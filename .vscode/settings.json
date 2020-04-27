@@ -1,0 +1,32 @@
+{
+  "files.exclude": {
+    ".github": false,
+    ".vscode": false,
+    "lib": false,
+    "node_modules": false,
+    ".eslintrc.js": false,
+    ".eslintcache": false,
+    ".gitignore": false,
+    ".huskyrc.js": false,
+    ".nvmrc": false,
+    ".prettierrc.js": false,
+    "jest.config.js": false,
+    "package-lock.json": false,
+    "renovate.json": false,
+    "tsconfig.build.json": false,
+    "tsconfig.json": false,
+    "LICENSE": false
+  },
+  "search.exclude": {
+    "lib/**": true,
+    "node_modules/**": true,
+    ".eslintcache": true,
+  },
+  "files.watcherExclude": {
+    "lib/**": true,
+    "node_modules/**": true,
+    ".eslintcache": true,
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.suggest.autoImports": true,
+}

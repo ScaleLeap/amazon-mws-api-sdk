@@ -1,0 +1,60 @@
+{
+  "name": "@scaleleap/typescript-template",
+  "description": "",
+  "license": "MIT",
+  "author": {
+    "name": "Roman Filippov",
+    "email": "roman@scaleleap.com",
+    "url": "https://www.scaleleap.com/"
+  },
+  "homepage": "https://github.com/ScaleLeap/.../#readme",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "files": [
+    "/lib"
+  ],
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "tsc --build tsconfig.build.json",
+    "clean": "rimraf lib",
+    "dev": "ts-node-dev --respawn --transpileOnly src",
+    "lint": "eslint --ext ts,js src/ test/",
+    "lint:fix": "npm run lint -- --fix",
+    "semantic-release": "semantic-release",
+    "start": "ts-node --transpile-only --pretty src",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "types": "lib/index.d.ts",
+  "devDependencies": {
+    "@scaleleap/semantic-release-config": "1.1.6",
+    "@types/jest": "25.2.1",
+    "@types/node": "13.11.0",
+    "@typescript-eslint/eslint-plugin": "2.26.0",
+    "@typescript-eslint/parser": "2.26.0",
+    "danger": "10.1.1",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-import-resolver-typescript": "2.0.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-prettier": "3.1.3",
+    "husky": "4.2.5",
+    "jest": "25.4.0",
+    "post-npm-install": "2.0.0",
+    "prettier": "2.0.5",
+    "rimraf": "3.0.2",
+    "ts-jest": "25.4.0",
+    "ts-node": "8.9.1",
+    "ts-node-dev": "1.0.0-pre.44",
+    "tsconfigs": "4.0.2",
+    "typescript": "3.8.3"
+  },
+  "keywords": [],
+  "publishConfig": {
+    "access": "private"
+  },
+  "release": {
+    "extends": "@scaleleap/semantic-release-config",
+    "branch": "master"
+  }
+}

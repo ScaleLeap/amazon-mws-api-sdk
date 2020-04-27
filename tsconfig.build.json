@@ -1,0 +1,11 @@
+{
+  "extends": "tsconfigs/nodejs-module",
+  "compilerOptions": {
+    "outDir": "lib"
+  },
+  "exclude": [
+    "src/**.test.ts",
+    "test/**",
+    "dangerfile.ts"
+  ]
+}
