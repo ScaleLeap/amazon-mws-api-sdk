@@ -51,7 +51,7 @@
   },
   "keywords": [],
   "publishConfig": {
-    "access": "private"
+    "access": "public"
   },
   "release": {
     "extends": "@scaleleap/semantic-release-config",
