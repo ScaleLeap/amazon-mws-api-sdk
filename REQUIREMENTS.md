@@ -54,9 +54,18 @@ Amazon uses and provides [XSD](https://www.w3.org/TR/xmlschema11-2/#built-in-dat
 
 Here are some examples of the types they provide: https://github.com/dmichael/amazon-mws/blob/master/examples/xsd/amzn-base.xsd
 
-There seems to be a [library](https://github.com/khusamov/wsdl-xsd-parser) for parsing these, even in TypeScript! I think we can use that to codegen.
+There seems to be a [library](https://github.com/khusamov/wsdl-xsd-parser) for parsing these, even in TypeScript! I think we can use that to codegen, or maybe not, I didn't look closely.
+
+We can also use a tool to conver XML Schema to JSON schema. There are a few listed [here](https://stackoverflow.com/questions/3922026/generate-json-schema-from-xml-schema-xsd).
 
 I did say initially that we may use `purify-ts`, but I changed my mind, I am sorry. Nothig wrong with your library. But I have another approach, which will be more beneficial for integration with other parts of the system. I want to use [typebox](https://github.com/sinclairzx81/typebox), because it creates a valid JSON Schema, which I can then reuse in Fastify webserver, which natively supports request and response validation via JSON Schema.
+
+The goal here is to have an automated way to generating these, starting from XSD file downloads, to generation of schemas. Because if Amazon updates their XSDs then it'd be easy to update everything.
+
+So I think we shall do the following:
+
+* A script that downloads all of the `.xsd` files from Amazon and stores them locally, commited to the git.
+* A script that parses these files and creates JSON Schema models.
 
 ## Error Classes
 
