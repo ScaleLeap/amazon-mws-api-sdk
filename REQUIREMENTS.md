@@ -50,6 +50,8 @@ Note: because of the sensitive nature of the data, I cannot share the MWS auth k
 
 ## XSD and TypeScript
 
+**NOTE**: This section can be wrong!
+
 Amazon uses and provides [XSD](https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes) for all data types (see References below). I think we could parse these files and codegen some validation / interfaces code from these. All of their models have unique names.
 
 Here are some examples of the types they provide: https://github.com/dmichael/amazon-mws/blob/master/examples/xsd/amzn-base.xsd
