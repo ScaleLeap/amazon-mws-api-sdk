@@ -58,15 +58,15 @@ Here are some examples of the types they provide: https://github.com/dmichael/am
 
 There seems to be a [library](https://github.com/khusamov/wsdl-xsd-parser) for parsing these, even in TypeScript! I think we can use that to codegen, or maybe not, I didn't look closely.
 
-We can also use a tool to conver XML Schema to JSON schema. There are a few listed [here](https://stackoverflow.com/questions/3922026/generate-json-schema-from-xml-schema-xsd).
+We can also use a tool to convert XML Schema to JSON schema. There are a few listed [here](https://stackoverflow.com/questions/3922026/generate-json-schema-from-xml-schema-xsd).
 
-I did say initially that we may use `purify-ts`, but I changed my mind, I am sorry. Nothig wrong with your library. But I have another approach, which will be more beneficial for integration with other parts of the system. I want to use [typebox](https://github.com/sinclairzx81/typebox), because it creates a valid JSON Schema, which I can then reuse in Fastify webserver, which natively supports request and response validation via JSON Schema.
+I did say initially that we may use `purify-ts`, but I changed my mind, I am sorry. Nothing wrong with your library. But I have another approach, which will be more beneficial for integration with other parts of the system. I want to use [typebox](https://github.com/sinclairzx81/typebox), because it creates a valid JSON Schema, which I can then reuse in Fastify webserver, which natively supports request and response validation via JSON Schema.
 
 The goal here is to have an automated way to generating these, starting from XSD file downloads, to generation of schemas. Because if Amazon updates their XSDs then it'd be easy to update everything.
 
 So I think we shall do the following:
 
-* A script that downloads all of the `.xsd` files from Amazon and stores them locally, commited to the git.
+* A script that downloads all of the `.xsd` files from Amazon and stores them locally, committed to the git.
 * A script that parses these files and creates JSON Schema models.
 
 ## Error Classes
@@ -97,10 +97,10 @@ The following sections will **not** be completed at the moment:
 
 ## Existing Libraries
 
-* NodeJS: I have compliled the [list of all of the available libraries](https://docs.google.com/spreadsheets/d/1IC4X_tDygVEXbHhoFsugWmifksCRGjSoIDELpG8KXoI/edit#gid=0). Only few have basic TypeScript support. None have great developer experience. But all of them can be used to learn from.
+* NodeJS: I have compiled the [list of all of the available libraries](https://docs.google.com/spreadsheets/d/1IC4X_tDygVEXbHhoFsugWmifksCRGjSoIDELpG8KXoI/edit#gid=0). Only few have basic TypeScript support. None have great developer experience. But all of them can be used to learn from.
 * [Rust](https://github.com/fluxxu/mws-rs): don't know much about rust, except that the types here seem to be great!
 * [Perl](https://github.com/interchange/Amazon-MWS): yes, Perl is an old language, but the library is up-to-date and is being actively maintained. I'm an ex-Perl developer and can help understanding this one, if necessary.
-* [Ruby](https://github.com/hakanensari/peddler): this is a fully-featured Ruby library, lots to learn from. They also have "[casettes](https://github.com/hakanensari/peddler/tree/master/test/vcr_cassettes)" for tests for actual live calls, from which we can borrow some XML return examples. There are several JS/Node ports of VCR listed under "[Ports in Other Languages](https://github.com/vcr/vcr)" readme section. E.g. [vcr.js](https://github.com/elcuervo/vcr.js).
+* [Ruby](https://github.com/hakanensari/peddler): this is a fully-featured Ruby library, lots to learn from. They also have "[cassettes](https://github.com/hakanensari/peddler/tree/master/test/vcr_cassettes)" for tests for actual live calls, from which we can borrow some XML return examples. There are several JS/Node ports of VCR listed under "[Ports in Other Languages](https://github.com/vcr/vcr)" readme section. E.g. [vcr.js](https://github.com/elcuervo/vcr.js).
 * [Python](https://github.com/python-amazon-mws/python-amazon-mws): it's an ok and maintained library, can be used for cross checking with others.
 
 ## Raw XML Sample Data
