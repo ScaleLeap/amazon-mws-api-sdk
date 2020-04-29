@@ -16,7 +16,7 @@ We don't have to replicate the params interface 1:1 with the API. Sometimes thei
 
 All returned data should properly typed.
 
-Discrimated unions shall be used where possible.
+Discriminated unions shall be used where possible.
 
 ### HttpClient
 
