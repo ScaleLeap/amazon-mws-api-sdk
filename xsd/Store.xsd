@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #3 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:annotation>
+		<xsd:documentation>	
+    $Date: 2009/07/01 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are confidential and 
+    proprietary information of Amazon.com and may not be reproduced, distributed or used, in whole or 
+    in part, for any purpose other than as necessary to list products for sale on the www.amazon.com 
+    web site pursuant to an agreement with Amazon.com.  
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="Store">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="MarketplaceName"/>
+				<xsd:element name="StoreID">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:normalizedString">
+							<xsd:minLength value="1"/>
+							<xsd:maxLength value="80"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="StoreName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="isActive" type="xsd:boolean"/>
+				<xsd:element name="StoreTimeZone" type="TwoFiftyStringNotNull"/>
+				<xsd:element name="Country">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:normalizedString">
+							<xsd:length value="2" fixed="true"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="StoreType" type="TwentyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ProductType" type="ThirtyStringNotNull" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="Warehouse" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="WarehouseLocationID">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:normalizedString">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="4"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StartDate" type="xsd:date"/>
+							<xsd:element name="EndDate" type="xsd:date" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="StoreFeatures" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StoreFeatureType">
+								<xsd:simpleType>
+									<xsd:restriction base="StringNotNull">
+										<xsd:enumeration value="CollectionPoint"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="StoreFeatureTypeValue" type="StringNotNull"/>
+							<xsd:element name="IsActive" type="xsd:boolean" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="StandardStoreHours" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="DayOfWeek">
+								<xsd:simpleType>
+									<xsd:restriction base="StringNotNull">
+										<xsd:enumeration value="Monday"/>
+										<xsd:enumeration value="Tuesday"/>
+										<xsd:enumeration value="Wednesday"/>
+										<xsd:enumeration value="Thursday"/>
+										<xsd:enumeration value="Friday"/>
+										<xsd:enumeration value="Saturday"/>
+										<xsd:enumeration value="Sunday"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="OpeningHour" type="xsd:time" minOccurs="0"/>
+							 <xsd:element name="MidDayClosures" minOccurs="0" maxOccurs="unbounded">
+                                                                <xsd:complexType>
+                                                                        <xsd:sequence>
+                                                                                <xsd:element name="ClosingHour" type="xsd:time" minOccurs="0"/>
+                                                                                <xsd:element name="OpeningHour" type="xsd:time" minOccurs="0"/>
+                                                                        </xsd:sequence>
+                                                                </xsd:complexType>
+                                                        </xsd:element>
+							<xsd:element name="ClosingHour" type="xsd:time" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="StoreHourExceptions" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+									
+							<xsd:element name="ExceptionDate" type="xsd:dateTime">
+								<xsd:annotation>
+									<xsd:documentation>
+									ExceptionDate should be given in the format YYYY-MM-DDThh:mm:ssTZD.  Only 
+									the month, day, and year are retained by Amazon, and the day is assumed 
+									to be in the local time zone of the store (e.g. 2008-04-30T01:40:00+03:00 will
+									be stored as 2008-04-30).
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="OpeningHour" type="xsd:time" minOccurs="0"/>
+							 <xsd:element name="MidDayClosures" minOccurs="0" maxOccurs="unbounded">
+                                                                <xsd:complexType>
+                                                                        <xsd:sequence>
+                                                                                <xsd:element name="ClosingHour" type="xsd:time" minOccurs="0"/>
+                                                                                <xsd:element name="OpeningHour" type="xsd:time" minOccurs="0"/>
+                                                                        </xsd:sequence>
+                                                                </xsd:complexType>
+                                                        </xsd:element>
+							<xsd:element name="ClosingHour" type="xsd:time" minOccurs="0"/>
+							<xsd:element name="IsActive" type="xsd:boolean"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="StoreAddress" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="AddressFieldOne" type="xsd:string"/>
+							<xsd:element name="AddressFieldTwo" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="AddressFieldThree" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="City" type="xsd:string"/>
+							<xsd:element name="DistrictOrCounty" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="StateOrRegion" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="PostalCode" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="VoicePhone" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="FaxPhone" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="CountryCode" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="Latitude" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:float">
+									<xsd:minInclusive value="-90"/>
+									<xsd:maxInclusive value="90"/>
+									</xsd:restriction>
+								</xsd:simpleType> 
+							</xsd:element>
+							<xsd:element name="Longitude" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:float">
+									<xsd:minInclusive value="-180"/>
+									<xsd:maxInclusive value="180"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="TerminationDate" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+						      TerminationDate should be given in the format YYYY-MM-DDThh:mm:ssTZD or as an
+                                                      empty string.  Only the month, day, and year are retained by Amazon, and the day
+						      is assumed to be in the local time zone of the store (e.g. 2008-04-30T01:40:00+03:00 will 
+                                                      be stored as 2008-04-30).  Submitting the TerminationDate as an empty string will 
+						      clear out any previously submitted values for this field.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:union memberTypes="xsd:dateTime EmptyString"/>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="StoreImage" minOccurs="0" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="StoreImageTitle" type="StringNotNull">
+								<xsd:annotation>
+									<xsd:documentation>
+										The StoreImageTitle is a unique title for each image associated
+										with a store, and is provided for merchant use only.  This field 
+										is not used for customer displays.
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ImageCaption" type="TwoFiftyStringNotNull" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										ImageCaption is used for text that describes the image and 
+										can be used in customer displays.
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ImageURL" type="xsd:anyURI"/> 
+							<xsd:element name="IsActive" type="xsd:boolean" minOccurs="0"/>
+							<xsd:element name="IsPrimary" type="xsd:boolean" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										IsPrimary can only be applied to one image per Store.  The last 
+										image provided with IsPrimary set will be used as the primary image.
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="EmptyString">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="0"/>
+			<xsd:maxLength value="0"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

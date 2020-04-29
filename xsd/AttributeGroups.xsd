@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!-- Include the data type primitives -->
+	<xsd:include schemaLocation="TypeDefinitions.xsd"/>
+	<xsd:element name="AttributeGroup">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:any processContents="lax" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+			<xsd:attribute name="delete" type="BooleanType" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
+

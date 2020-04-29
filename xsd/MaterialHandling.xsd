@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+   <!--
+   $Date: 20011/07/26 $
+
+   AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+   confidential and proprietary information of Amazon.com and may not be reproduced, 
+   distributed or used, in whole or in part, for any purpose other than as necessary 
+   to list products for sale on the www.amazon.com web site pursuant to an agreement 
+   with Amazon.com.
+   -->
+   <xsd:include schemaLocation="amzn-base.xsd"/>
+   <!--
+   Please read the corresponding documentation that contains the recommended values for elements
+   of type StringNotNull.
+   -->
+   <xsd:element name="MaterialHandling">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="Parentage">
+               <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                     <xsd:enumeration value="parent"/>
+                     <xsd:enumeration value="child"/>
+                  </xsd:restriction>
+               </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="CFMat90PSI" type="PositiveDimension" minOccurs="0"/>
+            <xsd:element name="CompatibleBeamFlangeWidth" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="CompatibleMinBeamCurveRadius" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="CompatibleMinBeamHeight" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="ControlCordLength" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="DrumCapacity" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="HangerHoleDiameter" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="Horsepower" type="Dimension" minOccurs="0"/>
+            <xsd:element name="HydraulicRamHoleDiameter" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="HydraulicRamOutsideDiameter" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="HydraulicRamType" type="HundredString" minOccurs="0"/>
+            <xsd:element name="LeverLength" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="LiftingMaterialType" type="LongString" minOccurs="0"/>
+            <xsd:element name="LiftingMechanism" type="LongString" minOccurs="0"/>
+            <xsd:element name="LoadCapacity" type="WeightDimension" minOccurs="0"/>
+            <xsd:element name="MaterialType" type="LongString" minOccurs="0"/>
+            <xsd:element name="MaximumHeight" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MaximumLiftingHeight" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MaximumLiftingSpeed" type="SpeedDimension" minOccurs="0"/>
+            <xsd:element name="MaximumPressure" type="PressureDimension" minOccurs="0"/>
+            <xsd:element name="MaximumTensionLoad" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MeasurementSystem" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MinimumClearance" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MinimumHeight" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="ModelNumber" type="HundredString" minOccurs="0"/>
+            <xsd:element name="MotorPhase" type="HundredString" minOccurs="0"/>
+            <xsd:element name="MountingHoleDiameter" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="MountingType" type="HundredString" minOccurs="0"/>
+            <xsd:element name="NumberOfLinks" type="PositiveInteger" minOccurs="0"/>
+            <xsd:element name="NumberOfPoints" type="PositiveInteger" minOccurs="0"/>
+            <xsd:element name="NumberOfSpeeds" type="PositiveInteger" minOccurs="0"/>
+            <xsd:element name="OilCapacity" type="VolumeDimension" minOccurs="0"/>
+            <xsd:element name="PistonStrokeLength" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="PowerSourceType" type="StringNotNull" minOccurs="0"/>
+            <xsd:element name="SizeName" type="StringNotNull" minOccurs="0"/>
+            <xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0" maxOccurs="6"/>
+            <xsd:element name="SpecificationMet" type="StringNotNull" minOccurs="0"/>
+            <xsd:element name="StrandType" type="StringNotNull" minOccurs="0"/>
+            <xsd:element name="TensionRating" type="LengthDimension" minOccurs="0"/>
+            <xsd:element name="Voltage" type="PositiveDimension" minOccurs="0"/>
+            <xsd:element name="WheelTreadWidth" type="LengthDimension" minOccurs="0"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

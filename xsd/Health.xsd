@@ -1,0 +1,1310 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #7 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+$Date: 2007/10/30 $
+AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+confidential and proprietary information of Amazon.com and may not be reproduced,distributed or used, in whole or in part, for any purpose other than as necessary to list products for sale on the www.amazon.com web site pursuant to an agreement with Amazon.com.
+-->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="Health">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="HealthMisc"/>
+							<xsd:element ref="PersonalCareAppliances"/>
+							<xsd:element ref="PrescriptionDrug"/>
+							<xsd:element ref="DietarySupplements"/>
+							<xsd:element ref="OTCMedication"/>
+							<xsd:element ref="PrescriptionEyewear"/>
+							<xsd:element ref="SexualWellness"/>
+							<xsd:element ref="MedicalSupplies"/>
+						</xsd:choice>	
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Axis" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLife" type="PositiveNonZeroDimension" minOccurs="0"/>
+				<xsd:element name="BatteryCellComposition" type="BatteryCellTypeValues" minOccurs="0"/>				
+				<xsd:element name="BatteryAverageLifeStandby" type="PositiveNonZeroDimension" minOccurs="0"/>
+				<xsd:element name="BatteryChargeTime" type="PositiveNonZeroDimension" minOccurs="0"/>
+				<xsd:element name="BatteryTypeLithiumIon" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="BatteryTypeLithiumMetal" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="BatteryDescription" type="StringNotNull" minOccurs="0"/>	
+				<xsd:element name="BatteryFormFactor" type="StringNotNull" minOccurs="0"/>	
+				<xsd:element name="BatteryPower" type="BatteryPowerIntegerDimension" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+				<xsd:element name="Cylinder" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemDiameterString" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="FcShelfLife" type="DateIntegerDimension" minOccurs="0"/>
+				<xsd:element name="LensAdditionPower" type="UnknownOpticalDimension" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryEnergyContent" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="batteries_contained_in_equipment"/>
+							<xsd:enumeration value="batteries_only"/>
+							<xsd:enumeration value="batteries_packed_with_equipment"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="LithiumBatteryVoltage" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryWeight" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionLabor" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionParts" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="IncludedComponents" type="StringNotNull" minOccurs="0"
+					maxOccurs="3"/>					
+				<xsd:element name="ManufacturerWarrantyType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelNumber" type="FortyStringNotNull" minOccurs="0"/>		
+				<xsd:element name="SpecificUsesForProduct" type="StringNotNull" minOccurs="0"  maxOccurs="2"/>
+				<xsd:element name="Certification" type="StringNotNull" minOccurs="0"  maxOccurs="2"/>
+				<xsd:element name="Wattage" type="WattageDimension" minOccurs="0"/>
+				<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/>	
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="PlugType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="HarmonizedCode" type="HundredString" minOccurs="0"/>						
+				<xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger"
+					minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="WeightRecommendation" type="WeightRecommendationType"
+					minOccurs="0"/>
+				<xsd:element name="DeliveryScheduleGroupId" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="ContainsFoodOrBeverage" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="MedicineClassification" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="HealthMisc">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Count"/>
+										<xsd:enumeration value="Scent"/>
+										<xsd:enumeration value="Flavor"/>
+										<xsd:enumeration value="Size-Color"/>
+										<xsd:enumeration value="Flavor-Count"/>
+										<xsd:enumeration value="Flavor-Size"/>
+										<xsd:enumeration value="Size-Scent"/>
+										<xsd:enumeration value="Size-UnitCount"/>
+										<xsd:enumeration value="CustomerPackageType"/>
+										<xsd:enumeration value="ColorName-CustomerPackageType"/>
+										<xsd:enumeration value="SizeName-CustomerPackageType"/>
+										<xsd:enumeration
+											value="SizeName-ColorName-CustomerPackageType"/>
+										<xsd:enumeration value="StyleName-CustomerPackageType"/>
+										<xsd:enumeration value="SizeName-StyleName-CustomerPackageType"/>
+										<xsd:enumeration
+											value="Opticalpower-Basecurveradius-Itemdiameterstring-Cylindercorrection-Cylinderaxis-unitcount"/>
+										<xsd:enumeration
+											value="Opticalpower-Basecurveradius-Itemdiameterstring-Lensadditionpower-Unitcount"/>
+										<xsd:enumeration
+											value="Opticalpower-Basecurveradius-Itemdiameterstring-Unitcount"/>
+									</xsd:restriction>									
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+							<!-- <xsd:element ref="ColorMap" minOccurs="0"/>
+							Count represents the number of individually packaged items (a.k.a. 
+							units) included, such that each item is the smallest unit with a 
+							scannable bar code (UPC / EAN), and each item is packaged for 
+							individual sale.  For example, a box of 12 health bars, each
+							of which can be sold individually, would have a Count of 12. -->
+							<xsd:element name="Count" type="xsd:positiveInteger" minOccurs="0"/>
+							<!-- NumberOfItems represents the number of discrete items included, 
+							such that the items are not packaged for individual sale.  For example, 
+							a bottle of 100 aspirin tablets would have a NumberOfItems of 100.  
+							A box of 10 individually packaged bottles, each with 20 tablets, would 
+							have a Count of 10 and a NumberOfItems of 200.  -->
+							<xsd:element name="NumberOfItems" type="xsd:positiveInteger"
+								minOccurs="0"/>
+							<xsd:element name="Flavor" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Scent" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="CustomerPackageType" type="StringNotNull"
+								minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CanShipInOriginalContainer" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IdentityPackageType" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="StringNotNull">
+							<xsd:enumeration value="bulk"/>
+							<xsd:enumeration value="frustration_free"/>
+							<xsd:enumeration value="traditional"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="Indications" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="HairType" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="SkinType" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="SkinTone" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<!--<xsd:element name="SkinTone" minOccurs="0" maxOccurs="5">
+					<xsd:simpleType>
+						<xsd:restriction base="StringNotNull">
+							<xsd:enumeration value="Dark"/>
+							<xsd:enumeration value="Fair"/>
+							<xsd:enumeration value="Medium"/>
+							<xsd:enumeration value="MediumDark"/>
+							<xsd:enumeration value="VeryDark"/>
+							<xsd:enumeration value="VeryFair"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element> -->
+				<xsd:element name="Ingredients" type="LongStringNotNull" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="MaterialType" type="LongStringNotNull" minOccurs="0"
+					maxOccurs="3"/>
+				<xsd:element name="Directions" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemForm" type="String" minOccurs="0"/>
+				<xsd:element name="Coverage" type="String" minOccurs="0"/>
+				<xsd:element name="FinishType" type="String" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="ItemSpecialty" type="String" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="String" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="SpecificUsedKeywords" type="String" minOccurs="0" maxOccurs="2"/>				
+				<xsd:element name="SunProtection" type="SunProtectionDimension" minOccurs="0"/>				
+				<xsd:element name="TargetAudience" type="String" minOccurs="0"/>
+				<xsd:element name="TargetGender" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="male"/>
+							<xsd:enumeration value="female"/>
+							<xsd:enumeration value="unisex"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="LensType" type="String" minOccurs="0"/>
+				<xsd:element name="LifeExpectancy" type="DateIntegerDimension" minOccurs="0"/>
+				<xsd:element name="OccasionType" type="MediumStringNotNull" minOccurs="0"/>				
+				<xsd:element name="ItemDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="OpticalPower" type="UnknownOpticalDimension" minOccurs="0"/>
+				<xsd:element name="BaseCurveRadius" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CIPCode" type="String" minOccurs="0"/>
+				<xsd:element name="Pattern" type="String" minOccurs="0"/>
+				<xsd:element name="PowerSource" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ShaftLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ShaftDiameter" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="ItemGender" type="String" minOccurs="0"/>
+				<xsd:element name="CalciumString" type="String" minOccurs="0"/>
+				<xsd:element name="EnergyString" type="String" minOccurs="0"/>
+				<xsd:element name="TotalFatString" type="String" minOccurs="0"/>
+				<xsd:element name="SaturatedFatString" type="String" minOccurs="0"/>
+				<xsd:element name="MonounsaturatedFatString" type="String" minOccurs="0"/>
+				<xsd:element name="PolyunsaturatedFatString" type="String" minOccurs="0"/>
+				<xsd:element name="TotalCarbohydrateString" type="String" minOccurs="0"/>
+				<xsd:element name="SugarAlcoholString" type="String" minOccurs="0"/>
+				<xsd:element name="Starch" type="String" minOccurs="0"/>
+				<xsd:element name="DietaryFiberString" type="String" minOccurs="0"/>
+				<xsd:element name="ProteinString" type="String" minOccurs="0"/>
+				<xsd:element name="SaltPerServingString" type="String" minOccurs="0"/>
+				<xsd:element name="VitaminAString" type="String" minOccurs="0"/>
+				<xsd:element name="VitaminCString" type="String" minOccurs="0"/>
+				<xsd:element name="VitaminDString" type="String" minOccurs="0"/>
+				<xsd:element name="VitaminEString" type="String" minOccurs="0"/>
+				<xsd:element name="VitaminKString" type="String" minOccurs="0"/>
+				<xsd:element name="ThiaminString" type="String" minOccurs="0"/>
+				<xsd:element name="VitaminB2" type="String" minOccurs="0"/>
+				<xsd:element name="Niacin" type="String" minOccurs="0"/>
+				<xsd:element name="VitaminB6" type="String" minOccurs="0"/>
+				<xsd:element name="FolicAcid" type="String" minOccurs="0"/>
+				<xsd:element name="VitaminB12" type="String" minOccurs="0"/>
+				<xsd:element name="Biotin" type="String" minOccurs="0"/>
+				<xsd:element name="PantothenicAcid" type="String" minOccurs="0"/>
+				<xsd:element name="PotassiumString" type="String" minOccurs="0"/>
+				<xsd:element name="Chloride" type="String" minOccurs="0"/>
+				<xsd:element name="PhosphorusString" type="String" minOccurs="0"/>
+				<xsd:element name="Magnesium" type="String" minOccurs="0"/>
+				<xsd:element name="IronString" type="String" minOccurs="0"/>
+				<xsd:element name="Zinc" type="String" minOccurs="0"/>
+				<xsd:element name="Copper" type="String" minOccurs="0"/>				
+				<xsd:element name="Manganese" type="String" minOccurs="0"/>
+				<xsd:element name="Fluoride" type="String" minOccurs="0"/>
+				<xsd:element name="Selenium" type="String" minOccurs="0"/>
+				<xsd:element name="Chromium" type="String" minOccurs="0"/>
+				<xsd:element name="Molybdenum" type="String" minOccurs="0"/>
+				<xsd:element name="Iodine" type="String" minOccurs="0"/>
+				<xsd:element name="CholesterolString" type="String" minOccurs="0"/>
+				<xsd:element name="SodiumString" type="String" minOccurs="0"/>		
+				<xsd:element name="ManufacturerContactInformation" type="String" minOccurs="0"/>	
+				<xsd:element name="BandSizeNum" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CupSize" type="String" minOccurs="0"/>
+				<xsd:element name="InnerMaterialType" type="String" minOccurs="0"/>
+				<xsd:element name="OuterMaterialType" type="String" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="String" minOccurs="0"/>
+				<xsd:element name="TemperatureRating" type="String" minOccurs="0"/>
+				<xsd:element name="WeightRange" type="StringNotNull" minOccurs="0"/>
+                                <xsd:element name="SolidNetWeight" type="WeightDimension" minOccurs="0"/>
+                                <xsd:element name="CountryString" type="LongStringNotNull" minOccurs="0"/>
+                                <xsd:element name="ItemTypeName" type="String" minOccurs="0"/>
+                                <xsd:element name="AllergenInformation" type="AllergenInformationType" minOccurs="0" maxOccurs="5"/>
+                                <xsd:element name="SpecialIngredients" type="HundredString" minOccurs="0" maxOccurs="5"/>
+                                <xsd:element name="PrimaryIngredientCountryOfOrigin" type="String" minOccurs="0"/>
+                                <xsd:element name="PrimaryIngredientLocationProduced" type="String" minOccurs="0"/>
+                                <xsd:element name="StorageInstructions" type="HundredString" minOccurs="0"/>
+                                <xsd:element name="ServingRecommendation" type="String" minOccurs="0"/>
+                                <xsd:element name="UseByRecommendation" type="String" minOccurs="0"/>
+                                <xsd:element name="ServingSize" type="ServingDimension" minOccurs="0"/>
+								<xsd:element name="CustomerRestrictionType" type="StringNotNull" minOccurs="0"/>
+								<!-- LEGAL ANP CERTIFICATION ATTRIBUTES ONLY FOR BR, CA LOCALE-->
+								<xsd:element name="LegalComplianceCertificationMetadata" type="StringNotNull" minOccurs="0"/>
+				                <xsd:element name="LegalComplianceCertificationDateOfIssue" type="StringNotNull" minOccurs="0"/>
+				                <xsd:element name="LegalComplianceCertificationExpirationDate" type="StringNotNull" minOccurs="0"/>
+								<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+								<xsd:element name="PowerPlugType" type="PowerPlugType" minOccurs="0"/>
+								<xsd:element name="LegalComplianceCertificationStatus" minOccurs="0" maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Compliant"/>
+							<xsd:enumeration value="NonCompliant"/>
+							<xsd:enumeration value="Exempt"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+								</xsd:element>
+								<!-- LEGAL ANVISA CERTIFICATION ATTRIBUTES ONLY FOR BR LOCALE-->
+								<xsd:element name="LegalComplianceCertificationStatus1" minOccurs="0" maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Compliant"/>
+							<xsd:enumeration value="NonCompliant"/>
+							<xsd:enumeration value="Exempt"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+                <xsd:element name="LegalComplianceCertificationMetadata1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+				<!-- LEGAL_COMPLIANCE_CERTIFICATION_VALUES FOR CA-HEALTH_PERSONAL_CARE( Drug Identification Number, Homeopathic Medicine Number, Natural Product Number, Not Applicable)-->
+				<xsd:element name="LegalComplianceCertificationValue" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PersonalCareAppliances">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Count"/>
+										<xsd:enumeration value="Size-Color"/>
+										<xsd:enumeration value="Size-UnitCount"/>
+										<xsd:enumeration value="Scent"/>										
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>			
+							<!--<xsd:element ref="ColorMap" minOccurs="0"/>
+							 Count represents the number of individually packaged items (a.k.a. 
+							units) included, such that each item is the smallest unit with a 
+							scannable bar code (UPC / EAN), and each item is packaged for 
+							individual sale.  For example, a box of 12 health bars, each
+							of which can be sold individually, would have a Count of 12. -->
+							<xsd:element name="Count" type="xsd:positiveInteger" minOccurs="0"/>
+							<!-- NumberOfItems represents the number of discrete items included, 
+							such that the items are not packaged for individual sale.  For example, 
+							a bottle of 100 aspirin tablets would have a NumberOfItems of 100.  
+							A box of 10 individually packaged bottles, each with 20 tablets, would 
+							have a Count of 10 and a NumberOfItems of 200.  -->
+							<xsd:element name="NumberOfItems" type="xsd:positiveInteger"
+								minOccurs="0"/>
+							<xsd:element name="Scent" type="StringNotNull" minOccurs="0"/>									
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="Indications" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="HairType" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="SkinType" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="SkinTone" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<!--<xsd:element name="SkinTone" minOccurs="0" maxOccurs="5">
+					<xsd:simpleType>
+						<xsd:restriction base="StringNotNull">
+							<xsd:enumeration value="Dark"/>
+							<xsd:enumeration value="Fair"/>
+							<xsd:enumeration value="Medium"/>
+							<xsd:enumeration value="MediumDark"/>
+							<xsd:enumeration value="VeryDark"/>
+							<xsd:enumeration value="VeryFair"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element> -->
+				<xsd:element name="MaterialType" type="LongStringNotNull" minOccurs="0"
+					maxOccurs="3"/>
+				<xsd:element name="Directions" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemForm" type="String" minOccurs="0"/>
+				<xsd:element name="Flavor" type="String" minOccurs="0"/>
+				<xsd:element name="Coverage" type="String" minOccurs="0"/>
+				<xsd:element name="FinishType" type="String" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="ItemSpecialty" type="String" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="ItemPackageQuantity" type="PositiveInteger" default="1" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="TargetGender" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="male"/>
+							<xsd:enumeration value="female"/>
+							<xsd:enumeration value="unisex"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ItemDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Pattern" type="String" minOccurs="0"/>
+				<xsd:element name="PowerSource" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="String" minOccurs="0"/>
+				<xsd:element name="HandOrientation" type="String" minOccurs="0"/>
+				<xsd:element name="Ingredients" type="String" minOccurs="0" maxOccurs="3"/>				
+				<xsd:element name="BaseCurveRadius" type="LengthDimension" minOccurs="0"/>			
+				<xsd:element name="ShaftLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ShaftDiameter" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="ItemGender" type="String" minOccurs="0"/>
+				<xsd:element name="AnnualEnergyConsumption" type="EnergyConsumptionDimension"
+					minOccurs="0"/>
+				<xsd:element name="EuEnergyLabelEfficiencyClass" type="EnergyLabelEfficiencyClass" minOccurs="0"/>
+                                <xsd:element name="SolidNetWeight" type="WeightDimension" minOccurs="0"/>
+                                <xsd:element name="CountryString" type="LongStringNotNull" minOccurs="0"/>
+                                <xsd:element name="ItemTypeName" type="String" minOccurs="0"/>
+                                <xsd:element name="AllergenInformation" type="AllergenInformationType" minOccurs="0" maxOccurs="5"/>
+                                <xsd:element name="SpecialIngredients" type="HundredString" minOccurs="0" maxOccurs="5"/>
+                                <xsd:element name="PrimaryIngredientCountryOfOrigin" type="String" minOccurs="0"/>
+                                <xsd:element name="PrimaryIngredientLocationProduced" type="String" minOccurs="0"/>
+                                <xsd:element name="StorageInstructions" type="HundredString" minOccurs="0"/>
+                                <xsd:element name="ServingRecommendation" type="String" minOccurs="0"/>
+                                <xsd:element name="UseByRecommendation" type="String" minOccurs="0"/>
+                                <xsd:element name="ServingSize" type="ServingDimension" minOccurs="0"/>
+                                <xsd:element name="ManufacturerContactInformation" type="String" minOccurs="0"/>
+                                <xsd:element name="EnergyString" type="String" minOccurs="0"/>
+                                <xsd:element name="TotalFatString" type="String" minOccurs="0"/>
+                                <xsd:element name="SaturatedFatString" type="String" minOccurs="0"/>
+                                <xsd:element name="MonounsaturatedFatString" type="String" minOccurs="0"/>
+                                <xsd:element name="PolyunsaturatedFatString" type="String" minOccurs="0"/>
+                                <xsd:element name="TotalCarbohydrateString" type="String" minOccurs="0"/>
+                                <xsd:element name="SugarsString" type="String" minOccurs="0"/>
+                                <xsd:element name="SugarAlcoholString" type="String" minOccurs="0"/>
+                                <xsd:element name="Starch" type="String" minOccurs="0"/>
+                                <xsd:element name="DietaryFiberString" type="String" minOccurs="0"/>
+                                <xsd:element name="ProteinString" type="String" minOccurs="0"/>
+                                <xsd:element name="SaltPerServingString" type="String" minOccurs="0"/>
+                                <xsd:element name="VitaminAString" type="String" minOccurs="0"/>
+                                <xsd:element name="VitaminCString" type="String" minOccurs="0"/>
+                                <xsd:element name="VitaminDString" type="String" minOccurs="0"/>
+                                <xsd:element name="VitaminEString" type="String" minOccurs="0"/>
+                                <xsd:element name="VitaminKString" type="String" minOccurs="0"/>
+                                <xsd:element name="ThiaminString" type="String" minOccurs="0"/>
+                                <xsd:element name="VitaminB2" type="String" minOccurs="0"/>
+                                <xsd:element name="Niacin" type="String" minOccurs="0"/>
+                                <xsd:element name="VitaminB6" type="String" minOccurs="0"/>
+                                <xsd:element name="FolicAcid" type="String" minOccurs="0"/>
+                                <xsd:element name="VitaminB12" type="String" minOccurs="0"/>
+                                <xsd:element name="Biotin" type="String" minOccurs="0"/>
+                                <xsd:element name="PantothenicAcid" type="String" minOccurs="0"/>
+                                <xsd:element name="PotassiumString" type="String" minOccurs="0"/>
+                                <xsd:element name="Chloride" type="String" minOccurs="0"/>
+                                <xsd:element name="CalciumString" type="String" minOccurs="0"/>
+                                <xsd:element name="PhosphorusString" type="String" minOccurs="0"/>
+                                <xsd:element name="Magnesium" type="String" minOccurs="0"/>
+                                <xsd:element name="IronString" type="String" minOccurs="0"/>
+                                <xsd:element name="Zinc" type="String" minOccurs="0"/>
+                                <xsd:element name="Copper" type="String" minOccurs="0"/>
+                                <xsd:element name="Manganese" type="String" minOccurs="0"/>
+                                <xsd:element name="Fluoride" type="String" minOccurs="0"/>
+                                <xsd:element name="Selenium" type="String" minOccurs="0"/>
+                                <xsd:element name="Chromium" type="String" minOccurs="0"/>
+                                <xsd:element name="Molybdenum" type="String" minOccurs="0"/>
+                                <xsd:element name="Iodine" type="String" minOccurs="0"/>
+                                <xsd:element name="CholesterolString" type="String" minOccurs="0"/>
+                                <xsd:element name="SodiumString" type="String" minOccurs="0"/>
+                                <xsd:element name="InnerMaterialType" type="String" minOccurs="0"/>
+                                <xsd:element name="OuterMaterialType" type="String" minOccurs="0"/>
+                                <xsd:element name="MaterialComposition" type="String" minOccurs="0"/>
+                                <xsd:element name="BandSizeNum" type="LengthDimension" minOccurs="0"/>
+                                <xsd:element name="CupSize" type="String" minOccurs="0"/>	
+								<xsd:element name="Language" type="LanguageStringType" minOccurs="0"/>
+								<!-- LEGAL ANP CERTIFICATION ATTRIBUTES ONLY FOR BR LOCALE-->
+								<xsd:element name="LegalComplianceCertificationMetadata" type="StringNotNull" minOccurs="0"/>
+				                <xsd:element name="LegalComplianceCertificationDateOfIssue" type="StringNotNull" minOccurs="0"/>
+				                <xsd:element name="LegalComplianceCertificationExpirationDate" type="StringNotNull" minOccurs="0"/>
+								<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+								<xsd:element name="PowerPlugType" type="PowerPlugType" minOccurs="0"/>
+								<xsd:element name="LegalComplianceCertificationStatus" minOccurs="0" maxOccurs="1">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="Compliant"/>
+									<xsd:enumeration value="NonCompliant"/>
+									<xsd:enumeration value="Exempt"/>
+								</xsd:restriction>
+						</xsd:simpleType>
+						</xsd:element>
+								<!-- LEGAL ANVISA CERTIFICATION ATTRIBUTES ONLY FOR BR LOCALE-->
+								<xsd:element name="LegalComplianceCertificationStatus1" minOccurs="0" maxOccurs="1">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="Compliant"/>
+									<xsd:enumeration value="NonCompliant"/>
+									<xsd:enumeration value="Exempt"/>
+								</xsd:restriction>
+						</xsd:simpleType>
+						</xsd:element>
+								<xsd:element name="LegalComplianceCertificationMetadata1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="PrescriptionDrug">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Indications" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+<xsd:element name="DietarySupplements">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Flavor"/>
+										<xsd:enumeration value="SizeName-CustomerPackageType"/>
+										<xsd:enumeration
+											value="SizeName-ColorName-CustomerPackageType"/>
+										<xsd:enumeration value="ItemPackageQuantity"/>										
+									</xsd:restriction>									
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+							<!-- <xsd:element ref="ColorMap" minOccurs="0"/>
+							Count represents the number of individually packaged items (a.k.a. 
+							units) included, such that each item is the smallest unit with a 
+							scannable bar code (UPC / EAN), and each item is packaged for 
+							individual sale.  For example, a box of 12 health bars, each
+							of which can be sold individually, would have a Count of 12. -->
+							<xsd:element name="Flavor" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Scent" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>							
+
+					</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+							<xsd:element name="LegalComplianceCertificationMetadata" type="StringNotNull" minOccurs="0"/>
+				            <xsd:element name="LegalComplianceCertificationDateOfIssue" type="StringNotNull" minOccurs="0"/>
+				            <xsd:element name="LegalComplianceCertificationExpirationDate" type="StringNotNull" minOccurs="0"/>	
+							<xsd:element name="Indications" type="LongStringNotNull" minOccurs="0"/>
+							<xsd:element name="ItemForm" type="String" minOccurs="0"/>
+							<xsd:element name="TargetGender" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="male"/>
+							<xsd:enumeration value="female"/>
+							<xsd:enumeration value="unisex"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="Ingredients" type="LongStringNotNull" maxOccurs="3"/>
+				<xsd:element name="MaterialType" type="LongStringNotNull" minOccurs="0"
+					maxOccurs="3"/>
+				<xsd:element name="ItemSpecialty" type="String" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="AlcoholContent" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="Dimension">
+								<xsd:attribute name="unitOfMeasure" use="required">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:enumeration value="percent_by_volume"/>
+											<xsd:enumeration value="percent_by_weight"/>
+											<xsd:enumeration value="unit_of_alcohol"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:attribute>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="TargetAudienceBase" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="FinishType" type="String" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="PlatinumKeywords" type="StringNotNull" minOccurs="0"
+					maxOccurs="20"/>
+				<xsd:element name="EachUnitCount" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="PackageTypeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TotalEaches" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="String" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="PowerSource" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Directions" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="AllergenInformation" type="AllergenInformationType" minOccurs="0" maxOccurs="5"/>
+                <xsd:element name="SpecialIngredients" type="HundredString" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="PrimaryIngredientCountryOfOrigin" type="String" minOccurs="0"/>
+                <xsd:element name="PrimaryIngredientLocationProduced" type="String" minOccurs="0"/>
+                <xsd:element name="StorageInstructions" type="HundredString" minOccurs="0"/>				
+				<xsd:element name="UseByRecommendation" type="String" minOccurs="0"/>
+				<xsd:element name="ManufacturerContactInformation" type="String" minOccurs="0"/>
+				<xsd:element name="OpticalPower" type="UnknownOpticalDimension" minOccurs="0"/>
+				<xsd:element name="ServingSize" type="ServingDimension" minOccurs="0"/>
+				<xsd:element name="EnergyString" type="String" minOccurs="0"/>
+				<xsd:element name="TotalFatString" type="String" minOccurs="0"/>
+                <xsd:element name="SaturatedFatString" type="String" minOccurs="0"/>
+                <xsd:element name="MonounsaturatedFatString" type="String" minOccurs="0"/>
+                <xsd:element name="PolyunsaturatedFatString" type="String" minOccurs="0"/>
+				<xsd:element name="TotalCarbohydrateString" type="String" minOccurs="0"/>
+				<xsd:element name="SugarsString" type="String" minOccurs="0"/>
+                <xsd:element name="SugarAlcoholString" type="String" minOccurs="0"/>
+                <xsd:element name="Starch" type="String" minOccurs="0"/>
+                <xsd:element name="DietaryFiberString" type="String" minOccurs="0"/>
+                <xsd:element name="ProteinString" type="String" minOccurs="0"/>
+                <xsd:element name="SaltPerServingString" type="String" minOccurs="0"/>
+                <xsd:element name="VitaminAString" type="String" minOccurs="0"/>
+                <xsd:element name="VitaminCString" type="String" minOccurs="0"/>
+                <xsd:element name="VitaminDString" type="String" minOccurs="0"/>
+                <xsd:element name="VitaminEString" type="String" minOccurs="0"/>
+                <xsd:element name="VitaminKString" type="String" minOccurs="0"/>
+                <xsd:element name="ThiaminString" type="String" minOccurs="0"/>
+                <xsd:element name="VitaminB2" type="String" minOccurs="0"/>
+                <xsd:element name="Niacin" type="String" minOccurs="0"/>
+                <xsd:element name="VitaminB6" type="String" minOccurs="0"/>
+                <xsd:element name="FolicAcid" type="String" minOccurs="0"/>
+                <xsd:element name="VitaminB12" type="String" minOccurs="0"/>
+                <xsd:element name="Biotin" type="String" minOccurs="0"/>
+                <xsd:element name="PantothenicAcid" type="String" minOccurs="0"/>
+                <xsd:element name="PotassiumString" type="String" minOccurs="0"/>
+                <xsd:element name="Chloride" type="String" minOccurs="0"/>
+                <xsd:element name="CalciumString" type="String" minOccurs="0"/>
+                <xsd:element name="PhosphorusString" type="String" minOccurs="0"/>
+                <xsd:element name="Magnesium" type="String" minOccurs="0"/>
+                <xsd:element name="IronString" type="String" minOccurs="0"/>
+                <xsd:element name="Zinc" type="String" minOccurs="0"/>
+                <xsd:element name="Copper" type="String" minOccurs="0"/>
+                <xsd:element name="Manganese" type="String" minOccurs="0"/>
+                <xsd:element name="Fluoride" type="String" minOccurs="0"/>
+                <xsd:element name="Selenium" type="String" minOccurs="0"/>
+                <xsd:element name="Chromium" type="String" minOccurs="0"/>
+                <xsd:element name="Molybdenum" type="String" minOccurs="0"/>
+                <xsd:element name="Iodine" type="String" minOccurs="0"/>
+                <xsd:element name="CholesterolString" type="String" minOccurs="0"/>
+                <xsd:element name="SodiumString" type="String" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="CountryString" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="String" minOccurs="0"/>
+				<xsd:element name="Coverage" type="String" minOccurs="0"/>
+				<xsd:element name="ItemDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CustomerRestrictionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Language" type="LanguageStringType" minOccurs="0"/>
+                <xsd:element name="PackageSizeName" type="String" minOccurs="0"/>
+				<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+				<!-- LEGAL_COMPLIANCE_CERTIFICATION_VALUES FOR CA-DIETARY_SUPPLEMENTS( Drug Identification Number, Homeopathic Medicine Number, Natural Product Number, Not Applicable)-->
+                <xsd:element name="LegalComplianceCertificationValue" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="MaterialFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ProductExpirationType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TargetAudience" type="String" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="OTCMedication">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Flavor"/>
+										<xsd:enumeration value="SizeName-CustomerPackageType"/>
+										<xsd:enumeration
+											value="SizeName-ColorName-CustomerPackageType"/>
+										<xsd:enumeration value="ItemPackageQuantity"/>
+									</xsd:restriction>									
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+							<!-- <xsd:element ref="ColorMap" minOccurs="0"/>
+							Count represents the number of individually packaged items (a.k.a. 
+							units) included, such that each item is the smallest unit with a 
+							scannable bar code (UPC / EAN), and each item is packaged for 
+							individual sale.  For example, a box of 12 health bars, each
+							of which can be sold individually, would have a Count of 12. -->
+							<xsd:element name="Flavor" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Scent" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+					</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+							<xsd:element name="LegalComplianceCertificationMetadata" type="StringNotNull" minOccurs="0"/>
+				            <xsd:element name="LegalComplianceCertificationDateOfIssue" type="StringNotNull" minOccurs="0"/>
+				            <xsd:element name="LegalComplianceCertificationExpirationDate" type="StringNotNull" minOccurs="0"/>	
+							<xsd:element name="Indications" type="LongStringNotNull" minOccurs="0"/>
+							<xsd:element name="ItemForm" type="String" minOccurs="0"/>
+							<xsd:element name="TargetGender" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="male"/>
+							<xsd:enumeration value="female"/>
+							<xsd:enumeration value="unisex"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="Ingredients" type="LongStringNotNull" maxOccurs="3"/>
+				<xsd:element name="MaterialType" type="LongStringNotNull" minOccurs="0"
+					maxOccurs="3"/>
+				<xsd:element name="AlcoholContent" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="Dimension">
+								<xsd:attribute name="unitOfMeasure" use="required">
+									<xsd:simpleType>
+										<xsd:restriction base="xsd:string">
+											<xsd:enumeration value="percent_by_volume"/>
+											<xsd:enumeration value="percent_by_weight"/>
+											<xsd:enumeration value="unit_of_alcohol"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:attribute>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="TargetAudienceBase" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="FinishType" type="String" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="PlatinumKeywords" type="StringNotNull" minOccurs="0"
+					maxOccurs="20"/>
+				<xsd:element name="EachUnitCount" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="PackageTypeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TotalEaches" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="PackageSizeName" type="String" minOccurs="0"/>
+				<xsd:element name="ItemSpecialty" type="String" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="String" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="PowerSource" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Directions" type="LongStringNotNull" minOccurs="0"/>
+                <xsd:element name="SpecialIngredients" type="HundredString" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="AllergenInformation" type="AllergenInformationType" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="PrimaryIngredientCountryOfOrigin" type="String" minOccurs="0"/>
+                <xsd:element name="PrimaryIngredientLocationProduced" type="String" minOccurs="0"/>
+                <xsd:element name="StorageInstructions" type="HundredString" minOccurs="0"/>				
+				<xsd:element name="UseByRecommendation" type="String" minOccurs="0"/>
+				<xsd:element name="ManufacturerContactInformation" type="String" minOccurs="0"/>
+				<xsd:element name="ServingSize" type="ServingDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="CountryString" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="String" minOccurs="0"/>
+				<xsd:element name="Coverage" type="String" minOccurs="0"/>
+				<xsd:element name="ItemDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CustomerRestrictionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Language" type="LanguageStringType" minOccurs="0"/>
+				<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+				<!-- LEGAL_COMPLIANCE_CERTIFICATION_VALUES FOR CA-OTC_MEDICATION( Drug Identification Number, Homeopathic Medicine Number, Natural Product Number, Not Applicable)-->
+                <xsd:element name="LegalComplianceCertificationValue" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="PrescriptionEyewear">
+	<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="SizeName-CustomerPackageType"/>
+										<xsd:enumeration value="SizeName-ColorName-CustomerPackageType"/>
+										<xsd:enumeration value="ItemPackageQuantity"/>
+										<xsd:enumeration
+											value="Opticalpower-Basecurveradius-Itemdiameterstring-Cylindercorrection-Cylinderaxis-unitcount"/>
+										<xsd:enumeration
+											value="Opticalpower-Basecurveradius-Itemdiameterstring-Lensadditionpower-Unitcount"/>
+										<xsd:enumeration
+											value="Opticalpower-Basecurveradius-Itemdiameterstring-Unitcount"/>
+									</xsd:restriction>									
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+							<!-- <xsd:element ref="ColorMap" minOccurs="0"/>
+							Count represents the number of individually packaged items (a.k.a. 
+							units) included, such that each item is the smallest unit with a 
+							scannable bar code (UPC / EAN), and each item is packaged for 
+							individual sale.  For example, a box of 12 health bars, each
+							of which can be sold individually, would have a Count of 12. -->
+							<xsd:element name="Scent" type="StringNotNull" minOccurs="0"/>
+					</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+							
+							<xsd:element name="Indications" type="LongStringNotNull" minOccurs="0"/>
+							<xsd:element name="TargetGender" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="male"/>
+							<xsd:enumeration value="female"/>
+							<xsd:enumeration value="unisex"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Ingredients" type="LongStringNotNull" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="MaterialType" type="LongStringNotNull" minOccurs="0"
+					maxOccurs="3"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="TargetAudienceBase" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="Orientation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="String" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="Directions" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="CountryString" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="String" minOccurs="0"/>
+				<xsd:element name="OuterMaterialType" type="String" minOccurs="0"/>
+				<xsd:element name="OpticalPower" type="UnknownOpticalDimension" minOccurs="0"/>
+				<xsd:element name="BaseCurveRadius" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="LensType" type="String" minOccurs="0"/>
+				<xsd:element name="LifeExpectancy" type="DateIntegerDimension" minOccurs="0"/>
+				<xsd:element name="CustomerRestrictionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Language" type="LanguageStringType" minOccurs="0"/>
+				<xsd:element name="WaterContentPercentage" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="SexualWellness">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Flavor"/>
+										<xsd:enumeration value="Flavor-Size"/>
+										<xsd:enumeration value="SizeName-CustomerPackageType"/>
+										<xsd:enumeration value="SizeName-ColorName-CustomerPackageType"/>
+										<xsd:enumeration value="ItemPackageQuantity"/>
+									    <xsd:enumeration value="Count"/>
+										<xsd:enumeration value="SizeName"/>
+										<xsd:enumeration value="SizeName-ColorName"/>
+									</xsd:restriction>									
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+							<!-- <xsd:element ref="ColorMap" minOccurs="0"/>
+							Count represents the number of individually packaged items (a.k.a. 
+							units) included, such that each item is the smallest unit with a 
+							scannable bar code (UPC / EAN), and each item is packaged for 
+							individual sale.  For example, a box of 12 health bars, each
+							of which can be sold individually, would have a Count of 12. -->
+							<xsd:element name="Count" type="xsd:positiveInteger" minOccurs="0"/>
+							<!-- NumberOfItems represents the number of discrete items included, 
+							such that the items are not packaged for individual sale.  For example, 
+							a bottle of 100 aspirin tablets would have a NumberOfItems of 100.  
+							A box of 10 individually packaged bottles, each with 20 tablets, would 
+							have a Count of 10 and a NumberOfItems of 200.  -->
+							<xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0"/>
+							<xsd:element name="Flavor" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="Scent" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="CustomerPackageType" type="StringNotNull" minOccurs="0"/>
+					</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<!-- LEGAL ANP CERTIFICATION ATTRIBUTES ONLY FOR BR LOCALE-->
+							<xsd:element name="LegalComplianceCertificationMetadata" type="StringNotNull" minOccurs="0"/>
+				            <xsd:element name="LegalComplianceCertificationDateOfIssue" type="StringNotNull" minOccurs="0"/>
+				            <xsd:element name="LegalComplianceCertificationExpirationDate" type="StringNotNull" minOccurs="0"/>	
+							<xsd:element name="Indications" type="LongStringNotNull" minOccurs="0"/>
+							<xsd:element name="ItemForm" type="String" minOccurs="0"/>
+							<xsd:element name="TargetGender" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="male"/>
+							<xsd:enumeration value="female"/>
+							<xsd:enumeration value="unisex"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="Ingredients" type="LongStringNotNull" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="LongStringNotNull" minOccurs="0"
+					maxOccurs="3"/>
+				<xsd:element name="TargetAudienceBase" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="FinishType" type="String" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="PlatinumKeywords" type="StringNotNull" minOccurs="0"
+					maxOccurs="20"/>
+				<xsd:element name="EachUnitCount" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="TotalEaches" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="PackageSizeName" type="String" minOccurs="0"/>
+				<xsd:element name="ItemSpecialty" type="String" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="SpecialFeatures" type="String" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="ItemGender" type="String" minOccurs="0"/>
+				<xsd:element name="PowerSource" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Directions" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecialIngredients" type="HundredString" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="AllergenInformation" type="AllergenInformationType" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="UseByRecommendation" type="String" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="CountryString" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="String" minOccurs="0"/>
+				<xsd:element name="OuterMaterialType" type="String" minOccurs="0"/>
+				<xsd:element name="BandSizeNum" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CupSize" type="String" minOccurs="0"/>
+				<xsd:element name="ItemDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CustomerRestrictionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Language" type="LanguageStringType" minOccurs="0"/>
+				<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="LegalComplianceCertificationStatus" minOccurs="0" maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Compliant"/>
+							<xsd:enumeration value="NonCompliant"/>
+							<xsd:enumeration value="Exempt"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- LEGAL ANVISA CERTIFICATION ATTRIBUTES ONLY FOR BR LOCALE-->
+                <xsd:element name="LegalComplianceCertificationStatus1" minOccurs="0" maxOccurs="1">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Compliant"/>
+							<xsd:enumeration value="NonCompliant"/>
+							<xsd:enumeration value="Exempt"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+                <xsd:element name="LegalComplianceCertificationMetadata1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+				<!-- LEGAL_COMPLIANCE_CERTIFICATION_VALUES FOR CA-SEXUAL_WELLNESS( Drug Identification Number, Homeopathic Medicine Number, Natural Product Number, Not Applicable)-->
+                <xsd:element name="LegalComplianceCertificationValue" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+	</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+<xsd:element name="MedicalSupplies">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element name="VariationData" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Parentage">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="parent"/>
+									<xsd:enumeration value="child"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="VariationTheme" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="Size"/>
+									<xsd:enumeration value="Color"/>
+									<xsd:enumeration value="Count"/>
+									<xsd:enumeration value="Scent"/>
+									<xsd:enumeration value="Flavor"/>
+									<xsd:enumeration value="Size-Color"/>
+									<xsd:enumeration value="Flavor-Count"/>
+									<xsd:enumeration value="Flavor-Size"/>
+									<xsd:enumeration value="Size-Scent"/>
+									<xsd:enumeration value="Size-UnitCount"/>
+									<xsd:enumeration value="CustomerPackageType"/>
+									<xsd:enumeration value="ColorName-CustomerPackageType"/>
+									<xsd:enumeration value="SizeName-CustomerPackageType"/>
+									<xsd:enumeration
+										value="SizeName-ColorName-CustomerPackageType"/>
+									<xsd:enumeration value="StyleName-CustomerPackageType"/>
+									<xsd:enumeration value="SizeName-StyleName-CustomerPackageType"/>
+									<xsd:enumeration
+										value="Opticalpower-Basecurveradius-Itemdiameterstring-Cylindercorrection-Cylinderaxis-unitcount"/>
+									<xsd:enumeration
+										value="Opticalpower-Basecurveradius-Itemdiameterstring-Lensadditionpower-Unitcount"/>
+									<xsd:enumeration
+										value="Opticalpower-Basecurveradius-Itemdiameterstring-Unitcount"/>
+								</xsd:restriction>									
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+						<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+						<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+						<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+						<!-- <xsd:element ref="ColorMap" minOccurs="0"/>
+						Count represents the number of individually packaged items (a.k.a. 
+						units) included, such that each item is the smallest unit with a 
+						scannable bar code (UPC / EAN), and each item is packaged for 
+						individual sale.  For example, a box of 12 health bars, each
+						of which can be sold individually, would have a Count of 12. -->
+						<xsd:element name="Count" type="xsd:positiveInteger" minOccurs="0"/>
+						<!-- NumberOfItems represents the number of discrete items included, 
+						such that the items are not packaged for individual sale.  For example, 
+						a bottle of 100 aspirin tablets would have a NumberOfItems of 100.  
+						A box of 10 individually packaged bottles, each with 20 tablets, would 
+						have a Count of 10 and a NumberOfItems of 200.  -->
+						<xsd:element name="NumberOfItems" type="xsd:positiveInteger"
+							minOccurs="0"/>
+						<xsd:element name="Flavor" type="StringNotNull" minOccurs="0"/>
+						<xsd:element name="Scent" type="StringNotNull" minOccurs="0"/>
+						<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+						<xsd:element name="CustomerPackageType" type="StringNotNull"
+							minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CanShipInOriginalContainer" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="IdentityPackageType" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="StringNotNull">
+						<xsd:enumeration value="bulk"/>
+						<xsd:enumeration value="frustration_free"/>
+						<xsd:enumeration value="traditional"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="UnitCount" minOccurs="0">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:decimal">
+							<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+								use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+			<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+			<xsd:element name="Indications" type="LongStringNotNull" minOccurs="0"/>
+			<xsd:element name="HairType" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+			<xsd:element name="SkinType" type="LongStringNotNull" minOccurs="0" maxOccurs="5"/>
+			<xsd:element name="SkinTone" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+			<!--<xsd:element name="SkinTone" minOccurs="0" maxOccurs="5">
+				<xsd:simpleType>
+					<xsd:restriction base="StringNotNull">
+						<xsd:enumeration value="Dark"/>
+						<xsd:enumeration value="Fair"/>
+						<xsd:enumeration value="Medium"/>
+						<xsd:enumeration value="MediumDark"/>
+						<xsd:enumeration value="VeryDark"/>
+						<xsd:enumeration value="VeryFair"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element> -->
+			<xsd:element name="Ingredients" type="LongStringNotNull" minOccurs="0" maxOccurs="3"/>
+			<xsd:element name="MaterialType" type="LongStringNotNull" minOccurs="0"
+				maxOccurs="3"/>
+			<xsd:element name="Directions" type="LongStringNotNull" minOccurs="0"/>
+			<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+			<xsd:element name="ItemForm" type="String" minOccurs="0"/>
+			<xsd:element name="Coverage" type="String" minOccurs="0"/>
+			<xsd:element name="FinishType" type="String" minOccurs="0" maxOccurs="5"/>
+			<xsd:element name="ItemSpecialty" type="String" minOccurs="0" maxOccurs="5"/>
+			<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="SpecialFeatures" type="String" minOccurs="0" maxOccurs="3"/>
+			<xsd:element name="SpecificUsedKeywords" type="String" minOccurs="0" maxOccurs="2"/>				
+			<xsd:element name="SunProtection" type="SunProtectionDimension" minOccurs="0"/>				
+			<xsd:element name="TargetAudience" type="String" minOccurs="0"/>
+			<xsd:element name="TargetGender" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="male"/>
+						<xsd:enumeration value="female"/>
+						<xsd:enumeration value="unisex"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="LensType" type="String" minOccurs="0"/>
+			<xsd:element name="LifeExpectancy" type="DateIntegerDimension" minOccurs="0"/>
+			<xsd:element name="OccasionType" type="MediumStringNotNull" minOccurs="0"/>				
+			<xsd:element name="ItemDiameter" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="OpticalPower" type="UnknownOpticalDimension" minOccurs="0"/>
+			<xsd:element name="BaseCurveRadius" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="CIPCode" type="String" minOccurs="0"/>
+			<xsd:element name="Pattern" type="String" minOccurs="0"/>
+			<xsd:element name="PowerSource" type="FortyStringNotNull" minOccurs="0"/>
+			<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element ref="Battery" minOccurs="0"/>
+			<xsd:element name="IsExpirationDatedProduct" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="ShaftLength" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="ShaftDiameter" type="PositiveInteger" minOccurs="0"/>
+			<xsd:element name="ItemGender" type="String" minOccurs="0"/>
+			<xsd:element name="CalciumString" type="String" minOccurs="0"/>
+			<xsd:element name="EnergyString" type="String" minOccurs="0"/>
+			<xsd:element name="TotalFatString" type="String" minOccurs="0"/>
+			<xsd:element name="SaturatedFatString" type="String" minOccurs="0"/>
+			<xsd:element name="MonounsaturatedFatString" type="String" minOccurs="0"/>
+			<xsd:element name="PolyunsaturatedFatString" type="String" minOccurs="0"/>
+			<xsd:element name="TotalCarbohydrateString" type="String" minOccurs="0"/>
+			<xsd:element name="SugarAlcoholString" type="String" minOccurs="0"/>
+			<xsd:element name="Starch" type="String" minOccurs="0"/>
+			<xsd:element name="DietaryFiberString" type="String" minOccurs="0"/>
+			<xsd:element name="ProteinString" type="String" minOccurs="0"/>
+			<xsd:element name="SaltPerServingString" type="String" minOccurs="0"/>
+			<xsd:element name="VitaminAString" type="String" minOccurs="0"/>
+			<xsd:element name="VitaminCString" type="String" minOccurs="0"/>
+			<xsd:element name="VitaminDString" type="String" minOccurs="0"/>
+			<xsd:element name="VitaminEString" type="String" minOccurs="0"/>
+			<xsd:element name="VitaminKString" type="String" minOccurs="0"/>
+			<xsd:element name="ThiaminString" type="String" minOccurs="0"/>
+			<xsd:element name="VitaminB2" type="String" minOccurs="0"/>
+			<xsd:element name="Niacin" type="String" minOccurs="0"/>
+			<xsd:element name="VitaminB6" type="String" minOccurs="0"/>
+			<xsd:element name="FolicAcid" type="String" minOccurs="0"/>
+			<xsd:element name="VitaminB12" type="String" minOccurs="0"/>
+			<xsd:element name="Biotin" type="String" minOccurs="0"/>
+			<xsd:element name="PantothenicAcid" type="String" minOccurs="0"/>
+			<xsd:element name="PotassiumString" type="String" minOccurs="0"/>
+			<xsd:element name="Chloride" type="String" minOccurs="0"/>
+			<xsd:element name="PhosphorusString" type="String" minOccurs="0"/>
+			<xsd:element name="Magnesium" type="String" minOccurs="0"/>
+			<xsd:element name="IronString" type="String" minOccurs="0"/>
+			<xsd:element name="Zinc" type="String" minOccurs="0"/>
+			<xsd:element name="Copper" type="String" minOccurs="0"/>				
+			<xsd:element name="Manganese" type="String" minOccurs="0"/>
+			<xsd:element name="Fluoride" type="String" minOccurs="0"/>
+			<xsd:element name="Selenium" type="String" minOccurs="0"/>
+			<xsd:element name="Chromium" type="String" minOccurs="0"/>
+			<xsd:element name="Molybdenum" type="String" minOccurs="0"/>
+			<xsd:element name="Iodine" type="String" minOccurs="0"/>
+			<xsd:element name="CholesterolString" type="String" minOccurs="0"/>
+			<xsd:element name="SodiumString" type="String" minOccurs="0"/>		
+			<xsd:element name="ManufacturerContactInformation" type="String" minOccurs="0"/>	
+			<xsd:element name="BandSizeNum" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="CupSize" type="String" minOccurs="0"/>
+			<xsd:element name="InnerMaterialType" type="String" minOccurs="0"/>
+			<xsd:element name="OuterMaterialType" type="String" minOccurs="0"/>
+			<xsd:element name="MaterialComposition" type="String" minOccurs="0"/>
+			<xsd:element name="TemperatureRating" type="String" minOccurs="0"/>
+			<xsd:element name="WeightRange" type="StringNotNull" minOccurs="0"/>
+                            <xsd:element name="SolidNetWeight" type="WeightDimension" minOccurs="0"/>
+                            <xsd:element name="CountryString" type="LongStringNotNull" minOccurs="0"/>
+                            <xsd:element name="ItemTypeName" type="String" minOccurs="0"/>
+                            <xsd:element name="AllergenInformation" type="AllergenInformationType" minOccurs="0" maxOccurs="5"/>
+                            <xsd:element name="SpecialIngredients" type="HundredString" minOccurs="0" maxOccurs="5"/>
+                            <xsd:element name="PrimaryIngredientCountryOfOrigin" type="String" minOccurs="0"/>
+                            <xsd:element name="PrimaryIngredientLocationProduced" type="String" minOccurs="0"/>
+                            <xsd:element name="StorageInstructions" type="HundredString" minOccurs="0"/>
+                            <xsd:element name="ServingRecommendation" type="String" minOccurs="0"/>
+                            <xsd:element name="UseByRecommendation" type="String" minOccurs="0"/>
+                            <xsd:element name="ServingSize" type="ServingDimension" minOccurs="0"/>
+							<xsd:element name="CustomerRestrictionType" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="LegalComplianceCertificationMetadata" type="StringNotNull" minOccurs="0"/>
+			                <xsd:element name="LegalComplianceCertificationDateOfIssue" type="StringNotNull" minOccurs="0"/>
+			                <xsd:element name="LegalComplianceCertificationExpirationDate" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+							<xsd:element name="RequiredProductComplianceCertificate" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="FdaPremarketApprovalNumberPma" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="FdaInstructionsForUseType" type="FdaInstructionsForUseEnum" minOccurs="0"/>
+							<xsd:element name="FdaDeviceClassification" type="FdaDeviceClassificationType" minOccurs="0"/>
+							<xsd:element name="FcStorageMethod" type="StringNotNull" minOccurs="0"/>
+							<xsd:element name="CustomerReturnPolicy" type="CustomerReturnPolicyValues" minOccurs="0"/>
+							<xsd:element name="PlanExpirationDate" type="xsd:dateTime" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>	
+	<xsd:simpleType name="CustomerReturnPolicyValues">
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value= "NonReturnable"/>
+				<xsd:enumeration value= "Standard"/>
+			</xsd:restriction>
+	</xsd:simpleType> 
+	<xsd:simpleType name="FdaInstructionsForUseEnum">
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value= "professional"/>
+				<xsd:enumeration value= "consumer"/>
+				<xsd:enumeration value= "na"/>
+			</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="FdaDeviceClassificationType">
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value= "i"/>
+				<xsd:enumeration value= "ii"/>
+				<xsd:enumeration value= "iii"/>
+				<xsd:enumeration value= "iv"/>
+			</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="UnknownOpticalUnitOfMeasure">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="unknown_modifier"/>
+             <xsd:enumeration value="diopters"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="UnknownOpticalDimension">
+		<xsd:simpleContent>
+			<xsd:extension base="Dimension">
+				<xsd:attribute name="unitOfMeasure" type="UnknownOpticalUnitOfMeasure" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+</xsd:schema>

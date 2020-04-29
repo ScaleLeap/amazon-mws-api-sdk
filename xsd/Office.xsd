@@ -1,0 +1,1143 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #4 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+	$Date: 2005/09/19 $
+
+	AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+	confidential and proprietary information of Amazon.com and may not be reproduced, 
+	distributed or used, in whole or in part, for any purpose other than as necessary 
+	to list products for sale on the www.amazon.com web site pursuant to an agreement 
+	with Amazon.com.
+	-->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="Office">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Rebate" type="RebateType" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="ArtSupplies"/>
+							<xsd:element ref="EducationalSupplies"/>
+							<xsd:element ref="OfficeProducts"/>
+							<xsd:element ref="PaperProducts"/>
+							<xsd:element ref="WritingInstruments"/>
+							<xsd:element ref="BarCode"/>
+							<xsd:element ref="Calculator"/>
+							<xsd:element ref="InkToner"/>
+							<xsd:element ref="MultifunctionDevice"/>
+							<xsd:element ref="OfficeElectronics"/>
+							<xsd:element ref="OfficePhone"/>
+							<xsd:element ref="OfficePrinter"/>
+							<xsd:element ref="OfficeScanner"/>
+							<xsd:element ref="VoiceRecorder"/>
+							<xsd:element ref="PrinterConsumable"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLife" type="PositiveNonZeroDimension" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLifeStandby" type="PositiveNonZeroDimension"
+					minOccurs="0"/>
+				<xsd:element name="BatteryChargeTime" type="PositiveNonZeroDimension" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryEnergyContent" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="batteries_contained_in_equipment"/>
+							<xsd:enumeration value="batteries_only"/>
+							<xsd:enumeration value="batteries_packed_with_equipment"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="LithiumBatteryVoltage" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryWeight" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionLabor" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionParts" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="ManufacturerWarrantyType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumIonCells" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumMetalCells" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="PowerSource" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="WarrantyDescription" type="SuperLongStringNotNull" minOccurs="0"/>				
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# ArtSupplies Classification Data
+	###############################################################
+	-->
+	<xsd:element name="ArtSupplies">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="PaperSize"/>
+										<xsd:enumeration value="MaximumExpandableSize"/>
+										<xsd:enumeration value="LineSize"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="NumberOfItems"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="StringNotNull"/>
+							<xsd:element name="ColorMap" type="StringNotNull"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="PaintType" type="StringNotNull" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="RecycledContentPercentage" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="PreConsumerRecycledContent" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="PostConsumerRecycledContent" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="Diameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MaximumExpandableSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CoreDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="InkColor" type="String" minOccurs="0" maxOccurs="20"/>
+				<xsd:element name="BallpointPenType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TipDescription" type="String" minOccurs="0" maxOccurs="20"/>
+				<xsd:element name="PencilLeadHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PointType" type="String" minOccurs="0"/>
+				<xsd:element name="LineSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="NumberOfFasteners" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="FastenerCapacity" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Binding" type="BindingType" minOccurs="0"/>
+				<xsd:element name="BindingLocation" type="String" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="String" minOccurs="0"/>
+				<xsd:element name="NumberOfHoles" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="CoverMaterial" type="String" minOccurs="0"/>
+				<xsd:element name="TabCutType" type="String" minOccurs="0"/>
+				<xsd:element name="TabPosition" type="String" minOccurs="0"/>
+				<xsd:element name="IsPrePrinted" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="CoatingDescription" type="TwoFiftyStringNotNull" minOccurs="0"/>
+				<xsd:element name="PaperCornerType" type="String" minOccurs="0"/>
+				<xsd:element name="PaperFinish" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PaperSize" type="StringLengthOptionalDimension" minOccurs="0"/>
+				<xsd:element name="BrightnessRating" type="IntegerPercentageType" minOccurs="0"/>
+				<xsd:element name="MediaStorageCapacity" type="String" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FabricType" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="AnnualEnergyConsumption" type="EnergyConsumptionDimension" minOccurs="0"/>
+				<xsd:element name="PowerConsumption" type="PowerDimension" minOccurs="0"/>
+				<xsd:element name="EUEnergyLabelEfficiencyClass" type="EnergyLabelEfficiencyClass" minOccurs="0"/>
+				<xsd:element name="DisplayType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplaySize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ImageBrightness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ImageConstrastRatio" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayResolutionMaximum" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MfgMaximum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="LockType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CompatibilityOptions" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CalenderType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsWhiteGloveRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ModelYearRange" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfLines" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="ItemDensity" type="DensityDimension" minOccurs="0"/>
+				<xsd:element name="ItemShape" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SubjectCharacter" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Occasion" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OccasionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# EducationalSupplies Classification Data
+	###############################################################
+	-->
+	<xsd:element name="EducationalSupplies">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="PaperSize"/>
+										<xsd:enumeration value="MaximumExpandableSize"/>
+										<xsd:enumeration value="LineSize"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="NumberOfItems"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="StringNotNull"/>
+							<xsd:element name="ColorMap" type="StringNotNull"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="RecycledContentPercentage" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="PreConsumerRecycledContent" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="PostConsumerRecycledContent" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="Diameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MaximumExpandableSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CoreDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="InkColor" type="String" minOccurs="0" maxOccurs="20"/>
+				<xsd:element name="BallpointPenType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TipDescription" type="String" minOccurs="0" maxOccurs="20"/>
+				<xsd:element name="PencilLeadHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PointType" type="String" minOccurs="0"/>
+				<xsd:element name="LineSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="NumberOfFasteners" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="FastenerCapacity" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Binding" type="BindingType" minOccurs="0"/>
+				<xsd:element name="BindingLocation" type="String" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="String" minOccurs="0"/>
+				<xsd:element name="NumberOfHoles" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="CoverMaterial" type="String" minOccurs="0"/>
+				<xsd:element name="TabCutType" type="String" minOccurs="0"/>
+				<xsd:element name="TabPosition" type="String" minOccurs="0"/>
+				<xsd:element name="IsPrePrinted" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="CoatingDescription" type="TwoFiftyStringNotNull" minOccurs="0"/>
+				<xsd:element name="PaperCornerType" type="String" minOccurs="0"/>
+				<xsd:element name="PaperFinish" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PaperSize" type="StringLengthOptionalDimension" minOccurs="0"/>
+				<xsd:element name="BrightnessRating" type="IntegerPercentageType" minOccurs="0"/>
+				<xsd:element name="MediaStorageCapacity" type="String" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RulingType" type="String" minOccurs="0"/>
+				<xsd:element name="AnnualEnergyConsumption" type="EnergyConsumptionDimension" minOccurs="0"/>
+				<xsd:element name="PowerConsumption" type="PowerDimension" minOccurs="0"/>
+				<xsd:element name="EUEnergyLabelEfficiencyClass" type="EnergyLabelEfficiencyClass" minOccurs="0"/>
+				<xsd:element name="DisplayType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplaySize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ImageBrightness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ImageConstrastRatio" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayResolutionMaximum" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PaintType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MfgMinimum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="MfgMaximum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="LockType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CompatibilityOptions" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CalenderType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsWhiteGloveRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ModelYearRange" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfLines" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="ItemDensity" type="DensityDimension" minOccurs="0"/>
+				<xsd:element name="ItemShape" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SubjectCharacter" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Occasion" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Voltage" type="PositiveInteger" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# OfficeProducts Classification Data
+	###############################################################
+	-->
+	<xsd:element name="OfficeProducts">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="PaperSize"/>
+										<xsd:enumeration value="MaximumExpandableSize"/>
+										<xsd:enumeration value="LineSize"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="NumberOfItems"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="StringNotNull"/>
+							<xsd:element name="ColorMap" type="StringNotNull"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="RecycledContentPercentage" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="PreConsumerRecycledContent" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="PostConsumerRecycledContent" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="Diameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MaximumExpandableSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CoreDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="InkColor" type="String" minOccurs="0" maxOccurs="20"/>
+				<xsd:element name="BallpointPenType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TipDescription" type="String" minOccurs="0" maxOccurs="20"/>
+				<xsd:element name="PencilLeadHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PointType" type="String" minOccurs="0"/>
+				<xsd:element name="LineSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="NumberOfFasteners" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="FastenerCapacity" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Binding" type="BindingType" minOccurs="0"/>
+				<xsd:element name="BindingLocation" type="String" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="String" minOccurs="0"/>
+				<xsd:element name="NumberOfHoles" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="CoverMaterial" type="String" minOccurs="0"/>
+				<xsd:element name="TabCutType" type="String" minOccurs="0"/>
+				<xsd:element name="TabPosition" type="String" minOccurs="0"/>
+				<xsd:element name="IsPrePrinted" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="CoatingDescription" type="TwoFiftyStringNotNull" minOccurs="0"/>
+				<xsd:element name="PaperCornerType" type="String" minOccurs="0"/>
+				<xsd:element name="PaperFinish" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PaperSize" type="StringLengthOptionalDimension" minOccurs="0"/>
+				<xsd:element name="BrightnessRating" type="IntegerPercentageType" minOccurs="0"/>
+				<xsd:element name="MediaStorageCapacity" type="String" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RulingType" type="String" minOccurs="0"/>
+				<xsd:element name="AnnualEnergyConsumption" type="EnergyConsumptionDimension" minOccurs="0"/>
+				<xsd:element name="PowerConsumption" type="PowerDimension" minOccurs="0"/>
+				<xsd:element name="EUEnergyLabelEfficiencyClass" type="EnergyLabelEfficiencyClass" minOccurs="0"/>
+				<xsd:element name="DisplayType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplaySize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ImageBrightness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ImageConstrastRatio" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayResolutionMaximum" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PaintType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MfgMinimum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="MfgMaximum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="LockType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CompatibilityOptions" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CalenderType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Capacity" type="CapacityUnit" minOccurs="0"/>
+				<xsd:element name="IsWhiteGloveRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ModelYearRange" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfLines" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemDensity" type="DensityDimension" minOccurs="0"/>
+				<xsd:element name="Occasion" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="LegalComplianceCertificationMetadata" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="LegalComplianceCertificationDateOfIssue" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="LegalComplianceCertificationExpirationDate" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DrawerType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FurnitureFinish" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfHooks" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/>
+				<xsd:element name="PowerPlugType" type="PowerPlugType" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# PaperProducts Classification Data
+	###############################################################
+	-->
+	<xsd:element name="PaperProducts">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="PaperSize"/>
+										<xsd:enumeration value="MaximumExpandableSize"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="NumberOfItems"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="StringNotNull"/>
+							<xsd:element name="ColorMap" type="StringNotNull"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="RecycledContentPercentage" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="PreConsumerRecycledContent" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="PostConsumerRecycledContent" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="Diameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MaximumExpandableSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="CoreDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="NumberOfFasteners" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="FastenerCapacity" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Binding" type="BindingType" minOccurs="0"/>
+				<xsd:element name="BindingLocation" type="String" minOccurs="0"/>
+				<xsd:element name="ClosureType" type="String" minOccurs="0"/>
+				<xsd:element name="NumberOfHoles" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="CoverMaterial" type="String" minOccurs="0"/>
+				<xsd:element name="TabCutType" type="String" minOccurs="0"/>
+				<xsd:element name="TabPosition" type="String" minOccurs="0"/>
+				<xsd:element name="IsPrePrinted" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="CoatingDescription" type="TwoFiftyStringNotNull" minOccurs="0"/>
+				<xsd:element name="PaperCornerType" type="String" minOccurs="0"/>
+				<xsd:element name="PaperFinish" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PaperSize" type="StringLengthOptionalDimension" minOccurs="0"/>
+				<xsd:element name="BrightnessRating" type="IntegerPercentageType" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RulingType" type="String" minOccurs="0"/>
+				<xsd:element name="AnnualEnergyConsumption" type="EnergyConsumptionDimension" minOccurs="0"/>
+				<xsd:element name="PowerConsumption" type="PowerDimension" minOccurs="0"/>
+				<xsd:element name="EUEnergyLabelEfficiencyClass" type="EnergyLabelEfficiencyClass" minOccurs="0"/>
+				<xsd:element name="DisplayType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplaySize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ImageBrightness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ImageConstrastRatio" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayResolutionMaximum" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PaintType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MfgMinimum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="MfgMaximum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="LockType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CompatibilityOptions" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CalenderType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsWhiteGloveRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ModelYearRange" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfLines" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="ItemDensity" type="DensityDimension" minOccurs="0"/>
+				<xsd:element name="OccasionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Occasion" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# WritingInstruments Classification Data
+	###############################################################
+	-->
+	<xsd:element name="WritingInstruments">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="LineSize"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="NumberOfItems"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="StringNotNull"/>
+							<xsd:element name="ColorMap" type="StringNotNull"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="UnitCount" minOccurs="0">
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="xsd:decimal">
+								<xsd:attribute name="unitOfMeasure" type="StringNotNull"
+									use="required"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="RecycledContentPercentage" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="PreConsumerRecycledContent" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="PostConsumerRecycledContent" type="PercentageType" minOccurs="0"/>
+				<xsd:element name="Diameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="InkColor" type="String" minOccurs="0" maxOccurs="20"/>
+				<xsd:element name="BallpointPenType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TipDescription" type="String" minOccurs="0" maxOccurs="20"/>
+				<xsd:element name="PencilLeadHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PointType" type="String" minOccurs="0"/>
+				<xsd:element name="LineSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AnnualEnergyConsumption" type="EnergyConsumptionDimension" minOccurs="0"/>
+				<xsd:element name="PowerConsumption" type="PowerDimension" minOccurs="0"/>
+				<xsd:element name="EUEnergyLabelEfficiencyClass" type="EnergyLabelEfficiencyClass" minOccurs="0"/>
+				<xsd:element name="DisplayType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplaySize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ImageBrightness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ImageConstrastRatio" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayResolutionMaximum" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PaintType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MfgMinimum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="MfgMaximum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="LockType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CompatibilityOptions" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CalenderType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsWhiteGloveRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="ModelYearRange" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemDensity" type="DensityDimension" minOccurs="0"/>
+				<xsd:element name="ItemShape" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SubjectCharacter" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Occasion" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	<!--
+	###############################################################
+	# BarCodeReader Classification Data
+	###############################################################
+	-->	
+	<xsd:element name="BarCode">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="IncludesRechargableBattery" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="NoiseAttenuation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="HardwarePlatform" type="MediumStringNotNull" minOccurs="0"/>
+				<xsd:element name="InputDeviceInterface" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ConnectivityTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PowerDevice" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ScanElementType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ScanRate" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Voltage" type="PositiveInteger" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	<!--
+	###############################################################
+	# Calculator Classification Data
+	###############################################################
+	-->	
+	<xsd:element name="Calculator">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="IncludesRechargableBattery" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PowerPlugType" type="PowerPlugType" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	<!--
+	###############################################################
+	# InkOrToner Classification Data
+	###############################################################
+	-->	
+	<xsd:element name="InkToner">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="InkColor"/>
+										<xsd:enumeration value="NumberOfItems"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ConnectivityTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InkColor" type="String" minOccurs="0"/>
+				<xsd:element name="MaxPrintspeedBlackWhite" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="MaxPrintspeedColor" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="PrinterOutput" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PrinterTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CompatibleDevices" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AnnualEnergyConsumption" type="EnergyConsumptionDimension" minOccurs="0"/>
+				<xsd:element name="PowerConsumption" type="PowerDimension" minOccurs="0"/>
+				<xsd:element name="EUEnergyLabelEfficiencyClass" type="EnergyLabelEfficiencyClass" minOccurs="0"/>
+				<xsd:element name="DisplayType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplaySize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ImageBrightness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ImageConstrastRatio" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayResolutionMaximum" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemShape" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PaintType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MfgMinimum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="MfgMaximum" type="AgeRecommendedDimension" minOccurs="0"/>
+				<xsd:element name="LockType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemDensity" type="DensityDimension" minOccurs="0"/>
+				<xsd:element name="CompatibilityOptions" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Occasion" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	<!--
+	###############################################################
+	# MultifunctionDevice Classification Data
+	###############################################################
+	-->	
+	<xsd:element name="MultifunctionDevice">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ConnectivityTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludedFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ProductTypeSubcategory" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Voltage" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="PowerPlugType" type="PowerPlugType" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	<!--
+	###############################################################
+	# OfficeElectronics Classification Data
+	###############################################################
+	-->	
+	<xsd:element name="OfficeElectronics">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ResolutionBase" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/>
+				<xsd:element name="PowerPlugType" type="PowerPlugType" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	<!--
+	###############################################################
+	# Phone Classification Data
+	###############################################################
+	-->	
+	<xsd:element name="OfficePhone">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludesRechargableBattery" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="NoiseAttenuation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CallerIdentification" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="RadioBandsSupported" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	<!--
+	###############################################################
+	# Printer Classification Data
+	###############################################################
+	-->	
+	<xsd:element name="OfficePrinter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ConnectivityTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaxPrintspeedBlackWhite" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="MaxPrintspeedColor" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="PrinterOutput" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PrinterTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# PrinterConsumable Classification Data
+	###############################################################
+	-->	
+	<xsd:element name="PrinterConsumable">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ConnectivityTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaxPrintspeedBlackWhite" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="MaxPrintspeedColor" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="PrinterOutput" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PrinterTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ExternalTestingCertification" type="StringNotNull" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="Voltage" type="VoltageDecimalDimension" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	<!--
+	###############################################################
+	# Scanner Classification Data
+	###############################################################
+	-->
+	<xsd:element name="OfficeScanner">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="ConnectivityTechnology" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ProductTypeSubcategory" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="OperatingSystem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# VoiceRecorder Classification Data
+	###############################################################
+	-->	
+	<xsd:element name="VoiceRecorder">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Voltage" type="PositiveInteger" minOccurs="0"/>
+				<xsd:element name="PowerPlugType" type="PowerPlugType" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>	
+	<!--
+	##############################################################
+	# Office Data Types
+	##############################################################
+	-->
+	<xsd:simpleType name="BallpointPenTypes">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Retractable"/>
+			<xsd:enumeration value="Stick"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PencilLeadHardnessType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="6B"/>
+			<xsd:enumeration value="4B"/>
+			<xsd:enumeration value="2B"/>
+			<xsd:enumeration value="B"/>
+			<xsd:enumeration value="HB"/>
+			<xsd:enumeration value="F"/>
+			<xsd:enumeration value="H"/>
+			<xsd:enumeration value="2H"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PaperFinishType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="coated"/>
+			<xsd:enumeration value="embossed"/>
+			<xsd:enumeration value="glossy"/>
+			<xsd:enumeration value="high_gloss"/>
+			<xsd:enumeration value="matte"/>
+			<xsd:enumeration value="metallic"/>
+			<xsd:enumeration value="satin"/>
+			<xsd:enumeration value="semi-gloss"/>
+			<xsd:enumeration value="smooth"/>
+			<xsd:enumeration value="soft_gloss"/>
+			<xsd:enumeration value="specially_coated"/>
+			<xsd:enumeration value="texture_laid"/>
+			<xsd:enumeration value="tracing"/>
+			<xsd:enumeration value="translucent"/>
+			<xsd:enumeration value="ultra_smooth"/>
+			<xsd:enumeration value="uncoated"/>
+			<xsd:enumeration value="watercolor"/>
+			<xsd:enumeration value="wove"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="OfficeSpecialFeatures">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="refillable"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BindingType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="perfect"/>
+			<xsd:enumeration value="saddle_stitch"/>
+			<xsd:enumeration value="side_stitch"/>
+			<xsd:enumeration value="case"/>
+			<xsd:enumeration value="plastic_comb"/>
+			<xsd:enumeration value="three_ring"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PaperSizeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="A0"/>
+			<xsd:enumeration value="A1"/>
+			<xsd:enumeration value="A2"/>
+			<xsd:enumeration value="A3"/>
+			<xsd:enumeration value="A4"/>
+			<xsd:enumeration value="A5"/>
+			<xsd:enumeration value="A6"/>
+			<xsd:enumeration value="A7"/>
+			<xsd:enumeration value="A8"/>
+			<xsd:enumeration value="A9"/>
+			<xsd:enumeration value="A10"/>
+			<xsd:enumeration value="33.125-x-46.25-inch"/>
+			<xsd:enumeration value="23.375-x-33.125-inch"/>
+			<xsd:enumeration value="16.5-x-23.375-inch"/>
+			<xsd:enumeration value="11.75-x-16.5-inch"/>
+			<xsd:enumeration value="8.25-x-11.75-inch"/>
+			<xsd:enumeration value="5.875-x-8.25-inch"/>
+			<xsd:enumeration value="4.125-x-5.875-inch"/>
+			<xsd:enumeration value="2.875-x-4.125-inch"/>
+			<xsd:enumeration value="2-x-2.875-inch"/>
+			<xsd:enumeration value="1.5-x-2-inch"/>
+			<xsd:enumeration value="1-x-1.5-inch"/>
+			<xsd:enumeration value="2-x-3-inch"/>
+			<xsd:enumeration value="3-x-5-inch"/>
+			<xsd:enumeration value="4.125-x-5.83-inch"/>
+			<xsd:enumeration value="5-x-8-inch"/>
+			<xsd:enumeration value="8.5-x-11-inch"/>
+			<xsd:enumeration value="8.5-x-14-inch"/>
+			<xsd:enumeration value="11-x-17-inch"/>
+			<xsd:enumeration value="17-x-22-inch"/>
+			<xsd:enumeration value="22-x-34-inch"/>
+			<xsd:enumeration value="34-x-44-inch"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

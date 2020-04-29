@@ -1,0 +1,306 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #4 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2009/07/24 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="HomeImprovement">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="BuildingMaterials"/>
+							<xsd:element ref="Hardware"/>
+							<xsd:element ref="PlumbingFixtures"/>
+							<xsd:element name="Tools" type="HomeImprovementTools"/>
+							<xsd:element ref="OrganizersAndStorage"/>
+							<xsd:element ref="MajorHomeAppliances"/>
+							<xsd:element ref="SecurityElectronics"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="BuildingMaterials">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Material"/>
+										<xsd:enumeration value="ItemWeight"/>
+										<xsd:enumeration value="Size-Color"/>
+										<xsd:enumeration value="ItemPackageQuantity"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Material" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="ManufacturerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Hardware">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Material"/>
+										<xsd:enumeration value="ItemWeight"/>
+										<xsd:enumeration value="ItemPackageQuantity"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Material" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ManufacturerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PlumbingFixtures">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Material"/>
+										<xsd:enumeration value="ItemWeight"/>
+										<xsd:enumeration value="Size-Color"/>
+										<xsd:enumeration value="ItemPackageQuantity"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Material" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ManufacturerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="HomeImprovementTools">
+		<xsd:sequence>
+			<xsd:element name="VariationData" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Parentage">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="parent"/>
+									<xsd:enumeration value="child"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="VariationTheme" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="Size"/>
+									<xsd:enumeration value="Color"/>
+									<xsd:enumeration value="ItemWeight"/>
+									<xsd:enumeration value="ItemPackageQuantity"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="DisplayDiameter" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+			<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+			<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="DisplayWidth" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="DisplayHeight" type="LengthDimension" minOccurs="0"/>
+			<xsd:element name="PowerSource" type="StringNotNull" minOccurs="0"/>
+			<xsd:element name="Horsepower" type="Dimension" minOccurs="0"/>
+			<xsd:element name="Wattage" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="Voltage" type="Dimension" minOccurs="0"/>
+			<xsd:element name="BatteryCapacity" type="Dimension" minOccurs="0"/>
+			<xsd:element name="GritRating" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0"/>
+			<xsd:element name="MinimumAge" type="AgeRecommendedDimension" minOccurs="0"/>
+			<xsd:element name="ManufacturerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+			<xsd:element name="SellerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="MajorHomeAppliances">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="ItemWeight"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PowerSource" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Wattage" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="Voltage" type="Dimension" minOccurs="0"/>
+				<xsd:element name="BatteryCapacity" type="Dimension" minOccurs="0"/>
+				<xsd:element name="ManufacturerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OrganizersAndStorage">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="Material"/>
+										<xsd:enumeration value="ItemWeight"/>
+										<xsd:enumeration value="ItemPackageQuantity"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Material" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ManufacturerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SecurityElectronics">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="ItemWeight"/>
+										<xsd:enumeration value="Size-Color"/>
+										<xsd:enumeration value="ItemPackageQuantity"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ManufacturerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="LongStringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

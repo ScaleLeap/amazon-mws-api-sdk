@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by jwo (private) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>$Date: 2003/04/09 $</xs:documentation>
+	</xs:annotation>
+	<xs:include schemaLocation="PaymentMethod.xsd"/>
+	<xs:include schemaLocation="CustomerAddress.xsd"/>
+	<xs:element name="Customer">
+		<xs:annotation>
+			<xs:documentation>A single customer account</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Name">
+					<xs:annotation>
+						<xs:documentation>Customer's full name</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="150"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="FormalTitle" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>e.g. "Mr." "Mrs."</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="30"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="GivenName" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Customer's given name.  Depending on cultural background, this may or may not be the "first" name</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="150"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="FamilyName" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Customer's given name.  Depending on cultural background, this may or may not be the "last" name</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="150"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Pronunciation" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Phonetic spelling of Customer's full name</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="150"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="EmailAddress">
+					<xs:annotation>
+						<xs:documentation>Customer's primary email address.  This field is considering the username (aka login name) for the Amazon.com platform</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="64"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="Password">
+					<xs:annotation>
+						<xs:documentation>Encrypted password for the customer account.  The user must know his/her password in order to access the account</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="172"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="BirthDate" type="xs:date" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The customer's birth date</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="PreferredPostalCode" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The postal code where the customer lives.  Usually the postal code for the customer's billing address</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="CustomerAddresses" minOccurs="0"/>
+				<xs:element ref="PaymentMethods" minOccurs="0"/>
+				<xs:element name="AdditionalProperties" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Property" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:anySimpleType">
+											<xs:attribute name="name" type="xs:string"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="MerchantCustomerID" type="xs:anySimpleType" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+
+

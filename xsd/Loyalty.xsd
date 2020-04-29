@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <!--
+    $Date: 2005/09/02 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced,
+    distributed or used, in whole or in part, for any purpose other than as necessary
+    to list products for sale on the www.amazon.com web site pursuant to an agreement
+    with Amazon.com.
+    -->
+
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+    <xsd:element name="Loyalty">
+        <xsd:complexType>
+            <xsd:sequence>
+      	        <xsd:element name="LoyaltyID">
+		    <xsd:simpleType>
+		        <xsd:restriction base="xsd:normalizedString">
+                            <xsd:minLength value="1"/>
+		    	    <xsd:maxLength value="10"/>
+			</xsd:restriction>
+		    </xsd:simpleType>
+		</xsd:element>
+		<xsd:element ref="AmazonCustomerID" minOccurs="0"/>
+		<xsd:element name="YearToDatePoints" type="xsd:nonNegativeInteger"/>
+		<xsd:element name="RewardsAvailable" type="CurrencyAmount"/>
+		<xsd:element name="PointsToNextReward" type="xsd:nonNegativeInteger"/>
+		<xsd:element name="TotalPoints" type="xsd:nonNegativeInteger"/>
+		<xsd:element name="PostalCode" type="String" minOccurs="0"/>
+		<xsd:element name="AnniversaryDate" type="xsd:dateTime"/>
+		<xsd:element name="FreeShipping" type="xsd:boolean"/>
+		<xsd:element name="Reward" maxOccurs="unbounded" minOccurs="0">
+		    <xsd:complexType>
+		        <xsd:sequence>
+			    <xsd:element name="RewardCertificateID" type="xsd:nonNegativeInteger"/>
+  			    <xsd:element name="Balance" type="CurrencyAmount"/>
+			    <xsd:element name="EarnedOnDate" type="xsd:dateTime"/>
+			    <xsd:element name="ExpirationDateDisplay" type="xsd:dateTime"/>
+			    <xsd:element name="ExpirationDateEnforced" type="xsd:dateTime"/>
+		        </xsd:sequence>
+		    </xsd:complexType>
+	        </xsd:element>
+ 	    </xsd:sequence>
+	</xsd:complexType>
+    </xsd:element>
+</xsd:schema>
+

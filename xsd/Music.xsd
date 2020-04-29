@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+  			 $Date: 2008/05/16/ $      
+         AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+         confidential and proprietary information of Amazon.com and may not be reproduced,
+         distributed or used, in whole or in part, for any purpose other than as necessary 
+         to list products for sale on the www.amazon.com web site pursuant to an agreement
+         with Amazon.com.
+	-->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="Music">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="MusicPopular"/>
+							<xsd:element ref="MusicClassical"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# MusicPopular  Classification Data
+	###############################################################
+	-->
+	<xsd:element name="MusicPopular">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="MediaType" type="MusicMediaType"/>
+				<xsd:element name="AspectRatio" type="MusicAspectRatioType" minOccurs="0"/>
+				<xsd:element name="VinylRecordDetails" type="VinylRecordDetailsType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This field is required for records (MediaType
+							lp_record).</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="Format" type="MusicFormatType" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="DVDRegion" type="MusicDVDRegionType" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="PublishingCompany" type="HundredString" minOccurs="0"/>
+				<xsd:element name="Publisher" type="HundredString" minOccurs="0"/>
+				<xsd:element name="OriginalLanguageTitle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PowerSource" type="StringNotNull" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLife" type="BatteryLifeDimension" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLifeStandby" type="Dimension" minOccurs="0"/>
+				<xsd:element name="BatteryChargeTime" type="Dimension" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryEnergyContent" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="batteries_contained_in_equipment"/>
+							<xsd:enumeration value="batteries_only"/>
+							<xsd:enumeration value="batteries_packed_with_equipment"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="LithiumBatteryVoltage" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryWeight" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionLabor" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionParts" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:normalizedString">
+							<xsd:maxLength value="1500"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Copyright" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="AudioEncoding" type="AudioEncodingType" minOccurs="0"/>
+				<xsd:element name="NumberOfDiscs" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="RunTime" type="xsd:positiveInteger" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>The total run time, in minutes.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="Artist" type="MediumStringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="Language" type="LanguageStringType" minOccurs="0"/>
+				<xsd:element name="SubtitleLanguage" type="LanguageStringType" minOccurs="0"/>
+				<xsd:element name="OriginalPublicationDate" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="PublicationDate" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="SubjectKeywords" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Genre" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+				<xsd:element name="Tenor" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Piano" type="xsd:string" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="Oboe" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Harp" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Soprano" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Saxophone" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Sitar" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Cello" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Cornet" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Violin" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Bass" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="MezzoSoprano" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Guitar" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Clarinet" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Trumpet" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="FrenchHorn" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Baritone" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Vocals" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Orchestra" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Flute" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Alto" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Conductor" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Contralto" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="SourceCountryCode" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="SampleAvailabilityDatetime" type="xsd:dateTime" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# MusicClassical  Classification Data
+	###############################################################
+	-->
+	<xsd:element name="MusicClassical">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="MediaType" type="MusicMediaType"/>
+				<xsd:element name="AspectRatio" type="MusicAspectRatioType" minOccurs="0"/>
+				<xsd:element name="VinylRecordDetails" type="VinylRecordDetailsType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>This field is required for records (MediaType
+							lp_record).</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="Format" type="MusicFormatType" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="DVDRegion" type="MusicDVDRegionType" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="PublishingCompany" type="HundredString" minOccurs="0"/>
+				<xsd:element name="Publisher" type="HundredString" minOccurs="0"/>
+				<xsd:element name="OriginalLanguageTitle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialComposition" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PowerSource" type="StringNotNull" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLife" type="BatteryLifeDimension" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLifeStandby" type="Dimension" minOccurs="0"/>
+				<xsd:element name="BatteryChargeTime" type="Dimension" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryEnergyContent" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="batteries_contained_in_equipment"/>
+							<xsd:enumeration value="batteries_only"/>
+							<xsd:enumeration value="batteries_packed_with_equipment"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="LithiumBatteryVoltage" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryWeight" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionLabor" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionParts" type="SuperLongStringNotNull" minOccurs="0"/>
+				<xsd:element name="MfrWarrantyDescriptionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:normalizedString">
+							<xsd:maxLength value="1500"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Copyright" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="AudioEncoding" type="AudioEncodingType" minOccurs="0"/>
+				<xsd:element name="NumberOfDiscs" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="RunTime" type="xsd:positiveInteger" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>The total run time, in minutes.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="Artist" type="MediumStringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="Performer" type="StringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="Composer" type="MediumStringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="Conductor" type="MediumStringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="Orchestra" type="MediumStringNotNull" minOccurs="0" maxOccurs="10"/>
+				<xsd:element name="Language" type="LanguageStringType" minOccurs="0"/>
+				<xsd:element name="SubtitleLanguage" type="LanguageStringType" minOccurs="0"/>
+				<xsd:element name="OriginalPublicationDate" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="PublicationDate" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="SubjectKeywords" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Genre" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+				<xsd:element name="Tenor" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Piano" type="xsd:string" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="Oboe" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Harp" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Soprano" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Saxophone" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Sitar" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Cello" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Cornet" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Violin" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Bass" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="MezzoSoprano" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Guitar" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Clarinet" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Trumpet" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="FrenchHorn" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Baritone" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Vocals" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Flute" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Alto" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="Contralto" type="xsd:string" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="SourceCountryCode" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="SampleAvailabilityDatetime" type="xsd:dateTime" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# Music Data Types
+	###############################################################
+	-->
+	<xsd:simpleType name="MusicMediaType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="lp_record"/>
+			<xsd:enumeration value="audioCD"/>
+			<xsd:enumeration value="cassette"/>
+			<xsd:enumeration value="dvd_audio"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MusicDVDRegionType">
+		<xsd:restriction base="xsd:integer">
+			<xsd:minInclusive value="0"/>
+			<xsd:maxInclusive value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MusicAspectRatioType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="1.33:1"/>
+			<xsd:enumeration value="1.85:1"/>
+			<xsd:enumeration value="2.35:1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

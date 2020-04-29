@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Revision="$Revision: #7 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+        <!-- Include the data type primitives -->
+        <xsd:include schemaLocation="TypeDefinitions.xsd"/>
+        <xsd:include schemaLocation="ProductAttributes.xsd"/>
+        <xsd:include schemaLocation="AttributeGroups.xsd"/>
+        <!-- Start of the item schema -->
+        <xsd:element name="Offer">
+                <xsd:complexType>
+                        <xsd:sequence>
+                                <xsd:element name="sku">
+                                        <xsd:complexType>
+                                                <xsd:sequence>
+                                                        <xsd:element name="value" type="ItemFortyStringNotNull"/>
+                                                </xsd:sequence>
+                                        </xsd:complexType>
+                                </xsd:element>
+                                <xsd:element name="MarketplaceData" minOccurs="0" maxOccurs="unbounded">
+                                        <xsd:complexType>
+                                                <xsd:all>
+                                                        <xsd:element name="launch_date" type="DateValue" minOccurs="0"/>
+                                                </xsd:all>
+                                                <xsd:attribute name="market_name" type="ItemStringNotNull" use="required"/>
+                                        </xsd:complexType>
+                                </xsd:element>
+                                <xsd:element name="DescriptionData" minOccurs="0">
+                                        <xsd:complexType>
+                                                <xsd:sequence>
+                                                        <xsd:element name="can_be_giftmessaged" type="BooleanValue" minOccurs="0"/>
+                                                        <xsd:element name="can_be_giftwrapped" type="BooleanValue" minOccurs="0"/>
+                                                        <xsd:element name="ean" minOccurs="0">
+                                                                <xsd:complexType>
+                                                                        <xsd:sequence>
+                                                                                <xsd:element name="value" type="StandardIdString" maxOccurs="unbounded"/>
+                                                                        </xsd:sequence>
+                                                                        <xsd:attribute name="delete" type="BooleanType" use="optional"/>
+                                                                </xsd:complexType>
+                                                        </xsd:element>
+                                                        <xsd:element name="isbn" minOccurs="0">
+                                                                <xsd:complexType>
+                                                                        <xsd:sequence>
+                                                                                <xsd:element name="value">
+                                                                                        <xsd:simpleType>
+                                                                                                <xsd:restriction base="xsd:normalizedString">
+                                                                                                        <xsd:minLength value="10"/>
+                                                                                                        <xsd:maxLength value="13"/>
+                                                                                                </xsd:restriction>
+                                                                                        </xsd:simpleType>
+                                                                                </xsd:element>
+                                                                        </xsd:sequence>
+                                                                        <xsd:attribute name="delete" type="BooleanType" use="optional"/>
+                                                                </xsd:complexType>
+                                                        </xsd:element>
+                                                        <xsd:element name="offering_condition" minOccurs="0">
+                                                                <xsd:complexType>
+                                                                        <xsd:sequence>
+                                                                                <xsd:element name="value" minOccurs="0">
+                                                                                        <xsd:simpleType>
+                                                                                                <xsd:restriction base="xsd:normalizedString">
+                                                                                                        <xsd:enumeration value="New"/>
+                                                                                                        <xsd:enumeration value="Used"/>
+                                                                                                        <xsd:enumeration value="Collectible"/>
+                                                                                                        <xsd:enumeration value="Refurbished"/>
+                                                                                                        <xsd:enumeration value="Club"/>
+                                                                                                </xsd:restriction>
+                                                                                        </xsd:simpleType>
+                                                                                </xsd:element>
+                                                                        </xsd:sequence>
+                                                                        <xsd:attribute name="delete" type="BooleanType" use="optional"/>
+                                                                </xsd:complexType>
+                                                        </xsd:element>
+                                                        <xsd:element name="offering_subcondition" minOccurs="0">
+                                                                <xsd:complexType>
+                                                                        <xsd:sequence>
+                                                                                <xsd:element name="value" minOccurs="0">
+                                                                                        <xsd:simpleType>
+                                                                                                <xsd:restriction base="xsd:normalizedString">
+                                                                                                        <xsd:enumeration value="New"/>
+                                                                                                        <xsd:enumeration value="LikeNew"/>
+                                                                                                        <xsd:enumeration value="VeryGood"/>
+                                                                                                        <xsd:enumeration value="Good"/>
+                                                                                                        <xsd:enumeration value="Acceptable"/>
+                                                                                                        <xsd:enumeration value="Refurbished"/>
+                                                                                                </xsd:restriction>
+                                                                                        </xsd:simpleType>
+                                                                                </xsd:element>
+                                                                        </xsd:sequence>
+                                                                        <xsd:attribute name="delete" type="BooleanType" use="optional"/>
+                                                                </xsd:complexType>
+                                                        </xsd:element>
+                                                        <xsd:element name="product_tax_code" type="StringValue" minOccurs="0"/>
+                                                        <xsd:element name="upc" minOccurs="0">
+                                                                <xsd:complexType>
+                                                                        <xsd:sequence>
+                                                                                <xsd:element name="value" type="StandardIdString" maxOccurs="unbounded"/>
+                                                                        </xsd:sequence>
+                                                                        <xsd:attribute name="delete" type="BooleanType" use="optional"/>
+                                                                </xsd:complexType>
+                                                        </xsd:element>
+                                                </xsd:sequence>
+                                        </xsd:complexType>
+                                </xsd:element>
+                                <xsd:element name="AdditionalData" minOccurs="0">
+                                        <xsd:complexType>
+                                                <xsd:sequence>
+                                                        <xsd:any processContents="lax" maxOccurs="unbounded"/>
+                                                </xsd:sequence>
+                                        </xsd:complexType>
+                                </xsd:element>
+                                <!-- SKU and Product Type -->
+                                <!-- Marketplace specific data -->
+                                <!-- Core data about the item that is the same for all product types -->
+                                <!-- Attributes used for indexing the data for search & browse -->
+                                <!-- This group holds all of the product type specific attributes -->
+                        </xsd:sequence>
+                </xsd:complexType>
+        </xsd:element>
+</xsd:schema>

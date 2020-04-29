@@ -1,0 +1,98 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2012/05/09 $
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<!--
+    Please read the corresponding documentation that contains the recommended values for elements
+    of type StringNotNull.
+    -->
+	<xsd:element name="Furniture">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ProductType">
+					<xsd:simpleType>
+						<xsd:restriction base="HundredString">
+							<xsd:enumeration value="Furniture"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="SizeName"/>
+										<xsd:enumeration value="ColorName"/>
+										<xsd:enumeration value="SizeName-ColorName"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="Model" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="FabricWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="Occasion" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludedComponents" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Shape" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Pattern" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecialFeatures" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Wattage" type="WattageDimension" minOccurs="0"/>
+				<xsd:element name="Style" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="IsStainResistant" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="MaximumCoverageArea" type="AreaDimensionOptionalUnit" minOccurs="0"/>
+				<xsd:element name="LightSourceType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PowerSource" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SeatHeight" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="PaintType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsFragile" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="Framed" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="FrameMaterial" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FrameColor" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DoorType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TopMaterial" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfPanels" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfRails" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="CoverMaterial" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DesignName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ShelfType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InstallationType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BackMaterial" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="LegFinish" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FormFactor" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TopFinish" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FrameType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfHooks" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="LockType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemForm" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MetalType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="FootboardUpholstery" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfSinks" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="MaximumCompatibleThickness"  type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MaximumSupportedScreenSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="StorageType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SinkMaterial" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BaseMaterial" type="StringNotNull" minOccurs="0"/>				
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

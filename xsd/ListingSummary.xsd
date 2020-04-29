@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #3 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+    $Date: 2008/08/22 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="ListingSummary">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SKU"/>
+				<xsd:element name="ReportType" type="ListingReportType"/>
+				<xsd:element name="ListingID" type="xsd:string" minOccurs="0"/>
+		        <xsd:element name="ImageURl" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="ASIN" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="PendingQuantity" type="xsd:nonNegativeInteger" minOccurs="0"/>
+				<xsd:element name="Shipping" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="WillShipInternationally" type="xsd:string" minOccurs="0"/>
+							<xsd:element name="ExpeditedShipping" type="xsd:string" minOccurs="0"/> 
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType	name="ListingReportType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="MLR"/>
+			<xsd:enumeration value="MSLRNEMO"/>
+		</xsd:restriction>
+	</xsd:simpleType>	 
+</xsd:schema>

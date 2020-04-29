@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by sunil sachdev (amazon.com) -->
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <!--
+    $Date: 20011/07/26 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+    <!--
+    Please read the corresponding documentation that contains the recommended values for elements
+    of type StringNotNull.
+    -->
+    <xsd:element name="MechanicalFasteners">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="ProductType">
+                    <xsd:complexType>
+                        <xsd:choice>
+                            <xsd:element name="MechanicalFasteners" minOccurs="0">
+                                 <xsd:complexType>
+                                     <xsd:sequence>
+                                         <xsd:element ref="Color" minOccurs="0" />
+                                         <xsd:element ref="CompatibleGrooveDepth" minOccurs="0" />
+                                         <xsd:element ref="CompatibleGrooveDiameter" minOccurs="0" />
+                                         <xsd:element ref="CompatibleGrooveWidth" minOccurs="0" />
+                                         <xsd:element ref="CompatibleWithInsideDiameter" minOccurs="0" />
+                                         <xsd:element ref="CompatibleWithPipeSize" minOccurs="0" />
+                                         <xsd:element ref="CompatibleWithTorxWrench" minOccurs="0" />
+                                         <xsd:element ref="CountryOfOrigin" minOccurs="0" />
+                                         <xsd:element ref="DriveSystem" minOccurs="0" />
+                                         <xsd:element ref="ExteriorFinish" minOccurs="0" />
+                                         <xsd:element ref="FastenerThreadCount" minOccurs="0" />
+                                         <xsd:element ref="GradeRating" minOccurs="0" />
+                                         <xsd:element ref="HeadDiameter" minOccurs="0" />
+                                         <xsd:element ref="HeadDiameterTolerance" minOccurs="0" />
+                                         <xsd:element ref="HeadHeight" minOccurs="0" />
+                                         <xsd:element ref="HeadHeightTolerance" minOccurs="0" />
+                                         <xsd:element ref="IndentationHardness" minOccurs="0" />
+                                         <xsd:element ref="InsideDiameter" minOccurs="0" />
+                                         <xsd:element ref="InsideDiameterTolerance" minOccurs="0" />
+                                         <xsd:element ref="InsideThreadSize" minOccurs="0" />
+                                         <xsd:element ref="ItemDepth" minOccurs="0" />
+                                         <xsd:element ref="ItemDiameter" minOccurs="0" />
+                                         <xsd:element ref="ItemThickness" minOccurs="0" />
+                                         <xsd:element ref="ItemThicknessTolerance" minOccurs="0" />
+                                         <xsd:element ref="LowerTemperatureRating" minOccurs="0" />
+                                         <xsd:element ref="MagneticPullCapacity" minOccurs="0" />
+                                         <xsd:element name="MaterialType"  type="LongString" minOccurs="0" />
+                                         <xsd:element ref="MaximumCompatibleThickness" minOccurs="0" />
+                                         <xsd:element ref="MaximumDoubleShearStrength" minOccurs="0" />
+                                         <xsd:element ref="MaxShearStrength" minOccurs="0" />
+                                         <xsd:element ref="MeasurementSystem" minOccurs="0" />
+                                         <xsd:element ref="MinimumCompatibleThickness" minOccurs="0" />
+                                         <xsd:element ref="MinimumEmbedmentDepth" minOccurs="0" />
+                                         <xsd:element name="Model" type="FortyStringNotNull" minOccurs="0"/>
+                                         <xsd:element ref="NominalOutsideDiameter" minOccurs="0" />
+                                         <xsd:element ref="NumberOfStarts" minOccurs="0" />
+                                         <xsd:element ref="NumberOfTurns" minOccurs="0" />
+                                         <xsd:element ref="OutsideThreadSize" minOccurs="0" />
+                                         <xsd:element ref="PointMaterialType" minOccurs="0" />
+                                         <xsd:element ref="ScrewHeadStyle" minOccurs="0" />
+                                         <xsd:element ref="ScrewPointStyle" minOccurs="0" />
+                                         <xsd:element ref="SelfLockingMechanismType" minOccurs="0" />
+                                         <xsd:element ref="ShoulderDiameter" minOccurs="0" />
+                                         <xsd:element ref="ShoulderDiameterTolerance" minOccurs="0" />
+                                         <xsd:element ref="ShoulderLength" minOccurs="0" />
+                                         <xsd:element ref="ShoulderLengthTolerance" minOccurs="0" />
+                                         <xsd:element ref="SizeName" minOccurs="0" />
+                                         <xsd:element ref="SpecificationMet" minOccurs="0" maxOccurs="5"/>
+                                         <xsd:element ref="ThreadCoverage" minOccurs="0" />
+                                         <xsd:element ref="ThreadLength" minOccurs="0" />
+                                         <xsd:element ref="ThreadPitch" minOccurs="0" />
+                                         <xsd:element ref="ThreadSize" minOccurs="0" />
+                                         <xsd:element ref="ThreadStyle" minOccurs="0" />
+                                         <xsd:element ref="ThreadType" minOccurs="0" />
+                                         <xsd:element ref="UncompressedDiameter" minOccurs="0" />
+                                         <xsd:element ref="UpperTemperatureRating" minOccurs="0" />
+                                         <xsd:element ref="WasherType" minOccurs="0" />
+                                         <xsd:element ref="WingSpan" minOccurs="0" />
+                                         <xsd:element ref="WorkingLoadLimit" minOccurs="0" />
+										 <xsd:element ref="StyleName" minOccurs="0" />
+                                     </xsd:sequence>
+                                 </xsd:complexType>
+                            </xsd:element>
+                        </xsd:choice>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+     <xsd:element name="Color"  type="StringNotNull"/>
+     <xsd:element name="CompatibleGrooveDepth"  type="LengthDimension"/>
+     <xsd:element name="CompatibleGrooveDiameter"  type="LengthDimension"/>
+     <xsd:element name="CompatibleGrooveWidth"  type="LengthDimension"/>
+     <xsd:element name="CompatibleWithInsideDiameter"  type="LengthDimension"/>
+     <xsd:element name="CompatibleWithPipeSize"  type="xsd:boolean"/>
+     <xsd:element name="CompatibleWithTorxWrench"  type="xsd:boolean"/>
+     <xsd:element name="CountryOfOrigin"  type="CountryOfOriginType"/>
+     <xsd:element name="DriveSystem"  type="MediumString"/>
+     <xsd:element name="ExteriorFinish"  type="LongString"/>
+     <xsd:element name="FastenerThreadCount"  type="PositiveInteger"/>
+     <xsd:element name="GradeRating"  type="MediumString"/>
+     <xsd:element name="HeadDiameter"  type="LengthDimension"/>
+     <xsd:element name="HeadDiameterTolerance"  type="LengthDimension"/>
+     <xsd:element name="HeadHeight"  type="LengthDimension"/>
+     <xsd:element name="HeadHeightTolerance"  type="LengthDimension"/>
+     <xsd:element name="IndentationHardness"  type="HardnessDimension"/>
+     <xsd:element name="InsideDiameter"  type="LengthDimension"/>
+     <xsd:element name="InsideDiameterTolerance"  type="LengthDimension"/>
+     <xsd:element name="InsideThreadSize"  type="LengthDimension"/>
+     <xsd:element name="ItemDepth"  type="LengthDimension"/>
+     <xsd:element name="ItemDiameter"  type="LengthDimension"/>
+     <xsd:element name="ItemThickness"  type="LengthDimension"/>
+     <xsd:element name="ItemThicknessTolerance"  type="LengthDimension"/>
+     <xsd:element name="LowerTemperatureRating"  type="TemperatureDimension"/>
+     <xsd:element name="MagneticPullCapacity"  type="WeightDimension"/>
+     <xsd:element name="MaximumCompatibleThickness"  type="LengthDimension"/>
+     <xsd:element name="MaximumDoubleShearStrength"  type="ShearStrengthDimension"/>
+     <xsd:element name="MaxShearStrength"  type="ShearStrengthDimension"/>
+     <xsd:element name="MeasurementSystem"  type="StringNotNull"/>
+     <xsd:element name="MinimumCompatibleThickness"  type="LengthDimension"/>
+     <xsd:element name="MinimumEmbedmentDepth"  type="LengthDimension"/>
+     <xsd:element name="NominalOutsideDiameter"  type="LengthDimension"/>
+     <xsd:element name="NumberOfStarts"  type="PositiveInteger"/>
+     <xsd:element name="NumberOfTurns"  type="PositiveInteger"/>
+     <xsd:element name="OutsideThreadSize"  type="LengthDimension"/>
+     <xsd:element name="PointMaterialType"  type="LongString"/>
+     <xsd:element name="ScrewHeadStyle"  type="MediumString"/>
+     <xsd:element name="ScrewPointStyle"  type="MediumString"/>
+     <xsd:element name="SelfLockingMechanismType"  type="HundredString"/>
+     <xsd:element name="ShoulderDiameter"  type="LengthDimension"/>
+     <xsd:element name="ShoulderDiameterTolerance"  type="LengthDimension"/>
+     <xsd:element name="ShoulderLength"  type="LengthDimension"/>
+     <xsd:element name="ShoulderLengthTolerance"  type="LengthDimension"/>
+     <xsd:element name="SizeName"  type="LongString"/>
+     <xsd:element name="SpecificationMet"  type="HundredString"/>
+     <xsd:element name="ThreadCoverage"  type="HundredString"/>
+     <xsd:element name="ThreadLength"  type="LengthDimension"/>
+     <xsd:element name="ThreadPitch"  type="LengthDimension"/>
+     <xsd:element name="ThreadSize"  type="String"/>
+     <xsd:element name="ThreadStyle"  type="MediumString"/>
+     <xsd:element name="ThreadType"  type="MediumString"/>
+     <xsd:element name="UncompressedDiameter"  type="LengthDimension"/>
+     <xsd:element name="UpperTemperatureRating"  type="TemperatureDimension"/>
+     <xsd:element name="WasherType"  type="LongString"/>
+     <xsd:element name="WingSpan"  type="LengthDimension"/>
+     <xsd:element name="WorkingLoadLimit"  type="WeightDimension"/>
+	 <xsd:element name="StyleName"  type="StringNotNull"/>
+
+     <!--
+    ###############################################################
+    # MechanicalFasteners Data Types
+    ###############################################################
+    -->    
+    <xsd:complexType name="ShearStrengthDimension">
+        <xsd:simpleContent>
+            <xsd:extension base="Dimension">
+                <xsd:attribute name="unitOfMeasure" type="ShearStrengthUnitOfMeasure" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>    
+    <xsd:simpleType name="ShearStrengthUnitOfMeasure">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="psi"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

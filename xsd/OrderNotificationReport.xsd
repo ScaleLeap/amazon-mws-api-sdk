@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<!-- "$Revision: #3 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <!--
+    $Date: 2005/10/21 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced, 
+    distributed or used, in whole or in part, for any purpose other than as necessary 
+    to list products for sale on the www.amazon.com web site pursuant to an agreement 
+    with Amazon.com.
+    -->
+
+    <xsd:include schemaLocation="amzn-base.xsd"/>
+    <xsd:include schemaLocation="TypeDefinitions.xsd"/>
+
+    <xsd:element name="OrderNotificationReport">
+        <xsd:complexType>
+            <xsd:sequence>
+	        <xsd:element name="Language" type="LanguageType" minOccurs="0"/>
+        	<xsd:element name="OrderStatus" type="String"/>
+                <xsd:element name="OrderChannel" type="String" minOccurs="0"/>
+
+                <xsd:element ref="AmazonOrderID"/>
+                <xsd:element ref="MarketplaceName"/>
+                <xsd:element ref="AmazonCustomerID"/>
+
+                <xsd:element name="AmazonSessionID">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:pattern value="\d{3}-\d{7}-\d{7}"/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:element>
+
+               <xsd:element name="OrderDate" type="xsd:dateTime"/>
+               <xsd:element name="CustomerOrderInfo" minOccurs="0" maxOccurs="10">
+		    <xsd:complexType>
+			<xsd:sequence>
+			    <xsd:element name="Type" type="StringNotNull"/>
+			    <xsd:element name="Value" type="StringNotNull"/>
+			</xsd:sequence>
+		   </xsd:complexType>
+	      </xsd:element>
+
+               <xsd:element name="BillingData">
+                   <xsd:complexType>
+                       <xsd:sequence>
+
+                           <xsd:element name="BuyerEmailAddress">
+                               <xsd:simpleType>
+                                   <xsd:restriction base="xsd:normalizedString">
+                                       <xsd:pattern value="[^@]+@[^@\.]+(\.[^@\.]+)+"/>
+                                   </xsd:restriction>
+                               </xsd:simpleType>
+                           </xsd:element>
+
+                           <xsd:element name="BuyerName" type="String"/>
+                           <xsd:element name="BuyerPhoneNumber" type="String"/>
+
+                           <xsd:element name="PaymentData" minOccurs="0" maxOccurs="unbounded">
+                               <xsd:complexType>
+                                   <xsd:sequence>
+		                       <xsd:element name="Type" type="StringNotNull"/>
+                                       <xsd:element name="Identifier" type="StringNotNull" minOccurs="0"/>
+                                       <xsd:element name="Issuer" type="StringNotNull" minOccurs="0"/>
+                                       <xsd:element name="Tail" minOccurs="0">
+                                           <xsd:simpleType>
+                                               <xsd:restriction base="xsd:string">
+                                                   <xsd:pattern value="\d{4}"/>
+                                               </xsd:restriction>
+                                           </xsd:simpleType>
+                                      </xsd:element>
+                                      <xsd:element name="ExpirationDate" type="xsd:gYearMonth" minOccurs="0"/>
+                                   </xsd:sequence>
+                               </xsd:complexType>
+                           </xsd:element>
+
+                           <xsd:element ref="Address" minOccurs="0"/>
+
+                       </xsd:sequence>
+                   </xsd:complexType>
+               </xsd:element>
+
+			   <xsd:element name="Promotion" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:complexType>
+                       <xsd:sequence>
+                           <xsd:element name="Name" type="StringNotNull"/>
+                           <xsd:element name="ID" type="String"/>
+                           <xsd:element name="Amount" type="CurrencyAmount"/>
+                      </xsd:sequence>
+                   </xsd:complexType>
+               </xsd:element>
+	
+               <xsd:element name="FulfillmentData">
+                   <xsd:complexType>
+                       <xsd:sequence>
+                           <xsd:element ref="FulfillmentMethod" minOccurs="0"/>
+                           <xsd:element ref="ShipOption"/>
+                           <xsd:element ref="Address" minOccurs="0"/>
+                       </xsd:sequence>
+                   </xsd:complexType>
+               </xsd:element>
+
+               <xsd:element name="Item" maxOccurs="unbounded">
+                   <xsd:complexType>
+                       <xsd:sequence>
+                           <xsd:element ref="AmazonOrderItemCode"/>
+                           <xsd:element ref="SKU"/>
+                           <xsd:element name="Title" type="LongString"/>
+                           <xsd:element name="Quantity" type="xsd:nonNegativeInteger"/>
+                           <xsd:element name="ItemPrice" type="CurrencyAmount"/>
+                           <xsd:element name="GiftWrapLevel" type="StringNotNull" minOccurs="0"/>
+                           <xsd:element name="GiftMessageText" minOccurs="0">
+                               <xsd:simpleType>
+                                   <xsd:restriction base="xsd:string">
+                                       <xsd:maxLength value="500"/>
+                                   </xsd:restriction>
+                               </xsd:simpleType>
+                           </xsd:element>
+                       </xsd:sequence>
+                   </xsd:complexType>
+               </xsd:element>
+
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>
+
+

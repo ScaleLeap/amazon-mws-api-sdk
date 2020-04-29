@@ -1,0 +1,983 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2010 rel. 2 (http://www.altova.com) by sunil sachdev (amazon.com) -->
+<!-- Revision="$Revision: #6 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+	$Date: 2006/04/03 $
+
+	AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+	confidential and proprietary information of Amazon.com and may not be reproduced, 
+	distributed or used, in whole or in part, for any purpose other than as necessary 
+	to list products for sale on the www.amazon.com web site pursuant to an agreement 
+	with Amazon.com.
+	-->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="MusicalInstruments">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Rebate" type="RebateType" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="BrassAndWoodwindInstruments"/>
+							<xsd:element ref="Guitars"/>
+							<xsd:element ref="InstrumentPartsAndAccessories"/>
+							<xsd:element ref="KeyboardInstruments"/>
+							<xsd:element ref="MiscWorldInstruments"/>
+							<xsd:element ref="PercussionInstruments"/>
+							<xsd:element ref="SoundAndRecordingEquipment"/>
+							<xsd:element ref="StringedInstruments"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="BatteryAverageLife" type="PositiveDimension" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLifeStandby" type="PositiveDimension" minOccurs="0"/>
+				<xsd:element name="BatteryChargeTime" type="PositiveDimension" minOccurs="0"/>
+				<xsd:element name="BatteryTypeLithiumIon" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="BatteryTypeLithiumMetal" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryEnergyContent" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="batteries_contained_in_equipment"/>
+							<xsd:enumeration value="batteries_only"/>
+							<xsd:enumeration value="batteries_packed_with_equipment"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="LithiumBatteryVoltage" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryWeight" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="MfgWarrantyDescriptionLabor" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="MfgWarrantyDescriptionParts" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="ManufacturerWarrantyType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger"
+					minOccurs="0"/>
+				<xsd:element name="PowerSource" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TargetGender" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="WarrantyDescription" type="SuperLongStringNotNull" minOccurs="0"/>				
+				
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# BrassAndWoodwindInstruments Classification Data
+	###############################################################
+	-->
+	<xsd:element name="BrassAndWoodwindInstruments">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="AdditionalSpecifications" type="AdditionalSpecs" minOccurs="0"/>
+				<xsd:element name="AmplifierType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="String" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="String" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CableLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Size" type="String" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="CountryProducedIn" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DrumSticksSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InstrumentKey" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Range" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ScaleLength" type="HundredString" minOccurs="0"/>
+				<xsd:element name="InstrumentSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BodyMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ModelName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="MusicalStyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ProficiencyLevel" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Intermediate"/>
+							<xsd:enumeration value="Professional"/>
+							<xsd:enumeration value="Student"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="KeyAction" type="HundredString" minOccurs="0"/>
+				<xsd:element name="HandOrientation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PolarPattern" type="HundredString" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="IsAssemblyRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="MaximumSampleRate" type="FrequencyDimension" minOccurs="0"/>
+				<xsd:element name="ConnectorType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SignalFormat" type="HundredString" minOccurs="0"/>
+				<xsd:element name="OperatingSystem" type="String" minOccurs="0"/>
+				<xsd:element name="SupportedSoftware" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="DrumSetPieceQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="DigitalAudioProtocol" type="HundredString" minOccurs="0"/>
+				<xsd:element name="GuitarAttribute" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarBridgeSystem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickThickness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickupConfiguration" type="StringNotNull" minOccurs="0"/>
+				<xsd:element ref="HardwareInterface" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="MalletHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MixerChannelQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NeckMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfChannels" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfKeyboardKeys" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfStrings" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerAmplificationType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SpeakerCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="FretboardMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="BackMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="WirelessMicrophoneFrequency" type="FrequencyIntegerDimension"
+					minOccurs="0"/>
+				<xsd:element name="TopMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="OutputWattage" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="PercussionDiameter" type="LengthIntegerDimension" minOccurs="0"/>
+				<xsd:element name="PickguardDescription" type="HundredString" minOccurs="0"/>
+				<xsd:element name="RecorderTrackCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="StringGauge" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# Guitars Classification Data
+	###############################################################
+	-->
+	<xsd:element name="Guitars">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="AdditionalSpecifications" type="AdditionalSpecs" minOccurs="0"/>
+				<xsd:element name="AmplifierType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="String" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="String" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CableLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Size" type="String" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="CountryProducedIn" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DrumSticksSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarAttribute" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarBridgeSystem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickupConfiguration" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InstrumentKey" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Range" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ScaleLength" type="HundredString" minOccurs="0"/>
+				<xsd:element name="InstrumentSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BackMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="BodyMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="TopMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="FretboardMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NeckMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringGauge" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PickguardDescription" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ModelName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="MusicalStyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpeakerCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SpeakerAmplificationType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfStrings" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="KeyAction" type="HundredString" minOccurs="0"/>
+				<xsd:element name="HandOrientation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PolarPattern" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="IsAssemblyRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="MaximumSampleRate" type="FrequencyDimension" minOccurs="0"/>
+				<xsd:element name="ConnectorType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SignalFormat" type="HundredString" minOccurs="0"/>
+				<xsd:element name="OperatingSystem" type="String" minOccurs="0"/>
+				<xsd:element name="SupportedSoftware" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="DrumSetPieceQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="DigitalAudioProtocol" type="HundredString" minOccurs="0"/>
+				<xsd:element name="GuitarPickThickness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element ref="HardwareInterface" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="MalletHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MixerChannelQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfChannels" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfKeyboardKeys" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="WirelessMicrophoneFrequency" type="FrequencyIntegerDimension"
+					minOccurs="0"/>
+				<xsd:element name="OutputWattage" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="PercussionDiameter" type="LengthIntegerDimension" minOccurs="0"/>
+				<xsd:element name="ProficiencyLevel" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Intermediate"/>
+							<xsd:enumeration value="Professional"/>
+							<xsd:enumeration value="Student"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="RecorderTrackCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# InstrumentPartsAndAccessories Classification Data
+	###############################################################
+	-->
+	<xsd:element name="InstrumentPartsAndAccessories">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="AdditionalSpecifications" type="AdditionalSpecs" minOccurs="0"/>
+				<xsd:element name="AmplifierType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="String" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="String" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CableLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Size" type="String" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="CountryProducedIn" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DrumSticksSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickThickness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InstrumentKey" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Range" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ScaleLength" type="HundredString" minOccurs="0"/>
+				<xsd:element name="InstrumentSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="MalletHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BodyMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="BackMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="TopMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="FretboardMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NeckMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringGauge" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PickguardDescription" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ModelName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="MusicalStyle" type="StringNotNull" minOccurs="0"/>
+				<!-- Default unit of measure for OutputWattage is watts -->
+				<xsd:element name="OutputWattage" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SpeakerAmplificationType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfStrings" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfKeyboardKeys" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="KeyAction" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PercussionDiameter" type="LengthIntegerDimension" minOccurs="0"/>
+				<xsd:element name="HandOrientation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PolarPattern" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="IsAssemblyRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="MaximumSampleRate" type="FrequencyDimension" minOccurs="0"/>
+				<xsd:element name="ConnectorType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SignalFormat" type="HundredString" minOccurs="0"/>
+				<xsd:element name="DigitalAudioProtocol" type="HundredString" minOccurs="0"/>
+				<xsd:element ref="HardwareInterface" minOccurs="0"/>
+				<xsd:element name="OperatingSystem" type="String" minOccurs="0"/>
+				<xsd:element name="SupportedSoftware" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="DrumSetPieceQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="GuitarAttribute" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarBridgeSystem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickupConfiguration" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MixerChannelQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfChannels" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="WirelessMicrophoneFrequency" type="FrequencyIntegerDimension"
+					minOccurs="0"/>
+				<xsd:element name="ProficiencyLevel" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Intermediate"/>
+							<xsd:enumeration value="Professional"/>
+							<xsd:enumeration value="Student"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="RecorderTrackCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# KeyboardInstruments Classification Data
+	###############################################################
+	-->
+	<xsd:element name="KeyboardInstruments">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="AdditionalSpecifications" type="AdditionalSpecs" minOccurs="0"/>
+				<xsd:element name="AmplifierType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="String" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="String" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CableLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Size" type="String" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="CountryProducedIn" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DrumSticksSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InstrumentKey" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Range" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ScaleLength" type="HundredString" minOccurs="0"/>
+				<xsd:element name="InstrumentSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="MalletHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BodyMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringGauge" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PickguardDescription" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ModelName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="MusicalStyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RecorderTrackCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpeakerCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SpeakerAmplificationType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="WirelessMicrophoneFrequency" type="FrequencyIntegerDimension"
+					minOccurs="0"/>
+				<xsd:element name="NumberOfKeyboardKeys" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="KeyAction" type="HundredString" minOccurs="0"/>
+				<xsd:element name="HandOrientation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PolarPattern" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="IsAssemblyRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="MaximumSampleRate" type="FrequencyDimension" minOccurs="0"/>
+				<xsd:element name="ConnectorType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SignalFormat" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfChannels" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="DigitalAudioProtocol" type="HundredString" minOccurs="0"/>
+				<xsd:element ref="HardwareInterface" minOccurs="0"/>
+				<xsd:element name="OperatingSystem" type="String" minOccurs="0"/>
+				<xsd:element name="SupportedSoftware" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="DrumSetPieceQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="GuitarAttribute" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarBridgeSystem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickThickness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickupConfiguration" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MixerChannelQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NeckMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfStrings" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="FretboardMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="BackMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="TopMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="OutputWattage" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="PercussionDiameter" type="LengthIntegerDimension" minOccurs="0"/>
+				<xsd:element name="ProficiencyLevel" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Intermediate"/>
+							<xsd:enumeration value="Professional"/>
+							<xsd:enumeration value="Student"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# MiscWorldInstruments Classification Data
+	###############################################################
+	-->
+	<xsd:element name="MiscWorldInstruments">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="AdditionalSpecifications" type="AdditionalSpecs" minOccurs="0"/>
+				<xsd:element name="AmplifierType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="String" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="String" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CableLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Size" type="String" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="CountryProducedIn" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DrumSticksSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarBridgeSystem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickThickness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickupConfiguration" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InstrumentKey" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Range" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ScaleLength" type="HundredString" minOccurs="0"/>
+				<xsd:element name="InstrumentSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="MalletHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BackMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="BodyMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="TopMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="FretboardMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NeckMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringGauge" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PickguardDescription" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ModelName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="MusicalStyle" type="StringNotNull" minOccurs="0"/>
+				<!-- Default unit of measure for OutputWattage is watts -->
+				<xsd:element name="OutputWattage" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="RecorderTrackCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfStrings" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="KeyAction" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PercussionDiameter" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="HandOrientation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PolarPattern" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="IsAssemblyRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="MaximumSampleRate" type="FrequencyDimension" minOccurs="0"/>
+				<xsd:element name="ConnectorType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SignalFormat" type="HundredString" minOccurs="0"/>
+				<xsd:element name="DigitalAudioProtocol" type="HundredString" minOccurs="0"/>
+				<xsd:element ref="HardwareInterface" minOccurs="0"/>
+				<xsd:element name="NumberOfChannels" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="OperatingSystem" type="String" minOccurs="0"/>
+				<xsd:element name="SupportedSoftware" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="DrumSetPieceQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="GuitarAttribute" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MixerChannelQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfKeyboardKeys" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerAmplificationType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SpeakerCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="WirelessMicrophoneFrequency" type="FrequencyIntegerDimension"
+					minOccurs="0"/>
+				<xsd:element name="ProficiencyLevel" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Intermediate"/>
+							<xsd:enumeration value="Professional"/>
+							<xsd:enumeration value="Student"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# PercussionInstruments Classification Data
+	###############################################################
+	-->
+	<xsd:element name="PercussionInstruments">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="AdditionalSpecifications" type="AdditionalSpecs" minOccurs="0"/>
+				<xsd:element name="AmplifierType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="String" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="String" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CableLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Size" type="String" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="CountryProducedIn" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DrumSetPieceQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="DrumSticksSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InstrumentKey" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Range" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ScaleLength" type="HundredString" minOccurs="0"/>
+				<xsd:element name="InstrumentSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="MalletHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BodyMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ModelName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="MusicalStyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfStrings" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfKeyboardKeys" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="KeyAction" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PercussionDiameter" type="LengthIntegerDimension" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PolarPattern" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="IsAssemblyRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="MaximumSampleRate" type="FrequencyDimension" minOccurs="0"/>
+				<xsd:element name="ConnectorType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SignalFormat" type="HundredString" minOccurs="0"/>
+				<xsd:element name="DigitalAudioProtocol" type="HundredString" minOccurs="0"/>
+				<xsd:element ref="HardwareInterface" minOccurs="0"/>
+				<xsd:element name="OperatingSystem" type="String" minOccurs="0"/>
+				<xsd:element name="SupportedSoftware" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="GuitarAttribute" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarBridgeSystem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickThickness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickupConfiguration" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="HandOrientation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="MixerChannelQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NeckMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SpeakerAmplificationType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SpeakerCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="FretboardMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="BackMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="WirelessMicrophoneFrequency" type="FrequencyIntegerDimension"
+					minOccurs="0"/>
+				<xsd:element name="TopMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="OutputWattage" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="PickguardDescription" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ProficiencyLevel" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Intermediate"/>
+							<xsd:enumeration value="Professional"/>
+							<xsd:enumeration value="Student"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="RecorderTrackCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="StringGauge" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# SoundAndRecordingEquipment Classification Data
+	###############################################################
+	-->
+	<xsd:element name="SoundAndRecordingEquipment">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Color"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="AdditionalSpecifications" type="AdditionalSpecs" minOccurs="0"/>
+				<xsd:element name="AmplifierType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="String" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="String" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CableLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Size" type="String" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="CountryProducedIn" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DrumSticksSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InstrumentKey" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Range" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ScaleLength" type="HundredString" minOccurs="0"/>
+				<xsd:element name="InstrumentSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MixerChannelQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="BodyMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ModelName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="MusicalStyle" type="StringNotNull" minOccurs="0"/>
+				<!-- Default unit of measure for OutputWattage is watts -->
+				<xsd:element name="OutputWattage" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="RecorderTrackCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpeakerCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SpeakerAmplificationType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="WirelessMicrophoneFrequency" type="FrequencyIntegerDimension"
+					minOccurs="0"/>
+				<xsd:element name="KeyAction" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PolarPattern" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="IsAssemblyRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IsACAdapterIncluded" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="MaximumSampleRate" type="FrequencyDimension" minOccurs="0"/>
+				<xsd:element name="ConnectorType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SignalFormat" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfChannels" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="DigitalAudioProtocol" type="HundredString" minOccurs="0"/>
+				<xsd:element ref="HardwareInterface" minOccurs="0"/>
+				<xsd:element name="OperatingSystem" type="String" minOccurs="0"/>
+				<xsd:element name="SupportedSoftware" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="DrumSetPieceQty" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="GuitarAttribute" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarBridgeSystem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickThickness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickupConfiguration" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="HandOrientation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MalletHardness" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NeckMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfKeyboardKeys" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfStrings" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="FretboardMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="BackMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="TopMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PercussionDiameter" type="LengthIntegerDimension" minOccurs="0"/>
+				<xsd:element name="PickguardDescription" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ProficiencyLevel" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Intermediate"/>
+							<xsd:enumeration value="Professional"/>
+							<xsd:enumeration value="Student"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="StringGauge" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# StringedInstruments Classification Data
+	###############################################################
+	-->
+	<xsd:element name="StringedInstruments">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VariationData" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Parentage">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="parent"/>
+										<xsd:enumeration value="child"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VariationTheme" minOccurs="0">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:enumeration value="Size"/>
+										<xsd:enumeration value="Color"/>
+										<xsd:enumeration value="SizeColor"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="AdditionalSpecifications" type="AdditionalSpecs" minOccurs="0"/>
+				<xsd:element name="AmplifierType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorSpecification" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Color" type="String" minOccurs="0"/>
+							<xsd:element name="ColorMap" type="String" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="CableLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="Size" type="String" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="CountryProducedIn" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="DrumSticksSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarBridgeSystem" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GuitarPickupConfiguration" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="InstrumentKey" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Range" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ScaleLength" type="HundredString" minOccurs="0"/>
+				<xsd:element name="InstrumentSize" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" default="1"
+					minOccurs="0"/>
+				<xsd:element name="MaterialType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="BackMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="BodyMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="TopMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="FretboardMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NeckMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringMaterial" type="HundredString" minOccurs="0"/>
+				<xsd:element name="StringGauge" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PickguardDescription" type="HundredString" minOccurs="0"/>
+				<xsd:element name="ModelName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelNumber" type="FortyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ModelYear" type="FourDigitYear" minOccurs="0"/>
+				<xsd:element name="MusicalStyle" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SpeakerCount" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SpeakerSize" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="SpeakerAmplificationType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfStrings" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="KeyAction" type="HundredString" minOccurs="0"/>
+				<xsd:element name="HandOrientation" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemStyling" type="HundredString" minOccurs="0"/>
+				<xsd:element name="PolarPattern" type="HundredString" minOccurs="0"/>
+				<xsd:element name="NumberOfPieces" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="IsAssemblyRequired" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="MaximumSampleRate" type="FrequencyDimension" minOccurs="0"/>
+				<xsd:element name="ConnectorType" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SignalFormat" type="HundredString" minOccurs="0"/>
+				<xsd:element name="OperatingSystem" type="String" minOccurs="0"/>
+				<xsd:element name="SupportedSoftware" type="HundredString" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="ItemTypeName" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# Musical Instruments Data Types
+	###############################################################
+	-->
+	<xsd:simpleType name="AdditionalSpecs">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="1500"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="HardwareInterface" type="HardwareInterfaceValues"/>
+
+</xsd:schema>

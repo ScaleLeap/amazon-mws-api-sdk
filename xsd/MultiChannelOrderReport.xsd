@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!-- "$Revision: #3 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <!--
+    $Date: 2008/07/28 $
+
+    AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+    confidential and proprietary information of Amazon.com and may not be reproduced,
+    distributed or used, in whole or in part, for any purpose other than as necessary
+    to list products for sale on the www.amazon.com web site pursuant to an agreement
+    with Amazon.com.
+  -->
+  <xsd:include schemaLocation="amzn-base.xsd"/>
+  <xsd:element name="MultiChannelOrderReport">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="AmazonOrderID">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="\w{3}-\d{7}-\d{7}"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="MerchantOrderID" type="String"/>
+        <xsd:element name="OrderDate" type="xsd:dateTime"/>
+        <xsd:element name="BillingData">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="BuyerEmailAddress" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:normalizedString">
+                    <xsd:pattern value="[^@]+@[^@\.]+(\.[^@\.]+)+"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="BuyerName" type="String"/>
+              <xsd:element name="BuyerPhoneNumber" type="String" minOccurs="0"/>
+              <xsd:element ref="Address" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="FulfillmentData">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="FulfillmentChannel">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="AFN"/>
+                    <xsd:enumeration value="MFN"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element ref="FulfillmentServiceLevel"/>
+              <xsd:element ref="Address"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="SalesChannel" type="HundredString"/>
+        <xsd:element name="OrderStatus">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="ASSIGNED"/>
+              <xsd:enumeration value="COMPLETED"/>
+              <xsd:enumeration value="CANCELLED"/>
+              <xsd:enumeration value="HOLD"/>
+              <xsd:enumeration value="ADJUSTED"/>
+              <xsd:enumeration value="PLANNING"/>
+              <xsd:enumeration value="PROCESSING"/>
+              <xsd:enumeration value="UNFULFILLABLE"/>
+              <xsd:enumeration value="INVALID"/>
+              <xsd:enumeration value="COMPLETE_PARTIAL"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="Item" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element ref="AmazonOrderItemCode" minOccurs="0"/>
+              <xsd:element name="MerchantOrderItemID" type="HundredString" minOccurs="0"/>
+              <xsd:element ref="SKU"/>
+              <xsd:element name="Title" type="LongString"/>
+              <xsd:element name="Quantity" type="xsd:nonNegativeInteger"/>
+              <xsd:element name="ItemPrice" type="BuyerPrice" minOccurs="0"/>
+              <xsd:element name="GiftWrapLevel" type="StringNotNull" minOccurs="0"/>
+              <xsd:element name="GiftMessageText" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="500"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="Promotion" type="PromotionDataType" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+

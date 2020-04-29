@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #1 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--  Include the data type primitives -->
+	<xsd:include schemaLocation="TypeDefinitions.xsd"/>
+	<!-- Start of the ReverseItem -->
+	<xsd:element name="ReverseItem">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="sku">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="value" type="ItemFortyStringNotNull"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="asin">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="value" type="StandardIdString"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="PackageDimensions" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="package_height" type="DimensionValue"/>
+							<xsd:element name="package_length" type="DimensionValue"/>
+							<xsd:element name="package_width" type="DimensionValue"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="package_weight" type="WeightValue" minOccurs="0"/>
+				<xsd:element name="item_package_conveyability" type="ConveyabilityValue" minOccurs="0"/>
+				<!--  SKU -->
+				<!--  ASIN -->
+				<!--  Package Dimensions -->
+				<!-- Package Weight -->
+				<!-- Item Package Conveyability -->
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
+
+

@@ -1,0 +1,335 @@
+<?xml version="1.0"?>
+<!-- Revision="$Revision: #8 $" -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--
+
+	$Date: 2012/04/02 $
+
+	AMAZON.COM CONFIDENTIAL.  This document and the information contained in it are
+	confidential and proprietary information of Amazon.com and may not be reproduced, 
+	distributed or used, in whole or in part, for any purpose other than as necessary 
+	to list products for sale on the www.amazon.com web site pursuant to an agreement 
+	with Amazon.com.
+
+	-->
+	<xsd:include schemaLocation="amzn-base.xsd"/>
+	<xsd:element name="SoftwareVideoGames">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Rebate" type="RebateType" minOccurs="0" maxOccurs="2"/>
+				<xsd:element name="ProductType">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element ref="Software"/>
+							<xsd:element ref="HandheldSoftwareDownloads"/>
+							<xsd:element ref="SoftwareGames"/>
+							<xsd:element ref="VideoGames"/>
+							<xsd:element ref="VideoGamesAccessories"/>
+							<xsd:element ref="VideoGamesHardware"/>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element ref="Battery" minOccurs="0"/>
+				<xsd:element name="DisplayWeight" type="WeightDimension" minOccurs="0"/>
+				<xsd:element name="DisplayVolume" type="VolumeDimension" minOccurs="0"/>
+				<xsd:element name="DisplayLength" type="LengthDimension" minOccurs="0"/>
+				<xsd:element name="MfgWarrantyDescriptionParts" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="MfgWarrantyDescriptionType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="MfgWarrantyDescriptionLabor" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="LanguageOriginal" type="LanguageSWVG" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="LanguageSubtitled" type="LanguageSWVG" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="LanguageDubbed" type="LanguageSWVG" minOccurs="0" maxOccurs="3"/>
+				<xsd:element name="Parentage" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="parent"/>
+							<xsd:enumeration value="child"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="VariationTheme" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="Color"/>
+							<xsd:enumeration value="Size"/>
+							<xsd:enumeration value="Size-Color"/>
+							<xsd:enumeration value="Scent"/>
+							<xsd:enumeration value="Size-Scent"/>
+							<xsd:enumeration value="CustomerPackageType"/>
+							<xsd:enumeration value="ColorName-CustomerPackageType"/>
+							<xsd:enumeration value="SizeName-CustomerPackageType"/>
+							<xsd:enumeration value="SizeName-ColorName-CustomerPackageType"/>
+							<xsd:enumeration value="StyleName-CustomerPackageType"/>
+							<xsd:enumeration value="SizeName-StyleName-CustomerPackageType"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="BatteryAverageLife" type="Dimension" minOccurs="0"/>
+				<xsd:element name="BatteryAverageLifeStandby" type="Dimension" minOccurs="0"/>
+				<xsd:element name="BatteryChargeTime" type="Dimension" minOccurs="0"/>
+				<xsd:element name="IsAdultProduct" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="BatteryTypeLithiumIon" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="BatteryTypeLithiumMetal" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="ColorName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Count" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="CountryOfOrigin" type="CountryOfOriginType" minOccurs="0"/>
+				<xsd:element name="CustomerPackageType" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="CanShipInOriginalContainer" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="IdentityPackageType" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="StringNotNull">
+							<xsd:enumeration value="bulk"/>
+							<xsd:enumeration value="frustration_free"/>
+							<xsd:enumeration value="traditional"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="GappPrcDcz" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="GappPrcXcyz" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="IncludedComponents" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryEnergyContent" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryPackaging" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="batteries_contained_in_equipment"/>
+							<xsd:enumeration value="batteries_only"/>
+							<xsd:enumeration value="batteries_packed_with_equipment"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="LithiumBatteryVoltage" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="LithiumBatteryWeight" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="MaxOrderQuantity" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfItems" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumIonCells" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLithiumMetalCells" type="xsd:positiveInteger"
+					minOccurs="0"/>
+				<xsd:element name="PowerSource" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="Publisher" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="PublishingCompany" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="RegionOfOrigin" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SellerWarrantyDescription" type="SuperLongStringNotNull"
+					minOccurs="0"/>
+				<xsd:element name="Size" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SizeMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="StyleName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="TargetGender" minOccurs="0">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="male"/>
+							<xsd:enumeration value="female"/>
+							<xsd:enumeration value="unisex"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<xsd:element name="Warnings" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="SpecificUsesForProduct" type="SuperLongStringNotNull"
+					minOccurs="0" maxOccurs="5"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# Software Classification Data
+	###############################################################
+	-->
+	<xsd:element name="Software">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="MediaFormat" type="MediumStringNotNull" maxOccurs="5"/>
+				<xsd:element name="OperatingSystem" type="MediumStringNotNull" maxOccurs="7"/>
+				<xsd:element name="Bundles" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ChildrensSoftwareGenre" type="StringNotNull" minOccurs="0"
+					maxOccurs="5"/>
+				<xsd:choice minOccurs="0">
+					<xsd:element name="ESRBRating" type="FortyStringNotNull"/>
+					<xsd:element name="BBFCRating" type="BBFCRatingType"/>
+					<xsd:element name="PEGIRating" type="PEGIRatingType"/>
+					<xsd:element name="USKRating" type="USKRatingType"/>
+				</xsd:choice>
+				<xsd:element name="ESRBDescriptors" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="HardwarePlatform" type="MediumStringNotNull" minOccurs="0" maxOccurs="5"/>					
+				<xsd:element name="PEGIDetails" type="PEGIDetailsType" minOccurs="0"/>
+				<xsd:element name="MaxNumberOfPlayers" type="xsd:positiveInteger" minOccurs="0"/>				
+				<xsd:element name="MFGSuggestedAgeMin" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="MFGSuggestedAgeMax" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element ref="SoftwarePlatform" minOccurs="0" maxOccurs="4"/> 				
+				<xsd:element name="ApplicationVersion" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfLicenses" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="SoftwareMediaFormat" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SubscriptionTermName" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="SubjectKeywords" type="StringNotNull" minOccurs="0" maxOccurs="6"/>
+				<xsd:element name="NumberOfDiscs" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="ArchType" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# HandheldSoftwareDownloads Classification Data
+	###############################################################
+	-->
+	<xsd:element name="HandheldSoftwareDownloads">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ApplicationVersion" type="StringNotNull"/>
+				<xsd:element ref="DownloadableFile"/>
+				<xsd:element name="OperatingSystem" type="MediumStringNotNull" maxOccurs="7"/>
+				<xsd:element name="SystemRequirements" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="NumberOfLicenses" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="MaxNumberOfPlayers" type="xsd:positiveInteger" minOccurs="0"/>				
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# SoftwareGames Classification Data
+	###############################################################
+	-->
+	<xsd:element name="SoftwareGames">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="SoftwareVideoGamesGenre" type="StringNotNull" maxOccurs="5"/>
+				<xsd:choice>
+					<xsd:element name="ESRBRating" type="FortyStringNotNull"/>
+					<xsd:element name="BBFCRating" type="BBFCRatingType"/>
+					<xsd:element name="PEGIRating" type="PEGIRatingType"/>
+					<xsd:element name="USKRating" type="USKRatingType"/>
+				</xsd:choice>
+				<xsd:element name="MediaFormat" type="MediumStringNotNull" maxOccurs="5"/>
+				<xsd:element name="OperatingSystem" type="MediumStringNotNull" maxOccurs="7"/>
+				<xsd:element name="Bundles" type="ThirtyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ESRBDescriptors" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="HardwarePlatform" type="MediumStringNotNull" minOccurs="0" maxOccurs="5"/>					
+				<xsd:element name="PEGIDetails" type="PEGIDetailsType" minOccurs="0"/>
+				<xsd:element name="MFGSuggestedAgeMin" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="MFGSuggestedAgeMax" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="MaxNumberOfPlayers" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element ref="SoftwarePlatform" minOccurs="0" maxOccurs="4"/>    
+				<xsd:element name="ComputerPlatform" type="ComputerPlatformValues" minOccurs="0"/>
+				<xsd:element name="OnlinePlay" type="xsd:boolean" minOccurs="0"/>
+				<xsd:element name="AgeRangeDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ContentRatingValue" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# VideoGames Classification Data
+	###############################################################
+	-->
+	<xsd:element name="VideoGames">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ConsoleVideoGamesGenre" type="StringNotNull" maxOccurs="5"/>
+				<xsd:choice>
+					<xsd:element name="ESRBRating" type="FortyStringNotNull"/>
+					<xsd:element name="BBFCRating" type="BBFCRatingType"/>
+					<xsd:element name="PEGIRating" type="PEGIRatingType"/>
+					<xsd:element name="USKRating" type="USKRatingType"/>
+				</xsd:choice>
+				<xsd:element name="HardwarePlatform" type="MediumStringNotNull" maxOccurs="5"/>	
+				<xsd:element name="ComputerPlatform" type="ComputerPlatformValues" minOccurs="0"/>
+				<xsd:element name="Bundles" type="ThirtyStringNotNull" minOccurs="0"/>
+				<xsd:element name="ESRBDescriptors" type="StringNotNull" minOccurs="0" maxOccurs="5"/>
+				<xsd:element name="PEGIDetails" type="PEGIDetailsType" minOccurs="0"/>
+				<xsd:element name="MaxNumberOfPlayers" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="NumberOfLicenses" type="xsd:positiveInteger" minOccurs="0"/>	
+				<xsd:element name="AgeRangeDescription" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ContentRatingValue" type="StringNotNull" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# VideoGamesAccessories Classification Data
+	###############################################################
+	-->
+	<xsd:element name="VideoGamesAccessories">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="HardwarePlatform" type="MediumStringNotNull" maxOccurs="5"/>
+				<xsd:element name="ComputerPlatform" type="ComputerPlatformValues" minOccurs="0"/>
+				<xsd:element name="Bundles" type="ThirtyStringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AdditionalFeatures" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="MaxNumberOfPlayers" type="xsd:positiveInteger" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# VideoGamesHardware Classification Data
+	###############################################################
+	-->
+	<xsd:element name="VideoGamesHardware">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="HardwarePlatform" type="MediumStringNotNull" maxOccurs="5"/>	
+				<xsd:element name="ComputerPlatform" type="ComputerPlatformValues" minOccurs="0"/>
+				<xsd:element name="Bundles" type="ThirtyStringNotNull" minOccurs="0"/>
+				<xsd:element name="Color" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="ColorMap" type="StringNotNull" minOccurs="0"/>
+				<xsd:element name="AdditionalFeatures" type="LongStringNotNull" minOccurs="0"/>
+				<xsd:element name="ItemPackageQuantity" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="MaxNumberOfPlayers" type="xsd:positiveInteger" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--
+	###############################################################
+	# SWVG Data Types
+	###############################################################
+	-->
+	<xsd:element name="SoftwarePlatform">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="HardwarePlatform" type="HardwarePlatformType"/>
+				<xsd:element name="SystemRequirements" type="LongStringNotNull" default="N/A"
+					minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="HardwarePlatformType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="linux"/>
+			<xsd:enumeration value="mac"/>
+			<xsd:enumeration value="windows"/>
+			<xsd:enumeration value="unix"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="DownloadableFile">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="DownloadableFileFormat" type="FortyStringNotNull"/>
+				<xsd:element name="FileSize" type="MemorySizeDimension"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="BBFCRatingType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ages_12_and_over"/>
+			<xsd:enumeration value="ages_15_and_over"/>
+			<xsd:enumeration value="ages_18_and_over"/>
+			<xsd:enumeration value="exempt"/>
+			<xsd:enumeration value="parental_guidance"/>
+			<xsd:enumeration value="to_be_announced"/>
+			<xsd:enumeration value="universal_childrens"/>
+			<xsd:enumeration value="universal"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="PEGIDetailsType">
+		<xsd:sequence>
+			<xsd:element name="BadLanguage" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="Fear" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="Violence" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="Discrimination" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="Drugs" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="SexualContent" type="xsd:boolean" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
