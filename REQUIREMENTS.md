@@ -102,14 +102,18 @@ The following sections will **not** be completed at the moment:
 * [Perl](https://github.com/interchange/Amazon-MWS): yes, Perl is an old language, but the library is up-to-date and is being actively maintained. I'm an ex-Perl developer and can help understanding this one, if necessary.
 * [Ruby](https://github.com/hakanensari/peddler): this is a fully-featured Ruby library, lots to learn from. They also have "[cassettes](https://github.com/hakanensari/peddler/tree/master/test/vcr_cassettes)" for tests for actual live calls, from which we can borrow some XML return examples. There are several JS/Node ports of VCR listed under "[Ports in Other Languages](https://github.com/vcr/vcr)" readme section. E.g. [vcr.js](https://github.com/elcuervo/vcr.js).
 * [Python](https://github.com/python-amazon-mws/python-amazon-mws): it's an ok and maintained library, can be used for cross checking with others.
+* [Official Amazon MWS client libraries](https://developer.amazonservices.com/tools) - Available in Java, PHP, and C3. These *can* be outdated, but they can be helpful to study. I have experimented with an approach where C# classes can be converted to TypeScript classes. Worked ok.
 
 ## Raw XML Sample Data
 
 When we need XML sample data examples for development and/or testing of the parser, please let me know specifically which section or request you need the data for. Please open an issue and assign it to me and I'll get these from the API, anonymize it and commit to the repo.
+
+There is sample data available in the Official Amazon MWS client libraries (see above) C# package.
+
+Also some of the third party libraries have sample response data in their repositories, e.g. see Ruby library.
 
 ## References
 
 * [Amazon MWS Documentation](https://developer.amazonservices.ca/gp/mws/docs.html)
 * [Amazon MWS XML / XSD references](https://images-na.ssl-images-amazon.com/images/G/01/rainier/help/XML_Documentation_Intl.pdf).
 * [Create your own MWS client library](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_ClientLibraries.html)
-* [Official Amazon MWS client libraries](https://developer.amazonservices.com/tools) - Available in Java, PHP, and C3. These *can* be outdated, but they can be helpful to study. I have experimented with an approach where C# classes can be converted to TypeScript classes. Worked ok.
