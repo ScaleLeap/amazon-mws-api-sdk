@@ -48,7 +48,7 @@ If we need to record HTTP request / response sequences, we should use `@scalelea
 
 Note: because of the sensitive nature of the data, I cannot share the MWS auth keys, and will have to do these live calls myself.
 
-##XSD and TypeScript
+## XSD and TypeScript
 
 Amazon uses and provides [XSD](https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes) for all data types (see References below). I think we could parse these files and codegen some validation / interfaces code from these. All of their models have unique names.
 
