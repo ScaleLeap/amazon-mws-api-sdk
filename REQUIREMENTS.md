@@ -110,4 +110,4 @@ When we need XML sample data examples for development and/or testing of the pars
 * [Amazon MWS Documentation](https://developer.amazonservices.ca/gp/mws/docs.html)
 * [Amazon MWS XML / XSD references](https://images-na.ssl-images-amazon.com/images/G/01/rainier/help/XML_Documentation_Intl.pdf).
 * [Create your own MWS client library](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_ClientLibraries.html)
-
+* [Official Amazon MWS client libraries](https://developer.amazonservices.com/tools) - Available in Java, PHP, and C3. These *can* be outdated, but they can be helpful to study. I have experimented with an approach where C# classes can be converted to TypeScript classes. Worked ok.
