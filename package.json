@@ -29,7 +29,7 @@
   "devDependencies": {
     "@scaleleap/semantic-release-config": "1.1.7",
     "@types/jest": "25.2.1",
-    "@types/node": "13.11.0",
+    "@types/node": "13.13.4",
     "@typescript-eslint/eslint-plugin": "2.26.0",
     "@typescript-eslint/parser": "2.26.0",
     "danger": "10.1.1",
