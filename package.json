@@ -27,7 +27,7 @@
   },
   "types": "lib/index.d.ts",
   "devDependencies": {
-    "@scaleleap/semantic-release-config": "1.1.7",
+    "@scaleleap/semantic-release-config": "1.1.8",
     "@scaleleap/utils": "1.6.6",
     "@types/jest": "25.2.1",
     "@types/node": "13.13.4",
