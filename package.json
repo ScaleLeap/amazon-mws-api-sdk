@@ -29,7 +29,7 @@
   "devDependencies": {
     "@scaleleap/semantic-release-config": "1.1.7",
     "@types/jest": "25.2.1",
-    "@types/node": "13.11.0",
+    "@types/node": "13.13.4",
     "@typescript-eslint/eslint-plugin": "2.30.0",
     "@typescript-eslint/parser": "2.30.0",
     "danger": "10.1.1",
@@ -39,7 +39,7 @@
     "eslint-plugin-import": "2.20.2",
     "eslint-plugin-prettier": "3.1.3",
     "husky": "4.2.5",
-    "jest": "25.4.0",
+    "jest": "25.5.3",
     "post-npm-install": "2.0.0",
     "prettier": "2.0.5",
     "rimraf": "3.0.2",
