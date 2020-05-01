@@ -7,7 +7,7 @@
     "email": "roman@scaleleap.com",
     "url": "https://www.scaleleap.com/"
   },
-  "homepage": "https://github.com/ScaleLeap/.../#readme",
+  "homepage": "https://github.com/ScaleLeap/amazon-mws-api-sdk/#readme",
   "version": "0.0.0",
   "main": "lib/index.js",
   "files": [
