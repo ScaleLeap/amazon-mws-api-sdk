@@ -26,6 +26,11 @@ This should be swappable with custom implementations. The reason we want this, i
 
 But also, of course, it is just good software design to modularize and encapsulate :)
 
+### `@scaleleap/amazon-marketplaces`
+
+For any marketplace data (e.g. country codes, marketplace IDs, and API URIs) we should use
+[@scaleleap/amazon-marketplaces](https://github.com/ScaleLeap/amazon-marketplaces).
+
 ### Throttling Limits
 
 Amazon has request [throttling limits](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_Throttling.html). They return these as part of the response. I think there are two different ways. Sometimes it is part of the response body, and sometimes it is a header. We need to standardize this somehow and also think about how to return this with the data.
