@@ -68,7 +68,7 @@ export class HttpClient {
     const queryStringToSign = `${method}\n${host}\n/${info.resource}/${info.version}\n${parametersForSigning}`
 
     const signature = sign(queryStringToSign, info.secret)
-    const parametersWithSignature = { ...parameters, signature }
+    const parametersWithSignature = { ...parameters, Signature: signature }
 
     return this.fetch({
       url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
