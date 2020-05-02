@@ -27,6 +27,7 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@scaleleap/amazon-marketplaces": "^4.0.2",
     "axios": "^0.19.2"
   },
   "devDependencies": {
