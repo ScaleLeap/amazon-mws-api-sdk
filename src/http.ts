@@ -25,7 +25,7 @@ interface Request {
   headers: Record<string, string>
 }
 
-interface ClientInfo extends MWSOptions {
+interface ResourceInfo {
   resource: Resource
   version: string
   action: string
@@ -38,25 +38,24 @@ const canonicalizeParameters = (parameters: Parameters): string => {
   return sp.toString().replace(/\+/g, '%20')
 }
 
+const defaultFetch = ({ url, method, headers }: Request) =>
+  axios({ method, url, headers }).then((response) => response.data)
+
 export class HttpClient {
-  static withDefaults() {
-    return new HttpClient(({ url, method, headers }) =>
-      axios({ method, url, headers }).then((response) => response.data),
-    )
-  }
+  constructor(
+    private options: MWSOptions,
+    private fetch: <T>(meta: Request) => Promise<T> = defaultFetch, // eslint-disable-next-line no-empty-function
+  ) {}
 
-  // eslint-disable-next-line no-useless-constructor, no-empty-function
-  constructor(private fetch: <T>(meta: Request) => Promise<T>) {}
-
-  request(method: HttpMethod, info: ClientInfo) {
-    const host = info.endpoint.replace('https://', '')
-    const url = `${info.endpoint}/${info.resource}/${info.version}/`
+  request(method: HttpMethod, info: ResourceInfo) {
+    const host = this.options.endpoint.replace('https://', '')
+    const url = `${this.options.endpoint}/${info.resource}/${info.version}/`
 
     const parameters = {
-      AWSAccessKeyId: info.awsAccessKeyId,
+      AWSAccessKeyId: this.options.awsAccessKeyId,
       Action: info.action,
-      MWSAuthToken: info.mwsAuthToken,
-      SellerId: info.sellerId,
+      MWSAuthToken: this.options.mwsAuthToken,
+      SellerId: this.options.sellerId,
       SignatureMethod: 'HmacSHA256',
       SignatureVersion: '2',
       Timestamp: new Date().toISOString(),
@@ -67,7 +66,7 @@ export class HttpClient {
     const parametersForSigning = canonicalizeParameters(parameters)
     const queryStringToSign = `${method}\n${host}\n/${info.resource}/${info.version}\n${parametersForSigning}`
 
-    const signature = sign(queryStringToSign, info.secret)
+    const signature = sign(queryStringToSign, this.options.secret)
     const parametersWithSignature = { ...parameters, Signature: signature }
 
     return this.fetch({

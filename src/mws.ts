@@ -1,19 +1,16 @@
 /* eslint-disable no-underscore-dangle */
-import { HttpClient, MWSOptions } from './http'
+import { HttpClient } from './http'
 import { Sellers } from './sections/sellers'
 
 export class MWS {
-  private httpClient: HttpClient
-
   private _sellers!: Sellers
 
-  constructor(private options: MWSOptions) {
-    this.httpClient = options.httpClient ?? HttpClient.withDefaults()
-  }
+  // eslint-disable-next-line no-empty-function
+  constructor(private httpClient: HttpClient) {}
 
   get sellers() {
     if (!this._sellers) {
-      this._sellers = new Sellers(this.options, this.httpClient)
+      this._sellers = new Sellers(this.httpClient)
     }
 
     return this._sellers
