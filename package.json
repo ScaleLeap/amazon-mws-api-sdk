@@ -26,6 +26,9 @@
     "test:watch": "jest --watchAll"
   },
   "types": "lib/index.d.ts",
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
   "devDependencies": {
     "@scaleleap/semantic-release-config": "1.1.8",
     "@scaleleap/utils": "1.6.6",
