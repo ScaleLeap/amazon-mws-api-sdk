@@ -30,7 +30,7 @@ interface Request {
   url: string
   method: HttpMethod
   headers: Record<string, string>
-  data: string
+  data?: string
 }
 
 interface ResourceInfo<TResource extends Resource> {
@@ -59,7 +59,7 @@ export class HttpClient {
     const marketplaceUri = this.options.marketplace.webServiceUri
 
     const host = marketplaceUri.replace('https://', '')
-    const url = `${marketplaceUri}/${info.resource}/${info.version}/`
+    const url = `${marketplaceUri}/${info.resource}/${info.version}`
 
     const parameters = {
       AWSAccessKeyId: this.options.awsAccessKeyId,
@@ -79,13 +79,21 @@ export class HttpClient {
     const signature = sign(queryStringToSign, this.options.secretKey)
     const parametersWithSignature = { ...parameters, Signature: signature }
 
-    return this.fetch({
-      url,
-      method,
-      headers: {
-        'user-agent': '@scaleleap/amazon-mws-api-sdk/1.0.0 (Language=JavaScript)',
-      },
-      data: canonicalizeParameters(parametersWithSignature),
-    })
+    const headers = {
+      'user-agent': '@scaleleap/amazon-mws-api-sdk/1.0.0 (Language=JavaScript)',
+    }
+
+    return method === 'GET'
+      ? this.fetch({
+          url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
+          method,
+          headers,
+        })
+      : this.fetch({
+          url,
+          method,
+          headers,
+          data: canonicalizeParameters(parametersWithSignature),
+        })
   }
 }
