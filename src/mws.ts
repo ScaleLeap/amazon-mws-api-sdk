@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { HttpClient } from './http'
 import { Sellers } from './sections/sellers'
 
@@ -15,4 +14,3 @@ export class MWS {
     return this._sellers
   }
 }
-/* eslint-enable no-underscore-dangle */

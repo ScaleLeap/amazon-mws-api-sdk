@@ -33,7 +33,7 @@
   "devDependencies": {
     "@scaleleap/config": "1.6.1",
     "@scaleleap/semantic-release-config": "1.1.8",
-    "@scaleleap/utils": "^1.6.10",
+    "@scaleleap/utils": "^1.6.11",
     "@types/is-ci": "2.0.0",
     "@types/jest": "25.2.1",
     "@types/node": "13.13.4",
