@@ -6,7 +6,7 @@ export class Sellers {
 
   // TODO: type and parse response
   listMarketplaceParticipations() {
-    return this.httpClient.request('GET', {
+    return this.httpClient.request('POST', {
       resource: Resource.Sellers,
       version: '2011-07-01',
       action: 'ListMarketplaceParticipations',
