@@ -37,7 +37,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           MWS_AUTH_TOKEN: ${{ secrets.MWS_AUTH_TOKEN }}
-          SECRET: ${{ secrets.SECRET }}
+          SECRET_KEY: ${{ secrets.SECRET }}
           SELLER_ID: ${{ secrets.SELLER_ID }}
 
       - name: Upload coverage to Codecov
