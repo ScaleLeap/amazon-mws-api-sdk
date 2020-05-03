@@ -19,16 +19,23 @@ export enum Resource {
   Sellers = 'Sellers',
 }
 
+interface ResourceActions {
+  [Resource.Sellers]:
+    | 'ListMarketplaceParticipations'
+    | 'ListMarketplaceParticipationsByNextToken'
+    | 'GetServiceStatus'
+}
+
 interface Request {
   url: string
   method: HttpMethod
   headers: Record<string, string>
 }
 
-interface ResourceInfo {
-  resource: Resource
+interface ResourceInfo<TResource extends Resource> {
+  resource: TResource
   version: string
-  action: string
+  action: ResourceActions[TResource]
   parameters: Parameters
 }
 
@@ -44,10 +51,10 @@ const defaultFetch = ({ url, method, headers }: Request) =>
 export class HttpClient {
   constructor(
     private options: MWSOptions,
-    private fetch: <T>(meta: Request) => Promise<T> = defaultFetch, // eslint-disable-next-line no-empty-function
+    private fetch: <T>(meta: Request) => Promise<T> = defaultFetch,
   ) {}
 
-  request(method: HttpMethod, info: ResourceInfo) {
+  request<TResource extends Resource>(method: HttpMethod, info: ResourceInfo<TResource>) {
     const marketplaceUri = this.options.marketplace.webServiceUri
 
     const host = marketplaceUri.replace('https://', '')
