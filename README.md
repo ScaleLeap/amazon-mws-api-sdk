@@ -19,6 +19,13 @@ $ npm i -s @scaleleap/amazon-mws-api-sdk
 
 This repository uses [Conventional Commit](https://www.conventionalcommits.org/) style commit messages.
 
+Testing uses [global-agent](https://github.com/gajus/global-agent) to allow for request proxying/interception
+for debugging.
+
+1. Use [Charles.app](https://www.charlesproxy.com), or a similar MiM tool to proxy the requests.
+2. Set the proxy server via `export GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:8080`
+3. Run tests `npm t` and you'll be able to inspect traffic going through.
+
 ## Authors or Acknowledgments
 
 * Roman Filippov ([Scale Leap](https://www.scaleleap.com))
