@@ -6,7 +6,7 @@ export class Config extends BaseConfig {
 
   public readonly MWS_AUTH_TOKEN = this.get('MWS_AUTH_TOKEN').required().asString()
 
-  public readonly SECRET = this.get('SECRET').required().asString()
+  public readonly SECRET_KEY = this.get('SECRET_KEY').required().asString()
 
   public readonly SELLER_ID = this.get('SELLER_ID').required().asString()
 }

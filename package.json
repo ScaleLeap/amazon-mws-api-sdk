@@ -39,6 +39,7 @@
     "@types/node": "13.13.4",
     "danger": "10.1.1",
     "eslint": "6.8.0",
+    "global-agent": "2.1.8",
     "is-ci": "2.0.0",
     "jest": "25.5.3",
     "post-npm-install": "2.0.0",
