@@ -9,7 +9,7 @@ export interface MWSOptions {
   awsAccessKeyId: string
   mwsAuthToken: string
   sellerId: string
-  secret: string
+  secretKey: string
 }
 
 type HttpMethod = 'GET' | 'POST'
@@ -68,7 +68,7 @@ export class HttpClient {
     const parametersForSigning = canonicalizeParameters(parameters)
     const queryStringToSign = `${method}\n${host}\n/${info.resource}/${info.version}\n${parametersForSigning}`
 
-    const signature = sign(queryStringToSign, this.options.secret)
+    const signature = sign(queryStringToSign, this.options.secretKey)
     const parametersWithSignature = { ...parameters, Signature: signature }
 
     return this.fetch({

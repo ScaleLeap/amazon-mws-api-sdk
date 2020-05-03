@@ -10,7 +10,7 @@ const httpClient = new HttpClient({
   marketplace: amazonMarketplaces.CA,
   awsAccessKeyId: config.AWS_ACCESS_KEY_ID,
   mwsAuthToken: config.MWS_AUTH_TOKEN,
-  secret: config.SECRET,
+  secretKey: config.SECRET,
   sellerId: config.SELLER_ID,
 })
 
