@@ -5,7 +5,6 @@ import { Sellers } from './sections/sellers'
 export class MWS {
   private _sellers!: Sellers
 
-  // eslint-disable-next-line no-empty-function
   constructor(private httpClient: HttpClient) {}
 
   get sellers() {
@@ -16,5 +15,4 @@ export class MWS {
     return this._sellers
   }
 }
-
 /* eslint-enable no-underscore-dangle */
