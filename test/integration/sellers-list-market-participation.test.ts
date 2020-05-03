@@ -1,13 +1,13 @@
 import { amazonMarketplaces } from '@scaleleap/amazon-marketplaces'
 
-import { AmazonMarketplaceCountryCode, HttpClient, Sellers } from '../../src'
+import { HttpClient, Sellers } from '../../src'
 import { Config } from './config'
 import { itci } from './it'
 
 const config = new Config()
 
 const httpClient = new HttpClient({
-  endpoint: AmazonMarketplaceCountryCode.CA,
+  marketplace: amazonMarketplaces.CA,
   awsAccessKeyId: config.AWS_ACCESS_KEY_ID,
   mwsAuthToken: config.MWS_AUTH_TOKEN,
   secret: config.SECRET,

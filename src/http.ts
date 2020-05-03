@@ -1,16 +1,15 @@
-import { AmazonMarketplaceCountryCode, amazonMarketplaces } from '@scaleleap/amazon-marketplaces'
+import { AmazonMarketplace } from '@scaleleap/amazon-marketplaces'
 import axios from 'axios'
 import { URLSearchParams } from 'url'
 
 import { sign } from './sign'
 
 export interface MWSOptions {
-  endpoint: AmazonMarketplaceCountryCode
+  marketplace: AmazonMarketplace
   awsAccessKeyId: string
   mwsAuthToken: string
   sellerId: string
   secret: string
-  httpClient?: HttpClient
 }
 
 type HttpMethod = 'GET' | 'POST'
@@ -49,7 +48,7 @@ export class HttpClient {
   ) {}
 
   request(method: HttpMethod, info: ResourceInfo) {
-    const marketplaceUri = amazonMarketplaces[this.options.endpoint].webServiceUri
+    const marketplaceUri = this.options.marketplace.webServiceUri
 
     const host = marketplaceUri.replace('https://', '')
     const url = `${marketplaceUri}/${info.resource}/${info.version}/`
