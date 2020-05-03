@@ -49,7 +49,7 @@ export class HttpClient {
   ) {}
 
   request(method: HttpMethod, info: ResourceInfo) {
-    const marketplaceUri = amazonMarketplaces[this.options.endpoint].uri
+    const marketplaceUri = amazonMarketplaces[this.options.endpoint].webServiceUri
 
     const host = marketplaceUri.replace('https://', '')
     const url = `${marketplaceUri}/${info.resource}/${info.version}/`
