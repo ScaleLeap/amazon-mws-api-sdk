@@ -30,6 +30,7 @@ interface Request {
   url: string
   method: HttpMethod
   headers: Record<string, string>
+  data: string
 }
 
 interface ResourceInfo<TResource extends Resource> {
@@ -45,8 +46,8 @@ const canonicalizeParameters = (parameters: Parameters): string => {
   return sp.toString().replace(/\+/g, '%20')
 }
 
-const defaultFetch = ({ url, method, headers }: Request) =>
-  axios({ method, url, headers }).then((response) => response.data)
+const defaultFetch = ({ url, method, headers, data }: Request) =>
+  axios({ method, url, headers, data }).then((response) => response.data)
 
 export class HttpClient {
   constructor(
@@ -79,11 +80,12 @@ export class HttpClient {
     const parametersWithSignature = { ...parameters, Signature: signature }
 
     return this.fetch({
-      url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
+      url,
       method,
       headers: {
         'user-agent': '@scaleleap/amazon-mws-api-sdk/1.0.0 (Language=JavaScript)',
       },
+      data: canonicalizeParameters(parametersWithSignature),
     })
   }
 }
