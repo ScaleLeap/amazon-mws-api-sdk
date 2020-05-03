@@ -28,7 +28,9 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@scaleleap/amazon-marketplaces": "^4.0.2",
-    "axios": "^0.19.2"
+    "@sinclair/typebox": "^0.9.13",
+    "axios": "^0.19.2",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "@scaleleap/config": "1.6.1",

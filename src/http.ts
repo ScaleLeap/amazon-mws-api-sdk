@@ -1,6 +1,7 @@
 import { AmazonMarketplace } from '@scaleleap/amazon-marketplaces'
 import axios from 'axios'
 import { URLSearchParams } from 'url'
+import { parseString } from 'xml2js'
 
 import { sign } from './sign'
 
@@ -46,8 +47,18 @@ const canonicalizeParameters = (parameters: Parameters): string => {
   return sp.toString().replace(/\+/g, '%20')
 }
 
-const defaultFetch = ({ url, method, headers, data }: Request) =>
-  axios({ method, url, headers, data }).then((response) => response.data)
+const defaultFetch = <T>({ url, method, headers, data }: Request) =>
+  axios({ method, url, headers, data }).then(
+    (response) =>
+      new Promise<T>((resolve, reject) =>
+        parseString(response.data, (error, result) => {
+          if (error) {
+            reject(error)
+          }
+          resolve(result)
+        }),
+      ),
+  )
 
 export class HttpClient {
   constructor(
@@ -55,7 +66,10 @@ export class HttpClient {
     private fetch: <T>(meta: Request) => Promise<T> = defaultFetch,
   ) {}
 
-  request<TResource extends Resource>(method: HttpMethod, info: ResourceInfo<TResource>) {
+  request<TResource extends Resource, TRes>(
+    method: HttpMethod,
+    info: ResourceInfo<TResource>,
+  ): Promise<TRes> {
     const marketplaceUri = this.options.marketplace.webServiceUri
 
     const host = marketplaceUri.replace('https://', '')
