@@ -31,12 +31,15 @@
     "axios": "^0.19.2"
   },
   "devDependencies": {
+    "@scaleleap/config": "1.6.1",
     "@scaleleap/semantic-release-config": "1.1.8",
     "@scaleleap/utils": "1.6.8",
+    "@types/is-ci": "2.0.0",
     "@types/jest": "25.2.1",
     "@types/node": "13.13.4",
     "danger": "10.1.1",
     "eslint": "6.8.0",
+    "is-ci": "2.0.0",
     "jest": "25.5.3",
     "post-npm-install": "2.0.0",
     "rimraf": "3.0.2",
