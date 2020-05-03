@@ -32,13 +32,10 @@ interface ResourceInfo {
   parameters: Parameters
 }
 
-const urlEncode = (string: string): string =>
-  encodeURIComponent(string).replace('+', '%20').replace('*', '%2A').replace('%7E', '~')
-
 const canonicalizeParameters = (parameters: Parameters): string => {
   const sp = new URLSearchParams(parameters)
   sp.sort()
-  return urlEncode(sp.toString())
+  return sp.toString().replace(/\+/g, '%20')
 }
 
 const defaultFetch = ({ url, method, headers }: Request) =>
@@ -54,17 +51,17 @@ export class HttpClient {
     const marketplaceUri = this.options.marketplace.webServiceUri
 
     const host = marketplaceUri.replace('https://', '')
-    const url = `${marketplaceUri}/${info.resource}/${info.version}`
+    const url = `${marketplaceUri}/${info.resource}/${info.version}/`
 
     const parameters = {
-      AWSAccessKeyId: urlEncode(this.options.awsAccessKeyId),
-      Action: urlEncode(info.action),
-      MWSAuthToken: urlEncode(this.options.mwsAuthToken),
-      SellerId: urlEncode(this.options.sellerId),
-      SignatureMethod: urlEncode('HmacSHA256'),
-      SignatureVersion: urlEncode('2'),
-      Timestamp: urlEncode(new Date().toISOString()),
-      Version: urlEncode(info.version),
+      AWSAccessKeyId: this.options.awsAccessKeyId,
+      Action: info.action,
+      MWSAuthToken: this.options.mwsAuthToken,
+      SellerId: this.options.sellerId,
+      SignatureMethod: 'HmacSHA256',
+      SignatureVersion: '2',
+      Timestamp: new Date().toISOString(),
+      Version: info.version,
       ...info.parameters,
     }
 
@@ -72,7 +69,7 @@ export class HttpClient {
     const queryStringToSign = `${method}\n${host}\n/${info.resource}/${info.version}\n${parametersForSigning}`
 
     const signature = sign(queryStringToSign, this.options.secretKey)
-    const parametersWithSignature = { ...parameters, Signature: urlEncode(signature) }
+    const parametersWithSignature = { ...parameters, Signature: signature }
 
     return this.fetch({
       url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
