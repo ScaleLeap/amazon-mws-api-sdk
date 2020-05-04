@@ -1,8 +1,7 @@
-import { Type } from '@sinclair/typebox'
-import Ajv from 'ajv'
+import { Codec, GetInterface, string } from 'purify-ts'
 
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray, parseBoolean } from '../parsing'
+import { ensureArray, mwsBoolean } from '../parsing'
 
 interface MarketplaceParticipationsResponse {
   ListMarketplaceParticipationsResponse: {
@@ -30,43 +29,27 @@ interface MarketplaceParticipationsResponse {
   }
 }
 
-const MarketplaceParticipations = Type.Object({
-  participations: Type.Array(
-    Type.Object({
-      marketplaceId: Type.String(),
-      sellerId: Type.String(),
-      hasSellerSuspendedListings: Type.Boolean(),
+const MarketplaceParticipations = Codec.interface({
+  participations: ensureArray(
+    Codec.interface({
+      marketplaceId: string,
+      sellerId: string,
+      hasSellerSuspendedListings: mwsBoolean,
     }),
   ),
-  marketplaces: Type.Array(
-    Type.Object({
-      marketplaceId: Type.String(),
-      name: Type.String(),
-      defaultCountryCode: Type.String(),
-      defaultCurrencyCode: Type.String(),
-      defaultLanguageCode: Type.String(),
-      domainName: Type.String(),
+  marketplaces: ensureArray(
+    Codec.interface({
+      marketplaceId: string,
+      name: string,
+      defaultCountryCode: string,
+      defaultCurrencyCode: string,
+      defaultLanguageCode: string,
+      domainName: string,
     }),
   ),
 })
 
-// Unfortunately typebox creates an ugly type from Static<typeof X> (not a regular object with keys),
-// it's not something that we can expose from this library, so I've added a manually created interface
-interface MarketplaceParticipations {
-  participations: Array<{
-    marketplaceId: string
-    sellerId: string
-    hasSellerSuspendedListings: boolean
-  }>
-  marketplaces: Array<{
-    marketplaceId: string
-    name: string
-    defaultCountryCode: string
-    defaultCurrencyCode: string
-    defaultLanguageCode: string
-    domainName: string
-  }>
-}
+type MarketplaceParticipations = GetInterface<typeof MarketplaceParticipations>
 
 export class Sellers {
   constructor(private httpClient: HttpClient) {}
@@ -84,26 +67,11 @@ export class Sellers {
 
     const data = response.ListMarketplaceParticipationsResponse.ListMarketplaceParticipationsResult
 
-    const result: MarketplaceParticipations = {
-      participations: ensureArray(data.ListParticipations.Participation).map((x) => ({
-        marketplaceId: x.MarketplaceId,
-        sellerId: x.SellerId,
-        hasSellerSuspendedListings: parseBoolean(x.HasSellerSuspendedListings),
-      })),
-      marketplaces: ensureArray(data.ListMarketplaces.Marketplace).map((x) => ({
-        marketplaceId: x.MarketplaceId,
-        name: x.Name,
-        defaultCountryCode: x.DefaultCountryCode,
-        defaultCurrencyCode: x.DefaultCurrencyCode,
-        defaultLanguageCode: x.DefaultLanguageCode,
-        domainName: x.DomainName,
-      })),
-    }
-
-    if (new Ajv().validate(MarketplaceParticipations, result)) {
-      return [result, meta]
-    }
-
-    throw new Error('TODO for now')
+    return MarketplaceParticipations.decode(data).caseOf({
+      Right: (x) => [x, meta],
+      Left: (error) => {
+        throw new Error(error)
+      },
+    })
   }
 }
