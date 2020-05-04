@@ -21,7 +21,7 @@ describe(`${Sellers.name}`, () => {
 
     const sellers = new Sellers(httpClient)
 
-    const marketplaceParticipations = await sellers.listMarketplaceParticipations()
+    const [marketplaceParticipations] = await sellers.listMarketplaceParticipations()
 
     // this test only works while we are returning raw XML, once the return data
     // is parsed, we should adjust this test
