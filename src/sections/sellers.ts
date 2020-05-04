@@ -30,21 +30,21 @@ interface MarketplaceParticipationsResponse {
 }
 
 const MarketplaceParticipations = Codec.interface({
-  participations: ensureArray(
+  Participations: ensureArray(
     Codec.interface({
-      marketplaceId: string,
-      sellerId: string,
-      hasSellerSuspendedListings: mwsBoolean,
+      MarketplaceId: string,
+      SellerId: string,
+      HasSellerSuspendedListings: mwsBoolean,
     }),
   ),
-  marketplaces: ensureArray(
+  Marketplaces: ensureArray(
     Codec.interface({
-      marketplaceId: string,
-      name: string,
-      defaultCountryCode: string,
-      defaultCurrencyCode: string,
-      defaultLanguageCode: string,
-      domainName: string,
+      MarketplaceId: string,
+      Name: string,
+      DefaultCountryCode: string,
+      DefaultCurrencyCode: string,
+      DefaultLanguageCode: string,
+      DomainName: string,
     }),
   ),
 })
