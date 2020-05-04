@@ -30,23 +30,28 @@ interface MarketplaceParticipationsResponse {
 }
 
 const MarketplaceParticipations = Codec.interface({
-  Participations: ensureArray(
-    Codec.interface({
-      MarketplaceId: string,
-      SellerId: string,
-      HasSellerSuspendedListings: mwsBoolean,
-    }),
-  ),
-  Marketplaces: ensureArray(
-    Codec.interface({
-      MarketplaceId: string,
-      Name: string,
-      DefaultCountryCode: string,
-      DefaultCurrencyCode: string,
-      DefaultLanguageCode: string,
-      DomainName: string,
-    }),
-  ),
+  NextToken: string,
+  ListParticipations: Codec.interface({
+    Participations: ensureArray(
+      Codec.interface({
+        MarketplaceId: string,
+        SellerId: string,
+        HasSellerSuspendedListings: mwsBoolean,
+      }),
+    ),
+  }),
+  ListMarketplaces: Codec.interface({
+    Marketplaces: ensureArray(
+      Codec.interface({
+        MarketplaceId: string,
+        Name: string,
+        DefaultCountryCode: string,
+        DefaultCurrencyCode: string,
+        DefaultLanguageCode: string,
+        DomainName: string,
+      }),
+    ),
+  }),
 })
 
 type MarketplaceParticipations = GetInterface<typeof MarketplaceParticipations>
