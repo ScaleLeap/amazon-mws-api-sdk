@@ -1,7 +1,7 @@
 import { Type } from '@sinclair/typebox'
 import Ajv from 'ajv'
 
-import { HttpClient, Resource } from '../http'
+import { HttpClient, RequestMeta, Resource } from '../http'
 import { ensureArray, parseBoolean } from '../parsing'
 
 interface MarketplaceParticipationsResponse {
@@ -71,8 +71,11 @@ interface MarketplaceParticipations {
 export class Sellers {
   constructor(private httpClient: HttpClient) {}
 
-  async listMarketplaceParticipations(): Promise<MarketplaceParticipations> {
-    const response: MarketplaceParticipationsResponse = await this.httpClient.request('POST', {
+  async listMarketplaceParticipations(): Promise<[MarketplaceParticipations, RequestMeta]> {
+    const [response, meta]: [
+      MarketplaceParticipationsResponse,
+      RequestMeta,
+    ] = await this.httpClient.request('POST', {
       resource: Resource.Sellers,
       version: '2011-07-01',
       action: 'ListMarketplaceParticipations',
@@ -98,7 +101,7 @@ export class Sellers {
     }
 
     if (new Ajv().validate(MarketplaceParticipations, result)) {
-      return result
+      return [result, meta]
     }
 
     throw new Error('TODO for now')

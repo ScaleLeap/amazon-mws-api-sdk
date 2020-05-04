@@ -41,25 +41,46 @@ interface ResourceInfo<TResource extends Resource> {
   parameters: Parameters
 }
 
+export interface RequestMeta {
+  requestId: string
+  timestamp: string
+  quotaMax: number
+  quotaRemaining: number
+  quotaResetOn: string
+}
+
 const canonicalizeParameters = (parameters: Parameters): string => {
   const sp = new URLSearchParams(parameters)
   sp.sort()
   return sp.toString().replace(/\+/g, '%20')
 }
 
-const defaultFetch = <T>({ url, method, headers, data }: Request): Promise<T> =>
-  axios({ method, url, headers, data }).then((response) => parser.parse(response.data))
+const defaultFetch = <T>({ url, method, headers, data }: Request): Promise<[T, RequestMeta]> =>
+  axios({ method, url, headers, data }).then((response) => {
+    const responseData = parser.parse(response.data)
+
+    return [
+      responseData,
+      {
+        requestId: response.headers['x-mws-request-id'] ?? responseData.ResponseMetadata.RequestId,
+        timestamp: response.headers['x-mws-timestamp'],
+        quotaMax: Number(response.headers['x-mws-quota-max']),
+        quotaRemaining: Number(response.headers['x-mws-quota-remaining']),
+        quotaResetOn: response.headers['x-mws-quota-resetson'],
+      },
+    ]
+  })
 
 export class HttpClient {
   constructor(
     private options: MWSOptions,
-    private fetch: <T>(meta: Request) => Promise<T> = defaultFetch,
+    private fetch: <T>(meta: Request) => Promise<[T, RequestMeta]> = defaultFetch,
   ) {}
 
   request<TResource extends Resource, TRes>(
     method: HttpMethod,
     info: ResourceInfo<TResource>,
-  ): Promise<TRes> {
+  ): Promise<[TRes, RequestMeta]> {
     const marketplaceUri = this.options.marketplace.webServiceUri
 
     const host = marketplaceUri.replace('https://', '')
