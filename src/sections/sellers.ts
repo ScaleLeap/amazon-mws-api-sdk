@@ -42,6 +42,6 @@ export class Sellers {
       version: '2011-07-01',
       action: 'ListMarketplaceParticipations',
       parameters: {},
-    })
+    }) as Promise<MarketplaceParticipations>
   }
 }
