@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`parseBoolean throws an exception if the argument is a string other than "Yes" and "No" 1`] = `"TODO, but should be library-specific error"`;

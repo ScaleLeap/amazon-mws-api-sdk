@@ -62,7 +62,7 @@ const defaultFetch = <T>({ url, method, headers, data }: Request): Promise<[T, R
     return [
       responseData,
       {
-        requestId: response.headers['x-mws-request-id'] ?? responseData.ResponseMetadata.RequestId,
+        requestId: response.headers['x-mws-request-id'] || responseData.ResponseMetadata.RequestId,
         timestamp: response.headers['x-mws-timestamp'],
         quotaMax: Number(response.headers['x-mws-quota-max']),
         quotaRemaining: Number(response.headers['x-mws-quota-remaining']),
