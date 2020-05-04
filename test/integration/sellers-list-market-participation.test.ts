@@ -25,7 +25,7 @@ describe(`${Sellers.name}`, () => {
 
     // this test only works while we are returning raw XML, once the return data
     // is parsed, we should adjust this test
-    expect(marketplaceParticipations).toMatch(amazonMarketplaces.CA.id)
+    expect(JSON.stringify(marketplaceParticipations)).toMatch(amazonMarketplaces.CA.id)
   })
 })
 /* eslint-enable jest/no-standalone-expect */
