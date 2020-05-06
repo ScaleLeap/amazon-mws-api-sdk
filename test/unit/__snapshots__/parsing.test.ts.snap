@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mwsBoolean decodes any other string as a failure 1`] = `"Expected a string with a value of either \\"Yes\\" or \\"No\\", but received a string with value \\"YES\\""`;

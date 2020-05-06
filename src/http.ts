@@ -1,7 +1,9 @@
 import { AmazonMarketplace } from '@scaleleap/amazon-marketplaces'
 import axios from 'axios'
+import parser from 'fast-xml-parser'
 import { URLSearchParams } from 'url'
 
+import { HttpError } from './error'
 import { sign } from './sign'
 
 export interface MWSOptions {
@@ -40,22 +42,56 @@ interface ResourceInfo<TResource extends Resource> {
   parameters: Parameters
 }
 
+export interface RequestMeta {
+  requestId: string
+  timestamp: string
+  quotaMax: number
+  quotaRemaining: number
+  quotaResetOn: string
+}
+
+interface RequestResponse {
+  data: string
+  headers: Record<string, string>
+}
+
 const canonicalizeParameters = (parameters: Parameters): string => {
   const sp = new URLSearchParams(parameters)
   sp.sort()
   return sp.toString().replace(/\+/g, '%20')
 }
 
-const defaultFetch = ({ url, method, headers, data }: Request) =>
-  axios({ method, url, headers, data }).then((response) => response.data)
+const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestResponse> =>
+  axios({ method, url, headers, data }).then((response) => ({
+    data: response.data,
+    headers: response.headers,
+  }))
+
+const parseResponse = <T>(response: RequestResponse): [T, RequestMeta] => {
+  const responseData = parser.parse(response.data)
+
+  return [
+    responseData,
+    {
+      requestId: response.headers['x-mws-request-id'],
+      timestamp: response.headers['x-mws-timestamp'],
+      quotaMax: Number(response.headers['x-mws-quota-max']),
+      quotaRemaining: Number(response.headers['x-mws-quota-remaining']),
+      quotaResetOn: response.headers['x-mws-quota-resetson'],
+    },
+  ]
+}
 
 export class HttpClient {
   constructor(
     private options: MWSOptions,
-    private fetch: <T>(meta: Request) => Promise<T> = defaultFetch,
+    private fetch: <T>(meta: Request) => Promise<RequestResponse> = defaultFetch,
   ) {}
 
-  request<TResource extends Resource>(method: HttpMethod, info: ResourceInfo<TResource>) {
+  public async request<TResource extends Resource, TRes>(
+    method: HttpMethod,
+    info: ResourceInfo<TResource>,
+  ): Promise<[TRes, RequestMeta]> {
     const marketplaceUri = this.options.marketplace.webServiceUri
 
     const host = marketplaceUri.replace('https://', '')
@@ -83,17 +119,24 @@ export class HttpClient {
       'user-agent': '@scaleleap/amazon-mws-api-sdk/1.0.0 (Language=JavaScript)',
     }
 
-    return method === 'GET'
-      ? this.fetch({
-          url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
-          method,
-          headers,
-        })
-      : this.fetch({
-          url,
-          method,
-          headers,
-          data: canonicalizeParameters(parametersWithSignature),
-        })
+    const config =
+      method === 'GET'
+        ? {
+            url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
+            method,
+            headers,
+          }
+        : {
+            url,
+            method,
+            headers,
+            data: canonicalizeParameters(parametersWithSignature),
+          }
+
+    try {
+      return await this.fetch(config).then((x) => parseResponse(x))
+    } catch (error) {
+      throw new HttpError(error)
+    }
   }
 }
