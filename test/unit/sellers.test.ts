@@ -1,18 +1,18 @@
-import { amazonMarketplaces, HttpClient } from '../../src'
+import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
 
+const httpConfig = {
+  awsAccessKeyId: '',
+  marketplace: amazonMarketplaces.CA,
+  mwsAuthToken: '',
+  secretKey: '',
+  sellerId: '',
+}
+
 const mockMws = new MWS(
-  new HttpClient(
-    {
-      awsAccessKeyId: '',
-      marketplace: amazonMarketplaces.CA,
-      mwsAuthToken: '',
-      secretKey: '',
-      sellerId: '',
-    },
-    () =>
-      Promise.resolve({
-        data: `<ListMarketplaceParticipationsResponse xmlns="https://mws.amazonservices.com/Sellers/2011-07-01"> 
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: `<ListMarketplaceParticipationsResponse xmlns="https://mws.amazonservices.com/Sellers/2011-07-01"> 
             <ListMarketplaceParticipationsResult> 
               <ListParticipations> 
                 <Participation> 
@@ -49,21 +49,35 @@ const mockMws = new MWS(
               <RequestId>bd71c84f-d2a6-4ce0-ae41-6dc8a13ce637</RequestId> 
             </ResponseMetadata> 
           </ListMarketplaceParticipationsResponse>`,
-        headers: {
-          'x-mws-request-id': '0',
-          'x-mws-timestamp': '2020-05-06T08:22:23.582Z',
-          'x-mws-quota-max': '1000',
-          'x-mws-quota-remaining': '999',
-          'x-mws-quota-resetson': '2020-05-06T10:22:23.582Z',
-        },
-      }),
+      headers: {
+        'x-mws-request-id': '0',
+        'x-mws-timestamp': '2020-05-06T08:22:23.582Z',
+        'x-mws-quota-max': '1000',
+        'x-mws-quota-remaining': '999',
+        'x-mws-quota-resetson': '2020-05-06T10:22:23.582Z',
+      },
+    }),
   ),
 )
 
-describe('sellers', () => {
-  it('listMarketplaceParticipations', async () => {
-    expect.assertions(1)
+const mockMwsFail = new MWS(
+  new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
+)
 
-    expect(await mockMws.sellers.listMarketplaceParticipations()).toMatchSnapshot()
+describe('sellers', () => {
+  describe('listMarketplaceParticipations', () => {
+    it('returns a parsed model when the response is valid', async () => {
+      expect.assertions(1)
+
+      expect(await mockMws.sellers.listMarketplaceParticipations()).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.sellers.listMarketplaceParticipations()).rejects.toStrictEqual(
+        new ParsingError(''),
+      )
+    })
   })
 })

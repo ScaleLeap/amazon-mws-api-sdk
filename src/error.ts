@@ -31,5 +31,4 @@ export class ParsingError extends MWSError {
     Object.setPrototypeOf(this, ParsingError.prototype)
   }
 }
-
 /* eslint-enable max-classes-per-file */

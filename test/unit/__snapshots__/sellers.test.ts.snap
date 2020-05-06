@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`sellers listMarketplaceParticipations 1`] = `
+exports[`sellers listMarketplaceParticipations returns a parsed model when the response is valid 1`] = `
 Array [
   Object {
     "ListMarketplaces": Object {
