@@ -29,7 +29,7 @@ describe('mwsBoolean', () => {
     expect(mwsBoolean.decode('No')).toStrictEqual(Right(false))
   })
 
-  it('decodes any other string "Yes" as a failure', () => {
+  it('decodes any other string as a failure', () => {
     expect.assertions(1)
 
     expect(mwsBoolean.decode('YES')).toMatchSnapshot()
