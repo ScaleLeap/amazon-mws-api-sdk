@@ -3,6 +3,7 @@ import axios from 'axios'
 import parser from 'fast-xml-parser'
 import { URLSearchParams } from 'url'
 
+import { HttpError } from './error'
 import { sign } from './sign'
 
 export interface MWSOptions {
@@ -87,7 +88,7 @@ export class HttpClient {
     private fetch: <T>(meta: Request) => Promise<RequestResponse> = defaultFetch,
   ) {}
 
-  public request<TResource extends Resource, TRes>(
+  public async request<TResource extends Resource, TRes>(
     method: HttpMethod,
     info: ResourceInfo<TResource>,
   ): Promise<[TRes, RequestMeta]> {
@@ -118,17 +119,24 @@ export class HttpClient {
       'user-agent': '@scaleleap/amazon-mws-api-sdk/1.0.0 (Language=JavaScript)',
     }
 
-    return method === 'GET'
-      ? this.fetch({
-          url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
-          method,
-          headers,
-        }).then((x) => parseResponse(x))
-      : this.fetch({
-          url,
-          method,
-          headers,
-          data: canonicalizeParameters(parametersWithSignature),
-        }).then((x) => parseResponse(x))
+    const config =
+      method === 'GET'
+        ? {
+            url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
+            method,
+            headers,
+          }
+        : {
+            url,
+            method,
+            headers,
+            data: canonicalizeParameters(parametersWithSignature),
+          }
+
+    try {
+      return await this.fetch(config).then((x) => parseResponse(x))
+    } catch (error) {
+      throw new HttpError(error)
+    }
   }
 }

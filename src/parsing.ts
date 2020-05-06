@@ -25,7 +25,11 @@ export const mwsBoolean = Codec.custom<boolean>({
       case 'No':
         return Right(false)
       default:
-        return Left('TODO, but should be library-specific error')
+        return Left(
+          `Expected a string with a value of either "Yes" or "No", but received a string with value ${JSON.stringify(
+            x,
+          )}`,
+        )
     }
   },
   encode: (x) => x,
