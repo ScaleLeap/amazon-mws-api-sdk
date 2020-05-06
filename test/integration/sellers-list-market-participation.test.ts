@@ -23,9 +23,9 @@ describe(`${Sellers.name}`, () => {
 
     const [marketplaceParticipations] = await sellers.listMarketplaceParticipations()
 
-    // this test only works while we are returning raw XML, once the return data
-    // is parsed, we should adjust this test
-    expect(JSON.stringify(marketplaceParticipations)).toMatch(amazonMarketplaces.CA.id)
+    expect(marketplaceParticipations.ListMarketplaces.Marketplace).toContain(
+      expect.objectContaining({ MarketplaceId: amazonMarketplaces.CA.id }),
+    )
   })
 })
 /* eslint-enable jest/no-standalone-expect */
