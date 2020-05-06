@@ -49,35 +49,45 @@ export interface RequestMeta {
   quotaResetOn: string
 }
 
+interface RequestResponse {
+  data: string
+  headers: Record<string, string>
+}
+
 const canonicalizeParameters = (parameters: Parameters): string => {
   const sp = new URLSearchParams(parameters)
   sp.sort()
   return sp.toString().replace(/\+/g, '%20')
 }
 
-const defaultFetch = <T>({ url, method, headers, data }: Request): Promise<[T, RequestMeta]> =>
-  axios({ method, url, headers, data }).then((response) => {
-    const responseData = parser.parse(response.data)
+const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestResponse> =>
+  axios({ method, url, headers, data }).then((response) => ({
+    data: response.data,
+    headers: response.headers,
+  }))
 
-    return [
-      responseData,
-      {
-        requestId: response.headers['x-mws-request-id'] || responseData.ResponseMetadata.RequestId,
-        timestamp: response.headers['x-mws-timestamp'],
-        quotaMax: Number(response.headers['x-mws-quota-max']),
-        quotaRemaining: Number(response.headers['x-mws-quota-remaining']),
-        quotaResetOn: response.headers['x-mws-quota-resetson'],
-      },
-    ]
-  })
+const parseResponse = <T>(response: RequestResponse): [T, RequestMeta] => {
+  const responseData = parser.parse(response.data)
+
+  return [
+    responseData,
+    {
+      requestId: response.headers['x-mws-request-id'],
+      timestamp: response.headers['x-mws-timestamp'],
+      quotaMax: Number(response.headers['x-mws-quota-max']),
+      quotaRemaining: Number(response.headers['x-mws-quota-remaining']),
+      quotaResetOn: response.headers['x-mws-quota-resetson'],
+    },
+  ]
+}
 
 export class HttpClient {
   constructor(
     private options: MWSOptions,
-    private fetch: <T>(meta: Request) => Promise<[T, RequestMeta]> = defaultFetch,
+    private fetch: <T>(meta: Request) => Promise<RequestResponse> = defaultFetch,
   ) {}
 
-  request<TResource extends Resource, TRes>(
+  public request<TResource extends Resource, TRes>(
     method: HttpMethod,
     info: ResourceInfo<TResource>,
   ): Promise<[TRes, RequestMeta]> {
@@ -113,12 +123,12 @@ export class HttpClient {
           url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
           method,
           headers,
-        })
+        }).then((x) => parseResponse(x))
       : this.fetch({
           url,
           method,
           headers,
           data: canonicalizeParameters(parametersWithSignature),
-        })
+        }).then((x) => parseResponse(x))
   }
 }

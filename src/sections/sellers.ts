@@ -1,4 +1,4 @@
-import { Codec, GetInterface, string } from 'purify-ts'
+import { Codec, GetInterface, optional, string } from 'purify-ts'
 
 import { HttpClient, RequestMeta, Resource } from '../http'
 import { ensureArray, mwsBoolean } from '../parsing'
@@ -30,9 +30,9 @@ interface MarketplaceParticipationsResponse {
 }
 
 const MarketplaceParticipations = Codec.interface({
-  NextToken: string,
+  NextToken: optional(string),
   ListParticipations: Codec.interface({
-    Participations: ensureArray(
+    Participation: ensureArray(
       Codec.interface({
         MarketplaceId: string,
         SellerId: string,
@@ -41,7 +41,7 @@ const MarketplaceParticipations = Codec.interface({
     ),
   }),
   ListMarketplaces: Codec.interface({
-    Marketplaces: ensureArray(
+    Marketplace: ensureArray(
       Codec.interface({
         MarketplaceId: string,
         Name: string,
