@@ -35,3 +35,30 @@ export const mwsBoolean = Codec.custom<boolean>({
   encode: (x) => x,
   schema: () => ({ type: 'string', enum: ['Yes', 'No'] }),
 })
+
+export enum ServiceStatus {
+  Green = 'GREEN',
+  Yellow = 'YELLOW',
+  Red = 'RED',
+}
+
+export const serviceStatus = Codec.custom<ServiceStatus>({
+  decode: (x) => {
+    switch (x) {
+      case 'GREEN':
+        return Right(ServiceStatus.Green)
+      case 'YELLOW':
+        return Right(ServiceStatus.Yellow)
+      case 'RED':
+        return Right(ServiceStatus.Red)
+      default:
+        return Left(
+          `Expected a string with a value of "GREEN", "YELLOW" or "RED", but received a string with value ${JSON.stringify(
+            x,
+          )}`,
+        )
+    }
+  },
+  encode: (x) => x,
+  schema: () => ({ type: 'string', enum: ['GREEN', 'YELLOW', 'RED'] }),
+})

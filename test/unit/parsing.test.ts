@@ -1,6 +1,6 @@
 import { number, Right } from 'purify-ts'
 
-import { ensureArray, mwsBoolean } from '../../src/parsing'
+import { ensureArray, mwsBoolean, ServiceStatus, serviceStatus } from '../../src/parsing'
 
 describe('ensureArray', () => {
   it('acts like an idenity if the value to be decoded is already an array', () => {
@@ -33,5 +33,31 @@ describe('mwsBoolean', () => {
     expect.assertions(1)
 
     expect(mwsBoolean.decode('YES')).toMatchSnapshot()
+  })
+})
+
+describe('serviceStatus', () => {
+  it('decodes the string "GREEN"', () => {
+    expect.assertions(1)
+
+    expect(serviceStatus.decode('GREEN')).toStrictEqual(Right(ServiceStatus.Green))
+  })
+
+  it('decodes the string "YELLOW"', () => {
+    expect.assertions(1)
+
+    expect(serviceStatus.decode('YELLOW')).toStrictEqual(Right(ServiceStatus.Yellow))
+  })
+
+  it('decodes the string "RED"', () => {
+    expect.assertions(1)
+
+    expect(serviceStatus.decode('RED')).toStrictEqual(Right(ServiceStatus.Red))
+  })
+
+  it('decodes any other string as a failure', () => {
+    expect.assertions(1)
+
+    expect(serviceStatus.decode('Green')).toMatchSnapshot()
   })
 })

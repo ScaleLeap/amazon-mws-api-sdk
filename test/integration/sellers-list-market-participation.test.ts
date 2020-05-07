@@ -27,5 +27,15 @@ describe(`${Sellers.name}`, () => {
       expect.objectContaining({ MarketplaceId: amazonMarketplaces.CA.id }),
     )
   })
+
+  itci('should be able to query service status', async () => {
+    expect.assertions(1)
+
+    const sellers = new Sellers(httpClient)
+
+    const [marketplaceParticipations] = await sellers.getServiceStatus()
+
+    expect(marketplaceParticipations.Status).toMatch(/GREEN|YELLOW|RED/)
+  })
 })
 /* eslint-enable jest/no-standalone-expect */
