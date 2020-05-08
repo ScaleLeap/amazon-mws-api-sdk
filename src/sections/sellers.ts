@@ -2,12 +2,18 @@ import { Codec, GetInterface, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray, mwsBoolean, serviceStatus } from '../parsing'
+import {
+  ensureArray,
+  mwsBoolean,
+  NextToken,
+  nextToken as nextTokenCodec,
+  serviceStatus,
+} from '../parsing'
 
 const SELLERS_API_VERSION = '2011-07-01'
 
 const MarketplaceParticipations = Codec.interface({
-  NextToken: optional(string),
+  NextToken: optional(nextTokenCodec('ListMarketplaceParticipations')),
   ListParticipations: Codec.interface({
     Participation: ensureArray(
       Codec.interface({
@@ -80,13 +86,13 @@ export class Sellers {
   }
 
   async listMarketplaceParticipationsByNextToken(
-    nextToken: string,
+    nextToken: NextToken<'ListMarketplaceParticipations'>,
   ): Promise<[MarketplaceParticipations, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Sellers,
       version: SELLERS_API_VERSION,
       action: 'ListMarketplaceParticipationsByNextToken',
-      parameters: { NextToken: nextToken },
+      parameters: { NextToken: nextToken.token },
     })
 
     return MarketplaceParticipationsByNextTokenResponse.decode(response).caseOf({

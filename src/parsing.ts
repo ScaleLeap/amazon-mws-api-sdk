@@ -1,5 +1,5 @@
 /** A collection of parsing codecs */
-import { array, Codec } from 'purify-ts/Codec'
+import { array, Codec, string } from 'purify-ts/Codec'
 import { Left, Right } from 'purify-ts/Either'
 
 export const ensureArray = <T>(codec: Codec<T>): Codec<T[]> => {
@@ -62,3 +62,14 @@ export const serviceStatus = Codec.custom<ServiceStatus>({
   encode: (x) => x,
   schema: () => ({ type: 'string', enum: ['GREEN', 'YELLOW', 'RED'] }),
 })
+
+export class NextToken<T> {
+  constructor(private action: T, public token: string) {}
+}
+
+export const nextToken = <T extends string>(action: T) =>
+  Codec.custom<NextToken<T>>({
+    decode: (x) => string.decode(x).map((string_) => new NextToken(action, string_)),
+    encode: (x) => x,
+    schema: () => ({ type: 'string' }),
+  })

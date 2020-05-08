@@ -1,6 +1,13 @@
 import { number, Right } from 'purify-ts'
 
-import { ensureArray, mwsBoolean, ServiceStatus, serviceStatus } from '../../src/parsing'
+import {
+  ensureArray,
+  mwsBoolean,
+  NextToken,
+  nextToken,
+  ServiceStatus,
+  serviceStatus,
+} from '../../src/parsing'
 
 describe('ensureArray', () => {
   it('acts like an idenity if the value to be decoded is already an array', () => {
@@ -59,5 +66,13 @@ describe('serviceStatus', () => {
     expect.assertions(1)
 
     expect(serviceStatus.decode('Green')).toMatchSnapshot()
+  })
+})
+
+describe('nextToken', () => {
+  it('is a string parser that constructs a NextToken object', () => {
+    expect.assertions(1)
+
+    expect(nextToken('Action').decode('123')).toStrictEqual(Right(new NextToken('Action', '123')))
   })
 })
