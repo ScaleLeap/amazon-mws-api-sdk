@@ -24,6 +24,12 @@ describe('ensureArray', () => {
 
     expect(ensureArray(number).decode(1)).toStrictEqual(Right([1]))
   })
+
+  it('has an encode that does nothing', () => {
+    expect.assertions(1)
+
+    expect(ensureArray(number).encode([1])).toStrictEqual([1])
+  })
 })
 
 describe('mwsBoolean', () => {
@@ -53,6 +59,12 @@ describe('mwsBoolean', () => {
     expect(ajv.validate(schema, 'Yes')).toStrictEqual(true)
     expect(ajv.validate(schema, 'No')).toStrictEqual(true)
     expect(ajv.validate(schema, 'YES')).toStrictEqual(false)
+  })
+
+  it('has an encode that does nothing', () => {
+    expect.assertions(1)
+
+    expect(mwsBoolean.encode(false)).toStrictEqual(false)
   })
 })
 
@@ -91,6 +103,12 @@ describe('serviceStatus', () => {
     expect(ajv.validate(schema, 'RED')).toStrictEqual(true)
     expect(ajv.validate(schema, 'BLUE')).toStrictEqual(false)
   })
+
+  it('has an encode that does nothing to its argument', () => {
+    expect.assertions(1)
+
+    expect(serviceStatus.encode(ServiceStatus.Green)).toStrictEqual(ServiceStatus.Green)
+  })
 })
 
 describe('nextToken', () => {
@@ -107,5 +125,11 @@ describe('nextToken', () => {
 
     expect(ajv.validate(schema, 'some string')).toStrictEqual(true)
     expect(ajv.validate(schema, 42)).toStrictEqual(false)
+  })
+
+  it('has an encode that does nothing to its argument', () => {
+    expect.assertions(1)
+
+    expect(nextToken('').encode(new NextToken('', '123'))).toStrictEqual(new NextToken('', '123'))
   })
 })
