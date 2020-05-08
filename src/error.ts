@@ -31,4 +31,11 @@ export class ParsingError extends MWSError {
     Object.setPrototypeOf(this, ParsingError.prototype)
   }
 }
+
+export class BadParameterError extends MWSError {
+  constructor(public error: string, ...parameters: string[]) {
+    super(...parameters)
+    Object.setPrototypeOf(this, ParsingError.prototype)
+  }
+}
 /* eslint-enable max-classes-per-file */

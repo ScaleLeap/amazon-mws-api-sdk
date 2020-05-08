@@ -15,16 +15,25 @@ export interface MWSOptions {
 }
 
 type HttpMethod = 'GET' | 'POST'
-type Parameters = Record<string, string | string[]>
+type Parameters = Record<string, string | number | (number | string)[] | undefined>
+type CleanParameters = Record<string, string>
 
 export enum Resource {
   Sellers = 'Sellers',
+  Orders = 'Orders',
 }
 
 interface ResourceActions {
   [Resource.Sellers]:
     | 'ListMarketplaceParticipations'
     | 'ListMarketplaceParticipationsByNextToken'
+    | 'GetServiceStatus'
+  [Resource.Orders]:
+    | 'ListOrders'
+    | 'ListOrdersByNextToken'
+    | 'GetOrder'
+    | 'ListOrderItems'
+    | 'ListOrderItemsByNextToken'
     | 'GetServiceStatus'
 }
 
@@ -55,10 +64,31 @@ interface RequestResponse {
   headers: Record<string, string>
 }
 
-const canonicalizeParameters = (parameters: Parameters): string => {
+const canonicalizeParameters = (parameters: CleanParameters): string => {
   const sp = new URLSearchParams(parameters)
   sp.sort()
   return sp.toString().replace(/\+/g, '%20')
+}
+
+const cleanParameters = (parameters: Parameters): CleanParameters => {
+  const result: CleanParameters = {}
+
+  // eslint-disable-next-line no-restricted-syntax, guard-for-in
+  for (const key in parameters) {
+    const value = parameters[key]
+
+    if (value !== undefined) {
+      if (Array.isArray(value)) {
+        for (let index = 0; index < value.length; index += 1) {
+          result[`${key}.${index + 1}`] = String(value)
+        }
+      } else {
+        result[key] = String(value)
+      }
+    }
+  }
+
+  return result
 }
 
 const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestResponse> =>
@@ -106,7 +136,7 @@ export class HttpClient {
       SignatureVersion: '2',
       Timestamp: new Date().toISOString(),
       Version: info.version,
-      ...info.parameters,
+      ...cleanParameters(info.parameters),
     }
 
     const parametersForSigning = canonicalizeParameters(parameters)
