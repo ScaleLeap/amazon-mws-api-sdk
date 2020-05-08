@@ -63,7 +63,7 @@ export const serviceStatus = Codec.custom<ServiceStatus>({
   schema: () => ({ type: 'string', enum: ['GREEN', 'YELLOW', 'RED'] }),
 })
 
-export class NextToken<T> {
+export class NextToken<T extends string> {
   constructor(private action: T, public token: string) {}
 }
 
