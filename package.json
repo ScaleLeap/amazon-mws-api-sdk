@@ -39,6 +39,7 @@
     "@types/is-ci": "2.0.0",
     "@types/jest": "25.2.1",
     "@types/node": "13.13.4",
+    "ajv": "^6.12.2",
     "danger": "10.2.0",
     "eslint": "6.8.0",
     "global-agent": "2.1.8",

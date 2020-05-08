@@ -1,6 +1,16 @@
+import Ajv from 'ajv'
 import { number, Right } from 'purify-ts'
 
-import { ensureArray, mwsBoolean } from '../../src/parsing'
+import {
+  ensureArray,
+  mwsBoolean,
+  NextToken,
+  nextToken,
+  ServiceStatus,
+  serviceStatus,
+} from '../../src/parsing'
+
+const ajv = new Ajv()
 
 describe('ensureArray', () => {
   it('acts like an idenity if the value to be decoded is already an array', () => {
@@ -13,6 +23,12 @@ describe('ensureArray', () => {
     expect.assertions(1)
 
     expect(ensureArray(number).decode(1)).toStrictEqual(Right([1]))
+  })
+
+  it('has an encode that does nothing', () => {
+    expect.assertions(1)
+
+    expect(ensureArray(number).encode([1])).toStrictEqual([1])
   })
 })
 
@@ -33,5 +49,87 @@ describe('mwsBoolean', () => {
     expect.assertions(1)
 
     expect(mwsBoolean.decode('YES')).toMatchSnapshot()
+  })
+
+  it('generates a valid JSON schema for an enum', () => {
+    expect.assertions(3)
+
+    const schema = mwsBoolean.schema()
+
+    expect(ajv.validate(schema, 'Yes')).toStrictEqual(true)
+    expect(ajv.validate(schema, 'No')).toStrictEqual(true)
+    expect(ajv.validate(schema, 'YES')).toStrictEqual(false)
+  })
+
+  it('has an encode that does nothing', () => {
+    expect.assertions(1)
+
+    expect(mwsBoolean.encode(false)).toStrictEqual(false)
+  })
+})
+
+describe('serviceStatus', () => {
+  it('decodes the string "GREEN"', () => {
+    expect.assertions(1)
+
+    expect(serviceStatus.decode('GREEN')).toStrictEqual(Right(ServiceStatus.Green))
+  })
+
+  it('decodes the string "YELLOW"', () => {
+    expect.assertions(1)
+
+    expect(serviceStatus.decode('YELLOW')).toStrictEqual(Right(ServiceStatus.Yellow))
+  })
+
+  it('decodes the string "RED"', () => {
+    expect.assertions(1)
+
+    expect(serviceStatus.decode('RED')).toStrictEqual(Right(ServiceStatus.Red))
+  })
+
+  it('decodes any other string as a failure', () => {
+    expect.assertions(1)
+
+    expect(serviceStatus.decode('Green')).toMatchSnapshot()
+  })
+
+  it('generates a valid JSON schema for an enum', () => {
+    expect.assertions(4)
+
+    const schema = serviceStatus.schema()
+
+    expect(ajv.validate(schema, 'YELLOW')).toStrictEqual(true)
+    expect(ajv.validate(schema, 'GREEN')).toStrictEqual(true)
+    expect(ajv.validate(schema, 'RED')).toStrictEqual(true)
+    expect(ajv.validate(schema, 'BLUE')).toStrictEqual(false)
+  })
+
+  it('has an encode that does nothing to its argument', () => {
+    expect.assertions(1)
+
+    expect(serviceStatus.encode(ServiceStatus.Green)).toStrictEqual(ServiceStatus.Green)
+  })
+})
+
+describe('nextToken', () => {
+  it('is a string parser that constructs a NextToken object', () => {
+    expect.assertions(1)
+
+    expect(nextToken('Action').decode('123')).toStrictEqual(Right(new NextToken('Action', '123')))
+  })
+
+  it('generates a valid JSON schema', () => {
+    expect.assertions(2)
+
+    const schema = nextToken('').schema()
+
+    expect(ajv.validate(schema, 'some string')).toStrictEqual(true)
+    expect(ajv.validate(schema, 42)).toStrictEqual(false)
+  })
+
+  it('has an encode that does nothing to its argument', () => {
+    expect.assertions(1)
+
+    expect(nextToken('').encode(new NextToken('', '123'))).toStrictEqual(new NextToken('', '123'))
   })
 })
