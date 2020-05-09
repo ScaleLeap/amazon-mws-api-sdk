@@ -1,6 +1,6 @@
 import { amazonMarketplaces } from '@scaleleap/amazon-marketplaces'
 
-import { HttpClient, Sellers } from '../../src'
+import { HttpClient, Orders } from '../../src'
 import { Config } from './config'
 import { itci } from './it'
 
@@ -15,15 +15,15 @@ const httpClient = new HttpClient({
 })
 
 /* eslint-disable jest/no-standalone-expect */
-describe(`${Sellers.name}`, () => {
+describe(`${Orders.name}`, () => {
   itci('should be able to query marketplace participation', async () => {
     expect.assertions(1)
 
-    const sellers = new Sellers(httpClient)
+    const orders = new Orders(httpClient)
 
-    const [marketplaceParticipations] = await sellers.listMarketplaceParticipations()
+    const [listOrders] = await orders.listOrders({ MarketplaceId: [amazonMarketplaces.CA.id] })
 
-    expect(marketplaceParticipations.ListMarketplaces.Marketplace).toContainEqual(
+    expect(listOrders.Orders.Order).toContainEqual(
       expect.objectContaining({ MarketplaceId: amazonMarketplaces.CA.id }),
     )
   })
@@ -31,11 +31,11 @@ describe(`${Sellers.name}`, () => {
   itci('should be able to query service status', async () => {
     expect.assertions(1)
 
-    const sellers = new Sellers(httpClient)
+    const orders = new Orders(httpClient)
 
-    const [marketplaceParticipations] = await sellers.getServiceStatus()
+    const [response] = await orders.getServiceStatus()
 
-    expect(marketplaceParticipations.Status).toMatch(/GREEN|YELLOW|RED/)
+    expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 })
 /* eslint-enable jest/no-standalone-expect */

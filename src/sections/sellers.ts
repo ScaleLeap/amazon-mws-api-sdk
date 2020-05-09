@@ -2,13 +2,8 @@ import { Codec, GetInterface, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import {
-  ensureArray,
-  mwsBoolean,
-  NextToken,
-  nextToken as nextTokenCodec,
-  serviceStatus,
-} from '../parsing'
+import { ensureArray, mwsBoolean, NextToken, nextToken as nextTokenCodec } from '../parsing'
+import { getServiceStatusByResource } from './shared'
 
 const SELLERS_API_VERSION = '2011-07-01'
 
@@ -49,19 +44,7 @@ const MarketplaceParticipationsByNextTokenResponse = Codec.interface({
   }),
 })
 
-const ServiceStatusResponse = Codec.interface({
-  GetServiceStatusResponse: Codec.interface({
-    GetServiceStatusResult: Codec.interface({
-      Status: serviceStatus,
-      Timestamp: string,
-    }),
-  }),
-})
-
 type MarketplaceParticipations = GetInterface<typeof MarketplaceParticipations>
-type ServiceStatusResponse = GetInterface<
-  typeof ServiceStatusResponse
->['GetServiceStatusResponse']['GetServiceStatusResult']
 
 export class Sellers {
   constructor(private httpClient: HttpClient) {}
@@ -107,19 +90,7 @@ export class Sellers {
     })
   }
 
-  async getServiceStatus(): Promise<[ServiceStatusResponse, RequestMeta]> {
-    const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Sellers,
-      version: SELLERS_API_VERSION,
-      action: 'GetServiceStatus',
-      parameters: {},
-    })
-
-    return ServiceStatusResponse.decode(response).caseOf({
-      Right: (x) => [x.GetServiceStatusResponse.GetServiceStatusResult, meta],
-      Left: (error) => {
-        throw new ParsingError(error)
-      },
-    })
+  async getServiceStatus() {
+    return getServiceStatusByResource(this.httpClient, Resource.Sellers, SELLERS_API_VERSION)
   }
 }

@@ -70,26 +70,22 @@ const canonicalizeParameters = (parameters: CleanParameters): string => {
   return sp.toString().replace(/\+/g, '%20')
 }
 
-const cleanParameters = (parameters: Parameters): CleanParameters => {
-  const result: CleanParameters = {}
-
-  // eslint-disable-next-line no-restricted-syntax, guard-for-in
-  for (const key in parameters) {
-    const value = parameters[key]
-
-    if (value !== undefined) {
-      if (Array.isArray(value)) {
-        for (let index = 0; index < value.length; index += 1) {
-          result[`${key}.${index + 1}`] = String(value)
+/* eslint-disable no-param-reassign */
+const cleanParameters = (parameters: Parameters): CleanParameters =>
+  Object.entries(parameters)
+    .filter(([, v]) => v !== undefined)
+    .reduce((result, [k, v]) => {
+      if (Array.isArray(v)) {
+        for (let index = 0; index < v.length; index += 1) {
+          result[`${k}.${index + 1}`] = String(v)
         }
       } else {
-        result[key] = String(value)
+        result[k] = String(v)
       }
-    }
-  }
 
-  return result
-}
+      return result
+    }, {} as CleanParameters)
+/* eslint-enable no-param-reassign */
 
 const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestResponse> =>
   axios({ method, url, headers, data }).then((response) => ({

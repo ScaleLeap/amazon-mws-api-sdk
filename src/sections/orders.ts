@@ -1,7 +1,9 @@
-import { date } from 'purify-ts'
+import { boolean, Codec, date, exactly, GetInterface, number, oneOf, string } from 'purify-ts/Codec'
 
-import { BadParameterError } from '../error'
-import { HttpClient, Resource } from '../http'
+import { ParsingError } from '../error'
+import { HttpClient, RequestMeta, Resource } from '../http'
+import { ensureArray, nextToken } from '../parsing'
+import { getServiceStatusByResource } from './shared'
 
 const ORDERS_API_VERSION = '2013-09-01'
 
@@ -41,172 +43,123 @@ export enum EasyShipShipmentStatus {
 }
 
 interface ListOrderParameters {
-  createdAfter?: string
-  createdBefore?: string
-  lastUpdatedAfter?: string
-  lastUpdatedBefore?: string
-  orderStatuses?: OrderStatus[]
-  marketplaceIds: string[]
-  fulfillmentChannels?: FulfillmentChannel[]
-  paymentMethods?: PaymentMethod[]
-  buyerEmail?: string
-  sellerOrderId?: string
-  maxResultsPerPage?: number
-  easyShipShipmentStatuses?: EasyShipShipmentStatus[]
+  CreatedAfter?: string
+  CreatedBefore?: string
+  LastUpdatedAfter?: string
+  LastUpdatedBefore?: string
+  OrderStatus?: (keyof typeof OrderStatus)[]
+  MarketplaceId: string[]
+  FulfillmentChannel?: (keyof typeof FulfillmentChannel)[]
+  PaymentMethod?: (keyof typeof PaymentMethod)[]
+  BuyerEmail?: string
+  SellerOrderId?: string
+  MaxResultsPerPage?: number
+  EasyShipShipmentStatus?: (keyof typeof EasyShipShipmentStatus)[]
 }
 
-const validateCreatedAfter = (parameters: ListOrderParameters): void => {
-  if (!parameters.createdAfter && !parameters.lastUpdatedAfter) {
-    throw new BadParameterError(
-      'Parameter "createdAfter" is required if "lastUpdatedAfter" is not specified.',
-    )
-  }
+const orderStatus: Codec<OrderStatus> = oneOf(Object.values(OrderStatus).map((x) => exactly(x)))
+const fulfillmentChannel: Codec<FulfillmentChannel> = oneOf(
+  Object.values(FulfillmentChannel).map((x) => exactly(x)),
+)
 
-  if (parameters.createdAfter && parameters.lastUpdatedAfter) {
-    throw new BadParameterError(
-      'Specifying both "createdAfter" and "lastUpdatedAfter" is not allowed.',
-    )
-  }
+const ListOrders = Codec.interface({
+  NextToken: nextToken('ListOrders'),
+  LastUpdatedBefore: string,
+  Orders: Codec.interface({
+    Order: ensureArray(
+      Codec.interface({
+        AmazonOrderId: string,
+        PurchaseDate: date,
+        LastUpdateDate: date,
+        OrderStatus: orderStatus,
+        FulfillmentChannel: fulfillmentChannel,
+        SalesChannel: string,
+        ShippingAddress: Codec.interface({
+          Name: string,
+          AddressLine1: string,
+          City: string,
+          PostalCode: string,
+          CountryCode: string,
+          AddressType: string,
+        }),
+        OrderTotal: Codec.interface({
+          CurrencyCode: string,
+          Amount: number,
+        }),
+        NumberOfItemsShipped: number,
+        NumberOfItemsUnshipped: number,
+        PaymentMethod: string,
+        PaymentMethodDetails: Codec.interface({
+          PaymentMethodDetail: ensureArray(string),
+        }),
+        MarketplaceId: string,
+        BuyerEmail: string,
+        BuyerTaxInfo: Codec.interface({
+          CompanyLegalName: string,
+          TaxingRegion: string,
+          TaxClassifications: Codec.interface({
+            TaxClassification: ensureArray(
+              Codec.interface({
+                Name: string,
+                Value: string,
+              }),
+            ),
+          }),
+        }),
+        OrderType: string,
+        EarliestShipDate: date,
+        LatestShipDate: date,
+        IsBusinessOrder: boolean,
+        PurchaseOrderNumber: string,
+        IsPrime: boolean,
+        IsPremiumOrder: boolean,
+        IsGlobalExpressEnabled: boolean,
+      }),
+    ),
+  }),
+})
 
-  if (parameters.createdAfter && date.decode(parameters.createdAfter).isLeft()) {
-    throw new BadParameterError('"createdAfter" must be in ISO 8601 date time format.')
-  }
-}
+const ListOrdersResponse = Codec.interface({
+  ListOrdersResponse: Codec.interface({
+    ListOrdersResult: ListOrders,
+  }),
+})
 
-const validateCreatedBefore = (parameters: ListOrderParameters): void => {
-  if (parameters.createdBefore && date.decode(parameters.createdBefore).isLeft()) {
-    throw new BadParameterError('"createdBefore" must be in ISO 8601 date time format.')
-  }
-}
-
-const validateLastUpdatedAfter = (parameters: ListOrderParameters): void => {
-  if (!parameters.lastUpdatedAfter && !parameters.createdAfter) {
-    throw new BadParameterError(
-      'Parameter "lastUpdatedAfter" is required if "createdAfter" is not specified.',
-    )
-  }
-
-  if (parameters.lastUpdatedAfter && (parameters.buyerEmail || parameters.sellerOrderId)) {
-    throw new BadParameterError(
-      'If "lastUpdatedAfter" is specified, then "buyerEmail" and "sellerOrderId" cannot be specified.',
-    )
-  }
-
-  if (parameters.lastUpdatedAfter && date.decode(parameters.lastUpdatedAfter).isLeft()) {
-    throw new BadParameterError('"lastUpdatedAfter" must be in ISO 8601 date time format.')
-  }
-}
-
-const validateLastUpdatedBefore = (parameters: ListOrderParameters): void => {
-  if (parameters.lastUpdatedBefore && date.decode(parameters.lastUpdatedBefore).isLeft()) {
-    throw new BadParameterError('"lastUpdatedBefore" must be in ISO 8601 date time format.')
-  }
-}
-
-const validateBuyerEmail = (parameters: ListOrderParameters): void => {
-  if (
-    parameters.buyerEmail &&
-    (parameters.fulfillmentChannels ||
-      parameters.orderStatuses ||
-      parameters.paymentMethods ||
-      parameters.lastUpdatedAfter ||
-      parameters.lastUpdatedBefore ||
-      parameters.sellerOrderId)
-  ) {
-    throw new BadParameterError(
-      'If "buyerEmail" is specified, then "fulfillmentChannels", "orderStatuses", "paymentMethods", "lastUpdatedAfter", "lastUpdatedBefore", and "sellerOrderId" cannot be specified.',
-    )
-  }
-}
-
-const validateSellerOrderId = (parameters: ListOrderParameters): void => {
-  if (
-    parameters.sellerOrderId &&
-    (parameters.fulfillmentChannels ||
-      parameters.orderStatuses ||
-      parameters.paymentMethods ||
-      parameters.lastUpdatedAfter ||
-      parameters.lastUpdatedBefore ||
-      parameters.buyerEmail)
-  ) {
-    throw new BadParameterError(
-      'If "sellerOrderId" is specified, then "fulfillmentChannels", "orderStatuses", "paymentMethods", "lastUpdatedAfter", "lastUpdatedBefore", and "buyerEmail" cannot be specified.',
-    )
-  }
-}
-
-const validateOrderStatuses = (parameters: ListOrderParameters): void => {
-  if (parameters.orderStatuses) {
-    let foundUnshipped = false
-    let foundPartiallyShipped = false
-
-    for (let i = 0; i < parameters.orderStatuses.length; i += 1) {
-      if (parameters.orderStatuses[i] === OrderStatus.Unshipped) {
-        foundUnshipped = true
-      }
-
-      if (parameters.orderStatuses[i] === OrderStatus.PartiallyShipped) {
-        foundPartiallyShipped = true
-      }
-    }
-
-    if ((foundUnshipped && !foundPartiallyShipped) || (foundPartiallyShipped && !foundUnshipped)) {
-      throw new BadParameterError(
-        '"orderStatuses": Unshipped and PartiallyShipped must be used together. Using one and not the other is not valid.',
-      )
-    }
-  }
-}
-
-const validateMarketplaceIds = (parameters: ListOrderParameters): void => {
-  if (parameters.marketplaceIds && parameters.marketplaceIds.length > 50) {
-    throw new BadParameterError('"marketplaceIds": A maximum of 50 ids is allowed.')
-  }
-}
-
-const validateMaxResultsPerPage = (parameters: ListOrderParameters): void => {
-  if (
-    parameters.maxResultsPerPage !== undefined &&
-    (parameters.maxResultsPerPage < 1 || parameters.maxResultsPerPage > 100)
-  ) {
-    throw new BadParameterError('"maxResultsPerPage": Value must be 1 - 100.')
-  }
-}
+type ListOrders = GetInterface<typeof ListOrders>
 
 export class Orders {
   constructor(private httpClient: HttpClient) {}
 
-  async listOrders(parameters: ListOrderParameters) {
-    validateCreatedAfter(parameters)
-    validateCreatedBefore(parameters)
-    validateLastUpdatedAfter(parameters)
-    validateLastUpdatedBefore(parameters)
-    validateOrderStatuses(parameters)
-    validateMarketplaceIds(parameters)
-    validateBuyerEmail(parameters)
-    validateSellerOrderId(parameters)
-    validateMaxResultsPerPage(parameters)
-
+  async listOrders(parameters: ListOrderParameters): Promise<[ListOrders, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Orders,
       version: ORDERS_API_VERSION,
       action: 'ListOrders',
       parameters: {
-        CreatedAfter: parameters.createdAfter,
-        CreatedBefore: parameters.createdBefore,
-        LastUpdatedAfter: parameters.lastUpdatedAfter,
-        LastUpdatedBefore: parameters.lastUpdatedBefore,
-        'OrderStatus.Status': parameters.orderStatuses,
-        'MarketplaceId.Id': parameters.marketplaceIds,
-        'FulfillmentChannel.Channel': parameters.fulfillmentChannels,
-        'PaymentMethod.Method': parameters.paymentMethods,
-        'EasyShipShipmentStatus.Status': parameters.easyShipShipmentStatuses,
-        BuyerEmail: parameters.buyerEmail,
-        SellerOrderId: parameters.sellerOrderId,
-        MaxResultsPerPage: parameters.maxResultsPerPage,
+        CreatedAfter: parameters.CreatedAfter,
+        CreatedBefore: parameters.CreatedBefore,
+        LastUpdatedAfter: parameters.LastUpdatedAfter,
+        LastUpdatedBefore: parameters.LastUpdatedBefore,
+        'OrderStatus.Status': parameters.OrderStatus,
+        'MarketplaceId.Id': parameters.MarketplaceId,
+        'FulfillmentChannel.Channel': parameters.FulfillmentChannel,
+        'PaymentMethod.Method': parameters.PaymentMethod,
+        'EasyShipShipmentStatus.Status': parameters.EasyShipShipmentStatus,
+        BuyerEmail: parameters.BuyerEmail,
+        SellerOrderId: parameters.SellerOrderId,
+        MaxResultsPerPage: parameters.MaxResultsPerPage,
       },
     })
 
-    return [response, meta]
+    return ListOrdersResponse.decode(response).caseOf({
+      Right: (x) => [x.ListOrdersResponse.ListOrdersResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getServiceStatus() {
+    return getServiceStatusByResource(this.httpClient, Resource.Orders, ORDERS_API_VERSION)
   }
 }
