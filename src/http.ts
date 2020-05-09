@@ -94,6 +94,7 @@ const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestR
   }))
 
 const parseResponse = <T>(response: RequestResponse): [T, RequestMeta] => {
+  console.log(response.data)
   const responseData = parser.parse(response.data)
 
   return [

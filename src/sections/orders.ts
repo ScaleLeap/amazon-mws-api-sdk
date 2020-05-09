@@ -1,4 +1,14 @@
-import { boolean, Codec, date, exactly, GetInterface, number, oneOf, string } from 'purify-ts/Codec'
+import {
+  boolean,
+  Codec,
+  date,
+  exactly,
+  GetInterface,
+  number,
+  oneOf,
+  optional,
+  string,
+} from 'purify-ts/Codec'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -26,6 +36,11 @@ export enum PaymentMethod {
   COD = 'COD',
   CVS = 'CVS',
   Other = 'Other',
+}
+
+export enum AddressType {
+  Commercial = 'Commercial',
+  Residential = 'Residential',
 }
 
 export enum EasyShipShipmentStatus {
@@ -61,59 +76,101 @@ const orderStatus: Codec<OrderStatus> = oneOf(Object.values(OrderStatus).map((x)
 const fulfillmentChannel: Codec<FulfillmentChannel> = oneOf(
   Object.values(FulfillmentChannel).map((x) => exactly(x)),
 )
+const adddressType: Codec<AddressType> = oneOf(Object.values(AddressType).map((x) => exactly(x)))
+
+const Address = Codec.interface({
+  Name: string,
+  AddressLine1: optional(string),
+  AddressLine2: optional(string),
+  AddressLine3: optional(string),
+  City: optional(string),
+  Municipality: optional(string),
+  Country: optional(string),
+  District: optional(string),
+  StateOrRegion: optional(string),
+  PostalCode: optional(string),
+  CountryCode: optional(string),
+  Phone: optional(string),
+  AddressType: optional(adddressType),
+})
+
+const TaxClassification = Codec.interface({
+  Name: string,
+  Value: string,
+})
+
+const BuyerTaxInfo = Codec.interface({
+  CompanyLegalName: optional(string),
+  TaxingRegion: optional(string),
+  TaxClassifications: optional(
+    Codec.interface({
+      TaxClassification,
+    }),
+  ),
+})
+
+const Money = Codec.interface({
+  CurrencyCode: optional(string),
+  Amount: optional(number),
+})
 
 const ListOrders = Codec.interface({
-  NextToken: nextToken('ListOrders'),
-  LastUpdatedBefore: string,
+  NextToken: optional(nextToken('ListOrders')),
+  LastUpdatedBefore: optional(date),
+  CreatedBefore: optional(date),
   Orders: Codec.interface({
     Order: ensureArray(
       Codec.interface({
         AmazonOrderId: string,
+        SellerOrderId: optional(string),
         PurchaseDate: date,
         LastUpdateDate: date,
         OrderStatus: orderStatus,
-        FulfillmentChannel: fulfillmentChannel,
-        SalesChannel: string,
-        ShippingAddress: Codec.interface({
-          Name: string,
-          AddressLine1: string,
-          City: string,
-          PostalCode: string,
-          CountryCode: string,
-          AddressType: string,
-        }),
-        OrderTotal: Codec.interface({
-          CurrencyCode: string,
-          Amount: number,
-        }),
-        NumberOfItemsShipped: number,
-        NumberOfItemsUnshipped: number,
-        PaymentMethod: string,
-        PaymentMethodDetails: Codec.interface({
-          PaymentMethodDetail: ensureArray(string),
-        }),
-        MarketplaceId: string,
-        BuyerEmail: string,
-        BuyerTaxInfo: Codec.interface({
-          CompanyLegalName: string,
-          TaxingRegion: string,
-          TaxClassifications: Codec.interface({
-            TaxClassification: ensureArray(
+        FulfillmentChannel: optional(fulfillmentChannel),
+        SalesChannel: optional(string),
+        ShipServiceLevel: optional(string),
+        ShippingAddress: optional(Address),
+        OrderTotal: optional(Money),
+        NumberOfItemsShipped: optional(number),
+        NumberOfItemsUnshipped: optional(number),
+        PaymentExecutionDetail: optional(
+          Codec.interface({
+            PaymentExecutionDetailItem: ensureArray(
               Codec.interface({
-                Name: string,
-                Value: string,
+                Payment: Money,
+                PaymentMethod: string,
               }),
             ),
           }),
-        }),
-        OrderType: string,
-        EarliestShipDate: date,
-        LatestShipDate: date,
-        IsBusinessOrder: boolean,
-        PurchaseOrderNumber: string,
-        IsPrime: boolean,
-        IsPremiumOrder: boolean,
-        IsGlobalExpressEnabled: boolean,
+        ),
+        PaymentMethod: optional(string),
+        PaymentMethodDetails: optional(
+          Codec.interface({
+            PaymentMethodDetail: optional(string),
+          }),
+        ),
+        IsReplacementOrder: optional(boolean),
+        ReplacedOrderId: optional(string),
+        MarketplaceId: optional(string),
+        BuyerEmail: optional(string),
+        BuyerName: optional(string),
+        BuyerCounty: optional(string),
+        BuyerTaxInfo,
+        ShipmentServiceLevelCategory: optional(string),
+        EasyShipShipmentStatus: optional(string),
+        OrderType: optional(string),
+        EarliestShipDate: optional(date),
+        LatestShipDate: optional(date),
+        EarliestDeliveryDate: optional(date),
+        LatestDeliveryDate: optional(date),
+        IsBusinessOrder: optional(boolean),
+        IsSoldByAB: optional(boolean),
+        PurchaseOrderNumber: optional(string),
+        IsPrime: optional(boolean),
+        IsPremiumOrder: optional(boolean),
+        IsGlobalExpressEnabled: optional(boolean),
+        PromiseResponseDueDate: optional(date),
+        IsEstimatedShipDateSet: optional(boolean),
       }),
     ),
   }),
