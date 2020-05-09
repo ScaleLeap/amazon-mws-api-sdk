@@ -29,10 +29,11 @@ export class HttpError extends MWSError {
 }
 
 export class ParsingError extends MWSError {
-  public message = 'MWS: Encountered an error while parsing a response'
+  public message = 'MWS: Encountered an error while parsing a response: '
 
   constructor(public error: string, ...parameters: string[]) {
     super(...parameters)
+    this.message += error
     Object.setPrototypeOf(this, ParsingError.prototype)
 
     if (Error.captureStackTrace) {
