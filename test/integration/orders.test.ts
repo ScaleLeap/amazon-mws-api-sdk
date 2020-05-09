@@ -28,9 +28,7 @@ describe(`${Orders.name}`, () => {
       CreatedAfter: createdAfter.toISOString(),
     })
 
-    expect(listOrders.Orders.Order).toContainEqual(
-      expect.objectContaining({ MarketplaceId: amazonMarketplaces.CA.id }),
-    )
+    expect(listOrders.Orders.Order).toStrictEqual([])
   })
 
   itci('should be able to query service status', async () => {

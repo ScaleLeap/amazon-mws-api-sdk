@@ -6,13 +6,14 @@ export const ensureArray = <T>(codec: Codec<T>): Codec<T[]> => {
   const schema = codec.schema()
 
   return Codec.custom({
-    decode: (x) => {
-      const arrayX = Array.isArray(x) ? x : [x]
-      return array(codec).decode(arrayX)
-    },
+    decode: (x) => (x === '' ? Right([]) : array(codec).decode(Array.isArray(x) ? x : [x])),
     encode: (x) => x,
     schema: () => ({
-      oneOf: [schema, { type: 'array', items: [schema], minItems: 1 }],
+      oneOf: [
+        schema,
+        { type: 'array', items: [schema], minItems: 1 },
+        { type: 'string', enum: [''] },
+      ],
     }),
   })
 }
