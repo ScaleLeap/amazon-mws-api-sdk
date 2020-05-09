@@ -1,7 +1,6 @@
 import {
   boolean,
   Codec,
-  date,
   exactly,
   GetInterface,
   number,
@@ -12,7 +11,13 @@ import {
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray, nextToken } from '../parsing'
+import {
+  ensureArray,
+  ensureString,
+  mwsDate,
+  NextToken,
+  nextToken as nextTokenCodec,
+} from '../parsing'
 import { getServiceStatusByResource } from './shared'
 
 const ORDERS_API_VERSION = '2013-09-01'
@@ -88,7 +93,7 @@ const Address = Codec.interface({
   Country: optional(string),
   District: optional(string),
   StateOrRegion: optional(string),
-  PostalCode: optional(string),
+  PostalCode: optional(ensureString),
   CountryCode: optional(string),
   Phone: optional(string),
   AddressType: optional(adddressType),
@@ -115,16 +120,16 @@ const Money = Codec.interface({
 })
 
 const ListOrders = Codec.interface({
-  NextToken: optional(nextToken('ListOrders')),
-  LastUpdatedBefore: optional(date),
-  CreatedBefore: optional(date),
+  NextToken: optional(nextTokenCodec('ListOrders')),
+  LastUpdatedBefore: optional(mwsDate),
+  CreatedBefore: optional(mwsDate),
   Orders: ensureArray(
     'Order',
     Codec.interface({
       AmazonOrderId: string,
       SellerOrderId: optional(string),
-      PurchaseDate: date,
-      LastUpdateDate: date,
+      PurchaseDate: mwsDate,
+      LastUpdateDate: mwsDate,
       OrderStatus: orderStatus,
       FulfillmentChannel: optional(fulfillmentChannel),
       SalesChannel: optional(string),
@@ -154,21 +159,21 @@ const ListOrders = Codec.interface({
       BuyerEmail: optional(string),
       BuyerName: optional(string),
       BuyerCounty: optional(string),
-      BuyerTaxInfo,
+      BuyerTaxInfo: optional(BuyerTaxInfo),
       ShipmentServiceLevelCategory: optional(string),
       EasyShipShipmentStatus: optional(string),
       OrderType: optional(string),
-      EarliestShipDate: optional(date),
-      LatestShipDate: optional(date),
-      EarliestDeliveryDate: optional(date),
-      LatestDeliveryDate: optional(date),
+      EarliestShipDate: optional(mwsDate),
+      LatestShipDate: optional(mwsDate),
+      EarliestDeliveryDate: optional(mwsDate),
+      LatestDeliveryDate: optional(mwsDate),
       IsBusinessOrder: optional(boolean),
       IsSoldByAB: optional(boolean),
       PurchaseOrderNumber: optional(string),
       IsPrime: optional(boolean),
       IsPremiumOrder: optional(boolean),
       IsGlobalExpressEnabled: optional(boolean),
-      PromiseResponseDueDate: optional(date),
+      PromiseResponseDueDate: optional(mwsDate),
       IsEstimatedShipDateSet: optional(boolean),
     }),
   ),
@@ -180,7 +185,30 @@ const ListOrdersResponse = Codec.interface({
   }),
 })
 
+const ListOrdersByNextTokenResponse = Codec.interface({
+  ListOrdersByNextTokenResponse: Codec.interface({
+    ListOrdersByNextTokenResult: ListOrders,
+  }),
+})
+
 type ListOrders = GetInterface<typeof ListOrders>
+
+const canonicalizeParameters = (parameters: ListOrderParameters) => {
+  return {
+    CreatedAfter: parameters.CreatedAfter,
+    CreatedBefore: parameters.CreatedBefore,
+    LastUpdatedAfter: parameters.LastUpdatedAfter,
+    LastUpdatedBefore: parameters.LastUpdatedBefore,
+    'OrderStatus.Status': parameters.OrderStatus,
+    'MarketplaceId.Id': parameters.MarketplaceId,
+    'FulfillmentChannel.Channel': parameters.FulfillmentChannel,
+    'PaymentMethod.Method': parameters.PaymentMethod,
+    'EasyShipShipmentStatus.Status': parameters.EasyShipShipmentStatus,
+    BuyerEmail: parameters.BuyerEmail,
+    SellerOrderId: parameters.SellerOrderId,
+    MaxResultsPerPage: parameters.MaxResultsPerPage,
+  }
+}
 
 export class Orders {
   constructor(private httpClient: HttpClient) {}
@@ -190,24 +218,33 @@ export class Orders {
       resource: Resource.Orders,
       version: ORDERS_API_VERSION,
       action: 'ListOrders',
-      parameters: {
-        CreatedAfter: parameters.CreatedAfter,
-        CreatedBefore: parameters.CreatedBefore,
-        LastUpdatedAfter: parameters.LastUpdatedAfter,
-        LastUpdatedBefore: parameters.LastUpdatedBefore,
-        'OrderStatus.Status': parameters.OrderStatus,
-        'MarketplaceId.Id': parameters.MarketplaceId,
-        'FulfillmentChannel.Channel': parameters.FulfillmentChannel,
-        'PaymentMethod.Method': parameters.PaymentMethod,
-        'EasyShipShipmentStatus.Status': parameters.EasyShipShipmentStatus,
-        BuyerEmail: parameters.BuyerEmail,
-        SellerOrderId: parameters.SellerOrderId,
-        MaxResultsPerPage: parameters.MaxResultsPerPage,
-      },
+      parameters: canonicalizeParameters(parameters),
     })
 
     return ListOrdersResponse.decode(response).caseOf({
       Right: (x) => [x.ListOrdersResponse.ListOrdersResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async listOrdersByNextToken(
+    nextToken: NextToken<'ListOrders'>,
+    parameters: ListOrderParameters,
+  ): Promise<[ListOrders, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Orders,
+      version: ORDERS_API_VERSION,
+      action: 'ListOrdersByNextToken',
+      parameters: {
+        ...canonicalizeParameters(parameters),
+        NextToken: nextToken.token,
+      },
+    })
+
+    return ListOrdersByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [x.ListOrdersByNextTokenResponse.ListOrdersByNextTokenResult, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },
