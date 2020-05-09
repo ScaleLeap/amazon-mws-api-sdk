@@ -9,27 +9,25 @@ const SELLERS_API_VERSION = '2011-07-01'
 
 const MarketplaceParticipations = Codec.interface({
   NextToken: optional(nextTokenCodec('ListMarketplaceParticipations')),
-  ListParticipations: Codec.interface({
-    Participation: ensureArray(
-      Codec.interface({
-        MarketplaceId: string,
-        SellerId: string,
-        HasSellerSuspendedListings: mwsBoolean,
-      }),
-    ),
-  }),
-  ListMarketplaces: Codec.interface({
-    Marketplace: ensureArray(
-      Codec.interface({
-        MarketplaceId: string,
-        Name: string,
-        DefaultCountryCode: string,
-        DefaultCurrencyCode: string,
-        DefaultLanguageCode: string,
-        DomainName: string,
-      }),
-    ),
-  }),
+  ListParticipations: ensureArray(
+    'Participation',
+    Codec.interface({
+      MarketplaceId: string,
+      SellerId: string,
+      HasSellerSuspendedListings: mwsBoolean,
+    }),
+  ),
+  ListMarketplaces: ensureArray(
+    'Marketplace',
+    Codec.interface({
+      MarketplaceId: string,
+      Name: string,
+      DefaultCountryCode: string,
+      DefaultCurrencyCode: string,
+      DefaultLanguageCode: string,
+      DomainName: string,
+    }),
+  ),
 })
 
 const MarketplaceParticipationsResponse = Codec.interface({

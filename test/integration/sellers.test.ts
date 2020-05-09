@@ -23,7 +23,7 @@ describe(`${Sellers.name}`, () => {
 
     const [marketplaceParticipations] = await sellers.listMarketplaceParticipations()
 
-    expect(marketplaceParticipations.ListMarketplaces.Marketplace).toContainEqual(
+    expect(marketplaceParticipations.ListMarketplaces).toContainEqual(
       expect.objectContaining({ MarketplaceId: amazonMarketplaces.CA.id }),
     )
   })

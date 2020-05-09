@@ -13,28 +13,28 @@ import {
 const ajv = new Ajv()
 
 describe('ensureArray', () => {
-  it('acts like an idenity if the value to be decoded is already an array', () => {
+  it('just extracts the elements if the value to be decoded is already an array', () => {
     expect.assertions(1)
 
-    expect(ensureArray(number).decode([1])).toStrictEqual(Right([1]))
+    expect(ensureArray('A', number).decode({ A: [1] })).toStrictEqual(Right([1]))
   })
 
-  it("wraps the value to be decoded in an array if it's not already", () => {
+  it("extracts the elements and wraps the value to be decoded in an array if it's not already", () => {
     expect.assertions(1)
 
-    expect(ensureArray(number).decode(1)).toStrictEqual(Right([1]))
+    expect(ensureArray('A', number).decode({ A: 1 })).toStrictEqual(Right([1]))
   })
 
   it('handles empty arrays which get deserialized as empty string', () => {
     expect.assertions(1)
 
-    expect(ensureArray(number).decode('')).toStrictEqual(Right([]))
+    expect(ensureArray('A', number).decode('')).toStrictEqual(Right([]))
   })
 
   it('has an encode that does nothing', () => {
     expect.assertions(1)
 
-    expect(ensureArray(number).encode([1])).toStrictEqual([1])
+    expect(ensureArray('A', number).encode([1])).toStrictEqual([1])
   })
 })
 

@@ -19,40 +19,36 @@ Array [
 exports[`sellers listMarketplaceParticipations returns a parsed model when the response is valid 1`] = `
 Array [
   Object {
-    "ListMarketplaces": Object {
-      "Marketplace": Array [
-        Object {
-          "DefaultCountryCode": "CA",
-          "DefaultCurrencyCode": "CAD",
-          "DefaultLanguageCode": "en_CA",
-          "DomainName": "www.amazon.ca",
-          "MarketplaceId": "A2EUQ1WTGCTBG2",
-          "Name": "Amazon.ca",
-        },
-        Object {
-          "DefaultCountryCode": "US",
-          "DefaultCurrencyCode": "USD",
-          "DefaultLanguageCode": "en_US",
-          "DomainName": "iba.login.amazon.com",
-          "MarketplaceId": "A6W85IYQ5WB1C",
-          "Name": "IBA",
-        },
-      ],
-    },
-    "ListParticipations": Object {
-      "Participation": Array [
-        Object {
-          "HasSellerSuspendedListings": false,
-          "MarketplaceId": "A2EUQ1WTGCTBG2",
-          "SellerId": "x",
-        },
-        Object {
-          "HasSellerSuspendedListings": false,
-          "MarketplaceId": "A6W85IYQ5WB1C",
-          "SellerId": "x",
-        },
-      ],
-    },
+    "ListMarketplaces": Array [
+      Object {
+        "DefaultCountryCode": "CA",
+        "DefaultCurrencyCode": "CAD",
+        "DefaultLanguageCode": "en_CA",
+        "DomainName": "www.amazon.ca",
+        "MarketplaceId": "A2EUQ1WTGCTBG2",
+        "Name": "Amazon.ca",
+      },
+      Object {
+        "DefaultCountryCode": "US",
+        "DefaultCurrencyCode": "USD",
+        "DefaultLanguageCode": "en_US",
+        "DomainName": "iba.login.amazon.com",
+        "MarketplaceId": "A6W85IYQ5WB1C",
+        "Name": "IBA",
+      },
+    ],
+    "ListParticipations": Array [
+      Object {
+        "HasSellerSuspendedListings": false,
+        "MarketplaceId": "A2EUQ1WTGCTBG2",
+        "SellerId": "x",
+      },
+      Object {
+        "HasSellerSuspendedListings": false,
+        "MarketplaceId": "A6W85IYQ5WB1C",
+        "SellerId": "x",
+      },
+    ],
     "NextToken": undefined,
   },
   Object {
@@ -68,40 +64,36 @@ Array [
 exports[`sellers listMarketplaceParticipationsByNextToken returns a parsed model when the response is valid 1`] = `
 Array [
   Object {
-    "ListMarketplaces": Object {
-      "Marketplace": Array [
-        Object {
-          "DefaultCountryCode": "CA",
-          "DefaultCurrencyCode": "CAD",
-          "DefaultLanguageCode": "en_CA",
-          "DomainName": "www.amazon.ca",
-          "MarketplaceId": "A2EUQ1WTGCTBG2",
-          "Name": "Amazon.ca",
-        },
-        Object {
-          "DefaultCountryCode": "US",
-          "DefaultCurrencyCode": "USD",
-          "DefaultLanguageCode": "en_US",
-          "DomainName": "iba.login.amazon.com",
-          "MarketplaceId": "A6W85IYQ5WB1C",
-          "Name": "IBA",
-        },
-      ],
-    },
-    "ListParticipations": Object {
-      "Participation": Array [
-        Object {
-          "HasSellerSuspendedListings": false,
-          "MarketplaceId": "A2EUQ1WTGCTBG2",
-          "SellerId": "x",
-        },
-        Object {
-          "HasSellerSuspendedListings": false,
-          "MarketplaceId": "A6W85IYQ5WB1C",
-          "SellerId": "x",
-        },
-      ],
-    },
+    "ListMarketplaces": Array [
+      Object {
+        "DefaultCountryCode": "CA",
+        "DefaultCurrencyCode": "CAD",
+        "DefaultLanguageCode": "en_CA",
+        "DomainName": "www.amazon.ca",
+        "MarketplaceId": "A2EUQ1WTGCTBG2",
+        "Name": "Amazon.ca",
+      },
+      Object {
+        "DefaultCountryCode": "US",
+        "DefaultCurrencyCode": "USD",
+        "DefaultLanguageCode": "en_US",
+        "DomainName": "iba.login.amazon.com",
+        "MarketplaceId": "A6W85IYQ5WB1C",
+        "Name": "IBA",
+      },
+    ],
+    "ListParticipations": Array [
+      Object {
+        "HasSellerSuspendedListings": false,
+        "MarketplaceId": "A2EUQ1WTGCTBG2",
+        "SellerId": "x",
+      },
+      Object {
+        "HasSellerSuspendedListings": false,
+        "MarketplaceId": "A6W85IYQ5WB1C",
+        "SellerId": "x",
+      },
+    ],
     "NextToken": undefined,
   },
   Object {

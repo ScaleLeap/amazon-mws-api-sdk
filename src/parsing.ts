@@ -1,12 +1,25 @@
 /** A collection of parsing codecs */
-import { array, Codec, string } from 'purify-ts/Codec'
+import { array, Codec, record, string, unknown } from 'purify-ts/Codec'
 import { Left, Right } from 'purify-ts/Either'
 
-export const ensureArray = <T>(codec: Codec<T>): Codec<T[]> => {
+export const ensureArray = <T>(tag: string, codec: Codec<T>): Codec<T[]> => {
   const schema = codec.schema()
 
   return Codec.custom({
-    decode: (x) => (x === '' ? Right([]) : array(codec).decode(Array.isArray(x) ? x : [x])),
+    decode: (x) => {
+      if (x === '') {
+        return Right([])
+      }
+
+      return record(string, unknown)
+        .decode(x)
+        .chain((object) => {
+          const possiblyElements = object[tag]
+          const elements = Array.isArray(possiblyElements) ? possiblyElements : [possiblyElements]
+
+          return array(codec).decode(elements)
+        })
+    },
     encode: (x) => x,
     schema: () => ({
       oneOf: [

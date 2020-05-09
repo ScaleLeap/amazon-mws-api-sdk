@@ -28,7 +28,7 @@ describe(`${Orders.name}`, () => {
       CreatedAfter: createdAfter.toISOString(),
     })
 
-    expect(listOrders.Orders.Order).toStrictEqual([])
+    expect(listOrders.Orders).toStrictEqual([])
   })
 
   itci('should be able to query service status', async () => {
