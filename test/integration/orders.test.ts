@@ -16,12 +16,17 @@ const httpClient = new HttpClient({
 
 /* eslint-disable jest/no-standalone-expect */
 describe(`${Orders.name}`, () => {
-  itci('should be able to query marketplace participation', async () => {
+  itci('should be able to query list orders', async () => {
     expect.assertions(1)
 
     const orders = new Orders(httpClient)
+    const createdAfter = new Date()
+    createdAfter.setFullYear(2017)
 
-    const [listOrders] = await orders.listOrders({ MarketplaceId: [amazonMarketplaces.CA.id] })
+    const [listOrders] = await orders.listOrders({
+      MarketplaceId: [amazonMarketplaces.CA.id],
+      CreatedAfter: createdAfter.toISOString(),
+    })
 
     expect(listOrders.Orders.Order).toContainEqual(
       expect.objectContaining({ MarketplaceId: amazonMarketplaces.CA.id }),

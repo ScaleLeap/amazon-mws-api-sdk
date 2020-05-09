@@ -162,9 +162,6 @@ export class HttpClient {
     try {
       return await this.fetch(config).then((x) => parseResponse(x))
     } catch (error) {
-      // eslint-disable-next-line no-console, unicorn/no-null
-      console.dir({ error }, { depth: null })
-
       throw new HttpError(error)
     }
   }
