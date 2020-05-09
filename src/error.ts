@@ -20,6 +20,10 @@ export class HttpError extends MWSError {
   constructor(public error: unknown, ...parameters: string[]) {
     super(...parameters)
     Object.setPrototypeOf(this, HttpError.prototype)
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, MWSError)
+    }
   }
 }
 
@@ -29,6 +33,10 @@ export class ParsingError extends MWSError {
   constructor(public error: string, ...parameters: string[]) {
     super(...parameters)
     Object.setPrototypeOf(this, ParsingError.prototype)
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, MWSError)
+    }
   }
 }
 
@@ -36,6 +44,10 @@ export class BadParameterError extends MWSError {
   constructor(public error: string, ...parameters: string[]) {
     super(...parameters)
     Object.setPrototypeOf(this, BadParameterError.prototype)
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, MWSError)
+    }
   }
 }
 /* eslint-enable max-classes-per-file */
