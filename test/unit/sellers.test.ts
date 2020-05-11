@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/no-duplicate-string */
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
 import { NextToken } from '../../src/parsing'
@@ -139,6 +138,8 @@ const mockMwsFail = new MWS(
 
 const mockNextToken = new NextToken('ListMarketplaceParticipations', '123')
 
+const parsingError = 'Expected an object, but received a string with value ""'
+
 describe('sellers', () => {
   describe('listMarketplaceParticipations', () => {
     it('returns a parsed model when the response is valid', async () => {
@@ -153,7 +154,7 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() => mockMwsFail.sellers.listMarketplaceParticipations()).rejects.toStrictEqual(
-        new ParsingError('Expected an object, but received a string with value ""'),
+        new ParsingError(parsingError),
       )
     })
   })
@@ -174,9 +175,7 @@ describe('sellers', () => {
 
       await expect(() =>
         mockMwsFail.sellers.listMarketplaceParticipationsByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(
-        new ParsingError('Expected an object, but received a string with value ""'),
-      )
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 
@@ -191,9 +190,8 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() => mockMwsFail.sellers.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError('Expected an object, but received a string with value ""'),
+        new ParsingError(parsingError),
       )
     })
   })
 })
-/* eslint-enable sonarjs/no-duplicate-string */
