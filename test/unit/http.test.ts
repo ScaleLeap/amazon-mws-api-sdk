@@ -1,5 +1,6 @@
 import { amazonMarketplaces, HttpClient, HttpError } from '../../src'
 import { Resource } from '../../src/http'
+import { getFixture } from '../utils'
 
 describe('httpClient', () => {
   it('should throw a HttpError on failure', async () => {
@@ -14,7 +15,7 @@ describe('httpClient', () => {
         sellerId: '',
       },
       () => {
-        throw new Error('404')
+        throw getFixture('error-response')
       },
     )
 
@@ -25,6 +26,6 @@ describe('httpClient', () => {
         action: 'GetServiceStatus',
         parameters: {},
       }),
-    ).rejects.toStrictEqual(new HttpError(new Error('404')))
+    ).rejects.toStrictEqual(new HttpError('Request failed with InvalidParameterValue'))
   })
 })

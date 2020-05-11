@@ -23,6 +23,7 @@
     "semantic-release": "semantic-release",
     "start": "ts-node --transpile-only --pretty src",
     "test": "jest",
+    "test:unit": "jest unit/",
     "test:watch": "jest --watchAll"
   },
   "types": "lib/index.d.ts",
@@ -30,7 +31,8 @@
     "@scaleleap/amazon-marketplaces": "^4.0.2",
     "axios": "^0.19.2",
     "fast-xml-parser": "^3.16.0",
-    "purify-ts": "^0.16.0-beta.1"
+    "purify-ts": "^0.16.0-beta.1",
+    "ts-error": "^1.0.4"
   },
   "devDependencies": {
     "@scaleleap/config": "1.6.1",

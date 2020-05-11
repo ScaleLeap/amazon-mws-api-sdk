@@ -1,44 +1,46 @@
 /* eslint-disable max-classes-per-file */
-export class MWSError extends Error {
-  constructor(...parameters: string[]) {
-    // Propagate some vendor-specific arguments
-    super(...parameters)
+import { Codec, GetInterface, optional, string } from 'purify-ts/Codec'
+import { ExtendableError } from 'ts-error'
 
-    // If someone downlevels the compilation target to es5
-    Object.setPrototypeOf(this, MWSError.prototype)
-
-    // Maintains proper stack trace (only available on V8)
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, MWSError)
-    }
-  }
-}
+export class MWSError extends ExtendableError {}
 
 export class HttpError extends MWSError {
-  public message = 'MWS: Encountered an error while sending a request: '
+  public type!: string
 
-  constructor(public error: Error, ...parameters: string[]) {
-    super(...parameters)
-    this.message += error.message
-    Object.setPrototypeOf(this, HttpError.prototype)
+  public code!: string
 
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, HttpError)
-    }
-  }
+  public detail!: string | undefined
+
+  public mwsMessage!: string
+
+  public requestId!: string
 }
 
-export class ParsingError extends MWSError {
-  public message = 'MWS: Encountered an error while parsing a response: '
-
-  constructor(public error: string, ...parameters: string[]) {
-    super(...parameters)
-    this.message += error
-    Object.setPrototypeOf(this, ParsingError.prototype)
-
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, ParsingError)
-    }
-  }
-}
+export class ParsingError extends MWSError {}
 /* eslint-enable max-classes-per-file */
+
+export const MWSApiError = Codec.interface({
+  ErrorResponse: Codec.interface({
+    Error: Codec.interface({
+      Type: string,
+      Code: string,
+      Message: string,
+      Detail: optional(string),
+    }),
+    RequestId: string,
+  }),
+})
+
+type MWSApiError = GetInterface<typeof MWSApiError>
+
+/* eslint-disable no-param-reassign */
+export const enhanceError = (error: HttpError, response: MWSApiError): HttpError => {
+  error.type = response.ErrorResponse.Error.Type
+  error.code = response.ErrorResponse.Error.Code
+  error.detail = response.ErrorResponse.Error.Detail
+  error.mwsMessage = response.ErrorResponse.Error.Message
+  error.requestId = response.ErrorResponse.RequestId
+
+  return error
+}
+/* eslint-enable no-param-reassign */

@@ -3,7 +3,7 @@ import axios from 'axios'
 import parser from 'fast-xml-parser'
 import { URLSearchParams } from 'url'
 
-import { HttpError } from './error'
+import { enhanceError, HttpError, MWSApiError } from './error'
 import { sign } from './sign'
 
 export interface MWSOptions {
@@ -88,10 +88,12 @@ const cleanParameters = (parameters: Parameters): CleanParameters =>
 /* eslint-enable no-param-reassign */
 
 const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestResponse> =>
-  axios({ method, url, headers, data }).then((response) => ({
-    data: response.data,
-    headers: response.headers,
-  }))
+  axios({ method, url, headers, data })
+    .then((response) => ({
+      data: response.data,
+      headers: response.headers,
+    }))
+    .catch((error) => error.response.data)
 
 const parseResponse = <T>(response: RequestResponse): [T, RequestMeta] => {
   const responseData = parser.parse(response.data)
@@ -162,7 +164,16 @@ export class HttpClient {
     try {
       return await this.fetch(config).then((x) => parseResponse(x))
     } catch (error) {
-      throw new HttpError(error)
+      const response = MWSApiError.decode(parser.parse(error))
+
+      if (response.isRight()) {
+        throw enhanceError(
+          new HttpError(`Request failed with ${response.extract().ErrorResponse.Error.Code}`),
+          response.extract(),
+        )
+      }
+
+      throw error
     }
   }
 }
