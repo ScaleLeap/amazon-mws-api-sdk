@@ -15,16 +15,25 @@ export interface MWSOptions {
 }
 
 type HttpMethod = 'GET' | 'POST'
-type Parameters = Record<string, string | string[]>
+type Parameters = Record<string, string | number | (number | string)[] | undefined>
+type CleanParameters = Record<string, string>
 
 export enum Resource {
   Sellers = 'Sellers',
+  Orders = 'Orders',
 }
 
 interface ResourceActions {
   [Resource.Sellers]:
     | 'ListMarketplaceParticipations'
     | 'ListMarketplaceParticipationsByNextToken'
+    | 'GetServiceStatus'
+  [Resource.Orders]:
+    | 'ListOrders'
+    | 'ListOrdersByNextToken'
+    | 'GetOrder'
+    | 'ListOrderItems'
+    | 'ListOrderItemsByNextToken'
     | 'GetServiceStatus'
 }
 
@@ -55,11 +64,28 @@ interface RequestResponse {
   headers: Record<string, string>
 }
 
-const canonicalizeParameters = (parameters: Parameters): string => {
+const canonicalizeParameters = (parameters: CleanParameters): string => {
   const sp = new URLSearchParams(parameters)
   sp.sort()
   return sp.toString().replace(/\+/g, '%20')
 }
+
+/* eslint-disable no-param-reassign */
+const cleanParameters = (parameters: Parameters): CleanParameters =>
+  Object.entries(parameters)
+    .filter(([, v]) => v !== undefined)
+    .reduce((result, [k, v]) => {
+      if (Array.isArray(v)) {
+        for (let index = 0; index < v.length; index += 1) {
+          result[`${k}.${index + 1}`] = String(v)
+        }
+      } else {
+        result[k] = String(v)
+      }
+
+      return result
+    }, {} as CleanParameters)
+/* eslint-enable no-param-reassign */
 
 const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestResponse> =>
   axios({ method, url, headers, data }).then((response) => ({
@@ -106,7 +132,7 @@ export class HttpClient {
       SignatureVersion: '2',
       Timestamp: new Date().toISOString(),
       Version: info.version,
-      ...info.parameters,
+      ...cleanParameters(info.parameters),
     }
 
     const parametersForSigning = canonicalizeParameters(parameters)

@@ -1,21 +1,43 @@
 /** A collection of parsing codecs */
-import { array, Codec, string } from 'purify-ts/Codec'
+import { array, Codec, date, record, string, unknown } from 'purify-ts/Codec'
 import { Left, Right } from 'purify-ts/Either'
 
-export const ensureArray = <T>(codec: Codec<T>): Codec<T[]> => {
+export const ensureArray = <T>(tag: string, codec: Codec<T>): Codec<T[]> => {
   const schema = codec.schema()
 
   return Codec.custom({
     decode: (x) => {
-      const arrayX = Array.isArray(x) ? x : [x]
-      return array(codec).decode(arrayX)
+      if (x === '') {
+        return Right([])
+      }
+
+      return record(string, unknown)
+        .decode(x)
+        .chain((object) => {
+          const possiblyElements = object[tag]
+          const elements = Array.isArray(possiblyElements) ? possiblyElements : [possiblyElements]
+
+          return array(codec).decode(elements)
+        })
     },
     encode: (x) => x,
     schema: () => ({
-      oneOf: [schema, { type: 'array', items: [schema], minItems: 1 }],
+      oneOf: [
+        schema,
+        { type: 'array', items: [schema], minItems: 1 },
+        { type: 'string', enum: [''] },
+      ],
     }),
   })
 }
+
+/** If a string is a valid number it will be parsed as such by our xml parser, even though it should still be a string */
+export const ensureString = Codec.custom({
+  decode: (x) =>
+    string.decode(x).chainLeft((error) => (typeof x === 'number' ? Right(String(x)) : Left(error))),
+  encode: string.encode,
+  schema: () => ({ oneOf: [{ type: 'string' }, { type: 'number' }] }),
+})
 
 export const mwsBoolean = Codec.custom<boolean>({
   decode: (x) => {
@@ -34,6 +56,12 @@ export const mwsBoolean = Codec.custom<boolean>({
   },
   encode: (x) => x,
   schema: () => ({ type: 'string', enum: ['Yes', 'No'] }),
+})
+
+export const mwsDate = Codec.custom<Date>({
+  decode: (x) => string.decode(x).chain((aString) => date.decode(decodeURIComponent(aString))),
+  encode: date.encode,
+  schema: date.schema,
 })
 
 export enum ServiceStatus {

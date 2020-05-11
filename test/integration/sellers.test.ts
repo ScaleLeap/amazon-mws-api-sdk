@@ -23,7 +23,7 @@ describe(`${Sellers.name}`, () => {
 
     const [marketplaceParticipations] = await sellers.listMarketplaceParticipations()
 
-    expect(marketplaceParticipations.ListMarketplaces.Marketplace).toContainEqual(
+    expect(marketplaceParticipations.ListMarketplaces).toContainEqual(
       expect.objectContaining({ MarketplaceId: amazonMarketplaces.CA.id }),
     )
   })
@@ -33,9 +33,9 @@ describe(`${Sellers.name}`, () => {
 
     const sellers = new Sellers(httpClient)
 
-    const [marketplaceParticipations] = await sellers.getServiceStatus()
+    const [response] = await sellers.getServiceStatus()
 
-    expect(marketplaceParticipations.Status).toMatch(/GREEN|YELLOW|RED/)
+    expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 })
 /* eslint-enable jest/no-standalone-expect */

@@ -138,6 +138,8 @@ const mockMwsFail = new MWS(
 
 const mockNextToken = new NextToken('ListMarketplaceParticipations', '123')
 
+const parsingError = 'Expected an object, but received a string with value ""'
+
 describe('sellers', () => {
   describe('listMarketplaceParticipations', () => {
     it('returns a parsed model when the response is valid', async () => {
@@ -152,7 +154,7 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() => mockMwsFail.sellers.listMarketplaceParticipations()).rejects.toStrictEqual(
-        new ParsingError(''),
+        new ParsingError(parsingError),
       )
     })
   })
@@ -173,7 +175,7 @@ describe('sellers', () => {
 
       await expect(() =>
         mockMwsFail.sellers.listMarketplaceParticipationsByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(''))
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 
@@ -188,7 +190,7 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() => mockMwsFail.sellers.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(''),
+        new ParsingError(parsingError),
       )
     })
   })

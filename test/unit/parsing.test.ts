@@ -1,9 +1,12 @@
 import Ajv from 'ajv'
-import { number, Right } from 'purify-ts'
+import { date, number, string } from 'purify-ts/Codec'
+import { Right } from 'purify-ts/Either'
 
 import {
   ensureArray,
+  ensureString,
   mwsBoolean,
+  mwsDate,
   NextToken,
   nextToken,
   ServiceStatus,
@@ -13,22 +16,52 @@ import {
 const ajv = new Ajv()
 
 describe('ensureArray', () => {
-  it('acts like an idenity if the value to be decoded is already an array', () => {
+  it('just extracts the elements if the value to be decoded is already an array', () => {
     expect.assertions(1)
 
-    expect(ensureArray(number).decode([1])).toStrictEqual(Right([1]))
+    expect(ensureArray('A', number).decode({ A: [1] })).toStrictEqual(Right([1]))
   })
 
-  it("wraps the value to be decoded in an array if it's not already", () => {
+  it("extracts the elements and wraps the value to be decoded in an array if it's not already", () => {
     expect.assertions(1)
 
-    expect(ensureArray(number).decode(1)).toStrictEqual(Right([1]))
+    expect(ensureArray('A', number).decode({ A: 1 })).toStrictEqual(Right([1]))
+  })
+
+  it('handles empty arrays which get deserialized as empty string', () => {
+    expect.assertions(1)
+
+    expect(ensureArray('A', number).decode('')).toStrictEqual(Right([]))
   })
 
   it('has an encode that does nothing', () => {
     expect.assertions(1)
 
-    expect(ensureArray(number).encode([1])).toStrictEqual([1])
+    expect(ensureArray('A', number).encode([1])).toStrictEqual([1])
+  })
+})
+
+describe('ensureString', () => {
+  it('decodes numbers as strings', () => {
+    expect.assertions(1)
+
+    expect(ensureString.decode(5)).toStrictEqual(Right('5'))
+  })
+
+  it('has the same encode as the string codec', () => {
+    expect.assertions(1)
+
+    expect(ensureString.encode).toStrictEqual(string.encode)
+  })
+
+  it('generates a valid JSON schema for a string or number', () => {
+    expect.assertions(3)
+
+    const schema = ensureString.schema()
+
+    expect(ajv.validate(schema, 'A')).toStrictEqual(true)
+    expect(ajv.validate(schema, 5)).toStrictEqual(true)
+    expect(ajv.validate(schema, false)).toStrictEqual(false)
   })
 })
 
@@ -65,6 +98,28 @@ describe('mwsBoolean', () => {
     expect.assertions(1)
 
     expect(mwsBoolean.encode(false)).toStrictEqual(false)
+  })
+})
+
+describe('mwsDate', () => {
+  it('is like the date decoder but it handled uri encoded strings', () => {
+    expect.assertions(1)
+
+    expect(mwsDate.decode('2017-02-25T18%3A10%3A21.687Z')).toStrictEqual(
+      date.decode('2017-02-25T18:10:21.687Z'),
+    )
+  })
+
+  it('has the same encode as the date codec', () => {
+    expect.assertions(1)
+
+    expect(mwsDate.encode).toStrictEqual(date.encode)
+  })
+
+  it('has the same schema as the date codec', () => {
+    expect.assertions(1)
+
+    expect(mwsDate.schema).toStrictEqual(date.schema)
   })
 })
 

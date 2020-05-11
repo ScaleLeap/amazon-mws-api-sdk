@@ -25,6 +25,6 @@ describe('httpClient', () => {
         action: 'GetServiceStatus',
         parameters: {},
       }),
-    ).rejects.toStrictEqual(new HttpError('404'))
+    ).rejects.toStrictEqual(new HttpError(new Error('404')))
   })
 })

@@ -15,20 +15,30 @@ export class MWSError extends Error {
 }
 
 export class HttpError extends MWSError {
-  public message = 'Encountered an error while sending a request'
+  public message = 'MWS: Encountered an error while sending a request: '
 
-  constructor(public error: unknown, ...parameters: string[]) {
+  constructor(public error: Error, ...parameters: string[]) {
     super(...parameters)
+    this.message += error.message
     Object.setPrototypeOf(this, HttpError.prototype)
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, HttpError)
+    }
   }
 }
 
 export class ParsingError extends MWSError {
-  public message = 'Encountered an error while parsing a response'
+  public message = 'MWS: Encountered an error while parsing a response: '
 
   constructor(public error: string, ...parameters: string[]) {
     super(...parameters)
+    this.message += error
     Object.setPrototypeOf(this, ParsingError.prototype)
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, ParsingError)
+    }
   }
 }
 /* eslint-enable max-classes-per-file */
