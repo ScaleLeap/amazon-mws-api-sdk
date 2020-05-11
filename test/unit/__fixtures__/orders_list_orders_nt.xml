@@ -1,0 +1,10 @@
+<ListOrdersByNextTokenResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">
+  <ListOrdersByNextTokenResult>
+      <NextToken>2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=</NextToken>
+      <LastUpdatedBefore>2017-02-25T18%3A10%3A21.687Z</LastUpdatedBefore>
+      <Orders />
+  </ListOrdersByNextTokenResult>
+  <ResponseMetadata>
+      <RequestId>88faca76-b600-46d2-b53c-0c8c4533e43a</RequestId>
+  </ResponseMetadata>
+</ListOrdersByNextTokenResponse>
