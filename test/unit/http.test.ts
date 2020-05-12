@@ -73,4 +73,13 @@ describe('httpClient', () => {
       new Error('Out of memory'),
     )
   })
+
+  it('should propagate API errors that are not valid', async () => {
+    expect.assertions(1)
+
+    const fixture = getFixture('invalid-error-response')
+    const httpClient = httpClientThatThrows(fixture)
+
+    await expect(() => httpClient.request('POST', mockRequest)).rejects.toStrictEqual(fixture)
+  })
 })

@@ -1,0 +1,5 @@
+<ErrorResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">\n' +
+  <Errors>
+    <Massage>CreatedAfter or LastUpdatedAfter must be specified</Massage>
+  </Errors>
+</ErrorResponse>
