@@ -176,6 +176,10 @@ export class HttpClient {
     try {
       return await this.fetch(config).then((x) => parseResponse(x))
     } catch (error) {
+      if (parser.validate(error) !== true) {
+        throw error
+      }
+
       const maybeResponse = MWSApiError.decode(parser.parse(error))
 
       if (maybeResponse.isRight()) {
@@ -197,9 +201,9 @@ export class HttpClient {
         const ErrorToThrow = errorMap[errorCode]
 
         throw enhanceError(new ErrorToThrow(`${info.action} request failed`), response)
+      } else {
+        throw error
       }
-
-      throw error
     }
   }
 }
