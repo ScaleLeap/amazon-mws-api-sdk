@@ -1,4 +1,4 @@
-import { amazonMarketplaces, HttpClient, HttpError } from '../../src'
+import { amazonMarketplaces, HttpClient, InvalidParameterValue } from '../../src'
 import { Resource } from '../../src/http'
 import { getFixture } from '../utils'
 
@@ -26,6 +26,6 @@ describe('httpClient', () => {
         action: 'GetServiceStatus',
         parameters: {},
       }),
-    ).rejects.toStrictEqual(new HttpError('Request failed with InvalidParameterValue'))
+    ).rejects.toStrictEqual(new InvalidParameterValue('GetServiceStatus request failed'))
   })
 })

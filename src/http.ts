@@ -196,7 +196,7 @@ export class HttpClient {
 
         const ErrorToThrow = errorMap[errorCode]
 
-        throw enhanceError(new ErrorToThrow(`Request failed with ${errorCode}`), response)
+        throw enhanceError(new ErrorToThrow(`${info.action} request failed`), response)
       }
 
       throw error
