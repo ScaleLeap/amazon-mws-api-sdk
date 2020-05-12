@@ -3,7 +3,19 @@ import axios from 'axios'
 import parser from 'fast-xml-parser'
 import { URLSearchParams } from 'url'
 
-import { enhanceError, HttpError, MWSApiError } from './error'
+import {
+  AccessDenied,
+  enhanceError,
+  InputStreamDisconnected,
+  InternalError,
+  InvalidAccessKeyId,
+  InvalidAddress,
+  InvalidParameterValue,
+  MWSApiError,
+  QuotaExceeded,
+  RequestThrottled,
+  SignatureDoesNotMatch,
+} from './error'
 import { sign } from './sign'
 
 export interface MWSOptions {
@@ -164,13 +176,27 @@ export class HttpClient {
     try {
       return await this.fetch(config).then((x) => parseResponse(x))
     } catch (error) {
-      const response = MWSApiError.decode(parser.parse(error))
+      const maybeResponse = MWSApiError.decode(parser.parse(error))
 
-      if (response.isRight()) {
-        throw enhanceError(
-          new HttpError(`Request failed with ${response.extract().ErrorResponse.Error.Code}`),
-          response.extract(),
-        )
+      if (maybeResponse.isRight()) {
+        const response = maybeResponse.extract()
+        const errorCode = response.ErrorResponse.Error.Code
+
+        const errorMap = {
+          InputStreamDisconnected,
+          InvalidParameterValue,
+          AccessDenied,
+          InvalidAccessKeyId,
+          SignatureDoesNotMatch,
+          InvalidAddress,
+          InternalError,
+          QuotaExceeded,
+          RequestThrottled,
+        }
+
+        const ErrorToThrow = errorMap[errorCode]
+
+        throw enhanceError(new ErrorToThrow(`Request failed with ${errorCode}`), response)
       }
 
       throw error
