@@ -1,4 +1,4 @@
-<ErrorResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">\n' +
+<ErrorResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">
   <Errors>
     <Massage>CreatedAfter or LastUpdatedAfter must be specified</Massage>
   </Errors>

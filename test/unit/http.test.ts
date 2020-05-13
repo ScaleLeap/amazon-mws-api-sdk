@@ -2,6 +2,7 @@ import {
   amazonMarketplaces,
   HttpClient,
   HttpError,
+  InvalidAddress,
   InvalidParameterValue,
   MWSError,
 } from '../../src'
@@ -81,5 +82,23 @@ describe('httpClient', () => {
     const httpClient = httpClientThatThrows(fixture)
 
     await expect(() => httpClient.request('POST', mockRequest)).rejects.toStrictEqual(fixture)
+  })
+
+  describe('default fetch', () => {
+    it('returns only the XML response on failure', async () => {
+      expect.assertions(1)
+
+      const httpClient = new HttpClient({
+        awsAccessKeyId: 'a',
+        marketplace: amazonMarketplaces.CA,
+        mwsAuthToken: 'b',
+        secretKey: 'c',
+        sellerId: 'd',
+      })
+
+      await expect(() => httpClient.request('POST', mockRequest)).rejects.toStrictEqual(
+        new InvalidAddress('GetServiceStatus request failed'),
+      )
+    })
   })
 })

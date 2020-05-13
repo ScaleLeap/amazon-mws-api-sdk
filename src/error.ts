@@ -49,7 +49,8 @@ export const MWSApiError = Codec.interface({
       Message: string,
       Detail: optional(string),
     }),
-    RequestId: string,
+    RequestID: optional(string),
+    RequestId: optional(string),
   }),
 })
 
@@ -61,7 +62,8 @@ export const enhanceError = (error: HttpError, response: MWSApiError): HttpError
   error.code = response.ErrorResponse.Error.Code
   error.detail = response.ErrorResponse.Error.Detail
   error.mwsMessage = response.ErrorResponse.Error.Message
-  error.requestId = response.ErrorResponse.RequestId
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  error.requestId = (response.ErrorResponse.RequestID || response.ErrorResponse.RequestId)!
 
   return error
 }
