@@ -4,6 +4,7 @@ import {
   HttpError,
   InvalidAddress,
   InvalidParameterValue,
+  InvalidUPCIdentifier,
   MWSError,
 } from '../../src'
 import { Resource } from '../../src/http'
@@ -82,6 +83,32 @@ describe('httpClient', () => {
     const httpClient = httpClientThatThrows(fixture)
 
     await expect(() => httpClient.request('POST', mockRequest)).rejects.toStrictEqual(fixture)
+  })
+
+  it('should handle Invalid UPC identifier error', async () => {
+    expect.assertions(1)
+
+    const httpClient = new HttpClient(
+      {
+        awsAccessKeyId: '',
+        marketplace: amazonMarketplaces.CA,
+        mwsAuthToken: '',
+        secretKey: '',
+        sellerId: '',
+      },
+      () => Promise.resolve({ data: 'Invalid UPC identifier', headers: {} }),
+    )
+
+    const request = {
+      resource: Resource.Products,
+      version: '',
+      action: 'GetMatchingProductForId',
+      parameters: {},
+    } as const
+
+    await expect(() => httpClient.request('POST', request)).rejects.toStrictEqual(
+      new InvalidUPCIdentifier('GetMatchingProductForId request failed'),
+    )
   })
 
   describe('default fetch', () => {

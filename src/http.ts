@@ -5,15 +5,45 @@ import { URLSearchParams } from 'url'
 
 import {
   AccessDenied,
+  AccessToFeedProcessingResultDenied,
+  AccessToReportDenied,
+  ContentMD5DoesNotMatch,
+  ContentMD5Missing,
+  DependencyFatalException,
+  DependencyRetriableException,
+  DependencyUnauthorizedException,
   enhanceError,
+  FeedCanceled,
+  FeedProcessingResultNoLongerAvailable,
+  FeedProcessingResultNotReady,
+  InputDataError,
   InputStreamDisconnected,
   InternalError,
+  InternalErrorFatalException,
   InvalidAccessKeyId,
   InvalidAddress,
+  InvalidFeedSubmissionId,
+  InvalidFeedType,
+  InvalidInputFatalException,
+  InvalidOrderState,
   InvalidParameterValue,
+  InvalidReportId,
+  InvalidReportType,
+  InvalidRequest,
+  InvalidScheduleFrequency,
+  InvalidUPCIdentifier,
   MWSApiError,
+  NonRetriableInternalError,
+  PickupSlotNotAvailable,
   QuotaExceeded,
+  RegionNotSupported,
+  ReportNoLongerAvailable,
+  ReportNotReady,
   RequestThrottled,
+  ResourceNotFound,
+  RetriableInternalError,
+  ScheduledPackageAlreadyExists,
+  ScheduleWindowExpired,
   SignatureDoesNotMatch,
 } from './error'
 import { sign } from './sign'
@@ -33,6 +63,7 @@ type CleanParameters = Record<string, string>
 export enum Resource {
   Sellers = 'Sellers',
   Orders = 'Orders',
+  Products = 'Products',
 }
 
 interface ResourceActions {
@@ -46,6 +77,22 @@ interface ResourceActions {
     | 'GetOrder'
     | 'ListOrderItems'
     | 'ListOrderItemsByNextToken'
+    | 'GetServiceStatus'
+  [Resource.Products]:
+    | 'ListMatchingProducts'
+    | 'GetMatchingProduct'
+    | 'GetMatchingProductForId'
+    | 'GetCompetitivePricingForSKU'
+    | 'GetCompetitivePricingForASIN'
+    | 'GetLowestOfferListingsForSKU'
+    | 'GetLowestOfferListingsForASIN'
+    | 'GetLowestPricedOffersForSKU'
+    | 'GetLowestPricedOffersForASIN'
+    | 'GetMyFeesEstimate'
+    | 'GetMyPriceForSKU'
+    | 'GetMyPriceForASIN'
+    | 'GetProductCategoriesForSKU'
+    | 'GetProductCategoriesForASIN'
     | 'GetServiceStatus'
 }
 
@@ -176,7 +223,17 @@ export class HttpClient {
           }
 
     try {
-      return await this.fetch(config).then((x) => parseResponse(x))
+      const response = await this.fetch(config)
+
+      // GetMatchingProductForId can return an Invalid UPC identifier error message to an otherwise successfully processed request (i.e. 200 status code)
+      if (
+        info.action === 'GetMatchingProductForId' &&
+        response.data.includes('Invalid UPC identifier')
+      ) {
+        throw new InvalidUPCIdentifier(`${info.action} request failed`)
+      }
+
+      return parseResponse(response)
     } catch (error) {
       if (parser.validate(error) !== true) {
         throw error
@@ -196,8 +253,39 @@ export class HttpClient {
           SignatureDoesNotMatch,
           InvalidAddress,
           InternalError,
+          // Subscriptions-specific
+          'Internal Error': InternalError,
           QuotaExceeded,
           RequestThrottled,
+          ResourceNotFound,
+          ScheduledPackageAlreadyExists,
+          RegionNotSupported,
+          ScheduleWindowExpired,
+          InvalidOrderState,
+          PickupSlotNotAvailable,
+          AccessToFeedProcessingResultDenied,
+          ContentMD5Missing,
+          ContentMD5DoesNotMatch,
+          FeedCanceled,
+          FeedProcessingResultNoLongerAvailable,
+          FeedProcessingResultNotReady,
+          InputDataError,
+          InvalidFeedSubmissionId,
+          InvalidFeedType,
+          InvalidRequest,
+          NonRetriableInternalError,
+          RetriableInternalError,
+          AccessToReportDenied,
+          InvalidReportId,
+          InvalidReportType,
+          InvalidScheduleFrequency,
+          ReportNoLongerAvailable,
+          ReportNotReady,
+          DependencyFatalException,
+          DependencyRetriableException,
+          DependencyUnauthorizedException,
+          InternalErrorFatalException,
+          InvalidInputFatalException,
         }
 
         const ErrorToThrow = errorMap[errorCode]
