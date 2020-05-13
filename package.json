@@ -53,7 +53,7 @@
     "ts-node": "8.10.1",
     "ts-node-dev": "1.0.0-pre.44",
     "tsconfigs": "4.0.2",
-    "typescript": "3.8.3"
+    "typescript": "3.9.2"
   },
   "keywords": [],
   "publishConfig": {
