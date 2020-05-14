@@ -3,7 +3,49 @@ import axios from 'axios'
 import parser from 'fast-xml-parser'
 import { URLSearchParams } from 'url'
 
-import { HttpError } from './error'
+import {
+  AccessDenied,
+  AccessToFeedProcessingResultDenied,
+  AccessToReportDenied,
+  ContentMD5DoesNotMatch,
+  ContentMD5Missing,
+  DependencyFatalException,
+  DependencyRetriableException,
+  DependencyUnauthorizedException,
+  enhanceError,
+  FeedCanceled,
+  FeedProcessingResultNoLongerAvailable,
+  FeedProcessingResultNotReady,
+  InputDataError,
+  InputStreamDisconnected,
+  InternalError,
+  InternalErrorFatalException,
+  InvalidAccessKeyId,
+  InvalidAddress,
+  InvalidFeedSubmissionId,
+  InvalidFeedType,
+  InvalidInputFatalException,
+  InvalidOrderState,
+  InvalidParameterValue,
+  InvalidReportId,
+  InvalidReportType,
+  InvalidRequest,
+  InvalidScheduleFrequency,
+  InvalidUPCIdentifier,
+  MWSApiError,
+  NonRetriableInternalError,
+  PickupSlotNotAvailable,
+  QuotaExceeded,
+  RegionNotSupported,
+  ReportNoLongerAvailable,
+  ReportNotReady,
+  RequestThrottled,
+  ResourceNotFound,
+  RetriableInternalError,
+  ScheduledPackageAlreadyExists,
+  ScheduleWindowExpired,
+  SignatureDoesNotMatch,
+} from './error'
 import { sign } from './sign'
 
 export interface MWSOptions {
@@ -21,6 +63,7 @@ type CleanParameters = Record<string, string>
 export enum Resource {
   Sellers = 'Sellers',
   Orders = 'Orders',
+  Products = 'Products',
 }
 
 interface ResourceActions {
@@ -34,6 +77,22 @@ interface ResourceActions {
     | 'GetOrder'
     | 'ListOrderItems'
     | 'ListOrderItemsByNextToken'
+    | 'GetServiceStatus'
+  [Resource.Products]:
+    | 'ListMatchingProducts'
+    | 'GetMatchingProduct'
+    | 'GetMatchingProductForId'
+    | 'GetCompetitivePricingForSKU'
+    | 'GetCompetitivePricingForASIN'
+    | 'GetLowestOfferListingsForSKU'
+    | 'GetLowestOfferListingsForASIN'
+    | 'GetLowestPricedOffersForSKU'
+    | 'GetLowestPricedOffersForASIN'
+    | 'GetMyFeesEstimate'
+    | 'GetMyPriceForSKU'
+    | 'GetMyPriceForASIN'
+    | 'GetProductCategoriesForSKU'
+    | 'GetProductCategoriesForASIN'
     | 'GetServiceStatus'
 }
 
@@ -88,10 +147,14 @@ const cleanParameters = (parameters: Parameters): CleanParameters =>
 /* eslint-enable no-param-reassign */
 
 const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestResponse> =>
-  axios({ method, url, headers, data }).then((response) => ({
-    data: response.data,
-    headers: response.headers,
-  }))
+  axios({ method, url, headers, data })
+    .then((response) => ({
+      data: response.data,
+      headers: response.headers,
+    }))
+    .catch((error) => {
+      return Promise.reject(error.response.data)
+    })
 
 const parseResponse = <T>(response: RequestResponse): [T, RequestMeta] => {
   const responseData = parser.parse(response.data)
@@ -160,9 +223,77 @@ export class HttpClient {
           }
 
     try {
-      return await this.fetch(config).then((x) => parseResponse(x))
+      const response = await this.fetch(config)
+
+      // GetMatchingProductForId can return an Invalid UPC identifier error message to an otherwise successfully processed request (i.e. 200 status code)
+      if (
+        info.action === 'GetMatchingProductForId' &&
+        response.data.includes('Invalid UPC identifier')
+      ) {
+        throw new InvalidUPCIdentifier(`${info.action} request failed`)
+      }
+
+      return parseResponse(response)
     } catch (error) {
-      throw new HttpError(error)
+      if (parser.validate(error) !== true) {
+        throw error
+      }
+
+      const maybeResponse = MWSApiError.decode(parser.parse(error))
+
+      if (maybeResponse.isRight()) {
+        const response = maybeResponse.extract()
+        const errorCode = response.ErrorResponse.Error.Code
+
+        const errorMap = {
+          InputStreamDisconnected,
+          InvalidParameterValue,
+          AccessDenied,
+          InvalidAccessKeyId,
+          SignatureDoesNotMatch,
+          InvalidAddress,
+          InternalError,
+          // Subscriptions-specific
+          'Internal Error': InternalError,
+          QuotaExceeded,
+          RequestThrottled,
+          ResourceNotFound,
+          ScheduledPackageAlreadyExists,
+          RegionNotSupported,
+          ScheduleWindowExpired,
+          InvalidOrderState,
+          PickupSlotNotAvailable,
+          AccessToFeedProcessingResultDenied,
+          ContentMD5Missing,
+          ContentMD5DoesNotMatch,
+          FeedCanceled,
+          FeedProcessingResultNoLongerAvailable,
+          FeedProcessingResultNotReady,
+          InputDataError,
+          InvalidFeedSubmissionId,
+          InvalidFeedType,
+          InvalidRequest,
+          NonRetriableInternalError,
+          RetriableInternalError,
+          AccessToReportDenied,
+          InvalidReportId,
+          InvalidReportType,
+          InvalidScheduleFrequency,
+          ReportNoLongerAvailable,
+          ReportNotReady,
+          DependencyFatalException,
+          DependencyRetriableException,
+          DependencyUnauthorizedException,
+          InternalErrorFatalException,
+          InvalidInputFatalException,
+        }
+
+        const ErrorToThrow = errorMap[errorCode]
+
+        throw enhanceError(new ErrorToThrow(`${info.action} request failed`), response)
+      } else {
+        throw error
+      }
     }
   }
 }

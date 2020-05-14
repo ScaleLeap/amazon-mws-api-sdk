@@ -1,0 +1,8 @@
+<ErrorResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">
+  <Error>
+    <Type>Sender</Type>
+    <Code>InvalidParameterValue</Code>
+    <Message>CreatedAfter or LastUpdatedAfter must be specified</Message>
+  </Error>
+  <RequestId>e26147f9-30cc-4379-9fb5-bd4ad966c48b</RequestId>
+</ErrorResponse>
