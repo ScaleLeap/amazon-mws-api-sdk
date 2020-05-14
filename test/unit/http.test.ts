@@ -35,7 +35,7 @@ describe('httpClient', () => {
   it('should throw a HttpError on failure', async () => {
     expect.assertions(1)
 
-    const httpClient = httpClientThatThrows(getFixture('error-response'))
+    const httpClient = httpClientThatThrows(getFixture('error_response'))
 
     await expect(() => httpClient.request('POST', mockRequest)).rejects.toStrictEqual(
       new InvalidParameterValue('GetServiceStatus request failed'),
@@ -45,7 +45,7 @@ describe('httpClient', () => {
   it('should throw a HttpError that can be handled', async () => {
     expect.assertions(7)
 
-    const httpClient = httpClientThatThrows(getFixture('error-response'))
+    const httpClient = httpClientThatThrows(getFixture('error_response'))
 
     let expectedError!: InvalidParameterValue
 
@@ -79,7 +79,7 @@ describe('httpClient', () => {
   it('should propagate API errors that are not valid', async () => {
     expect.assertions(1)
 
-    const fixture = getFixture('invalid-error-response')
+    const fixture = getFixture('invalid_error_response')
     const httpClient = httpClientThatThrows(fixture)
 
     await expect(() => httpClient.request('POST', mockRequest)).rejects.toStrictEqual(fixture)

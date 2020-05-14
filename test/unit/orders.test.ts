@@ -11,17 +11,19 @@ const httpConfig = {
   sellerId: '',
 }
 
+const headers = {
+  'x-mws-request-id': '0',
+  'x-mws-timestamp': '2020-05-06T09:22:23.582Z',
+  'x-mws-quota-max': '1000',
+  'x-mws-quota-remaining': '999',
+  'x-mws-quota-resetson': '2020-04-06T10:22:23.582Z',
+}
+
 const mockMwsListOrders = new MWS(
   new HttpClient(httpConfig, () =>
     Promise.resolve({
       data: getFixture('orders_list_orders'),
-      headers: {
-        'x-mws-request-id': '0',
-        'x-mws-timestamp': '2020-05-06T09:22:23.582Z',
-        'x-mws-quota-max': '1000',
-        'x-mws-quota-remaining': '999',
-        'x-mws-quota-resetson': '2020-04-06T10:22:23.582Z',
-      },
+      headers,
     }),
   ),
 )
@@ -30,13 +32,16 @@ const mockMwsListOrdersNT = new MWS(
   new HttpClient(httpConfig, () =>
     Promise.resolve({
       data: getFixture('orders_list_orders_nt'),
-      headers: {
-        'x-mws-request-id': '0',
-        'x-mws-timestamp': '2020-05-06T08:22:23.582Z',
-        'x-mws-quota-max': '1000',
-        'x-mws-quota-remaining': '999',
-        'x-mws-quota-resetson': '2020-05-06T10:22:23.582Z',
-      },
+      headers,
+    }),
+  ),
+)
+
+const mockMwsGetOrder = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('orders_get_order'),
+      headers,
     }),
   ),
 )
@@ -45,13 +50,7 @@ const mockMwsServiceStatus = new MWS(
   new HttpClient(httpConfig, () =>
     Promise.resolve({
       data: getFixture('get_service_status'),
-      headers: {
-        'x-mws-request-id': '0',
-        'x-mws-timestamp': '2020-05-06T08:22:23.582Z',
-        'x-mws-quota-max': '1000',
-        'x-mws-quota-remaining': '999',
-        'x-mws-quota-resetson': '2020-05-06T10:22:23.582Z',
-      },
+      headers,
     }),
   ),
 )
@@ -64,8 +63,8 @@ const mockNextToken = new NextToken('ListOrders', '123')
 
 const parsingError = 'Expected an object, but received a string with value ""'
 
-describe('sellers', () => {
-  describe('listMarketplaceParticipations', () => {
+describe('orders', () => {
+  describe('listOrders', () => {
     it('returns a parsed model when the response is valid', async () => {
       expect.assertions(1)
 
@@ -81,7 +80,7 @@ describe('sellers', () => {
     })
   })
 
-  describe('listMarketplaceParticipationsByNextToken', () => {
+  describe('listOrdersByNextToken', () => {
     it('returns a parsed model when the response is valid', async () => {
       expect.assertions(1)
 
@@ -114,6 +113,22 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() => mockMwsFail.orders.getServiceStatus()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
+    })
+  })
+
+  describe('getOrder', () => {
+    it('returns an array of orders when the response is valid', async () => {
+      expect.assertions(1)
+
+      expect(await mockMwsGetOrder.orders.getOrder({ AmazonOrderId: [] })).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response is invalid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.orders.getOrder({ AmazonOrderId: [] })).rejects.toStrictEqual(
         new ParsingError(parsingError),
       )
     })
