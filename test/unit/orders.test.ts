@@ -46,6 +46,24 @@ const mockMwsGetOrder = new MWS(
   ),
 )
 
+const mockMwsListOrderItems = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('orders_list_order_items'),
+      headers,
+    }),
+  ),
+)
+
+const mockMwsListOrderItemsNT = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('orders_list_order_items_nt'),
+      headers,
+    }),
+  ),
+)
+
 const mockMwsServiceStatus = new MWS(
   new HttpClient(httpConfig, () =>
     Promise.resolve({
@@ -59,7 +77,8 @@ const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
 
-const mockNextToken = new NextToken('ListOrders', '123')
+const mockNextTokenOrders = new NextToken('ListOrders', '123')
+const mockNextTokenOrderItems = new NextToken('ListOrderItems', '123')
 
 const parsingError = 'Expected an object, but received a string with value ""'
 
@@ -85,7 +104,7 @@ describe('orders', () => {
       expect.assertions(1)
 
       expect(
-        await mockMwsListOrdersNT.orders.listOrdersByNextToken(mockNextToken, {
+        await mockMwsListOrdersNT.orders.listOrdersByNextToken(mockNextTokenOrders, {
           MarketplaceId: [],
         }),
       ).toMatchSnapshot()
@@ -95,8 +114,64 @@ describe('orders', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.orders.listOrdersByNextToken(mockNextToken, {
+        mockMwsFail.orders.listOrdersByNextToken(mockNextTokenOrders, {
           MarketplaceId: [],
+        }),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
+  describe('getOrder', () => {
+    it('returns an array of orders when the response is valid', async () => {
+      expect.assertions(1)
+
+      expect(await mockMwsGetOrder.orders.getOrder({ AmazonOrderId: [] })).toMatchSnapshot()
+    })
+
+    it('throws an error when the response is invalid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.orders.getOrder({ AmazonOrderId: [] })).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
+    })
+  })
+
+  describe('listOrderItems', () => {
+    it('returns an array of order items when the response is valid', async () => {
+      expect.assertions(1)
+
+      expect(
+        await mockMwsListOrderItems.orders.listOrderItems({ AmazonOrderId: '' }),
+      ).toMatchSnapshot()
+    })
+
+    it('throws an error when the response is invalid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.orders.listOrderItems({ AmazonOrderId: '' }),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
+  describe('listOrderItemsByNextToken', () => {
+    it('returns an array of order items when the response is valid', async () => {
+      expect.assertions(1)
+
+      expect(
+        await mockMwsListOrderItemsNT.orders.listOrderItemsByNextToken(mockNextTokenOrderItems, {
+          AmazonOrderId: '',
+        }),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response is invalid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.orders.listOrderItemsByNextToken(mockNextTokenOrderItems, {
+          AmazonOrderId: '',
         }),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
@@ -113,22 +188,6 @@ describe('orders', () => {
       expect.assertions(1)
 
       await expect(() => mockMwsFail.orders.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
-      )
-    })
-  })
-
-  describe('getOrder', () => {
-    it('returns an array of orders when the response is valid', async () => {
-      expect.assertions(1)
-
-      expect(await mockMwsGetOrder.orders.getOrder({ AmazonOrderId: [] })).toMatchSnapshot()
-    })
-
-    it('throws a parsing error when the response is invalid', async () => {
-      expect.assertions(1)
-
-      await expect(() => mockMwsFail.orders.getOrder({ AmazonOrderId: [] })).rejects.toStrictEqual(
         new ParsingError(parsingError),
       )
     })

@@ -72,6 +72,144 @@ Array [
 ]
 `;
 
+exports[`orders listOrderItems returns an array of order items when the response is valid 1`] = `
+Array [
+  Object {
+    "AmazonOrderId": "058-1233752-8214740",
+    "NextToken": "Token!",
+    "OrderItems": Array [
+      Object {
+        "ASIN": "BT0093TELA",
+        "BuyerCustomizedInfo": undefined,
+        "CODFee": Object {
+          "Amount": 10,
+          "CurrencyCode": "USD",
+        },
+        "CODFeeDiscount": Object {
+          "Amount": 1,
+          "CurrencyCode": "USD",
+        },
+        "ConditionId": undefined,
+        "ConditionNote": undefined,
+        "ConditionSubtypeId": undefined,
+        "GiftMessageText": "For you!",
+        "GiftWrapLevel": "Classic",
+        "GiftWrapPrice": Object {
+          "Amount": 1.99,
+          "CurrencyCode": "USD",
+        },
+        "GiftWrapTax": undefined,
+        "IsGift": undefined,
+        "IsTransparency": undefined,
+        "ItemPrice": Object {
+          "Amount": 25.99,
+          "CurrencyCode": "USD",
+        },
+        "ItemTax": undefined,
+        "OrderItemId": "68828574383266",
+        "PointsGranted": undefined,
+        "PriceDesignation": undefined,
+        "ProductInfo": undefined,
+        "PromotionDiscount": undefined,
+        "PromotionDiscountTax": undefined,
+        "PromotionIds": undefined,
+        "QuantityOrdered": 1,
+        "QuantityShipper": undefined,
+        "ScheduledDeliveryEndDate": undefined,
+        "ScheduledDeliveryStartDate": undefined,
+        "SellerSKU": "CBA_OTF_1",
+        "SerialNumberRequired": undefined,
+        "ShippingDiscount": undefined,
+        "ShippingDiscountTax": undefined,
+        "ShippingPrice": Object {
+          "Amount": 1.26,
+          "CurrencyCode": "USD",
+        },
+        "ShippingTax": undefined,
+        "TaxCollection": undefined,
+        "Title": "Example item name",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
+exports[`orders listOrderItemsByNextToken returns an array of order items when the response is valid 1`] = `
+Array [
+  Object {
+    "AmazonOrderId": "058-1233752-8214740",
+    "NextToken": "Token!",
+    "OrderItems": Array [
+      Object {
+        "ASIN": "BT0093TELA",
+        "BuyerCustomizedInfo": undefined,
+        "CODFee": Object {
+          "Amount": 10,
+          "CurrencyCode": "USD",
+        },
+        "CODFeeDiscount": Object {
+          "Amount": 1,
+          "CurrencyCode": "USD",
+        },
+        "ConditionId": undefined,
+        "ConditionNote": undefined,
+        "ConditionSubtypeId": undefined,
+        "GiftMessageText": "For you!",
+        "GiftWrapLevel": "Classic",
+        "GiftWrapPrice": Object {
+          "Amount": 1.99,
+          "CurrencyCode": "USD",
+        },
+        "GiftWrapTax": undefined,
+        "IsGift": undefined,
+        "IsTransparency": undefined,
+        "ItemPrice": Object {
+          "Amount": 25.99,
+          "CurrencyCode": "USD",
+        },
+        "ItemTax": undefined,
+        "OrderItemId": "68828574383266",
+        "PointsGranted": undefined,
+        "PriceDesignation": undefined,
+        "ProductInfo": undefined,
+        "PromotionDiscount": undefined,
+        "PromotionDiscountTax": undefined,
+        "PromotionIds": undefined,
+        "QuantityOrdered": 1,
+        "QuantityShipper": undefined,
+        "ScheduledDeliveryEndDate": undefined,
+        "ScheduledDeliveryStartDate": undefined,
+        "SellerSKU": "CBA_OTF_1",
+        "SerialNumberRequired": undefined,
+        "ShippingDiscount": undefined,
+        "ShippingDiscountTax": undefined,
+        "ShippingPrice": Object {
+          "Amount": 1.26,
+          "CurrencyCode": "USD",
+        },
+        "ShippingTax": undefined,
+        "TaxCollection": undefined,
+        "Title": "Example item name",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
 exports[`orders listOrders returns a parsed model when the response is valid 1`] = `
 Array [
   Object {
