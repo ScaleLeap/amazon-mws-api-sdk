@@ -29,6 +29,7 @@ for debugging.
 ## Authors or Acknowledgments
 
 * Roman Filippov ([Scale Leap](https://www.scaleleap.com))
+* Stanislav Iliev ([gigobyte](https://github.com/gigobyte))
 
 ## License
 
