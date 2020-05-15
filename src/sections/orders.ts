@@ -89,10 +89,10 @@ export enum ConditionSubtype {
 }
 
 interface ListOrderParameters {
-  CreatedAfter?: string
-  CreatedBefore?: string
-  LastUpdatedAfter?: string
-  LastUpdatedBefore?: string
+  CreatedAfter?: Date
+  CreatedBefore?: Date
+  LastUpdatedAfter?: Date
+  LastUpdatedBefore?: Date
   OrderStatus?: (keyof typeof OrderStatus)[]
   MarketplaceId: string[]
   FulfillmentChannel?: (keyof typeof FulfillmentChannel)[]
@@ -304,10 +304,10 @@ type ListOrderItems = GetInterface<typeof ListOrderItems>
 
 const canonicalizeParameters = (parameters: ListOrderParameters) => {
   return {
-    CreatedAfter: parameters.CreatedAfter,
-    CreatedBefore: parameters.CreatedBefore,
-    LastUpdatedAfter: parameters.LastUpdatedAfter,
-    LastUpdatedBefore: parameters.LastUpdatedBefore,
+    CreatedAfter: parameters.CreatedAfter && parameters.CreatedAfter.toISOString(),
+    CreatedBefore: parameters.CreatedBefore && parameters.CreatedBefore.toISOString(),
+    LastUpdatedAfter: parameters.LastUpdatedAfter && parameters.LastUpdatedAfter.toISOString(),
+    LastUpdatedBefore: parameters.LastUpdatedBefore && parameters.LastUpdatedBefore.toISOString(),
     'OrderStatus.Status': parameters.OrderStatus,
     'MarketplaceId.Id': parameters.MarketplaceId,
     'FulfillmentChannel.Channel': parameters.FulfillmentChannel,
