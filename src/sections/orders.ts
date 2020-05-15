@@ -62,11 +62,37 @@ export enum EasyShipShipmentStatus {
   Lost = 'Lost',
 }
 
+export enum Condition {
+  New = 'New',
+  Used = 'Used',
+  Collectible = 'Collectible',
+  Refurbished = 'Refurbished',
+  Preorder = 'Preorder',
+  Club = 'Club',
+}
+
+export enum ConditionSubtype {
+  New = 'New',
+  Mint = 'Mint',
+  VeryGood = 'Very Good',
+  Good = 'Good',
+  Acceptable = 'Acceptable',
+  Poor = 'Poor',
+  Club = 'Club',
+  OEM = 'OEM',
+  Warranty = 'Warranty',
+  RefurbishedWarranty = 'Refurbished Warranty',
+  Refurbished = 'Refurbished',
+  OpenBox = 'Open Box',
+  Any = 'Any',
+  Other = 'Other',
+}
+
 interface ListOrderParameters {
-  CreatedAfter?: string
-  CreatedBefore?: string
-  LastUpdatedAfter?: string
-  LastUpdatedBefore?: string
+  CreatedAfter?: Date
+  CreatedBefore?: Date
+  LastUpdatedAfter?: Date
+  LastUpdatedBefore?: Date
   OrderStatus?: (keyof typeof OrderStatus)[]
   MarketplaceId: string[]
   FulfillmentChannel?: (keyof typeof FulfillmentChannel)[]
@@ -82,6 +108,10 @@ const fulfillmentChannel: Codec<FulfillmentChannel> = oneOf(
   Object.values(FulfillmentChannel).map((x) => exactly(x)),
 )
 const adddressType: Codec<AddressType> = oneOf(Object.values(AddressType).map((x) => exactly(x)))
+const condition: Codec<Condition> = oneOf(Object.values(Condition).map((x) => exactly(x)))
+const conditionSubtype: Codec<ConditionSubtype> = oneOf(
+  Object.values(ConditionSubtype).map((x) => exactly(x)),
+)
 
 const Address = Codec.interface({
   Name: string,
@@ -119,64 +149,59 @@ const Money = Codec.interface({
   Amount: optional(number),
 })
 
+const Order = Codec.interface({
+  AmazonOrderId: string,
+  SellerOrderId: optional(string),
+  PurchaseDate: mwsDate,
+  LastUpdateDate: mwsDate,
+  OrderStatus: orderStatus,
+  FulfillmentChannel: optional(fulfillmentChannel),
+  SalesChannel: optional(string),
+  ShipServiceLevel: optional(string),
+  ShippingAddress: optional(Address),
+  OrderTotal: optional(Money),
+  NumberOfItemsShipped: optional(number),
+  NumberOfItemsUnshipped: optional(number),
+  PaymentExecutionDetail: optional(
+    ensureArray(
+      'PaymentExecutionDetailItem',
+      Codec.interface({
+        Payment: Money,
+        PaymentMethod: string,
+      }),
+    ),
+  ),
+  PaymentMethod: optional(string),
+  PaymentMethodDetails: ensureArray('PaymentMethodDetail', string),
+  IsReplacementOrder: optional(boolean),
+  ReplacedOrderId: optional(string),
+  MarketplaceId: optional(string),
+  BuyerEmail: optional(string),
+  BuyerName: optional(string),
+  BuyerCounty: optional(string),
+  BuyerTaxInfo: optional(BuyerTaxInfo),
+  ShipmentServiceLevelCategory: optional(string),
+  EasyShipShipmentStatus: optional(string),
+  OrderType: optional(string),
+  EarliestShipDate: optional(mwsDate),
+  LatestShipDate: optional(mwsDate),
+  EarliestDeliveryDate: optional(mwsDate),
+  LatestDeliveryDate: optional(mwsDate),
+  IsBusinessOrder: optional(boolean),
+  IsSoldByAB: optional(boolean),
+  PurchaseOrderNumber: optional(string),
+  IsPrime: optional(boolean),
+  IsPremiumOrder: optional(boolean),
+  IsGlobalExpressEnabled: optional(boolean),
+  PromiseResponseDueDate: optional(mwsDate),
+  IsEstimatedShipDateSet: optional(boolean),
+})
+
 const ListOrders = Codec.interface({
   NextToken: optional(nextTokenCodec('ListOrders')),
   LastUpdatedBefore: optional(mwsDate),
   CreatedBefore: optional(mwsDate),
-  Orders: ensureArray(
-    'Order',
-    Codec.interface({
-      AmazonOrderId: string,
-      SellerOrderId: optional(string),
-      PurchaseDate: mwsDate,
-      LastUpdateDate: mwsDate,
-      OrderStatus: orderStatus,
-      FulfillmentChannel: optional(fulfillmentChannel),
-      SalesChannel: optional(string),
-      ShipServiceLevel: optional(string),
-      ShippingAddress: optional(Address),
-      OrderTotal: optional(Money),
-      NumberOfItemsShipped: optional(number),
-      NumberOfItemsUnshipped: optional(number),
-      PaymentExecutionDetail: optional(
-        ensureArray(
-          'PaymentExecutionDetailItem',
-          Codec.interface({
-            Payment: Money,
-            PaymentMethod: string,
-          }),
-        ),
-      ),
-      PaymentMethod: optional(string),
-      PaymentMethodDetails: optional(
-        Codec.interface({
-          PaymentMethodDetail: optional(string),
-        }),
-      ),
-      IsReplacementOrder: optional(boolean),
-      ReplacedOrderId: optional(string),
-      MarketplaceId: optional(string),
-      BuyerEmail: optional(string),
-      BuyerName: optional(string),
-      BuyerCounty: optional(string),
-      BuyerTaxInfo: optional(BuyerTaxInfo),
-      ShipmentServiceLevelCategory: optional(string),
-      EasyShipShipmentStatus: optional(string),
-      OrderType: optional(string),
-      EarliestShipDate: optional(mwsDate),
-      LatestShipDate: optional(mwsDate),
-      EarliestDeliveryDate: optional(mwsDate),
-      LatestDeliveryDate: optional(mwsDate),
-      IsBusinessOrder: optional(boolean),
-      IsSoldByAB: optional(boolean),
-      PurchaseOrderNumber: optional(string),
-      IsPrime: optional(boolean),
-      IsPremiumOrder: optional(boolean),
-      IsGlobalExpressEnabled: optional(boolean),
-      PromiseResponseDueDate: optional(mwsDate),
-      IsEstimatedShipDateSet: optional(boolean),
-    }),
-  ),
+  Orders: ensureArray('Order', Order),
 })
 
 const ListOrdersResponse = Codec.interface({
@@ -191,14 +216,98 @@ const ListOrdersByNextTokenResponse = Codec.interface({
   }),
 })
 
+const GetOrderResponse = Codec.interface({
+  GetOrderResponse: Codec.interface({
+    GetOrderResult: Codec.interface({
+      Orders: ensureArray('Order', Order),
+    }),
+  }),
+})
+
+const ListOrderItems = Codec.interface({
+  NextToken: optional(string),
+  AmazonOrderId: string,
+  OrderItems: ensureArray(
+    'OrderItem',
+    Codec.interface({
+      ASIN: string,
+      OrderItemId: ensureString,
+      SellerSKU: optional(string),
+      BuyerCustomizedInfo: optional(
+        Codec.interface({
+          CustomizedURL: string,
+        }),
+      ),
+      Title: optional(string),
+      QuantityOrdered: number,
+      QuantityShipper: optional(number),
+      PointsGranted: optional(
+        Codec.interface({
+          PointsNumber: optional(number),
+          PointsMonetaryValue: optional(Money),
+        }),
+      ),
+      ProductInfo: optional(
+        Codec.interface({
+          NumberOfItems: optional(number),
+        }),
+      ),
+      ItemPrice: optional(Money),
+      ShippingPrice: optional(Money),
+      GiftWrapPrice: optional(Money),
+      TaxCollection: optional(
+        Codec.interface({
+          Model: string,
+          ResponsibleParty: string,
+        }),
+      ),
+      ItemTax: optional(Money),
+      ShippingTax: optional(Money),
+      GiftWrapTax: optional(Money),
+      ShippingDiscount: optional(Money),
+      ShippingDiscountTax: optional(Money),
+      PromotionDiscount: optional(Money),
+      PromotionDiscountTax: optional(Money),
+      PromotionIds: optional(ensureArray('PromotionId', string)),
+      CODFee: optional(Money),
+      CODFeeDiscount: optional(Money),
+      IsGift: optional(boolean),
+      GiftMessageText: optional(string),
+      GiftWrapLevel: optional(string),
+      ConditionNote: optional(string),
+      ConditionId: optional(condition),
+      ConditionSubtypeId: optional(conditionSubtype),
+      ScheduledDeliveryStartDate: optional(mwsDate),
+      ScheduledDeliveryEndDate: optional(mwsDate),
+      PriceDesignation: optional(string),
+      IsTransparency: optional(boolean),
+      SerialNumberRequired: optional(boolean),
+    }),
+  ),
+})
+
+const ListOrderItemsResponse = Codec.interface({
+  ListOrderItemsResponse: Codec.interface({
+    ListOrderItemsResult: ListOrderItems,
+  }),
+})
+
+const ListOrderItemsByNextTokenResponse = Codec.interface({
+  ListOrderItemsByNextTokenResponse: Codec.interface({
+    ListOrderItemsByNextTokenResult: ListOrderItems,
+  }),
+})
+
+type Order = GetInterface<typeof Order>
 type ListOrders = GetInterface<typeof ListOrders>
+type ListOrderItems = GetInterface<typeof ListOrderItems>
 
 const canonicalizeParameters = (parameters: ListOrderParameters) => {
   return {
-    CreatedAfter: parameters.CreatedAfter,
-    CreatedBefore: parameters.CreatedBefore,
-    LastUpdatedAfter: parameters.LastUpdatedAfter,
-    LastUpdatedBefore: parameters.LastUpdatedBefore,
+    CreatedAfter: parameters.CreatedAfter && parameters.CreatedAfter.toISOString(),
+    CreatedBefore: parameters.CreatedBefore && parameters.CreatedBefore.toISOString(),
+    LastUpdatedAfter: parameters.LastUpdatedAfter && parameters.LastUpdatedAfter.toISOString(),
+    LastUpdatedBefore: parameters.LastUpdatedBefore && parameters.LastUpdatedBefore.toISOString(),
     'OrderStatus.Status': parameters.OrderStatus,
     'MarketplaceId.Id': parameters.MarketplaceId,
     'FulfillmentChannel.Channel': parameters.FulfillmentChannel,
@@ -245,6 +354,63 @@ export class Orders {
 
     return ListOrdersByNextTokenResponse.decode(response).caseOf({
       Right: (x) => [x.ListOrdersByNextTokenResponse.ListOrdersByNextTokenResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getOrder(parameters: { AmazonOrderId: string[] }): Promise<[Order[], RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Orders,
+      version: ORDERS_API_VERSION,
+      action: 'GetOrder',
+      parameters: {
+        'AmazonOrderId.Id': parameters.AmazonOrderId,
+      },
+    })
+
+    return GetOrderResponse.decode(response).caseOf({
+      Right: (x) => [x.GetOrderResponse.GetOrderResult.Orders, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async listOrderItems(parameters: {
+    AmazonOrderId: string
+  }): Promise<[ListOrderItems, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Orders,
+      version: ORDERS_API_VERSION,
+      action: 'ListOrderItems',
+      parameters,
+    })
+
+    return ListOrderItemsResponse.decode(response).caseOf({
+      Right: (x) => [x.ListOrderItemsResponse.ListOrderItemsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async listOrderItemsByNextToken(
+    nextToken: NextToken<'ListOrderItems'>,
+    parameters: {
+      AmazonOrderId: string
+    },
+  ): Promise<[ListOrderItems, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Orders,
+      version: ORDERS_API_VERSION,
+      action: 'ListOrderItemsByNextToken',
+      parameters: { ...parameters, NextToken: nextToken.token },
+    })
+
+    return ListOrderItemsByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [x.ListOrderItemsByNextTokenResponse.ListOrderItemsByNextTokenResult, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },

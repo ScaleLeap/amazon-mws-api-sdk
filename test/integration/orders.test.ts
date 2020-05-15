@@ -25,7 +25,7 @@ describe(`${Orders.name}`, () => {
 
     const [listOrders] = await orders.listOrders({
       MarketplaceId: [amazonMarketplaces.CA.id],
-      CreatedAfter: createdAfter.toISOString(),
+      CreatedAfter: createdAfter,
     })
 
     expect(listOrders.Orders).toStrictEqual([])
