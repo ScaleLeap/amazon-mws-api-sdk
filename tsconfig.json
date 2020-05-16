@@ -3,5 +3,8 @@
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
-  ]
+  ],
+  "compilerOptions": {
+    "target": "es2019"
+  }
 }
