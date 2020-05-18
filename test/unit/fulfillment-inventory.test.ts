@@ -21,7 +21,7 @@ const headers = {
 const mockMwsInventorySupply = new MWS(
   new HttpClient(httpConfig, () =>
     Promise.resolve({
-      data: getFixture('fulfillment_inventory_list_inventory_supply.xml'),
+      data: getFixture('fulfillment_inventory_list_inventory_supply'),
       headers,
     }),
   ),
@@ -40,7 +40,7 @@ describe('fulfillment-inventory', () => {
     it('returns a parsed model when the response is valid', async () => {
       expect.assertions(1)
       expect(
-        await mockMwsInventorySupply.fulfillmentInventory.listInventorySupply(),
+        await mockMwsInventorySupply.fulfillmentInventory.listInventorySupply({}),
       ).toMatchSnapshot()
     })
 
