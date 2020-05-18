@@ -59,3 +59,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: API Extractor
+        run: npm run api-extractor

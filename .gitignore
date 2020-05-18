@@ -112,3 +112,7 @@ temp/
 
 # TypeScript build output
 lib/
+
+# Api Extractor
+dist/
+temp/
