@@ -129,8 +129,7 @@ export const enhanceError = (error: HttpError, response: MWSApiError): HttpError
   error.code = response.ErrorResponse.Error.Code
   error.detail = response.ErrorResponse.Error.Detail
   error.mwsMessage = response.ErrorResponse.Error.Message
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  error.requestId = (response.ErrorResponse.RequestID || response.ErrorResponse.RequestId)!
+  error.requestId = response.ErrorResponse.RequestID || response.ErrorResponse.RequestId || ''
 
   return error
 }
