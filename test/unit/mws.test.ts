@@ -1,6 +1,5 @@
 /** This test includes sanity checks only, for integration tests check out the /test/integration folder */
 
-/* eslint-disable no-unused-expressions */
 import { amazonMarketplaces } from '@scaleleap/amazon-marketplaces'
 
 import { HttpClient, MWS } from '../../src'
@@ -22,21 +21,18 @@ const mockMws = new MWS(
 
 describe(`${MWS.name}`, () => {
   it('instantiates the sellers section only once', () => {
-    expect.assertions(1)
+    expect.assertions(3)
 
-    mockMws.sellers
-    mockMws.sellers
-
+    expect(mockMws.sellers).toBeInstanceOf(Sellers)
+    expect(mockMws.sellers).toBeInstanceOf(Sellers)
     expect(Sellers).toHaveBeenCalledTimes(1)
   })
 
   it('instantiates the orders section only once', () => {
-    expect.assertions(1)
+    expect.assertions(3)
 
-    mockMws.orders
-    mockMws.orders
-
+    expect(mockMws.orders).toBeInstanceOf(Orders)
+    expect(mockMws.orders).toBeInstanceOf(Orders)
     expect(Orders).toHaveBeenCalledTimes(1)
   })
 })
-/* eslint-enable no-unused-expressions */
