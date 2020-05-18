@@ -123,14 +123,12 @@ export const MWSApiError = Codec.interface({
 
 type MWSApiError = GetInterface<typeof MWSApiError>
 
-/* eslint-disable no-param-reassign */
 export const enhanceError = (error: HttpError, response: MWSApiError): HttpError => {
-  error.type = response.ErrorResponse.Error.Type
-  error.code = response.ErrorResponse.Error.Code
-  error.detail = response.ErrorResponse.Error.Detail
-  error.mwsMessage = response.ErrorResponse.Error.Message
-  error.requestId = response.ErrorResponse.RequestID || response.ErrorResponse.RequestId || ''
-
-  return error
+  return Object.assign(error, {
+    type: response.ErrorResponse.Error.Type,
+    code: response.ErrorResponse.Error.Code,
+    detail: response.ErrorResponse.Error.Detail,
+    mwsMessage: response.ErrorResponse.Error.Message,
+    requestId: response.ErrorResponse.RequestID || response.ErrorResponse.RequestId || '',
+  } as HttpError)
 }
-/* eslint-enable no-param-reassign */
