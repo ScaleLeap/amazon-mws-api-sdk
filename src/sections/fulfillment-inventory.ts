@@ -59,7 +59,7 @@ const InventorySupply = Codec.interface({
   TotalSupplyQuantity: number,
   InStockSupplyQuantity: number,
   EarliestAvailability: optional(Timepoint),
-  SupplyDetail: optional(ensureArray('InventorySupplyDetail', InventorySupplyDetail)),
+  SupplyDetail: optional(ensureArray('member', InventorySupplyDetail)),
 })
 
 const InventorySupplyList = Codec.interface({
@@ -78,15 +78,16 @@ type InventorySupplyList = GetInterface<typeof InventorySupplyList>
 
 const canonicalizeParameters = (parameters: ListInventorySupplyRequestParameters) => {
   return {
-    'SellersSkus.member': parameters.SellerSKU,
+    'SellersSkus.member': parameters.SellerSku,
+    QueryStartDateTime: parameters.QueryStartDateTime?.toISOString(),
     ResponseGroup: parameters.ResponseGroup,
     MarketplaceId: parameters.MarketplaceId,
   }
 }
 
 interface ListInventorySupplyRequestParameters {
-  SellerSKU?: string[]
-  QueryStartDateTime?: Date // No examples of usage of QueryStartDateTime as parameter shown on docs
+  SellerSku?: string[]
+  QueryStartDateTime?: Date
   ResponseGroup?: 'Basic' | 'Detailed'
   MarketplaceId?: string
 }
