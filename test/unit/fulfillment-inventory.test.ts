@@ -1,6 +1,6 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
-// import { NextToken } from '../../src/parsing'
+import { NextToken } from '../../src/parsing'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -27,11 +27,20 @@ const mockMwsInventorySupply = new MWS(
   ),
 )
 
+const mockMwsInventorySupplyNT = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('fulfillment_inventory_list_inventory_supply_nt'),
+      headers,
+    }),
+  ),
+)
+
 const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
 
-// const mockNextToken = new NextToken('ListOrdersBy', '123')
+const mockNextTokenInventorySupply = new NextToken('ListInventorySupply', '123')
 
 const parsingError = 'Expected an object, but received a string with value ""'
 
@@ -47,9 +56,30 @@ describe('fulfillment-inventory', () => {
     it('throws a parsing error when the response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.sellers.listMarketplaceParticipations()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
-      )
+      await expect(() =>
+        mockMwsFail.fulfillmentInventory.listInventorySupply({}),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
+  describe('listInventorySupplyByNextToken', () => {
+    it('returns a parsed model when the response is valid', async () => {
+      expect.assertions(1)
+      expect(
+        await mockMwsInventorySupplyNT.fulfillmentInventory.listInventorySupplyByNextToken(
+          mockNextTokenInventorySupply,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInventory.listInventorySupplyByNextToken(
+          mockNextTokenInventorySupply,
+        ),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 })
