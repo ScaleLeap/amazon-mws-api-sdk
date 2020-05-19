@@ -3,6 +3,7 @@ import { Codec, exactly, GetInterface, number, oneOf, optional, string } from 'p
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
 import { ensureArray, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
+import { getServiceStatusByResource } from './shared'
 
 const FULFILLMENT_INVENTORY_API_VERSION = '2010-10-01'
 
@@ -147,5 +148,13 @@ export class FulfillmentInventory {
         throw new ParsingError(error)
       },
     })
+  }
+
+  async getServiceStatus() {
+    return getServiceStatusByResource(
+      this.httpClient,
+      Resource.FulfilmentInventory,
+      FULFILLMENT_INVENTORY_API_VERSION,
+    )
   }
 }
