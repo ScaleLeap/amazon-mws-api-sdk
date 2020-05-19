@@ -35,7 +35,7 @@
     "ts-error": "1.0.6"
   },
   "devDependencies": {
-    "@scaleleap/config": "1.6.1",
+    "@scaleleap/config": "2.0.0",
     "@scaleleap/semantic-release-config": "1.1.9",
     "@scaleleap/utils": "1.7.0",
     "@types/is-ci": "2.0.0",
