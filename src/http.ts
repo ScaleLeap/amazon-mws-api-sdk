@@ -95,7 +95,7 @@ interface ResourceActions {
     | 'GetProductCategoriesForSKU'
     | 'GetProductCategoriesForASIN'
     | 'GetServiceStatus'
-  [Resource.FulfilmentInventory]: 'ListInventorySupply'
+  [Resource.FulfilmentInventory]: 'ListInventorySupply' | 'ListInventorySupplyByNextToken'
 }
 
 interface Request {

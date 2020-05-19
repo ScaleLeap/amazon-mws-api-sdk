@@ -61,3 +61,46 @@ Array [
   },
 ]
 `;
+
+exports[`fulfillment-inventory listInventorySupplyByNextToken returns a parsed model when the response is valid 1`] = `
+Array [
+  Object {
+    "InventorySupplyList": Array [
+      Object {
+        "ASIN": "B00008UI0R",
+        "Condition": "",
+        "EarliestAvailability": undefined,
+        "FNSKU": "B00008UI0R",
+        "InStockSupplyQuantity": 0,
+        "SellerSKU": "SampleSKU5",
+        "SupplyDetail": Array [],
+        "TotalSupplyQuantity": 0,
+      },
+      Object {
+        "ASIN": "B00000K3CQ",
+        "Condition": "NewItem",
+        "EarliestAvailability": Object {
+          "DateTime": undefined,
+          "TimepointType": "Immediately",
+        },
+        "FNSKU": "X0000000FM",
+        "InStockSupplyQuantity": 5259,
+        "SellerSKU": "SampleSKU6",
+        "SupplyDetail": Array [],
+        "TotalSupplyQuantity": 5259,
+      },
+    ],
+    "NextToken": NextToken {
+      "action": "ListInventorySupply",
+      "token": "2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;

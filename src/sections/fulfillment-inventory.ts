@@ -2,7 +2,7 @@ import { Codec, exactly, GetInterface, number, oneOf, optional, string } from 'p
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray, mwsDate, nextToken as nextTokenCodec } from '../parsing'
+import { ensureArray, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 
 const FULFILLMENT_INVENTORY_API_VERSION = '2010-10-01'
 
@@ -25,6 +25,8 @@ enum Condition {
   RefurbishedWithWarranty = 'RefurbishedWithWarranty',
   Refurbished = 'Refurbished',
   Club = 'Club',
+  // InventorySupplyListByNextToken fixture has condition with an empty string as value
+  '' = '',
 }
 
 enum TimepointType {
@@ -68,13 +70,26 @@ const InventorySupplyList = Codec.interface({
   InventorySupplyList: ensureArray('member', InventorySupply),
 })
 
+type InventorySupplyList = GetInterface<typeof InventorySupplyList>
+
 const ListInventorySupplyResponse = Codec.interface({
   ListInventorySupplyResponse: Codec.interface({
     ListInventorySupplyResult: InventorySupplyList,
   }),
 })
 
-type InventorySupplyList = GetInterface<typeof InventorySupplyList>
+const InventorySupplyListByNextToken = Codec.interface({
+  NextToken: optional(nextTokenCodec('ListInventorySupply')),
+  InventorySupplyList: ensureArray('member', InventorySupply),
+})
+
+type InventorySupplyListByNextToken = GetInterface<typeof InventorySupplyListByNextToken>
+
+const ListInventorySupplyByNextTokenResponse = Codec.interface({
+  ListInventorySupplyByNextTokenResponse: Codec.interface({
+    ListInventorySupplyByNextTokenResult: InventorySupplyListByNextToken,
+  }),
+})
 
 const canonicalizeParameters = (parameters: ListInventorySupplyRequestParameters) => {
   return {
@@ -107,6 +122,27 @@ export class FulfillmentInventory {
 
     return ListInventorySupplyResponse.decode(response).caseOf({
       Right: (x) => [x.ListInventorySupplyResponse.ListInventorySupplyResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async listInventorySupplyByNextToken(
+    nextToken: NextToken<'ListInventorySupply'>,
+  ): Promise<[InventorySupplyListByNextToken, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfilmentInventory,
+      version: FULFILLMENT_INVENTORY_API_VERSION,
+      action: 'ListInventorySupplyByNextToken',
+      parameters: { NextToken: nextToken.token },
+    })
+
+    return ListInventorySupplyByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.ListInventorySupplyByNextTokenResponse.ListInventorySupplyByNextTokenResult,
+        meta,
+      ],
       Left: (error) => {
         throw new ParsingError(error)
       },
