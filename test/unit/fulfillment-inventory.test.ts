@@ -36,6 +36,15 @@ const mockMwsInventorySupplyNT = new MWS(
   ),
 )
 
+const mockMwsServiceStatus = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('get_service_status'),
+      headers,
+    }),
+  ),
+)
+
 const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
@@ -80,6 +89,22 @@ describe('fulfillment-inventory', () => {
           mockNextTokenInventorySupply,
         ),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
+  describe('getServiceStatus', () => {
+    it('returns a parsed model when the status response is valid', async () => {
+      expect.assertions(1)
+
+      expect(await mockMwsServiceStatus.fulfillmentInventory.getServiceStatus()).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.fulfillmentInventory.getServiceStatus()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
     })
   })
 })
