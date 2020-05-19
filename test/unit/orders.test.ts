@@ -104,9 +104,7 @@ describe('orders', () => {
       expect.assertions(1)
 
       expect(
-        await mockMwsListOrdersNT.orders.listOrdersByNextToken(mockNextTokenOrders, {
-          MarketplaceId: [],
-        }),
+        await mockMwsListOrdersNT.orders.listOrdersByNextToken(mockNextTokenOrders),
       ).toMatchSnapshot()
     })
 
@@ -114,9 +112,7 @@ describe('orders', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.orders.listOrdersByNextToken(mockNextTokenOrders, {
-          MarketplaceId: [],
-        }),
+        mockMwsFail.orders.listOrdersByNextToken(mockNextTokenOrders),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
@@ -160,9 +156,7 @@ describe('orders', () => {
       expect.assertions(1)
 
       expect(
-        await mockMwsListOrderItemsNT.orders.listOrderItemsByNextToken(mockNextTokenOrderItems, {
-          AmazonOrderId: '',
-        }),
+        await mockMwsListOrderItemsNT.orders.listOrderItemsByNextToken(mockNextTokenOrderItems),
       ).toMatchSnapshot()
     })
 
@@ -170,9 +164,7 @@ describe('orders', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.orders.listOrderItemsByNextToken(mockNextTokenOrderItems, {
-          AmazonOrderId: '',
-        }),
+        mockMwsFail.orders.listOrderItemsByNextToken(mockNextTokenOrderItems),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
