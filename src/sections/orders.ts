@@ -340,14 +340,12 @@ export class Orders {
 
   async listOrdersByNextToken(
     nextToken: NextToken<'ListOrders'>,
-    parameters: ListOrderParameters,
   ): Promise<[ListOrders, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Orders,
       version: ORDERS_API_VERSION,
       action: 'ListOrdersByNextToken',
       parameters: {
-        ...canonicalizeParameters(parameters),
         NextToken: nextToken.token,
       },
     })
@@ -398,15 +396,12 @@ export class Orders {
 
   async listOrderItemsByNextToken(
     nextToken: NextToken<'ListOrderItems'>,
-    parameters: {
-      AmazonOrderId: string
-    },
   ): Promise<[ListOrderItems, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Orders,
       version: ORDERS_API_VERSION,
       action: 'ListOrderItemsByNextToken',
-      parameters: { ...parameters, NextToken: nextToken.token },
+      parameters: { NextToken: nextToken.token },
     })
 
     return ListOrderItemsByNextTokenResponse.decode(response).caseOf({
