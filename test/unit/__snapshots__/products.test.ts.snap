@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`products getMyFeesEstimate returns a list fee estimates when the response is valid 1`] = `
+Array [
+  Object {
+    "FeesEstimateResultList": Array [
+      Object {
+        "Error": Object {
+          "Code": "String",
+          "Message": "String",
+          "Type": "String",
+        },
+        "FeesEstimate": Object {
+          "FeeDetailList": Array [
+            Object {
+              "FeeAmount": Object {
+                "Amount": 100,
+                "CurrencyCode": "USD",
+              },
+              "FeePromotion": Object {
+                "Amount": 100,
+                "CurrencyCode": "USD",
+              },
+              "FeeType": "ReferralFee",
+              "FinalFee": Object {
+                "Amount": 100,
+                "CurrencyCode": "USD",
+              },
+              "TaxAmount": Object {
+                "Amount": 100,
+                "CurrencyCode": "USD",
+              },
+            },
+          ],
+          "TimeOfFeesEstimation": 1969-07-21T02:56:03.000Z,
+          "TotalFeesEstimate": Object {
+            "Amount": 100,
+            "CurrencyCode": "USD",
+          },
+        },
+        "FeesEstimateIdentifier": Object {
+          "IdType": "SKU",
+          "IdValue": "String",
+          "IsAmazonFulfilled": true,
+          "MarketplaceId": "String",
+          "PriceToEstimateFees": Object {
+            "ListingPrice": Object {
+              "Amount": 100,
+              "CurrencyCode": "USD",
+            },
+            "Points": Object {
+              "PointsMonetaryValue": Object {
+                "Amount": 100,
+                "CurrencyCode": "USD",
+              },
+              "PointsNumber": 1,
+            },
+            "Shipping": Object {
+              "Amount": 100,
+              "CurrencyCode": "USD",
+            },
+          },
+          "SellerInputIdentifier": "String",
+        },
+        "Status": "Success",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
