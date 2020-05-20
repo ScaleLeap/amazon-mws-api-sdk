@@ -37,15 +37,12 @@ const mockMwsFail = new MWS(
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('products', () => {
-  describe('listMatchingProducts', () => {
-    it('returns an array of products when the response is valid', async () => {
+  describe('getMyFeesEstimate', () => {
+    it('returns a list fee estimates when the response is valid', async () => {
       expect.assertions(1)
 
       expect(
-        await mockListMatchingProducts.products.listMatchingProducts({
-          MarketplaceId: '',
-          Query: '',
-        }),
+        await mockListMatchingProducts.products.getMyFeesEstimate({ FeesEstimateRequestList: [] }),
       ).toMatchSnapshot()
     })
 
@@ -53,7 +50,7 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.listMatchingProducts({ MarketplaceId: '', Query: '' }),
+        mockMwsFail.products.getMyFeesEstimate({ FeesEstimateRequestList: [] }),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
