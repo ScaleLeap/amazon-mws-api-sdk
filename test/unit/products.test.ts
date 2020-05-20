@@ -22,7 +22,7 @@ const headers = {
 const mockListMatchingProducts = new MWS(
   new HttpClient(httpConfig, () =>
     Promise.resolve({
-      data: getFixture('products_list_matching_products'),
+      data: getFixture('products_get_my_fees_estimate'),
       headers,
     }),
   ),
