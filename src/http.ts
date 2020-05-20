@@ -64,6 +64,7 @@ export enum Resource {
   Sellers = 'Sellers',
   Orders = 'Orders',
   Products = 'Products',
+  FulfilmentInventory = 'FulfillmentInventory',
 }
 
 interface ResourceActions {
@@ -93,6 +94,10 @@ interface ResourceActions {
     | 'GetMyPriceForASIN'
     | 'GetProductCategoriesForSKU'
     | 'GetProductCategoriesForASIN'
+    | 'GetServiceStatus'
+  [Resource.FulfilmentInventory]:
+    | 'ListInventorySupply'
+    | 'ListInventorySupplyByNextToken'
     | 'GetServiceStatus'
 }
 
