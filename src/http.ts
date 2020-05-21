@@ -57,7 +57,8 @@ export interface MWSOptions {
 }
 
 type HttpMethod = 'GET' | 'POST'
-type Parameters = Record<string, string | number | (number | string)[] | undefined>
+type ParameterTypes = string | number | (number | string)[] | object[] | boolean | undefined
+type Parameters = Record<string, ParameterTypes>
 type CleanParameters = Record<string, string>
 
 export enum Resource {
@@ -134,14 +135,35 @@ const canonicalizeParameters = (parameters: CleanParameters): string => {
   return sp.toString().replace(/\+/g, '%20')
 }
 
-const cleanParameters = (parameters: Parameters): CleanParameters =>
+export const toDotNotation = (object: object, prefix: string) => {
+  const result: { [key: string]: string | number | boolean } = {}
+  function dotify(plainObject: object, currentKey?: string | number) {
+    Object.entries(plainObject).forEach(([key, value]) => {
+      const newKey = currentKey ? `${currentKey}.${key}` : key // joined key with dot
+      if (value && typeof value === 'object') {
+        dotify(value, newKey) // it's a nested object, so do it again
+      } else {
+        Object.assign(result, { [`${prefix}.${newKey}`]: value }) // it's not an object, so set the property
+      }
+    })
+  }
+
+  dotify(object)
+  return result
+}
+
+export const cleanParameters = (parameters: Parameters): CleanParameters =>
   Object.entries(parameters)
     .filter(([, v]) => v !== undefined)
     .reduce((result, [k, v]) => {
       if (Array.isArray(v)) {
-        for (let index = 0; index < v.length; index += 1) {
-          Object.assign(result, { [`${k}.${index + 1}`]: String(v) })
-        }
+        v.forEach((element: string | number | object, index: number) => {
+          if (typeof element === 'string' || !Number.isNaN(Number(element))) {
+            Object.assign(result, { [`${k}.${index + 1}`]: String(element) })
+          } else {
+            Object.assign(result, toDotNotation(element as object, `${k}.${index + 1}`))
+          }
+        })
       } else {
         Object.assign(result, { [k]: String(v) })
       }
