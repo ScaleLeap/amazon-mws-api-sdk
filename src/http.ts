@@ -32,7 +32,6 @@ import {
   InvalidRequest,
   InvalidScheduleFrequency,
   InvalidUPCIdentifier,
-  MWSApiError,
   NonRetriableInternalError,
   PickupSlotNotAvailable,
   QuotaExceeded,
@@ -46,6 +45,7 @@ import {
   ScheduleWindowExpired,
   SignatureDoesNotMatch,
 } from './error'
+import { MWSApiError } from './error-codec'
 import { sign } from './sign'
 
 export interface MWSOptions {
