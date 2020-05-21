@@ -1,4 +1,15 @@
-import { boolean, Codec, exactly, GetInterface, number, oneOf, optional, string } from 'purify-ts'
+import {
+  array,
+  boolean,
+  Codec,
+  exactly,
+  GetInterface,
+  number,
+  oneOf,
+  optional,
+  string,
+  unknown,
+} from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -103,12 +114,32 @@ enum FeeType {
   FBADeliveryServicesFee = 'FBADeliveryServicesFee',
 }
 
+type AvailableFeeTypes =
+  | 'ReferralFee'
+  | 'VariableClosingFee'
+  | 'PerItemFee'
+  | 'FBAFees'
+  | 'FBAPickAndPack'
+  | 'FBAWeightHandling'
+  | 'FBAOrderHandling'
+  | 'FBADeliveryServicesFee'
+
+interface FeeDetail {
+  FeeType: AvailableFeeTypes
+  FeeAmount: MoneyType
+  FeePromotion?: MoneyType
+  TaxAmount?: MoneyType
+  FinalFee: MoneyType
+  IncludedFeeDetailList?: FeeDetail
+}
+
 const FeeDetail = Codec.interface({
   FeeType: oneOf(Object.values(FeeType).map((x) => exactly(x))),
   FeeAmount: MoneyType,
   FeePromotion: optional(MoneyType),
   TaxAmount: optional(MoneyType),
   FinalFee: MoneyType,
+  IncludedFeeDetailList: optional(array(unknown)), // Unsure how to handle this
   // IncludedFeeDetailList: optional(ensureArray('IncludedFeeDetail', FeeDetail)) // Need to think about how to get around this
 })
 
