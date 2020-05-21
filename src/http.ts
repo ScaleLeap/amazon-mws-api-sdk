@@ -57,7 +57,8 @@ export interface MWSOptions {
 }
 
 type HttpMethod = 'GET' | 'POST'
-type Parameters = Record<string, string | number | (number | string)[] | undefined>
+type ParameterTypes = string | number | (number | string)[] | object[] | boolean | undefined
+type Parameters = Record<string, ParameterTypes>
 type CleanParameters = Record<string, string>
 
 export enum Resource {
@@ -134,16 +135,37 @@ const canonicalizeParameters = (parameters: CleanParameters): string => {
   return sp.toString().replace(/\+/g, '%20')
 }
 
-const cleanParameters = (parameters: Parameters): CleanParameters =>
-  Object.entries(parameters)
-    .filter(([, v]) => v !== undefined)
-    .reduce((result, [k, v]) => {
-      if (Array.isArray(v)) {
-        for (let index = 0; index < v.length; index += 1) {
-          Object.assign(result, { [`${k}.${index + 1}`]: String(v) })
-        }
+export const toDotNotation = (object: object, prefix: string) => {
+  const result: { [key: string]: string | number | boolean } = {}
+  function dotify(plainObject: object, currentKey?: string | number) {
+    Object.entries(plainObject).forEach(([key, value]) => {
+      const newKey = currentKey ? `${currentKey}.${key}` : key // joined key with dot
+      if (value && typeof value === 'object') {
+        dotify(value, newKey) // it's a nested object, so do it again
       } else {
-        Object.assign(result, { [k]: String(v) })
+        Object.assign(result, { [`${prefix}.${newKey}`]: value }) // it's not an object, so set the property
+      }
+    })
+  }
+
+  dotify(object)
+  return result
+}
+
+export const cleanParameters = (parameters: Parameters): CleanParameters =>
+  Object.entries(parameters)
+    .filter(([, parameter]) => parameter !== undefined)
+    .reduce((result, [key, parameter]) => {
+      if (Array.isArray(parameter)) {
+        parameter.forEach((parameterChild: string | number | object, index: number) => {
+          if (typeof parameterChild === 'string' || !Number.isNaN(Number(parameterChild))) {
+            Object.assign(result, { [`${key}.${index + 1}`]: String(parameterChild) })
+          } else {
+            Object.assign(result, toDotNotation(parameterChild as object, `${key}.${index + 1}`))
+          }
+        })
+      } else {
+        Object.assign(result, { [key]: String(parameter) })
       }
 
       return result
