@@ -7,7 +7,7 @@ import {
   InvalidUPCIdentifier,
   MWSError,
 } from '../../src'
-import { Resource } from '../../src/http'
+import { cleanParameters, Resource } from '../../src/http'
 import { getFixture } from '../utils'
 
 const httpClientThatThrows = (error: unknown) =>
@@ -126,6 +126,53 @@ describe('httpClient', () => {
       await expect(() => httpClient.request('POST', mockRequest)).rejects.toStrictEqual(
         new InvalidAddress('GetServiceStatus request failed'),
       )
+    })
+  })
+
+  describe('cleanParameters', () => {
+    it('should properly clean primitive parameters', () => {
+      expect.hasAssertions()
+
+      const parameters = {
+        abc: ['a', 'b', 'c'],
+        a: 'a',
+        b: 'b',
+        c: true,
+      }
+
+      const expectedResult = { 'abc.1': 'a', 'abc.2': 'b', 'abc.3': 'c', a: 'a', b: 'b', c: 'true' }
+
+      expect(cleanParameters(parameters)).toStrictEqual(expectedResult)
+    })
+
+    it('should properly clean parameters with array of objects', () => {
+      expect.hasAssertions()
+
+      const parameters = {
+        'aabbc.ddcc': [
+          {
+            a: 'a',
+          },
+          {
+            b: 'b',
+          },
+          {
+            c: {
+              d: 'd',
+              c: 'c,',
+            },
+          },
+        ],
+      }
+
+      const results = {
+        'aabbc.ddcc.1.a': 'a',
+        'aabbc.ddcc.2.b': 'b',
+        'aabbc.ddcc.3.c.d': 'd',
+        'aabbc.ddcc.3.c.c': 'c,',
+      }
+
+      expect(cleanParameters(parameters)).toStrictEqual(results)
     })
   })
 })
