@@ -103,38 +103,8 @@ const FeesEstimateIdentifier = Codec.interface({
   IsAmazonFulfilled: boolean,
 })
 
-enum FeeType {
-  ReferralFee = 'ReferralFee',
-  VariableClosingFee = 'VariableClosingFee',
-  PerItemFee = 'PerItemFee',
-  FBAFees = 'FBAFees',
-  FBAPickAndPack = 'FBAPickAndPack',
-  FBAWeightHandling = 'FBAWeightHandling',
-  FBAOrderHandling = 'FBAOrderHandling',
-  FBADeliveryServicesFee = 'FBADeliveryServicesFee',
-}
-
-type AvailableFeeTypes =
-  | 'ReferralFee'
-  | 'VariableClosingFee'
-  | 'PerItemFee'
-  | 'FBAFees'
-  | 'FBAPickAndPack'
-  | 'FBAWeightHandling'
-  | 'FBAOrderHandling'
-  | 'FBADeliveryServicesFee'
-
-interface FeeDetail {
-  FeeType: AvailableFeeTypes
-  FeeAmount: MoneyType
-  FeePromotion?: MoneyType
-  TaxAmount?: MoneyType
-  FinalFee: MoneyType
-  IncludedFeeDetailList?: FeeDetail
-}
-
 const FeeDetail = Codec.interface({
-  FeeType: oneOf(Object.values(FeeType).map((x) => exactly(x))),
+  FeeType: string,
   FeeAmount: MoneyType,
   FeePromotion: optional(MoneyType),
   TaxAmount: optional(MoneyType),
