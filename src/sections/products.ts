@@ -141,14 +141,13 @@ export class Products {
   constructor(private httpClient: HttpClient) {}
 
   async getMyFeesEstimate(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _parameters: GetMyFeesEstimateParameters,
+    parameters: GetMyFeesEstimateParameters,
   ): Promise<[GetMyFeesEstimateResponse, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Products,
       version: PRODUCTS_API_VERSION,
       action: 'GetMyFeesEstimate',
-      parameters: {}, // Patch after pushing fix to clean dependencies to master
+      parameters,
     })
 
     return GetMyFeesEstimateResponse.decode(response).caseOf({
