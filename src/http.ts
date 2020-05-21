@@ -154,18 +154,18 @@ export const toDotNotation = (object: object, prefix: string) => {
 
 export const cleanParameters = (parameters: Parameters): CleanParameters =>
   Object.entries(parameters)
-    .filter(([, v]) => v !== undefined)
-    .reduce((result, [k, v]) => {
-      if (Array.isArray(v)) {
-        v.forEach((element: string | number | object, index: number) => {
-          if (typeof element === 'string' || !Number.isNaN(Number(element))) {
-            Object.assign(result, { [`${k}.${index + 1}`]: String(element) })
+    .filter(([, parameter]) => parameter !== undefined)
+    .reduce((result, [key, parameter]) => {
+      if (Array.isArray(parameter)) {
+        parameter.forEach((parameterChild: string | number | object, index: number) => {
+          if (typeof parameterChild === 'string' || !Number.isNaN(Number(parameterChild))) {
+            Object.assign(result, { [`${key}.${index + 1}`]: String(parameterChild) })
           } else {
-            Object.assign(result, toDotNotation(element as object, `${k}.${index + 1}`))
+            Object.assign(result, toDotNotation(parameterChild as object, `${key}.${index + 1}`))
           }
         })
       } else {
-        Object.assign(result, { [k]: String(v) })
+        Object.assign(result, { [key]: String(parameter) })
       }
 
       return result
