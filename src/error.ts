@@ -1,6 +1,8 @@
 /* eslint-disable max-classes-per-file */
-import { Codec, exactly, GetInterface, oneOf, optional, string } from 'purify-ts/Codec'
+import { GetInterface } from 'purify-ts/Codec'
 import { ExtendableError } from 'ts-error'
+
+import { MWSApiError } from './error-codec'
 
 export class MWSError extends ExtendableError {}
 
@@ -65,61 +67,6 @@ export class InvalidInputFatalException extends HttpError {}
 
 export class ParsingError extends MWSError {}
 /* eslint-enable max-classes-per-file */
-
-export const MWSApiError = Codec.interface({
-  ErrorResponse: Codec.interface({
-    Error: Codec.interface({
-      Type: string,
-      Code: oneOf(
-        ([
-          'InputStreamDisconnected',
-          'InvalidParameterValue',
-          'AccessDenied',
-          'InvalidAccessKeyId',
-          'SignatureDoesNotMatch',
-          'InvalidAddress',
-          'InternalError',
-          'Internal Error',
-          'QuotaExceeded',
-          'RequestThrottled',
-          'ResourceNotFound',
-          'ScheduledPackageAlreadyExists',
-          'RegionNotSupported',
-          'ScheduleWindowExpired',
-          'InvalidOrderState',
-          'PickupSlotNotAvailable',
-          'AccessToFeedProcessingResultDenied',
-          'ContentMD5Missing',
-          'ContentMD5DoesNotMatch',
-          'FeedCanceled',
-          'FeedProcessingResultNoLongerAvailable',
-          'FeedProcessingResultNotReady',
-          'InputDataError',
-          'InvalidFeedSubmissionId',
-          'InvalidFeedType',
-          'InvalidRequest',
-          'NonRetriableInternalError',
-          'RetriableInternalError',
-          'AccessToReportDenied',
-          'InvalidReportId',
-          'InvalidReportType',
-          'InvalidScheduleFrequency',
-          'ReportNoLongerAvailable',
-          'ReportNotReady',
-          'DependencyFatalException',
-          'DependencyRetriableException',
-          'DependencyUnauthorizedException',
-          'InternalErrorFatalException',
-          'InvalidInputFatalException',
-        ] as const).map((element) => exactly(element)),
-      ),
-      Message: string,
-      Detail: optional(string),
-    }),
-    RequestID: optional(string),
-    RequestId: optional(string),
-  }),
-})
 
 type MWSApiError = GetInterface<typeof MWSApiError>
 
