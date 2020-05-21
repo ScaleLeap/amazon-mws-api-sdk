@@ -5,47 +5,69 @@ Array [
   Object {
     "FeesEstimateResultList": Array [
       Object {
-        "Error": Object {
-          "Code": "String",
-          "Message": "String",
-          "Type": "String",
-        },
+        "Error": undefined,
         "FeesEstimate": Object {
           "FeeDetailList": Array [
             Object {
               "FeeAmount": Object {
-                "Amount": 100,
+                "Amount": 8.7,
                 "CurrencyCode": "USD",
               },
               "FeePromotion": Object {
-                "Amount": 100,
+                "Amount": 1,
                 "CurrencyCode": "USD",
               },
               "FeeType": "ReferralFee",
               "FinalFee": Object {
-                "Amount": 100,
+                "Amount": 7.7,
                 "CurrencyCode": "USD",
               },
-              "TaxAmount": Object {
-                "Amount": 100,
+              "IncludedFeeDetailList": undefined,
+              "TaxAmount": undefined,
+            },
+            Object {
+              "FeeAmount": Object {
+                "Amount": 0,
                 "CurrencyCode": "USD",
               },
+              "FeePromotion": undefined,
+              "FeeType": "VariableClosingFee",
+              "FinalFee": Object {
+                "Amount": 0,
+                "CurrencyCode": "USD",
+              },
+              "IncludedFeeDetailList": undefined,
+              "TaxAmount": undefined,
+            },
+            Object {
+              "FeeAmount": Object {
+                "Amount": 2.3,
+                "CurrencyCode": "USD",
+              },
+              "FeePromotion": undefined,
+              "FeeType": "FulfillmentFees",
+              "FinalFee": Object {
+                "Amount": 2.3,
+                "CurrencyCode": "USD",
+              },
+              "IncludedFeeDetailList": undefined,
+              "TaxAmount": undefined,
             },
           ],
-          "TimeOfFeesEstimation": 1969-07-21T02:56:03.000Z,
+          "TimeOfFeesEstimation": 2015-07-19T23:15:11.859Z,
           "TotalFeesEstimate": Object {
-            "Amount": 100,
+            "Amount": 10,
             "CurrencyCode": "USD",
           },
         },
         "FeesEstimateIdentifier": Object {
-          "IdType": "SKU",
-          "IdValue": "String",
+          "IdType": "ASIN",
+          "IdValue": "B0002GTTRC",
           "IsAmazonFulfilled": true,
-          "MarketplaceId": "String",
+          "MarketplaceId": "ATVPDKIKX0DER",
           "PriceToEstimateFees": Object {
             "ListingPrice": Object {
-              "Amount": 100,
+              "Amount": 58,
               "CurrencyCode": "USD",
             },
             "Points": Object {
@@ -53,14 +75,14 @@ Array [
                 "Amount": 100,
                 "CurrencyCode": "USD",
               },
-              "PointsNumber": 1,
+              "PointsNumber": 0,
             },
             "Shipping": Object {
-              "Amount": 100,
+              "Amount": 0,
               "CurrencyCode": "USD",
             },
           },
-          "SellerInputIdentifier": "String",
+          "SellerInputIdentifier": "IDDDDDDDD",
         },
         "Status": "Success",
       },
