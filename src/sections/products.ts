@@ -154,8 +154,10 @@ interface ListMatchingProductsRequestParameters {
   [key: string]: string | undefined
 }
 
+const Product = unknown
+
 const ListMatchingProducts = Codec.interface({
-  Products: ensureArray('Product', unknown),
+  Products: ensureArray('Product', Product),
 })
 
 const ListMatchingProductsResponse = Codec.interface({
