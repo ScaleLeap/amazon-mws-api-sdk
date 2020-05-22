@@ -1,6 +1,5 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
-// import { NextToken } from '../../src/parsing'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -37,15 +36,43 @@ const mockGetMyFeesEstimate = new MWS(
   ),
 )
 
+const mockGetMatchingProduct = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('products_get_matching_product'),
+      headers,
+    }),
+  ),
+)
+
 const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
 
-// const mockNextTokenInventorySupply = new NextToken('ListInventorySupply', '123')
-
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('products', () => {
+  describe('getMatchingProduct', () => {
+    it('returns a matching product when the response is valid', async () => {
+      expect.assertions(1)
+
+      expect(
+        await mockGetMatchingProduct.products.getMatchingProduct({
+          MarketplaceId: '',
+          ASINList: [],
+        }),
+      ).toMatchSnapshot()
+
+      it('throws an error when the response is not valid', async () => {
+        expect.assertions(1)
+
+        await expect(() =>
+          mockMwsFail.products.getMatchingProduct({ MarketplaceId: '', ASINList: [] }),
+        ).rejects.toStrictEqual(new ParsingError(parsingError))
+      })
+    })
+  })
+
   describe('listMatchingProducts', () => {
     it('returns an array of products when the response is valid', async () => {
       expect.assertions(1)
