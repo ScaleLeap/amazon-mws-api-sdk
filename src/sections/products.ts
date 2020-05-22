@@ -247,6 +247,25 @@ const GetCompetitivePricingForASINResponse = Codec.interface({
   GetCompetitivePricingForASINResponse: GetCompetitivePricingForASINResult,
 })
 
+interface ListMatchingProductsRequestParameters {
+  MarketplaceId: string
+  Query: string
+  QueryContextId?: string
+  [key: string]: string | undefined
+}
+
+const ListMatchingProducts = Codec.interface({
+  Products: ensureArray('Product', unknown),
+})
+
+const ListMatchingProductsResponse = Codec.interface({
+  ListMatchingProductsResponse: Codec.interface({
+    ListMatchingProductsResult: ListMatchingProducts,
+  }),
+})
+
+type ListMatchingProducts = GetInterface<typeof ListMatchingProducts>
+
 export class Products {
   constructor(private httpClient: HttpClient) {}
 
