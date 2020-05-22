@@ -1,14 +1,13 @@
 import {
-  array,
   boolean,
   Codec,
   exactly,
   GetInterface,
+  lazy,
   number,
   oneOf,
   optional,
   string,
-  unknown,
 } from 'purify-ts'
 
 import { ParsingError } from '../error'
@@ -42,9 +41,9 @@ const MoneyType = Codec.interface({
   CurrencyCode: oneOf(Object.values(CurrencyCodeEnum).map((x) => exactly(x))),
 })
 
-interface MoneyType {
-  Amount?: number
-  CurrencyCode?: CurrencyCode
+type MoneyType = {
+  Amount: number | undefined
+  CurrencyCode: CurrencyCodeEnum
 }
 
 const Points = Codec.interface({
@@ -52,11 +51,7 @@ const Points = Codec.interface({
   PointsMonetaryValue: MoneyType,
 })
 
-interface Points {
-  PointsNumber: number
-  PointsMonetaryValue: MoneyType
-}
-
+type Points = GetInterface<typeof Points>
 interface PriceToEstimateFees {
   ListingPrice: MoneyType
   Shipping?: MoneyType
@@ -103,14 +98,27 @@ const FeesEstimateIdentifier = Codec.interface({
   IsAmazonFulfilled: boolean,
 })
 
-const FeeDetail = Codec.interface({
+interface FeeDetail {
+  FeePromotion: MoneyType | undefined
+  TaxAmount: MoneyType | undefined
+  FinalFee: MoneyType
+  FeeType: string
+  FeeAmount: MoneyType
+  IncludedFeeDetailList: FeeDetail[] | undefined
+}
+
+const FeeDetail: Codec<FeeDetail> = Codec.interface({
   FeeType: string,
   FeeAmount: MoneyType,
   FeePromotion: optional(MoneyType),
   TaxAmount: optional(MoneyType),
   FinalFee: MoneyType,
-  IncludedFeeDetailList: optional(array(unknown)), // Unsure how to handle this
-  // IncludedFeeDetailList: optional(ensureArray('IncludedFeeDetail', FeeDetail)) // Need to think about how to get around this
+  IncludedFeeDetailList: optional(
+    ensureArray(
+      'IncludedFeeDetail',
+      lazy(() => FeeDetail),
+    ),
+  ),
 })
 
 const FeesEstimate = Codec.interface({
