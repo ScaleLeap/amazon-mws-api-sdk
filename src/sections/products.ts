@@ -8,6 +8,7 @@ import {
   oneOf,
   optional,
   string,
+  unknown,
 } from 'purify-ts'
 
 import { ParsingError } from '../error'
@@ -146,8 +147,45 @@ const GetMyFeesEstimateResponse = Codec.interface({
 
 type GetMyFeesEstimateResponse = GetInterface<typeof GetMyFeesEstimate>
 
+interface ListMatchingProductsRequestParameters {
+  MarketplaceId: string
+  Query: string
+  QueryContextId?: string
+  [key: string]: string | undefined
+}
+
+const ListMatchingProducts = Codec.interface({
+  Products: ensureArray('Product', unknown),
+})
+
+const ListMatchingProductsResponse = Codec.interface({
+  ListMatchingProductsResponse: Codec.interface({
+    ListMatchingProductsResult: ListMatchingProducts,
+  }),
+})
+
+type ListMatchingProducts = GetInterface<typeof ListMatchingProducts>
+
 export class Products {
   constructor(private httpClient: HttpClient) {}
+
+  async listMatchingProducts(
+    parameters: ListMatchingProductsRequestParameters,
+  ): Promise<[ListMatchingProducts, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Products,
+      version: PRODUCTS_API_VERSION,
+      action: 'ListMatchingProducts',
+      parameters,
+    })
+
+    return ListMatchingProductsResponse.decode(response).caseOf({
+      Right: (x) => [x.ListMatchingProductsResponse.ListMatchingProductsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getMyFeesEstimate(
     parameters: GetMyFeesEstimateParameters,
