@@ -22,6 +22,15 @@ const headers = {
 const mockListMatchingProducts = new MWS(
   new HttpClient(httpConfig, () =>
     Promise.resolve({
+      data: getFixture('products_list_matching_products'),
+      headers,
+    }),
+  ),
+)
+
+const mockGetMyFeesEstimate = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
       data: getFixture('products_get_my_fees_estimate'),
       headers,
     }),
@@ -37,12 +46,33 @@ const mockMwsFail = new MWS(
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('products', () => {
+  describe('listMatchingProducts', () => {
+    it('returns an array of products when the response is valid', async () => {
+      expect.assertions(1)
+
+      expect(
+        await mockListMatchingProducts.products.listMatchingProducts({
+          MarketplaceId: '',
+          Query: '',
+        }),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.products.listMatchingProducts({ MarketplaceId: '', Query: '' }),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getMyFeesEstimate', () => {
     it('returns a list fee estimates when the response is valid', async () => {
       expect.assertions(1)
 
       expect(
-        await mockListMatchingProducts.products.getMyFeesEstimate({ FeesEstimateRequestList: [] }),
+        await mockGetMyFeesEstimate.products.getMyFeesEstimate({ FeesEstimateRequestList: [] }),
       ).toMatchSnapshot()
     })
 
