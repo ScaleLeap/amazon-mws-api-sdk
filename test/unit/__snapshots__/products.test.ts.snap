@@ -97,3 +97,110 @@ Array [
   },
 ]
 `;
+
+exports[`products listMatchingProducts returns an array of products when the response is valid 1`] = `
+Array [
+  Object {
+    "Products": Array [
+      Object {
+        "AttributeSets": Object {
+          "ns2:ItemAttributes": Object {
+            "ns2:Author": "Rowling, J.K.",
+            "ns2:Binding": "Paperback",
+            "ns2:Brand": "Scholastic Press",
+            "ns2:Creator": "GrandPrÃ©, Mary",
+            "ns2:Edition": "1st",
+            "ns2:Feature": "Recommended Age: 9 years and up",
+            "ns2:IsAutographed": false,
+            "ns2:IsMemorabilia": false,
+            "ns2:ItemDimensions": Object {
+              "ns2:Height": 0.8,
+              "ns2:Length": 7.5,
+              "ns2:Weight": 0.5,
+              "ns2:Width": 5.2,
+            },
+            "ns2:Label": "Scholastic Paperbacks",
+            "ns2:Languages": Object {
+              "ns2:Language": Array [
+                Object {
+                  "ns2:Name": "english",
+                  "ns2:Type": "Unknown",
+                },
+                Object {
+                  "ns2:Name": "english",
+                  "ns2:Type": "Original Language",
+                },
+                Object {
+                  "ns2:Name": "english",
+                  "ns2:Type": "Published",
+                },
+              ],
+            },
+            "ns2:ListPrice": Object {
+              "ns2:Amount": 10.99,
+              "ns2:CurrencyCode": "USD",
+            },
+            "ns2:Manufacturer": "Scholastic Paperbacks",
+            "ns2:NumberOfItems": 1,
+            "ns2:NumberOfPages": 320,
+            "ns2:PackageDimensions": Object {
+              "ns2:Height": 1,
+              "ns2:Length": 7.5,
+              "ns2:Weight": 0.5,
+              "ns2:Width": 5.2,
+            },
+            "ns2:PackageQuantity": 1,
+            "ns2:PartNumber": 9780590353427,
+            "ns2:ProductGroup": "Book",
+            "ns2:ProductTypeName": "ABIS_BOOK",
+            "ns2:PublicationDate": "1999-10-01",
+            "ns2:Publisher": "Scholastic Paperbacks",
+            "ns2:ReleaseDate": "1999-09-08",
+            "ns2:SmallImage": Object {
+              "ns2:Height": 75,
+              "ns2:URL": "http://ecx.images-amazon.com/images/I/51MU5VilKpL._SL75_.jpg",
+              "ns2:Width": 51,
+            },
+            "ns2:Studio": "Scholastic Paperbacks",
+            "ns2:Title": "Harry Potter and the Sorcerer's Stone (Book 1)",
+          },
+        },
+        "Identifiers": Object {
+          "MarketplaceASIN": Object {
+            "ASIN": "059035342X",
+            "MarketplaceId": "ATVPDKIKX0DER",
+          },
+        },
+        "Relationships": "",
+        "SalesRankings": Object {
+          "SalesRank": Array [
+            Object {
+              "ProductCategoryId": "book_display_on_website",
+              "Rank": 401,
+            },
+            Object {
+              "ProductCategoryId": 15356791,
+              "Rank": 5,
+            },
+            Object {
+              "ProductCategoryId": 3153,
+              "Rank": 8,
+            },
+            Object {
+              "ProductCategoryId": 17468,
+              "Rank": 16,
+            },
+          ],
+        },
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
