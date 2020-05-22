@@ -41,7 +41,7 @@ const MoneyType = Codec.interface({
   CurrencyCode: oneOf(Object.values(CurrencyCodeEnum).map((x) => exactly(x))),
 })
 
-type MoneyType = {
+interface MoneyType {
   Amount: number | undefined
   CurrencyCode: CurrencyCodeEnum
 }
