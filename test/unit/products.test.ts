@@ -62,14 +62,14 @@ describe('products', () => {
           ASINList: [],
         }),
       ).toMatchSnapshot()
+    })
 
-      it('throws an error when the response is not valid', async () => {
-        expect.assertions(1)
+    it('throws an error when the response is not valid', async () => {
+      expect.assertions(1)
 
-        await expect(() =>
-          mockMwsFail.products.getMatchingProduct({ MarketplaceId: '', ASINList: [] }),
-        ).rejects.toStrictEqual(new ParsingError(parsingError))
-      })
+      await expect(() =>
+        mockMwsFail.products.getMatchingProduct({ MarketplaceId: '', ASINList: [] }),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 
