@@ -8,6 +8,7 @@ import {
   number,
   oneOf,
   optional,
+  record,
   string,
   unknown,
 } from 'purify-ts'
@@ -155,7 +156,7 @@ interface ListMatchingProductsRequestParameters {
   [key: string]: string | undefined
 }
 
-const Product = unknown
+const Product = record(string, unknown)
 
 const ListMatchingProducts = Codec.interface({
   Products: ensureArray('Product', Product),
