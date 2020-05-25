@@ -168,6 +168,24 @@ const ListMatchingProductsResponse = Codec.interface({
 
 type ListMatchingProducts = GetInterface<typeof ListMatchingProducts>
 
+interface GetMatchingProductParameters {
+  ASINList: string[]
+  MarketplaceId: string
+  [key: string]: string[] | string
+}
+
+const MatchingProduct = Codec.interface({
+  Product,
+})
+
+const GetMatchingProductResponse = Codec.interface({
+  GetMatchingProductResponse: Codec.interface({
+    GetMatchingProductResult: MatchingProduct,
+  }),
+})
+
+type MatchingProduct = GetInterface<typeof MatchingProduct>
+
 export class Products {
   constructor(private httpClient: HttpClient) {}
 
@@ -201,6 +219,24 @@ export class Products {
 
     return GetMyFeesEstimateResponse.decode(response).caseOf({
       Right: (x) => [x.GetMyFeesEstimateResponse.GetMyFeesEstimateResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getMatchingProduct(
+    parameters: GetMatchingProductParameters,
+  ): Promise<[MatchingProduct, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Products,
+      version: PRODUCTS_API_VERSION,
+      action: 'GetMatchingProduct',
+      parameters,
+    })
+
+    return GetMatchingProductResponse.decode(response).caseOf({
+      Right: (x) => [x.GetMatchingProductResponse.GetMatchingProductResult, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },
