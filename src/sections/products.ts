@@ -1,4 +1,5 @@
 import {
+  array,
   boolean,
   Codec,
   exactly,
@@ -266,6 +267,33 @@ const ListMatchingProductsResponse = Codec.interface({
 
 type ListMatchingProducts = GetInterface<typeof ListMatchingProducts>
 
+interface GetMatchingProductForIdParameters {
+  MarketplaceId: string
+  IdType: string
+  IdList: string[]
+  [key: string]: string | string[]
+}
+
+const MatchingProductForId = Codec.interface({
+  Products: ensureArray('Product', Product),
+})
+
+// GetMatchingProductForId is different than other APIs,
+// The example on MWS points to it possibly being an array structured this way
+const GetMatchingProductForIdResult = oneOf([
+  MatchingProductForId,
+  array(MatchingProductForId),
+  string,
+])
+
+const GetMatchingProductForIdResponse = Codec.interface({
+  GetMatchingProductForIdResponse: Codec.interface({
+    GetMatchingProductForIdResult,
+  }),
+})
+
+type GetMatchingProductForIdResult = GetInterface<typeof GetMatchingProductForIdResult>
+
 export class Products {
   constructor(private httpClient: HttpClient) {}
 
@@ -305,6 +333,10 @@ export class Products {
     })
   }
 
+  /**
+   *
+   * @todo Think about converting GetMatchingProductResposne to array to match getMatchingProductForId
+   */
   async getMatchingProduct(
     parameters: GetMatchingProductParameters,
   ): Promise<[GetMatchingProductResult, RequestMeta]> {
@@ -384,6 +416,24 @@ export class Products {
 
     return GetCompetitivePricingForASINResponse.decode(response).caseOf({
       Right: (x) => [x.GetCompetitivePricingForASINResponse, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getMatchingProductForId(
+    parameters: GetMatchingProductForIdParameters,
+  ): Promise<[GetMatchingProductForIdResult, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Products,
+      version: PRODUCTS_API_VERSION,
+      action: 'GetMatchingProductForId',
+      parameters,
+    })
+
+    return GetMatchingProductForIdResponse.decode(response).caseOf({
+      Right: (x) => [x.GetMatchingProductForIdResponse.GetMatchingProductForIdResult, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },
