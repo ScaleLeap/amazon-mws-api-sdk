@@ -1,0 +1,89 @@
+<GetCompetitivePricingForSKUResponse xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+    <GetCompetitivePricingForSKUResult SellerSKU="SKU2468" status="Success">
+        <Product xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd">
+            <Identifiers>
+                <MarketplaceASIN>
+                    <MarketplaceId>ATVPDKIKX0DER</MarketplaceId>
+                    <ASIN>1933890517</ASIN>
+                </MarketplaceASIN>
+                <SKUIdentifier>
+                    <MarketplaceId>ATVPDKIKX0DER</MarketplaceId>
+                    <SellerId>A1IMEXAMPLEWRC</SellerId>
+                    <SellerSKU>SKU2468</SellerSKU>
+                </SKUIdentifier>
+            </Identifiers>
+            <CompetitivePricing>
+                <CompetitivePrices>
+                    <CompetitivePrice belongsToRequester="false"
+                        condition="New"
+                        subcondition="New">
+                        <CompetitivePriceId>1</CompetitivePriceId>
+                        <Price>
+                            <LandedPrice>
+                                <CurrencyCode>USD</CurrencyCode>
+                                <Amount>40.03</Amount>
+                            </LandedPrice>
+                            <ListingPrice>
+                                <CurrencyCode>USD</CurrencyCode>
+                                <Amount>40.03</Amount>
+                            </ListingPrice>
+                            <Shipping>
+                                <CurrencyCode>USD</CurrencyCode>
+                                <Amount>0.00</Amount>
+                            </Shipping>
+                        </Price>
+                    </CompetitivePrice>
+                    <CompetitivePrice belongsToRequester="false"
+                        condition="Used"
+                        subcondition="Good">
+                        <CompetitivePriceId>2</CompetitivePriceId>
+                        <Price>
+                            <LandedPrice>
+                                <CurrencyCode>USD</CurrencyCode>
+                                <Amount>30.50</Amount>
+                            </LandedPrice>
+                            <ListingPrice>
+                                <CurrencyCode>USD</CurrencyCode>
+                                <Amount>30.50</Amount>
+                            </ListingPrice>
+                            <Shipping>
+                                <CurrencyCode>USD</CurrencyCode>
+                                <Amount>0.00</Amount>
+                            </Shipping>
+                        </Price>
+                    </CompetitivePrice>
+                </CompetitivePrices>
+                <NumberOfOfferListings>
+                    <OfferListingCount condition="Any">296</OfferListingCount>
+                    <OfferListingCount condition="Used">145</OfferListingCount>
+                    <OfferListingCount condition="New">151</OfferListingCount>
+                </NumberOfOfferListings>
+                <TradeInValue>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <Amount>17.05</Amount>
+                </TradeInValue>
+            </CompetitivePricing>
+            <SalesRankings>
+                <SalesRank>
+                    <ProductCategoryId>book_display_on_website</ProductCategoryId>
+                    <Rank>900</Rank>
+                </SalesRank>
+                <SalesRank>
+                    <ProductCategoryId>271578011</ProductCategoryId>
+                    <Rank>1</Rank>
+                </SalesRank>
+                <SalesRank>
+                    <ProductCategoryId>355562011</ProductCategoryId>
+                    <Rank>8</Rank>
+                </SalesRank>
+                <SalesRank>
+                    <ProductCategoryId>173516</ProductCategoryId>
+                    <Rank>25</Rank>
+                </SalesRank>
+            </SalesRankings>
+        </Product>
+    </GetCompetitivePricingForSKUResult>
+    <ResponseMetadata>
+        <RequestId>003fc73e-bf70-4e55-8db8-EXAMPLEce417</RequestId>
+    </ResponseMetadata>
+</GetCompetitivePricingForSKUResponse>
