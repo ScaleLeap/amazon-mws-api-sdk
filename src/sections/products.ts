@@ -1,5 +1,4 @@
 import {
-  array,
   boolean,
   Codec,
   exactly,
@@ -278,21 +277,16 @@ const MatchingProductForId = Codec.interface({
   Products: ensureArray('Product', Product),
 })
 
-// GetMatchingProductForId is different than other APIs,
-// The example on MWS points to it possibly being an array structured this way
-const GetMatchingProductForIdResult = oneOf([
+const GetMatchingProductForIdResponse = ensureArray(
+  'GetMatchingProductForIdResult',
   MatchingProductForId,
-  array(MatchingProductForId),
-  string,
-])
+)
 
-const GetMatchingProductForIdResponse = Codec.interface({
-  GetMatchingProductForIdResponse: Codec.interface({
-    GetMatchingProductForIdResult,
-  }),
+const GetMatchingProductForIdResponseCodec = Codec.interface({
+  GetMatchingProductForIdResponse,
 })
 
-type GetMatchingProductForIdResult = GetInterface<typeof GetMatchingProductForIdResult>
+type GetMatchingProductForIdResponse = GetInterface<typeof GetMatchingProductForIdResponse>
 
 export class Products {
   constructor(private httpClient: HttpClient) {}
@@ -424,7 +418,7 @@ export class Products {
 
   async getMatchingProductForId(
     parameters: GetMatchingProductForIdParameters,
-  ): Promise<[GetMatchingProductForIdResult, RequestMeta]> {
+  ): Promise<[GetMatchingProductForIdResponse, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Products,
       version: PRODUCTS_API_VERSION,
@@ -432,8 +426,8 @@ export class Products {
       parameters,
     })
 
-    return GetMatchingProductForIdResponse.decode(response).caseOf({
-      Right: (x) => [x.GetMatchingProductForIdResponse.GetMatchingProductForIdResult, meta],
+    return GetMatchingProductForIdResponseCodec.decode(response).caseOf({
+      Right: (x) => [x.GetMatchingProductForIdResponse, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },
