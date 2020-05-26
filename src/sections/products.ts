@@ -327,10 +327,6 @@ export class Products {
     })
   }
 
-  /**
-   *
-   * @todo Think about converting GetMatchingProductResposne to array to match getMatchingProductForId
-   */
   async getMatchingProduct(
     parameters: GetMatchingProductParameters,
   ): Promise<[GetMatchingProductResult, RequestMeta]> {
@@ -423,7 +419,11 @@ export class Products {
       resource: Resource.Products,
       version: PRODUCTS_API_VERSION,
       action: 'GetMatchingProductForId',
-      parameters,
+      parameters: {
+        'IdList.Id': parameters.IdList,
+        IdType: parameters.IdType,
+        MarketplaceId: parameters.MarketplaceId,
+      },
     })
 
     return GetMatchingProductForIdResponseCodec.decode(response).caseOf({
