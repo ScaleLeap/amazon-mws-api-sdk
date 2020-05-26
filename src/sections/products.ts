@@ -175,17 +175,18 @@ interface GetMatchingProductParameters {
   [key: string]: string[] | string
 }
 
-const MatchingProduct = Codec.interface({
-  Product,
-})
+const GetMatchingProductResult = ensureArray(
+  'GetMatchingProductResult',
+  Codec.interface({
+    Product,
+  }),
+)
 
 const GetMatchingProductResponse = Codec.interface({
-  GetMatchingProductResponse: Codec.interface({
-    GetMatchingProductResult: MatchingProduct,
-  }),
+  GetMatchingProductResponse: GetMatchingProductResult,
 })
 
-type MatchingProduct = GetInterface<typeof MatchingProduct>
+type GetMatchingProductResult = GetInterface<typeof GetMatchingProductResult>
 
 interface GetMatchingProductForIdParameters {
   MarketplaceId: string
@@ -269,7 +270,7 @@ export class Products {
 
   async getMatchingProduct(
     parameters: GetMatchingProductParameters,
-  ): Promise<[MatchingProduct, RequestMeta]> {
+  ): Promise<[GetMatchingProductResult, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Products,
       version: PRODUCTS_API_VERSION,
@@ -281,7 +282,7 @@ export class Products {
     })
 
     return GetMatchingProductResponse.decode(response).caseOf({
-      Right: (x) => [x.GetMatchingProductResponse.GetMatchingProductResult, meta],
+      Right: (x) => [x.GetMatchingProductResponse, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },

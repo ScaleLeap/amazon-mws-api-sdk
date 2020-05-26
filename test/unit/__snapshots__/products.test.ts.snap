@@ -102,134 +102,136 @@ Array [
 
 exports[`products getMatchingProduct returns a matching product when the response is valid 1`] = `
 Array [
-  Object {
-    "Product": Object {
-      "AttributeSets": Object {
-        "ns2:ItemAttributes": Object {
-          "ns2:Binding": "Apparel",
-          "ns2:Brand": "Pearl iZUMi",
-          "ns2:Department": "mens",
-          "ns2:Feature": Array [
-            "Select transfer fabric sets the benchmark for moisture transfer and
+  Array [
+    Object {
+      "Product": Object {
+        "AttributeSets": Object {
+          "ns2:ItemAttributes": Object {
+            "ns2:Binding": "Apparel",
+            "ns2:Brand": "Pearl iZUMi",
+            "ns2:Department": "mens",
+            "ns2:Feature": Array [
+              "Select transfer fabric sets the benchmark for moisture transfer and
                         four-way performance stretch",
-            "6-Panel anatomic design for superior, chafe-free comfort, UPF 50+ sun
+              "6-Panel anatomic design for superior, chafe-free comfort, UPF 50+ sun
                         protection",
-            "Comfortable silicone leg grippers keep shorts in place,
+              "Comfortable silicone leg grippers keep shorts in place,
                         moisture-wicking, antimicrobial properties",
-            "Tour 3D Chamois is male-specific and non-chafing with padding in
+              "Tour 3D Chamois is male-specific and non-chafing with padding in
                         key areas",
-            "86 percent nylon, 14% spandex, 9-Inch inseam",
+              "86 percent nylon, 14% spandex, 9-Inch inseam",
+            ],
+            "ns2:ItemDimensions": Object {
+              "ns2:Height": 2,
+              "ns2:Length": 9,
+              "ns2:Width": 9,
+            },
+            "ns2:Label": "Pearl iZUMi",
+            "ns2:ListPrice": Object {
+              "ns2:Amount": 50,
+              "ns2:CurrencyCode": "USD",
+            },
+            "ns2:Manufacturer": "Pearl iZUMi",
+            "ns2:Model": 275,
+            "ns2:PackageDimensions": Object {
+              "ns2:Height": 2.8,
+              "ns2:Length": 9.75,
+              "ns2:Weight": 0.4,
+              "ns2:Width": 8.4,
+            },
+            "ns2:PackageQuantity": 1,
+            "ns2:PartNumber": 275,
+            "ns2:ProductGroup": "Apparel",
+            "ns2:ProductTypeName": "SHORTS",
+            "ns2:Publisher": "Pearl iZUMi",
+            "ns2:SmallImage": Object {
+              "ns2:Height": 75,
+              "ns2:URL": "http://ecx.images-amazon.com/images/I/41ty3Sn%2BU8L._SL75_.jpg",
+              "ns2:Width": 58,
+            },
+            "ns2:Studio": "Pearl iZUMi",
+            "ns2:Title": "Pearl iZUMi Men's Quest Cycling Short",
+          },
+        },
+        "Identifiers": Object {
+          "MarketplaceASIN": Object {
+            "ASIN": "B002KT3XRQ",
+            "MarketplaceId": "ATVPDKIKX0DER",
+          },
+        },
+        "Relationships": Object {
+          "ns2:VariationChild": Array [
+            Object {
+              "Identifiers": Object {
+                "MarketplaceASIN": Object {
+                  "ASIN": "B002KT3XQC",
+                  "MarketplaceId": "ATVPDKIKX0DER",
+                },
+              },
+              "ns2:Color": "Black",
+              "ns2:Size": "Small",
+            },
+            Object {
+              "Identifiers": Object {
+                "MarketplaceASIN": Object {
+                  "ASIN": "B002KT3XQW",
+                  "MarketplaceId": "ATVPDKIKX0DER",
+                },
+              },
+              "ns2:Color": "Black",
+              "ns2:Size": "Medium",
+            },
+            Object {
+              "Identifiers": Object {
+                "MarketplaceASIN": Object {
+                  "ASIN": "B002KT3XQM",
+                  "MarketplaceId": "ATVPDKIKX0DER",
+                },
+              },
+              "ns2:Color": "Black",
+              "ns2:Size": "Large",
+            },
+            Object {
+              "Identifiers": Object {
+                "MarketplaceASIN": Object {
+                  "ASIN": "B002KT3XR6",
+                  "MarketplaceId": "ATVPDKIKX0DER",
+                },
+              },
+              "ns2:Color": "Black",
+              "ns2:Size": "X-Large",
+            },
+            Object {
+              "Identifiers": Object {
+                "MarketplaceASIN": Object {
+                  "ASIN": "B002KT3XRG",
+                  "MarketplaceId": "ATVPDKIKX0DER",
+                },
+              },
+              "ns2:Color": "Black",
+              "ns2:Size": "XX-Large",
+            },
           ],
-          "ns2:ItemDimensions": Object {
-            "ns2:Height": 2,
-            "ns2:Length": 9,
-            "ns2:Width": 9,
-          },
-          "ns2:Label": "Pearl iZUMi",
-          "ns2:ListPrice": Object {
-            "ns2:Amount": 50,
-            "ns2:CurrencyCode": "USD",
-          },
-          "ns2:Manufacturer": "Pearl iZUMi",
-          "ns2:Model": 275,
-          "ns2:PackageDimensions": Object {
-            "ns2:Height": 2.8,
-            "ns2:Length": 9.75,
-            "ns2:Weight": 0.4,
-            "ns2:Width": 8.4,
-          },
-          "ns2:PackageQuantity": 1,
-          "ns2:PartNumber": 275,
-          "ns2:ProductGroup": "Apparel",
-          "ns2:ProductTypeName": "SHORTS",
-          "ns2:Publisher": "Pearl iZUMi",
-          "ns2:SmallImage": Object {
-            "ns2:Height": 75,
-            "ns2:URL": "http://ecx.images-amazon.com/images/I/41ty3Sn%2BU8L._SL75_.jpg",
-            "ns2:Width": 58,
-          },
-          "ns2:Studio": "Pearl iZUMi",
-          "ns2:Title": "Pearl iZUMi Men's Quest Cycling Short",
         },
-      },
-      "Identifiers": Object {
-        "MarketplaceASIN": Object {
-          "ASIN": "B002KT3XRQ",
-          "MarketplaceId": "ATVPDKIKX0DER",
+        "SalesRankings": Object {
+          "SalesRank": Array [
+            Object {
+              "ProductCategoryId": "apparel_display_on_website",
+              "Rank": 159,
+            },
+            Object {
+              "ProductCategoryId": 2420095011,
+              "Rank": 1,
+            },
+            Object {
+              "ProductCategoryId": 2611189011,
+              "Rank": 4,
+            },
+          ],
         },
-      },
-      "Relationships": Object {
-        "ns2:VariationChild": Array [
-          Object {
-            "Identifiers": Object {
-              "MarketplaceASIN": Object {
-                "ASIN": "B002KT3XQC",
-                "MarketplaceId": "ATVPDKIKX0DER",
-              },
-            },
-            "ns2:Color": "Black",
-            "ns2:Size": "Small",
-          },
-          Object {
-            "Identifiers": Object {
-              "MarketplaceASIN": Object {
-                "ASIN": "B002KT3XQW",
-                "MarketplaceId": "ATVPDKIKX0DER",
-              },
-            },
-            "ns2:Color": "Black",
-            "ns2:Size": "Medium",
-          },
-          Object {
-            "Identifiers": Object {
-              "MarketplaceASIN": Object {
-                "ASIN": "B002KT3XQM",
-                "MarketplaceId": "ATVPDKIKX0DER",
-              },
-            },
-            "ns2:Color": "Black",
-            "ns2:Size": "Large",
-          },
-          Object {
-            "Identifiers": Object {
-              "MarketplaceASIN": Object {
-                "ASIN": "B002KT3XR6",
-                "MarketplaceId": "ATVPDKIKX0DER",
-              },
-            },
-            "ns2:Color": "Black",
-            "ns2:Size": "X-Large",
-          },
-          Object {
-            "Identifiers": Object {
-              "MarketplaceASIN": Object {
-                "ASIN": "B002KT3XRG",
-                "MarketplaceId": "ATVPDKIKX0DER",
-              },
-            },
-            "ns2:Color": "Black",
-            "ns2:Size": "XX-Large",
-          },
-        ],
-      },
-      "SalesRankings": Object {
-        "SalesRank": Array [
-          Object {
-            "ProductCategoryId": "apparel_display_on_website",
-            "Rank": 159,
-          },
-          Object {
-            "ProductCategoryId": 2420095011,
-            "Rank": 1,
-          },
-          Object {
-            "ProductCategoryId": 2611189011,
-            "Rank": 4,
-          },
-        ],
       },
     },
-  },
+  ],
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,
