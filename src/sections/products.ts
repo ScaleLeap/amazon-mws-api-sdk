@@ -15,7 +15,6 @@ import {
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
 import { ensureArray, mwsDate } from '../parsing'
-// import { getServiceStatusByResource } from './shared'
 
 const PRODUCTS_API_VERSION = '2011-10-01'
 
