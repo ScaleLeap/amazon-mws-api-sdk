@@ -1,0 +1,44 @@
+<GetCompetitivePricingForASINResponse xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+    <GetCompetitivePricingForASINResult ASIN="B002KT3XQM" status="Success">
+        <Product xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd">
+            <Identifiers>
+                <MarketplaceASIN>
+                    <MarketplaceId>ATVPDKIKX0DER</MarketplaceId>
+                    <ASIN>B002KT3XQM</ASIN>
+                </MarketplaceASIN>
+            </Identifiers>
+            <CompetitivePricing>
+                <CompetitivePrices>
+                    <CompetitivePrice belongsToRequester="false"
+                        condition="New"
+                        subcondition="New">
+                        <CompetitivePriceId>1</CompetitivePriceId>
+                        <Price>
+                            <LandedPrice>
+                                <CurrencyCode>USD</CurrencyCode>
+                                <Amount>34.27</Amount>
+                            </LandedPrice>
+                            <ListingPrice>
+                                <CurrencyCode>USD</CurrencyCode>
+                                <Amount>34.27</Amount>
+                            </ListingPrice>
+                            <Shipping>
+                                <CurrencyCode>USD</CurrencyCode>
+                                <Amount>0.00</Amount>
+                            </Shipping>
+                        </Price>
+                    </CompetitivePrice>
+                </CompetitivePrices>
+                <NumberOfOfferListings>
+                    <OfferListingCount condition="Any">11</OfferListingCount>
+                    <OfferListingCount condition="Used">1</OfferListingCount>
+                    <OfferListingCount condition="New">10</OfferListingCount>
+                </NumberOfOfferListings>
+            </CompetitivePricing>
+            <SalesRankings/>
+        </Product>
+    </GetCompetitivePricingForASINResult>
+    <ResponseMetadata>
+        <RequestId>a8ec20c3-fc88-46e3-a128-EXAMPLE3fcdf</RequestId>
+    </ResponseMetadata>
+</GetCompetitivePricingForASINResponse>
