@@ -1,5 +1,105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`products getCompetitivePricingForSku returns product and competitive prices when response is valid 1`] = `
+Array [
+  Array [
+    Object {
+      "Product": Object {
+        "CompetitivePricing": Object {
+          "CompetitivePrices": Object {
+            "CompetitivePrice": Array [
+              Object {
+                "CompetitivePriceId": 1,
+                "Price": Object {
+                  "LandedPrice": Object {
+                    "Amount": 40.03,
+                    "CurrencyCode": "USD",
+                  },
+                  "ListingPrice": Object {
+                    "Amount": 40.03,
+                    "CurrencyCode": "USD",
+                  },
+                  "Shipping": Object {
+                    "Amount": 0,
+                    "CurrencyCode": "USD",
+                  },
+                },
+              },
+              Object {
+                "CompetitivePriceId": 2,
+                "Price": Object {
+                  "LandedPrice": Object {
+                    "Amount": 30.5,
+                    "CurrencyCode": "USD",
+                  },
+                  "ListingPrice": Object {
+                    "Amount": 30.5,
+                    "CurrencyCode": "USD",
+                  },
+                  "Shipping": Object {
+                    "Amount": 0,
+                    "CurrencyCode": "USD",
+                  },
+                },
+              },
+            ],
+          },
+          "NumberOfOfferListings": Object {
+            "OfferListingCount": Array [
+              296,
+              145,
+              151,
+            ],
+          },
+          "TradeInValue": Object {
+            "Amount": 17.05,
+            "CurrencyCode": "USD",
+          },
+        },
+        "Identifiers": Object {
+          "MarketplaceASIN": Object {
+            "ASIN": 1933890517,
+            "MarketplaceId": "ATVPDKIKX0DER",
+          },
+          "SKUIdentifier": Object {
+            "MarketplaceId": "ATVPDKIKX0DER",
+            "SellerId": "A1IMEXAMPLEWRC",
+            "SellerSKU": "SKU2468",
+          },
+        },
+        "SalesRankings": Object {
+          "SalesRank": Array [
+            Object {
+              "ProductCategoryId": "book_display_on_website",
+              "Rank": 900,
+            },
+            Object {
+              "ProductCategoryId": 271578011,
+              "Rank": 1,
+            },
+            Object {
+              "ProductCategoryId": 355562011,
+              "Rank": 8,
+            },
+            Object {
+              "ProductCategoryId": 173516,
+              "Rank": 25,
+            },
+          ],
+        },
+      },
+    },
+  ],
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
 exports[`products getMatchingProduct returns a matching product when the response is valid 1`] = `
 Array [
   Object {
