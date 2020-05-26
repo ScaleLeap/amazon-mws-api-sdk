@@ -228,6 +228,25 @@ const GetCompetitivePricingForSKUResponse = Codec.interface({
   GetCompetitivePricingForSKUResponse: GetCompetitivePricingForSKUResult,
 })
 
+const GetCompetitivePricingForASINResult = ensureArray(
+  'GetCompetitivePricingForASINResult',
+  Codec.interface({
+    Product,
+  }),
+)
+
+type GetCompetitivePricingForASINResult = GetInterface<typeof GetCompetitivePricingForASINResult>
+
+interface GetCompetitivePricingForAsinParameters {
+  MarketplaceId: string
+  ASINList: string[]
+  [key: string]: string | string[]
+}
+
+const GetCompetitivePricingForASINResponse = Codec.interface({
+  GetCompetitivePricingForASINResponse: GetCompetitivePricingForASINResult,
+})
+
 export class Products {
   constructor(private httpClient: HttpClient) {}
 
@@ -325,6 +344,27 @@ export class Products {
 
     return GetCompetitivePricingForSKUResponse.decode(response).caseOf({
       Right: (x) => [x.GetCompetitivePricingForSKUResponse, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getCompetitivePricingForAsin(
+    parameters: GetCompetitivePricingForAsinParameters,
+  ): Promise<[GetCompetitivePricingForASINResult, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Products,
+      version: PRODUCTS_API_VERSION,
+      action: 'GetCompetitivePricingForASIN',
+      parameters: {
+        'ASINList.ASIN': parameters.ASINList,
+        MarketplaceId: parameters.MarketplaceId,
+      },
+    })
+
+    return GetCompetitivePricingForASINResponse.decode(response).caseOf({
+      Right: (x) => [x.GetCompetitivePricingForASINResponse, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },

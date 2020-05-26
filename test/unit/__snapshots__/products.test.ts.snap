@@ -1,5 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`products getCompetitivePricingForASIN returns product and competitive prices when response is valid 1`] = `
+Array [
+  Array [
+    Object {
+      "Product": Object {
+        "CompetitivePricing": Object {
+          "CompetitivePrices": Object {
+            "CompetitivePrice": Object {
+              "CompetitivePriceId": 1,
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 34.27,
+                  "CurrencyCode": "USD",
+                },
+                "ListingPrice": Object {
+                  "Amount": 34.27,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 0,
+                  "CurrencyCode": "USD",
+                },
+              },
+            },
+          },
+          "NumberOfOfferListings": Object {
+            "OfferListingCount": Array [
+              11,
+              1,
+              10,
+            ],
+          },
+        },
+        "Identifiers": Object {
+          "MarketplaceASIN": Object {
+            "ASIN": "B002KT3XQM",
+            "MarketplaceId": "ATVPDKIKX0DER",
+          },
+        },
+        "SalesRankings": "",
+      },
+    },
+  ],
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
 exports[`products getCompetitivePricingForSku returns product and competitive prices when response is valid 1`] = `
 Array [
   Array [
