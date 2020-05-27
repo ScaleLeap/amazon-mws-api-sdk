@@ -156,6 +156,10 @@ interface ListMatchingProductsRequestParameters {
 
 const Product = record(string, unknown)
 
+const SingleProductCodec = Codec.interface({
+  Product,
+})
+
 const ListMatchingProducts = Codec.interface({
   Products: ensureArray('Product', Product),
 })
@@ -174,12 +178,7 @@ interface GetMatchingProductParameters {
   [key: string]: string[] | string
 }
 
-const GetMatchingProductResult = ensureArray(
-  'GetMatchingProductResult',
-  Codec.interface({
-    Product,
-  }),
-)
+const GetMatchingProductResult = ensureArray('GetMatchingProductResult', SingleProductCodec)
 
 const GetMatchingProductResponse = Codec.interface({
   GetMatchingProductResponse: GetMatchingProductResult,
@@ -217,9 +216,7 @@ interface GetCompetitivePricingForSkuParameters {
 
 const GetCompetitivePricingForSKUResult = ensureArray(
   'GetCompetitivePricingForSKUResult',
-  Codec.interface({
-    Product,
-  }),
+  SingleProductCodec,
 )
 
 type GetCompetitivePricingForSKUResult = GetInterface<typeof GetCompetitivePricingForSKUResult>
@@ -230,9 +227,7 @@ const GetCompetitivePricingForSKUResponse = Codec.interface({
 
 const GetCompetitivePricingForASINResult = ensureArray(
   'GetCompetitivePricingForASINResult',
-  Codec.interface({
-    Product,
-  }),
+  SingleProductCodec,
 )
 
 type GetCompetitivePricingForASINResult = GetInterface<typeof GetCompetitivePricingForASINResult>
