@@ -247,6 +247,28 @@ const GetCompetitivePricingForASINResponse = Codec.interface({
   GetCompetitivePricingForASINResponse: GetCompetitivePricingForASINResult,
 })
 
+type ItemCondition = 'Any' | 'New' | 'Used' | 'Collectible' | 'Refurbished' | 'Club'
+
+interface GetLowestOfferListingsForSkuParameters {
+  SellerSKUList: string[]
+  MarketplaceId: string
+  ItemCondition?: ItemCondition
+}
+
+const GetLowestOfferListingsForSKUResult = ensureArray(
+  'GetLowestOfferListingsForSKUResult',
+  Codec.interface({
+    AllOfferListingsConsidered: boolean,
+    Product,
+  }),
+)
+
+const GetLowestOfferListingsForSKUResponse = Codec.interface({
+  GetLowestOfferListingsForSKUResponse: GetLowestOfferListingsForSKUResult,
+})
+
+type GetLowestOfferListingsForSKUResult = GetInterface<typeof GetLowestOfferListingsForSKUResult>
+
 export class Products {
   constructor(private httpClient: HttpClient) {}
 
@@ -365,6 +387,28 @@ export class Products {
 
     return GetCompetitivePricingForASINResponse.decode(response).caseOf({
       Right: (x) => [x.GetCompetitivePricingForASINResponse, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getLowestOfferListingsForSku(
+    parameters: GetLowestOfferListingsForSkuParameters,
+  ): Promise<[GetLowestOfferListingsForSKUResult, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Products,
+      version: PRODUCTS_API_VERSION,
+      action: 'GetLowestOfferListingsForSKU',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        'SellerSKUList.SellerSKU': parameters.SellerSKUList,
+        ItemCondition: parameters.ItemCondition,
+      },
+    })
+
+    return GetLowestOfferListingsForSKUResponse.decode(response).caseOf({
+      Right: (x) => [x.GetLowestOfferListingsForSKUResponse, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },
