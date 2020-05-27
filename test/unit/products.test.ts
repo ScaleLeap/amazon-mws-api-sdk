@@ -81,6 +81,15 @@ const mockGetLowestOfferListingsForSku = new MWS(
   ),
 )
 
+const mockGetLowestOfferListingsForAsin = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('products_get_lowest_offer_listings_for_asin'),
+      headers,
+    }),
+  ),
+)
+
 const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
@@ -88,6 +97,29 @@ const mockMwsFail = new MWS(
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('products', () => {
+  describe('getLowestOfferListingsForAsin', () => {
+    const parameters = {
+      MarketplaceId: '',
+      ASINList: [],
+    }
+
+    it('returns product and lowest offer listings when response is valid', async () => {
+      expect.assertions(1)
+
+      expect(
+        await mockGetLowestOfferListingsForAsin.products.getLowestOfferListingsForAsin(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it("throws an error when the response isn't valid", async () => {
+      expect.assertions(1)
+
+      await expect(() => {
+        mockMwsFail.products.getLowestOfferListingsForAsin(parameters)
+      }).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getLowestOfferListingsForSku', () => {
     const parameters = {
       MarketplaceId: '',
