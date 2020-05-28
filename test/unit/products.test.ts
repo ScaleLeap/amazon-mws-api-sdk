@@ -1,5 +1,6 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
+import { ItemCondition } from '../../src/sections/products/type'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -110,7 +111,7 @@ describe('products', () => {
     const parameters = {
       MarketplaceId: '',
       SellerSKU: '',
-      ItemCondition: 'New',
+      ItemCondition: 'New' as ItemCondition,
     }
 
     it('returns lowest priced offer for sku when response is valid', async () => {
@@ -147,9 +148,9 @@ describe('products', () => {
     it("throws an error when the response isn't valid", async () => {
       expect.assertions(1)
 
-      await expect(() => {
-        mockMwsFail.products.getLowestOfferListingsForAsin(parameters)
-      }).rejects.toStrictEqual(new ParsingError(parsingError))
+      await expect(() =>
+        mockMwsFail.products.getLowestOfferListingsForAsin(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 
