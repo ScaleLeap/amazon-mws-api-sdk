@@ -38,6 +38,7 @@
   "devDependencies": {
     "@microsoft/api-extractor": "7.8.1",
     "@scaleleap/config": "2.0.0",
+    "@scaleleap/jest-polly": "1.4.3",
     "@scaleleap/utils": "1.7.1",
     "@types/is-ci": "2.0.0",
     "@types/jest": "25.2.1",
