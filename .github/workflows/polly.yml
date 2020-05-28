@@ -1,0 +1,57 @@
+name: Polly Recordings
+
+on:
+  push:
+    branches-ignore:
+      - master
+    paths:
+      - '**.ts'
+      - '**.har'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Cache node modules
+      uses: actions/cache@v1
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - name: install
+      run: npm ci
+
+    - name: test
+      run: npm t -- test/integration/
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        MWS_AUTH_TOKEN: ${{ secrets.MWS_AUTH_TOKEN }}
+        SECRET_KEY: ${{ secrets.SECRET }}
+        SELLER_ID: ${{ secrets.SELLER_ID }}
+        POLLY_RECORD_IF_MISSING: "true"
+
+    - name: Commit files
+      run: |
+        git config --local user.email "scale-bot@scaleleap.com"
+        git config --local user.name "Scale Bot"
+        git add -A test/integration/__recordings__
+        git diff-index --quiet HEAD || git commit -m "test: adds Polly recordings"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: ${{ github.ref }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
