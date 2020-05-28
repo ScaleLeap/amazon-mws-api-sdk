@@ -1,7 +1,7 @@
 import { HttpClient } from './http'
 import { FulfillmentInventory } from './sections/fulfillment-inventory'
 import { Orders } from './sections/orders'
-import { Products } from './sections/products'
+import { Products } from './sections/products/products'
 import { Sellers } from './sections/sellers'
 
 export class MWS {
