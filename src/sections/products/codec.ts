@@ -13,7 +13,7 @@ import {
 } from 'purify-ts'
 
 import { ensureArray, mwsDate } from '../../parsing'
-import * as type from './type'
+import { CurrencyCodeEnum, FeeDetail as FeeDetailInterface, IdType, Status } from './type'
 
 /**
  * Collection of codecs for the products api
@@ -21,7 +21,7 @@ import * as type from './type'
 
 const MoneyType = Codec.interface({
   Amount: optional(number),
-  CurrencyCode: oneOf(Object.values(type.CurrencyCodeEnum).map((x) => exactly(x))),
+  CurrencyCode: oneOf(Object.values(CurrencyCodeEnum).map((x) => exactly(x))),
 })
 
 export const Points = Codec.interface({
@@ -43,14 +43,14 @@ const PriceToEstimateFees = Codec.interface({
 
 const FeesEstimateIdentifier = Codec.interface({
   MarketplaceId: string,
-  IdType: oneOf(Object.values(type.IdType).map((x) => exactly(x))),
+  IdType: oneOf(Object.values(IdType).map((x) => exactly(x))),
   IdValue: string,
   PriceToEstimateFees,
   SellerInputIdentifier: string,
   IsAmazonFulfilled: boolean,
 })
 
-const FeeDetail: Codec<type.FeeDetail> = Codec.interface({
+const FeeDetail: Codec<FeeDetailInterface> = Codec.interface({
   FeeType: string,
   FeeAmount: MoneyType,
   FeePromotion: optional(MoneyType),
@@ -73,7 +73,7 @@ const FeesEstimate = Codec.interface({
 const FeesEstimateResult = Codec.interface({
   FeesEstimateIdentifier,
   FeesEstimate: optional(FeesEstimate),
-  Status: oneOf(Object.values(type.Status).map((x) => exactly(x))),
+  Status: oneOf(Object.values(Status).map((x) => exactly(x))),
   Error: optional(ErrorType),
 })
 
