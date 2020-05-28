@@ -156,7 +156,7 @@ interface ListMatchingProductsRequestParameters {
 
 const Product = record(string, unknown)
 
-const SingleProductCodec = Codec.interface({
+const SingleProductInterface = Codec.interface({
   Product,
 })
 
@@ -178,7 +178,7 @@ interface GetMatchingProductParameters {
   [key: string]: string[] | string
 }
 
-const GetMatchingProductResult = ensureArray('GetMatchingProductResult', SingleProductCodec)
+const GetMatchingProductResult = ensureArray('GetMatchingProductResult', SingleProductInterface)
 
 const GetMatchingProductResponse = Codec.interface({
   GetMatchingProductResponse: GetMatchingProductResult,
@@ -216,7 +216,7 @@ interface GetCompetitivePricingForSkuParameters {
 
 const GetCompetitivePricingForSKUResult = ensureArray(
   'GetCompetitivePricingForSKUResult',
-  SingleProductCodec,
+  SingleProductInterface,
 )
 
 type GetCompetitivePricingForSKUResult = GetInterface<typeof GetCompetitivePricingForSKUResult>
@@ -227,7 +227,7 @@ const GetCompetitivePricingForSKUResponse = Codec.interface({
 
 const GetCompetitivePricingForASINResult = ensureArray(
   'GetCompetitivePricingForASINResult',
-  SingleProductCodec,
+  SingleProductInterface,
 )
 
 type GetCompetitivePricingForASINResult = GetInterface<typeof GetCompetitivePricingForASINResult>
@@ -263,6 +263,26 @@ const GetLowestOfferListingsForSKUResponse = Codec.interface({
 })
 
 type GetLowestOfferListingsForSKUResult = GetInterface<typeof GetLowestOfferListingsForSKUResult>
+
+interface GetLowestOfferListingsForAsinParameters {
+  ASINList: string[]
+  MarketplaceId: string
+  ItemCondition?: ItemCondition
+}
+
+const GetLowestOfferListingsForASINResult = ensureArray(
+  'GetLowestOfferListingsForASINResult',
+  Codec.interface({
+    AllOfferListingsConsidered: boolean,
+    Product,
+  }),
+)
+
+type GetLowestOfferListingsForASINResult = GetInterface<typeof GetLowestOfferListingsForASINResult>
+
+const GetLowestOfferListingsForASINResponse = Codec.interface({
+  GetLowestOfferListingsForASINResponse: GetLowestOfferListingsForASINResult,
+})
 
 export class Products {
   constructor(private httpClient: HttpClient) {}
@@ -404,6 +424,28 @@ export class Products {
 
     return GetLowestOfferListingsForSKUResponse.decode(response).caseOf({
       Right: (x) => [x.GetLowestOfferListingsForSKUResponse, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getLowestOfferListingsForAsin(
+    parameters: GetLowestOfferListingsForAsinParameters,
+  ): Promise<[GetLowestOfferListingsForASINResult, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Products,
+      version: PRODUCTS_API_VERSION,
+      action: 'GetLowestOfferListingsForASIN',
+      parameters: {
+        'ASINList.ASIN': parameters.ASINList,
+        MarketplaceId: parameters.MarketplaceId,
+        ItemCondition: parameters.ItemCondition,
+      },
+    })
+
+    return GetLowestOfferListingsForASINResponse.decode(response).caseOf({
+      Right: (x) => [x.GetLowestOfferListingsForASINResponse, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },
