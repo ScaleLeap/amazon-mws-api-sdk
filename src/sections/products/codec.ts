@@ -167,6 +167,25 @@ export const GetLowestOfferListingsForASINResponse = Codec.interface({
   GetLowestOfferListingsForASINResponse: GetLowestOfferListingsForASINResult,
 })
 
+/**
+ * @todo - complete definitions
+ */
+
+const GetLowestPricedOffersForSKU = Codec.interface({
+  Identifier: unknown,
+  Summary: unknown,
+  Offers: unknown,
+})
+
+export const GetLowestPricedOffersForSKUResponse = Codec.interface({
+  GetLowestPricedOffersForSKUResponse: Codec.interface({
+    GetLowestPricedOffersForSKUResult: GetLowestPricedOffersForSKU,
+  }),
+})
+/**
+ * Types derived from codecs
+ */
+
 export type GetMatchingProductForIdResponse = GetInterface<typeof GetMatchingProductForIdResponse>
 export type GetMyFeesEstimate = GetInterface<typeof GetMyFeesEstimate>
 export type ListMatchingProducts = GetInterface<typeof ListMatchingProducts>
@@ -183,3 +202,4 @@ export type GetLowestOfferListingsForSKUResult = GetInterface<
 export type GetLowestOfferListingsForASINResult = GetInterface<
   typeof GetLowestOfferListingsForASINResult
 >
+export type GetLowestPricedOffersForSKU = GetInterface<typeof GetLowestPricedOffersForSKU>

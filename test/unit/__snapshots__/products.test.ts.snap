@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`products getCompetitivePricingForASIN returns product and competitive prices when response is valid 1`] = `
+exports[`products getCompetitivePricingForAsin returns product and competitive prices when response is valid 1`] = `
 Array [
   Array [
     Object {
@@ -153,6 +153,334 @@ Array [
 ]
 `;
 
+exports[`products getLowestOfferListingsForAsin returns product and lowest offer listings when response is valid 1`] = `
+Array [
+  Array [
+    Object {
+      "AllOfferListingsConsidered": true,
+      "Product": Object {
+        "Identifiers": Object {
+          "MarketplaceASIN": Object {
+            "ASIN": "B002KT3XQM",
+            "MarketplaceId": "ATVPDKIKX0DER",
+          },
+        },
+        "LowestOfferListings": Object {
+          "LowestOfferListing": Array [
+            Object {
+              "MultipleOffersAtLowestPrice": "False",
+              "NumberOfOfferListingsConsidered": 1,
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 32.99,
+                  "CurrencyCode": "USD",
+                },
+                "ListingPrice": Object {
+                  "Amount": 28,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 4.99,
+                  "CurrencyCode": "USD",
+                },
+              },
+              "Qualifiers": Object {
+                "FulfillmentChannel": "Merchant",
+                "ItemCondition": "Used",
+                "ItemSubcondition": "VeryGood",
+                "SellerPositiveFeedbackRating": "90-94%",
+                "ShippingTime": Object {
+                  "Max": "0-2 days",
+                },
+                "ShipsDomestically": "True",
+              },
+              "SellerFeedbackCount": 762,
+            },
+            Object {
+              "MultipleOffersAtLowestPrice": "False",
+              "NumberOfOfferListingsConsidered": 1,
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 34.27,
+                  "CurrencyCode": "USD",
+                },
+                "ListingPrice": Object {
+                  "Amount": 34.27,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 0,
+                  "CurrencyCode": "USD",
+                },
+              },
+              "Qualifiers": Object {
+                "FulfillmentChannel": "Amazon",
+                "ItemCondition": "New",
+                "ItemSubcondition": "New",
+                "SellerPositiveFeedbackRating": "98-100%",
+                "ShippingTime": Object {
+                  "Max": "0-2 days",
+                },
+                "ShipsDomestically": "True",
+              },
+              "SellerFeedbackCount": 181744,
+            },
+            Object {
+              "MultipleOffersAtLowestPrice": "False",
+              "NumberOfOfferListingsConsidered": 1,
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 41.18,
+                  "CurrencyCode": "USD",
+                },
+                "ListingPrice": Object {
+                  "Amount": 41.18,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 0,
+                  "CurrencyCode": "USD",
+                },
+              },
+              "Qualifiers": Object {
+                "FulfillmentChannel": "Amazon",
+                "ItemCondition": "New",
+                "ItemSubcondition": "New",
+                "SellerPositiveFeedbackRating": "95-97%",
+                "ShippingTime": Object {
+                  "Max": "0-2 days",
+                },
+                "ShipsDomestically": "True",
+              },
+              "SellerFeedbackCount": 13213,
+            },
+          ],
+        },
+      },
+    },
+  ],
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
+exports[`products getLowestOfferListingsForSku returns product and lowest offer listings when response is valid 1`] = `
+Array [
+  Array [
+    Object {
+      "AllOfferListingsConsidered": false,
+      "Product": Object {
+        "Identifiers": Object {
+          "MarketplaceASIN": Object {
+            "ASIN": 1933890517,
+            "MarketplaceId": "ATVPDKIKX0DER",
+          },
+          "SKUIdentifier": Object {
+            "MarketplaceId": "ATVPDKIKX0DER",
+            "SellerId": "A1IMEXAMPLEWRC",
+            "SellerSKU": "SKU2468",
+          },
+        },
+        "LowestOfferListings": Object {
+          "LowestOfferListing": Array [
+            Object {
+              "MultipleOffersAtLowestPrice": "True",
+              "NumberOfOfferListingsConsidered": 3,
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 28.68,
+                  "CurrencyCode": "USD",
+                },
+                "ListingPrice": Object {
+                  "Amount": 24.69,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 3.99,
+                  "CurrencyCode": "USD",
+                },
+              },
+              "Qualifiers": Object {
+                "FulfillmentChannel": "Merchant",
+                "ItemCondition": "Used",
+                "ItemSubcondition": "Acceptable",
+                "SellerPositiveFeedbackRating": "95-97%",
+                "ShippingTime": Object {
+                  "Max": "0-2 days",
+                },
+                "ShipsDomestically": "True",
+              },
+              "SellerFeedbackCount": 8900,
+            },
+            Object {
+              "MultipleOffersAtLowestPrice": "False",
+              "NumberOfOfferListingsConsidered": 1,
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 30.5,
+                  "CurrencyCode": "USD",
+                },
+                "ListingPrice": Object {
+                  "Amount": 30.5,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 0,
+                  "CurrencyCode": "USD",
+                },
+              },
+              "Qualifiers": Object {
+                "FulfillmentChannel": "Amazon",
+                "ItemCondition": "Used",
+                "ItemSubcondition": "Good",
+                "SellerPositiveFeedbackRating": "90-94%",
+                "ShippingTime": Object {
+                  "Max": "0-2 days",
+                },
+                "ShipsDomestically": "True",
+              },
+              "SellerFeedbackCount": 1569694,
+            },
+            Object {
+              "MultipleOffersAtLowestPrice": "False",
+              "NumberOfOfferListingsConsidered": 3,
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 30.99,
+                  "CurrencyCode": "USD",
+                },
+                "ListingPrice": Object {
+                  "Amount": 27,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 3.99,
+                  "CurrencyCode": "USD",
+                },
+              },
+              "Qualifiers": Object {
+                "FulfillmentChannel": "Merchant",
+                "ItemCondition": "Used",
+                "ItemSubcondition": "Good",
+                "SellerPositiveFeedbackRating": "95-97%",
+                "ShippingTime": Object {
+                  "Max": "0-2 days",
+                },
+                "ShipsDomestically": "True",
+              },
+              "SellerFeedbackCount": 7732,
+            },
+          ],
+        },
+      },
+    },
+  ],
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
+exports[`products getLowestPricedOffersForSku returns lowest priced offer for sku when response is valid 1`] = `
+Array [
+  Object {
+    "Identifier": Object {
+      "ItemCondition": "New",
+      "MarketplaceId": "ATVPDKIKX0DER",
+      "SellerSKU": "GE Product",
+      "TimeOfOfferChange": "2015-07-19T23:15:11.859Z",
+    },
+    "Offers": Object {
+      "Offer": Object {
+        "IsBuyBoxWinner": true,
+        "IsFeaturedMerchant": true,
+        "IsFulfilledByAmazon": true,
+        "ListingPrice": Object {
+          "Amount": 32.99,
+          "CurrencyCode": "USD",
+        },
+        "MyOffer": false,
+        "SellerFeedbackRating": Object {
+          "FeedbackCount": 1,
+          "SellerPositiveFeedbackRating": 100,
+        },
+        "Shipping": Object {
+          "Amount": 0,
+          "CurrencyCode": "USD",
+        },
+        "ShippingTime": "",
+        "SubCondition": "new",
+      },
+    },
+    "Summary": Object {
+      "BuyBoxEligibleOffers": Object {
+        "OfferCount": 1,
+      },
+      "BuyBoxPrices": Object {
+        "BuyBoxPrice": Object {
+          "LandedPrice": Object {
+            "Amount": 32.99,
+            "CurrencyCode": "USD",
+          },
+          "ListingPrice": Object {
+            "Amount": 32.99,
+            "CurrencyCode": "USD",
+          },
+          "Shipping": Object {
+            "Amount": 0,
+            "CurrencyCode": "USD",
+          },
+        },
+      },
+      "ListPrice": Object {
+        "Amount": 58.34,
+        "CurrencyCode": "USD",
+      },
+      "LowestPrices": Object {
+        "LowestPrice": Object {
+          "LandedPrice": Object {
+            "Amount": 32.99,
+            "CurrencyCode": "USD",
+          },
+          "ListingPrice": Object {
+            "Amount": 32.99,
+            "CurrencyCode": "USD",
+          },
+          "Shipping": Object {
+            "Amount": 0,
+            "CurrencyCode": "USD",
+          },
+        },
+      },
+      "NumberOfOffers": Object {
+        "OfferCount": 1,
+      },
+      "SuggestedLowerPricePlusShipping": Object {
+        "Amount": 32.99,
+        "CurrencyCode": "USD",
+      },
+      "TotalOfferCount": 1,
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
 exports[`products getMatchingProduct returns a matching product when the response is valid 1`] = `
 Array [
   Array [
@@ -283,260 +611,6 @@ Array [
           ],
         },
       },
-    },
-  ],
-  Object {
-    "quotaMax": 1000,
-    "quotaRemaining": 999,
-    "quotaResetOn": "2020-04-06T10:22:23.582Z",
-    "requestId": "0",
-    "timestamp": "2020-05-06T09:22:23.582Z",
-  },
-]
-`;
-
-exports[`products getMatchingProductForId returns a matching product when the response is valid 1`] = `
-Array [
-  Array [
-    Object {
-      "Products": Array [
-        Object {
-          "AttributeSets": Object {
-            "ns2:ItemAttributes": Object {
-              "ns2:Author": Array [
-                "Marmanis, Haralambos",
-                "Babenko, Dmitry",
-              ],
-              "ns2:Binding": "Paperback",
-              "ns2:Edition": 1,
-              "ns2:IsEligibleForTradeIn": true,
-              "ns2:ItemDimensions": Object {
-                "ns2:Height": 9.17,
-                "ns2:Length": 7.36,
-                "ns2:Weight": 1.4,
-                "ns2:Width": 0.75,
-              },
-              "ns2:Label": "Manning Publications",
-              "ns2:Languages": Object {
-                "ns2:Language": Array [
-                  Object {
-                    "ns2:Name": "english",
-                    "ns2:Type": "Unknown",
-                  },
-                  Object {
-                    "ns2:Name": "english",
-                    "ns2:Type": "Original Language",
-                  },
-                  Object {
-                    "ns2:Name": "english",
-                    "ns2:Type": "Published",
-                  },
-                ],
-              },
-              "ns2:ListPrice": Object {
-                "ns2:Amount": 44.99,
-                "ns2:CurrencyCode": "USD",
-              },
-              "ns2:Manufacturer": "Manning Publications",
-              "ns2:NumberOfItems": 1,
-              "ns2:NumberOfPages": 368,
-              "ns2:PackageDimensions": Object {
-                "ns2:Height": 0.8,
-                "ns2:Length": 9.1,
-                "ns2:Weight": 1.35,
-                "ns2:Width": 7.3,
-              },
-              "ns2:ProductGroup": "Book",
-              "ns2:ProductTypeName": "ABIS_BOOK",
-              "ns2:PublicationDate": "2009-07-05",
-              "ns2:Publisher": "Manning Publications",
-              "ns2:SmallImage": Object {
-                "ns2:Height": 75,
-                "ns2:URL": "http://ecx.images-amazon.com/images/I/51EEz05N2HL._SL75_.jpg",
-                "ns2:Width": 60,
-              },
-              "ns2:Studio": "Manning Publications",
-              "ns2:Title": "Algorithms of the Intelligent Web",
-            },
-          },
-          "Identifiers": Object {
-            "MarketplaceASIN": Object {
-              "ASIN": 1933988665,
-              "MarketplaceId": "ATVPDKIKX0DER",
-            },
-          },
-          "Relationships": "",
-          "SalesRankings": Object {
-            "SalesRank": Array [
-              Object {
-                "ProductCategoryId": "book_display_on_website",
-                "Rank": 59485,
-              },
-              Object {
-                "ProductCategoryId": 377886011,
-                "Rank": 32,
-              },
-              Object {
-                "ProductCategoryId": 3887,
-                "Rank": 66,
-              },
-              Object {
-                "ProductCategoryId": 3870,
-                "Rank": 82,
-              },
-            ],
-          },
-        },
-      ],
-    },
-    Object {
-      "Products": Array [
-        Object {
-          "AttributeSets": Object {
-            "ns2:ItemAttributes": Object {
-              "ns2:Author": "Rowling, J.K.",
-              "ns2:Binding": "Paperback",
-              "ns2:Brand": "Scholastic Press",
-              "ns2:Creator": "GrandPrÃ©, Mary",
-              "ns2:Edition": "1st",
-              "ns2:Feature": "Recommended Age: 9 years and up",
-              "ns2:IsAutographed": false,
-              "ns2:IsMemorabilia": false,
-              "ns2:ItemDimensions": Object {
-                "ns2:Height": 0.8,
-                "ns2:Length": 7.5,
-                "ns2:Weight": 0.5,
-                "ns2:Width": 5.2,
-              },
-              "ns2:Label": "Scholastic Paperbacks",
-              "ns2:Languages": Object {
-                "ns2:Language": Array [
-                  Object {
-                    "ns2:Name": "english",
-                    "ns2:Type": "Unknown",
-                  },
-                  Object {
-                    "ns2:Name": "english",
-                    "ns2:Type": "Original Language",
-                  },
-                  Object {
-                    "ns2:Name": "english",
-                    "ns2:Type": "Published",
-                  },
-                ],
-              },
-              "ns2:ListPrice": Object {
-                "ns2:Amount": 10.99,
-                "ns2:CurrencyCode": "USD",
-              },
-              "ns2:Manufacturer": "Scholastic Paperbacks",
-              "ns2:NumberOfItems": 1,
-              "ns2:NumberOfPages": 320,
-              "ns2:PackageDimensions": Object {
-                "ns2:Height": 1,
-                "ns2:Length": 7.5,
-                "ns2:Weight": 0.5,
-                "ns2:Width": 5.2,
-              },
-              "ns2:PackageQuantity": 1,
-              "ns2:PartNumber": 9780590353427,
-              "ns2:ProductGroup": "Book",
-              "ns2:ProductTypeName": "ABIS_BOOK",
-              "ns2:PublicationDate": "1999-10-01",
-              "ns2:Publisher": "Scholastic Paperbacks",
-              "ns2:ReleaseDate": "1999-09-08",
-              "ns2:SmallImage": Object {
-                "ns2:Height": 75,
-                "ns2:URL": "http://ecx.images-amazon.com/images/I/51MU5VilKpL._SL75_.jpg",
-                "ns2:Width": 51,
-              },
-              "ns2:Studio": "Scholastic Paperbacks",
-              "ns2:Title": "Harry Potter and the Sorcerer's Stone (Book 1)",
-            },
-          },
-          "Identifiers": Object {
-            "MarketplaceASIN": Object {
-              "ASIN": "059035342X",
-              "MarketplaceId": "ATVPDKIKX0DER",
-            },
-          },
-          "Relationships": "",
-          "SalesRankings": Object {
-            "SalesRank": Array [
-              Object {
-                "ProductCategoryId": "book_display_on_website",
-                "Rank": 362,
-              },
-              Object {
-                "ProductCategoryId": 15356791,
-                "Rank": 6,
-              },
-              Object {
-                "ProductCategoryId": 3153,
-                "Rank": 9,
-              },
-              Object {
-                "ProductCategoryId": 3045,
-                "Rank": 14,
-              },
-            ],
-          },
-        },
-        Object {
-          "AttributeSets": Object {
-            "ns2:ItemAttributes": Object {
-              "ns2:Author": "J.K. Rowling, Mary GrandPrÃƒÂ©",
-              "ns2:Binding": "Paperback",
-              "ns2:Label": "Scholastic Paperbacks",
-              "ns2:Languages": Object {
-                "ns2:Language": Array [
-                  Object {
-                    "ns2:Name": "english",
-                    "ns2:Type": "Unknown",
-                  },
-                  Object {
-                    "ns2:Name": "english",
-                    "ns2:Type": "Published",
-                  },
-                ],
-              },
-              "ns2:Manufacturer": "Scholastic Paperbacks",
-              "ns2:NumberOfItems": 1,
-              "ns2:NumberOfPages": 784,
-              "ns2:PackageDimensions": Object {
-                "ns2:Height": 0.73,
-                "ns2:Length": 8.43,
-                "ns2:Weight": 0.79,
-                "ns2:Width": 5.85,
-              },
-              "ns2:ProductGroup": "Book",
-              "ns2:ProductTypeName": "BOOKS_1973_AND_LATER",
-              "ns2:PublicationDate": "1999-09-08",
-              "ns2:Publisher": "Scholastic Paperbacks",
-              "ns2:SmallImage": Object {
-                "ns2:Height": 75,
-                "ns2:URL": "http://ecx.images-amazon.com/images/I/51STfI7UiCL._SL75_.jpg",
-                "ns2:Width": 52,
-              },
-              "ns2:Studio": "Scholastic Paperbacks",
-              "ns2:Title": "Harry Potter and the Sorcerer's Stone",
-            },
-          },
-          "Identifiers": Object {
-            "MarketplaceASIN": Object {
-              "ASIN": 439708184,
-              "MarketplaceId": "ATVPDKIKX0DER",
-            },
-          },
-          "Relationships": "",
-          "SalesRankings": Object {
-            "SalesRank": Object {
-              "ProductCategoryId": "book_display_on_website",
-              "Rank": 2091024,
-            },
-          },
-        },
-      ],
     },
   ],
   Object {

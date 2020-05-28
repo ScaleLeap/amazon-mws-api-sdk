@@ -94,7 +94,7 @@ export interface GetCompetitivePricingForAsinParameters {
   [key: string]: string | string[]
 }
 
-type ItemCondition = 'Any' | 'New' | 'Used' | 'Collectible' | 'Refurbished' | 'Club'
+export type ItemCondition = 'Any' | 'New' | 'Used' | 'Collectible' | 'Refurbished' | 'Club'
 
 export interface GetLowestOfferListingsForSkuParameters {
   SellerSKUList: string[]
@@ -106,4 +106,11 @@ export interface GetLowestOfferListingsForAsinParameters {
   ASINList: string[]
   MarketplaceId: string
   ItemCondition?: ItemCondition
+}
+
+export interface GetLowestPricedOffersForSkuParameters {
+  MarketplaceId: string
+  SellerSKU: string
+  ItemCondition: ItemCondition
+  [key: string]: string
 }
