@@ -19,15 +19,12 @@ const SECRET_KEYS = ['AWS_ACCESS_KEY_ID', 'MWS_AUTH_TOKEN', 'SECRET_KEY', 'SELLE
 beforeEach(() => {
   // removes secrets from stored recordings
   jestPollyContext.polly.server.any().on('beforePersist', (_request, rec) => {
-    let request = JSON.stringify(rec.request)
-    let response = JSON.stringify(rec.response)
+    let text = JSON.stringify(rec)
 
     SECRET_KEYS.forEach((key) => {
-      request = replaceAll(request, process.env[key], 'x')
-      response = replaceAll(response, process.env[key], 'x')
+      text = replaceAll(text, process.env[key], 'x')
     })
 
-    rec.request = JSON.parse(request)
-    rec.response = JSON.parse(response)
+    Object.assign(rec, JSON.parse(text))
   })
 })
