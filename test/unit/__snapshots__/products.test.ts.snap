@@ -390,6 +390,101 @@ Array [
 ]
 `;
 
+exports[`products getLowestPricedOffersForAsin returns lowest priced offer for sku when response is valid 1`] = `
+Array [
+  Object {
+    "Identifier": Object {
+      "ASIN": "B0002GTTRC",
+      "ItemCondition": "New",
+      "MarketplaceId": "ATVPDKIKX0DER",
+      "TimeOfOfferChange": 2015-07-19T23:15:11.859Z,
+    },
+    "Offers": Array [
+      Object {
+        "IsBuyBoxWinner": true,
+        "IsFeaturedMerchant": true,
+        "IsFulfilledByAmazon": true,
+        "ListingPrice": Object {
+          "Amount": 32.99,
+          "CurrencyCode": "USD",
+        },
+        "Points": undefined,
+        "SellerFeedbackRating": Object {
+          "FeedbackCount": 1,
+          "SellerPositiveFeedbackRating": 100,
+        },
+        "Shipping": Object {
+          "Amount": 0,
+          "CurrencyCode": "USD",
+        },
+        "ShippingTime": "",
+        "ShipsFrom": undefined,
+        "SubCondition": "new",
+      },
+    ],
+    "Summary": Object {
+      "BuyBoxEligibleOffers": Object {
+        "OfferCount": 1,
+      },
+      "BuyBoxPrices": Array [
+        Object {
+          "LandedPrice": Object {
+            "Amount": 32.99,
+            "CurrencyCode": "USD",
+          },
+          "ListingPrice": Object {
+            "Amount": 32.99,
+            "CurrencyCode": "USD",
+          },
+          "Points": undefined,
+          "Shipping": Object {
+            "Amount": 0,
+            "CurrencyCode": "USD",
+          },
+        },
+      ],
+      "ListPrice": Object {
+        "Amount": 58.34,
+        "CurrencyCode": "USD",
+      },
+      "LowestPrices": Array [
+        Object {
+          "LandedPrice": Object {
+            "Amount": 32.99,
+            "CurrencyCode": "USD",
+          },
+          "ListingPrice": Object {
+            "Amount": 32.99,
+            "CurrencyCode": "USD",
+          },
+          "Points": undefined,
+          "Shipping": Object {
+            "Amount": 0,
+            "CurrencyCode": "USD",
+          },
+        },
+      ],
+      "NumberOfOffers": Object {
+        "OfferCount": 1,
+      },
+      "OffersAvailableTime": undefined,
+      "SuggestedLowerPricePlusShipping": Object {
+        "Amount": 32.99,
+        "CurrencyCode": "USD",
+      },
+      "TotalOfferCount": 0,
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
 exports[`products getLowestPricedOffersForSku returns lowest priced offer for sku when response is valid 1`] = `
 Array [
   Object {

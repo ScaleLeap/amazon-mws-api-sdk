@@ -10,6 +10,8 @@ import {
   GetLowestOfferListingsForASINResult,
   GetLowestOfferListingsForSKUResponse,
   GetLowestOfferListingsForSKUResult,
+  GetLowestPricedOffersForASIN,
+  GetLowestPricedOffersForASINResponse,
   GetLowestPricedOffersForSKU,
   GetLowestPricedOffersForSKUResponse,
   GetMatchingProductForIdResponse,
@@ -26,6 +28,7 @@ import {
   GetCompetitivePricingForSkuParameters,
   GetLowestOfferListingsForAsinParameters,
   GetLowestOfferListingsForSkuParameters,
+  GetLowestPricedOffersForAsinParameters,
   GetLowestPricedOffersForSkuParameters,
   GetMatchingProductForIdParameters,
   GetMatchingProductParameters,
@@ -219,6 +222,27 @@ export class Products {
 
     return GetLowestPricedOffersForSKUResponse.decode(response).caseOf({
       Right: (x) => [x.GetLowestPricedOffersForSKUResponse.GetLowestPricedOffersForSKUResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getLowestPricedOffersForAsin(
+    parameters: GetLowestPricedOffersForAsinParameters,
+  ): Promise<[GetLowestPricedOffersForASIN, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Products,
+      version: PRODUCTS_API_VERSION,
+      action: 'GetLowestPricedOffersForASIN',
+      parameters,
+    })
+
+    return GetLowestPricedOffersForASINResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.GetLowestPricedOffersForASINResponse.GetLowestPricedOffersForASINResult,
+        meta,
+      ],
       Left: (error) => {
         throw new ParsingError(error)
       },

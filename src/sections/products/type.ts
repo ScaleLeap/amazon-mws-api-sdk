@@ -6,7 +6,7 @@ export type ItemCondition = 'Any' | 'New' | 'Used' | 'Collectible' | 'Refurbishe
 
 export interface MoneyType {
   Amount: number | undefined
-  CurrencyCode: CurrencyCodeEnum
+  CurrencyCode: string
 }
 
 export interface FeeDetail {
@@ -90,6 +90,13 @@ export interface GetLowestOfferListingsForAsinParameters {
 export interface GetLowestPricedOffersForSkuParameters {
   MarketplaceId: string
   SellerSKU: string
+  ItemCondition: ItemCondition
+  [key: string]: string
+}
+
+export interface GetLowestPricedOffersForAsinParameters {
+  MarketplaceId: string
+  ASIN: string
   ItemCondition: ItemCondition
   [key: string]: string
 }

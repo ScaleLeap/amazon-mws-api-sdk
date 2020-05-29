@@ -241,11 +241,20 @@ const Summary = Codec.interface({
   OffersAvailableTime: optional(mwsDate),
 })
 
-const Identifier = Codec.interface({
+const Identifier = {
   MarketplaceId: string,
-  SellerSKU: string,
   ItemCondition,
   TimeOfOfferChange: optional(mwsDate),
+}
+
+const SkuIdentifier = Codec.interface({
+  SellerSKU: string,
+  ...Identifier,
+})
+
+const AsinIdentifier = Codec.interface({
+  ASIN: string,
+  ...Identifier,
 })
 
 const SellerFeedbackRating = Codec.interface({
@@ -263,8 +272,7 @@ const ShipsFrom = Codec.interface({
   Country: optional(string),
 })
 
-const Offer = Codec.interface({
-  MyOffer: optional(boolean),
+const Offer = {
   SubCondition: string,
   SellerFeedbackRating: optional(SellerFeedbackRating),
   ShippingTime: DetailedShippingTimeType,
@@ -275,17 +283,40 @@ const Offer = Codec.interface({
   IsFulfilledByAmazon: boolean,
   IsBuyBoxWinner: optional(boolean),
   IsFeaturedMerchant: optional(boolean),
-})
+}
 
 const GetLowestPricedOffersForSKU = Codec.interface({
-  Identifier,
+  Identifier: SkuIdentifier,
   Summary,
-  Offers: ensureArray('Offer', Offer),
+  Offers: ensureArray(
+    'Offer',
+    Codec.interface({
+      MyOffer: optional(boolean),
+      ...Offer,
+    }),
+  ),
 })
 
 export const GetLowestPricedOffersForSKUResponse = Codec.interface({
   GetLowestPricedOffersForSKUResponse: Codec.interface({
     GetLowestPricedOffersForSKUResult: GetLowestPricedOffersForSKU,
+  }),
+})
+
+const GetLowestPricedOffersForASIN = Codec.interface({
+  Identifier: AsinIdentifier,
+  Summary,
+  Offers: ensureArray(
+    'Offer',
+    Codec.interface({
+      ...Offer,
+    }),
+  ),
+})
+
+export const GetLowestPricedOffersForASINResponse = Codec.interface({
+  GetLowestPricedOffersForASINResponse: Codec.interface({
+    GetLowestPricedOffersForASINResult: GetLowestPricedOffersForASIN,
   }),
 })
 
@@ -312,3 +343,4 @@ export type GetLowestOfferListingsForASINResult = GetInterface<
   typeof GetLowestOfferListingsForASINResult
 >
 export type GetLowestPricedOffersForSKU = GetInterface<typeof GetLowestPricedOffersForSKU>
+export type GetLowestPricedOffersForASIN = GetInterface<typeof GetLowestPricedOffersForASIN>
