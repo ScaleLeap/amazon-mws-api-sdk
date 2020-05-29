@@ -1,27 +1,64 @@
 import {
   boolean,
   Codec,
-  exactly,
   GetInterface,
   lazy,
   number,
-  oneOf,
   optional,
   record,
   string,
   unknown,
 } from 'purify-ts'
 
-import { ensureArray, mwsDate } from '../../parsing'
-import { CurrencyCodeEnum, FeeDetail as FeeDetailInterface, IdType, Status } from './type'
+import { ensureArray, mwsDate, oneOfEnum } from '../../parsing'
+import { FeeDetail as FeeDetailInterface } from './type'
 
 /**
  * Collection of codecs for the products api
  */
 
+enum ItemConditionEnum {
+  Any = 'Any',
+  New = 'New',
+  Used = 'Used',
+  Collectible = 'Collectible',
+  Refurbished = 'Refurbished',
+  Club = 'Club',
+}
+
+const ItemCondition = oneOfEnum(ItemConditionEnum)
+
+enum CurrencyCodeEnum {
+  USD = 'USD',
+  EUR = 'EUR',
+  GBP = 'GBP',
+  RMB = 'RMB',
+  INR = 'INR',
+  JPY = 'JPY',
+  CAD = 'CAD',
+  MXN = 'MXN',
+}
+
+const CurrencyCode = oneOfEnum(CurrencyCodeEnum)
+
+enum StatusEnum {
+  Success = 'Success',
+  ClientError = 'ClientError',
+  ServiceError = 'ServiceError',
+}
+
+const Status = oneOfEnum(StatusEnum)
+
+enum IdTypeEnum {
+  ASIN = 'ASIN',
+  SKU = 'SKU',
+}
+
+const IdType = oneOfEnum(IdTypeEnum)
+
 const MoneyType = Codec.interface({
   Amount: optional(number),
-  CurrencyCode: oneOf(Object.values(CurrencyCodeEnum).map((x) => exactly(x))),
+  CurrencyCode,
 })
 
 export const Points = Codec.interface({
@@ -43,7 +80,7 @@ const PriceToEstimateFees = Codec.interface({
 
 const FeesEstimateIdentifier = Codec.interface({
   MarketplaceId: string,
-  IdType: oneOf(Object.values(IdType).map((x) => exactly(x))),
+  IdType,
   IdValue: string,
   PriceToEstimateFees,
   SellerInputIdentifier: string,
@@ -73,7 +110,7 @@ const FeesEstimate = Codec.interface({
 const FeesEstimateResult = Codec.interface({
   FeesEstimateIdentifier,
   FeesEstimate: optional(FeesEstimate),
-  Status: oneOf(Object.values(Status).map((x) => exactly(x))),
+  Status,
   Error: optional(ErrorType),
 })
 
@@ -171,8 +208,34 @@ export const GetLowestOfferListingsForASINResponse = Codec.interface({
  * @todo - complete definitions
  */
 
+/**
+ * This has attributes instead of children, how do we handle that?
+ * http://docs.developer.amazonservices.com/en_CA/products/Products_Datatypes.html#OfferCount
+ */
+// const OfferCountType = number
+
+// const LowestPrice
+
+// const Summary = Codec.interface({
+//   TotalOfferCount: number,
+//   NumberOfOffers: OfferCountType,
+//   LowestPrices: optional(ensureArray('LowestPrice', LowestPrice)),
+//   BuyBoxPrices: optional(ensureArray('BuyBoxPrice', BuyBoxPrice)),
+//   ListPrice: optional(MoneyType),
+//   SuggestedLowerPricePlusShipping: optional(MoneyType),
+//   BuyBoxEligibleOffers: optional(OfferCountType),
+//   OffersAvailableTime: optional(mwsDate)
+// })
+
+const Identifier = Codec.interface({
+  MarketplaceId: string,
+  SellerSKU: string,
+  ItemCondition,
+  TimeOfOfferChange: optional(mwsDate),
+})
+
 const GetLowestPricedOffersForSKU = Codec.interface({
-  Identifier: unknown,
+  Identifier,
   Summary: unknown,
   Offers: unknown,
 })

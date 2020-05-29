@@ -1,22 +1,8 @@
 /**
  * Collection of types for products API
  */
-export enum CurrencyCodeEnum {
-  USD = 'USD',
-  EUR = 'EUR',
-  GBP = 'GBP',
-  RMB = 'RMB',
-  INR = 'INR',
-  JPY = 'JPY',
-  CAD = 'CAD',
-  MXN = 'MXN',
-}
 
-export enum Status {
-  Success = 'Success',
-  ClientError = 'ClientError',
-  ServiceError = 'ServiceError',
-}
+export type ItemCondition = 'Any' | 'New' | 'Used' | 'Collectible' | 'Refurbished' | 'Club'
 
 export interface MoneyType {
   Amount: number | undefined
@@ -57,11 +43,6 @@ export interface GetMyFeesEstimateParameters {
   [key: string]: FeeEstimateRequest[]
 }
 
-export enum IdType {
-  ASIN = 'ASIN',
-  SKU = 'SKU',
-}
-
 export interface ListMatchingProductsRequestParameters {
   MarketplaceId: string
   Query: string
@@ -93,8 +74,6 @@ export interface GetCompetitivePricingForAsinParameters {
   ASINList: string[]
   [key: string]: string | string[]
 }
-
-export type ItemCondition = 'Any' | 'New' | 'Used' | 'Collectible' | 'Refurbished' | 'Club'
 
 export interface GetLowestOfferListingsForSkuParameters {
   SellerSKUList: string[]
