@@ -100,6 +100,15 @@ const mockGetLowestPricedOffersForSku = new MWS(
   ),
 )
 
+const mockGetLowestPricedOffersForAsin = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('products_get_lowest_priced_offers_for_asin'),
+      headers,
+    }),
+  ),
+)
+
 const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
@@ -116,19 +125,27 @@ const mockMwsServiceStatus = new MWS(
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('products', () => {
-  describe('getServiceStatus', () => {
-    it('returns a parsed model when the status response is valid', async () => {
+  describe('getLowestPricedOffersForAsin', () => {
+    const parameters = {
+      MarketplaceId: '',
+      ASIN: '',
+      ItemCondition: 'New' as ItemCondition,
+    }
+
+    it('returns lowest priced offer for sku when response is valid', async () => {
       expect.assertions(1)
 
-      expect(await mockMwsServiceStatus.products.getServiceStatus()).toMatchSnapshot()
+      expect(
+        await mockGetLowestPricedOffersForAsin.products.getLowestPricedOffersForAsin(parameters),
+      ).toMatchSnapshot()
     })
 
-    it('throws a parsing error when the status response is not valid', async () => {
+    it('throws an error when the response isnt valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.products.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
-      )
+      await expect(() =>
+        mockMwsFail.products.getLowestPricedOffersForAsin(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 
@@ -329,6 +346,22 @@ describe('products', () => {
       await expect(() =>
         mockMwsFail.products.getMyFeesEstimate({ FeesEstimateRequestList: [] }),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
+  describe('getServiceStatus', () => {
+    it('returns a parsed model when the status response is valid', async () => {
+      expect.assertions(1)
+
+      expect(await mockMwsServiceStatus.products.getServiceStatus()).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.products.getServiceStatus()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
     })
   })
 })
