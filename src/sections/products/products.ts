@@ -1,5 +1,6 @@
 import { ParsingError } from '../../error'
 import { HttpClient, RequestMeta, Resource } from '../../http'
+import { getServiceStatusByResource } from '../shared'
 import {
   GetCompetitivePricingForASINResponse,
   GetCompetitivePricingForASINResult,
@@ -36,6 +37,10 @@ const PRODUCTS_API_VERSION = '2011-10-01'
 
 export class Products {
   constructor(private httpClient: HttpClient) {}
+
+  async getServiceStatus() {
+    return getServiceStatusByResource(this.httpClient, Resource.Products, PRODUCTS_API_VERSION)
+  }
 
   async listMatchingProducts(
     parameters: ListMatchingProductsRequestParameters,
