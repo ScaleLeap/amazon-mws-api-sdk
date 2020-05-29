@@ -399,8 +399,8 @@ Array [
       "SellerSKU": "GE Product",
       "TimeOfOfferChange": 2015-07-19T23:15:11.859Z,
     },
-    "Offers": Object {
-      "Offer": Object {
+    "Offers": Array [
+      Object {
         "IsBuyBoxWinner": true,
         "IsFeaturedMerchant": true,
         "IsFulfilledByAmazon": true,
@@ -409,6 +409,7 @@ Array [
           "CurrencyCode": "USD",
         },
         "MyOffer": false,
+        "Points": undefined,
         "SellerFeedbackRating": Object {
           "FeedbackCount": 1,
           "SellerPositiveFeedbackRating": 100,
@@ -418,15 +419,16 @@ Array [
           "CurrencyCode": "USD",
         },
         "ShippingTime": "",
+        "ShipsFrom": undefined,
         "SubCondition": "new",
       },
-    },
+    ],
     "Summary": Object {
       "BuyBoxEligibleOffers": Object {
         "OfferCount": 1,
       },
-      "BuyBoxPrices": Object {
-        "BuyBoxPrice": Object {
+      "BuyBoxPrices": Array [
+        Object {
           "LandedPrice": Object {
             "Amount": 32.99,
             "CurrencyCode": "USD",
@@ -435,18 +437,19 @@ Array [
             "Amount": 32.99,
             "CurrencyCode": "USD",
           },
+          "Points": undefined,
           "Shipping": Object {
             "Amount": 0,
             "CurrencyCode": "USD",
           },
         },
-      },
+      ],
       "ListPrice": Object {
         "Amount": 58.34,
         "CurrencyCode": "USD",
       },
-      "LowestPrices": Object {
-        "LowestPrice": Object {
+      "LowestPrices": Array [
+        Object {
           "LandedPrice": Object {
             "Amount": 32.99,
             "CurrencyCode": "USD",
@@ -455,15 +458,17 @@ Array [
             "Amount": 32.99,
             "CurrencyCode": "USD",
           },
+          "Points": undefined,
           "Shipping": Object {
             "Amount": 0,
             "CurrencyCode": "USD",
           },
         },
-      },
+      ],
       "NumberOfOffers": Object {
         "OfferCount": 1,
       },
+      "OffersAvailableTime": undefined,
       "SuggestedLowerPricePlusShipping": Object {
         "Amount": 32.99,
         "CurrencyCode": "USD",

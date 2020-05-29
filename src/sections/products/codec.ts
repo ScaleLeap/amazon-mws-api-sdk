@@ -212,20 +212,34 @@ export const GetLowestOfferListingsForASINResponse = Codec.interface({
  * This has attributes instead of children, how do we handle that?
  * http://docs.developer.amazonservices.com/en_CA/products/Products_Datatypes.html#OfferCount
  */
-// const OfferCountType = number
+const OfferCountType = Codec.interface({
+  OfferCount: number,
+})
 
-// const LowestPrice
+const LowestPrice = Codec.interface({
+  LandedPrice: MoneyType,
+  ListingPrice: MoneyType,
+  Shipping: MoneyType,
+  Points: optional(Points),
+})
 
-// const Summary = Codec.interface({
-//   TotalOfferCount: number,
-//   NumberOfOffers: OfferCountType,
-//   LowestPrices: optional(ensureArray('LowestPrice', LowestPrice)),
-//   BuyBoxPrices: optional(ensureArray('BuyBoxPrice', BuyBoxPrice)),
-//   ListPrice: optional(MoneyType),
-//   SuggestedLowerPricePlusShipping: optional(MoneyType),
-//   BuyBoxEligibleOffers: optional(OfferCountType),
-//   OffersAvailableTime: optional(mwsDate)
-// })
+const BuyBoxPrice = Codec.interface({
+  LandedPrice: MoneyType,
+  ListingPrice: MoneyType,
+  Shipping: MoneyType,
+  Points: optional(Points),
+})
+
+const Summary = Codec.interface({
+  TotalOfferCount: number,
+  NumberOfOffers: OfferCountType,
+  LowestPrices: optional(ensureArray('LowestPrice', LowestPrice)),
+  BuyBoxPrices: optional(ensureArray('BuyBoxPrice', BuyBoxPrice)),
+  ListPrice: optional(MoneyType),
+  SuggestedLowerPricePlusShipping: optional(MoneyType),
+  BuyBoxEligibleOffers: optional(OfferCountType),
+  OffersAvailableTime: optional(mwsDate),
+})
 
 const Identifier = Codec.interface({
   MarketplaceId: string,
@@ -234,10 +248,39 @@ const Identifier = Codec.interface({
   TimeOfOfferChange: optional(mwsDate),
 })
 
+const SellerFeedbackRating = Codec.interface({
+  SellerPositiveFeedbackRating: optional(number),
+  FeedbackCount: number,
+})
+
+/**
+ * Does not have elements, but is defined by attributes
+ */
+const DetailedShippingTimeType = optional(unknown)
+
+const ShipsFrom = Codec.interface({
+  State: optional(string),
+  Country: optional(string),
+})
+
+const Offer = Codec.interface({
+  MyOffer: optional(boolean),
+  SubCondition: string,
+  SellerFeedbackRating: optional(SellerFeedbackRating),
+  ShippingTime: DetailedShippingTimeType,
+  ListingPrice: MoneyType,
+  Points: optional(Points),
+  Shipping: MoneyType,
+  ShipsFrom: optional(ShipsFrom),
+  IsFulfilledByAmazon: boolean,
+  IsBuyBoxWinner: optional(boolean),
+  IsFeaturedMerchant: optional(boolean),
+})
+
 const GetLowestPricedOffersForSKU = Codec.interface({
   Identifier,
-  Summary: unknown,
-  Offers: unknown,
+  Summary,
+  Offers: ensureArray('Offer', Offer),
 })
 
 export const GetLowestPricedOffersForSKUResponse = Codec.interface({
@@ -245,8 +288,11 @@ export const GetLowestPricedOffersForSKUResponse = Codec.interface({
     GetLowestPricedOffersForSKUResult: GetLowestPricedOffersForSKU,
   }),
 })
+
 /**
+ *
  * Types derived from codecs
+ *
  */
 
 export type GetMatchingProductForIdResponse = GetInterface<typeof GetMatchingProductForIdResponse>
