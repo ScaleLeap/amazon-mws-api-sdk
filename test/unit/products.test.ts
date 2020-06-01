@@ -118,6 +118,15 @@ const mockGetMyPriceForSku = new MWS(
   ),
 )
 
+const mockGetMyPriceForAsin = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('products_get_my_price_for_asin'),
+      headers,
+    }),
+  ),
+)
+
 const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
@@ -134,11 +143,31 @@ const mockMwsServiceStatus = new MWS(
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('products', () => {
+  describe('getMyPriceForAsin', () => {
+    const parameters = {
+      MarketplaceId: '',
+      ASINList: [],
+    }
+
+    it('returns price for prouct for asin when response is valid', async () => {
+      expect.assertions(1)
+
+      expect(await mockGetMyPriceForAsin.products.getMyPriceForAsin(parameters)).toMatchSnapshot()
+    })
+
+    it('throws an error when the response is nt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.products.getMyPriceForAsin(parameters)).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
+    })
+  })
+
   describe('getMyPriceForSku', () => {
     const parameters = {
       MarketplaceId: '',
       SellerSKUList: [],
-      ItemCondition: 'New' as ItemCondition,
     }
 
     it('returns price for prouct for sku when response is valid', async () => {
