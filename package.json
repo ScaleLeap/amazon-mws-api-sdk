@@ -45,7 +45,7 @@
     "@types/node": "13.13.4",
     "ajv": "6.12.2",
     "danger": "10.2.0",
-    "global-agent": "2.1.9",
+    "global-agent": "2.1.12",
     "is-ci": "2.0.0",
     "jest": "25.5.3",
     "rimraf": "3.0.2",
