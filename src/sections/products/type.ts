@@ -112,3 +112,15 @@ export interface GetMyPriceForAsinParameters {
   ASINList: string[]
   ItemCondition?: ItemCondition
 }
+
+export interface GetProductCategoriesForSkuParameters {
+  MarketplaceId: string
+  SellerSKU: string
+  [key: string]: string
+}
+
+export interface ProductCategory {
+  ProductCategoryId: string
+  ProductCategoryName: string
+  Parent: ProductCategory | undefined
+}

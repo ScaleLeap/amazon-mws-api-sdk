@@ -158,7 +158,7 @@ describe('products', () => {
       SellerSKU: '',
     }
 
-    it('returns price for prouct for asin when response is valid', async () => {
+    it('returns price for product for asin when response is valid', async () => {
       expect.assertions(1)
 
       expect(
@@ -181,7 +181,7 @@ describe('products', () => {
       ASINList: [],
     }
 
-    it('returns price for prouct for asin when response is valid', async () => {
+    it('returns price for product for asin when response is valid', async () => {
       expect.assertions(1)
 
       expect(await mockGetMyPriceForAsin.products.getMyPriceForAsin(parameters)).toMatchSnapshot()
@@ -202,7 +202,7 @@ describe('products', () => {
       SellerSKUList: [],
     }
 
-    it('returns price for prouct for sku when response is valid', async () => {
+    it('returns price for product for sku when response is valid', async () => {
       expect.assertions(1)
 
       expect(await mockGetMyPriceForSku.products.getMyPriceForSku(parameters)).toMatchSnapshot()

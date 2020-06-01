@@ -24,6 +24,8 @@ import {
   GetMyPriceForASINResult,
   GetMyPriceForSKUResponse,
   GetMyPriceForSKUResult,
+  GetProductCategoriesForSKU,
+  GetProductCategoriesForSKUResponse,
   ListMatchingProducts,
   ListMatchingProductsResponse,
 } from './codec'
@@ -39,6 +41,7 @@ import {
   GetMyFeesEstimateParameters,
   GetMyPriceForAsinParameters,
   GetMyPriceForSkuParameters,
+  GetProductCategoriesForSkuParameters,
   ListMatchingProductsRequestParameters,
 } from './type'
 
@@ -261,7 +264,7 @@ export class Products {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Products,
       version: PRODUCTS_API_VERSION,
-      action: 'GetLowestPricedOffersForASIN',
+      action: 'GetMyPriceForSKU',
       parameters: {
         MarketplaceId: parameters.MarketplaceId,
         'SellerSKUList.SellerSKU': parameters.SellerSKUList,
@@ -283,7 +286,7 @@ export class Products {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Products,
       version: PRODUCTS_API_VERSION,
-      action: 'GetLowestPricedOffersForASIN',
+      action: 'GetMyPriceForASIN',
       parameters: {
         MarketplaceId: parameters.MarketplaceId,
         'ASINList.ASIN': parameters.ASINList,
@@ -293,6 +296,24 @@ export class Products {
 
     return GetMyPriceForASINResponse.decode(response).caseOf({
       Right: (x) => [x.GetMyPriceForASINResponse, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getProductCategoriesForSku(
+    parameters: GetProductCategoriesForSkuParameters,
+  ): Promise<[GetProductCategoriesForSKU, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Products,
+      version: PRODUCTS_API_VERSION,
+      action: 'GetProductCategoriesForSKU',
+      parameters,
+    })
+
+    return GetProductCategoriesForSKUResponse.decode(response).caseOf({
+      Right: (x) => [x.GetProductCategoriesForSKUResponse.GetProductCategoriesForSKUResult, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },

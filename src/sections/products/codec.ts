@@ -10,8 +10,11 @@ import {
   unknown,
 } from 'purify-ts'
 
-import { ensureArray, mwsDate, oneOfEnum } from '../../parsing'
-import { FeeDetail as FeeDetailInterface } from './type'
+import { ensureArray, ensureString, mwsDate, oneOfEnum } from '../../parsing'
+import {
+  FeeDetail as FeeDetailInterface,
+  ProductCategory as ProductCategoryInterface,
+} from './type'
 
 /**
  * Collection of codecs for the products api
@@ -328,6 +331,20 @@ export const GetMyPriceForASINResponse = Codec.interface({
   GetMyPriceForASINResponse: GetMyPriceForASINResult,
 })
 
+const ProductCategory: Codec<ProductCategoryInterface> = Codec.interface({
+  ProductCategoryId: ensureString,
+  ProductCategoryName: string,
+  Parent: optional(lazy(() => ProductCategory)),
+})
+
+const GetProductCategoriesForSKU = ensureArray('Self', ProductCategory)
+
+export const GetProductCategoriesForSKUResponse = Codec.interface({
+  GetProductCategoriesForSKUResponse: Codec.interface({
+    GetProductCategoriesForSKUResult: GetProductCategoriesForSKU,
+  }),
+})
+
 /**
  *
  * Types derived from codecs
@@ -354,3 +371,4 @@ export type GetLowestPricedOffersForSKU = GetInterface<typeof GetLowestPricedOff
 export type GetLowestPricedOffersForASIN = GetInterface<typeof GetLowestPricedOffersForASIN>
 export type GetMyPriceForSKUResult = GetInterface<typeof GetMyPriceForSKUResult>
 export type GetMyPriceForASINResult = GetInterface<typeof GetMyPriceForASINResult>
+export type GetProductCategoriesForSKU = GetInterface<typeof GetProductCategoriesForSKU>

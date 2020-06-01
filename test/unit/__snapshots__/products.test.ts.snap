@@ -1075,7 +1075,7 @@ Array [
 ]
 `;
 
-exports[`products getMyPriceForAsin returns price for prouct for asin when response is valid 1`] = `
+exports[`products getMyPriceForAsin returns price for product for asin when response is valid 1`] = `
 Array [
   Array [
     Object {
@@ -1126,7 +1126,7 @@ Array [
 ]
 `;
 
-exports[`products getMyPriceForSku returns price for prouct for sku when response is valid 1`] = `
+exports[`products getMyPriceForSku returns price for product for sku when response is valid 1`] = `
 Array [
   Array [
     Object {
@@ -1170,6 +1170,62 @@ Array [
           },
         },
       },
+    },
+  ],
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
+exports[`products getProductCategoriesForSku returns price for product for asin when response is valid 1`] = `
+Array [
+  Array [
+    Object {
+      "Parent": Object {
+        "Parent": Object {
+          "Parent": Object {
+            "Parent": Object {
+              "Parent": undefined,
+              "ProductCategoryId": "283155",
+              "ProductCategoryName": "Subjects",
+            },
+            "ProductCategoryId": "1000",
+            "ProductCategoryName": "Subjects",
+          },
+          "ProductCategoryId": "3",
+          "ProductCategoryName": "Business &#x26; Investing",
+        },
+        "ProductCategoryId": "2675",
+        "ProductCategoryName": "Management &#x26; Leadership",
+      },
+      "ProductCategoryId": "271578011",
+      "ProductCategoryName": "Project Management",
+    },
+    Object {
+      "Parent": Object {
+        "Parent": Object {
+          "Parent": Object {
+            "Parent": Object {
+              "Parent": undefined,
+              "ProductCategoryId": "283155",
+              "ProductCategoryName": "Specialty Boutique",
+            },
+            "ProductCategoryId": "2349030011",
+            "ProductCategoryName": "Specialty Boutique",
+          },
+          "ProductCategoryId": "465600",
+          "ProductCategoryName": "New, Used &#x26; Rental Textbooks",
+        },
+        "ProductCategoryId": "468220",
+        "ProductCategoryName": "Business &#x26; Finance",
+      },
+      "ProductCategoryId": "684248011",
+      "ProductCategoryName": "Management",
     },
   ],
   Object {
