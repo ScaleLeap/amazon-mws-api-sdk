@@ -106,3 +106,9 @@ export interface GetMyPriceForSkuParameters {
   SellerSKUList: string[]
   ItemCondition?: ItemCondition
 }
+
+export interface GetMyPriceForAsinParameters {
+  MarketplaceId: string
+  ASINList: string[]
+  ItemCondition?: ItemCondition
+}

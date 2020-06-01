@@ -322,6 +322,12 @@ export const GetMyPriceForSKUResponse = Codec.interface({
   GetMyPriceForSKUResponse: GetMyPriceForSKUResult,
 })
 
+const GetMyPriceForASINResult = ensureArray('GetMyPriceForASINResult', SingleProductInterface)
+
+export const GetMyPriceForASINResponse = Codec.interface({
+  GetMyPriceForASINResponse: GetMyPriceForASINResult,
+})
+
 /**
  *
  * Types derived from codecs
@@ -347,3 +353,4 @@ export type GetLowestOfferListingsForASINResult = GetInterface<
 export type GetLowestPricedOffersForSKU = GetInterface<typeof GetLowestPricedOffersForSKU>
 export type GetLowestPricedOffersForASIN = GetInterface<typeof GetLowestPricedOffersForASIN>
 export type GetMyPriceForSKUResult = GetInterface<typeof GetMyPriceForSKUResult>
+export type GetMyPriceForASINResult = GetInterface<typeof GetMyPriceForASINResult>
