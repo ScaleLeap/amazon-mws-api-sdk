@@ -100,3 +100,9 @@ export interface GetLowestPricedOffersForAsinParameters {
   ItemCondition: ItemCondition
   [key: string]: string
 }
+
+export interface GetMyPriceForSkuParameters {
+  MarketplaceId: string
+  SellerSKUList: string[]
+  ItemCondition?: ItemCondition
+}

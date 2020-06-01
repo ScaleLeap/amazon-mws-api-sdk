@@ -20,6 +20,8 @@ import {
   GetMatchingProductResult,
   GetMyFeesEstimate,
   GetMyFeesEstimateResponse,
+  GetMyPriceForSKUResponse,
+  GetMyPriceForSKUResult,
   ListMatchingProducts,
   ListMatchingProductsResponse,
 } from './codec'
@@ -33,6 +35,7 @@ import {
   GetMatchingProductForIdParameters,
   GetMatchingProductParameters,
   GetMyFeesEstimateParameters,
+  GetMyPriceForSkuParameters,
   ListMatchingProductsRequestParameters,
 } from './type'
 
@@ -243,6 +246,28 @@ export class Products {
         x.GetLowestPricedOffersForASINResponse.GetLowestPricedOffersForASINResult,
         meta,
       ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getMyPriceForSku(
+    parameters: GetMyPriceForSkuParameters,
+  ): Promise<[GetMyPriceForSKUResult, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Products,
+      version: PRODUCTS_API_VERSION,
+      action: 'GetLowestPricedOffersForASIN',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        'SellerSKUList.SellerSKU': parameters.SellerSKUList,
+        ItemCondition: parameters.ItemCondition,
+      },
+    })
+
+    return GetMyPriceForSKUResponse.decode(response).caseOf({
+      Right: (x) => [x.GetMyPriceForSKUResponse, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },

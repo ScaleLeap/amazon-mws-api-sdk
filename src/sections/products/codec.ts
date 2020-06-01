@@ -205,10 +205,6 @@ export const GetLowestOfferListingsForASINResponse = Codec.interface({
 })
 
 /**
- * @todo - complete definitions
- */
-
-/**
  * This has attributes instead of children, how do we handle that?
  * http://docs.developer.amazonservices.com/en_CA/products/Products_Datatypes.html#OfferCount
  */
@@ -320,6 +316,12 @@ export const GetLowestPricedOffersForASINResponse = Codec.interface({
   }),
 })
 
+const GetMyPriceForSKUResult = ensureArray('GetMyPriceForSKUResult', SingleProductInterface)
+
+export const GetMyPriceForSKUResponse = Codec.interface({
+  GetMyPriceForSKUResponse: GetMyPriceForSKUResult,
+})
+
 /**
  *
  * Types derived from codecs
@@ -344,3 +346,4 @@ export type GetLowestOfferListingsForASINResult = GetInterface<
 >
 export type GetLowestPricedOffersForSKU = GetInterface<typeof GetLowestPricedOffersForSKU>
 export type GetLowestPricedOffersForASIN = GetInterface<typeof GetLowestPricedOffersForASIN>
+export type GetMyPriceForSKUResult = GetInterface<typeof GetMyPriceForSKUResult>

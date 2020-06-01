@@ -1075,6 +1075,62 @@ Array [
 ]
 `;
 
+exports[`products getMyPriceForSku returns price for prouct for sku when response is valid 1`] = `
+Array [
+  Array [
+    Object {
+      "Product": Object {
+        "Identifiers": Object {
+          "MarketplaceASIN": Object {
+            "ASIN": 1933890517,
+            "MarketplaceId": "ATVPDKIKX0DER",
+          },
+          "SKUIdentifier": Object {
+            "MarketplaceId": "ATVPDKIKX0DER",
+            "SellerId": "A1IMEXAMPLEWRC",
+            "SellerSKU": "SKU2468",
+          },
+        },
+        "Offers": Object {
+          "Offer": Object {
+            "BuyingPrice": Object {
+              "LandedPrice": Object {
+                "Amount": 303.99,
+                "CurrencyCode": "USD",
+              },
+              "ListingPrice": Object {
+                "Amount": 300,
+                "CurrencyCode": "USD",
+              },
+              "Shipping": Object {
+                "Amount": 3.99,
+                "CurrencyCode": "USD",
+              },
+            },
+            "FulfillmentChannel": "MERCHANT",
+            "ItemCondition": "Used",
+            "ItemSubCondition": "Acceptable",
+            "RegularPrice": Object {
+              "Amount": 300,
+              "CurrencyCode": "USD",
+            },
+            "SellerId": "A1IMEXAMPLEWRC",
+            "SellerSKU": "SKU2468",
+          },
+        },
+      },
+    },
+  ],
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
 exports[`products getServiceStatus returns a parsed model when the status response is valid 1`] = `
 Array [
   Object {
