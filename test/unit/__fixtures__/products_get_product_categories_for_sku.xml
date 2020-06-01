@@ -1,0 +1,47 @@
+<GetProductCategoriesForSKUResponse xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+    <GetProductCategoriesForSKUResult>
+        <Self>
+            <ProductCategoryId>271578011</ProductCategoryId>
+            <ProductCategoryName>Project Management</ProductCategoryName>
+            <Parent>
+                <ProductCategoryId>2675</ProductCategoryId>
+                <ProductCategoryName>Management &#x26; Leadership</ProductCategoryName>
+                <Parent>
+                    <ProductCategoryId>3</ProductCategoryId>
+                    <ProductCategoryName>Business &#x26; Investing</ProductCategoryName>
+                    <Parent>
+                        <ProductCategoryId>1000</ProductCategoryId>
+                        <ProductCategoryName>Subjects</ProductCategoryName>
+                        <Parent>
+                            <ProductCategoryId>283155</ProductCategoryId>
+                            <ProductCategoryName>Subjects</ProductCategoryName>
+                        </Parent>
+                    </Parent>
+                </Parent>
+            </Parent>
+        </Self>
+        <Self>
+            <ProductCategoryId>684248011</ProductCategoryId>
+            <ProductCategoryName>Management</ProductCategoryName>
+            <Parent>
+                <ProductCategoryId>468220</ProductCategoryId>
+                <ProductCategoryName>Business &#x26; Finance</ProductCategoryName>
+                <Parent>
+                    <ProductCategoryId>465600</ProductCategoryId>
+                    <ProductCategoryName>New, Used &#x26; Rental Textbooks</ProductCategoryName>
+                    <Parent>
+                        <ProductCategoryId>2349030011</ProductCategoryId>
+                        <ProductCategoryName>Specialty Boutique</ProductCategoryName>
+                        <Parent>
+                            <ProductCategoryId>283155</ProductCategoryId>
+                            <ProductCategoryName>Specialty Boutique</ProductCategoryName>
+                        </Parent>
+                    </Parent>
+                </Parent>
+            </Parent>
+        </Self>
+    </GetProductCategoriesForSKUResult>
+    <ResponseMetadata>
+        <RequestId>e058aabd-b4c3-48ba-9bfa-EXAMPLE9a267</RequestId>
+    </ResponseMetadata>
+</GetProductCategoriesForSKUResponse>
