@@ -1,0 +1,86 @@
+<GetLowestPricedOffersForASINResponse xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+    <GetLowestPricedOffersForASINResult MarketplaceID="ATVPDKIKX0DER" ItemCondition="New" ASIN="B0002GTTRC" status="Success">
+        <Identifier>
+            <MarketplaceId>ATVPDKIKX0DER</MarketplaceId>
+            <ASIN>B0002GTTRC</ASIN>
+            <ItemCondition>New</ItemCondition>
+            <TimeOfOfferChange>2015-07-19T23:15:11.859Z</TimeOfOfferChange>
+        </Identifier>
+        <Summary>
+            <TotalOfferCount>0</TotalOfferCount>
+            <NumberOfOffers>
+                <OfferCount condition="new" 
+                    fulfillmentChannel="Amazon">1</OfferCount>
+            </NumberOfOffers>
+            <LowestPrices>
+                <LowestPrice condition="new" fulfillmentChannel="Amazon">
+                    <LandedPrice>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <Amount>32.99</Amount>
+                    </LandedPrice>
+                    <ListingPrice>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <Amount>32.99</Amount>
+                    </ListingPrice>
+                    <Shipping>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <Amount>0.00</Amount>
+                    </Shipping>
+                </LowestPrice>
+            </LowestPrices>
+            <BuyBoxPrices>
+                <BuyBoxPrice condition="New">
+                    <LandedPrice>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <Amount>32.99</Amount>
+                    </LandedPrice>
+                    <ListingPrice>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <Amount>32.99</Amount>
+                    </ListingPrice>
+                    <Shipping>
+                        <CurrencyCode>USD</CurrencyCode>
+                        <Amount>0.00</Amount>
+                    </Shipping>
+                </BuyBoxPrice>
+            </BuyBoxPrices>
+            <ListPrice>
+                <CurrencyCode>USD</CurrencyCode>
+                <Amount>58.34</Amount>
+            </ListPrice>
+            <SuggestedLowerPricePlusShipping>
+                <CurrencyCode>USD</CurrencyCode>
+                <Amount>32.99</Amount>
+            </SuggestedLowerPricePlusShipping>
+            <BuyBoxEligibleOffers>
+                <OfferCount condition="new" 
+                    fulfillmentChannel="Amazon">1</OfferCount>
+            </BuyBoxEligibleOffers>
+        </Summary>
+        <Offers>
+            <Offer>
+                <SubCondition>new</SubCondition>
+                <SellerFeedbackRating>
+                    <SellerPositiveFeedbackRating>100.0</SellerPositiveFeedbackRating>
+                    <FeedbackCount>1</FeedbackCount>
+                </SellerFeedbackRating>
+                <ShippingTime minimumHours="0" maximumHours="0" 
+                    availabilityType="NOW"/>
+                <ListingPrice>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <Amount>32.99</Amount>
+                </ListingPrice>
+                <Shipping>
+                    <CurrencyCode>USD</CurrencyCode>
+                    <Amount>0.00</Amount>
+                </Shipping>
+                <IsFulfilledByAmazon>true</IsFulfilledByAmazon>
+                <IsBuyBoxWinner>true</IsBuyBoxWinner>
+                <IsFeaturedMerchant>true</IsFeaturedMerchant>
+            </Offer>
+        </Offers>
+    </GetLowestPricedOffersForASINResult>
+    <ResponseMetadata>
+        <RequestId>21534f03-e7e3-4d9a-9bea-0e15add3326d</RequestId>
+    </ResponseMetadata>
+</GetLowestPricedOffersForASINResponse>
