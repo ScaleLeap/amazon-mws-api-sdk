@@ -390,7 +390,7 @@ Array [
 ]
 `;
 
-exports[`products getLowestPricedOffersForAsin returns lowest priced offer for sku when response is valid 1`] = `
+exports[`products getLowestPricedOffersForAsin returns lowest priced offer for asin when response is valid 1`] = `
 Array [
   Object {
     "Identifier": Object {
@@ -1182,7 +1182,50 @@ Array [
 ]
 `;
 
-exports[`products getProductCategoriesForSku returns price for product for asin when response is valid 1`] = `
+exports[`products getProductCategoriesForAsin returns product categories for product for asin when response is valid 1`] = `
+Array [
+  Array [
+    Object {
+      "Parent": Object {
+        "Parent": Object {
+          "Parent": Object {
+            "Parent": Object {
+              "Parent": Object {
+                "Parent": Object {
+                  "Parent": undefined,
+                  "ProductCategoryId": "3375251",
+                  "ProductCategoryName": "Categories",
+                },
+                "ProductCategoryId": "3375301",
+                "ProductCategoryName": "Categories",
+              },
+              "ProductCategoryId": "2232464011",
+              "ProductCategoryName": "Bikes &#x26; Scooters",
+            },
+            "ProductCategoryId": "3403201",
+            "ProductCategoryName": "Bikes &#x26; Accessories",
+          },
+          "ProductCategoryId": "2371051011",
+          "ProductCategoryName": "Clothing",
+        },
+        "ProductCategoryId": "2419332011",
+        "ProductCategoryName": "Men",
+      },
+      "ProductCategoryId": "2420095011",
+      "ProductCategoryName": "Compression Shorts",
+    },
+  ],
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "requestId": "0",
+    "timestamp": "2020-05-06T09:22:23.582Z",
+  },
+]
+`;
+
+exports[`products getProductCategoriesForSku returns product categories for product for sku when response is valid 1`] = `
 Array [
   Array [
     Object {

@@ -124,3 +124,9 @@ export interface ProductCategory {
   ProductCategoryName: string
   Parent: ProductCategory | undefined
 }
+
+export interface GetProductCategoriesForAsinParameters {
+  MarketplaceId: string
+  ASIN: string
+  [key: string]: string
+}

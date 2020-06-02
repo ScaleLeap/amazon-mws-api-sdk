@@ -24,6 +24,8 @@ import {
   GetMyPriceForASINResult,
   GetMyPriceForSKUResponse,
   GetMyPriceForSKUResult,
+  GetProductCategoriesForASIN,
+  GetProductCategoriesForASINResponse,
   GetProductCategoriesForSKU,
   GetProductCategoriesForSKUResponse,
   ListMatchingProducts,
@@ -41,6 +43,7 @@ import {
   GetMyFeesEstimateParameters,
   GetMyPriceForAsinParameters,
   GetMyPriceForSkuParameters,
+  GetProductCategoriesForAsinParameters,
   GetProductCategoriesForSkuParameters,
   ListMatchingProductsRequestParameters,
 } from './type'
@@ -314,6 +317,24 @@ export class Products {
 
     return GetProductCategoriesForSKUResponse.decode(response).caseOf({
       Right: (x) => [x.GetProductCategoriesForSKUResponse.GetProductCategoriesForSKUResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
+  async getProductCategoriesForAsin(
+    parameters: GetProductCategoriesForAsinParameters,
+  ): Promise<[GetProductCategoriesForASIN, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Products,
+      version: PRODUCTS_API_VERSION,
+      action: 'GetProductCategoriesForASIN',
+      parameters,
+    })
+
+    return GetProductCategoriesForASINResponse.decode(response).caseOf({
+      Right: (x) => [x.GetProductCategoriesForASINResponse.GetProductCategoriesForASINResult, meta],
       Left: (error) => {
         throw new ParsingError(error)
       },
