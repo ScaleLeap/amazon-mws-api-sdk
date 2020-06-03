@@ -18,6 +18,19 @@ const httpClient = new HttpClient({
 describe(`products`, () => {
   const products = new Products(httpClient)
   const ASINList = ['B00D6CMT12', 'B07L1G4YKT', 'B00J8NCVX4']
+  const SKUList = ['SPATULA-MWS-TEST', 'B07L1G4YKT', 'B00J8NCVX4']
+
+  itci('should get matching products of more than one sku', async () => {
+    expect.assertions(1)
+
+    const [getMatchingProductResponse] = await products.getMatchingProductForId({
+      IdList: SKUList,
+      MarketplaceId: amazonMarketplaces.CA.id,
+      IdType: 'SKU',
+    })
+
+    expect(Array.isArray(getMatchingProductResponse)).toBe(true)
+  })
 
   itci('should get matching products of more than one asin', async () => {
     expect.assertions(1)
