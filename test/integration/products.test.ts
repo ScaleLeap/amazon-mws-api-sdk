@@ -25,9 +25,10 @@ describe(`products`, () => {
   itci('should be able to handle invalid and valid asins', async () => {
     expect.assertions(1)
 
-    const [getMatchingProductResponse] = await products.getMatchingProduct({
-      ASINList: InvalidASINList,
+    const [getMatchingProductResponse] = await products.getMatchingProductForId({
+      IdList: InvalidASINList,
       MarketplaceId,
+      IdType: 'ASIN',
     })
 
     expect(Array.isArray(getMatchingProductResponse)).toBe(true)
