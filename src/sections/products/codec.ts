@@ -143,7 +143,10 @@ export const ListMatchingProductsResponse = Codec.interface({
   }),
 })
 
-export const GetMatchingProductResult = ensureArray('GetMatchingProductResult', unknown)
+export const GetMatchingProductResult = ensureArray(
+  'GetMatchingProductResult',
+  SingleProductInterface,
+)
 
 export const GetMatchingProductResponse = Codec.interface({
   GetMatchingProductResponse: GetMatchingProductResult,

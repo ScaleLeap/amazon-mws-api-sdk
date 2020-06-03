@@ -585,13 +585,6 @@ exports[`products getMatchingProduct returns a matching product when the respons
 Array [
   Array [
     Object {
-      "Error": Object {
-        "Code": "InvalidParameterValue",
-        "Message": "Invalid ISBN identifier 0439708623 for marketplace ATVPDKIKX0DER",
-        "Type": "Sender",
-      },
-    },
-    Object {
       "Product": Object {
         "AttributeSets": Object {
           "ns2:ItemAttributes": Object {
