@@ -20,6 +20,18 @@ describe(`products`, () => {
   const MarketplaceId = amazonMarketplaces.CA.id
   const ASINList = ['B00D6CMT12', 'B07L1G4YKT', 'B00J8NCVX4']
   const SKUList = ['SPATULA-MWS-TEST', 'PRESS001', 'B00J8NCVX4']
+  const InvalidASINList = ['This is an invalid ASIN', 'B07L1G4YKT', 'B00J8NCVX4']
+
+  itci('should be able to handle invalid and valid asins', async () => {
+    expect.assertions(1)
+
+    const [getMatchingProductResponse] = await products.getMatchingProduct({
+      ASINList: InvalidASINList,
+      MarketplaceId,
+    })
+
+    expect(Array.isArray(getMatchingProductResponse)).toBe(true)
+  })
 
   /**
    * @todo: improve assertions
