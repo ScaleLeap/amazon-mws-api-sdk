@@ -583,8 +583,8 @@ Array [
 
 exports[`products getMatchingProduct returns a matching product when the response is valid 1`] = `
 Array [
-  Array [
-    Object {
+  Object {
+    "GetMatchingProductResult": Object {
       "Product": Object {
         "AttributeSets": Object {
           "ns2:ItemAttributes": Object {
@@ -712,7 +712,10 @@ Array [
         },
       },
     },
-  ],
+    "ResponseMetadata": Object {
+      "RequestId": "b12caada-d330-4d87-a789-EXAMPLE35872",
+    },
+  },
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,
