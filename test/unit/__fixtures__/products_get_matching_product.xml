@@ -1,4 +1,11 @@
 <GetMatchingProductResponse xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+    <GetMatchingProductResult ASIN="B002KT3XRQ" IdType="ASIN" status="ClientError">
+        <Error>
+            <Type>Sender</Type>
+            <Code>InvalidParameterValue</Code>
+            <Message>Invalid ISBN identifier 0439708623 for marketplace ATVPDKIKX0DER</Message>
+        </Error>
+    </GetMatchingProductResult>
     <GetMatchingProductResult ASIN="B002KT3XRQ" status="Success">
         <Product xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01" xmlns:ns2="http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd">
             <Identifiers>

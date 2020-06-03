@@ -583,8 +583,15 @@ Array [
 
 exports[`products getMatchingProduct returns a matching product when the response is valid 1`] = `
 Array [
-  Object {
-    "GetMatchingProductResult": Object {
+  Array [
+    Object {
+      "Error": Object {
+        "Code": "InvalidParameterValue",
+        "Message": "Invalid ISBN identifier 0439708623 for marketplace ATVPDKIKX0DER",
+        "Type": "Sender",
+      },
+    },
+    Object {
       "Product": Object {
         "AttributeSets": Object {
           "ns2:ItemAttributes": Object {
@@ -712,10 +719,7 @@ Array [
         },
       },
     },
-    "ResponseMetadata": Object {
-      "RequestId": "b12caada-d330-4d87-a789-EXAMPLE35872",
-    },
-  },
+  ],
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,

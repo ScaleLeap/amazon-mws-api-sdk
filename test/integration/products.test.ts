@@ -19,22 +19,22 @@ describe(`products`, () => {
   const products = new Products(httpClient)
   const ASINList = ['B00D6CMT12', 'B07L1G4YKT', 'B00J8NCVX4']
   const SKUList = ['SPATULA-MWS-TEST', 'B07L1G4YKT', 'B00J8NCVX4']
-  const InvalidASINsWithOneValidASIN = ['X', 'The next ID is valid', 'B00D6CMT12']
+  // const InvalidASINsWithOneValidASIN = ['X', 'The next ID is valid', 'B00D6CMT12']
 
-  itci('should properly decode request with one valid ASIN', async () => {
-    expect.assertions(1)
+  // itci('should properly decode request with one valid ASIN', async () => {
+  //   expect.assertions(1)
 
-    const [getMatchingProductResponse] = await products.getMatchingProduct({
-      ASINList: InvalidASINsWithOneValidASIN,
-      MarketplaceId: amazonMarketplaces.CA.id,
-    })
+  //   const [getMatchingProductResponse] = await products.getMatchingProduct({
+  //     ASINList,
+  //     MarketplaceId: amazonMarketplaces.CA.id,
+  //   })
 
-    /**
-     * @todo: Review returned data and adjust API accordingly
-     * I don't actually know what to expect here yet
-     */
-    expect(Array.isArray(getMatchingProductResponse)).toBe(true)
-  })
+  //   /**
+  //    * @todo: Review returned data and adjust API accordingly
+  //    * I don't actually know what to expect here yet
+  //    */
+  //   expect(Array.isArray(getMatchingProductResponse)).toBe(true)
+  // })
 
   itci('should get matching products of more than one sku', async () => {
     expect.assertions(1)
