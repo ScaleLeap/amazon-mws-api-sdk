@@ -17,7 +17,7 @@ import {
   GetMatchingProductForIdResponse,
   GetMatchingProductForIdResponseCodec,
   GetMatchingProductResponse,
-  // GetMatchingProductResult,
+  GetMatchingProductResult,
   GetMyFeesEstimate,
   GetMyFeesEstimateResponse,
   GetMyPriceForASINResponse,
@@ -95,7 +95,7 @@ export class Products {
 
   async getMatchingProduct(
     parameters: GetMatchingProductParameters,
-  ): Promise<[unknown, RequestMeta]> {
+  ): Promise<[GetMatchingProductResult, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Products,
       version: PRODUCTS_API_VERSION,

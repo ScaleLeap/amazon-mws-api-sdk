@@ -4,7 +4,6 @@ import {
   GetInterface,
   lazy,
   number,
-  // oneOf,
   optional,
   record,
   string,
@@ -144,13 +143,10 @@ export const ListMatchingProductsResponse = Codec.interface({
   }),
 })
 
-export const GetMatchingProductResult = ensureArray(
-  'GetMatchingProductResult',
-  SingleProductInterface,
-)
+export const GetMatchingProductResult = ensureArray('GetMatchingProductResult', unknown)
 
 export const GetMatchingProductResponse = Codec.interface({
-  GetMatchingProductResponse: unknown,
+  GetMatchingProductResponse: GetMatchingProductResult,
 })
 
 const MatchingProductForId = Codec.interface({
