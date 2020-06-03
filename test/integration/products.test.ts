@@ -26,7 +26,7 @@ describe(`products`, () => {
     const [getMatchingProductResponse] = await products.getMatchingProductForId({
       IdList: SKUList,
       MarketplaceId: amazonMarketplaces.CA.id,
-      IdType: 'SKU',
+      IdType: 'SellerSKU',
     })
 
     expect(Array.isArray(getMatchingProductResponse)).toBe(true)
