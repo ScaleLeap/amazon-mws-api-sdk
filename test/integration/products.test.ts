@@ -17,15 +17,41 @@ const httpClient = new HttpClient({
 /* eslint-disable jest/no-standalone-expect */
 describe(`products`, () => {
   const products = new Products(httpClient)
+  const MarketplaceId = amazonMarketplaces.CA.id
   const ASINList = ['B00D6CMT12', 'B07L1G4YKT', 'B00J8NCVX4']
   const SKUList = ['SPATULA-MWS-TEST', 'PRESS001', 'B00J8NCVX4']
+
+  /**
+   * @todo: improve assertions
+   */
+  itci('should get competitive pricing for asin if succesful', async () => {
+    expect.assertions(1)
+
+    const [getCompetitivePricingForAsinResponse] = await products.getCompetitivePricingForAsin({
+      MarketplaceId,
+      ASINList,
+    })
+
+    expect(Array.isArray(getCompetitivePricingForAsinResponse)).toBe(true)
+  })
+
+  itci('should get competitive pricing for sku if succesful', async () => {
+    expect.assertions(1)
+
+    const [getCompetitivePricingForSkuResponse] = await products.getCompetitivePricingForSku({
+      MarketplaceId,
+      SellerSKUList: SKUList,
+    })
+
+    expect(Array.isArray(getCompetitivePricingForSkuResponse)).toBe(true)
+  })
 
   itci('should get matching products of more than one sku', async () => {
     expect.assertions(1)
 
     const [getMatchingProductResponse] = await products.getMatchingProductForId({
       IdList: SKUList,
-      MarketplaceId: amazonMarketplaces.CA.id,
+      MarketplaceId,
       IdType: 'SellerSKU',
     })
 
@@ -37,7 +63,7 @@ describe(`products`, () => {
 
     const [getMatchingProductResponse] = await products.getMatchingProduct({
       ASINList,
-      MarketplaceId: amazonMarketplaces.CA.id,
+      MarketplaceId,
     })
 
     expect(Array.isArray(getMatchingProductResponse)).toBe(true)
