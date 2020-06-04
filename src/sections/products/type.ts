@@ -3,7 +3,8 @@
  */
 
 export type ItemCondition = 'Any' | 'New' | 'Used' | 'Collectible' | 'Refurbished' | 'Club'
-
+type GetMatchingProductIdType = 'ASIN' | 'GCID' | 'SellerSKU' | 'UPC' | 'EAN' | 'ISBN' | 'JAN'
+type FeeEstimateIdType = 'ASIN' | 'SellerSKU'
 export interface MoneyType {
   Amount: number | undefined
   CurrencyCode: string
@@ -31,7 +32,7 @@ interface PriceToEstimateFees {
 
 interface FeeEstimateRequest {
   MarketplaceId: string
-  IdType: string
+  IdType: FeeEstimateIdType
   IdValue: string
   PriceToEstimateFees: PriceToEstimateFees
   Identifier: string
@@ -58,7 +59,7 @@ export interface GetMatchingProductParameters {
 
 export interface GetMatchingProductForIdParameters {
   MarketplaceId: string
-  IdType: string
+  IdType: GetMatchingProductIdType
   IdList: string[]
   [key: string]: string | string[]
 }
