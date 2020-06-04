@@ -3,8 +3,15 @@
  */
 
 export type ItemCondition = 'Any' | 'New' | 'Used' | 'Collectible' | 'Refurbished' | 'Club'
-type GetMatchingProductIdType = 'ASIN' | 'GCID' | 'SellerSKU' | 'UPC' | 'EAN' | 'ISBN' | 'JAN'
-type FeeEstimateIdType = 'ASIN' | 'SellerSKU'
+export type GetMatchingProductIdType =
+  | 'ASIN'
+  | 'GCID'
+  | 'SellerSKU'
+  | 'UPC'
+  | 'EAN'
+  | 'ISBN'
+  | 'JAN'
+export type FeeEstimateIdType = 'ASIN' | 'SellerSKU'
 export interface MoneyType {
   Amount: number | undefined
   CurrencyCode: string

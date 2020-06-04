@@ -1,6 +1,6 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
-import { ItemCondition } from '../../src/sections/products/type'
+import { GetMatchingProductIdType, ItemCondition } from '../../src/sections/products/type'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -422,15 +422,17 @@ describe('products', () => {
   })
 
   describe('getMatchingProductForId', () => {
+    const parameters = {
+      MarketplaceId: '',
+      IdType: 'ASIN' as GetMatchingProductIdType,
+      IdList: [],
+    }
+
     it('returns a matching product when the response is valid', async () => {
       expect.assertions(1)
 
       expect(
-        await mockGetMatchingProductForId.products.getMatchingProductForId({
-          MarketplaceId: '',
-          IdType: '',
-          IdList: [],
-        }),
+        await mockGetMatchingProductForId.products.getMatchingProductForId(parameters),
       ).toMatchSnapshot()
     })
 
@@ -438,7 +440,7 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getMatchingProductForId({ MarketplaceId: '', IdType: '', IdList: [] }),
+        mockMwsFail.products.getMatchingProductForId(parameters),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
