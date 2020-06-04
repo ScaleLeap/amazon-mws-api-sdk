@@ -118,6 +118,24 @@ const mockGetMyPriceForSku = new MWS(
   ),
 )
 
+const mockGetLowestPricedOffersForSkuMissingShipping = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('products_get_lowest_priced_offers_for_sku_missing_shipping_charge'),
+      headers,
+    }),
+  ),
+)
+
+const mockGetLowestPricedOffersForSkuTooSoonForProcessing = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('products_get_lowest_priced_offers_for_sku_too_soon_for_processing'),
+      headers,
+    }),
+  ),
+)
+
 const mockGetMyPriceForAsin = new MWS(
   new HttpClient(httpConfig, () =>
     Promise.resolve({
@@ -281,10 +299,22 @@ describe('products', () => {
     }
 
     it('returns lowest priced offer for sku when response is valid', async () => {
-      expect.assertions(1)
+      expect.assertions(3)
 
       expect(
         await mockGetLowestPricedOffersForSku.products.getLowestPricedOffersForSku(parameters),
+      ).toMatchSnapshot()
+
+      expect(
+        await mockGetLowestPricedOffersForSkuTooSoonForProcessing.products.getLowestPricedOffersForSku(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+
+      expect(
+        await mockGetLowestPricedOffersForSkuMissingShipping.products.getLowestPricedOffersForSku(
+          parameters,
+        ),
       ).toMatchSnapshot()
     })
 
