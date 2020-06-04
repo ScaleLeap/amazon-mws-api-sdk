@@ -239,7 +239,7 @@ const BuyBoxPrice = Codec.interface({
 
 const Summary = Codec.interface({
   TotalOfferCount: number,
-  NumberOfOffers: OfferCountType,
+  NumberOfOffers: optional(OfferCountType),
   LowestPrices: optional(ensureArray('LowestPrice', LowestPrice)),
   BuyBoxPrices: optional(ensureArray('BuyBoxPrice', BuyBoxPrice)),
   ListPrice: optional(MoneyType),
