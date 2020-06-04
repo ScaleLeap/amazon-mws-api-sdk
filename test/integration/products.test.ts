@@ -34,9 +34,17 @@ describe(`products`, () => {
     expect(Array.isArray(getMatchingProductResponse)).toBe(true)
   })
 
-  /**
-   * @todo: improve assertions
-   */
+  itci('should get product categories using product sku', async () => {
+    expect.assertions(1)
+
+    const [getProductCategoriesForSkuResponse] = await products.getProductCategoriesForSku({
+      MarketplaceId,
+      SellerSKU: SKUList[0],
+    })
+
+    expect(Array.isArray(getProductCategoriesForSkuResponse)).toBe(true)
+  })
+
   itci('should get competitive pricing for asin if succesful', async () => {
     expect.assertions(1)
 
