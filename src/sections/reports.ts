@@ -2,7 +2,7 @@ import { boolean, Codec, GetInterface, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureString, mwsDate } from '../parsing'
+import { ensureString, mwsDate, nextToken as nextTokenCodec } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 
 const REPORTS_API_VERSION = '2009-01-01'
@@ -13,6 +13,7 @@ const REPORTS_API_VERSION = '2009-01-01'
  */
 const ReportType = string
 type ReportType = GetInterface<typeof ReportType>
+
 interface RequestReportParameters {
   ReportType: ReportType
   StartDate?: Date
@@ -30,7 +31,7 @@ const ReportRequestInfo = Codec.interface({
   Scheduled: optional(boolean),
   SubmittedDate: optional(mwsDate),
   ReportProcessingStatus: optional(string),
-  GeneratedReportId: optional(string),
+  GeneratedReportId: optional(ensureString),
   StartedProcessingDate: optional(mwsDate),
   CompletedDate: optional(mwsDate),
 })
@@ -45,8 +46,63 @@ const RequestReportResponse = Codec.interface({
   }),
 })
 
+type ReportProcessing =
+  | '_SUBMITTED_'
+  | '_IN_PROGRESS_'
+  | '_CANCELLED_'
+  | '_DONE_'
+  | '_DONE_NO_DATA_'
+  | 'All'
+interface GetReportRequestListParameters {
+  ReportRequestIdList?: string[]
+  ReportTypeList?: ReportType[]
+  ReportProcessingStatusList?: ReportProcessing[]
+  MaxCount?: number
+  RequestedFromDate?: Date
+  RequestedToDate?: Date
+}
+
+const GetReportRequestListResult = Codec.interface({
+  NextToken: optional(nextTokenCodec('GetReportRequestList')),
+  HasNext: optional(boolean),
+  ReportRequestInfo: optional(ReportRequestInfo),
+})
+
+type GetReportRequestListResult = GetInterface<typeof GetReportRequestListResult>
+
+const GetReportRequestListResponse = Codec.interface({
+  GetReportRequestListResponse: Codec.interface({
+    GetReportRequestListResult,
+  }),
+})
+
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async getReportRequestList(
+    parameters: GetReportRequestListParameters,
+  ): Promise<[GetReportRequestListResult, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Report,
+      version: REPORTS_API_VERSION,
+      action: 'GetReportRequestList',
+      parameters: {
+        'ReportRequestIdList.Id': parameters.ReportRequestIdList,
+        'ReportTypeList.Type': parameters.ReportRequestIdList,
+        'ReportProcessingStatusList.Status': parameters.ReportProcessingStatusList,
+        MaxCount: parameters.MaxCount,
+        RequestedFromDate: parameters.RequestedFromDate?.toISOString(),
+        RequestedToDate: parameters.RequestedToDate?.toISOString(),
+      },
+    })
+
+    return GetReportRequestListResponse.decode(response).caseOf({
+      Right: (x) => [x.GetReportRequestListResponse.GetReportRequestListResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async requestReport(
     parameters: RequestReportParameters,
