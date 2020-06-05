@@ -49,9 +49,9 @@ Array [
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,
-    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
     "requestId": "0",
-    "timestamp": "2020-05-06T09:22:23.582Z",
+    "timestamp": 2020-05-06T09:22:23.582Z,
   },
 ]
 `;
@@ -65,9 +65,9 @@ Array [
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,
-    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
     "requestId": "0",
-    "timestamp": "2020-05-06T09:22:23.582Z",
+    "timestamp": 2020-05-06T09:22:23.582Z,
   },
 ]
 `;
@@ -134,9 +134,9 @@ Array [
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,
-    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
     "requestId": "0",
-    "timestamp": "2020-05-06T09:22:23.582Z",
+    "timestamp": 2020-05-06T09:22:23.582Z,
   },
 ]
 `;
@@ -203,9 +203,9 @@ Array [
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,
-    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
     "requestId": "0",
-    "timestamp": "2020-05-06T09:22:23.582Z",
+    "timestamp": 2020-05-06T09:22:23.582Z,
   },
 ]
 `;
@@ -439,9 +439,9 @@ Array [
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,
-    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
     "requestId": "0",
-    "timestamp": "2020-05-06T09:22:23.582Z",
+    "timestamp": 2020-05-06T09:22:23.582Z,
   },
 ]
 `;
@@ -460,9 +460,9 @@ Array [
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,
-    "quotaResetOn": "2020-04-06T10:22:23.582Z",
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
     "requestId": "0",
-    "timestamp": "2020-05-06T09:22:23.582Z",
+    "timestamp": 2020-05-06T09:22:23.582Z,
   },
 ]
 `;
