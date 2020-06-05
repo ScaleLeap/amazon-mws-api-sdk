@@ -19,22 +19,16 @@ Array [
 exports[`reports requestReport returns a parsed model when the response is valid 1`] = `
 Array [
   Object {
-    "RequestReportResponse": Object {
-      "RequestReportResult": Object {
-        "ReportRequestInfo": Object {
-          "EndDate": "2009-02-13T02:10:39+00:00",
-          "ReportProcessingStatus": "_SUBMITTED_",
-          "ReportRequestId": 2291326454,
-          "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
-          "Scheduled": false,
-          "StartDate": "2009-01-21T02:10:39+00:00",
-          "SubmittedDate": "2009-02-20T02:10:39+00:00",
-        },
-      },
-      "ResponseMetadata": Object {
-        "RequestId": "88faca76-b600-46d2-b53c-0c8c4533e43a",
-      },
-    },
+    "CompletedDate": undefined,
+    "EndDate": 2009-02-13T02:10:39.000Z,
+    "GeneratedReportId": undefined,
+    "ReportProcessingStatus": "_SUBMITTED_",
+    "ReportRequestId": "2291326454",
+    "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+    "Scheduled": false,
+    "StartDate": 2009-01-21T02:10:39.000Z,
+    "StartedProcessingDate": undefined,
+    "SubmittedDate": 2009-02-20T02:10:39.000Z,
   },
   Object {
     "quotaMax": 1000,
