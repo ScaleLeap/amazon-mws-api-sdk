@@ -4,6 +4,7 @@ import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
 import { ensureArray, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 import { getServiceStatusByResource } from './shared'
+import { RequireOnlyOne } from './types'
 
 const FULFILLMENT_INVENTORY_API_VERSION = '2010-10-01'
 
@@ -112,7 +113,10 @@ export class FulfillmentInventory {
   constructor(private httpClient: HttpClient) {}
 
   async listInventorySupply(
-    parameters: ListInventorySupplyRequestParameters,
+    parameters: RequireOnlyOne<
+      ListInventorySupplyRequestParameters,
+      'MarketplaceId' | 'QueryStartDateTime'
+    >,
   ): Promise<[InventorySupplyList, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.FulfilmentInventory,
