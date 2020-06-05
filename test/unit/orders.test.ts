@@ -84,18 +84,19 @@ const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('orders', () => {
   describe('listOrders', () => {
+    const parameters = { CreatedAfter: new Date(), MarketplaceId: [] }
+
     it('returns a parsed model when the response is valid', async () => {
       expect.assertions(1)
-
-      expect(await mockMwsListOrders.orders.listOrders({ MarketplaceId: [] })).toMatchSnapshot()
+      expect(await mockMwsListOrders.orders.listOrders(parameters)).toMatchSnapshot()
     })
 
     it('throws a parsing error when the response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() =>
-        mockMwsFail.orders.listOrders({ MarketplaceId: [] }),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      await expect(() => mockMwsFail.orders.listOrders(parameters)).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
     })
   })
 

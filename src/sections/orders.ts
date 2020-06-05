@@ -19,6 +19,7 @@ import {
   nextToken as nextTokenCodec,
 } from '../parsing'
 import { getServiceStatusByResource } from './shared'
+import { RequireOnlyOne } from './types'
 
 const ORDERS_API_VERSION = '2013-09-01'
 
@@ -322,7 +323,15 @@ const canonicalizeParameters = (parameters: ListOrderParameters) => {
 export class Orders {
   constructor(private httpClient: HttpClient) {}
 
-  async listOrders(parameters: ListOrderParameters): Promise<[ListOrders, RequestMeta]> {
+  /**
+   * If BuyerEmail is specified, then FulfillmentChannel,
+   * OrderStatus, PaymentMethod,
+   * LastUpdatedAfter, LastUpdatedBefore,
+   * and SellerOrderId cannot be specified.
+   */
+  async listOrders(
+    parameters: RequireOnlyOne<ListOrderParameters, 'CreatedAfter' | 'LastUpdatedAfter'>,
+  ): Promise<[ListOrders, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Orders,
       version: ORDERS_API_VERSION,
