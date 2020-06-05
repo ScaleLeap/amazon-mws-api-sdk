@@ -118,10 +118,10 @@ interface ResourceInfo<TResource extends Resource> {
 
 export interface RequestMeta {
   requestId: string
-  timestamp: string
+  timestamp: Date
   quotaMax: number
   quotaRemaining: number
-  quotaResetOn: string
+  quotaResetOn: Date
 }
 
 interface RequestResponse {
@@ -188,10 +188,10 @@ const parseResponse = <T>(response: RequestResponse): [T, RequestMeta] => {
     responseData,
     {
       requestId: response.headers['x-mws-request-id'],
-      timestamp: response.headers['x-mws-timestamp'],
+      timestamp: new Date(response.headers['x-mws-timestamp']),
       quotaMax: Number(response.headers['x-mws-quota-max']),
       quotaRemaining: Number(response.headers['x-mws-quota-remaining']),
-      quotaResetOn: response.headers['x-mws-quota-resetson'],
+      quotaResetOn: new Date(response.headers['x-mws-quota-resetson']),
     },
   ]
 }
