@@ -2,6 +2,7 @@ import { HttpClient } from './http'
 import { FulfillmentInventory } from './sections/fulfillment-inventory'
 import { Orders } from './sections/orders'
 import { Products } from './sections/products/products'
+import { Reports } from './sections/reports'
 import { Sellers } from './sections/sellers'
 
 export class MWS {
@@ -12,6 +13,8 @@ export class MWS {
   private _fulfillmentInventory!: FulfillmentInventory
 
   private _products!: Products
+
+  private _reports!: Reports
 
   constructor(private httpClient: HttpClient) {}
 
@@ -45,5 +48,13 @@ export class MWS {
     }
 
     return this._products
+  }
+
+  get reports() {
+    if (!this._reports) {
+      this._reports = new Reports(this.httpClient)
+    }
+
+    return this._reports
   }
 }

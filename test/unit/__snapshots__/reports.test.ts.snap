@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reports getServiceStatus returns a parsed model when the status response is valid 1`] = `
+Array [
+  Object {
+    "Status": "GREEN",
+    "Timestamp": "2020-05-06T08:22:23.582Z",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-05-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T08:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports requestReport returns a parsed model when the response is valid 1`] = `
+Array [
+  Object {
+    "RequestReportResponse": Object {
+      "RequestReportResult": Object {
+        "ReportRequestInfo": Object {
+          "EndDate": "2009-02-13T02:10:39+00:00",
+          "ReportProcessingStatus": "_SUBMITTED_",
+          "ReportRequestId": 2291326454,
+          "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+          "Scheduled": false,
+          "StartDate": "2009-01-21T02:10:39+00:00",
+          "SubmittedDate": "2009-02-20T02:10:39+00:00",
+        },
+      },
+      "ResponseMetadata": Object {
+        "RequestId": "88faca76-b600-46d2-b53c-0c8c4533e43a",
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;

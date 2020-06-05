@@ -66,6 +66,7 @@ export enum Resource {
   Orders = 'Orders',
   Products = 'Products',
   FulfilmentInventory = 'FulfillmentInventory',
+  Report = 'Report',
 }
 
 interface ResourceActions {
@@ -100,6 +101,21 @@ interface ResourceActions {
     | 'ListInventorySupply'
     | 'ListInventorySupplyByNextToken'
     | 'GetServiceStatus'
+  [Resource.Report]:
+    | 'RequestReport'
+    | 'GetReportRequestList'
+    | 'GetReportRequestListByNextToken'
+    | 'GetReportRequestCount'
+    | 'CancelReportRequests'
+    | 'GetReportList'
+    | 'GetReportListByNextToken'
+    | 'GetReportCount'
+    | 'GetReport'
+    | 'ManageReportSchedule'
+    | 'GetReportScheduleList'
+    | 'GetReportScheduleListByNextToken'
+    | 'GetReportScheduleCount'
+    | 'UpdateReportAcknowledgements'
 }
 
 interface Request {
