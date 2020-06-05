@@ -1,6 +1,6 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
-import { ItemCondition } from '../../src/sections/products/type'
+import { GetMatchingProductIdType, ItemCondition } from '../../src/sections/products/type'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -113,6 +113,24 @@ const mockGetMyPriceForSku = new MWS(
   new HttpClient(httpConfig, () =>
     Promise.resolve({
       data: getFixture('products_get_my_price_for_sku'),
+      headers,
+    }),
+  ),
+)
+
+const mockGetLowestPricedOffersForSkuMissingShipping = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('products_get_lowest_priced_offers_for_sku_missing_shipping_charge'),
+      headers,
+    }),
+  ),
+)
+
+const mockGetLowestPricedOffersForSkuTooSoonForProcessing = new MWS(
+  new HttpClient(httpConfig, () =>
+    Promise.resolve({
+      data: getFixture('products_get_lowest_priced_offers_for_sku_too_soon_for_processing'),
       headers,
     }),
   ),
@@ -281,10 +299,22 @@ describe('products', () => {
     }
 
     it('returns lowest priced offer for sku when response is valid', async () => {
-      expect.assertions(1)
+      expect.assertions(3)
 
       expect(
         await mockGetLowestPricedOffersForSku.products.getLowestPricedOffersForSku(parameters),
+      ).toMatchSnapshot()
+
+      expect(
+        await mockGetLowestPricedOffersForSkuTooSoonForProcessing.products.getLowestPricedOffersForSku(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+
+      expect(
+        await mockGetLowestPricedOffersForSkuMissingShipping.products.getLowestPricedOffersForSku(
+          parameters,
+        ),
       ).toMatchSnapshot()
     })
 
@@ -392,15 +422,17 @@ describe('products', () => {
   })
 
   describe('getMatchingProductForId', () => {
+    const parameters = {
+      MarketplaceId: '',
+      IdType: 'ASIN' as GetMatchingProductIdType,
+      IdList: [],
+    }
+
     it('returns a matching product when the response is valid', async () => {
       expect.assertions(1)
 
       expect(
-        await mockGetMatchingProductForId.products.getMatchingProductForId({
-          MarketplaceId: '',
-          IdType: '',
-          IdList: [],
-        }),
+        await mockGetMatchingProductForId.products.getMatchingProductForId(parameters),
       ).toMatchSnapshot()
     })
 
@@ -408,7 +440,7 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getMatchingProductForId({ MarketplaceId: '', IdType: '', IdList: [] }),
+        mockMwsFail.products.getMatchingProductForId(parameters),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })

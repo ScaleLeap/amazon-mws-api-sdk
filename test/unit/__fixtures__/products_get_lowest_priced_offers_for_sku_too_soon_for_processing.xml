@@ -1,0 +1,17 @@
+<GetLowestPricedOffersForSKUResponse xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+    <GetLowestPricedOffersForSKUResult MarketplaceID="A2EUQ1WTGCTBG2" SKU="ACA-8039-6PK-DL57" ItemCondition="New" status="ActiveButTooSoonForProcessing">
+        <Identifier>
+            <MarketplaceId>A2EUQ1WTGCTBG2</MarketplaceId>
+            <SellerSKU>ACA-8039-6PK-DL57</SellerSKU>
+            <ItemCondition>New</ItemCondition>
+        </Identifier>
+        <Summary>
+            <TotalOfferCount>0</TotalOfferCount>
+            <OffersAvailableTime>2017-03-08T07:13:21.763Z</OffersAvailableTime>
+        </Summary>
+        <Offers/>
+    </GetLowestPricedOffersForSKUResult>
+    <ResponseMetadata>
+        <RequestId>1212334</RequestId>
+    </ResponseMetadata>
+</GetLowestPricedOffersForSKUResponse>

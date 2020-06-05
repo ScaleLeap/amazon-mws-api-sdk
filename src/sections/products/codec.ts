@@ -4,12 +4,14 @@ import {
   GetInterface,
   lazy,
   number,
+  oneOf,
   optional,
   record,
   string,
   unknown,
 } from 'purify-ts'
 
+import { Error } from '../../error-codec'
 import { ensureArray, ensureString, mwsDate, oneOfEnum } from '../../parsing'
 import {
   FeeDetail as FeeDetailInterface,
@@ -152,9 +154,15 @@ export const GetMatchingProductResponse = Codec.interface({
   GetMatchingProductResponse: GetMatchingProductResult,
 })
 
-const MatchingProductForId = Codec.interface({
+const ProductsCodec = Codec.interface({
   Products: ensureArray('Product', Product),
 })
+
+const ErrorCodec = Codec.interface({
+  Error,
+})
+
+const MatchingProductForId = oneOf([ProductsCodec, ErrorCodec])
 
 export const GetMatchingProductForIdResponse = ensureArray(
   'GetMatchingProductForIdResult',
@@ -231,7 +239,7 @@ const BuyBoxPrice = Codec.interface({
 
 const Summary = Codec.interface({
   TotalOfferCount: number,
-  NumberOfOffers: OfferCountType,
+  NumberOfOffers: optional(OfferCountType),
   LowestPrices: optional(ensureArray('LowestPrice', LowestPrice)),
   BuyBoxPrices: optional(ensureArray('BuyBoxPrice', BuyBoxPrice)),
   ListPrice: optional(MoneyType),

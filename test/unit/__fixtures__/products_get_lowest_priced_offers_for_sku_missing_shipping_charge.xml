@@ -1,0 +1,17 @@
+<GetLowestPricedOffersForSKUResponse
+  xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+  <GetLowestPricedOffersForSKUResult MarketplaceID="ATVPDKIKX0DER" SKU="0I-RIAS-6UA0" ItemCondition="new" status="NoOfferDueToMissingShippingCharge">
+    <Identifier>
+      <MarketplaceId>ATVPDKIKX0DER</MarketplaceId>
+      <SellerSKU>0I-RIAS-6UA0</SellerSKU>
+      <ItemCondition>New</ItemCondition>
+    </Identifier>
+    <Summary>
+      <TotalOfferCount>0</TotalOfferCount>
+    </Summary>
+    <Offers/>
+  </GetLowestPricedOffersForSKUResult>
+  <ResponseMetadata>
+    <RequestId>75621aa7-9c8b-40be-9bf9-3ac1efdcdb87</RequestId>
+  </ResponseMetadata>
+</GetLowestPricedOffersForSKUResponse>
