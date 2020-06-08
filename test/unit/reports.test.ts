@@ -1,5 +1,6 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
+import { NextToken } from '../../src/parsing'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -38,12 +39,40 @@ const mockMwsFail = new MWS(
 
 const mockRequestReport = createMockHttpClient('reports_request_report')
 const mockGetReportRequestList = createMockHttpClient('reports_get_report_request_list')
+const mockGetReportRequestListByNextToken = createMockHttpClient(
+  'reports_get_report_request_list_by_next_token',
+)
 
 describe('reports', () => {
+  describe('getReportRequestListByNextToken', () => {
+    const mockNextToken = new NextToken('GetReportRequestListByNextToken', '123')
+    const parameters = {
+      NextToken: mockNextToken,
+    }
+
+    it('returns report request info if succesful', async () => {
+      expect.assertions(1)
+
+      expect(
+        await mockGetReportRequestListByNextToken.reports.getReportRequestListByNextToken(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it("throws a parsing error when the response isn't valid", async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.reports.getReportRequestListByNextToken(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getReportRequestList', () => {
     const parameters = {}
 
-    it('returns a parsed model when the response is valid', async () => {
+    it('returns report request info if succesful', async () => {
       expect.assertions(1)
 
       expect(
