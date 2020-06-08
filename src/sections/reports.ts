@@ -1,4 +1,4 @@
-import { boolean, Codec, GetInterface, optional, string } from 'purify-ts'
+import { boolean, Codec, GetInterface, number, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -86,8 +86,49 @@ interface GetReportRequestListByNextTokenParameters {
   NextToken: NextToken<'GetReportRequestList'>
 }
 
+interface GetReportRequestCountParameters {
+  ReportTypeList?: ReportType[]
+  ReportProcessingStatusList?: ReportProcessing[]
+  RequestedFromDate?: Date
+  RequestedToDate?: Date
+}
+
+const GetReportRequestCount = Codec.interface({
+  Count: number,
+})
+
+const GetReportRequestCountResponse = Codec.interface({
+  GetReportRequestCountResponse: Codec.interface({
+    GetReportRequestCountResult: GetReportRequestCount,
+  }),
+})
+
+type GetReportRequestCount = GetInterface<typeof GetReportRequestCount>
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async getReportRequestCount(
+    parameters: GetReportRequestCountParameters,
+  ): Promise<[GetReportRequestCount, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Report,
+      version: REPORTS_API_VERSION,
+      action: 'GetReportRequestCount',
+      parameters: {
+        'ReportTypeList.Type': parameters.ReportTypeList,
+        'ReportProcessingStatusList.Status': parameters.ReportProcessingStatusList,
+        RequestedFromDate: parameters.RequestedFromDate?.toISOString(),
+        RequestedToDate: parameters.RequestedToDate?.toISOString(),
+      },
+    })
+
+    return GetReportRequestCountResponse.decode(response).caseOf({
+      Right: (x) => [x.GetReportRequestCountResponse.GetReportRequestCountResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getReportRequestListByNextToken(
     parameters: GetReportRequestListByNextTokenParameters,
