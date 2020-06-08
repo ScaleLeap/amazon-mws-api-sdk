@@ -42,8 +42,29 @@ const mockGetReportRequestList = createMockHttpClient('reports_get_report_reques
 const mockGetReportRequestListByNextToken = createMockHttpClient(
   'reports_get_report_request_list_by_next_token',
 )
+const mockGetReportRequestCount = createMockHttpClient('reports_get_report_request_count')
 
 describe('reports', () => {
+  describe('getReportRequestCount', () => {
+    const parameters = {}
+
+    it('returns report request count if succesful', async () => {
+      expect.assertions(1)
+
+      expect(
+        await mockGetReportRequestCount.reports.getReportRequestCount(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it("throws a parsing error when the response isn't valid", async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.reports.getReportRequestCount(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getReportRequestListByNextToken', () => {
     const mockNextToken = new NextToken('GetReportRequestList', '123')
     const parameters = {
