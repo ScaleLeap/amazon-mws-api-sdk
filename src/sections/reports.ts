@@ -125,8 +125,65 @@ const CancelReportRequestsResponse = Codec.interface({
 })
 
 type CancelReportRequests = GetInterface<typeof CancelReportRequests>
+
+interface GetReportListParameters {
+  MaxCount?: number
+  ReportTypeList?: ReportType[]
+  Acknowledged?: boolean
+  ReportRequestIdList?: string[]
+  AvailableFromDate?: Date
+  AvailableToDate?: Date
+}
+
+const ReportInfo = Codec.interface({
+  ReportId: ensureString,
+  ReportType: optional(ReportType),
+  ReportRequestId: optional(ensureString),
+  AvailableDate: optional(mwsDate),
+  Acknowledged: optional(boolean),
+  AcknowledgedDate: optional(mwsDate),
+})
+
+const GetReportListResult = Codec.interface({
+  NextToken: optional(nextTokenCodec('GetReportList')),
+  HasNext: optional(boolean),
+  ReportInfo: optional(ReportInfo),
+})
+
+const GetReportListResponse = Codec.interface({
+  GetReportListResponse: Codec.interface({
+    GetReportListResult,
+  }),
+})
+
+type GetReportListResult = GetInterface<typeof GetReportListResult>
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async getReportList(
+    parameters: GetReportListParameters,
+  ): Promise<[GetReportListResult, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Report,
+      version: REPORTS_API_VERSION,
+      action: 'GetReportList',
+      parameters: {
+        MaxCount: parameters.MaxCount,
+        'ReportTypeList.Type': parameters.ReportTypeList,
+        Acknowledged: parameters.Acknowledged,
+        'ReportRequestIdList.Id': parameters.ReportRequestIdList,
+        AvailableFromDate: parameters.AvailableFromDate?.toISOString(),
+        AvailableToDate: parameters.AvailableToDate?.toISOString(),
+      },
+    })
+
+    return GetReportListResponse.decode(response).caseOf({
+      Right: (x) => [x.GetReportListResponse.GetReportListResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async cancelReportRequests(
     parameters: CancelReportRequestsParameters,
@@ -137,7 +194,7 @@ export class Reports {
       action: 'CancelReportRequests',
       parameters: {
         'ReportRequestIdList.Id': parameters.ReportRequestIdList,
-        'ReportTypeList.Type': parameters.ReportRequestIdList,
+        'ReportTypeList.Type': parameters.ReportTypeList,
         'ReportProcessingStatusList.Status': parameters.ReportProcessingStatusList,
         RequestedFromDate: parameters.RequestedFromDate?.toISOString(),
         RequestedToDate: parameters.RequestedToDate?.toISOString(),
@@ -207,7 +264,7 @@ export class Reports {
       action: 'GetReportRequestList',
       parameters: {
         'ReportRequestIdList.Id': parameters.ReportRequestIdList,
-        'ReportTypeList.Type': parameters.ReportRequestIdList,
+        'ReportTypeList.Type': parameters.ReportTypeList,
         'ReportProcessingStatusList.Status': parameters.ReportProcessingStatusList,
         MaxCount: parameters.MaxCount,
         RequestedFromDate: parameters.RequestedFromDate?.toISOString(),
