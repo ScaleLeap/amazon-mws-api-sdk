@@ -1,5 +1,5 @@
 <GetReportRequestListByNextTokenResponse xmlns="http://mws.amazonservices.com/doc/2009-01-01/">
-    <GetReportRequestLisByNextTokentResult>
+    <GetReportRequestListByNextTokenResult>
         <NextToken>none</NextToken>
         <HasNext>false</HasNext>
         <ReportRequestInfo>
