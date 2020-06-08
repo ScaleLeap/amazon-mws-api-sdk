@@ -2,7 +2,7 @@ import { boolean, Codec, GetInterface, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureString, mwsDate, nextToken as nextTokenCodec } from '../parsing'
+import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 
 const REPORTS_API_VERSION = '2009-01-01'
@@ -76,8 +76,41 @@ const GetReportRequestListResponse = Codec.interface({
   }),
 })
 
+const GetReportRequestListByNextTokenResponse = Codec.interface({
+  GetReportRequestListByNextTokenResponse: Codec.interface({
+    GetReportRequestListByNextTokenResult: GetReportRequestListResult,
+  }),
+})
+
+interface GetReportRequestListByNextTokenParameters {
+  NextToken: NextToken<'GetReportRequestList'>
+}
+
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async getReportRequestListByNextToken(
+    parameters: GetReportRequestListByNextTokenParameters,
+  ): Promise<[GetReportRequestListResult, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Report,
+      version: REPORTS_API_VERSION,
+      action: 'GetReportRequestListByNextToken',
+      parameters: {
+        NextToken: parameters.NextToken.token,
+      },
+    })
+
+    return GetReportRequestListByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.GetReportRequestListByNextTokenResponse.GetReportRequestListByNextTokenResult,
+        meta,
+      ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getReportRequestList(
     parameters: GetReportRequestListParameters,

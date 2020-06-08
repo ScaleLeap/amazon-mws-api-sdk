@@ -45,7 +45,7 @@ const mockGetReportRequestListByNextToken = createMockHttpClient(
 
 describe('reports', () => {
   describe('getReportRequestListByNextToken', () => {
-    const mockNextToken = new NextToken('GetReportRequestListByNextToken', '123')
+    const mockNextToken = new NextToken('GetReportRequestList', '123')
     const parameters = {
       NextToken: mockNextToken,
     }
