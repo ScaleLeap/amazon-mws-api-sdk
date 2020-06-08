@@ -104,8 +104,53 @@ const GetReportRequestCountResponse = Codec.interface({
 })
 
 type GetReportRequestCount = GetInterface<typeof GetReportRequestCount>
+
+interface CancelReportRequestsParameters {
+  ReportRequestIdList?: string[]
+  ReportTypeList?: ReportType[]
+  ReportProcessingStatusList?: ReportProcessing[]
+  RequestedFromDate?: Date
+  RequestedToDate?: Date
+}
+
+const CancelReportRequests = Codec.interface({
+  Count: number,
+  ReportRequestInfo,
+})
+
+const CancelReportRequestsResponse = Codec.interface({
+  CancelReportRequestsResponse: Codec.interface({
+    CancelReportRequestsResult: CancelReportRequests,
+  }),
+})
+
+type CancelReportRequests = GetInterface<typeof CancelReportRequests>
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async cancelReportRequests(
+    parameters: CancelReportRequestsParameters,
+  ): Promise<[CancelReportRequests, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Report,
+      version: REPORTS_API_VERSION,
+      action: 'CancelReportRequests',
+      parameters: {
+        'ReportRequestIdList.Id': parameters.ReportRequestIdList,
+        'ReportTypeList.Type': parameters.ReportRequestIdList,
+        'ReportProcessingStatusList.Status': parameters.ReportProcessingStatusList,
+        RequestedFromDate: parameters.RequestedFromDate?.toISOString(),
+        RequestedToDate: parameters.RequestedToDate?.toISOString(),
+      },
+    })
+
+    return CancelReportRequestsResponse.decode(response).caseOf({
+      Right: (x) => [x.CancelReportRequestsResponse.CancelReportRequestsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getReportRequestCount(
     parameters: GetReportRequestCountParameters,
