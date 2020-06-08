@@ -43,8 +43,29 @@ const mockGetReportRequestListByNextToken = createMockHttpClient(
   'reports_get_report_request_list_by_next_token',
 )
 const mockGetReportRequestCount = createMockHttpClient('reports_get_report_request_count')
+const mockCancelReportRequests = createMockHttpClient('reports_cancel_report_requests')
 
 describe('reports', () => {
+  describe('cancelReportRequests', () => {
+    const parameters = {}
+
+    it('returns count and detailed info of cancelled requests if succesful', async () => {
+      expect.assertions(1)
+
+      expect(
+        await mockCancelReportRequests.reports.cancelReportRequests(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.reports.cancelReportRequests(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getReportRequestCount', () => {
     const parameters = {}
 
