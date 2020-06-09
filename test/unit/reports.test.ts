@@ -31,27 +31,43 @@ const createMockHttpClient = (fixture: string) =>
     ),
   )
 
-const mockMwsServiceStatus = createMockHttpClient('get_service_status')
-
 const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
 
-const mockRequestReport = createMockHttpClient('reports_request_report')
-const mockGetReportRequestList = createMockHttpClient('reports_get_report_request_list')
-const mockGetReportRequestListByNextToken = createMockHttpClient(
-  'reports_get_report_request_list_by_next_token',
-)
-const mockGetReportRequestCount = createMockHttpClient('reports_get_report_request_count')
-const mockCancelReportRequests = createMockHttpClient('reports_cancel_report_requests')
-const mockGetReportList = createMockHttpClient('reports_get_report_list')
-
 describe('reports', () => {
+  describe('getReportListByNextToken', () => {
+    const mockNextToken = new NextToken('GetReportList', '123')
+    const parameters = {
+      NextToken: mockNextToken,
+    }
+
+    it('returns report info and next token if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetReportListByNextToken = createMockHttpClient('reports_get_report_list_nt')
+
+      expect(
+        await mockGetReportListByNextToken.reports.getReportListByNextToken(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response isn t valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.reports.getReportListByNextToken(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getReportList', () => {
     const parameters = {}
 
     it('returns report info and next token if succesful', async () => {
       expect.assertions(1)
+
+      const mockGetReportList = createMockHttpClient('reports_get_report_list')
 
       expect(await mockGetReportList.reports.getReportList(parameters)).toMatchSnapshot()
     })
@@ -70,6 +86,8 @@ describe('reports', () => {
 
     it('returns count and detailed info of cancelled requests if succesful', async () => {
       expect.assertions(1)
+
+      const mockCancelReportRequests = createMockHttpClient('reports_cancel_report_requests')
 
       expect(
         await mockCancelReportRequests.reports.cancelReportRequests(parameters),
@@ -90,6 +108,8 @@ describe('reports', () => {
 
     it('returns report request count if succesful', async () => {
       expect.assertions(1)
+
+      const mockGetReportRequestCount = createMockHttpClient('reports_get_report_request_count')
 
       expect(
         await mockGetReportRequestCount.reports.getReportRequestCount(parameters),
@@ -114,6 +134,10 @@ describe('reports', () => {
     it('returns report request info if succesful', async () => {
       expect.assertions(1)
 
+      const mockGetReportRequestListByNextToken = createMockHttpClient(
+        'reports_get_report_request_list_nt',
+      )
+
       expect(
         await mockGetReportRequestListByNextToken.reports.getReportRequestListByNextToken(
           parameters,
@@ -135,6 +159,8 @@ describe('reports', () => {
 
     it('returns report request info if succesful', async () => {
       expect.assertions(1)
+
+      const mockGetReportRequestList = createMockHttpClient('reports_get_report_request_list')
 
       expect(
         await mockGetReportRequestList.reports.getReportRequestList(parameters),
@@ -158,6 +184,8 @@ describe('reports', () => {
     it('returns a parsed model when the response is valid', async () => {
       expect.assertions(1)
 
+      const mockRequestReport = createMockHttpClient('reports_request_report')
+
       expect(await mockRequestReport.reports.requestReport(parameters)).toMatchSnapshot()
     })
 
@@ -173,6 +201,8 @@ describe('reports', () => {
   describe('getServiceStatus', () => {
     it('returns a parsed model when the status response is valid', async () => {
       expect.assertions(1)
+
+      const mockMwsServiceStatus = createMockHttpClient('get_service_status')
 
       expect(await mockMwsServiceStatus.reports.getServiceStatus()).toMatchSnapshot()
     })
