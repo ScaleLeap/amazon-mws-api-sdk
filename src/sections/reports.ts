@@ -156,9 +156,39 @@ const GetReportListResponse = Codec.interface({
   }),
 })
 
+interface GetReportListByNextTokenParameters {
+  NextToken: NextToken<'GetReportList'>
+}
+
+const GetReportListByNextTokenResponse = Codec.interface({
+  GetReportListByNextTokenResponse: Codec.interface({
+    GetReportListByNextTokenResult: GetReportListResult,
+  }),
+})
+
 type GetReportListResult = GetInterface<typeof GetReportListResult>
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async getReportListByNextToken(
+    parameters: GetReportListByNextTokenParameters,
+  ): Promise<[GetReportListResult, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Report,
+      version: REPORTS_API_VERSION,
+      action: 'GetReportListByNextToken',
+      parameters: {
+        NextToken: parameters.NextToken.token,
+      },
+    })
+
+    return GetReportListByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [x.GetReportListByNextTokenResponse.GetReportListByNextTokenResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getReportList(
     parameters: GetReportListParameters,
@@ -238,7 +268,7 @@ export class Reports {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Report,
       version: REPORTS_API_VERSION,
-      action: 'GetReportRequestListByNextToken',
+      action: 'GetReportListByNextToken',
       parameters: {
         NextToken: parameters.NextToken.token,
       },
