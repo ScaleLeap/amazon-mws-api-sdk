@@ -3,7 +3,6 @@ import { boolean, Codec, GetInterface, Left, number, optional, string } from 'pu
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
 import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
-import { getServiceStatusByResource } from './shared'
 
 const REPORTS_API_VERSION = '2009-01-01'
 /**
@@ -403,9 +402,5 @@ export class Reports {
         throw new ParsingError(error)
       },
     })
-  }
-
-  async getServiceStatus() {
-    return getServiceStatusByResource(this.httpClient, Resource.Report, REPORTS_API_VERSION)
   }
 }

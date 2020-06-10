@@ -242,22 +242,4 @@ describe('reports', () => {
       )
     })
   })
-
-  describe('getServiceStatus', () => {
-    it('returns a parsed model when the status response is valid', async () => {
-      expect.assertions(1)
-
-      const mockMwsServiceStatus = createMockHttpClient('get_service_status')
-
-      expect(await mockMwsServiceStatus.reports.getServiceStatus()).toMatchSnapshot()
-    })
-
-    it('throws a parsing error when the status response is not valid', async () => {
-      expect.assertions(1)
-
-      await expect(() => mockMwsFail.reports.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
-      )
-    })
-  })
 })
