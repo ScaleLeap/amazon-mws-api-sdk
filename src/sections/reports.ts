@@ -7,8 +7,8 @@ import { getServiceStatusByResource } from './shared'
 
 const REPORTS_API_VERSION = '2009-01-01'
 /**
- * List of supported strings
- * Should probably define an enum for this
+ * List of supported strings.
+ * Could probably define an enum for this
  * http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html#ReportTypeCategories__ListingsReports
  */
 const ReportType = string
@@ -167,8 +167,50 @@ const GetReportListByNextTokenResponse = Codec.interface({
 })
 
 type GetReportListResult = GetInterface<typeof GetReportListResult>
+
+const GetReportCount = Codec.interface({
+  Count: number,
+})
+
+const GetReportCountResponse = Codec.interface({
+  GetReportCountResponse: Codec.interface({
+    GetReportCountResult: GetReportCount,
+  }),
+})
+
+interface GetReportCountParameters {
+  ReportTypeList?: ReportType[]
+  Acknowledged?: boolean
+  AvailableFromDate?: Date
+  AvailableToDate?: Date
+}
+
+type GetReportCount = GetInterface<typeof GetReportCount>
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async getReportCount(
+    parameters: GetReportCountParameters,
+  ): Promise<[GetReportCount, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Report,
+      version: REPORTS_API_VERSION,
+      action: 'GetReportRequestCount',
+      parameters: {
+        'ReportTypeList.Type': parameters.ReportTypeList,
+        Acknowledged: parameters.Acknowledged,
+        AvailableFromDate: parameters.AvailableFromDate?.toISOString(),
+        AvailableToDate: parameters.AvailableToDate?.toISOString(),
+      },
+    })
+
+    return GetReportCountResponse.decode(response).caseOf({
+      Right: (x) => [x.GetReportCountResponse.GetReportCountResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getReportListByNextToken(
     parameters: GetReportListByNextTokenParameters,
