@@ -101,7 +101,7 @@ interface ResourceActions {
     | 'ListInventorySupply'
     | 'ListInventorySupplyByNextToken'
     | 'GetServiceStatus'
-  [Resource.Report]:
+  [Resource.Reports]:
     | 'RequestReport'
     | 'GetReportRequestList'
     | 'GetReportRequestListByNextToken'
