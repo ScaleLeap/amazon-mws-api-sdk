@@ -17,12 +17,13 @@ const httpClient = new HttpClient({
 /* eslint-disable jest/no-standalone-expect */
 describe('reports', () => {
   const reports = new Reports(httpClient)
-  itci('should be able to query service status', async () => {
+  itci('should be able to query get report request list', async () => {
     expect.assertions(1)
 
-    const [response] = await reports.getServiceStatus()
+    // getReportRequestList with all defaults
+    const [response] = await reports.getReportRequestList({})
 
-    expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
+    expect(response).toBeDefined()
   })
 })
 /* eslint-enable jest/no-standalone-expect */
