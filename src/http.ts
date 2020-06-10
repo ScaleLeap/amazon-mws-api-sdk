@@ -66,7 +66,7 @@ export enum Resource {
   Orders = 'Orders',
   Products = 'Products',
   FulfilmentInventory = 'FulfillmentInventory',
-  Report = 'Report',
+  Reports = 'Reports',
 }
 
 interface ResourceActions {

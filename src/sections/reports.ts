@@ -203,7 +203,7 @@ export class Reports {
 
   async getReport(parameters: { ReportId: string }): Promise<[Report, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Report,
+      resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReport',
       parameters,
@@ -221,7 +221,7 @@ export class Reports {
     parameters: GetReportCountParameters,
   ): Promise<[GetReportCount, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Report,
+      resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReportCount',
       parameters: {
@@ -244,7 +244,7 @@ export class Reports {
     parameters: GetReportListByNextTokenParameters,
   ): Promise<[GetReportListResult, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Report,
+      resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReportListByNextToken',
       parameters: {
@@ -264,7 +264,7 @@ export class Reports {
     parameters: GetReportListParameters,
   ): Promise<[GetReportListResult, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Report,
+      resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReportList',
       parameters: {
@@ -289,7 +289,7 @@ export class Reports {
     parameters: CancelReportRequestsParameters,
   ): Promise<[CancelReportRequests, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Report,
+      resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'CancelReportRequests',
       parameters: {
@@ -313,7 +313,7 @@ export class Reports {
     parameters: GetReportRequestCountParameters,
   ): Promise<[GetReportRequestCount, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Report,
+      resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReportRequestCount',
       parameters: {
@@ -336,7 +336,7 @@ export class Reports {
     parameters: GetReportRequestListByNextTokenParameters,
   ): Promise<[GetReportRequestListResult, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Report,
+      resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReportListByNextToken',
       parameters: {
@@ -359,7 +359,7 @@ export class Reports {
     parameters: GetReportRequestListParameters,
   ): Promise<[GetReportRequestListResult, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Report,
+      resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReportRequestList',
       parameters: {
@@ -384,7 +384,7 @@ export class Reports {
     parameters: RequestReportParameters,
   ): Promise<[ReportRequestInfo, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Report,
+      resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'RequestReport',
       parameters: {
