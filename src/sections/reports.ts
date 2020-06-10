@@ -195,7 +195,7 @@ export class Reports {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Report,
       version: REPORTS_API_VERSION,
-      action: 'GetReportRequestCount',
+      action: 'GetReportCount',
       parameters: {
         'ReportTypeList.Type': parameters.ReportTypeList,
         Acknowledged: parameters.Acknowledged,
