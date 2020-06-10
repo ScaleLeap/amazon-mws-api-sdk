@@ -36,6 +36,31 @@ const mockMwsFail = new MWS(
 )
 
 describe('reports', () => {
+  describe('getReport', () => {
+    const parameters = {
+      ReportId: '',
+    }
+
+    it('returns a report if succesful', async () => {
+      expect.assertions(1)
+
+      /**
+       * This isn't an XML file, but I thought it'd be fine to reuse getFixture
+       */
+      const mockGetReport = createMockHttpClient('reports_get_report')
+
+      expect(await mockGetReport.reports.getReport(parameters)).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response is nt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.reports.getReport(parameters)).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
+    })
+  })
+
   describe('getReportCount', () => {
     const parameters = {}
 
