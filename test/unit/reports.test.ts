@@ -56,7 +56,7 @@ describe('reports', () => {
       expect.assertions(1)
 
       await expect(() => mockMwsFail.reports.getReport(parameters)).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+        new ParsingError('Expected report to have length of more than 0'),
       )
     })
   })

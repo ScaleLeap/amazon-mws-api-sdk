@@ -1,4 +1,4 @@
-import { boolean, Codec, GetInterface, number, optional, string } from 'purify-ts'
+import { boolean, Codec, GetInterface, Left, number, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -185,9 +185,38 @@ interface GetReportCountParameters {
   AvailableToDate?: Date
 }
 
+const GetReportResponse = Codec.custom<string>({
+  decode: (report) => {
+    if (typeof report === 'string' && report.length > 0) {
+      return string.decode(report)
+    }
+
+    return Left('Expected report to have length of more than 0')
+  },
+  encode: (report) => report,
+})
+
+type Report = string
+
 type GetReportCount = GetInterface<typeof GetReportCount>
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async getReport(parameters: { ReportId: string }): Promise<[Report, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Report,
+      version: REPORTS_API_VERSION,
+      action: 'GetReport',
+      parameters,
+    })
+
+    return GetReportResponse.decode(response).caseOf({
+      Right: (x) => [x, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getReportCount(
     parameters: GetReportCountParameters,
