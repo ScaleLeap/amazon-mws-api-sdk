@@ -36,6 +36,26 @@ const mockMwsFail = new MWS(
 )
 
 describe('reports', () => {
+  describe('getReportCount', () => {
+    const parameters = {}
+
+    it('returns report count if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetReportCount = createMockHttpClient('reports_get_report_count')
+
+      expect(await mockGetReportCount.reports.getReportCount(parameters)).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response isn t valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.reports.getReportCount(parameters)).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
+    })
+  })
+
   describe('getReportListByNextToken', () => {
     const mockNextToken = new NextToken('GetReportList', '123')
     const parameters = {
