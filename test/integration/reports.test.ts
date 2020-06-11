@@ -34,5 +34,14 @@ describe('reports', () => {
     expect(typeof response).toBe('string')
     expect(response).toContain('settlement-id')
   })
+
+  itci('should be able to query get report list', async () => {
+    expect.assertions(1)
+
+    // getReportList with all defaults
+    const [response] = await reports.getReportList({})
+
+    expect(response).toBeDefined()
+  })
 })
 /* eslint-enable jest/no-standalone-expect */
