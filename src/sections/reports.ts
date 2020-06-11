@@ -159,7 +159,7 @@ const ReportInfo = Codec.interface({
 const GetReportListResult = Codec.interface({
   NextToken: optional(nextTokenCodec('GetReportList')),
   HasNext: optional(boolean),
-  ReportInfo: optional(ReportInfo),
+  ReportInfo: optional(oneOf([array(ReportInfo), ReportInfo, exactly('')])),
 })
 
 const GetReportListResponse = Codec.interface({
