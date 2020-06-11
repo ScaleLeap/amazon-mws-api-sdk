@@ -17,6 +17,14 @@ const httpClient = new HttpClient({
 /* eslint-disable jest/no-standalone-expect */
 describe('reports', () => {
   const reports = new Reports(httpClient)
+  itci('should succesfully get report schedule list', async () => {
+    expect.assertions(1)
+
+    const [response] = await reports.getReportScheduleList({})
+
+    expect(typeof response).toBeDefined()
+  })
+
   itci('should be able to query get report count', async () => {
     expect.assertions(1)
 
