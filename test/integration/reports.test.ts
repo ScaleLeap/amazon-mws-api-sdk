@@ -25,5 +25,14 @@ describe('reports', () => {
 
     expect(response).toBeDefined()
   })
+
+  itci('should be able to request a report', async () => {
+    expect.assertions(2)
+
+    const [response] = await reports.getReport({ ReportId: '20812705939018404' })
+
+    expect(typeof response).toBe('string')
+    expect(response).toContain('settlement-id')
+  })
 })
 /* eslint-enable jest/no-standalone-expect */
