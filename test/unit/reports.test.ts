@@ -109,7 +109,15 @@ describe('reports', () => {
   describe('getReportList', () => {
     const parameters = {}
 
-    it('returns report info and next token if succesful', async () => {
+    it('should properly return report list for multiple reports', async () => {
+      expect.assertions(1)
+
+      const mockGetReportList = createMockHttpClient('reports_get_report_list_multiple')
+
+      expect(await mockGetReportList.reports.getReportList(parameters)).toMatchSnapshot()
+    })
+
+    it('should properly return report list for a single report', async () => {
       expect.assertions(1)
 
       const mockGetReportList = createMockHttpClient('reports_get_report_list')
