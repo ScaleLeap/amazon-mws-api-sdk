@@ -350,6 +350,30 @@ Array [
 ]
 `;
 
+exports[`reports getReportScheduleList returns detailed information about a report schedule if succesful 1`] = `
+Array [
+  Object {
+    "HasNext": false,
+    "NextToken": NextToken {
+      "action": "GetReportScheduleList",
+      "token": "",
+    },
+    "ReportSchedule": Object {
+      "ReportType": "_GET_ORDERS_DATA_",
+      "Schedule": "_30_DAYS_",
+      "ScheduleDate": undefined,
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`reports manageReportSchedule returns count and report schedule if succesful 1`] = `
 Array [
   Object {

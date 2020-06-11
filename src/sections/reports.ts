@@ -281,8 +281,46 @@ const ManageReportScheduleResponse = Codec.interface({
   }),
 })
 
+interface GetReportScheduleListParameters {
+  ReportTypeList?: ReportType[]
+}
+
+const GetReportScheduleList = Codec.interface({
+  NextToken: optional(nextTokenCodec('GetReportScheduleList')),
+  HasNext: optional(boolean),
+  ReportSchedule: optional(ReportSchedule),
+})
+
+type GetReportScheduleList = GetInterface<typeof GetReportScheduleList>
+
+const GetReportScheduleListResponse = Codec.interface({
+  GetReportScheduleListResponse: Codec.interface({
+    GetReportScheduleListResult: GetReportScheduleList,
+  }),
+})
+
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async getReportScheduleList(
+    parameters: GetReportScheduleListParameters,
+  ): Promise<[GetReportScheduleList, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Reports,
+      version: REPORTS_API_VERSION,
+      action: 'GetReportScheduleList',
+      parameters: {
+        'ReportTypeList.Type': parameters.ReportTypeList,
+      },
+    })
+
+    return GetReportScheduleListResponse.decode(response).caseOf({
+      Right: (x) => [x.GetReportScheduleListResponse.GetReportScheduleListResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async manageReportSchedule(
     parameters: ManageReportScheduleParameters,
