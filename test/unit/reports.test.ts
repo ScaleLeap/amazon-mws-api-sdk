@@ -37,6 +37,28 @@ const mockMwsFail = new MWS(
 )
 
 describe('reports', () => {
+  describe('getReportScheduleList', () => {
+    const parameters = {}
+
+    it('returns detailed information about a report schedule if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetReportScheduleList = createMockHttpClient('reports_get_report_schedule_list')
+
+      expect(
+        await mockGetReportScheduleList.reports.getReportScheduleList(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response is nt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.reports.getReportScheduleList(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('manageReportSchedule', () => {
     const parameters = {
       ReportType: '_GET_ORDERS_DATA_',
@@ -46,9 +68,11 @@ describe('reports', () => {
     it('returns count and report schedule if succesful', async () => {
       expect.assertions(1)
 
-      const mockGetReportCount = createMockHttpClient('reports_manage_report_schedule')
+      const mockManageReportSchedule = createMockHttpClient('reports_manage_report_schedule')
 
-      expect(await mockGetReportCount.reports.manageReportSchedule(parameters)).toMatchSnapshot()
+      expect(
+        await mockManageReportSchedule.reports.manageReportSchedule(parameters),
+      ).toMatchSnapshot()
     })
 
     it('throws a parsing error when the response is nt valid', async () => {
