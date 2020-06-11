@@ -1,4 +1,15 @@
-import { boolean, Codec, GetInterface, Left, number, optional, string } from 'purify-ts'
+import {
+  array,
+  boolean,
+  Codec,
+  exactly,
+  GetInterface,
+  Left,
+  number,
+  oneOf,
+  optional,
+  string,
+} from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -64,7 +75,9 @@ interface GetReportRequestListParameters {
 const GetReportRequestListResult = Codec.interface({
   NextToken: optional(nextTokenCodec('GetReportRequestList')),
   HasNext: optional(boolean),
-  ReportRequestInfo: optional(ReportRequestInfo),
+  ReportRequestInfo: optional(oneOf([array(ReportRequestInfo), ReportRequestInfo, exactly('')])),
+  // This does not work for some reason
+  // ReportRequestInfo: ensureArray('ReportRequestInfo', ReportRequestInfo),
 })
 
 type GetReportRequestListResult = GetInterface<typeof GetReportRequestListResult>
