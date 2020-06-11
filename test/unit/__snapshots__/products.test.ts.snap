@@ -408,7 +408,6 @@ Array [
           "Amount": 32.99,
           "CurrencyCode": "USD",
         },
-        "Points": undefined,
         "SellerFeedbackRating": Object {
           "FeedbackCount": 1,
           "SellerPositiveFeedbackRating": 100,
@@ -418,7 +417,6 @@ Array [
           "CurrencyCode": "USD",
         },
         "ShippingTime": "",
-        "ShipsFrom": undefined,
         "SubCondition": "new",
       },
     ],
@@ -436,7 +434,6 @@ Array [
             "Amount": 32.99,
             "CurrencyCode": "USD",
           },
-          "Points": undefined,
           "Shipping": Object {
             "Amount": 0,
             "CurrencyCode": "USD",
@@ -457,7 +454,6 @@ Array [
             "Amount": 32.99,
             "CurrencyCode": "USD",
           },
-          "Points": undefined,
           "Shipping": Object {
             "Amount": 0,
             "CurrencyCode": "USD",
@@ -467,7 +463,6 @@ Array [
       "NumberOfOffers": Object {
         "OfferCount": 1,
       },
-      "OffersAvailableTime": undefined,
       "SuggestedLowerPricePlusShipping": Object {
         "Amount": 32.99,
         "CurrencyCode": "USD",
@@ -504,7 +499,6 @@ Array [
           "CurrencyCode": "USD",
         },
         "MyOffer": false,
-        "Points": undefined,
         "SellerFeedbackRating": Object {
           "FeedbackCount": 1,
           "SellerPositiveFeedbackRating": 100,
@@ -514,7 +508,6 @@ Array [
           "CurrencyCode": "USD",
         },
         "ShippingTime": "",
-        "ShipsFrom": undefined,
         "SubCondition": "new",
       },
     ],
@@ -532,7 +525,6 @@ Array [
             "Amount": 32.99,
             "CurrencyCode": "USD",
           },
-          "Points": undefined,
           "Shipping": Object {
             "Amount": 0,
             "CurrencyCode": "USD",
@@ -553,7 +545,6 @@ Array [
             "Amount": 32.99,
             "CurrencyCode": "USD",
           },
-          "Points": undefined,
           "Shipping": Object {
             "Amount": 0,
             "CurrencyCode": "USD",
@@ -563,7 +554,6 @@ Array [
       "NumberOfOffers": Object {
         "OfferCount": 1,
       },
-      "OffersAvailableTime": undefined,
       "SuggestedLowerPricePlusShipping": Object {
         "Amount": 32.99,
         "CurrencyCode": "USD",
@@ -588,17 +578,10 @@ Array [
       "ItemCondition": "New",
       "MarketplaceId": "A2EUQ1WTGCTBG2",
       "SellerSKU": "ACA-8039-6PK-DL57",
-      "TimeOfOfferChange": undefined,
     },
     "Offers": Array [],
     "Summary": Object {
-      "BuyBoxEligibleOffers": undefined,
-      "BuyBoxPrices": undefined,
-      "ListPrice": undefined,
-      "LowestPrices": undefined,
-      "NumberOfOffers": undefined,
       "OffersAvailableTime": 2017-03-08T07:13:21.763Z,
-      "SuggestedLowerPricePlusShipping": undefined,
       "TotalOfferCount": 0,
     },
   },
@@ -619,17 +602,9 @@ Array [
       "ItemCondition": "New",
       "MarketplaceId": "ATVPDKIKX0DER",
       "SellerSKU": "0I-RIAS-6UA0",
-      "TimeOfOfferChange": undefined,
     },
     "Offers": Array [],
     "Summary": Object {
-      "BuyBoxEligibleOffers": undefined,
-      "BuyBoxPrices": undefined,
-      "ListPrice": undefined,
-      "LowestPrices": undefined,
-      "NumberOfOffers": undefined,
-      "OffersAvailableTime": undefined,
-      "SuggestedLowerPricePlusShipping": undefined,
       "TotalOfferCount": 0,
     },
   },
@@ -791,7 +766,6 @@ Array [
     Object {
       "Error": Object {
         "Code": "InvalidParameterValue",
-        "Detail": undefined,
         "Message": "Invalid ISBN identifier 0439708623 for marketplace ATVPDKIKX0DER",
         "Type": "Sender",
       },
@@ -905,7 +879,6 @@ Array [
   Object {
     "FeesEstimateResultList": Array [
       Object {
-        "Error": undefined,
         "FeesEstimate": Object {
           "FeeDetailList": Array [
             Object {
@@ -922,36 +895,28 @@ Array [
                 "Amount": 7.7,
                 "CurrencyCode": "USD",
               },
-              "IncludedFeeDetailList": undefined,
-              "TaxAmount": undefined,
             },
             Object {
               "FeeAmount": Object {
                 "Amount": 0,
                 "CurrencyCode": "USD",
               },
-              "FeePromotion": undefined,
               "FeeType": "VariableClosingFee",
               "FinalFee": Object {
                 "Amount": 0,
                 "CurrencyCode": "USD",
               },
-              "IncludedFeeDetailList": undefined,
-              "TaxAmount": undefined,
             },
             Object {
               "FeeAmount": Object {
                 "Amount": 2.3,
                 "CurrencyCode": "USD",
               },
-              "FeePromotion": undefined,
               "FeeType": "FulfillmentFees",
               "FinalFee": Object {
                 "Amount": 2.3,
                 "CurrencyCode": "USD",
               },
-              "IncludedFeeDetailList": undefined,
-              "TaxAmount": undefined,
             },
           ],
           "TimeOfFeesEstimation": 2015-07-19T23:15:11.859Z,
@@ -1115,7 +1080,6 @@ Array [
             "Parent": Object {
               "Parent": Object {
                 "Parent": Object {
-                  "Parent": undefined,
                   "ProductCategoryId": "3375251",
                   "ProductCategoryName": "Categories",
                 },
@@ -1156,7 +1120,6 @@ Array [
         "Parent": Object {
           "Parent": Object {
             "Parent": Object {
-              "Parent": undefined,
               "ProductCategoryId": "283155",
               "ProductCategoryName": "Subjects",
             },
@@ -1177,7 +1140,6 @@ Array [
         "Parent": Object {
           "Parent": Object {
             "Parent": Object {
-              "Parent": undefined,
               "ProductCategoryId": "283155",
               "ProductCategoryName": "Specialty Boutique",
             },
