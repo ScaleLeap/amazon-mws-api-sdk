@@ -202,10 +202,22 @@ describe('reports', () => {
   describe('getReportRequestList', () => {
     const parameters = {}
 
-    it('returns report request info if succesful', async () => {
+    it('returns report request info succesfully for responses with a single report', async () => {
       expect.assertions(1)
 
       const mockGetReportRequestList = createMockHttpClient('reports_get_report_request_list')
+
+      expect(
+        await mockGetReportRequestList.reports.getReportRequestList(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('returns report request info succesfully for responses with multiple reports', async () => {
+      expect.assertions(1)
+
+      const mockGetReportRequestList = createMockHttpClient(
+        'reports_get_report_request_list_multiple',
+      )
 
       expect(
         await mockGetReportRequestList.reports.getReportRequestList(parameters),
