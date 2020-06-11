@@ -302,6 +302,11 @@ const GetReportScheduleListResponse = Codec.interface({
 export class Reports {
   constructor(private httpClient: HttpClient) {}
 
+  /**
+   * getReportScheduleListByNextToken cannot be called
+   * http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportScheduleListByNextToken.html
+   */
+
   async getReportScheduleList(
     parameters: GetReportScheduleListParameters,
   ): Promise<[GetReportScheduleList, RequestMeta]> {
