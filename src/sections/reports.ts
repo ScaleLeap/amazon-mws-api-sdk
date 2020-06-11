@@ -13,7 +13,13 @@ import {
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
+import {
+  ensureString,
+  mwsDate,
+  NextToken,
+  nextToken as nextTokenCodec,
+  oneOfEnum,
+} from '../parsing'
 
 const REPORTS_API_VERSION = '2009-01-01'
 /**
@@ -63,6 +69,44 @@ type ReportProcessing =
   | '_DONE_'
   | '_DONE_NO_DATA_'
   | 'All'
+
+enum ScheduleEnum {
+  _15_MINUTES_ = '_15_MINUTES_',
+  _30_MINUTES_ = '_30_MINUTES_',
+  _1_HOUR_ = '_1_HOUR_',
+  _2_HOURS_ = '_2_HOURS_',
+  _4_HOURS_ = '_4_HOURS_',
+  _8_HOURS_ = '_8_HOURS_',
+  _12_HOURS_ = '_12_HOURS_',
+  _1_DAY_ = '_1_DAY_',
+  _2_DAYS_ = '_2_DAYS_',
+  _72_HOURS_ = '_72_HOURS_',
+  _1_WEEK_ = '_1_WEEK_',
+  _14_DAYS_ = '_14_DAYS_',
+  _15_DAYS_ = '_15_DAYS_',
+  _30_DAYS_ = '_30_DAYS_',
+  _NEVER_ = '_NEVER_',
+}
+
+const ScheduleCodec = oneOfEnum(ScheduleEnum)
+
+export type ScheduleType =
+  | '_15_MINUTES_'
+  | '_30_MINUTES_'
+  | '_1_HOUR_'
+  | '_2_HOURS_'
+  | '_4_HOURS_'
+  | '_8_HOURS_'
+  | '_12_HOURS_'
+  | '_1_DAY_'
+  | '_2_DAYS_'
+  | '_72_HOURS_'
+  | '_1_WEEK_'
+  | '_14_DAYS_'
+  | '_15_DAYS_'
+  | '_30_DAYS_'
+  | '_NEVER_'
+
 interface GetReportRequestListParameters {
   ReportRequestIdList?: string[]
   ReportTypeList?: ReportType[]
@@ -211,8 +255,56 @@ const GetReportResponse = Codec.custom<string>({
 type Report = string
 
 type GetReportCount = GetInterface<typeof GetReportCount>
+
+interface ManageReportScheduleParameters {
+  ReportType: ReportType
+  Schedule: ScheduleType
+  ScheduleDate?: Date
+}
+
+const ReportSchedule = Codec.interface({
+  ReportType: optional(ReportType),
+  Schedule: optional(ScheduleCodec),
+  ScheduleDate: optional(mwsDate),
+})
+
+const ManageReportSchedule = Codec.interface({
+  Count: number,
+  ReportSchedule: optional(ReportSchedule),
+})
+
+type ManageReportSchedule = GetInterface<typeof ManageReportSchedule>
+
+const ManageReportScheduleResponse = Codec.interface({
+  ManageReportScheduleResponse: Codec.interface({
+    ManageReportScheduleResult: ManageReportSchedule,
+  }),
+})
+
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async manageReportSchedule(
+    parameters: ManageReportScheduleParameters,
+  ): Promise<[ManageReportSchedule, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Reports,
+      version: REPORTS_API_VERSION,
+      action: 'ManageReportSchedule',
+      parameters: {
+        ReportType: parameters.ReportType,
+        Schedule: parameters.Schedule,
+        ScheduleDate: parameters.ScheduleDate?.toISOString(),
+      },
+    })
+
+    return ManageReportScheduleResponse.decode(response).caseOf({
+      Right: (x) => [x.ManageReportScheduleResponse.ManageReportScheduleResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getReport(parameters: { ReportId: string }): Promise<[Report, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {

@@ -1,6 +1,7 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
 import { NextToken } from '../../src/parsing'
+import { ScheduleType } from '../../src/sections/reports'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -39,7 +40,7 @@ describe('reports', () => {
   describe('manageReportSchedule', () => {
     const parameters = {
       ReportType: '_GET_ORDERS_DATA_',
-      Schedule: '_30_DAYS_',
+      Schedule: '_30_DAYS_' as ScheduleType,
     }
 
     it('returns count and report schedule if succesful', async () => {
