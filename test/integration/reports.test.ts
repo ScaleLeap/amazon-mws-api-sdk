@@ -41,7 +41,7 @@ describe('reports', () => {
     const [response] = await reports.getReport({ ReportId: '21175694446018424' })
 
     expect(typeof response).toBe('string')
-    // expect(response).toContain('settlement-id')
+    expect(response).toContain('item-name')
   })
 
   itci('should be able to query get report list', async () => {
