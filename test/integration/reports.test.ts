@@ -17,10 +17,25 @@ const httpClient = new HttpClient({
 /* eslint-disable jest/no-standalone-expect */
 describe('reports', () => {
   const reports = new Reports(httpClient)
+  itci('should be able to query get report count', async () => {
+    expect.assertions(1)
+
+    const [response] = await reports.getReportCount({})
+
+    expect(typeof response.Count).toBe('number')
+  })
+
+  itci('should be able to query get report request count', async () => {
+    expect.assertions(1)
+
+    const [response] = await reports.getReportRequestCount({})
+
+    expect(typeof response.Count).toBe('number')
+  })
+
   itci('should be able to query get report request list', async () => {
     expect.assertions(1)
 
-    // getReportRequestList with all defaults
     const [response] = await reports.getReportRequestList({})
 
     expect(response).toBeDefined()
@@ -38,7 +53,6 @@ describe('reports', () => {
   itci('should be able to query get report list', async () => {
     expect.assertions(1)
 
-    // getReportList with all defaults
     const [response] = await reports.getReportList({})
 
     expect(response).toBeDefined()
