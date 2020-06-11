@@ -29,7 +29,7 @@ describe('reports', () => {
   itci('should be able to request a report', async () => {
     expect.assertions(2)
 
-    const [response] = await reports.getReport({ ReportId: '20812705939018404' })
+    const [response] = await reports.getReport({ ReportId: '21175694446018424' })
 
     expect(typeof response).toBe('string')
     expect(response).toContain('settlement-id')
