@@ -312,7 +312,7 @@ export class Reports {
   constructor(private httpClient: HttpClient) {}
 
   async getReportScheduleCount(
-    parameters: GetReportScheduleCountParameters,
+    parameters: GetReportScheduleCountParameters = {},
   ): Promise<[GetReportScheduleCount, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,
@@ -337,7 +337,7 @@ export class Reports {
    */
 
   async getReportScheduleList(
-    parameters: GetReportScheduleListParameters,
+    parameters: GetReportScheduleListParameters = {},
   ): Promise<[GetReportScheduleList, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,
@@ -395,7 +395,7 @@ export class Reports {
   }
 
   async getReportCount(
-    parameters: GetReportCountParameters,
+    parameters: GetReportCountParameters = {},
   ): Promise<[GetReportCount, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,
@@ -438,7 +438,7 @@ export class Reports {
   }
 
   async getReportList(
-    parameters: GetReportListParameters,
+    parameters: GetReportListParameters = {},
   ): Promise<[GetReportListResult, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,
@@ -463,7 +463,7 @@ export class Reports {
   }
 
   async cancelReportRequests(
-    parameters: CancelReportRequestsParameters,
+    parameters: CancelReportRequestsParameters = {},
   ): Promise<[CancelReportRequests, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,
@@ -487,7 +487,7 @@ export class Reports {
   }
 
   async getReportRequestCount(
-    parameters: GetReportRequestCountParameters,
+    parameters: GetReportRequestCountParameters = {},
   ): Promise<[GetReportRequestCount, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,
@@ -533,7 +533,7 @@ export class Reports {
   }
 
   async getReportRequestList(
-    parameters: GetReportRequestListParameters,
+    parameters: GetReportRequestListParameters = {},
   ): Promise<[GetReportRequestListResult, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,

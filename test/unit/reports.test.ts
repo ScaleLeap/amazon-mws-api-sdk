@@ -38,46 +38,38 @@ const mockMwsFail = new MWS(
 
 describe('reports', () => {
   describe('getReportScheduleCount', () => {
-    const parameters = {}
-
     it('returns a count of schedule reports if succesful', async () => {
       expect.assertions(1)
 
       const mockGetReportScheduleCount = createMockHttpClient('reports_get_report_schedule_count')
 
-      expect(
-        await mockGetReportScheduleCount.reports.getReportScheduleCount(parameters),
-      ).toMatchSnapshot()
+      expect(await mockGetReportScheduleCount.reports.getReportScheduleCount()).toMatchSnapshot()
     })
 
     it('throws a parsing error when the response i snt valid', async () => {
       expect.assertions(1)
 
-      await expect(() =>
-        mockMwsFail.reports.getReportScheduleCount(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      await expect(() => mockMwsFail.reports.getReportScheduleCount()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
     })
   })
 
   describe('getReportScheduleList', () => {
-    const parameters = {}
-
     it('returns detailed information about a report schedule if succesful', async () => {
       expect.assertions(1)
 
       const mockGetReportScheduleList = createMockHttpClient('reports_get_report_schedule_list')
 
-      expect(
-        await mockGetReportScheduleList.reports.getReportScheduleList(parameters),
-      ).toMatchSnapshot()
+      expect(await mockGetReportScheduleList.reports.getReportScheduleList()).toMatchSnapshot()
     })
 
     it('throws a parsing error when the response is nt valid', async () => {
       expect.assertions(1)
 
-      await expect(() =>
-        mockMwsFail.reports.getReportScheduleList(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      await expect(() => mockMwsFail.reports.getReportScheduleList()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
     })
   })
 
@@ -132,20 +124,18 @@ describe('reports', () => {
   })
 
   describe('getReportCount', () => {
-    const parameters = {}
-
     it('returns report count if succesful', async () => {
       expect.assertions(1)
 
       const mockGetReportCount = createMockHttpClient('reports_get_report_count')
 
-      expect(await mockGetReportCount.reports.getReportCount(parameters)).toMatchSnapshot()
+      expect(await mockGetReportCount.reports.getReportCount()).toMatchSnapshot()
     })
 
     it('throws a parsing error when the response isn t valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.reports.getReportCount(parameters)).rejects.toStrictEqual(
+      await expect(() => mockMwsFail.reports.getReportCount()).rejects.toStrictEqual(
         new ParsingError(parsingError),
       )
     })
@@ -177,14 +167,12 @@ describe('reports', () => {
   })
 
   describe('getReportList', () => {
-    const parameters = {}
-
     it('should properly return report list for multiple reports', async () => {
       expect.assertions(1)
 
       const mockGetReportList = createMockHttpClient('reports_get_report_list_multiple')
 
-      expect(await mockGetReportList.reports.getReportList(parameters)).toMatchSnapshot()
+      expect(await mockGetReportList.reports.getReportList()).toMatchSnapshot()
     })
 
     it('should properly return report list for a single report', async () => {
@@ -192,59 +180,51 @@ describe('reports', () => {
 
       const mockGetReportList = createMockHttpClient('reports_get_report_list')
 
-      expect(await mockGetReportList.reports.getReportList(parameters)).toMatchSnapshot()
+      expect(await mockGetReportList.reports.getReportList()).toMatchSnapshot()
     })
 
     it('throws a parsing error when the response isnt valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.reports.getReportList(parameters)).rejects.toStrictEqual(
+      await expect(() => mockMwsFail.reports.getReportList()).rejects.toStrictEqual(
         new ParsingError(parsingError),
       )
     })
   })
 
   describe('cancelReportRequests', () => {
-    const parameters = {}
-
     it('returns count and detailed info of cancelled requests if succesful', async () => {
       expect.assertions(1)
 
       const mockCancelReportRequests = createMockHttpClient('reports_cancel_report_requests')
 
-      expect(
-        await mockCancelReportRequests.reports.cancelReportRequests(parameters),
-      ).toMatchSnapshot()
+      expect(await mockCancelReportRequests.reports.cancelReportRequests()).toMatchSnapshot()
     })
 
     it('throws a parsing error when the response isnt valid', async () => {
       expect.assertions(1)
 
-      await expect(() =>
-        mockMwsFail.reports.cancelReportRequests(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      await expect(() => mockMwsFail.reports.cancelReportRequests()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
     })
   })
 
   describe('getReportRequestCount', () => {
-    const parameters = {}
-
     it('returns report request count if succesful', async () => {
       expect.assertions(1)
 
       const mockGetReportRequestCount = createMockHttpClient('reports_get_report_request_count')
 
-      expect(
-        await mockGetReportRequestCount.reports.getReportRequestCount(parameters),
-      ).toMatchSnapshot()
+      expect(await mockGetReportRequestCount.reports.getReportRequestCount()).toMatchSnapshot()
     })
 
     it("throws a parsing error when the response isn't valid", async () => {
       expect.assertions(1)
 
-      await expect(() =>
-        mockMwsFail.reports.getReportRequestCount(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      await expect(() => mockMwsFail.reports.getReportRequestCount()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
     })
   })
 
@@ -278,16 +258,12 @@ describe('reports', () => {
   })
 
   describe('getReportRequestList', () => {
-    const parameters = {}
-
     it('returns report request info succesfully for responses with a single report', async () => {
       expect.assertions(1)
 
       const mockGetReportRequestList = createMockHttpClient('reports_get_report_request_list')
 
-      expect(
-        await mockGetReportRequestList.reports.getReportRequestList(parameters),
-      ).toMatchSnapshot()
+      expect(await mockGetReportRequestList.reports.getReportRequestList()).toMatchSnapshot()
     })
 
     it('returns report request info succesfully for responses with multiple reports', async () => {
@@ -297,17 +273,15 @@ describe('reports', () => {
         'reports_get_report_request_list_multiple',
       )
 
-      expect(
-        await mockGetReportRequestList.reports.getReportRequestList(parameters),
-      ).toMatchSnapshot()
+      expect(await mockGetReportRequestList.reports.getReportRequestList()).toMatchSnapshot()
     })
 
     it('throws a parsing error when the response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() =>
-        mockMwsFail.reports.getReportRequestList(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      await expect(() => mockMwsFail.reports.getReportRequestList()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
     })
   })
 
