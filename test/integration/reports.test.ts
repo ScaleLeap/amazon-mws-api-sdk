@@ -27,7 +27,7 @@ describe('reports', () => {
     expect(response.ReportRequestId).toBeDefined()
   })
 
-  itci('should return new request report', async () => {
+  itci('should return another request report', async () => {
     const parameters = {
       ReportType: '_GET_MERCHANT_LISTINGS_DATA_',
     }
