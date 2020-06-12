@@ -1,6 +1,7 @@
 import {
   boolean,
   Codec,
+  enumeration,
   GetInterface,
   lazy,
   number,
@@ -12,8 +13,9 @@ import {
 } from 'purify-ts'
 
 import { Error } from '../../error-codec'
-import { ensureArray, ensureString, mwsDate, oneOfEnum } from '../../parsing'
+import { ensureArray, ensureString, mwsDate } from '../../parsing'
 import {
+  CurrencyCodeEnum,
   FeeDetail as FeeDetailInterface,
   ProductCategory as ProductCategoryInterface,
 } from './type'
@@ -31,20 +33,9 @@ enum ItemConditionEnum {
   Club = 'Club',
 }
 
-const ItemCondition = oneOfEnum(ItemConditionEnum)
+const ItemCondition = enumeration(ItemConditionEnum)
 
-enum CurrencyCodeEnum {
-  USD = 'USD',
-  EUR = 'EUR',
-  GBP = 'GBP',
-  RMB = 'RMB',
-  INR = 'INR',
-  JPY = 'JPY',
-  CAD = 'CAD',
-  MXN = 'MXN',
-}
-
-const CurrencyCode = oneOfEnum(CurrencyCodeEnum)
+const CurrencyCode = enumeration(CurrencyCodeEnum)
 
 enum StatusEnum {
   Success = 'Success',
@@ -52,14 +43,14 @@ enum StatusEnum {
   ServiceError = 'ServiceError',
 }
 
-const Status = oneOfEnum(StatusEnum)
+const Status = enumeration(StatusEnum)
 
 enum IdTypeEnum {
   ASIN = 'ASIN',
   SKU = 'SKU',
 }
 
-const IdType = oneOfEnum(IdTypeEnum)
+const IdType = enumeration(IdTypeEnum)
 
 const MoneyType = Codec.interface({
   Amount: optional(number),
