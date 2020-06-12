@@ -263,7 +263,7 @@ const ReportSchedule = Codec.interface({
 
 const ManageReportSchedule = Codec.interface({
   Count: number,
-  ReportSchedule: optional(ReportSchedule),
+  ReportSchedule: optional(oneOf([array(ReportSchedule), ReportSchedule, exactly('')])),
 })
 
 type ManageReportSchedule = GetInterface<typeof ManageReportSchedule>
