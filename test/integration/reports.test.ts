@@ -27,24 +27,15 @@ describe('reports', () => {
     expect(response.ReportRequestId).toBeDefined()
   })
 
-  itci('should return another request report', async () => {
+  itci('should succesfully return info on cancelled report requests', async () => {
     const parameters = {
-      ReportType: '_GET_MERCHANT_LISTINGS_DATA_',
+      ReportRequestIdList: ['51783018425', '51784018425'],
     }
 
-    const [response] = await reports.requestReport(parameters)
+    const [response] = await reports.cancelReportRequests(parameters)
 
-    expect(response.ReportRequestId).toBeDefined()
+    expect(response.Count).toBe(2)
   })
-  // itci('should succesfully return info on cancelled report requests', async () => {
-  //   const parameters = {
-  //     ReportRequestIdList: ['51776018334', '51777018376'],
-  //   }
-
-  //   const [response] = await reports.cancelReportRequests(parameters)
-
-  //   expect(response.Count).toBe(2)
-  // })
 
   itci('should succesfully get a count of 0 on an empty report id list', async () => {
     const parameters = {
