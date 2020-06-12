@@ -1,18 +1,10 @@
 import { amazonMarketplaces } from '@scaleleap/amazon-marketplaces'
 
-import { HttpClient, Orders } from '../../src'
+import { Orders } from '../../src'
 import { Config } from './config'
 import { itci } from './it'
 
-const config = new Config()
-
-const httpClient = new HttpClient({
-  marketplace: amazonMarketplaces.CA,
-  awsAccessKeyId: config.AWS_ACCESS_KEY_ID,
-  mwsAuthToken: config.MWS_AUTH_TOKEN,
-  secretKey: config.SECRET_KEY,
-  sellerId: config.SELLER_ID,
-})
+const httpClient = new Config().createHttpClient()
 
 /* eslint-disable jest/no-standalone-expect */
 describe(`${Orders.name}`, () => {
