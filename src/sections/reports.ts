@@ -317,7 +317,7 @@ export class Reports {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,
       version: REPORTS_API_VERSION,
-      action: 'GetReportScheduleList',
+      action: 'GetReportScheduleCount',
       parameters: {
         'ReportTypeList.Type': parameters.ReportTypeList,
       },
