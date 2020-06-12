@@ -44,7 +44,7 @@ describe('reports', () => {
     expect(response.Count).toBe(2)
   })
 
-  itci('should succesfully get a count of 0 on an empty report id list', async () => {
+  itci('should succesfully get a count of 2 with 2 valid ids', async () => {
     const parameters = {
       ReportIdList: ['21175694446018424', '21178489344018424'],
       Acknowledged: false,
