@@ -239,6 +239,16 @@ describe('reports', () => {
       expect(await mockCancelReportRequests.reports.cancelReportRequests()).toMatchSnapshot()
     })
 
+    it('returns count and detailed info of all cancelled requests if succesful', async () => {
+      expect.assertions(1)
+
+      const mockCancelReportRequests = createMockHttpClient(
+        'reports_cancel_report_requests_multiple',
+      )
+
+      expect(await mockCancelReportRequests.reports.cancelReportRequests()).toMatchSnapshot()
+    })
+
     it('throws a parsing error when the response isnt valid', async () => {
       expect.assertions(1)
 
