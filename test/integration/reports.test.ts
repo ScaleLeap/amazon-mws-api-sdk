@@ -17,6 +17,16 @@ const httpClient = new HttpClient({
 /* eslint-disable jest/no-standalone-expect */
 describe('reports', () => {
   const reports = new Reports(httpClient)
+  itci('should succesfully return info on cancelled report requests', async () => {
+    const parameters = {
+      ReportRequestIdList: ['51776018334', '51777018376'],
+    }
+
+    const [response] = await reports.cancelReportRequests(parameters)
+
+    expect(response.Count).toBe(2)
+  })
+
   itci('should succesfully get a count of 0 on an empty report id list', async () => {
     const parameters = {
       ReportIdList: ['21175694446018424', '21178489344018424'],
