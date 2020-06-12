@@ -66,6 +66,7 @@ export enum Resource {
   Orders = 'Orders',
   Products = 'Products',
   FulfilmentInventory = 'FulfillmentInventory',
+  Reports = 'Reports',
 }
 
 interface ResourceActions {
@@ -100,6 +101,21 @@ interface ResourceActions {
     | 'ListInventorySupply'
     | 'ListInventorySupplyByNextToken'
     | 'GetServiceStatus'
+  [Resource.Reports]:
+    | 'RequestReport'
+    | 'GetReportRequestList'
+    | 'GetReportRequestListByNextToken'
+    | 'GetReportRequestCount'
+    | 'CancelReportRequests'
+    | 'GetReportList'
+    | 'GetReportListByNextToken'
+    | 'GetReportCount'
+    | 'GetReport'
+    | 'ManageReportSchedule'
+    | 'GetReportScheduleList'
+    | 'GetReportScheduleListByNextToken'
+    | 'GetReportScheduleCount'
+    | 'UpdateReportAcknowledgements'
 }
 
 interface Request {
@@ -181,9 +197,19 @@ const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestR
       return Promise.reject(error.response.data)
     })
 
+const parseGetReport = (response: RequestResponse): [string, RequestMeta] => [
+  response.data,
+  {
+    requestId: response.headers['x-mws-request-id'],
+    timestamp: new Date(response.headers['x-mws-timestamp']),
+    quotaMax: Number(response.headers['x-mws-quota-max']),
+    quotaRemaining: Number(response.headers['x-mws-quota-remaining']),
+    quotaResetOn: new Date(response.headers['x-mws-quota-resetson']),
+  },
+]
+
 const parseResponse = <T>(response: RequestResponse): [T, RequestMeta] => {
   const responseData = parser.parse(response.data)
-
   return [
     responseData,
     {
@@ -205,7 +231,7 @@ export class HttpClient {
   public async request<TResource extends Resource, TRes>(
     method: HttpMethod,
     info: ResourceInfo<TResource>,
-  ): Promise<[TRes, RequestMeta]> {
+  ): Promise<[TRes | string, RequestMeta]> {
     const marketplaceUri = this.options.marketplace.webServiceUri
 
     const host = marketplaceUri.replace('https://', '')
@@ -256,6 +282,12 @@ export class HttpClient {
         response.data.includes('Invalid UPC identifier')
       ) {
         throw new InvalidUPCIdentifier(`${info.action} request failed`)
+      }
+
+      // GetReport returns a string that should be treated as a file instead of XML data
+      // http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReport.html
+      if (info.action === 'GetReport') {
+        return parseGetReport(response)
       }
 
       return parseResponse(response)

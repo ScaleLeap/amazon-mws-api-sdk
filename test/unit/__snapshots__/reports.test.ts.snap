@@ -1,0 +1,505 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reports cancelReportRequests returns count and detailed info of all cancelled requests if succesful 1`] = `
+Array [
+  Object {
+    "Count": 2,
+    "ReportRequestInfo": Array [
+      Object {
+        "CompletedDate": 2020-06-12T09:05:59.000Z,
+        "EndDate": 2020-06-12T09:05:48.000Z,
+        "ReportProcessingStatus": "_DONE_",
+        "ReportRequestId": "51783018425",
+        "ReportType": "_GET_MERCHANT_LISTINGS_ALL_DATA_",
+        "Scheduled": false,
+        "StartDate": 2020-06-12T09:05:48.000Z,
+        "StartedProcessingDate": 2020-06-12T09:05:52.000Z,
+        "SubmittedDate": 2020-06-12T09:05:48.000Z,
+      },
+      Object {
+        "CompletedDate": 2020-06-12T09:29:22.000Z,
+        "EndDate": 2020-06-12T09:29:10.000Z,
+        "ReportProcessingStatus": "_DONE_",
+        "ReportRequestId": "51784018425",
+        "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+        "Scheduled": false,
+        "StartDate": 2020-06-12T09:29:10.000Z,
+        "StartedProcessingDate": 2020-06-12T09:29:15.000Z,
+        "SubmittedDate": 2020-06-12T09:29:10.000Z,
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports cancelReportRequests returns count and detailed info of cancelled requests if succesful 1`] = `
+Array [
+  Object {
+    "Count": 1,
+    "ReportRequestInfo": Object {
+      "EndDate": 2009-02-13T02:10:39.000Z,
+      "ReportProcessingStatus": "_CANCELLED_",
+      "ReportRequestId": "2291326454",
+      "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+      "Scheduled": false,
+      "StartDate": 2009-01-21T02:10:39.000Z,
+      "SubmittedDate": 2009-02-20T02:10:39.000Z,
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReport returns a report if succesful 1`] = `
+Array [
+  "  order-id order-item-id purchase-date payments-date buyer-email 
+  buyer-name buyer-phone-number sku product-name quantity-purchased 
+  currency item-price item-tax shipping-price shipping-tax 
+  ship-service-level recipient-name ship-address-1 ship-address-2 
+  ship-address-3 ship-city ship-state ship-postal-code ship-country
+  ship-phone-number delivery-start-date delivery-end-date 
+  delivery-time-zone delivery-Instructions
+103-26010-55904 394929210114 2011-02-09T02:46:57-08:00
+2011-02-09T02:46:57-08:00 0g9lx423zn5@marketplace.amazon.com 
+Joe Customer 404-555-1212 JW-RT1-HLD9 The Structure of Aikido: 
+Volume 1: Kenjutsu and Taijutsu Sword and Open-Hand Movement 
+Relationships (Structure of Aikido, Vol 1) 1 USD 19.49 0.00 3.99 
+0.00 Standard Joe Customer 123 Main Street LAWRENCE CA 90044-2463 
+US 404-555-1212",
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReportCount returns report count if succesful 1`] = `
+Array [
+  Object {
+    "Count": 166,
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReportList should properly return report list for a single report 1`] = `
+Array [
+  Object {
+    "HasNext": true,
+    "NextToken": NextToken {
+      "action": "GetReportList",
+      "token": "2YgYW55IPQhvu5hbCBwbGVhc3VyZS4=",
+    },
+    "ReportInfo": Object {
+      "Acknowledged": false,
+      "AvailableDate": 2009-02-10T09:22:33.000Z,
+      "ReportId": "898899473",
+      "ReportRequestId": "2278662938",
+      "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReportList should properly return report list for multiple reports 1`] = `
+Array [
+  Object {
+    "HasNext": false,
+    "ReportInfo": Array [
+      Object {
+        "Acknowledged": false,
+        "AvailableDate": 2020-06-11T07:44:32.000Z,
+        "ReportId": "21175694446018424",
+        "ReportRequestId": "51781018424",
+        "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+      },
+      Object {
+        "Acknowledged": false,
+        "AvailableDate": 2020-06-11T07:41:56.000Z,
+        "ReportId": "21178489344018424",
+        "ReportRequestId": "51780018424",
+        "ReportType": "_GET_FLAT_FILE_OPEN_LISTINGS_DATA_",
+      },
+      Object {
+        "Acknowledged": false,
+        "AvailableDate": 2020-05-22T08:16:14.000Z,
+        "ReportId": "20812705939018404",
+        "ReportRequestId": "51778018404",
+        "ReportType": "_GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_",
+      },
+      Object {
+        "Acknowledged": false,
+        "AvailableDate": 2020-04-24T08:10:54.000Z,
+        "ReportId": "20303555135018376",
+        "ReportRequestId": "51777018376",
+        "ReportType": "_GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_",
+      },
+      Object {
+        "Acknowledged": false,
+        "AvailableDate": 2020-03-13T08:21:03.000Z,
+        "ReportId": "19571121666018336",
+        "ReportRequestId": "51776018334",
+        "ReportType": "_GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReportListByNextToken returns report info and next token if succesful 1`] = `
+Array [
+  Object {
+    "HasNext": false,
+    "NextToken": NextToken {
+      "action": "GetReportList",
+      "token": "none",
+    },
+    "ReportInfo": Object {
+      "Acknowledged": false,
+      "AvailableDate": 2009-02-10T09:22:33.000Z,
+      "ReportId": "898899473",
+      "ReportRequestId": "2278662938",
+      "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReportRequestCount returns report request count if succesful 1`] = `
+Array [
+  Object {
+    "Count": 1276,
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReportRequestList returns report request info succesfully for responses with a single report 1`] = `
+Array [
+  Object {
+    "HasNext": true,
+    "NextToken": NextToken {
+      "action": "GetReportRequestList",
+      "token": "2YgYW55IPQhcm5hbCBwbGVhc3VyZS4=",
+    },
+    "ReportRequestInfo": Object {
+      "CompletedDate": 2011-02-17T23:44:48.000Z,
+      "EndDate": 2011-02-13T02:10:39.000Z,
+      "GeneratedReportId": "3538561173",
+      "ReportProcessingStatus": "_DONE_",
+      "ReportRequestId": "2291326454",
+      "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+      "Scheduled": false,
+      "StartDate": 2011-01-21T02:10:39.000Z,
+      "StartedProcessingDate": 2011-02-17T23:44:43.000Z,
+      "SubmittedDate": 2011-02-17T23:44:09.000Z,
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReportRequestList returns report request info succesfully for responses with multiple reports 1`] = `
+Array [
+  Object {
+    "HasNext": false,
+    "ReportRequestInfo": Array [
+      Object {
+        "CompletedDate": 2020-06-11T07:44:32.000Z,
+        "EndDate": 2020-06-11T07:44:22.000Z,
+        "GeneratedReportId": "21175694446018424",
+        "ReportProcessingStatus": "_DONE_",
+        "ReportRequestId": "51781018424",
+        "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+        "Scheduled": false,
+        "StartDate": 2020-06-11T07:44:22.000Z,
+        "StartedProcessingDate": 2020-06-11T07:44:25.000Z,
+        "SubmittedDate": 2020-06-11T07:44:22.000Z,
+      },
+      Object {
+        "CompletedDate": 2020-06-11T07:41:56.000Z,
+        "EndDate": 2020-06-11T07:41:44.000Z,
+        "GeneratedReportId": "21178489344018424",
+        "ReportProcessingStatus": "_DONE_",
+        "ReportRequestId": "51780018424",
+        "ReportType": "_GET_FLAT_FILE_OPEN_LISTINGS_DATA_",
+        "Scheduled": false,
+        "StartDate": 2020-06-11T07:41:44.000Z,
+        "StartedProcessingDate": 2020-06-11T07:41:48.000Z,
+        "SubmittedDate": 2020-06-11T07:41:44.000Z,
+      },
+      Object {
+        "CompletedDate": 2020-06-11T07:40:59.000Z,
+        "EndDate": 2020-06-11T07:40:49.000Z,
+        "ReportProcessingStatus": "_DONE_NO_DATA_",
+        "ReportRequestId": "51779018424",
+        "ReportType": "_GET_FLAT_FILE_ORDERS_DATA_",
+        "Scheduled": false,
+        "StartDate": 2020-06-10T07:40:49.000Z,
+        "StartedProcessingDate": 2020-06-11T07:40:52.000Z,
+        "SubmittedDate": 2020-06-11T07:40:49.000Z,
+      },
+      Object {
+        "CompletedDate": 2020-05-22T08:16:14.000Z,
+        "EndDate": 2020-05-22T07:52:49.000Z,
+        "GeneratedReportId": "20812705939018404",
+        "ReportProcessingStatus": "_DONE_",
+        "ReportRequestId": "51778018404",
+        "ReportType": "_GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_",
+        "Scheduled": false,
+        "StartDate": 2020-04-24T07:52:49.000Z,
+        "StartedProcessingDate": 2020-05-22T08:16:14.000Z,
+        "SubmittedDate": 2020-05-22T08:16:14.000Z,
+      },
+      Object {
+        "CompletedDate": 2020-04-24T08:10:53.000Z,
+        "EndDate": 2020-04-24T07:52:49.000Z,
+        "GeneratedReportId": "20303555135018376",
+        "ReportProcessingStatus": "_DONE_",
+        "ReportRequestId": "51777018376",
+        "ReportType": "_GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_",
+        "Scheduled": false,
+        "StartDate": 2020-03-13T07:52:49.000Z,
+        "StartedProcessingDate": 2020-04-24T08:10:53.000Z,
+        "SubmittedDate": 2020-04-24T08:10:53.000Z,
+      },
+      Object {
+        "CompletedDate": 2020-03-13T08:21:03.000Z,
+        "EndDate": 2020-03-13T07:52:49.000Z,
+        "GeneratedReportId": "19571121666018336",
+        "ReportProcessingStatus": "_DONE_",
+        "ReportRequestId": "51776018334",
+        "ReportType": "_GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_",
+        "Scheduled": false,
+        "StartDate": 2020-02-14T07:52:49.000Z,
+        "StartedProcessingDate": 2020-03-13T08:21:03.000Z,
+        "SubmittedDate": 2020-03-13T08:21:03.000Z,
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReportRequestListByNextToken returns report request info if succesful 1`] = `
+Array [
+  Object {
+    "HasNext": false,
+    "NextToken": NextToken {
+      "action": "GetReportRequestList",
+      "token": "none",
+    },
+    "ReportRequestInfo": Object {
+      "EndDate": 2009-02-13T02:10:39.000Z,
+      "ReportProcessingStatus": "_SUBMITTED_",
+      "ReportRequestId": "2291326454",
+      "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+      "Scheduled": false,
+      "StartDate": 2009-01-21T02:10:39.000Z,
+      "SubmittedDate": 2009-02-20T02:10:39.000Z,
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReportScheduleCount returns a count of schedule reports if succesful 1`] = `
+Array [
+  Object {
+    "Count": 18,
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports getReportScheduleList returns detailed information about a report schedule if succesful 1`] = `
+Array [
+  Object {
+    "HasNext": false,
+    "NextToken": NextToken {
+      "action": "GetReportScheduleList",
+      "token": "",
+    },
+    "ReportSchedule": Object {
+      "ReportType": "_GET_ORDERS_DATA_",
+      "Schedule": "_30_DAYS_",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports manageReportSchedule returns count and report schedule if succesful 1`] = `
+Array [
+  Object {
+    "Count": 1,
+    "ReportSchedule": Object {
+      "ReportType": "_GET_ORDERS_DATA_",
+      "Schedule": "_30_DAYS_",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports requestReport returns a parsed model when the response is valid 1`] = `
+Array [
+  Object {
+    "EndDate": 2009-02-13T02:10:39.000Z,
+    "ReportProcessingStatus": "_SUBMITTED_",
+    "ReportRequestId": "2291326454",
+    "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+    "Scheduled": false,
+    "StartDate": 2009-01-21T02:10:39.000Z,
+    "SubmittedDate": 2009-02-20T02:10:39.000Z,
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports updateReportAcknowledgements returns count and a list of updated reports 1`] = `
+Array [
+  Object {
+    "Count": 2,
+    "ReportInfo": Array [
+      Object {
+        "Acknowledged": true,
+        "AcknowledgedDate": 2020-06-12T04:15:48.000Z,
+        "AvailableDate": 2020-06-11T07:44:32.000Z,
+        "ReportId": "21175694446018424",
+        "ReportRequestId": "51781018424",
+        "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+      },
+      Object {
+        "Acknowledged": true,
+        "AcknowledgedDate": 2020-06-12T04:15:48.000Z,
+        "AvailableDate": 2020-06-11T07:41:56.000Z,
+        "ReportId": "21178489344018424",
+        "ReportRequestId": "51780018424",
+        "ReportType": "_GET_FLAT_FILE_OPEN_LISTINGS_DATA_",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`reports updateReportAcknowledgements returns count and info of updated reports 1`] = `
+Array [
+  Object {
+    "Count": 1,
+    "ReportInfo": Object {
+      "Acknowledged": true,
+      "AcknowledgedDate": 2009-02-20T02:10:41.000Z,
+      "AvailableDate": 2009-01-06T03:48:36.000Z,
+      "ReportId": "841997483",
+      "ReportRequestId": "2234038326",
+      "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
