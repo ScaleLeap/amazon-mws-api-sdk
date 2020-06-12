@@ -17,6 +17,13 @@ const httpClient = new HttpClient({
 /* eslint-disable jest/no-standalone-expect */
 describe('reports', () => {
   const reports = new Reports(httpClient)
+
+  itci('should succesfully query get report schedule list', async () => {
+    const [response] = await reports.getReportScheduleList()
+
+    expect(response).toBeDefined()
+  })
+
   itci('should return new request report', async () => {
     const parameters = {
       ReportType: '_GET_MERCHANT_LISTINGS_ALL_DATA_',
