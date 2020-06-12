@@ -19,6 +19,16 @@ describe('reports', () => {
   const reports = new Reports(httpClient)
   itci('should return new request report', async () => {
     const parameters = {
+      ReportType: '_GET_MERCHANT_LISTINGS_ALL_DATA_',
+    }
+
+    const [response] = await reports.requestReport(parameters)
+
+    expect(response.ReportRequestId).toBeDefined()
+  })
+
+  itci('should return new request report', async () => {
+    const parameters = {
       ReportType: '_GET_MERCHANT_LISTINGS_DATA_',
     }
 
