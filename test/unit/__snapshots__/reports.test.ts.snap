@@ -408,3 +408,26 @@ Array [
   },
 ]
 `;
+
+exports[`reports updateReportAcknowledgements returns count and info of updated reports 1`] = `
+Array [
+  Object {
+    "Count": 1,
+    "ReportInfo": Object {
+      "Acknowledged": true,
+      "AcknowledgedDate": 2009-02-20T02:10:41.000Z,
+      "AvailableDate": 2009-01-06T03:48:36.000Z,
+      "ReportId": "841997483",
+      "ReportRequestId": "2234038326",
+      "ReportType": "_GET_MERCHANT_LISTINGS_DATA_",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;

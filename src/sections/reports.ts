@@ -308,8 +308,48 @@ const GetReportScheduleCountResponse = Codec.interface({
   }),
 })
 
+interface UpdateReportAcknowledgementsParameters {
+  ReportIdList: string[]
+  Acknowledged?: boolean
+}
+
+const UpdateReportAcknowledgements = Codec.interface({
+  Count: optional(number),
+  ReportInfo: optional(oneOf([array(ReportInfo), ReportInfo, exactly('')])),
+})
+
+type UpdateReportAcknowledgements = GetInterface<typeof UpdateReportAcknowledgements>
+
+const UpdateReportAcknowledgementsResponse = Codec.interface({
+  UpdateReportAcknowledgementsResponse: Codec.interface({
+    UpdateReportAcknowledgementsResult: UpdateReportAcknowledgements,
+  }),
+})
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async updateReportAcknowledgements(
+    parameters: UpdateReportAcknowledgementsParameters,
+  ): Promise<[UpdateReportAcknowledgements, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Reports,
+      version: REPORTS_API_VERSION,
+      action: 'UpdateReportAcknowledgements',
+      parameters: {
+        'ReportIdList.Id': parameters.ReportIdList,
+      },
+    })
+
+    return UpdateReportAcknowledgementsResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.UpdateReportAcknowledgementsResponse.UpdateReportAcknowledgementsResult,
+        meta,
+      ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getReportScheduleCount(
     parameters: GetReportScheduleCountParameters = {},
