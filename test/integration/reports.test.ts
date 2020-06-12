@@ -1,6 +1,6 @@
 import { amazonMarketplaces } from '@scaleleap/amazon-marketplaces'
 
-import { HttpClient, Reports } from '../../src'
+import { HttpClient, Reports, ScheduleType } from '../../src'
 import { Config } from './config'
 import { itci } from './it'
 
@@ -17,6 +17,26 @@ const httpClient = new HttpClient({
 /* eslint-disable jest/no-standalone-expect */
 describe('reports', () => {
   const reports = new Reports(httpClient)
+
+  itci('after creating a schedule list it should return a count of more than one', async () => {
+    const parametersFlatFile = {
+      ReportType: '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_',
+      Schedule: '_30_DAYS_' as ScheduleType,
+    }
+
+    const parametersAllData = {
+      ReportType: '	_GET_MERCHANT_LISTINGS_ALL_DATA_',
+      Schedule: '_15_DAYS_' as ScheduleType,
+    }
+
+    const [responseFlatFile] = await reports.manageReportSchedule(parametersFlatFile)
+    const [responseAllData] = await reports.manageReportSchedule(parametersAllData)
+    const [responseScheduleList] = await reports.getReportScheduleList()
+
+    expect(typeof responseFlatFile.Count).toBe('number')
+    expect(typeof responseAllData.Count).toBe('number')
+    expect(typeof responseScheduleList.ReportSchedule).toBeDefined()
+  })
 
   itci('should succesfully query get report schedule list', async () => {
     const [response] = await reports.getReportScheduleList()
