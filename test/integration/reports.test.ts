@@ -19,11 +19,12 @@ describe('reports', () => {
   const reports = new Reports(httpClient)
   itci('should succesfully get a count of 0 on an empty report id list', async () => {
     const parameters = {
-      ReportIdList: [],
+      ReportIdList: ['21175694446018424', '21178489344018424'],
+      Acknowledged: false,
     }
     const [response] = await reports.updateReportAcknowledgements(parameters)
 
-    expect(response.Count).toBe(0)
+    expect(response.Count).toBe(2)
   })
 
   itci('should succesfully get report schedule count', async () => {
