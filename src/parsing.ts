@@ -1,5 +1,5 @@
 /** A collection of parsing codecs */
-import { array, Codec, date, exactly, oneOf, record, string, unknown } from 'purify-ts/Codec'
+import { array, Codec, date, record, string, unknown } from 'purify-ts/Codec'
 import { Left, Right } from 'purify-ts/Either'
 
 export const ensureArray = <T>(tag: string, codec: Codec<T>): Codec<T[]> => {
@@ -101,5 +101,3 @@ export const nextToken = <T extends string>(action: T) =>
     encode: (x) => x,
     schema: () => ({ type: 'string' }),
   })
-
-export const oneOfEnum = (enm: object) => oneOf(Object.values(enm).map((x: string) => exactly(x)))

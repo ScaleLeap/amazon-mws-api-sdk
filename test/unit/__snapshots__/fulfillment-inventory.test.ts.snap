@@ -23,18 +23,15 @@ Array [
       Object {
         "ASIN": "BT008FQ92Q",
         "Condition": "NewItem",
-        "EarliestAvailability": undefined,
         "FNSKU": "X0000000EY",
         "InStockSupplyQuantity": 4,
         "SellerSKU": "SampleSKU3",
         "SupplyDetail": Array [
           Object {
             "EarliestAvailableToPick": Object {
-              "DateTime": undefined,
               "TimepointType": "Immediately",
             },
             "LatestAvailableToPick": Object {
-              "DateTime": undefined,
               "TimepointType": "Immediately",
             },
             "Quantity": 5,
@@ -56,7 +53,6 @@ Array [
         "TotalSupplyQuantity": 18,
       },
     ],
-    "MarketplaceId": undefined,
     "NextToken": NextToken {
       "action": "ListInventorySupply",
       "token": "H4sIAAAAAAAAADXQzW6CMAAA4FcxXD3AgE5J5pLSiBTQ8Sc
@@ -85,7 +81,6 @@ Array [
       Object {
         "ASIN": "B00008UI0R",
         "Condition": "",
-        "EarliestAvailability": undefined,
         "FNSKU": "B00008UI0R",
         "InStockSupplyQuantity": 0,
         "SellerSKU": "SampleSKU5",
@@ -96,7 +91,6 @@ Array [
         "ASIN": "B00000K3CQ",
         "Condition": "NewItem",
         "EarliestAvailability": Object {
-          "DateTime": undefined,
           "TimepointType": "Immediately",
         },
         "FNSKU": "X0000000FM",

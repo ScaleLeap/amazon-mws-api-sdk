@@ -12,9 +12,21 @@ export type GetMatchingProductIdType =
   | 'ISBN'
   | 'JAN'
 export type FeeEstimateIdType = 'ASIN' | 'SellerSKU'
+
+export enum CurrencyCodeEnum {
+  USD = 'USD',
+  EUR = 'EUR',
+  GBP = 'GBP',
+  RMB = 'RMB',
+  INR = 'INR',
+  JPY = 'JPY',
+  CAD = 'CAD',
+  MXN = 'MXN',
+}
+
 export interface MoneyType {
   Amount: number | undefined
-  CurrencyCode: string
+  CurrencyCode: CurrencyCodeEnum
 }
 
 export interface FeeDetail {
