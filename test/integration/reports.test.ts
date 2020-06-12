@@ -19,22 +19,22 @@ describe('reports', () => {
   const reports = new Reports(httpClient)
 
   itci('after creating a schedule list it should return a count of more than one', async () => {
-    const parametersBrowseTreeData = {
-      ReportType: '_GET_XML_BROWSE_TREE_DATA_',
+    const parametersFirst = {
+      ReportType: '	_GET_FLAT_FILE_ACTIONABLE_ORDER_DATA_',
       Schedule: '_30_DAYS_' as ScheduleType,
     }
 
-    const parametersOrdersData = {
+    const parametersSecond = {
       ReportType: '	_GET_ORDERS_DATA_',
       Schedule: '_15_DAYS_' as ScheduleType,
     }
 
-    const [responseBrowseTreeData] = await reports.manageReportSchedule(parametersBrowseTreeData)
-    const [responseOrdersData] = await reports.manageReportSchedule(parametersOrdersData)
+    const [responseFirst] = await reports.manageReportSchedule(parametersFirst)
+    const [responseSecond] = await reports.manageReportSchedule(parametersSecond)
     const [responseScheduleList] = await reports.getReportScheduleList()
 
-    expect(typeof responseBrowseTreeData.Count).toBe('number')
-    expect(typeof responseOrdersData.Count).toBe('number')
+    expect(typeof responseFirst.Count).toBe('number')
+    expect(typeof responseSecond.Count).toBe('number')
     expect(typeof responseScheduleList.ReportSchedule).toBeDefined()
   })
 
