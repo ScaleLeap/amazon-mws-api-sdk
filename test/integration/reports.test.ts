@@ -17,6 +17,15 @@ const httpClient = new HttpClient({
 /* eslint-disable jest/no-standalone-expect */
 describe('reports', () => {
   const reports = new Reports(httpClient)
+  itci('should succesfully get a count of 0 on an empty report id list', async () => {
+    const parameters = {
+      ReportIdList: [],
+    }
+    const [response] = await reports.updateReportAcknowledgements(parameters)
+
+    expect(response.Count).toBe(0)
+  })
+
   itci('should succesfully get report schedule count', async () => {
     expect.assertions(1)
 
