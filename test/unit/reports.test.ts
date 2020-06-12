@@ -37,7 +37,7 @@ const mockMwsFail = new MWS(
 )
 
 describe('reports', () => {
-  describe('updateReportAcknowledgements', async () => {
+  describe('updateReportAcknowledgements', () => {
     const parameters = {
       ReportIdList: [''],
     }
