@@ -22,7 +22,7 @@ describe('reports', () => {
 
     const [response] = await reports.getReportScheduleCount({})
 
-    expect(typeof response).toBeDefined()
+    expect(typeof response.Count).toBe('number')
   })
 
   itci('should succesfully get report schedule list', async () => {
@@ -30,7 +30,7 @@ describe('reports', () => {
 
     const [response] = await reports.getReportScheduleList({})
 
-    expect(typeof response).toBeDefined()
+    expect(response).toBeDefined()
   })
 
   itci('should be able to query get report count', async () => {
