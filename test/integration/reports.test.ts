@@ -24,7 +24,7 @@ describe('reports', () => {
 
     const [response] = await reports.requestReport(parameters)
 
-    expect(response.GeneratedReportId).toBeDefined()
+    expect(response).toBeDefined()
   })
   // itci('should succesfully return info on cancelled report requests', async () => {
   //   const parameters = {
