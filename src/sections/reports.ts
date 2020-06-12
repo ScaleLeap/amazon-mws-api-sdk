@@ -115,8 +115,6 @@ const GetReportRequestListResult = Codec.interface({
   NextToken: optional(nextTokenCodec('GetReportRequestList')),
   HasNext: optional(boolean),
   ReportRequestInfo: optional(oneOf([array(ReportRequestInfo), ReportRequestInfo, exactly('')])),
-  // This does not work for some reason
-  // ReportRequestInfo: ensureArray('ReportRequestInfo', ReportRequestInfo),
 })
 
 type GetReportRequestListResult = GetInterface<typeof GetReportRequestListResult>
@@ -294,8 +292,44 @@ const GetReportScheduleListResponse = Codec.interface({
   }),
 })
 
+interface GetReportScheduleCountParameters {
+  ReportTypeList?: ReportType
+}
+
+const GetReportScheduleCount = Codec.interface({
+  Count: number,
+})
+
+type GetReportScheduleCount = GetInterface<typeof GetReportScheduleCount>
+
+const GetReportScheduleCountResponse = Codec.interface({
+  GetReportScheduleCountResponse: Codec.interface({
+    GetReportScheduleCountResult: GetReportScheduleCount,
+  }),
+})
+
 export class Reports {
   constructor(private httpClient: HttpClient) {}
+
+  async getReportScheduleCount(
+    parameters: GetReportScheduleCountParameters,
+  ): Promise<[GetReportScheduleCount, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Reports,
+      version: REPORTS_API_VERSION,
+      action: 'GetReportScheduleList',
+      parameters: {
+        'ReportTypeList.Type': parameters.ReportTypeList,
+      },
+    })
+
+    return GetReportScheduleCountResponse.decode(response).caseOf({
+      Right: (x) => [x.GetReportScheduleCountResponse.GetReportScheduleCountResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   /**
    * getReportScheduleListByNextToken cannot be called
