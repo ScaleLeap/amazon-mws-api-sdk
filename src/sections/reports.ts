@@ -281,7 +281,7 @@ interface GetReportScheduleListParameters {
 const GetReportScheduleList = Codec.interface({
   NextToken: optional(nextTokenCodec('GetReportScheduleList')),
   HasNext: optional(boolean),
-  ReportSchedule: optional(ReportSchedule),
+  ReportSchedule: optional(oneOf([array(ReportSchedule), ReportSchedule, exactly('')])),
 })
 
 type GetReportScheduleList = GetInterface<typeof GetReportScheduleList>
