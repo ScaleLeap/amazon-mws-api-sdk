@@ -1,0 +1,24 @@
+<UpdateReportAcknowledgementsResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <UpdateReportAcknowledgementsResult>
+    <Count>2</Count>
+    <ReportInfo>
+      <ReportType>_GET_MERCHANT_LISTINGS_DATA_</ReportType>
+      <Acknowledged>true</Acknowledged>
+      <AcknowledgedDate>2020-06-12T04:15:48+00:00</AcknowledgedDate>
+      <ReportId>21175694446018424</ReportId>
+      <ReportRequestId>51781018424</ReportRequestId>
+      <AvailableDate>2020-06-11T07:44:32+00:00</AvailableDate>
+    </ReportInfo>
+    <ReportInfo>
+      <ReportType>_GET_FLAT_FILE_OPEN_LISTINGS_DATA_</ReportType>
+      <Acknowledged>true</Acknowledged>
+      <AcknowledgedDate>2020-06-12T04:15:48+00:00</AcknowledgedDate>
+      <ReportId>21178489344018424</ReportId>
+      <ReportRequestId>51780018424</ReportRequestId>
+      <AvailableDate>2020-06-11T07:41:56+00:00</AvailableDate>
+    </ReportInfo>
+  </UpdateReportAcknowledgementsResult>
+  <ResponseMetadata>
+    <RequestId>bb0a2a9f-027d-4d04-9e20-8083b7558588</RequestId>
+  </ResponseMetadata>
+</UpdateReportAcknowledgementsResponse>

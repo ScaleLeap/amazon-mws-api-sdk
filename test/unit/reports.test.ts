@@ -54,6 +54,18 @@ describe('reports', () => {
       ).toMatchSnapshot()
     })
 
+    it('returns count and a list of updated reports', async () => {
+      expect.assertions(1)
+
+      const mockUpdateReportAcknowledgements = createMockHttpClient(
+        'reports_update_report_acknowledgements_multiple',
+      )
+
+      expect(
+        await mockUpdateReportAcknowledgements.reports.updateReportAcknowledgements(parameters),
+      ).toMatchSnapshot()
+    })
+
     it('throws a parsing error when the response i snt valid', async () => {
       expect.assertions(1)
 
