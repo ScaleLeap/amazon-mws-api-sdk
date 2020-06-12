@@ -24,7 +24,7 @@ export enum CurrencyCodeEnum {
   MXN = 'MXN',
 }
 
-export interface MoneyType {
+interface MoneyType {
   Amount: number | undefined
   CurrencyCode: CurrencyCodeEnum
 }

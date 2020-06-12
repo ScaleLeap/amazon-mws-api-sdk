@@ -2,6 +2,7 @@ import {
   array,
   boolean,
   Codec,
+  enumeration,
   exactly,
   GetInterface,
   Left,
@@ -13,13 +14,7 @@ import {
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import {
-  ensureString,
-  mwsDate,
-  NextToken,
-  nextToken as nextTokenCodec,
-  oneOfEnum,
-} from '../parsing'
+import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 
 const REPORTS_API_VERSION = '2009-01-01'
 /**
@@ -88,7 +83,7 @@ enum ScheduleEnum {
   _NEVER_ = '_NEVER_',
 }
 
-const ScheduleCodec = oneOfEnum(ScheduleEnum)
+const ScheduleCodec = enumeration(ScheduleEnum)
 
 export type ScheduleType =
   | '_15_MINUTES_'
