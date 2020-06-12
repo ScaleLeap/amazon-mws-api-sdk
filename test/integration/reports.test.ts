@@ -19,7 +19,7 @@ describe('reports', () => {
   const reports = new Reports(httpClient)
   itci('should return new request report', async () => {
     const parameters = {
-      ReportType: '	_GET_MERCHANT_LISTINGS_DATA_',
+      ReportType: '_GET_MERCHANT_LISTINGS_DATA_',
     }
 
     const [response] = await reports.requestReport(parameters)
