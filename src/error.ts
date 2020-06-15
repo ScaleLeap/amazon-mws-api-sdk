@@ -54,6 +54,7 @@ export class InvalidUPCIdentifier extends HttpError {}
 // Reports errors
 export class AccessToReportDenied extends HttpError {}
 export class InvalidReportId extends HttpError {}
+export class InvalidReportRequestId extends HttpError {}
 export class InvalidReportType extends HttpError {}
 export class InvalidScheduleFrequency extends HttpError {}
 export class ReportNoLongerAvailable extends HttpError {}
