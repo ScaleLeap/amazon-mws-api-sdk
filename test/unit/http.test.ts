@@ -179,7 +179,7 @@ describe('httpClient', () => {
       expect.hasAssertions()
 
       const parameters = {
-        MarketplaceId: '',
+        MarketplaceId: 'ATVPDKIKX0DER',
         Destination: {
           DeliveryChannel: 'SQS',
           'AttributeList.member': [
@@ -192,7 +192,8 @@ describe('httpClient', () => {
       }
 
       const results = {
-        MarketplaceId: '',
+        MarketplaceId: 'ATVPDKIKX0DER',
+        'Destination.DeliveryChannel': 'SQS',
         'Destination.AttributeList.member.1.Key': 'sqsQueueUrl',
         'Destination.AttributeList.member.1.Value':
           'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',

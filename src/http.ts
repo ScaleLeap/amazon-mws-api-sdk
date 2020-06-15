@@ -63,8 +63,9 @@ type ParameterTypes =
   | (number | string)[]
   | object[]
   | boolean
-  | object
+  | { [key: string]: ParameterTypes }
   | undefined
+
 type Parameters = Record<string, ParameterTypes>
 type CleanParameters = Record<string, string>
 
@@ -191,7 +192,15 @@ export const cleanParameters = (parameters: Parameters): CleanParameters =>
   Object.entries(parameters)
     .filter(([, parameter]) => parameter !== undefined)
     .reduce((result, [key, parameter]) => {
-      if (Array.isArray(parameter)) {
+      if (typeof parameter === 'string' || !Number.isNaN(Number(parameter))) {
+        /**
+         * If parameter is type string or number, assign it to result
+         */
+        Object.assign(result, { [key]: String(parameter) })
+      } else if (Array.isArray(parameter)) {
+        /**
+         * If parameter is type array reduce it to dotnotation
+         */
         parameter.forEach((parameterChild: string | number | object, index: number) => {
           if (typeof parameterChild === 'string' || !Number.isNaN(Number(parameterChild))) {
             Object.assign(result, { [`${key}.${index + 1}`]: String(parameterChild) })
@@ -200,7 +209,14 @@ export const cleanParameters = (parameters: Parameters): CleanParameters =>
           }
         })
       } else {
-        Object.assign(result, { [key]: String(parameter) })
+        /**
+         * If parameter is type object parameterize it
+         */
+        Object.entries(
+          cleanParameters(parameter as Parameters),
+        ).forEach(([innerKey, innerValue]: [string, string]) =>
+          Object.assign(result, { [`${key}.${innerKey}`]: innerValue }),
+        )
       }
 
       return result
