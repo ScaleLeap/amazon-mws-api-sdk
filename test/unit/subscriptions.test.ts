@@ -37,6 +37,37 @@ const mockMwsFail = new MWS(
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('sellers', () => {
+  describe('registerDestination', () => {
+    const parameters = {
+      MarketplaceId: '',
+      Destination: {
+        DeliveryChannel: 'SQS',
+        AttributeList: {
+          Key: 'sqsQueueUrl',
+          Value: '',
+        },
+      },
+    }
+
+    it('returns the standard response if succesful', async () => {
+      expect.assertions(1)
+
+      const mockRegisterDestination = createMockHttpClient('subscriptions_register_destination')
+
+      expect(
+        await mockRegisterDestination.subscriptions.registerDestination(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.subscriptions.registerDestination(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getServiceStatus', () => {
     it('returns a parsed model when the status response is valid', async () => {
       expect.assertions(1)
