@@ -1,5 +1,5 @@
 import { Reports, ScheduleType } from '../../src'
-// import { InvalidReportId } from '../../src/error'
+import { InvalidReportId } from '../../src/error'
 import { Config } from './config'
 import { itci } from './it'
 
@@ -59,12 +59,10 @@ describe('reports', () => {
       ReportRequestIdList: ['51783018499', '51784018499'],
     }
 
-    const [response] = await reports.cancelReportRequests(parameters)
-
-    expect(response).toBeDefined()
-    // await expect(() => reports.cancelReportRequests(parameters)).rejects.toThrow(
-    //   new InvalidReportId('CancelReportRequests request failed'),
-    // )
+    // expect(response).toBeDefined()
+    await expect(() => reports.cancelReportRequests(parameters)).rejects.toThrow(
+      new InvalidReportId('CancelReportRequests request failed'),
+    )
   })
 
   itci('should succesfully get a count of 2 with 2 valid ids', async () => {
