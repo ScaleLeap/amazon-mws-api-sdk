@@ -2,6 +2,7 @@
     <GetReportScheduleListResult>
         <NextToken></NextToken>
         <HasNext>false</HasNext>
+        <!--1 or more repetitions:-->
         <ReportSchedule>
             <ReportType>_GET_ORDERS_DATA_</ReportType>
             <Schedule>_30_DAYS_</Schedule>

@@ -2,9 +2,11 @@
     <GetReportListResult>
         <NextToken>2YgYW55IPQhvu5hbCBwbGVhc3VyZS4=</NextToken>
         <HasNext>true</HasNext>
+        <!--1 or more repetitions:-->
         <ReportInfo>
             <ReportId>898899473</ReportId>
             <ReportType>_GET_MERCHANT_LISTINGS_DATA_</ReportType>
+            <!--Optional:-->
             <ReportRequestId>2278662938</ReportRequestId>
             <AvailableDate>2009-02-10T09:22:33+00:00</AvailableDate>
             <Acknowledged>false</Acknowledged>

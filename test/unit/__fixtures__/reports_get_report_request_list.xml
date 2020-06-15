@@ -2,6 +2,7 @@
     <GetReportRequestListResult>
         <NextToken>2YgYW55IPQhcm5hbCBwbGVhc3VyZS4=</NextToken>
         <HasNext>true</HasNext>
+        <!--1 or more repetitions:-->
         <ReportRequestInfo>
             <ReportRequestId>2291326454</ReportRequestId>
             <ReportType>_GET_MERCHANT_LISTINGS_DATA_</ReportType>

@@ -1,6 +1,7 @@
 <CancelReportRequestsResponse xmlns="http://mws.amazonservices.com/doc/2009-01-01/">
     <CancelReportRequestsResult>
         <Count>1</Count>
+        <!--1 or more repetitions:-->
         <ReportRequestInfo>
             <ReportRequestId>2291326454</ReportRequestId>
             <ReportType>_GET_MERCHANT_LISTINGS_DATA_</ReportType>
