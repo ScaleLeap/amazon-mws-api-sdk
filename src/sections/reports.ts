@@ -258,7 +258,7 @@ interface ManageReportScheduleParameters {
 const ReportSchedule = Codec.interface({
   ReportType,
   Schedule: ScheduleCodec,
-  ScheduleDate: mwsDate,
+  ScheduledDate: mwsDate,
 })
 
 const ManageReportSchedule = Codec.interface({
