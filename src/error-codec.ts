@@ -34,6 +34,7 @@ export const Error = Codec.interface({
       'RetriableInternalError',
       'AccessToReportDenied',
       'InvalidReportId',
+      'InvalidReportRequestId',
       'InvalidReportType',
       'InvalidScheduleFrequency',
       'ReportNoLongerAvailable',

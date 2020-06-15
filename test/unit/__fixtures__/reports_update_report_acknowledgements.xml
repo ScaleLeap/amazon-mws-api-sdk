@@ -1,9 +1,11 @@
 <UpdateReportAcknowledgementsResponse xmlns="http://mws.amazonservices.com/doc/2009-01-01/">
     <UpdateReportAcknowledgementsResult>
         <Count>1</Count>
+        <!--1 or more repetitions:-->
         <ReportInfo>
             <ReportId>841997483</ReportId>
             <ReportType>_GET_MERCHANT_LISTINGS_DATA_</ReportType>
+            <!--Optional:-->
             <ReportRequestId>2234038326</ReportRequestId>
             <AvailableDate>2009-01-06T03:48:36+00:00</AvailableDate>
             <Acknowledged>true</Acknowledged>
