@@ -57,7 +57,14 @@ export interface MWSOptions {
 }
 
 type HttpMethod = 'GET' | 'POST'
-type ParameterTypes = string | number | (number | string)[] | object[] | boolean | undefined
+type ParameterTypes =
+  | string
+  | number
+  | (number | string)[]
+  | object[]
+  | boolean
+  | object
+  | undefined
 type Parameters = Record<string, ParameterTypes>
 type CleanParameters = Record<string, string>
 
