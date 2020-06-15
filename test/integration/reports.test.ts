@@ -56,7 +56,7 @@ describe('reports', () => {
 
   itci('should succesfully return info on cancelled report requests', async () => {
     const parameters = {
-      ReportRequestIdList: ['51783018499', '51784018425'],
+      ReportRequestIdList: ['51783018499', '51784018499'],
     }
 
     await expect(() => reports.cancelReportRequests(parameters)).rejects.toThrow(
