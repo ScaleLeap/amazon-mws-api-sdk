@@ -114,7 +114,7 @@ describe('reports', () => {
     expect(response).toBeDefined()
   })
 
-  itci('should be able to request a report', async () => {
+  itci('should be able to get a report', async () => {
     expect.assertions(2)
 
     const [response] = await reports.getReport({ ReportId: '20812705939018404' })

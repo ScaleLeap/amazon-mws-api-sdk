@@ -186,7 +186,7 @@ interface GetReportListParameters {
 
 const ReportInfo = Codec.interface({
   ReportId: ensureString,
-  ReportType: optional(ReportType),
+  ReportType,
   ReportRequestId: optional(ensureString),
   AvailableDate: optional(mwsDate),
   Acknowledged: optional(boolean),
@@ -194,8 +194,8 @@ const ReportInfo = Codec.interface({
 })
 
 const GetReportListResult = Codec.interface({
+  HasNext: boolean,
   NextToken: optional(nextTokenCodec('GetReportList')),
-  HasNext: optional(boolean),
   ReportInfo: optional(oneOf([array(ReportInfo), ReportInfo, exactly('')])),
 })
 
@@ -256,9 +256,9 @@ interface ManageReportScheduleParameters {
 }
 
 const ReportSchedule = Codec.interface({
-  ReportType: optional(ReportType),
-  Schedule: optional(ScheduleCodec),
-  ScheduleDate: optional(mwsDate),
+  ReportType,
+  Schedule: ScheduleCodec,
+  ScheduleDate: mwsDate,
 })
 
 const ManageReportSchedule = Codec.interface({
@@ -280,7 +280,7 @@ interface GetReportScheduleListParameters {
 
 const GetReportScheduleList = Codec.interface({
   NextToken: optional(nextTokenCodec('GetReportScheduleList')),
-  HasNext: optional(boolean),
+  HasNext: boolean,
   ReportSchedule: optional(oneOf([array(ReportSchedule), ReportSchedule, exactly('')])),
 })
 

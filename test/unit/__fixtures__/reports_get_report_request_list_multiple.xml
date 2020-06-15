@@ -1,6 +1,7 @@
 <GetReportRequestListResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
   <GetReportRequestListResult>
     <HasNext>false</HasNext>
+      <!--1 or more repetitions:-->
     <ReportRequestInfo>
       <ReportType>_GET_MERCHANT_LISTINGS_DATA_</ReportType>
       <ReportProcessingStatus>_DONE_</ReportProcessingStatus>
