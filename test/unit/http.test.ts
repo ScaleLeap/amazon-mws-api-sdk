@@ -174,5 +174,31 @@ describe('httpClient', () => {
 
       expect(cleanParameters(parameters)).toStrictEqual(results)
     })
+
+    it('should properly clean parameters with object arrays for attributes', () => {
+      expect.hasAssertions()
+
+      const parameters = {
+        MarketplaceId: '',
+        Destination: {
+          DeliveryChannel: 'SQS',
+          'AttributeList.member': [
+            {
+              Key: 'sqsQueueUrl',
+              Value: 'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
+            },
+          ],
+        },
+      }
+
+      const results = {
+        MarketplaceId: '',
+        'Destination.AttributeList.member.1.Key': 'sqsQueueUrl',
+        'Destination.AttributeList.member.1.Value':
+          'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
+      }
+
+      expect(cleanParameters(parameters)).toStrictEqual(results)
+    })
   })
 })

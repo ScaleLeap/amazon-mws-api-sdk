@@ -1,5 +1,6 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
+import { AttributeKeyValueKeys, DeliveryChannel } from '../../src/sections/subscriptions'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -41,11 +42,13 @@ describe('sellers', () => {
     const parameters = {
       MarketplaceId: '',
       Destination: {
-        DeliveryChannel: 'SQS',
-        AttributeList: {
-          Key: 'sqsQueueUrl',
-          Value: '',
-        },
+        DeliveryChannel: 'SQS' as DeliveryChannel,
+        AttributeList: [
+          {
+            Key: 'sqsQueueUrl' as AttributeKeyValueKeys,
+            Value: 'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
+          },
+        ],
       },
     }
 
