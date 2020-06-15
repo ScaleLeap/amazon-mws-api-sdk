@@ -62,11 +62,12 @@ type Parameters = Record<string, ParameterTypes>
 type CleanParameters = Record<string, string>
 
 export enum Resource {
-  Sellers = 'Sellers',
+  FulfilmentInventory = 'FulfillmentInventory',
   Orders = 'Orders',
   Products = 'Products',
-  FulfilmentInventory = 'FulfillmentInventory',
   Reports = 'Reports',
+  Sellers = 'Sellers',
+  Subscriptions = 'Subscriptions',
 }
 
 interface ResourceActions {
@@ -116,6 +117,17 @@ interface ResourceActions {
     | 'GetReportScheduleListByNextToken'
     | 'GetReportScheduleCount'
     | 'UpdateReportAcknowledgements'
+  [Resource.Subscriptions]:
+    | 'RegisterDestination'
+    | 'DeregisterDestination'
+    | 'ListRegisteredDestinations'
+    | 'SendTestNotificationToDestination'
+    | 'CreateSubscription'
+    | 'GetSubscription'
+    | 'DeleteSubscription'
+    | 'ListSubscriptions'
+    | 'UpdateSubscription'
+    | 'GetServiceStatus'
 }
 
 interface Request {
