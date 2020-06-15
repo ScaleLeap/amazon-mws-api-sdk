@@ -20,7 +20,6 @@ interface Destination {
 interface RegisterDestinationParameters {
   MarketplaceId: string
   Destination: Destination
-  [key: string]: string | Destination
 }
 
 const RegisterDestinationResponse = Codec.interface({
@@ -37,7 +36,13 @@ export class Subscriptions {
       resource: Resource.Subscriptions,
       version: SUBSCRIPTIONS_API_VERSION,
       action: 'RegisterDestination',
-      parameters,
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        Destination: {
+          DeliveryChannel: parameters.Destination.DeliveryChannel,
+          'AttributeList.member': parameters.Destination.AttributeList,
+        },
+      },
     })
 
     return RegisterDestinationResponse.decode(response).caseOf({
