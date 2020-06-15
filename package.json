@@ -51,7 +51,7 @@
     "rimraf": "3.0.2",
     "ts-jest": "25.4.0",
     "ts-node": "8.10.2",
-    "ts-node-dev": "1.0.0-pre.44",
+    "ts-node-dev": "1.0.0-pre.48",
     "tsconfigs": "4.0.2",
     "typescript": "3.9.5"
   },
