@@ -54,7 +54,7 @@ describe('reports', () => {
     expect(response.Count).toBe(2)
   })
 
-  itci('should succesfully return info on cancelled report requests', async () => {
+  itci('should throw error on invalid report request ids', async () => {
     const parameters = {
       ReportRequestIdList: ['51783018499', '51784018499'],
     }
