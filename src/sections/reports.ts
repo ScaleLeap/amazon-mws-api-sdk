@@ -164,7 +164,7 @@ interface CancelReportRequestsParameters {
 
 const CancelReportRequests = Codec.interface({
   Count: number,
-  ReportRequestInfo: optional(oneOf([array(ReportRequestInfo), ReportRequestInfo, exactly('')])),
+  ReportRequestInfo: oneOf([array(ReportRequestInfo), ReportRequestInfo, exactly('')]),
 })
 
 const CancelReportRequestsResponse = Codec.interface({
