@@ -1,10 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`sellers deregisterDestination returns the standard response if deregistration is succesful 1`] = `
+Array [
+  "",
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`sellers getServiceStatus returns a parsed model when the status response is valid 1`] = `
 Array [
   Object {
     "Status": "GREEN",
     "Timestamp": "2020-05-06T08:22:23.582Z",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`sellers listRegisteredDestinations returns a list of destinations if succesful 1`] = `
+Array [
+  Object {
+    "DestinationList": Array [
+      Object {
+        "AttributeList": Array [
+          Object {
+            "Key": "sqsQueueUrl",
+            "Value": "https://sqs.us-east-1.amazonaws.com/51471EXAMPLE/mws_notifications",
+          },
+        ],
+        "DeliveryChannel": "SQS",
+      },
+    ],
   },
   Object {
     "quotaMax": 1000,

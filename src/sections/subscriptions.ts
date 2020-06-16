@@ -1,7 +1,8 @@
-import { Codec, exactly } from 'purify-ts'
+import { Codec, enumeration, exactly, GetInterface, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
+import { ensureArray } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 
 const SUBSCRIPTIONS_API_VERSION = '2013-07-01'
@@ -39,8 +40,63 @@ const DeregisterDestinationResponse = Codec.interface({
   }),
 })
 
+interface ListRegisteredDestinationsParameters {
+  MarketplaceId: string
+  [key: string]: string
+}
+enum AttribueKeyValueKeysEnum {
+  sqsQueueUrl = 'sqsQueueUrl',
+}
+const AttribueKeyValueKeys = enumeration(AttribueKeyValueKeysEnum)
+
+const AttribueKeyValue = Codec.interface({
+  Value: string,
+  Key: AttribueKeyValueKeys,
+})
+
+enum DeliveryChannelEnum {
+  SQS = 'SQS',
+}
+
+const DeliveryChannel = enumeration(DeliveryChannelEnum)
+
+const Destination = Codec.interface({
+  DeliveryChannel,
+  AttributeList: ensureArray('member', AttribueKeyValue),
+})
+
+const ListRegisteredDestinations = Codec.interface({
+  DestinationList: ensureArray('member', Destination),
+})
+
+type ListRegisteredDestinations = GetInterface<typeof ListRegisteredDestinations>
+
+const ListRegisteredDestinationsResponse = Codec.interface({
+  ListRegisteredDestinationsResponse: Codec.interface({
+    ListRegisteredDestinationsResult: ListRegisteredDestinations,
+  }),
+})
+
 export class Subscriptions {
   constructor(private httpClient: HttpClient) {}
+
+  async listRegisteredDestinations(
+    parameters: ListRegisteredDestinationsParameters,
+  ): Promise<[ListRegisteredDestinations, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Subscriptions,
+      version: SUBSCRIPTIONS_API_VERSION,
+      action: 'ListRegisteredDestinations',
+      parameters,
+    })
+
+    return ListRegisteredDestinationsResponse.decode(response).caseOf({
+      Right: (x) => [x.ListRegisteredDestinationsResponse.ListRegisteredDestinationsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async deregisterDestination(
     parameters: DeregisterDestinationParameters,
