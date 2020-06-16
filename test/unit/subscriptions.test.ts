@@ -38,21 +38,48 @@ const mockMwsFail = new MWS(
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('sellers', () => {
+  const mockDestination = {
+    DeliveryChannel: 'SQS' as DeliveryChannel,
+    AttributeList: [
+      {
+        Key: 'sqsQueueUrl' as AttributeKeyValueKeys,
+        Value: 'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
+      },
+    ],
+  }
+
+  describe('deregisterDestination', () => {
+    const parameters = {
+      MarketplaceId: '',
+      Destination: mockDestination,
+    }
+
+    it('returns the standard response if deregistration is succesful', async () => {
+      expect.assertions(1)
+
+      const mockDeregisterDestination = createMockHttpClient('subscriptions_deregister_destination')
+
+      expect(
+        await mockDeregisterDestination.subscriptions.deregisterDestination(parameters),
+      ).toMatchSnapshot()
+
+      it('throws a parsing error when the response is not valid', async () => {
+        expect.assertions(1)
+
+        await expect(() =>
+          mockMwsFail.subscriptions.deregisterDestination(parameters),
+        ).rejects.toStrictEqual(new ParsingError(parsingError))
+      })
+    })
+  })
+
   describe('registerDestination', () => {
     const parameters = {
       MarketplaceId: '',
-      Destination: {
-        DeliveryChannel: 'SQS' as DeliveryChannel,
-        AttributeList: [
-          {
-            Key: 'sqsQueueUrl' as AttributeKeyValueKeys,
-            Value: 'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
-          },
-        ],
-      },
+      Destination: mockDestination,
     }
 
-    it('returns the standard response if succesful', async () => {
+    it('returns the standard response if registration is succesful', async () => {
       expect.assertions(1)
 
       const mockRegisterDestination = createMockHttpClient('subscriptions_register_destination')
