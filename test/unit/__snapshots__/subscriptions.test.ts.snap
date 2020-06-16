@@ -16,7 +16,7 @@ Array [
 ]
 `;
 
-exports[`sellers registerDestination returns the standard response if succesful 1`] = `
+exports[`sellers registerDestination returns the standard response if registration is succesful 1`] = `
 Array [
   "",
   Object {

@@ -28,8 +28,43 @@ const RegisterDestinationResponse = Codec.interface({
   }),
 })
 
+interface DeregisterDestinationParameters {
+  MarketplaceId: string
+  Destination: Destination
+}
+
+const DeregisterDestinationResponse = Codec.interface({
+  DeregisterDestinationResponse: Codec.interface({
+    DeregisterDestinationResult: exactly(''),
+  }),
+})
+
 export class Subscriptions {
   constructor(private httpClient: HttpClient) {}
+
+  async deregisterDestination(
+    parameters: DeregisterDestinationParameters,
+  ): Promise<['', RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Subscriptions,
+      version: SUBSCRIPTIONS_API_VERSION,
+      action: 'DeregisterDestination',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        Destination: {
+          DeliveryChannel: parameters.Destination.DeliveryChannel,
+          'AttributeList.member': parameters.Destination.AttributeList,
+        },
+      },
+    })
+
+    return DeregisterDestinationResponse.decode(response).caseOf({
+      Right: (x) => [x.DeregisterDestinationResponse.DeregisterDestinationResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async registerDestination(parameters: RegisterDestinationParameters): Promise<['', RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
