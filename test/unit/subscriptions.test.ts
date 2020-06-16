@@ -48,6 +48,32 @@ describe('sellers', () => {
     ],
   }
 
+  describe('listRegisteredDestinations', () => {
+    const parameters = {
+      MarketplaceId: '',
+    }
+
+    it('returns a list of destinations if succesful', async () => {
+      expect.assertions(1)
+
+      const mockListRegisteredDestinations = createMockHttpClient(
+        'subscriptions_deregister_destination',
+      )
+
+      expect(
+        await mockListRegisteredDestinations.subscriptions.listRegisteredDestinations(parameters),
+      ).toMatchSnapshot()
+
+      it("throws a parsing error when the response isn't valid", async () => {
+        expect.assertions(1)
+
+        await expect(() =>
+          mockMwsFail.subscriptions.listRegisteredDestinations(parameters),
+        ).rejects.toStrictEqual(new ParsingError(parsingError))
+      })
+    })
+  })
+
   describe('deregisterDestination', () => {
     const parameters = {
       MarketplaceId: '',
