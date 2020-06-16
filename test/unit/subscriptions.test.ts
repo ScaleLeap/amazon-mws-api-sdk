@@ -57,20 +57,20 @@ describe('sellers', () => {
       expect.assertions(1)
 
       const mockListRegisteredDestinations = createMockHttpClient(
-        'subscriptions_deregister_destination',
+        'subscriptions_list_registered_destinations',
       )
 
       expect(
         await mockListRegisteredDestinations.subscriptions.listRegisteredDestinations(parameters),
       ).toMatchSnapshot()
+    })
 
-      it("throws a parsing error when the response isn't valid", async () => {
-        expect.assertions(1)
+    it("throws a parsing error when the response isn't valid", async () => {
+      expect.assertions(1)
 
-        await expect(() =>
-          mockMwsFail.subscriptions.listRegisteredDestinations(parameters),
-        ).rejects.toStrictEqual(new ParsingError(parsingError))
-      })
+      await expect(() =>
+        mockMwsFail.subscriptions.listRegisteredDestinations(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 
@@ -88,14 +88,14 @@ describe('sellers', () => {
       expect(
         await mockDeregisterDestination.subscriptions.deregisterDestination(parameters),
       ).toMatchSnapshot()
+    })
 
-      it('throws a parsing error when the response is not valid', async () => {
-        expect.assertions(1)
+    it('throws a parsing error when the response is not valid', async () => {
+      expect.assertions(1)
 
-        await expect(() =>
-          mockMwsFail.subscriptions.deregisterDestination(parameters),
-        ).rejects.toStrictEqual(new ParsingError(parsingError))
-      })
+      await expect(() =>
+        mockMwsFail.subscriptions.deregisterDestination(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 
