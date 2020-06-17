@@ -37,22 +37,46 @@ const mockMwsFail = new MWS(
 
 const parsingError = 'Expected an object, but received a string with value ""'
 
+const mockDestination = {
+  DeliveryChannel: 'SQS' as DeliveryChannel,
+  AttributeList: [
+    {
+      Key: 'sqsQueueUrl' as AttributeKeyValueKeys,
+      Value: 'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
+    },
+  ],
+}
+
+const mockMarketplaceIdDestinationParameters = {
+  MarketplaceId: '',
+  Destination: mockDestination,
+}
+
 describe('sellers', () => {
-  const mockDestination = {
-    DeliveryChannel: 'SQS' as DeliveryChannel,
-    AttributeList: [
-      {
-        Key: 'sqsQueueUrl' as AttributeKeyValueKeys,
-        Value: 'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
-      },
-    ],
-  }
+  describe('createSubscription', () => {
+    const parameters = mockMarketplaceIdDestinationParameters
+
+    it('returns the standard response if testing is succesful', async () => {
+      expect.assertions(1)
+
+      const mockCreateSubscription = createMockHttpClient('subscriptions_create_subscription')
+
+      expect(
+        await mockCreateSubscription.subscriptions.createSubscription(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.subscriptions.createSubscription(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
 
   describe('sendTestNotificationToDestination', () => {
-    const parameters = {
-      MarketplaceId: '',
-      Destination: mockDestination,
-    }
+    const parameters = mockMarketplaceIdDestinationParameters
 
     it('returns the standard response if testing is succesful', async () => {
       expect.assertions(1)
@@ -104,10 +128,7 @@ describe('sellers', () => {
   })
 
   describe('deregisterDestination', () => {
-    const parameters = {
-      MarketplaceId: '',
-      Destination: mockDestination,
-    }
+    const parameters = mockMarketplaceIdDestinationParameters
 
     it('returns the standard response if deregistration is succesful', async () => {
       expect.assertions(1)
@@ -129,10 +150,7 @@ describe('sellers', () => {
   })
 
   describe('registerDestination', () => {
-    const parameters = {
-      MarketplaceId: '',
-      Destination: mockDestination,
-    }
+    const parameters = mockMarketplaceIdDestinationParameters
 
     it('returns the standard response if registration is succesful', async () => {
       expect.assertions(1)
