@@ -87,7 +87,7 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.getSubscription(mockMarketplaceIdSubscriptionParameters),
+        mockMwsFail.subscriptions.getSubscription(parameters),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
