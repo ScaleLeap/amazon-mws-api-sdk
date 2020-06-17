@@ -81,7 +81,9 @@ describe('sellers', () => {
       const mockDeleteSubscription = createMockHttpClient('subscriptions_delete_subscription')
 
       expect(
-        await mockDeleteSubscription.deleteSubscription(mockSubscriptionActionParameters),
+        await mockDeleteSubscription.subscriptions.deleteSubscription(
+          mockSubscriptionActionParameters,
+        ),
       ).toMatchSnapshot()
     })
 

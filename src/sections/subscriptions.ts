@@ -42,6 +42,11 @@ interface Destination {
   DeliveryChannel: DeliveryChannel
   AttributeList: AttributeKeyValue[]
 }
+interface SubscriptionActionParameters {
+  MarketplaceId: string
+  NotificationType: NotificationType
+  Destination: Destination
+}
 
 type RegisterDestinationParameters = MarketplaceIdAndDestinationOnlyParameters
 
@@ -121,11 +126,7 @@ const CreateSubscriptionResponse = Codec.interface({
   }),
 })
 
-interface GetSubscriptionParameters {
-  MarketplaceId: string
-  NotificationType: NotificationType
-  Destination: Destination
-}
+type GetSubscriptionParameters = SubscriptionActionParameters
 
 const Subscription = Codec.interface({
   NotificationType,
@@ -144,8 +145,39 @@ const GetSubscriptionResponse = Codec.interface({
     GetSubscriptionResult: GetSubscription,
   }),
 })
+
+type DeleteSubscriptionParameters = SubscriptionActionParameters
+
+const DeleteSubscriptionResponse = Codec.interface({
+  DeleteSubscriptionResponse: Codec.interface({
+    DeleteSubscriptionResult: exactly(''),
+  }),
+})
 export class Subscriptions {
   constructor(private httpClient: HttpClient) {}
+
+  async deleteSubscription(parameters: DeleteSubscriptionParameters): Promise<['', RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Subscriptions,
+      version: SUBSCRIPTIONS_API_VERSION,
+      action: 'DeleteSubscription',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        NotificationType: parameters.NotificationType,
+        Destination: {
+          DeliveryChannel: parameters.Destination.DeliveryChannel,
+          'AttributeList.member': parameters.Destination.AttributeList,
+        },
+      },
+    })
+
+    return DeleteSubscriptionResponse.decode(response).caseOf({
+      Right: (x) => [x.DeleteSubscriptionResponse.DeleteSubscriptionResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getSubscription(
     parameters: GetSubscriptionParameters,
