@@ -153,8 +153,45 @@ const DeleteSubscriptionResponse = Codec.interface({
     DeleteSubscriptionResult: exactly(''),
   }),
 })
+
+interface UpdateSubscriptionParameters {
+  MarketplaceId: string
+  Subscription: Subscription
+}
+
+const UpdateSubscriptionResponse = Codec.interface({
+  UpdateSubscriptionResponse: Codec.interface({
+    UpdateSubscriptionResult: exactly(''),
+  }),
+})
 export class Subscriptions {
   constructor(private httpClient: HttpClient) {}
+
+  async updateSubscription(parameters: UpdateSubscriptionParameters): Promise<['', RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Subscriptions,
+      version: SUBSCRIPTIONS_API_VERSION,
+      action: 'UpdateSubscription',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        Subscription: {
+          NotificationType: parameters.Subscription.NotificationType,
+          Destination: {
+            DeliveryChannel: parameters.Subscription.Destination.DeliveryChannel,
+            'AttributeList.member': parameters.Subscription.Destination.AttributeList,
+          },
+          IsEnabled: parameters.Subscription.IsEnabled,
+        },
+      }
+    })
+
+    return UpdateSubscriptionResponse.decode(response).caseOf({
+      Right: (x) => [x.UpdateSubscriptionResponse.UpdateSubscriptionResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async deleteSubscription(parameters: DeleteSubscriptionParameters): Promise<['', RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
