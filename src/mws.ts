@@ -4,7 +4,6 @@ import { Orders } from './sections/orders'
 import { Products } from './sections/products/products'
 import { Reports } from './sections/reports'
 import { Sellers } from './sections/sellers'
-import { Subscriptions } from './sections/subscriptions'
 
 export class MWS {
   private _sellers!: Sellers
@@ -16,8 +15,6 @@ export class MWS {
   private _products!: Products
 
   private _reports!: Reports
-
-  private _subscriptions!: Subscriptions
 
   constructor(private httpClient: HttpClient) {}
 
@@ -59,13 +56,5 @@ export class MWS {
     }
 
     return this._reports
-  }
-
-  get subscriptions() {
-    if (!this._subscriptions) {
-      this._subscriptions = new Subscriptions(this.httpClient)
-    }
-
-    return this._subscriptions
   }
 }
