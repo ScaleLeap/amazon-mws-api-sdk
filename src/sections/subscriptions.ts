@@ -95,8 +95,51 @@ const SendTestNotificationToDestinationResponse = Codec.interface({
   }),
 })
 
+interface Subscription {
+  NotificationType: NotificationType
+  Destination: Destination
+  IsEnabled: boolean
+}
+
+interface CreateSubscriptionParameters {
+  MarketplaceId: string
+  Subscription: Subscription
+}
+
+const CreateSubscriptionResponse = Codec.interface({
+  CreateSubscriptionResponse: Codec.interface({
+    CreateSubscriptionResult: exactly(''),
+  }),
+})
+
 export class Subscriptions {
   constructor(private httpClient: HttpClient) {}
+
+  async createSubscription(parameters: CreateSubscriptionParameters): Promise<['', RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Subscriptions,
+      version: SUBSCRIPTIONS_API_VERSION,
+      action: 'SendTestNotificationToDestination',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        Subscription: {
+          NotificationType: parameters.Subscription.NotificationType,
+          Destination: {
+            DeliveryChannel: parameters.Subscription.Destination.DeliveryChannel,
+            'AttributeList.member': parameters.Subscription.Destination.AttributeList,
+          },
+          IsEnabled: parameters.Subscription.IsEnabled,
+        },
+      },
+    })
+
+    return CreateSubscriptionResponse.decode(response).caseOf({
+      Right: (x) => [x.CreateSubscriptionResponse.CreateSubscriptionResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async sendTestNotificationToDestination(
     parameters: SendTestNotificationToDestinationParameters,

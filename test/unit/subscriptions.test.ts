@@ -1,6 +1,10 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
-import { AttributeKeyValueKeys, DeliveryChannel, NotificationType } from '../../src/sections/subscriptions'
+import {
+  AttributeKeyValueKeys,
+  DeliveryChannel,
+  NotificationType,
+} from '../../src/sections/subscriptions'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -60,7 +64,7 @@ const mockSubscription = {
 
 const mockMarketplaceIdSubscriptionParameters = {
   MarketplaceId: '',
-  Subscriptions: mockSubscription,
+  Subscription: mockSubscription,
 }
 
 describe('sellers', () => {
