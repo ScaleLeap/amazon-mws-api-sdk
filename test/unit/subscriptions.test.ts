@@ -74,6 +74,31 @@ const mockSubscriptionActionParameters = {
 }
 
 describe('sellers', () => {
+  describe('updateSubscription', () => {
+    const parameters = {
+      MarketplaceId: '',
+      Subscription: mockSubscription,
+    }
+
+    it('returns the standard response if update is succesful', async () => {
+      expect.assertions(1)
+
+      const mockUpdateSubscription = createMockHttpClient('subscriptions_update_subscription')
+
+      expect(
+        await mockUpdateSubscription.subscriptions.updateSubscription(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response isn t valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.subscriptions.updateSubscription(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('deleteSubscription', () => {
     it('returns the standard response if delete is succesful', async () => {
       expect.assertions(1)
