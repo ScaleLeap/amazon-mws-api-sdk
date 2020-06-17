@@ -182,7 +182,7 @@ export class Subscriptions {
           },
           IsEnabled: parameters.Subscription.IsEnabled,
         },
-      }
+      },
     })
 
     return UpdateSubscriptionResponse.decode(response).caseOf({
