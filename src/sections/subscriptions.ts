@@ -8,7 +8,7 @@ import { getServiceStatusByResource } from './shared'
 const SUBSCRIPTIONS_API_VERSION = '2013-07-01'
 
 /**
- * Amazon docs list these as the only possible choices for each parameters
+ * Amazon docs list these as the only possible choices for each parameter
  */
 export type DeliveryChannel = 'SQS'
 export type AttributeKeyValueKeys = 'sqsQueueUrl'
