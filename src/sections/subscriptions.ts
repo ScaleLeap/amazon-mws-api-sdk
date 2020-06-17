@@ -1,4 +1,4 @@
-import { Codec, enumeration, exactly, GetInterface, string } from 'purify-ts'
+import { boolean, Codec, enumeration, exactly, GetInterface, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -15,10 +15,19 @@ export type AttributeKeyValueKeys = 'sqsQueueUrl'
 export type NotificationType =
   | 'AnyOfferChanged'
   | 'FeedProcessingFinished'
-  | 'FeedProcessingFinished'
   | 'FeePromotion'
   | 'FulfillmentOrderStatus'
   | 'ReportProcessingFinished'
+
+enum NotificationTypeEnum {
+  AnyOfferChanged = 'AnyOfferChanged',
+  FeedProcessingFinished = 'FeedProcessingFinished',
+  FeePromotion = 'FeePromotion',
+  FulfillmentOrderStatus = 'FulfillmentOrderStatus',
+  ReportProcessingFinished = 'ReportProcessingFinished',
+}
+
+const NotificationType = enumeration(NotificationTypeEnum)
 
 interface MarketplaceIdAndDestinationOnlyParameters {
   MarketplaceId: string
@@ -112,14 +121,62 @@ const CreateSubscriptionResponse = Codec.interface({
   }),
 })
 
+interface GetSubscriptionParameters {
+  MarketplaceId: string
+  NotificationType: NotificationType
+  Destination: Destination
+}
+
+const Subscription = Codec.interface({
+  NotificationType,
+  Destination,
+  IsEnabled: boolean,
+})
+
+const GetSubscription = Codec.interface({
+  Subscription,
+})
+
+type GetSubscription = GetInterface<typeof GetSubscription>
+
+const GetSubscriptionResponse = Codec.interface({
+  GetSubscriptionResponse: Codec.interface({
+    GetSubscriptionResult: GetSubscription,
+  }),
+})
 export class Subscriptions {
   constructor(private httpClient: HttpClient) {}
+
+  async getSubscription(
+    parameters: GetSubscriptionParameters,
+  ): Promise<[GetSubscription, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Subscriptions,
+      version: SUBSCRIPTIONS_API_VERSION,
+      action: 'GetSubscription',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        NotificationType: parameters.NotificationType,
+        Destination: {
+          DeliveryChannel: parameters.Destination.DeliveryChannel,
+          'AttributeList.member': parameters.Destination.AttributeList,
+        },
+      },
+    })
+
+    return GetSubscriptionResponse.decode(response).caseOf({
+      Right: (x) => [x.GetSubscriptionResponse.GetSubscriptionResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async createSubscription(parameters: CreateSubscriptionParameters): Promise<['', RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Subscriptions,
       version: SUBSCRIPTIONS_API_VERSION,
-      action: 'SendTestNotificationToDestination',
+      action: 'CreateSubscription',
       parameters: {
         MarketplaceId: parameters.MarketplaceId,
         Subscription: {
