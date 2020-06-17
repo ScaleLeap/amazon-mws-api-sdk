@@ -68,8 +68,32 @@ const mockMarketplaceIdSubscriptionParameters = {
 }
 
 describe('sellers', () => {
+  describe('getSubscription', () => {
+    const parameters = {
+      MarketplaceId: '',
+      NotificationType: 'AnyOfferChanged' as NotificationType,
+      Destination: mockDestination,
+    }
+
+    it('returns a subscription if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetSubscription = createMockHttpClient('subscriptions_get_subscription')
+
+      expect(await mockGetSubscription.subscriptions.getSubscription(parameters)).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.subscriptions.getSubscription(mockMarketplaceIdSubscriptionParameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('createSubscription', () => {
-    it('returns the standard response if testing is succesful', async () => {
+    it('returns the standard response if creation is succesful', async () => {
       expect.assertions(1)
 
       const mockCreateSubscription = createMockHttpClient('subscriptions_create_subscription')
