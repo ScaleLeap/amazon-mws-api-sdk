@@ -67,27 +67,49 @@ const mockMarketplaceIdSubscriptionParameters = {
   Subscription: mockSubscription,
 }
 
-describe('sellers', () => {
-  describe('getSubscription', () => {
-    const parameters = {
-      MarketplaceId: '',
-      NotificationType: 'AnyOfferChanged' as NotificationType,
-      Destination: mockDestination,
-    }
+const mockSubscriptionActionParameters = {
+  MarketplaceId: '',
+  NotificationType: 'AnyOfferChanged' as NotificationType,
+  Destination: mockDestination,
+}
 
+describe('sellers', () => {
+  describe('deleteSubscription', () => {
+    it('returns the standard response if delete is succesful', async () => {
+      expect.assertions(1)
+
+      const mockDeleteSubscription = createMockHttpClient('subscriptions_delete_subscription')
+
+      expect(
+        await mockDeleteSubscription.deleteSubscription(mockSubscriptionActionParameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response isn t valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.subscriptions.deleteSubscription(mockSubscriptionActionParameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
+  describe('getSubscription', () => {
     it('returns a subscription if succesful', async () => {
       expect.assertions(1)
 
       const mockGetSubscription = createMockHttpClient('subscriptions_get_subscription')
 
-      expect(await mockGetSubscription.subscriptions.getSubscription(parameters)).toMatchSnapshot()
+      expect(
+        await mockGetSubscription.subscriptions.getSubscription(mockSubscriptionActionParameters),
+      ).toMatchSnapshot()
     })
 
     it('throws a parsing error when the response isnt valid', async () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.getSubscription(parameters),
+        mockMwsFail.subscriptions.getSubscription(mockSubscriptionActionParameters),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
