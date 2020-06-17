@@ -7,8 +7,17 @@ import { getServiceStatusByResource } from './shared'
 
 const SUBSCRIPTIONS_API_VERSION = '2013-07-01'
 
+/**
+ * Amazon docs list these as the only possible choices for each parameters
+ */
 export type DeliveryChannel = 'SQS'
 export type AttributeKeyValueKeys = 'sqsQueueUrl'
+
+interface MarketplaceIdAndDestinationOnlyParameters {
+  MarketplaceId: string
+  Destination: Destination
+}
+
 interface AttributeKeyValue {
   Key: AttributeKeyValueKeys
   Value: string
@@ -18,10 +27,7 @@ interface Destination {
   AttributeList: AttributeKeyValue[]
 }
 
-interface RegisterDestinationParameters {
-  MarketplaceId: string
-  Destination: Destination
-}
+type RegisterDestinationParameters = MarketplaceIdAndDestinationOnlyParameters
 
 const RegisterDestinationResponse = Codec.interface({
   RegisterDestinationResponse: Codec.interface({
@@ -29,10 +35,7 @@ const RegisterDestinationResponse = Codec.interface({
   }),
 })
 
-interface DeregisterDestinationParameters {
-  MarketplaceId: string
-  Destination: Destination
-}
+type DeregisterDestinationParameters = MarketplaceIdAndDestinationOnlyParameters
 
 const DeregisterDestinationResponse = Codec.interface({
   DeregisterDestinationResponse: Codec.interface({
@@ -77,8 +80,43 @@ const ListRegisteredDestinationsResponse = Codec.interface({
   }),
 })
 
+type SendTestNotificationToDestinationParameters = MarketplaceIdAndDestinationOnlyParameters
+
+const SendTestNotificationToDestinationResponse = Codec.interface({
+  SendTestNotificationToDestinationResponse: Codec.interface({
+    SendTestNotificationToDestinationResult: exactly(''),
+  }),
+})
+
 export class Subscriptions {
   constructor(private httpClient: HttpClient) {}
+
+  async sendTestNotificationToDestination(
+    parameters: SendTestNotificationToDestinationParameters,
+  ): Promise<['', RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Subscriptions,
+      version: SUBSCRIPTIONS_API_VERSION,
+      action: 'SendTestNotificationToDestination',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        Destination: {
+          DeliveryChannel: parameters.Destination.DeliveryChannel,
+          'AttributeList.member': parameters.Destination.AttributeList,
+        },
+      },
+    })
+
+    return SendTestNotificationToDestinationResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.SendTestNotificationToDestinationResponse.SendTestNotificationToDestinationResult,
+        meta,
+      ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async listRegisteredDestinations(
     parameters: ListRegisteredDestinationsParameters,
