@@ -1,6 +1,6 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
-import { AttributeKeyValueKeys, DeliveryChannel } from '../../src/sections/subscriptions'
+import { AttributeKeyValueKeys, DeliveryChannel, NotificationType } from '../../src/sections/subscriptions'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -52,17 +52,28 @@ const mockMarketplaceIdDestinationParameters = {
   Destination: mockDestination,
 }
 
+const mockSubscription = {
+  NotificationType: 'AnyOfferChanged' as NotificationType,
+  Destination: mockDestination,
+  IsEnabled: true,
+}
+
+const mockMarketplaceIdSubscriptionParameters = {
+  MarketplaceId: '',
+  Subscriptions: mockSubscription,
+}
+
 describe('sellers', () => {
   describe('createSubscription', () => {
-    const parameters = mockMarketplaceIdDestinationParameters
-
     it('returns the standard response if testing is succesful', async () => {
       expect.assertions(1)
 
       const mockCreateSubscription = createMockHttpClient('subscriptions_create_subscription')
 
       expect(
-        await mockCreateSubscription.subscriptions.createSubscription(parameters),
+        await mockCreateSubscription.subscriptions.createSubscription(
+          mockMarketplaceIdSubscriptionParameters,
+        ),
       ).toMatchSnapshot()
     })
 
@@ -70,14 +81,12 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.createSubscription(parameters),
+        mockMwsFail.subscriptions.createSubscription(mockMarketplaceIdSubscriptionParameters),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 
   describe('sendTestNotificationToDestination', () => {
-    const parameters = mockMarketplaceIdDestinationParameters
-
     it('returns the standard response if testing is succesful', async () => {
       expect.assertions(1)
 
@@ -87,7 +96,7 @@ describe('sellers', () => {
 
       expect(
         await mockListRegisteredDestinations.subscriptions.sendTestNotificationToDestination(
-          parameters,
+          mockMarketplaceIdDestinationParameters,
         ),
       ).toMatchSnapshot()
     })
@@ -96,7 +105,9 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.sendTestNotificationToDestination(parameters),
+        mockMwsFail.subscriptions.sendTestNotificationToDestination(
+          mockMarketplaceIdDestinationParameters,
+        ),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
@@ -128,15 +139,15 @@ describe('sellers', () => {
   })
 
   describe('deregisterDestination', () => {
-    const parameters = mockMarketplaceIdDestinationParameters
-
     it('returns the standard response if deregistration is succesful', async () => {
       expect.assertions(1)
 
       const mockDeregisterDestination = createMockHttpClient('subscriptions_deregister_destination')
 
       expect(
-        await mockDeregisterDestination.subscriptions.deregisterDestination(parameters),
+        await mockDeregisterDestination.subscriptions.deregisterDestination(
+          mockMarketplaceIdDestinationParameters,
+        ),
       ).toMatchSnapshot()
     })
 
@@ -144,21 +155,21 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.deregisterDestination(parameters),
+        mockMwsFail.subscriptions.deregisterDestination(mockMarketplaceIdDestinationParameters),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 
   describe('registerDestination', () => {
-    const parameters = mockMarketplaceIdDestinationParameters
-
     it('returns the standard response if registration is succesful', async () => {
       expect.assertions(1)
 
       const mockRegisterDestination = createMockHttpClient('subscriptions_register_destination')
 
       expect(
-        await mockRegisterDestination.subscriptions.registerDestination(parameters),
+        await mockRegisterDestination.subscriptions.registerDestination(
+          mockMarketplaceIdDestinationParameters,
+        ),
       ).toMatchSnapshot()
     })
 
@@ -166,7 +177,7 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.registerDestination(parameters),
+        mockMwsFail.subscriptions.registerDestination(mockMarketplaceIdDestinationParameters),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })

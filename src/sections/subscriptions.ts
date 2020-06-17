@@ -12,6 +12,13 @@ const SUBSCRIPTIONS_API_VERSION = '2013-07-01'
  */
 export type DeliveryChannel = 'SQS'
 export type AttributeKeyValueKeys = 'sqsQueueUrl'
+export type NotificationType =
+  | 'AnyOfferChanged'
+  | 'FeedProcessingFinished'
+  | 'FeedProcessingFinished'
+  | 'FeePromotion'
+  | 'FulfillmentOrderStatus'
+  | 'ReportProcessingFinished'
 
 interface MarketplaceIdAndDestinationOnlyParameters {
   MarketplaceId: string
