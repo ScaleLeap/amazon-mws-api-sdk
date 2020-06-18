@@ -38,7 +38,7 @@ const parsingError = 'Expected an object, but received a string with value ""'
 describe('finances', () => {
   describe('listFinancialEvents', () => {
     const parameters = {
-      PostedBefore: new Date(),
+      PostedAfter: new Date(),
     }
 
     it('returns a next token and financial events list if succesful', async () => {

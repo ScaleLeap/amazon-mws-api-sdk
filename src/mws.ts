@@ -1,5 +1,5 @@
 import { HttpClient } from './http'
-import { Finances } from './sections/finances'
+import { Finances } from './sections/finances/finances'
 import { FulfillmentInventory } from './sections/fulfillment-inventory'
 import { Orders } from './sections/orders'
 import { Products } from './sections/products/products'

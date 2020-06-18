@@ -93,3 +93,187 @@ Array [
   },
 ]
 `;
+
+exports[`finances listFinancialEvents returns a next token and financial events list if succesful 1`] = `
+Array [
+  Object {
+    "FinancialEvents": Object {
+      "AdjustmentEventList": "",
+      "AffordabilityExpenseEventList": Object {
+        "AffordabilityExpenseEvent": Object {
+          "AmazonOrderId": "931-2463294-5740665",
+          "BaseExpense": Object {
+            "CurrencyAmount": -100,
+            "CurrencyCode": "INR",
+          },
+          "MarketplaceId": "A2XZLSVIQ0F4JT",
+          "PostedDate": "2018-02-08T13:17:15.000Z",
+          "TaxTypeCGST": Object {
+            "CurrencyAmount": 0,
+            "CurrencyCode": "INR",
+          },
+          "TaxTypeIGST": Object {
+            "CurrencyAmount": -18,
+            "CurrencyCode": "INR",
+          },
+          "TaxTypeSGST": Object {
+            "CurrencyAmount": 0,
+            "CurrencyCode": "INR",
+          },
+          "TotalExpense": Object {
+            "CurrencyAmount": -118,
+            "CurrencyCode": "INR",
+          },
+          "TransactionType": "Charge",
+        },
+      },
+      "AffordabilityExpenseReversalEventList": Object {
+        "AffordabilityExpenseReversalEvent": Object {
+          "AmazonOrderId": "931-2463294-5740665",
+          "BaseExpense": Object {
+            "CurrencyAmount": 100,
+            "CurrencyCode": "INR",
+          },
+          "MarketplaceId": "A2XZLSVIQ0F4JT",
+          "PostedDate": "2018-02-08T13:17:15.000Z",
+          "TaxTypeCGST": Object {
+            "CurrencyAmount": 0,
+            "CurrencyCode": "INR",
+          },
+          "TaxTypeIGST": Object {
+            "CurrencyAmount": 18,
+            "CurrencyCode": "INR",
+          },
+          "TaxTypeSGST": Object {
+            "CurrencyAmount": 0,
+            "CurrencyCode": "INR",
+          },
+          "TotalExpense": Object {
+            "CurrencyAmount": 118,
+            "CurrencyCode": "INR",
+          },
+          "TransactionType": "Refund",
+        },
+      },
+      "ChargebackEventList": "",
+      "DebtRecoveryEventList": "",
+      "GuaranteeClaimEventList": "",
+      "LoanServicingEventList": "",
+      "PayWithAmazonEventList": "",
+      "PerformanceBondRefundEventList": "",
+      "ProductAdsPaymentEventList": Array [
+        "",
+        Object {
+          "ProductAdsPaymentEvent": Object {
+            "PostedDate": "2017-01-11T13:17:15.000Z",
+            "baseValue": Object {
+              "CurrencyAmount": 115.34,
+              "CurrencyCode": "USD",
+            },
+            "invoiceId": "TR1W0B4YB-6",
+            "taxValue": Object {
+              "CurrencyAmount": 21.91,
+              "CurrencyCode": "USD",
+            },
+            "transactionType": "Charge",
+            "transactionValue": Object {
+              "CurrencyAmount": 137.25,
+              "CurrencyCode": "USD",
+            },
+          },
+        },
+      ],
+      "RefundEventList": "",
+      "RentalTransactionEventList": "",
+      "RetrochargeEventList": "",
+      "SellerDealPaymentEventList": Object {
+        "SellerDealPaymentEvent": Object {
+          "DealDescription": "test fees",
+          "DealId": "fec11097c1f4379426a7de68bf938b684f677de2",
+          "EventType": "SellerDealComplete",
+          "FeeAmount": Object {
+            "CurrencyAmount": 16.38,
+            "CurrencyCode": "USD",
+          },
+          "FeeType": "RunLightningDealFee",
+          "PostedDate": "2016-11-21T16:18:15.000Z",
+          "TaxAmount": Object {
+            "CurrencyAmount": 3.18,
+            "CurrencyCode": "USD",
+          },
+        },
+      },
+      "ServiceFeeEventList": "",
+      "ServiceProviderCreditEventList": "",
+      "ShipmentEventList": Object {
+        "ShipmentEvent": Object {
+          "AmazonOrderId": "105-0457358-1245022",
+          "MarketplaceName": "Amazon.com",
+          "PostedDate": "2017-01-23T01:31:25Z",
+          "SellerOrderId": "105-0457358-1245022",
+          "ShipmentItemList": Object {
+            "ShipmentItem": Object {
+              "ItemChargeList": Object {
+                "ChargeComponent": Array [
+                  Object {
+                    "ChargeAmount": Object {
+                      "CurrencyAmount": 25.99,
+                      "CurrencyCode": "USD",
+                    },
+                    "ChargeType": "Principal",
+                  },
+                  Object {
+                    "ChargeAmount": Object {
+                      "CurrencyAmount": 0,
+                      "CurrencyCode": "USD",
+                    },
+                    "ChargeType": "Tax",
+                  },
+                ],
+              },
+              "ItemFeeList": Object {
+                "FeeComponent": Array [
+                  Object {
+                    "FeeAmount": Object {
+                      "CurrencyAmount": 0,
+                      "CurrencyCode": "USD",
+                    },
+                    "FeeType": "ShippingChargeback",
+                  },
+                  Object {
+                    "FeeAmount": Object {
+                      "CurrencyAmount": 0,
+                      "CurrencyCode": "USD",
+                    },
+                    "FeeType": "VariableClosingFee",
+                  },
+                ],
+              },
+              "OrderItemId": 46432915698730,
+              "QuantityShipped": 1,
+              "SellerSKU": "HS223A-C00",
+            },
+          },
+        },
+      },
+      "TDSReimbursementEventList": Object {
+        "TDSReimbursementEvent": Object {
+          "PostedDate": "2019-08-01T16:18:15.000Z",
+          "ReimbursedAmount": Object {
+            "CurrencyAmount": 3.98,
+            "CurrencyCode": "INR",
+          },
+          "TdsOrderId": "TDS-1235",
+        },
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;

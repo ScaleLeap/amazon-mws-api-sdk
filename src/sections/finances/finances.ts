@@ -1,15 +1,15 @@
-import { Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
-
-import { ParsingError } from '../error'
-import { HttpClient, RequestMeta, Resource } from '../http'
+import { ParsingError } from '../../error'
+import { HttpClient, RequestMeta, Resource } from '../../http'
+import { NextToken } from '../../parsing'
+import { getServiceStatusByResource } from '../shared'
+import { RequireOnlyOne } from '../types'
 import {
-  ensureArray,
-  ensureString,
-  mwsDate,
-  NextToken,
-  nextToken as nextTokenCodec,
-} from '../parsing'
-import { getServiceStatusByResource } from './shared'
+  ListFinancialEventGroups,
+  ListFinancialEventGroupsByNextTokenResponse,
+  ListFinancialEventGroupsResponse,
+  ListFinancialEvents,
+  ListFinancialEventsResponse,
+} from './codec'
 
 const FINANCES_API_VERSION = '2015-05-01'
 
@@ -19,53 +19,43 @@ interface ListFinancialEventGroupsParameters {
   FinancialEventGroupStartedBefore?: Date
 }
 
-enum ProcessingStatusEnum {
-  Open = 'Open',
-  Closed = 'Closed',
+interface ListFinancicalEventsParameters {
+  MaxResultsPerPage?: number
+  AmazonOrderId?: string
+  FinancialEventGroupId?: string
+  PostedAfter?: Date
+  PostedBefore?: Date
 }
-
-const ProcessingStatus = enumeration(ProcessingStatusEnum)
-
-const CurrencyAmount = Codec.interface({
-  CurrencyCode: optional(string),
-  CurrencyAmount: optional(number),
-})
-
-const FinancialEventGroup = Codec.interface({
-  FinancialEventGroupId: optional(string),
-  ProcessingStatus: optional(ProcessingStatus),
-  FundTransferStatus: optional(string),
-  OriginalTotal: optional(CurrencyAmount),
-  ConvertedTotal: optional(CurrencyAmount),
-  FundTransferDate: optional(mwsDate),
-  TraceId: optional(ensureString),
-  AccountTail: optional(ensureString),
-  BeginningBalance: optional(CurrencyAmount),
-  FinancialEventGroupStart: optional(mwsDate),
-  FinancialEventGroupEnd: optional(mwsDate),
-})
-
-const ListFinancialEventGroups = Codec.interface({
-  NextToken: optional(nextTokenCodec('ListFinancialEventGroups')),
-  FinancialEventGroupList: ensureArray('FinancialEventGroup', FinancialEventGroup),
-})
-
-type ListFinancialEventGroups = GetInterface<typeof ListFinancialEventGroups>
-
-const ListFinancialEventGroupsResponse = Codec.interface({
-  ListFinancialEventGroupsResponse: Codec.interface({
-    ListFinancialEventGroupsResult: ListFinancialEventGroups,
-  }),
-})
-
-const ListFinancialEventGroupsByNextTokenResponse = Codec.interface({
-  ListFinancialEventGroupsByNextTokenResponse: Codec.interface({
-    ListFinancialEventGroupsByNextTokenResult: ListFinancialEventGroups,
-  }),
-})
 
 export class Finances {
   constructor(private httpClient: HttpClient) {}
+
+  async listFinancialEvents(
+    parameters: RequireOnlyOne<
+      ListFinancicalEventsParameters,
+      'PostedAfter' | 'AmazonOrderId' | 'FinancialEventGroupId'
+    >,
+  ): Promise<[ListFinancialEvents, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Finances,
+      version: FINANCES_API_VERSION,
+      action: 'ListFinancialEvents',
+      parameters: {
+        MaxResultsPerPage: parameters.MaxResultsPerPage,
+        AmazonOrderId: parameters.AmazonOrderId,
+        FinancialEventGroupId: parameters.FinancialEventGroupId,
+        PostedAfter: parameters.PostedAfter?.toISOString(),
+        PostedBefore: parameters.PostedBefore?.toISOString(),
+      },
+    })
+
+    return ListFinancialEventsResponse.decode(response).caseOf({
+      Right: (x) => [x.ListFinancialEventsResponse.ListFinancialEventsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async listFinancialEventGroupsByNextToken(
     nextToken: NextToken<'ListFinancialEventGroups'>,
