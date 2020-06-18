@@ -145,6 +145,8 @@ describe('httpClient', () => {
       expect(cleanParameters(parameters)).toStrictEqual(expectedResult)
     })
 
+    const sqsUrl = 'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications'
+
     it('should properly clean parameters with array of objects', () => {
       expect.hasAssertions()
 
@@ -185,8 +187,7 @@ describe('httpClient', () => {
           'AttributeList.member': [
             {
               Key: 'sqsQueueUrl',
-              // eslint-disable-next-line sonarjs/no-duplicate-string
-              Value: 'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
+              Value: sqsUrl,
             },
           ],
         },
@@ -196,8 +197,7 @@ describe('httpClient', () => {
         MarketplaceId: 'ATVPDKIKX0DER',
         'Destination.DeliveryChannel': 'SQS',
         'Destination.AttributeList.member.1.Key': 'sqsQueueUrl',
-        'Destination.AttributeList.member.1.Value':
-          'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
+        'Destination.AttributeList.member.1.Value': sqsUrl,
       }
 
       expect(cleanParameters(parameters)).toStrictEqual(results)
@@ -215,13 +215,11 @@ describe('httpClient', () => {
             'AttributeList.member': [
               {
                 Key: 'sqsQueueUrl',
-                Value:
-                  'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
+                Value: sqsUrl,
               },
               {
                 Key: 'sqsQueueUrl',
-                Value:
-                  'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications2',
+                Value: `${sqsUrl}2`,
               },
             ],
           },
@@ -234,11 +232,9 @@ describe('httpClient', () => {
         'Subscriptions.NotificationType': 'AnyOfferChanged',
         'Subscriptions.Destination.DeliveryChannel': 'SQS',
         'Subscriptions.Destination.AttributeList.member.1.Key': 'sqsQueueUrl',
-        'Subscriptions.Destination.AttributeList.member.1.Value':
-          'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications',
+        'Subscriptions.Destination.AttributeList.member.1.Value': sqsUrl,
         'Subscriptions.Destination.AttributeList.member.2.Key': 'sqsQueueUrl',
-        'Subscriptions.Destination.AttributeList.member.2.Value':
-          'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications2',
+        'Subscriptions.Destination.AttributeList.member.2.Value': `${sqsUrl}2`,
         'Subscriptions.IsEnabled': 'true',
       }
 
