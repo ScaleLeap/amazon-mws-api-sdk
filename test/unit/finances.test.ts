@@ -43,7 +43,9 @@ describe('finances', () => {
     it('returns a next token and financial event groups list if succesful', async () => {
       expect.assertions(1)
 
-      const mockListFinancialEventGroups = createMockHttpClient('finances_list_financial_event_groups')
+      const mockListFinancialEventGroups = createMockHttpClient(
+        'finances_list_financial_event_groups',
+      )
 
       expect(
         await mockListFinancialEventGroups.finances.listFinancialEventGroups(parameters),
