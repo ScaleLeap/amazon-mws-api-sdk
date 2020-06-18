@@ -189,10 +189,25 @@ const PayWithAmazonEvent = Codec.interface({
   StoreName: optional(string),
 })
 
-/**
- * @todo
- */
-const ServiceProviderCreditEvent = unknown
+enum ProviderTransactionTypeEnum {
+  ProviderCredit = 'ProviderCredit',
+  ProviderCreditReversal = 'ProviderCreditReversal',
+}
+
+const ProviderTransactionType = enumeration(ProviderTransactionTypeEnum)
+
+const SolutionProviderCreditEvent = Codec.interface({
+  ProviderTransactionType: optional(ProviderTransactionType),
+  SellerOrderId: optional(ensureString),
+  MarketplaceId: optional(string),
+  MarketplaceCountryCode: optional(string),
+  SellerId: optional(string),
+  SellerStoreName: optional(string),
+  ProviderId: optional(string),
+  ProviderStoreName: optional(string),
+})
+
+const ServiceProviderCreditEvent = SolutionProviderCreditEvent
 /**
  * @todo
  */
