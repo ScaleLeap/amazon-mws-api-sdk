@@ -168,10 +168,27 @@ const ShipmentEvent = Codec.interface({
 const RefundEvent = ShipmentEvent
 const GuaranteeClaimEvent = ShipmentEvent
 const ChargebackEvent = ShipmentEvent
-/**
- * @todo
- */
-const PayWithAmazonEvent = unknown
+
+enum FulfillmentChannelEnum {
+  AFN = 'AFN',
+  MFN = 'MFN',
+}
+
+const FulfillmentChannel = enumeration(FulfillmentChannelEnum)
+
+const PayWithAmazonEvent = Codec.interface({
+  SellerOrderId: optional(string),
+  TransactionPostedDate: optional(mwsDate),
+  BusinessObjectType: optional(string),
+  SalesChannel: optional(string),
+  Charge: optional(ChargeComponent),
+  FeeList: optional(ensureArray('FeeComponent', FeeComponent)),
+  PaymentAmountType: optional(string),
+  AmountDescription: optional(string),
+  FulfillmentChannel: optional(FulfillmentChannel),
+  StoreName: optional(string),
+})
+
 /**
  * @todo
  */
