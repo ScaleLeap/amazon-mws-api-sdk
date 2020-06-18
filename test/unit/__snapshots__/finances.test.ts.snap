@@ -1,10 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`sellers getServiceStatus returns a parsed model when the status response is valid 1`] = `
+exports[`finances getServiceStatus returns a parsed model when the status response is valid 1`] = `
 Array [
   Object {
     "Status": "GREEN",
     "Timestamp": "2020-05-06T08:22:23.582Z",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`finances listFinancialEventGroups returns a next token and financial event groups list if succesful 1`] = `
+Array [
+  Object {
+    "FinancialEventGroupList": Array [
+      Object {
+        "AccountTail": "1212",
+        "BeginningBalance": Object {
+          "CurrencyCode": "USD",
+        },
+        "ConvertedTotal": Object {
+          "CurrencyCode": "USD",
+        },
+        "FinancialEventGroupEnd": 2014-09-09T07:30:00.000Z,
+        "FinancialEventGroupId": "22YgYW55IGNhcm5hbCBwbGVhEXAMPLE",
+        "FinancialEventGroupStart": 2014-09-01T07:30:00.000Z,
+        "FundTransferDate": 2014-09-09T07:30:00.000Z,
+        "FundTransferStatus": "Successful",
+        "OriginalTotal": Object {
+          "CurrencyCode": "USD",
+        },
+        "ProcessingStatus": "Closed",
+        "TraceId": "128311029381HSADJEXAMPLE",
+      },
+    ],
+    "NextToken": NextToken {
+      "action": "ListFinancialEventGroups",
+      "token": "2YgYW55IGNhcm5hbCBwbGVhcEXAMPLE",
+    },
   },
   Object {
     "quotaMax": 1000,

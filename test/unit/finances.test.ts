@@ -53,9 +53,9 @@ describe('finances', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.finances.listFinancialEventGroups()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
-      )
+      await expect(() =>
+        mockMwsFail.finances.listFinancialEventGroups(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
 
