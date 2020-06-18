@@ -36,6 +36,30 @@ const mockMwsFail = new MWS(
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('finances', () => {
+  describe('listFinancialEvents', () => {
+    const parameters = {
+      PostedBefore: new Date(),
+    }
+
+    it('returns a next token and financial events list if succesful', async () => {
+      expect.assertions(1)
+
+      const mockListFinancialEvents = createMockHttpClient('finances_list_financial_events')
+
+      expect(
+        await mockListFinancialEvents.finances.listFinancialEvents(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.finances.listFinancialEvents(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('listFinancialEventGroupsByNextToken', () => {
     const mockNextToken = new NextToken('ListFinancialEventGroups', '123')
 
