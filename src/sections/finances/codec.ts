@@ -211,7 +211,25 @@ const ServiceProviderCreditEvent = SolutionProviderCreditEvent
 /**
  * @todo
  */
-const RetrochargeEvent = unknown
+
+enum RetrochargeEventTypeEnum {
+  Retrocharge = 'Retrocharge',
+  RetrochargeReversal = 'RetrochargeReversal',
+}
+
+const RetrochargeEventType = enumeration(RetrochargeEventTypeEnum)
+
+const RetrochargeEvent = Codec.interface({
+  RetrochargeEventType: optional(RetrochargeEventType),
+  AmazonOrderId: optional(ensureString),
+  PostedDate: optional(mwsDate),
+  BaseTax: optional(CurrencyAmount),
+  ShippingTax: optional(CurrencyAmount),
+  MarketplaceName: optional(string),
+  RetrochargeTaxWithheldComponentList: optional(
+    ensureArray('TaxWithheldComponent', TaxWithheldComponent),
+  ),
+})
 /**
  * @todo
  */
@@ -276,6 +294,12 @@ const NetworkComminglingTransactionEvent = unknown
  * @todo
  */
 const TDSReimbursementEvent = unknown
+// Defined this too early, want to go in order. Will fix when I get here
+// const TDSReimbursementEvent = Codec.interface({
+//   PostedDate: optional(mwsDate),
+//   TdsOrderId: optional(ensureString),
+//   ReimbursedAmount: optional(CurrencyAmount),
+// })
 const FinancialEvents = Codec.interface({
   ShipmentEventList: optional(ensureArray('ShipmentEvent', ShipmentEvent)),
   RefundEventList: optional(ensureArray('RefundEvent', RefundEvent)),
