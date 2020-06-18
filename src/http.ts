@@ -68,6 +68,7 @@ export enum Resource {
   Products = 'Products',
   FulfilmentInventory = 'FulfillmentInventory',
   Reports = 'Reports',
+  Finances = 'Finances',
 }
 
 interface ResourceActions {
@@ -117,6 +118,12 @@ interface ResourceActions {
     | 'GetReportScheduleListByNextToken'
     | 'GetReportScheduleCount'
     | 'UpdateReportAcknowledgements'
+  [Resource.Finances]:
+    | 'ListFinancialEventGroups'
+    | 'ListFinancialEventGroupsByNextToken'
+    | 'ListFinancialEvents'
+    | 'ListFinancialEventsByNextToken'
+    | 'GetServiceStatus'
 }
 
 interface Request {
