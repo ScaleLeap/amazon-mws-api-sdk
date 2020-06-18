@@ -2,7 +2,13 @@ import { Codec, enumeration, GetInterface, number, optional, string } from 'puri
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../parsing'
+import {
+  ensureArray,
+  ensureString,
+  mwsDate,
+  NextToken,
+  nextToken as nextTokenCodec,
+} from '../parsing'
 import { getServiceStatusByResource } from './shared'
 
 const FINANCES_API_VERSION = '2015-05-01'
@@ -52,8 +58,37 @@ const ListFinancialEventGroupsResponse = Codec.interface({
   }),
 })
 
+const ListFinancialEventGroupsByNextTokenResponse = Codec.interface({
+  ListFinancialEventGroupsByNextTokenResponse: Codec.interface({
+    ListFinancialEventGroupsByNextTokenResult: ListFinancialEventGroups,
+  }),
+})
+
 export class Finances {
   constructor(private httpClient: HttpClient) {}
+
+  async listFinancialEventGroupsByNextToken(
+    nextToken: NextToken<'ListFinancialEventGroups'>,
+  ): Promise<[ListFinancialEventGroups, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Finances,
+      version: FINANCES_API_VERSION,
+      action: 'ListFinancialEventGroups',
+      parameters: {
+        NextToken: nextToken.token,
+      },
+    })
+
+    return ListFinancialEventGroupsByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.ListFinancialEventGroupsByNextTokenResponse.ListFinancialEventGroupsByNextTokenResult,
+        meta,
+      ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async listFinancialEventGroups(
     parameters: ListFinancialEventGroupsParameters,
