@@ -1,5 +1,6 @@
 import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
 import { MWS } from '../../src/mws'
+import { NextToken } from '../../src/parsing'
 import { getFixture } from '../utils'
 
 const httpConfig = {
@@ -35,6 +36,32 @@ const mockMwsFail = new MWS(
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('finances', () => {
+  describe('listFinancialEventGroupsByNextToken', () => {
+    const mockNextToken = new NextToken('ListFinancialEventGroups', '123')
+
+    it('returns a next token and financial event groups list if succesful', async () => {
+      expect.assertions(1)
+
+      const mockListFinancialEventGroups = createMockHttpClient(
+        'finances_list_financial_event_groups_nt',
+      )
+
+      expect(
+        await mockListFinancialEventGroups.finances.listFinancialEventGroupsByNextToken(
+          mockNextToken,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.finances.listFinancialEventGroupsByNextToken(mockNextToken),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('listFinancialEventGroups', () => {
     const parameters = {
       FinancialEventGroupStartedAfter: new Date(),
