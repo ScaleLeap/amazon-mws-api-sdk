@@ -48,21 +48,126 @@ export const ListFinancialEventGroupsByNextTokenResponse = Codec.interface({
 })
 
 /**
- * @todo
+ * Previously had a huge enum of all available fee types but Amazon's
+ * sample request contains <FeeType>ShippingChargeback</FeeType> which was not available
+ * in their docs. I'm not sure what other FeeType could be missing from their docs
  */
-const ShipmentEvent = unknown
-/**
- * @todo
- */
-const RefundEvent = unknown
-/**
- * @todo
- */
-const GuaranteeClaimEvent = unknown
-/**
- * @todo
- */
-const ChargebackEvent = unknown
+const FeeType = string
+
+const FeeComponent = Codec.interface({
+  FeeType: optional(FeeType),
+  FeeAmount: optional(CurrencyAmount),
+})
+
+enum ChargeTypeEnum {
+  Principal = 'Principal',
+  Tax = 'Tax',
+  'MarketplaceFacilitatorTax-Principal' = 'MarketplaceFacilitatorTax-Principal',
+  'MarketplaceFacilitatorTax-Shipping' = 'MarketplaceFacilitatorTax-Shipping',
+  'MarketplaceFacilitatorTax-Giftwrap' = 'MarketplaceFacilitatorTax-Giftwrap',
+  'MarketplaceFacilitatorTax-Other' = 'MarketplaceFacilitatorTax-Other',
+  Discount = 'Discount',
+  TaxDiscount = 'TaxDiscount',
+  CODItemCharge = 'CODItemCharge',
+  CODItemTaxCharge = 'CODItemTaxCharge',
+  CODOrderCharge = 'CODOrderCharge',
+  CODOrderTaxCharge = 'CODOrderTaxCharge',
+  CODShippingCharge = 'CODShippingCharge',
+  CODShippingTaxCharge = 'CODShippingTaxCharge',
+  ShippingCharge = 'ShippingCharge',
+  ShippingTax = 'ShippingTax',
+  Goodwill = 'Goodwill',
+  Giftwrap = 'Giftwrap',
+  GiftwrapTax = 'GiftwrapTax',
+  RestockingFee = 'RestockingFee',
+  ReturnShipping = 'ReturnShipping',
+  PointsFee = 'PointsFee',
+  GenericDeduction = 'GenericDeduction',
+  FreeReplacementReturnShipping = 'FreeReplacementReturnShipping',
+  PaymentMethodFee = 'PaymentMethodFee',
+  ExportCharge = 'ExportCharge',
+  'SAFE-TReimbursement' = 'SAFE-TReimbursement',
+  'TCS-CGST' = 'TCS-CGST',
+  'TCS-SGST' = 'TCS-SGST',
+  'TCS-IGST' = 'TCS-IGST',
+  'TCS-UTGST' = 'TCS-UTGST',
+}
+
+const ChargeType = enumeration(ChargeTypeEnum)
+
+const ChargeComponent = Codec.interface({
+  ChargeType: optional(ChargeType),
+  ChargeAmount: optional(CurrencyAmount),
+})
+
+enum DirectPaymentTypeEnum {
+  StoredValueCardRevenue = 'StoredValueCardRevenue',
+  StoredValueCardRefund = 'StoredValueCardRefund',
+  PrivateLabelCreditCardRevenue = 'PrivateLabelCreditCardRevenue',
+  PrivateLabelCreditCardRefund = 'PrivateLabelCreditCardRefund',
+  CollectOnDeliveryRevenue = 'CollectOnDeliveryRevenue',
+  CollectOnDeliveryRefund = 'CollectOnDeliveryRefund',
+}
+
+const DirectPaymentType = enumeration(DirectPaymentTypeEnum)
+
+const DirectPayment = Codec.interface({
+  DirectPaymentType: optional(DirectPaymentType),
+  DirectPaymentAmount: optional(CurrencyAmount),
+})
+
+enum TaxCollectionModelEnum {
+  MarketplaceFacilitator = 'MarketplaceFacilitator',
+  Standard = 'Standard',
+}
+
+const TaxCollectionModel = enumeration(TaxCollectionModelEnum)
+
+const TaxWithheldComponent = Codec.interface({
+  TaxCollectionModel: optional(TaxCollectionModel),
+  TaxesWithheld: optional(ensureArray('ChargeComponent', ChargeComponent)),
+})
+
+const Promotion = Codec.interface({
+  PromotionType: optional(string),
+  PromotionId: optional(string),
+  PromotionAmount: optional(CurrencyAmount),
+})
+
+const ShipmentItem = Codec.interface({
+  SellerSKU: optional(string),
+  OrderItemId: optional(ensureString),
+  OrderAdjustmentItemId: optional(ensureString),
+  QuantityShipped: optional(number),
+  ItemChargeList: optional(ensureArray('ChargeComponent', ChargeComponent)),
+  ItemTaxWithheldList: optional(ensureArray('TaxWithheldComponent', TaxWithheldComponent)),
+  ItemChargeAdjustmentList: optional(ensureArray('ChargeComponent', ChargeComponent)),
+  ItemFeeList: optional(ensureArray('FeeComponent', FeeComponent)),
+  ItemFeeAdjustmentList: optional(ensureArray('FeeComponent', FeeComponent)),
+  PromotionList: optional(ensureArray('Promotion', Promotion)),
+  PromotionAdjustmentList: optional(ensureArray('Promotion', Promotion)),
+  CostOfPointsGranted: optional(CurrencyAmount),
+  CostOfPointsReturned: optional(CurrencyAmount),
+})
+
+const ShipmentEvent = Codec.interface({
+  AmazonOrderId: optional(string),
+  SellerOrderId: optional(string),
+  MarketplaceName: optional(string),
+  OrderChargeList: optional(ensureArray('ChargeComponent', ChargeComponent)),
+  OrderChargeAdjustmentList: optional(ensureArray('ChargeComponent', ChargeComponent)),
+  ShipmentFeeList: optional(ensureArray('FeeComponent', FeeComponent)),
+  ShipmentFeeAdjustmentList: optional(ensureArray('FeeComponent', FeeComponent)),
+  OrderFeeList: optional(ensureArray('FeeComponent', FeeComponent)),
+  OrderFeeAdjustmentList: optional(ensureArray('FeeComponent', FeeComponent)),
+  DirectPaymentList: optional(ensureArray('DirectPayment', DirectPayment)),
+  PostedDate: optional(mwsDate),
+  ShipmentItemList: optional(ensureArray('ShipmentItem', ShipmentItem)),
+  ShipmentItemAdjustmentList: optional(ensureArray('ShipmentItem', ShipmentItem)),
+})
+const RefundEvent = ShipmentEvent
+const GuaranteeClaimEvent = ShipmentEvent
+const ChargebackEvent = ShipmentEvent
 /**
  * @todo
  */
@@ -139,7 +244,6 @@ const NetworkComminglingTransactionEvent = unknown
  * @todo
  */
 const TDSReimbursementEvent = unknown
-
 const FinancialEvents = Codec.interface({
   ShipmentEventList: optional(ensureArray('ShipmentEvent', ShipmentEvent)),
   RefundEventList: optional(ensureArray('RefundEvent', RefundEvent)),
