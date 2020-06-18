@@ -18,33 +18,60 @@ const headers = {
   'x-mws-quota-resetson': '2020-04-06T10:22:23.582Z',
 }
 
+const createMockHttpClient = (fixture: string) =>
+  new MWS(
+    new HttpClient(httpConfig, () =>
+      Promise.resolve({
+        data: getFixture(fixture),
+        headers,
+      }),
+    ),
+  )
+
 const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
 
 const parsingError = 'Expected an object, but received a string with value ""'
 
-describe('sellers', () => {
-  describe('getServiceStatus', () => {
-    it('returns a parsed model when the status response is valid', async () => {
+describe('finances', () => {
+  describe('listFinancialEventGroups', () => {
+    const parameters = {
+      FinancialEventGroupStartedAfter: new Date(),
+    }
+
+    it('returns a next token and financial event groups list if succesful', async () => {
       expect.assertions(1)
 
-      const mockMwsServiceStatus = new MWS(
-        new HttpClient(httpConfig, () =>
-          Promise.resolve({
-            data: getFixture('get_service_status'),
-            headers,
-          }),
-        ),
-      )
+      const mockListFinancialEventGroups = createMockHttpClient('finances_list_financial_event_groups')
 
-      expect(await mockMwsServiceStatus.sellers.getServiceStatus()).toMatchSnapshot()
+      expect(
+        await mockListFinancialEventGroups.finances.listFinancialEventGroups(parameters),
+      ).toMatchSnapshot()
     })
 
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.sellers.getServiceStatus()).rejects.toStrictEqual(
+      await expect(() => mockMwsFail.finances.listFinancialEventGroups()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
+    })
+  })
+
+  describe('getServiceStatus', () => {
+    it('returns a parsed model when the status response is valid', async () => {
+      expect.assertions(1)
+
+      const mockMwsServiceStatus = createMockHttpClient('get_service_status')
+
+      expect(await mockMwsServiceStatus.finances.getServiceStatus()).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.finances.getServiceStatus()).rejects.toStrictEqual(
         new ParsingError(parsingError),
       )
     })
