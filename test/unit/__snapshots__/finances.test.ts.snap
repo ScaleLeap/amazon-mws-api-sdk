@@ -107,7 +107,7 @@ Array [
             "CurrencyCode": "INR",
           },
           "MarketplaceId": "A2XZLSVIQ0F4JT",
-          "PostedDate": "2018-02-08T13:17:15.000Z",
+          "PostedDate": 2018-02-08T13:17:15.000Z,
           "TaxTypeCGST": Object {
             "CurrencyAmount": 0,
             "CurrencyCode": "INR",
@@ -135,7 +135,7 @@ Array [
             "CurrencyCode": "INR",
           },
           "MarketplaceId": "A2XZLSVIQ0F4JT",
-          "PostedDate": "2018-02-08T13:17:15.000Z",
+          "PostedDate": 2018-02-08T13:17:15.000Z,
           "TaxTypeCGST": Object {
             "CurrencyAmount": 0,
             "CurrencyCode": "INR",
@@ -233,7 +233,7 @@ Array [
       ],
       "TDSReimbursementEventList": Array [
         Object {
-          "PostedDate": "2019-08-01T16:18:15.000Z",
+          "PostedDate": 2019-08-01T16:18:15.000Z,
           "ReimbursedAmount": Object {
             "CurrencyAmount": 3.98,
             "CurrencyCode": "INR",

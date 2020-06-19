@@ -436,20 +436,30 @@ const AffordabilityExpenseReversalEvent = Codec.interface({
   TaxTypeSGST: optional(CurrencyAmount),
   MarketplaceId: optional(string),
 })
-/**
- * @todo
- */
-const NetworkComminglingTransactionEvent = unknown
-/**
- * @todo
- */
-const TDSReimbursementEvent = unknown
-// Defined this too early, want to go in order. Will fix when I get here
-// const TDSReimbursementEvent = Codec.interface({
-//   PostedDate: optional(mwsDate),
-//   TdsOrderId: optional(ensureString),
-//   ReimbursedAmount: optional(CurrencyAmount),
-// })
+
+enum NetworkComminglingTransactionTypeEnum {
+  ComminglingVAT = 'ComminglingVAT',
+  NetCo = 'NetCo',
+}
+
+const NetworkComminglingTransactionType = enumeration(NetworkComminglingTransactionTypeEnum)
+
+const NetworkComminglingTransactionEvent = Codec.interface({
+  PostedDate: optional(mwsDate),
+  NetCoTransactionID: optional(ensureString),
+  SwapReason: optional(string),
+  TransactionType: optional(NetworkComminglingTransactionType),
+  ASIN: optional(string),
+  MarketplaceId: optional(string),
+  TaxExclusiveAmount: optional(CurrencyAmount),
+  TaxAmount: optional(CurrencyAmount),
+})
+
+const TDSReimbursementEvent = Codec.interface({
+  PostedDate: optional(mwsDate),
+  TdsOrderId: optional(ensureString),
+  ReimbursedAmount: optional(CurrencyAmount),
+})
 const FinancialEvents = Codec.interface({
   ShipmentEventList: optional(ensureArray('ShipmentEvent', ShipmentEvent)),
   RefundEventList: optional(ensureArray('RefundEvent', RefundEvent)),
