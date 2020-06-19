@@ -230,10 +230,31 @@ const RetrochargeEvent = Codec.interface({
     ensureArray('TaxWithheldComponent', TaxWithheldComponent),
   ),
 })
-/**
- * @todo
- */
-const RentalTransactionEvent = unknown
+
+enum RentalEventTypeEnum {
+  'RentalCustomerPayment-Buyout' = 'RentalCustomerPayment-Buyout',
+  'RentalCustomerPayment-Extension' = 'RentalCustomerPayment-Extension',
+  'RentalCustomerRefund-Buyout' = 'RentalCustomerRefund-Buyout',
+  'RentalCustomerRefund-Extension' = 'RentalCustomerRefund-Extension',
+  RentalHandlingFee = 'RentalHandlingFee',
+  RentalChargeFailureReimbursement = 'RentalChargeFailureReimbursement',
+  RentalLostItemReimbursement = 'RentalLostItemReimbursement',
+}
+
+const RentalEventType = enumeration(RentalEventTypeEnum)
+
+const RentalTransactionEvent = Codec.interface({
+  AmazonOrderId: optional(ensureString),
+  RentalEventType: optional(RentalEventType),
+  ExtensionLength: optional(number),
+  PostedDate: optional(mwsDate),
+  RentalChargeList: optional(ensureArray('ChargeComponent', ChargeComponent)),
+  RentalFeeList: optional(ensureArray('FeeComponent', FeeComponent)),
+  MarketplaceName: optional(string),
+  RentalInitialValue: optional(CurrencyAmount),
+  RentalReimbursement: optional(CurrencyAmount),
+  RentalTaxWithheldList: optional(TaxWithheldComponent),
+})
 /**
  * @todo
  */
