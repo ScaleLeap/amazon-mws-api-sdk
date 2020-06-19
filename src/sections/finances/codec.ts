@@ -354,7 +354,7 @@ enum AdjustmentTypeEnum {
 const AdjustmentType = enumeration(AdjustmentTypeEnum)
 
 const AdjustmentItem = Codec.interface({
-  Quantity: optional(string),
+  Quantity: optional(ensureString), // Docs and mock responses list this as `string`
   PerUnitAmount: optional(CurrencyAmount),
   TotalAmount: optional(CurrencyAmount),
   SellerSKU: optional(string),
@@ -526,5 +526,11 @@ export type ListFinancialEvents = GetInterface<typeof ListFinancialEvents>
 export const ListFinancialEventsResponse = Codec.interface({
   ListFinancialEventsResponse: Codec.interface({
     ListFinancialEventsResult: ListFinancialEvents,
+  }),
+})
+
+export const ListFinancialEventsByNextTokenResponse = Codec.interface({
+  ListFinancialEventsByNextTokenResponse: Codec.interface({
+    ListFinancialEventsByNextTokenResult: ListFinancialEvents,
   }),
 })

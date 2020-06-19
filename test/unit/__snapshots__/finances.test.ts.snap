@@ -1637,3 +1637,154 @@ Array [
   },
 ]
 `;
+
+exports[`finances listFinancialEventsByNextToken returns a next token and financial events list if succesful 1`] = `
+Array [
+  Object {
+    "FinancialEvents": Object {
+      "AdjustmentEventList": Array [
+        Object {
+          "AdjustmentItemList": Array [
+            Object {
+              "PerUnitAmount": Object {
+                "CurrencyAmount": 3.38,
+                "CurrencyCode": "USD",
+              },
+              "ProductDescription": "Shacke Metal Shoe Horn 7.5&quot; inches - Double Sided Stainless
+                Steel (Silver)",
+              "Quantity": "1",
+              "SellerSKU": "KL-BPYA-C1VH",
+              "TotalAmount": Object {
+                "CurrencyAmount": 3.38,
+                "CurrencyCode": "USD",
+              },
+            },
+          ],
+          "AdjustmentType": "REVERSAL_REIMBURSEMENT",
+        },
+      ],
+      "AffordabilityExpenseEventList": Array [
+        Object {
+          "AmazonOrderId": "931-2463294-5740665",
+          "BaseExpense": Object {
+            "CurrencyAmount": -100,
+            "CurrencyCode": "INR",
+          },
+          "MarketplaceId": "A2XZLSVIQ0F4JT",
+          "PostedDate": 2018-02-08T13:17:15.000Z,
+          "TaxTypeCGST": Object {
+            "CurrencyAmount": 0,
+            "CurrencyCode": "INR",
+          },
+          "TaxTypeIGST": Object {
+            "CurrencyAmount": -18,
+            "CurrencyCode": "INR",
+          },
+          "TaxTypeSGST": Object {
+            "CurrencyAmount": 0,
+            "CurrencyCode": "INR",
+          },
+          "TotalExpense": Object {
+            "CurrencyAmount": -118,
+            "CurrencyCode": "INR",
+          },
+          "TransactionType": "Charge",
+        },
+      ],
+      "AffordabilityExpenseReversalEventList": Array [
+        Object {
+          "AmazonOrderId": "931-2463294-5740665",
+          "BaseExpense": Object {
+            "CurrencyAmount": 100,
+            "CurrencyCode": "INR",
+          },
+          "MarketplaceId": "A2XZLSVIQ0F4JT",
+          "PostedDate": 2018-02-08T13:17:15.000Z,
+          "TaxTypeCGST": Object {
+            "CurrencyAmount": 0,
+            "CurrencyCode": "INR",
+          },
+          "TaxTypeIGST": Object {
+            "CurrencyAmount": 18,
+            "CurrencyCode": "INR",
+          },
+          "TaxTypeSGST": Object {
+            "CurrencyAmount": 0,
+            "CurrencyCode": "INR",
+          },
+          "TotalExpense": Object {
+            "CurrencyAmount": 118,
+            "CurrencyCode": "INR",
+          },
+          "TransactionType": "Refund",
+        },
+      ],
+      "DebtRecoveryEventList": Array [],
+      "PayWithAmazonEventList": Array [],
+      "PerformanceBondRefundEventList": Array [],
+      "ProductAdsPaymentEventList": Array [
+        Object {
+          "baseValue": Object {
+            "CurrencyAmount": 115.34,
+            "CurrencyCode": "USD",
+          },
+          "invoiceId": "TR1W0B4YB-6",
+          "taxValue": Object {
+            "CurrencyAmount": 21.91,
+            "CurrencyCode": "USD",
+          },
+          "transactionType": "Charge",
+          "transactionValue": Object {
+            "CurrencyAmount": 137.25,
+            "CurrencyCode": "USD",
+          },
+        },
+      ],
+      "RentalTransactionEventList": Array [],
+      "ServiceFeeEventList": Array [
+        Object {
+          "SellerSKU": "FH-REED-16DX",
+        },
+        Object {
+          "FeeList": Array [
+            Object {
+              "FeeAmount": Object {
+                "CurrencyAmount": -1,
+                "CurrencyCode": "USD",
+              },
+              "FeeType": "FBACustomerReturnPerOrderFee",
+            },
+            Object {
+              "FeeAmount": Object {
+                "CurrencyAmount": -1.06,
+                "CurrencyCode": "USD",
+              },
+              "FeeType": "FBACustomerReturnPerUnitFee",
+            },
+            Object {
+              "FeeAmount": Object {
+                "CurrencyAmount": -0.5,
+                "CurrencyCode": "USD",
+              },
+              "FeeType": "FBACustomerReturnWeightBasedFee",
+            },
+          ],
+          "SellerSKU": "FH-REED-16DX",
+        },
+      ],
+      "ServiceProviderCreditEventList": Array [],
+    },
+    "NextToken": NextToken {
+      "action": "ListFinancialEvents",
+      "token": "e21hcmtldHBsYWNlSWQ6bnVsbCxtYXhSZXN1bHRzUGVyUGFnZTowLHNlYXJjaFF1ZXJ5Q2hlY2tzdW06bnVsbCxxdWVyeVBhZ2luYXRpb25Ub2tlbjoidDB3V25MNXFLWkRIZ2p5ZzB3ZHRWODVnV0htVExVMkM0XzlsMHpRMG9HVXFZOVhTdjFyWUNWUE8teGxWRnF3N0ZyaDIyY3lQX0VTOXYxendQNUVvc0t0V1NKM1YyQkRJdWcyWFpXdm1KVmdPVktBdzNIMXUyVHBiTGoxVmRmY3Z6ZlU1WlpNaEpsQ0RKUnYxRk16am13Y1YyQ1BoOXNWMU1xNUZqamxUMlRCeFBkSjdEa3BkbENISElVZ094aHVTN3ZfZlFCUWYyWWJYZ2l3NHNxZXkwNnQyaVBucm5PdnAzRTdKbW4xcnc1UTlaTGV1Ymk5WUV6UGJ6UnhjRmh2VUFKdlQ5U2U3eERIdHVMUzNJVWFRODBubVhja3JLeWt3dVZKeWZXQm5CY3p0bjZTbVRHenJmZ1VOanFMWFFNT2giLHNlYXJjaFF1ZXJ5Om51bGwsdG9rZW5DcmVhdGlvbkRhdGU6MTQ4NTg2MjY5ODI1NCxzZWxsZXJJZDoiQTM1SlMxREpITjdGViJ9",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;

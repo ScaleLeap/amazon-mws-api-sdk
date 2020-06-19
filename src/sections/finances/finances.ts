@@ -8,6 +8,7 @@ import {
   ListFinancialEventGroupsByNextTokenResponse,
   ListFinancialEventGroupsResponse,
   ListFinancialEvents,
+  ListFinancialEventsByNextTokenResponse,
   ListFinancialEventsResponse,
 } from './codec'
 
@@ -29,6 +30,29 @@ interface ListFinancicalEventsParameters {
 
 export class Finances {
   constructor(private httpClient: HttpClient) {}
+
+  async listFinancialEventsByNextToken(
+    nextToken: NextToken<'ListFinancialEvents'>,
+  ): Promise<[ListFinancialEvents, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Finances,
+      version: FINANCES_API_VERSION,
+      action: 'ListFinancialEventsByNextToken',
+      parameters: {
+        NextToken: nextToken.token,
+      },
+    })
+
+    return ListFinancialEventsByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.ListFinancialEventsByNextTokenResponse.ListFinancialEventsByNextTokenResult,
+        meta,
+      ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async listFinancialEvents(
     parameters: RequireOnlyOne<
@@ -63,7 +87,7 @@ export class Finances {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Finances,
       version: FINANCES_API_VERSION,
-      action: 'ListFinancialEventGroups',
+      action: 'ListFinancialEventGroupsByNextToken',
       parameters: {
         NextToken: nextToken.token,
       },
