@@ -163,7 +163,6 @@ Array [
       "PerformanceBondRefundEventList": Array [],
       "ProductAdsPaymentEventList": Array [
         Object {
-          "PostedDate": "2017-01-11T13:17:15.000Z",
           "baseValue": Object {
             "CurrencyAmount": 115.34,
             "CurrencyCode": "USD",

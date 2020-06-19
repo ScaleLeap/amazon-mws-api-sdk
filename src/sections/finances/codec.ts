@@ -256,13 +256,33 @@ const RentalTransactionEvent = Codec.interface({
   RentalTaxWithheldList: optional(TaxWithheldComponent),
 })
 /**
- * @todo
+ * Leaving this as unknown because Amazon did not define it in their
  */
 const PerformanceBondRefundEvent = unknown
+
 /**
- * @todo
+ * Not sure what case MWS returns. Fixture has them captialized but docs has them in lower case
  */
-const ProductAdsPaymentEvent = unknown
+enum transactionTypeEnum {
+  charge = 'charge',
+  refund = 'refund',
+  Charge = 'Charge',
+  Refund = 'Refund',
+}
+
+const transactionType = enumeration(transactionTypeEnum)
+
+/**
+ * For some unknown reason this is in camel case
+ */
+const ProductAdsPaymentEvent = Codec.interface({
+  postedDate: optional(mwsDate),
+  transactionType: optional(transactionType),
+  invoiceId: optional(ensureString),
+  baseValue: optional(CurrencyAmount),
+  taxValue: optional(CurrencyAmount),
+  transactionValue: optional(CurrencyAmount),
+})
 /**
  * @todo
  */
