@@ -3,6 +3,26 @@ import { MWS } from '../../src/mws'
 import { NextToken } from '../../src/parsing'
 import { getFixture } from '../utils'
 
+function mockFunctions() {
+  /**
+   * Mock everything in purify-ts, restore it except for `enumeration`
+   * https://github.com/facebook/jest/issues/936#issuecomment-265074320
+   */
+  const original = require.requireActual('purify-ts')
+  return {
+    ...original, // Pass down all the exported objects
+    enumeration: () => {
+      return original.Codec.custom({
+        decode: (input: string | number) => {
+          return original.Right(input)
+        },
+        encode: original.identity,
+      })
+    },
+  }
+}
+jest.mock('purify-ts', () => mockFunctions())
+
 const httpConfig = {
   awsAccessKeyId: '',
   marketplace: amazonMarketplaces.CA,
@@ -40,6 +60,26 @@ describe('finances', () => {
     const parameters = {
       PostedAfter: new Date(),
     }
+
+    /**
+     * Official mock response from C# library returns completely structured,
+     * except enum properties return "String" instead of a possible enum value.
+     * To test out the structure of the response, `enumeration` must be stubbed
+     * to allow "String" as a possible value for all enums
+     */
+    it('succesfully decodes the full response of ListFinancialEvents', async () => {
+      expect.assertions(1)
+
+      const mockListFinancialEvents = createMockHttpClient(
+        'finances_list_financial_events_structure',
+      )
+
+      expect(
+        await mockListFinancialEvents.finances.listFinancialEvents(parameters),
+      ).toMatchSnapshot()
+
+      jest.clearAllMocks()
+    })
 
     it('returns a next token and financial events list if succesful', async () => {
       expect.assertions(1)
