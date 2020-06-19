@@ -2,7 +2,10 @@
   <ListFinancialEventsByNextTokenResult>
     <NextToken>e21hcmtldHBsYWNlSWQ6bnVsbCxtYXhSZXN1bHRzUGVyUGFnZTowLHNlYXJjaFF1ZXJ5Q2hlY2tzdW06bnVsbCxxdWVyeVBhZ2luYXRpb25Ub2tlbjoidDB3V25MNXFLWkRIZ2p5ZzB3ZHRWODVnV0htVExVMkM0XzlsMHpRMG9HVXFZOVhTdjFyWUNWUE8teGxWRnF3N0ZyaDIyY3lQX0VTOXYxendQNUVvc0t0V1NKM1YyQkRJdWcyWFpXdm1KVmdPVktBdzNIMXUyVHBiTGoxVmRmY3Z6ZlU1WlpNaEpsQ0RKUnYxRk16am13Y1YyQ1BoOXNWMU1xNUZqamxUMlRCeFBkSjdEa3BkbENISElVZ094aHVTN3ZfZlFCUWYyWWJYZ2l3NHNxZXkwNnQyaVBucm5PdnAzRTdKbW4xcnc1UTlaTGV1Ymk5WUV6UGJ6UnhjRmh2VUFKdlQ5U2U3eERIdHVMUzNJVWFRODBubVhja3JLeWt3dVZKeWZXQm5CY3p0bjZTbVRHenJmZ1VOanFMWFFNT2giLHNlYXJjaFF1ZXJ5Om51bGwsdG9rZW5DcmVhdGlvbkRhdGU6MTQ4NTg2MjY5ODI1NCxzZWxsZXJJZDoiQTM1SlMxREpITjdGViJ9</NextToken>
     <FinancialEvents>
-      <ProductAdsPaymentEventList/>
+      <!-- 
+          Why is there a duplicate here? Probably a mistake on their part
+          <ProductAdsPaymentEventList/> 
+      -->
       <RentalTransactionEventList/>
       <PayWithAmazonEventList/>
       <SellerDealPaymentEventList>
