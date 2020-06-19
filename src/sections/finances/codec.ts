@@ -322,10 +322,20 @@ const DebtRecoveryEvent = Codec.interface({
   DebtRecoveryItemList: optional(ensureArray('DebtRecoveryItem', DebtRecoveryItem)),
   ChargeInstrumentList: optional(ensureArray('ChargeInstrument', ChargeInstrument)),
 })
-/**
- * @todo
- */
-const LoanServicingEvent = unknown
+
+enum SourceBusinessEventTypeEnum {
+  LoanAdvance = 'LoanAdvance',
+  LoanPayment = 'LoanPayment',
+  LoanRefund = 'LoanRefund',
+}
+
+const SourceBusinessEventType = enumeration(SourceBusinessEventTypeEnum)
+
+const LoanServicingEvent = Codec.interface({
+  LoanAmount: optional(CurrencyAmount),
+  SourceBusinessEventType: optional(SourceBusinessEventType),
+})
+
 /**
  * @todo
  */
