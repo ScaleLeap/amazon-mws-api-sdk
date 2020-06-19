@@ -221,7 +221,7 @@ const RetrochargeEventType = enumeration(RetrochargeEventTypeEnum)
 
 const RetrochargeEvent = Codec.interface({
   RetrochargeEventType: optional(RetrochargeEventType),
-  AmazonOrderId: optional(ensureString),
+  AmazonOrderId: optional(string),
   PostedDate: optional(mwsDate),
   BaseTax: optional(CurrencyAmount),
   ShippingTax: optional(CurrencyAmount),
@@ -283,10 +283,16 @@ const ProductAdsPaymentEvent = Codec.interface({
   taxValue: optional(CurrencyAmount),
   transactionValue: optional(CurrencyAmount),
 })
-/**
- * @todo
- */
-const ServiceFeeEvent = unknown
+
+const ServiceFeeEvent = Codec.interface({
+  AmazonOrderId: optional(string),
+  FeeReason: optional(string),
+  FeeList: optional(ensureArray('FeeComponent', FeeComponent)),
+  SellerSKU: optional(string),
+  FnSKU: optional(string),
+  FeeDesription: optional(string),
+  ASIN: optional(string),
+})
 /**
  * @todo
  */
