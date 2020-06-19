@@ -145,6 +145,8 @@ describe('httpClient', () => {
       expect(cleanParameters(parameters)).toStrictEqual(expectedResult)
     })
 
+    const sqsUrl = 'https%3A%2F%2Fsqs.us-east-1.amazonaws.com%2F51471EXAMPLE%2Fmws_notifications'
+
     it('should properly clean parameters with array of objects', () => {
       expect.hasAssertions()
 
@@ -170,6 +172,70 @@ describe('httpClient', () => {
         'aabbc.ddcc.2.b': 'b',
         'aabbc.ddcc.3.c.d': 'd',
         'aabbc.ddcc.3.c.c': 'c,',
+      }
+
+      expect(cleanParameters(parameters)).toStrictEqual(results)
+    })
+
+    it('should properly clean parameters with object arrays for attributes', () => {
+      expect.hasAssertions()
+
+      const parameters = {
+        MarketplaceId: 'ATVPDKIKX0DER',
+        Destination: {
+          DeliveryChannel: 'SQS',
+          'AttributeList.member': [
+            {
+              Key: 'sqsQueueUrl',
+              Value: sqsUrl,
+            },
+          ],
+        },
+      }
+
+      const results = {
+        MarketplaceId: 'ATVPDKIKX0DER',
+        'Destination.DeliveryChannel': 'SQS',
+        'Destination.AttributeList.member.1.Key': 'sqsQueueUrl',
+        'Destination.AttributeList.member.1.Value': sqsUrl,
+      }
+
+      expect(cleanParameters(parameters)).toStrictEqual(results)
+    })
+
+    it('should properly clean parameters with object with an object arrays for attributes', () => {
+      expect.hasAssertions()
+
+      const parameters = {
+        MarketplaceId: 'ATVPDKIKX0DER',
+        Subscriptions: {
+          NotificationType: 'AnyOfferChanged',
+          Destination: {
+            DeliveryChannel: 'SQS',
+            'AttributeList.member': [
+              {
+                Key: 'sqsQueueUrl',
+                Value: sqsUrl,
+              },
+              {
+                Key: 'sqsQueueUrl',
+                Value: `${sqsUrl}2`,
+              },
+            ],
+          },
+          IsEnabled: true,
+        },
+      }
+
+      const results = {
+        MarketplaceId: 'ATVPDKIKX0DER',
+        'Subscriptions.NotificationType': 'AnyOfferChanged',
+        'Subscriptions.Destination.DeliveryChannel': 'SQS',
+        'Subscriptions.Destination.AttributeList.member.1.Key': 'sqsQueueUrl',
+        'Subscriptions.Destination.AttributeList.member.1.Value': sqsUrl,
+        'Subscriptions.Destination.AttributeList.member.2.Key': 'sqsQueueUrl',
+        'Subscriptions.Destination.AttributeList.member.2.Value': `${sqsUrl}2`,
+        'Subscriptions.IsEnabled': 'true',
       }
 
       expect(cleanParameters(parameters)).toStrictEqual(results)
