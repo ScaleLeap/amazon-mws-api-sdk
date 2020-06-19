@@ -1,4 +1,13 @@
-import { Codec, enumeration, GetInterface, number, optional, string, unknown } from 'purify-ts'
+import {
+  Codec,
+  enumeration,
+  GetInterface,
+  number,
+  oneOf,
+  optional,
+  string,
+  unknown,
+} from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
 
@@ -206,11 +215,6 @@ const SolutionProviderCreditEvent = Codec.interface({
   ProviderId: optional(string),
   ProviderStoreName: optional(string),
 })
-
-const ServiceProviderCreditEvent = SolutionProviderCreditEvent
-/**
- * @todo
- */
 
 enum RetrochargeEventTypeEnum {
   Retrocharge = 'Retrocharge',
@@ -462,12 +466,12 @@ const TDSReimbursementEvent = Codec.interface({
 })
 const FinancialEvents = Codec.interface({
   ShipmentEventList: optional(ensureArray('ShipmentEvent', ShipmentEvent)),
-  RefundEventList: optional(ensureArray('RefundEvent', RefundEvent)),
-  GuaranteeClaimEventList: optional(ensureArray('GuaranteeClaimEvent', GuaranteeClaimEvent)),
-  ChargebackEventList: optional(ensureArray('ChargebackEvent', ChargebackEvent)),
+  RefundEventList: optional(ensureArray('ShipmentEvent', RefundEvent)),
+  GuaranteeClaimEventList: optional(ensureArray('ShipmentEvent', GuaranteeClaimEvent)),
+  ChargebackEventList: optional(ensureArray('ShipmentEvent', ChargebackEvent)),
   PayWithAmazonEventList: optional(ensureArray('PayWithAmazonEvent', PayWithAmazonEvent)),
   ServiceProviderCreditEventList: optional(
-    ensureArray('ServiceProviderCreditEvent', ServiceProviderCreditEvent),
+    ensureArray('SolutionProviderCreditEvent', SolutionProviderCreditEvent),
   ),
   RetrochargeEventList: optional(ensureArray('RetrochargeEvent', RetrochargeEvent)),
   RentalTransactionEventList: optional(
@@ -497,9 +501,15 @@ const FinancialEvents = Codec.interface({
   AffordabilityExpenseEventList: optional(
     ensureArray('AffordabilityExpenseEvent', AffordabilityExpenseEvent),
   ),
-  AffordabilityExpenseReversalEventList: optional(
-    ensureArray('AffordabilityExpenseReversalEvent', AffordabilityExpenseReversalEvent),
-  ),
+  /**
+   * Mock response from C# lib names the members of this as `AffordabilityExpenseEvent` while
+   * mock resposne from docs name the members as `AffordabilityExpenseEvent`. They're both the
+   * object just with different names though
+   */
+  AffordabilityExpenseReversalEventList: oneOf([
+    optional(ensureArray('AffordabilityExpenseEvent', AffordabilityExpenseEvent)),
+    optional(ensureArray('AffordabilityExpenseReversalEvent', AffordabilityExpenseReversalEvent)),
+  ]),
   NetworkComminglingTransactionEventList: optional(
     ensureArray('NetworkComminglingTransactionEvent', NetworkComminglingTransactionEvent),
   ),
