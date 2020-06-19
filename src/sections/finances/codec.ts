@@ -336,10 +336,35 @@ const LoanServicingEvent = Codec.interface({
   SourceBusinessEventType: optional(SourceBusinessEventType),
 })
 
-/**
- * @todo
- */
-const AdjustmentEvent = unknown
+enum AdjustmentTypeEnum {
+  FBAInventoryReimbursement = 'FBAInventoryReimbursement',
+  ReserveEvent = 'ReserveEvent',
+  PostageBilling = 'PostageBilling',
+  PostageRefund = 'PostageRefund',
+  LostOrDamagedReimbursement = 'LostOrDamagedReimbursement',
+  CanceledButPickedUpReimbursement = 'CanceledButPickedUpReimbursement',
+  ReimbursementClawback = 'ReimbursementClawback',
+  SellerRewards = 'SellerRewards',
+}
+
+const AdjustmentType = enumeration(AdjustmentTypeEnum)
+
+const AdjustmentItem = Codec.interface({
+  Quantity: optional(string),
+  PerUnitAmount: optional(CurrencyAmount),
+  TotalAmount: optional(CurrencyAmount),
+  SellerSKU: optional(string),
+  FnSKU: optional(string),
+  ProductDescription: optional(string),
+  ASIN: optional(string),
+})
+
+const AdjustmentEvent = Codec.interface({
+  AdjustmentType: optional(AdjustmentType),
+  AdjustmentAmount: optional(CurrencyAmount),
+  AdjustmentItemList: optional(ensureArray('AdjustmentItem', AdjustmentItem)),
+  PostedDate: optional(mwsDate),
+})
 /**
  * @todo
  */
