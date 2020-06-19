@@ -261,7 +261,7 @@ const RentalTransactionEvent = Codec.interface({
 const PerformanceBondRefundEvent = unknown
 
 /**
- * Not sure what case MWS returns. Fixture has them captialized but docs has them in lower case
+ * Not sure what case MWS returns. Sample requests has them captialized but docs has them in lower case
  */
 enum transactionTypeEnum {
   charge = 'charge',
@@ -405,14 +405,25 @@ const FBALiquidationEvent = Codec.interface({
   LiquidationProceedsAmount: optional(CurrencyAmount),
   LiquidationFeeAmount: optional(CurrencyAmount),
 })
-/**
- * @todo
- */
-const ImagingServicesFeeEvent = unknown
-/**
- * @todo
- */
-const AffordabilityExpenseEvent = unknown
+
+const ImagingServicesFeeEvent = Codec.interface({
+  ImagingRequestBillingItemID: optional(ensureString),
+  ASIN: optional(string),
+  PostedDate: optional(mwsDate),
+  FeeList: optional(ensureArray('FeeComponent', FeeComponent)),
+})
+
+const AffordabilityExpenseEvent = Codec.interface({
+  PostedDate: optional(mwsDate),
+  TransactionType: optional(transactionType),
+  AmazonOrderId: optional(string),
+  BaseExpense: optional(CurrencyAmount),
+  TotalExpense: optional(CurrencyAmount),
+  TaxTypeIGST: optional(CurrencyAmount),
+  TaxTypeCGST: optional(CurrencyAmount),
+  TaxTypeSGST: optional(CurrencyAmount),
+  MarketplaceId: optional(string),
+})
 /**
  * @todo
  */
