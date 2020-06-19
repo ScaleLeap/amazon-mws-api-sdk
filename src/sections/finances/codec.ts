@@ -365,14 +365,31 @@ const AdjustmentEvent = Codec.interface({
   AdjustmentItemList: optional(ensureArray('AdjustmentItem', AdjustmentItem)),
   PostedDate: optional(mwsDate),
 })
-/**
- * @todo
- */
-const CouponPaymentEvent = unknown
-/**
- * @todo
- */
-const SAFETReimbursementEvent = unknown
+
+const CouponPaymentEvent = Codec.interface({
+  PostedDate: optional(mwsDate),
+  CouponId: optional(ensureString),
+  SellerCouponDescription: optional(string),
+  ClipOrRedemptionCount: optional(number),
+  PaymentEventId: optional(ensureString),
+  FeeComponent: optional(FeeComponent),
+  ChargeComponent: optional(ChargeComponent),
+  TotalAmount: optional(CurrencyAmount),
+})
+
+const SAFETReimbursementItem = Codec.interface({
+  ItemChargeList: optional(ensureArray('ChargeComponent', ChargeComponent)),
+})
+
+const SAFETReimbursementEvent = Codec.interface({
+  PostedDate: optional(mwsDate),
+  SAFETClaimId: optional(ensureString),
+  ReimbursedAmount: optional(CurrencyAmount),
+  SAFETReimbursementItemList: optional(
+    ensureArray('SAFETReimbursementItem', SAFETReimbursementItem),
+  ),
+})
+
 /**
  * @todo
  */
