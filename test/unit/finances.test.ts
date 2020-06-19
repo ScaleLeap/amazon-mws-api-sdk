@@ -5,7 +5,8 @@ import { getFixture } from '../utils'
 
 function mockFunctions() {
   /**
-   * Mock everything in purify-ts, restore it except for `enumeration`
+   * Mock everything in purify-ts, restore it back to normal,
+   *  except for `enumeration` which will be stubbed
    * https://github.com/facebook/jest/issues/936#issuecomment-265074320
    */
   const original = require.requireActual('purify-ts')
@@ -56,6 +57,28 @@ const mockMwsFail = new MWS(
 const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('finances', () => {
+  describe('listFinancialEventsByNextToken', () => {
+    const mockNextToken = new NextToken('ListFinancialEvents', '123')
+
+    it('returns a next token and financial events list if succesful', async () => {
+      expect.assertions(1)
+
+      const mockListFinancialEventNT = createMockHttpClient('finances_list_financial_events_nt')
+
+      expect(
+        await mockListFinancialEventNT.finances.listFinancialEventsByNextToken(mockNextToken),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isn t valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.finances.listFinancialEventsByNextToken(mockNextToken),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('listFinancialEvents', () => {
     const parameters = {
       PostedAfter: new Date(),
