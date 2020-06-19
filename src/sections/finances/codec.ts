@@ -293,10 +293,35 @@ const ServiceFeeEvent = Codec.interface({
   FeeDesription: optional(string),
   ASIN: optional(string),
 })
-/**
- * @todo
- */
-const DebtRecoveryEvent = unknown
+
+const DebtRecoveryItem = Codec.interface({
+  RecoveryAmount: optional(CurrencyAmount),
+  OriginalAmount: optional(CurrencyAmount),
+  GroupBeginDate: optional(mwsDate),
+  GroupEndDate: optional(mwsDate),
+})
+
+const ChargeInstrument = Codec.interface({
+  Description: optional(string),
+  Tail: optional(string),
+  Amount: optional(CurrencyAmount),
+})
+
+enum DebtRecoveryTypeEnum {
+  DebtPayment = 'DebtPayment',
+  DebtPaymentFailure = 'DebtPaymentFailure',
+  DebtAdjustment = 'DebtAdjustment',
+}
+
+const DebtRecoveryType = enumeration(DebtRecoveryTypeEnum)
+
+const DebtRecoveryEvent = Codec.interface({
+  DebtRecoveryType: optional(DebtRecoveryType),
+  RecoveryAmount: optional(CurrencyAmount),
+  OverPaymentCredit: optional(CurrencyAmount),
+  DebtRecoveryItemList: optional(ensureArray('DebtRecoveryItem', DebtRecoveryItem)),
+  ChargeInstrumentList: optional(ensureArray('ChargeInstrument', ChargeInstrument)),
+})
 /**
  * @todo
  */
