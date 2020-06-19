@@ -424,10 +424,18 @@ const AffordabilityExpenseEvent = Codec.interface({
   TaxTypeSGST: optional(CurrencyAmount),
   MarketplaceId: optional(string),
 })
-/**
- * @todo
- */
-const AffordabilityExpenseReversalEvent = unknown
+
+const AffordabilityExpenseReversalEvent = Codec.interface({
+  PostedDate: optional(mwsDate),
+  TransactionType: optional(transactionType),
+  AmazonOrderId: optional(string),
+  BaseExpense: optional(CurrencyAmount),
+  TotalExpense: optional(CurrencyAmount),
+  TaxTypeIGST: optional(CurrencyAmount),
+  TaxTypeCGST: optional(CurrencyAmount),
+  TaxTypeSGST: optional(CurrencyAmount),
+  MarketplaceId: optional(string),
+})
 /**
  * @todo
  */
