@@ -390,10 +390,14 @@ const SAFETReimbursementEvent = Codec.interface({
   ),
 })
 
-/**
- * @todo
- */
-const SellerReviewEnrollmentPaymentEvent = unknown
+const SellerReviewEnrollmentPaymentEvent = Codec.interface({
+  PostedDate: optional(mwsDate),
+  EnrollmentId: optional(ensureString),
+  ParentASIN: optional(string),
+  FeeComponent: optional(FeeComponent),
+  ChargeComponent: optional(ChargeComponent),
+  TotalAmount: optional(CurrencyAmount),
+})
 /**
  * @todo
  */
