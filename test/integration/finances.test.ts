@@ -7,11 +7,12 @@ const httpClient = new Config().createHttpClient()
 /* eslint-disable jest/no-standalone-expect */
 describe(`${Finances.name}`, () => {
   const finances = new Finances(httpClient)
+  const validDate = new Date(Date.now() - 150 * 24 * 60 * 60 * 1000) // Date from 150 days ago
   itci('list financial event groups should post succesfully with a basic request', async () => {
     expect.assertions(1)
 
     const [response] = await finances.listFinancialEventGroups({
-      FinancialEventGroupStartedAfter: new Date('2018/01/01'),
+      FinancialEventGroupStartedAfter: validDate,
     })
 
     expect(response).toBeDefined()
@@ -21,7 +22,7 @@ describe(`${Finances.name}`, () => {
     expect.assertions(1)
 
     const [response] = await finances.listFinancialEvents({
-      PostedAfter: new Date('2018/01/01'),
+      PostedAfter: validDate,
     })
 
     expect(response).toBeDefined()
