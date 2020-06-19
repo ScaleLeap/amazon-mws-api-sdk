@@ -307,7 +307,7 @@ const DebtRecoveryItem = Codec.interface({
 
 const ChargeInstrument = Codec.interface({
   Description: optional(string),
-  Tail: optional(string),
+  Tail: optional(ensureString),
   Amount: optional(CurrencyAmount),
 })
 
