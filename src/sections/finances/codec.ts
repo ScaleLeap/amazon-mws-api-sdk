@@ -398,10 +398,13 @@ const SellerReviewEnrollmentPaymentEvent = Codec.interface({
   ChargeComponent: optional(ChargeComponent),
   TotalAmount: optional(CurrencyAmount),
 })
-/**
- * @todo
- */
-const FBALiquidationEvent = unknown
+
+const FBALiquidationEvent = Codec.interface({
+  PostedDate: optional(mwsDate),
+  OriginalRemovalOrderId: optional(ensureString),
+  LiquidationProceedsAmount: optional(CurrencyAmount),
+  LiquidationFeeAmount: optional(CurrencyAmount),
+})
 /**
  * @todo
  */
