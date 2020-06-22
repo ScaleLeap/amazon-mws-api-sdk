@@ -57,7 +57,7 @@ const RequestReportResponse = Codec.interface({
   }),
 })
 
-type ReportProcessing =
+export type ReportProcessing =
   | '_SUBMITTED_'
   | '_IN_PROGRESS_'
   | '_CANCELLED_'

@@ -98,11 +98,13 @@ const canonicalizeParameters = (parameters: ListInventorySupplyRequestParameters
   }
 }
 
+export type ResponseGroup = 'Basic' | 'Detailed'
+
 export type ListInventorySupplyRequestParameters = RequireOnlyOne<
   {
     SellerSku?: string[]
     QueryStartDateTime?: Date
-    ResponseGroup?: 'Basic' | 'Detailed'
+    ResponseGroup?: ResponseGroup
     MarketplaceId?: string
   },
   'MarketplaceId' | 'QueryStartDateTime'
