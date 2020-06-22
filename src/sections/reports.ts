@@ -427,7 +427,9 @@ export class Reports {
       resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReport',
-      parameters,
+      parameters: {
+        ReportId: parameters.ReportId,
+      },
     })
 
     return GetReportResponse.decode(response).caseOf({
