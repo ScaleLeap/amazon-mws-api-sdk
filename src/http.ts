@@ -75,6 +75,7 @@ export enum Resource {
   Orders = 'Orders',
   Products = 'Products',
   Reports = 'Reports',
+  Finances = 'Finances',
   Sellers = 'Sellers',
   Subscriptions = 'Subscriptions',
 }
@@ -126,6 +127,11 @@ interface ResourceActions {
     | 'GetReportScheduleListByNextToken'
     | 'GetReportScheduleCount'
     | 'UpdateReportAcknowledgements'
+  [Resource.Finances]:
+    | 'ListFinancialEventGroups'
+    | 'ListFinancialEventGroupsByNextToken'
+    | 'ListFinancialEvents'
+    | 'ListFinancialEventsByNextToken'
   [Resource.Subscriptions]:
     | 'RegisterDestination'
     | 'DeregisterDestination'
