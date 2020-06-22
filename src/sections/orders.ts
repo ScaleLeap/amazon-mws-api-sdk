@@ -291,20 +291,24 @@ export type ListOrderItems = GetInterface<typeof ListOrderItems>
 export interface GetOrderParameters {
   AmazonOrderId: string[]
 }
-export interface ListOrderParameters {
-  CreatedAfter?: Date
-  CreatedBefore?: Date
-  LastUpdatedAfter?: Date
-  LastUpdatedBefore?: Date
-  OrderStatus?: (keyof typeof OrderStatus)[]
-  MarketplaceId: string[]
-  FulfillmentChannel?: (keyof typeof FulfillmentChannel)[]
-  PaymentMethod?: (keyof typeof PaymentMethod)[]
-  BuyerEmail?: string
-  SellerOrderId?: string
-  MaxResultsPerPage?: number
-  EasyShipShipmentStatus?: (keyof typeof EasyShipShipmentStatus)[]
-}
+
+export type ListOrderParameters = RequireOnlyOne<
+  {
+    CreatedAfter?: Date
+    CreatedBefore?: Date
+    LastUpdatedAfter?: Date
+    LastUpdatedBefore?: Date
+    OrderStatus?: (keyof typeof OrderStatus)[]
+    MarketplaceId: string[]
+    FulfillmentChannel?: (keyof typeof FulfillmentChannel)[]
+    PaymentMethod?: (keyof typeof PaymentMethod)[]
+    BuyerEmail?: string
+    SellerOrderId?: string
+    MaxResultsPerPage?: number
+    EasyShipShipmentStatus?: (keyof typeof EasyShipShipmentStatus)[]
+  },
+  'CreatedAfter' | 'LastUpdatedAfter'
+>
 
 export interface ListOrderItemsParameters {
   AmazonOrderId: string
@@ -330,9 +334,7 @@ const canonicalizeParameters = (parameters: ListOrderParameters) => {
 export class Orders {
   constructor(private httpClient: HttpClient) {}
 
-  async listOrders(
-    parameters: RequireOnlyOne<ListOrderParameters, 'CreatedAfter' | 'LastUpdatedAfter'>,
-  ): Promise<[ListOrders, RequestMeta]> {
+  async listOrders(parameters: ListOrderParameters): Promise<[ListOrders, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Orders,
       version: ORDERS_API_VERSION,
