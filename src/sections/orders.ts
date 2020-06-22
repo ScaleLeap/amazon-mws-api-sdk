@@ -306,7 +306,7 @@ export type ListOrderParameters = RequireOnlyOne<
     LastUpdatedAfter?: Date
     LastUpdatedBefore?: Date
     OrderStatus?: OrderStatus
-    MarketplaceId: string
+    MarketplaceId: string[]
     FulfillmentChannel?: FulfillmentChannel
     PaymentMethod?: PaymentMethod
     BuyerEmail?: string
