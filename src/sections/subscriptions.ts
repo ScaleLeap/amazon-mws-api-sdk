@@ -19,6 +19,45 @@ export type NotificationType =
   | 'FulfillmentOrderStatus'
   | 'ReportProcessingFinished'
 
+export interface Destination {
+  DeliveryChannel: DeliveryChannel
+  AttributeList: AttributeKeyValue[]
+}
+
+export interface AttributeKeyValue {
+  Key: AttributeKeyValueKeys
+  Value: string
+}
+
+export interface Subscription {
+  NotificationType: NotificationType
+  Destination: Destination
+  IsEnabled: boolean
+}
+
+interface SubscriptionActionParameters {
+  MarketplaceId: string
+  NotificationType: NotificationType
+  Destination: Destination
+}
+
+export type DeleteSubscriptionParameters = SubscriptionActionParameters
+interface MarketplaceIdAndDestinationOnlyParameters {
+  MarketplaceId: string
+  Destination: Destination
+}
+
+export type RegisterDestinationParameters = MarketplaceIdAndDestinationOnlyParameters
+export type DeregisterDestinationParameters = MarketplaceIdAndDestinationOnlyParameters
+export interface ListRegisteredDestinationsParameters {
+  MarketplaceId: string
+}
+export interface UpdateSubscriptionParameters {
+  MarketplaceId: string
+  Subscription: Subscription
+}
+export type GetSubscriptionParameters = SubscriptionActionParameters
+
 enum NotificationTypeEnum {
   AnyOfferChanged = 'AnyOfferChanged',
   FeedProcessingFinished = 'FeedProcessingFinished',
@@ -29,34 +68,11 @@ enum NotificationTypeEnum {
 
 const NotificationType = enumeration(NotificationTypeEnum)
 
-interface MarketplaceIdAndDestinationOnlyParameters {
-  MarketplaceId: string
-  Destination: Destination
-}
-
-interface AttributeKeyValue {
-  Key: AttributeKeyValueKeys
-  Value: string
-}
-interface Destination {
-  DeliveryChannel: DeliveryChannel
-  AttributeList: AttributeKeyValue[]
-}
-interface SubscriptionActionParameters {
-  MarketplaceId: string
-  NotificationType: NotificationType
-  Destination: Destination
-}
-
-type RegisterDestinationParameters = MarketplaceIdAndDestinationOnlyParameters
-
 const RegisterDestinationResponse = Codec.interface({
   RegisterDestinationResponse: Codec.interface({
     RegisterDestinationResult: exactly(''),
   }),
 })
-
-type DeregisterDestinationParameters = MarketplaceIdAndDestinationOnlyParameters
 
 const DeregisterDestinationResponse = Codec.interface({
   DeregisterDestinationResponse: Codec.interface({
@@ -64,10 +80,6 @@ const DeregisterDestinationResponse = Codec.interface({
   }),
 })
 
-interface ListRegisteredDestinationsParameters {
-  MarketplaceId: string
-  [key: string]: string
-}
 enum AttribueKeyValueKeysEnum {
   sqsQueueUrl = 'sqsQueueUrl',
 }
@@ -93,8 +105,6 @@ const ListRegisteredDestinations = Codec.interface({
   DestinationList: ensureArray('member', Destination),
 })
 
-type ListRegisteredDestinations = GetInterface<typeof ListRegisteredDestinations>
-
 const ListRegisteredDestinationsResponse = Codec.interface({
   ListRegisteredDestinationsResponse: Codec.interface({
     ListRegisteredDestinationsResult: ListRegisteredDestinations,
@@ -109,12 +119,6 @@ const SendTestNotificationToDestinationResponse = Codec.interface({
   }),
 })
 
-interface Subscription {
-  NotificationType: NotificationType
-  Destination: Destination
-  IsEnabled: boolean
-}
-
 interface CreateSubscriptionParameters {
   MarketplaceId: string
   Subscription: Subscription
@@ -126,8 +130,6 @@ const CreateSubscriptionResponse = Codec.interface({
   }),
 })
 
-type GetSubscriptionParameters = SubscriptionActionParameters
-
 const Subscription = Codec.interface({
   NotificationType,
   Destination,
@@ -138,15 +140,11 @@ const GetSubscription = Codec.interface({
   Subscription,
 })
 
-type GetSubscription = GetInterface<typeof GetSubscription>
-
 const GetSubscriptionResponse = Codec.interface({
   GetSubscriptionResponse: Codec.interface({
     GetSubscriptionResult: GetSubscription,
   }),
 })
-
-type DeleteSubscriptionParameters = SubscriptionActionParameters
 
 const DeleteSubscriptionResponse = Codec.interface({
   DeleteSubscriptionResponse: Codec.interface({
@@ -154,16 +152,14 @@ const DeleteSubscriptionResponse = Codec.interface({
   }),
 })
 
-interface UpdateSubscriptionParameters {
-  MarketplaceId: string
-  Subscription: Subscription
-}
-
 const UpdateSubscriptionResponse = Codec.interface({
   UpdateSubscriptionResponse: Codec.interface({
     UpdateSubscriptionResult: exactly(''),
   }),
 })
+
+export type ListRegisteredDestinations = GetInterface<typeof ListRegisteredDestinations>
+export type GetSubscription = GetInterface<typeof GetSubscription>
 export class Subscriptions {
   constructor(private httpClient: HttpClient) {}
 
@@ -301,7 +297,9 @@ export class Subscriptions {
       resource: Resource.Subscriptions,
       version: SUBSCRIPTIONS_API_VERSION,
       action: 'ListRegisteredDestinations',
-      parameters,
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+      },
     })
 
     return ListRegisteredDestinationsResponse.decode(response).caseOf({
