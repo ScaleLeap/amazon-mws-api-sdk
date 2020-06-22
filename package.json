@@ -29,7 +29,7 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@scaleleap/amazon-marketplaces": "4.1.0",
+    "@scaleleap/amazon-marketplaces": "5.0.0",
     "axios": "0.19.2",
     "fast-xml-parser": "3.17.4",
     "purify-ts": "0.16.0-beta.2",
