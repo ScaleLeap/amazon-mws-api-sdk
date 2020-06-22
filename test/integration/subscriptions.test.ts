@@ -4,6 +4,16 @@ import { Subscriptions } from '../../src'
 import { Config } from './config'
 import { itci } from './it'
 
+/**
+ * If this test Polly recordings need to be re-recorded:
+ *
+ * 1. Create new SQS URI
+ * 2. Change the constant below.
+ * 3. Run only the "should be able to create a subscription" test (use -t option)
+ * 4. Run only the "should be able to delete a subscription"
+ *
+ * $> POLLY_MODE=record CI=true npm t -- test/integration/subscriptions.test.ts -t 'should be able to delete a subscription'
+ */
 const SQS_URL = 'https://sqs.us-east-1.amazonaws.com/304786922662/mws-sub-testw'
 
 const httpClient = new Config().createHttpClient()
@@ -22,6 +32,7 @@ describe('subscriptions', () => {
   itci('should be able to create a subscription', async () => {
     expect.assertions(2)
 
+    // destination must be registered before it can be subscribed to
     const [registerDestinationResponse] = await subscriptions.registerDestination({
       MarketplaceId: amazonMarketplaces.CA.id,
       Destination: {
