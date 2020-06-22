@@ -1,4 +1,5 @@
 import { HttpClient } from './http'
+import { Feeds } from './sections/feeds'
 import { Finances } from './sections/finances/finances'
 import { FulfillmentInventory } from './sections/fulfillment-inventory'
 import { Orders } from './sections/orders'
@@ -8,6 +9,8 @@ import { Sellers } from './sections/sellers'
 import { Subscriptions } from './sections/subscriptions'
 
 export class MWS {
+  private _feeds!: Feeds
+
   private _finances!: Finances
 
   private _fulfillmentInventory!: FulfillmentInventory
@@ -38,6 +41,14 @@ export class MWS {
     }
 
     return this._orders
+  }
+
+  get feeds() {
+    if (!this._feeds) {
+      this._feeds = new Feeds(this.httpClient)
+    }
+
+    return this._feeds
   }
 
   get finances() {

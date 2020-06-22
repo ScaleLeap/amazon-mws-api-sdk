@@ -78,6 +78,7 @@ export enum Resource {
   Finances = 'Finances',
   Sellers = 'Sellers',
   Subscriptions = 'Subscriptions',
+  Feeds = 'Feeds',
 }
 
 interface ResourceActions {
@@ -143,6 +144,13 @@ interface ResourceActions {
     | 'ListSubscriptions'
     | 'UpdateSubscription'
     | 'GetServiceStatus'
+  [Resource.Feeds]:
+    | 'SubmitFeed'
+    | 'GetFeedSubmissionList'
+    | 'GetFeedSubmissionListByNextToken'
+    | 'GetFeedSubmissionCount'
+    | 'CancelFeedSubmissions'
+    | 'GetFeedSubmissionResult'
 }
 
 interface Request {
