@@ -1,63 +1,13 @@
-import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
-import { MWS } from '../../src/mws'
+import { ParsingError } from '../../src'
 import { NextToken } from '../../src/parsing'
-import { getFixture } from '../utils'
+import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus } from '../utils'
 
-const httpConfig = {
-  awsAccessKeyId: '',
-  marketplace: amazonMarketplaces.CA,
-  mwsAuthToken: '',
-  secretKey: '',
-  sellerId: '',
-}
-
-const mockMwsMarketplaceParticipations = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('sellers_list_marketplace_participations'),
-      headers: {
-        'x-mws-request-id': '0',
-        'x-mws-timestamp': '2020-05-06T09:22:23.582Z',
-        'x-mws-quota-max': '1000',
-        'x-mws-quota-remaining': '999',
-        'x-mws-quota-resetson': '2020-04-06T10:22:23.582Z',
-      },
-    }),
-  ),
+const mockMwsMarketplaceParticipations = createMockHttpClient(
+  'sellers_list_marketplace_participations',
 )
 
-const mockMwsMarketplaceParticipationsNT = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('sellers_list_marketplace_participations_nt'),
-      headers: {
-        'x-mws-request-id': '0',
-        'x-mws-timestamp': '2020-05-06T08:22:23.582Z',
-        'x-mws-quota-max': '1000',
-        'x-mws-quota-remaining': '999',
-        'x-mws-quota-resetson': '2020-05-06T10:22:23.582Z',
-      },
-    }),
-  ),
-)
-
-const mockMwsServiceStatus = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('get_service_status'),
-      headers: {
-        'x-mws-request-id': '0',
-        'x-mws-timestamp': '2020-05-06T08:22:23.582Z',
-        'x-mws-quota-max': '1000',
-        'x-mws-quota-remaining': '999',
-        'x-mws-quota-resetson': '2020-05-06T10:22:23.582Z',
-      },
-    }),
-  ),
-)
-
-const mockMwsFail = new MWS(
-  new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
+const mockMwsMarketplaceParticipationsNT = createMockHttpClient(
+  'sellers_list_marketplace_participations_nt',
 )
 
 const mockNextToken = new NextToken('ListMarketplaceParticipations', '123')
