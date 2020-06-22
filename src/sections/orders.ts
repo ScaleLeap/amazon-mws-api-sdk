@@ -23,7 +23,7 @@ import { RequireOnlyOne } from './types'
 
 const ORDERS_API_VERSION = '2013-09-01'
 
-export enum OrderStatus {
+export enum OrderStatusEnum {
   PendingAvailability = 'PendingAvailability',
   Pending = 'Pending',
   Unshipped = 'Unshipped',
@@ -33,12 +33,12 @@ export enum OrderStatus {
   Unfulfillable = 'Unfulfillable',
 }
 
-export enum FulfillmentChannel {
+export enum FulfillmentChannelEnum {
   AFN = 'AFN',
   MFN = 'MFN',
 }
 
-export enum PaymentMethod {
+export enum PaymentMethodEnum {
   COD = 'COD',
   CVS = 'CVS',
   Other = 'Other',
@@ -49,7 +49,7 @@ export enum AddressType {
   Residential = 'Residential',
 }
 
-export enum EasyShipShipmentStatus {
+export enum EasyShipShipmentStatusEnum {
   PendingPickUp = 'PendingPickUp',
   LabelCanceled = 'LabelCanceled',
   PickedUp = 'PickedUp',
@@ -89,9 +89,11 @@ export enum ConditionSubtype {
   Other = 'Other',
 }
 
-const orderStatus: Codec<OrderStatus> = oneOf(Object.values(OrderStatus).map((x) => exactly(x)))
-const fulfillmentChannel: Codec<FulfillmentChannel> = oneOf(
-  Object.values(FulfillmentChannel).map((x) => exactly(x)),
+const orderStatus: Codec<OrderStatusEnum> = oneOf(
+  Object.values(OrderStatusEnum).map((x) => exactly(x)),
+)
+const fulfillmentChannel: Codec<FulfillmentChannelEnum> = oneOf(
+  Object.values(FulfillmentChannelEnum).map((x) => exactly(x)),
 )
 const adddressType: Codec<AddressType> = oneOf(Object.values(AddressType).map((x) => exactly(x)))
 const condition: Codec<Condition> = oneOf(Object.values(Condition).map((x) => exactly(x)))
@@ -292,20 +294,25 @@ export interface GetOrderParameters {
   AmazonOrderId: string[]
 }
 
+export type FulfillmentChannel = (keyof typeof FulfillmentChannelEnum)[]
+export type PaymentMethod = (keyof typeof PaymentMethodEnum)[]
+export type OrderStatus = (keyof typeof OrderStatusEnum)[]
+export type EasyShipShipmentStatus = (keyof typeof EasyShipShipmentStatusEnum)[]
+
 export type ListOrderParameters = RequireOnlyOne<
   {
     CreatedAfter?: Date
     CreatedBefore?: Date
     LastUpdatedAfter?: Date
     LastUpdatedBefore?: Date
-    OrderStatus?: (keyof typeof OrderStatus)[]
-    MarketplaceId: string[]
-    FulfillmentChannel?: (keyof typeof FulfillmentChannel)[]
-    PaymentMethod?: (keyof typeof PaymentMethod)[]
+    OrderStatus?: OrderStatus
+    MarketplaceId: string
+    FulfillmentChannel?: FulfillmentChannel
+    PaymentMethod?: PaymentMethod
     BuyerEmail?: string
     SellerOrderId?: string
     MaxResultsPerPage?: number
-    EasyShipShipmentStatus?: (keyof typeof EasyShipShipmentStatus)[]
+    EasyShipShipmentStatus?: EasyShipShipmentStatus
   },
   'CreatedAfter' | 'LastUpdatedAfter'
 >

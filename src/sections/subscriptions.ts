@@ -35,7 +35,7 @@ export interface Subscription {
   IsEnabled: boolean
 }
 
-interface SubscriptionActionParameters {
+export interface SubscriptionActionParameters {
   MarketplaceId: string
   NotificationType: NotificationType
   Destination: Destination
@@ -111,7 +111,7 @@ const ListRegisteredDestinationsResponse = Codec.interface({
   }),
 })
 
-type SendTestNotificationToDestinationParameters = MarketplaceIdAndDestinationOnlyParameters
+export type SendTestNotificationToDestinationParameters = MarketplaceIdAndDestinationOnlyParameters
 
 const SendTestNotificationToDestinationResponse = Codec.interface({
   SendTestNotificationToDestinationResponse: Codec.interface({
@@ -119,7 +119,7 @@ const SendTestNotificationToDestinationResponse = Codec.interface({
   }),
 })
 
-interface CreateSubscriptionParameters {
+export interface CreateSubscriptionParameters {
   MarketplaceId: string
   Subscription: Subscription
 }
