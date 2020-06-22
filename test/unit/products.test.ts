@@ -1,182 +1,6 @@
-import { amazonMarketplaces, HttpClient, ParsingError } from '../../src'
-import { MWS } from '../../src/mws'
+import { ParsingError } from '../../src'
 import { GetMatchingProductIdType, ItemCondition } from '../../src/sections/products/type'
-import { getFixture } from '../utils'
-
-const httpConfig = {
-  awsAccessKeyId: '',
-  marketplace: amazonMarketplaces.CA,
-  mwsAuthToken: '',
-  secretKey: '',
-  sellerId: '',
-}
-
-const headers = {
-  'x-mws-request-id': '0',
-  'x-mws-timestamp': '2020-05-06T09:22:23.582Z',
-  'x-mws-quota-max': '1000',
-  'x-mws-quota-remaining': '999',
-  'x-mws-quota-resetson': '2020-04-06T10:22:23.582Z',
-}
-
-const mockListMatchingProducts = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_list_matching_products'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetMyFeesEstimate = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_my_fees_estimate'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetMatchingProduct = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_matching_product'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetMatchingProductForId = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_matching_product_for_id'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetCompetitivePricingForSku = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_competitive_pricing_for_sku'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetCompetitivePricingForAsin = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_competitive_pricing_for_asin'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetLowestOfferListingsForSku = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_lowest_offer_listings_for_sku'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetLowestOfferListingsForAsin = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_lowest_offer_listings_for_asin'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetLowestPricedOffersForSku = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_lowest_priced_offers_for_sku'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetLowestPricedOffersForAsin = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_lowest_priced_offers_for_asin'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetMyPriceForSku = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_my_price_for_sku'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetLowestPricedOffersForSkuMissingShipping = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_lowest_priced_offers_for_sku_missing_shipping_charge'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetLowestPricedOffersForSkuTooSoonForProcessing = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_lowest_priced_offers_for_sku_too_soon_for_processing'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetMyPriceForAsin = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_my_price_for_asin'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetProductCategoriesForSku = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_product_categories_for_sku'),
-      headers,
-    }),
-  ),
-)
-
-const mockGetProductCategoriesForAsin = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('products_get_product_categories_for_asin'),
-      headers,
-    }),
-  ),
-)
-
-const mockMwsFail = new MWS(
-  new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
-)
-
-const mockMwsServiceStatus = new MWS(
-  new HttpClient(httpConfig, () =>
-    Promise.resolve({
-      data: getFixture('get_service_status'),
-      headers,
-    }),
-  ),
-)
-
-const parsingError = 'Expected an object, but received a string with value ""'
+import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 describe('products', () => {
   describe('getProductCategoriesForAsin', () => {
@@ -187,6 +11,10 @@ describe('products', () => {
 
     it('returns product categories for product for asin when response is valid', async () => {
       expect.assertions(1)
+
+      const mockGetProductCategoriesForAsin = createMockHttpClient(
+        'products_get_product_categories_for_asin',
+      )
 
       expect(
         await mockGetProductCategoriesForAsin.products.getProductCategoriesForAsin(parameters),
@@ -211,6 +39,10 @@ describe('products', () => {
     it('returns product categories for product for sku when response is valid', async () => {
       expect.assertions(1)
 
+      const mockGetProductCategoriesForSku = createMockHttpClient(
+        'products_get_product_categories_for_sku',
+      )
+
       expect(
         await mockGetProductCategoriesForSku.products.getProductCategoriesForSku(parameters),
       ).toMatchSnapshot()
@@ -234,6 +66,8 @@ describe('products', () => {
     it('returns price for product for asin when response is valid', async () => {
       expect.assertions(1)
 
+      const mockGetMyPriceForAsin = createMockHttpClient('products_get_my_price_for_asin')
+
       expect(await mockGetMyPriceForAsin.products.getMyPriceForAsin(parameters)).toMatchSnapshot()
     })
 
@@ -254,6 +88,8 @@ describe('products', () => {
 
     it('returns price for product for sku when response is valid', async () => {
       expect.assertions(1)
+
+      const mockGetMyPriceForSku = createMockHttpClient('products_get_my_price_for_sku')
 
       expect(await mockGetMyPriceForSku.products.getMyPriceForSku(parameters)).toMatchSnapshot()
     })
@@ -276,6 +112,10 @@ describe('products', () => {
 
     it('returns lowest priced offer for asin when response is valid', async () => {
       expect.assertions(1)
+
+      const mockGetLowestPricedOffersForAsin = createMockHttpClient(
+        'products_get_lowest_priced_offers_for_asin',
+      )
 
       expect(
         await mockGetLowestPricedOffersForAsin.products.getLowestPricedOffersForAsin(parameters),
@@ -301,15 +141,27 @@ describe('products', () => {
     it('returns lowest priced offer for sku when response is valid', async () => {
       expect.assertions(3)
 
+      const mockGetLowestPricedOffersForSku = createMockHttpClient(
+        'products_get_lowest_priced_offers_for_sku',
+      )
+
       expect(
         await mockGetLowestPricedOffersForSku.products.getLowestPricedOffersForSku(parameters),
       ).toMatchSnapshot()
+
+      const mockGetLowestPricedOffersForSkuTooSoonForProcessing = createMockHttpClient(
+        'products_get_lowest_priced_offers_for_sku_too_soon_for_processing',
+      )
 
       expect(
         await mockGetLowestPricedOffersForSkuTooSoonForProcessing.products.getLowestPricedOffersForSku(
           parameters,
         ),
       ).toMatchSnapshot()
+
+      const mockGetLowestPricedOffersForSkuMissingShipping = createMockHttpClient(
+        'products_get_lowest_priced_offers_for_sku_missing_shipping_charge',
+      )
 
       expect(
         await mockGetLowestPricedOffersForSkuMissingShipping.products.getLowestPricedOffersForSku(
@@ -336,6 +188,10 @@ describe('products', () => {
     it('returns product and lowest offer listings when response is valid', async () => {
       expect.assertions(1)
 
+      const mockGetLowestOfferListingsForAsin = createMockHttpClient(
+        'products_get_lowest_offer_listings_for_asin',
+      )
+
       expect(
         await mockGetLowestOfferListingsForAsin.products.getLowestOfferListingsForAsin(parameters),
       ).toMatchSnapshot()
@@ -359,6 +215,10 @@ describe('products', () => {
     it('returns product and lowest offer listings when response is valid', async () => {
       expect.assertions(1)
 
+      const mockGetLowestOfferListingsForSku = createMockHttpClient(
+        'products_get_lowest_offer_listings_for_sku',
+      )
+
       expect(
         await mockGetLowestOfferListingsForSku.products.getLowestOfferListingsForSku(parameters),
       ).toMatchSnapshot()
@@ -376,6 +236,10 @@ describe('products', () => {
   describe('getCompetitivePricingForAsin', () => {
     it('returns product and competitive prices when response is valid', async () => {
       expect.assertions(1)
+
+      const mockGetCompetitivePricingForAsin = createMockHttpClient(
+        'products_get_competitive_pricing_for_asin',
+      )
 
       expect(
         await mockGetCompetitivePricingForAsin.products.getCompetitivePricingForAsin({
@@ -400,6 +264,10 @@ describe('products', () => {
   describe('getCompetitivePricingForSku', () => {
     it('returns product and competitive prices when response is valid', async () => {
       expect.assertions(1)
+
+      const mockGetCompetitivePricingForSku = createMockHttpClient(
+        'products_get_competitive_pricing_for_sku',
+      )
 
       expect(
         await mockGetCompetitivePricingForSku.products.getCompetitivePricingForSku({
@@ -431,6 +299,10 @@ describe('products', () => {
     it('returns a matching product when the response is valid', async () => {
       expect.assertions(1)
 
+      const mockGetMatchingProductForId = createMockHttpClient(
+        'products_get_matching_product_for_id',
+      )
+
       expect(
         await mockGetMatchingProductForId.products.getMatchingProductForId(parameters),
       ).toMatchSnapshot()
@@ -448,6 +320,8 @@ describe('products', () => {
   describe('getMatchingProduct', () => {
     it('returns a matching product when the response is valid', async () => {
       expect.assertions(1)
+
+      const mockGetMatchingProduct = createMockHttpClient('products_get_matching_product')
 
       expect(
         await mockGetMatchingProduct.products.getMatchingProduct({
@@ -470,6 +344,8 @@ describe('products', () => {
     it('returns an array of products when the response is valid', async () => {
       expect.assertions(1)
 
+      const mockListMatchingProducts = createMockHttpClient('products_list_matching_products')
+
       expect(
         await mockListMatchingProducts.products.listMatchingProducts({
           MarketplaceId: '',
@@ -490,6 +366,8 @@ describe('products', () => {
   describe('getMyFeesEstimate', () => {
     it('returns a list fee estimates when the response is valid', async () => {
       expect.assertions(1)
+
+      const mockGetMyFeesEstimate = createMockHttpClient('products_get_my_fees_estimate')
 
       expect(
         await mockGetMyFeesEstimate.products.getMyFeesEstimate({ FeesEstimateRequestList: [] }),
