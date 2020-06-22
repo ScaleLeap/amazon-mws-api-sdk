@@ -1,5 +1,4 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable @typescript-eslint/no-var-requires, jest/require-top-level-describe, no-param-reassign */
+/* eslint-disable eslint-comments/disable-enable-pair, jest/require-top-level-describe */
 const { jestPollyConfigService } = require('@scaleleap/jest-polly')
 
 beforeAll(() => {
