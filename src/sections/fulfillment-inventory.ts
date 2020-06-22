@@ -72,8 +72,6 @@ const InventorySupplyList = Codec.interface({
   InventorySupplyList: ensureArray('member', InventorySupply),
 })
 
-type InventorySupplyList = GetInterface<typeof InventorySupplyList>
-
 const ListInventorySupplyResponse = Codec.interface({
   ListInventorySupplyResponse: Codec.interface({
     ListInventorySupplyResult: InventorySupplyList,
@@ -84,8 +82,6 @@ const InventorySupplyListByNextToken = Codec.interface({
   NextToken: optional(nextTokenCodec('ListInventorySupply')),
   InventorySupplyList: ensureArray('member', InventorySupply),
 })
-
-type InventorySupplyListByNextToken = GetInterface<typeof InventorySupplyListByNextToken>
 
 const ListInventorySupplyByNextTokenResponse = Codec.interface({
   ListInventorySupplyByNextTokenResponse: Codec.interface({
@@ -102,21 +98,24 @@ const canonicalizeParameters = (parameters: ListInventorySupplyRequestParameters
   }
 }
 
-interface ListInventorySupplyRequestParameters {
-  SellerSku?: string[]
-  QueryStartDateTime?: Date
-  ResponseGroup?: 'Basic' | 'Detailed'
-  MarketplaceId?: string
-}
+export type ResponseGroup = 'Basic' | 'Detailed'
 
+export type ListInventorySupplyRequestParameters = RequireOnlyOne<
+  {
+    SellerSku?: string[]
+    QueryStartDateTime?: Date
+    ResponseGroup?: ResponseGroup
+    MarketplaceId?: string
+  },
+  'MarketplaceId' | 'QueryStartDateTime'
+>
+export type InventorySupplyList = GetInterface<typeof InventorySupplyList>
+export type InventorySupplyListByNextToken = GetInterface<typeof InventorySupplyListByNextToken>
 export class FulfillmentInventory {
   constructor(private httpClient: HttpClient) {}
 
   async listInventorySupply(
-    parameters: RequireOnlyOne<
-      ListInventorySupplyRequestParameters,
-      'MarketplaceId' | 'QueryStartDateTime'
-    >,
+    parameters: ListInventorySupplyRequestParameters,
   ): Promise<[InventorySupplyList, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.FulfilmentInventory,

@@ -23,9 +23,9 @@ const REPORTS_API_VERSION = '2009-01-01'
  * http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html#ReportTypeCategories__ListingsReports
  */
 const ReportType = string
-type ReportType = GetInterface<typeof ReportType>
+export type ReportType = GetInterface<typeof ReportType>
 
-interface RequestReportParameters {
+export interface RequestReportParameters {
   ReportType: ReportType
   StartDate?: Date
   EndDate?: Date
@@ -47,7 +47,7 @@ const ReportRequestInfo = Codec.interface({
   CompletedDate: optional(mwsDate),
 })
 
-type ReportRequestInfo = GetInterface<typeof ReportRequestInfo>
+export type ReportRequestInfo = GetInterface<typeof ReportRequestInfo>
 
 const RequestReportResponse = Codec.interface({
   RequestReportResponse: Codec.interface({
@@ -57,7 +57,7 @@ const RequestReportResponse = Codec.interface({
   }),
 })
 
-type ReportProcessing =
+export type ReportProcessing =
   | '_SUBMITTED_'
   | '_IN_PROGRESS_'
   | '_CANCELLED_'
@@ -102,7 +102,7 @@ export type ScheduleType =
   | '_30_DAYS_'
   | '_NEVER_'
 
-interface GetReportRequestListParameters {
+export interface GetReportRequestListParameters {
   ReportRequestIdList?: string[]
   ReportTypeList?: ReportType[]
   ReportProcessingStatusList?: ReportProcessing[]
@@ -117,7 +117,7 @@ const GetReportRequestListResult = Codec.interface({
   ReportRequestInfo: optional(oneOf([array(ReportRequestInfo), ReportRequestInfo, exactly('')])),
 })
 
-type GetReportRequestListResult = GetInterface<typeof GetReportRequestListResult>
+export type GetReportRequestListResult = GetInterface<typeof GetReportRequestListResult>
 
 const GetReportRequestListResponse = Codec.interface({
   GetReportRequestListResponse: Codec.interface({
@@ -131,11 +131,11 @@ const GetReportRequestListByNextTokenResponse = Codec.interface({
   }),
 })
 
-interface GetReportRequestListByNextTokenParameters {
+export interface GetReportRequestListByNextTokenParameters {
   NextToken: NextToken<'GetReportRequestList'>
 }
 
-interface GetReportRequestCountParameters {
+export interface GetReportRequestCountParameters {
   ReportTypeList?: ReportType[]
   ReportProcessingStatusList?: ReportProcessing[]
   RequestedFromDate?: Date
@@ -152,9 +152,9 @@ const GetReportRequestCountResponse = Codec.interface({
   }),
 })
 
-type GetReportRequestCount = GetInterface<typeof GetReportRequestCount>
+export type GetReportRequestCount = GetInterface<typeof GetReportRequestCount>
 
-interface CancelReportRequestsParameters {
+export interface CancelReportRequestsParameters {
   ReportRequestIdList?: string[]
   ReportTypeList?: ReportType[]
   ReportProcessingStatusList?: ReportProcessing[]
@@ -173,9 +173,9 @@ const CancelReportRequestsResponse = Codec.interface({
   }),
 })
 
-type CancelReportRequests = GetInterface<typeof CancelReportRequests>
+export type CancelReportRequests = GetInterface<typeof CancelReportRequests>
 
-interface GetReportListParameters {
+export interface GetReportListParameters {
   MaxCount?: number
   ReportTypeList?: ReportType[]
   Acknowledged?: boolean
@@ -205,7 +205,7 @@ const GetReportListResponse = Codec.interface({
   }),
 })
 
-interface GetReportListByNextTokenParameters {
+export interface GetReportListByNextTokenParameters {
   NextToken: NextToken<'GetReportList'>
 }
 
@@ -215,7 +215,7 @@ const GetReportListByNextTokenResponse = Codec.interface({
   }),
 })
 
-type GetReportListResult = GetInterface<typeof GetReportListResult>
+export type GetReportListResult = GetInterface<typeof GetReportListResult>
 
 const GetReportCount = Codec.interface({
   Count: number,
@@ -227,7 +227,7 @@ const GetReportCountResponse = Codec.interface({
   }),
 })
 
-interface GetReportCountParameters {
+export interface GetReportCountParameters {
   ReportTypeList?: ReportType[]
   Acknowledged?: boolean
   AvailableFromDate?: Date
@@ -247,9 +247,9 @@ const GetReportResponse = Codec.custom<string>({
 
 type Report = string
 
-type GetReportCount = GetInterface<typeof GetReportCount>
+export type GetReportCount = GetInterface<typeof GetReportCount>
 
-interface ManageReportScheduleParameters {
+export interface ManageReportScheduleParameters {
   ReportType: ReportType
   Schedule: ScheduleType
   ScheduleDate?: Date
@@ -266,7 +266,7 @@ const ManageReportSchedule = Codec.interface({
   ReportSchedule: optional(oneOf([array(ReportSchedule), ReportSchedule, exactly('')])),
 })
 
-type ManageReportSchedule = GetInterface<typeof ManageReportSchedule>
+export type ManageReportSchedule = GetInterface<typeof ManageReportSchedule>
 
 const ManageReportScheduleResponse = Codec.interface({
   ManageReportScheduleResponse: Codec.interface({
@@ -274,7 +274,7 @@ const ManageReportScheduleResponse = Codec.interface({
   }),
 })
 
-interface GetReportScheduleListParameters {
+export interface GetReportScheduleListParameters {
   ReportTypeList?: ReportType[]
 }
 
@@ -284,7 +284,7 @@ const GetReportScheduleList = Codec.interface({
   ReportSchedule: optional(oneOf([array(ReportSchedule), ReportSchedule, exactly('')])),
 })
 
-type GetReportScheduleList = GetInterface<typeof GetReportScheduleList>
+export type GetReportScheduleList = GetInterface<typeof GetReportScheduleList>
 
 const GetReportScheduleListResponse = Codec.interface({
   GetReportScheduleListResponse: Codec.interface({
@@ -292,7 +292,7 @@ const GetReportScheduleListResponse = Codec.interface({
   }),
 })
 
-interface GetReportScheduleCountParameters {
+export interface GetReportScheduleCountParameters {
   ReportTypeList?: ReportType
 }
 
@@ -300,7 +300,7 @@ const GetReportScheduleCount = Codec.interface({
   Count: number,
 })
 
-type GetReportScheduleCount = GetInterface<typeof GetReportScheduleCount>
+export type GetReportScheduleCount = GetInterface<typeof GetReportScheduleCount>
 
 const GetReportScheduleCountResponse = Codec.interface({
   GetReportScheduleCountResponse: Codec.interface({
@@ -308,7 +308,7 @@ const GetReportScheduleCountResponse = Codec.interface({
   }),
 })
 
-interface UpdateReportAcknowledgementsParameters {
+export interface UpdateReportAcknowledgementsParameters {
   ReportIdList: string[]
   Acknowledged?: boolean
 }
@@ -318,13 +318,17 @@ const UpdateReportAcknowledgements = Codec.interface({
   ReportInfo: optional(oneOf([array(ReportInfo), ReportInfo, exactly('')])),
 })
 
-type UpdateReportAcknowledgements = GetInterface<typeof UpdateReportAcknowledgements>
+export type UpdateReportAcknowledgements = GetInterface<typeof UpdateReportAcknowledgements>
 
 const UpdateReportAcknowledgementsResponse = Codec.interface({
   UpdateReportAcknowledgementsResponse: Codec.interface({
     UpdateReportAcknowledgementsResult: UpdateReportAcknowledgements,
   }),
 })
+
+export interface GetReportParameters {
+  ReportId: string
+}
 export class Reports {
   constructor(private httpClient: HttpClient) {}
 
@@ -418,12 +422,14 @@ export class Reports {
     })
   }
 
-  async getReport(parameters: { ReportId: string }): Promise<[Report, RequestMeta]> {
+  async getReport(parameters: GetReportParameters): Promise<[Report, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReport',
-      parameters,
+      parameters: {
+        ReportId: parameters.ReportId,
+      },
     })
 
     return GetReportResponse.decode(response).caseOf({

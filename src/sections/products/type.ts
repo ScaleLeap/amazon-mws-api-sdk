@@ -49,7 +49,7 @@ interface PriceToEstimateFees {
   Points?: Points
 }
 
-interface FeeEstimateRequest {
+export interface FeeEstimateRequest {
   MarketplaceId: string
   IdType: FeeEstimateIdType
   IdValue: string

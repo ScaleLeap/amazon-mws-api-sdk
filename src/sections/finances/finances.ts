@@ -14,19 +14,22 @@ import {
 
 const FINANCES_API_VERSION = '2015-05-01'
 
-interface ListFinancialEventGroupsParameters {
+export interface ListFinancialEventGroupsParameters {
   MaxResultsPerPage?: number
   FinancialEventGroupStartedAfter: Date
   FinancialEventGroupStartedBefore?: Date
 }
 
-interface ListFinancicalEventsParameters {
-  MaxResultsPerPage?: number
-  AmazonOrderId?: string
-  FinancialEventGroupId?: string
-  PostedAfter?: Date
-  PostedBefore?: Date
-}
+export type ListFinancialEventsParameters = RequireOnlyOne<
+  {
+    MaxResultsPerPage?: number
+    AmazonOrderId?: string
+    FinancialEventGroupId?: string
+    PostedAfter?: Date
+    PostedBefore?: Date
+  },
+  'PostedAfter' | 'AmazonOrderId' | 'FinancialEventGroupId'
+>
 
 export class Finances {
   constructor(private httpClient: HttpClient) {}
@@ -55,10 +58,7 @@ export class Finances {
   }
 
   async listFinancialEvents(
-    parameters: RequireOnlyOne<
-      ListFinancicalEventsParameters,
-      'PostedAfter' | 'AmazonOrderId' | 'FinancialEventGroupId'
-    >,
+    parameters: ListFinancialEventsParameters,
   ): Promise<[ListFinancialEvents, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Finances,
