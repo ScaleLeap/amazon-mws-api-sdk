@@ -6,6 +6,7 @@
   },
   "exclude": [
     "src/**.test.ts",
+    "examples/*",
     "test/**",
     "dangerfile.ts"
   ]
