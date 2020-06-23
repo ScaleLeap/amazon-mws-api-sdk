@@ -2,7 +2,13 @@ import { boolean, Codec, GetInterface, number, optional, string } from 'purify-t
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
+import {
+  ensureArray,
+  ensureString,
+  mwsDate,
+  NextToken,
+  nextToken as nextTokenCodec,
+} from '../parsing'
 
 const FEEDS_API_VERSION = '2009-01-01'
 interface GetFeedSubmissionListParameters {
@@ -26,7 +32,7 @@ const FeedSubmissionInfo = Codec.interface({
 const GetFeedSubmissionList = Codec.interface({
   HasToken: optional(boolean),
   NextToken: optional(nextTokenCodec('GetFeedSubmissionList')),
-  FeedSubmissionInfo: optional(FeedSubmissionInfo),
+  FeedSubmissionInfo: optional(ensureArray('FeedSubmissionInfo', FeedSubmissionInfo)),
 })
 
 type GetFeedSubmissionList = GetInterface<typeof GetFeedSubmissionList>
