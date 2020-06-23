@@ -2,6 +2,7 @@
   "extends": "tsconfigs/nodejs-module",
   "include": [
     "src/**/*.ts",
+    "examples/**/*.ts",
     "test/**/*.ts"
   ],
   "compilerOptions": {
