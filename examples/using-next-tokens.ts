@@ -47,6 +47,12 @@ const main = async () => {
   ] = await sellers.listMarketplaceParticipationsByNextToken(nextToken)
 
   /**
+   * Using received NextTokens
+   */
+
+  const newNextToken = marketplaceParticipationsList.NextToken?.token
+
+  /**
    * Check out Amazon's official docs for other available endpoints
    * and definitions of possible request and response parameters
    * http://docs.developer.amazonservices.com/en_CA/dev_guide/index.html
