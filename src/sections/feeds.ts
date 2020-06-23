@@ -1,8 +1,8 @@
-import { boolean, Codec, GetInterface, optional, unknown } from 'purify-ts'
+import { boolean, Codec, GetInterface, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { nextToken as nextTokenCodec } from '../parsing'
+import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 
 const FEEDS_API_VERSION = '2009-01-01'
 interface GetFeedSubmissionListParameters {
@@ -14,10 +14,19 @@ interface GetFeedSubmissionListParameters {
   SubmittedToDate?: Date
 }
 
+const FeedSubmissionInfo = Codec.interface({
+  FeedSubmissionId: ensureString,
+  FeedType: string,
+  SubmittedDate: mwsDate,
+  FeedProcessingStatus: string,
+  StartedProcessingDate: optional(mwsDate),
+  CompletedProcessingDate: optional(mwsDate),
+})
+
 const GetFeedSubmissionList = Codec.interface({
   HasToken: optional(boolean),
   NextToken: optional(nextTokenCodec('GetFeedSubmissionList')),
-  FeedSubmissionInfo: optional(unknown),
+  FeedSubmissionInfo: optional(FeedSubmissionInfo),
 })
 
 type GetFeedSubmissionList = GetInterface<typeof GetFeedSubmissionList>
@@ -28,8 +37,37 @@ const GetFeedSubmissionListResponse = Codec.interface({
   }),
 })
 
+const GetFeedSubmissionListByNextTokenResponse = Codec.interface({
+  GetFeedSubmissionListByNextTokenResponse: Codec.interface({
+    GetFeedSubmissionListByNextTokenResult: GetFeedSubmissionList,
+  }),
+})
+
 export class Feeds {
   constructor(private httpClient: HttpClient) {}
+
+  async getFeedSubmissionListByNextToken(
+    nextToken: NextToken<'GetFeedSubmissionList'>,
+  ): Promise<[GetFeedSubmissionList, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Feeds,
+      version: FEEDS_API_VERSION,
+      action: 'GetFeedSubmissionListByNextToken',
+      parameters: {
+        NextToken: nextToken.token,
+      },
+    })
+
+    return GetFeedSubmissionListByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.GetFeedSubmissionListByNextTokenResponse.GetFeedSubmissionListByNextTokenResult,
+        meta,
+      ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getFeedSubmissionList(
     parameters: GetFeedSubmissionListParameters = {},
