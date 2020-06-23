@@ -12,7 +12,7 @@ describe('feeds', () => {
       expect(await mockGetFeedSubmissionList.feeds.getFeedSubmissionList()).toMatchSnapshot()
     })
 
-    it('throws a parsing error when the response is not valid', async () => {
+    it("throws a parsing error when the response isn't valid", async () => {
       expect.assertions(1)
 
       await expect(() => mockMwsFail.feeds.getFeedSubmissionList()).rejects.toStrictEqual(
@@ -40,6 +40,24 @@ describe('feeds', () => {
       await expect(() =>
         mockMwsFail.feeds.getFeedSubmissionListByNextToken(nextToken),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
+  describe('getFeedSubmissionCount', () => {
+    it('returns count of total number of feed submissions if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetFeedSubmissionCount = createMockHttpClient('feeds_get_feed_submission_count')
+
+      expect(await mockGetFeedSubmissionCount.feeds.getFeedSubmissionCount()).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.feeds.getFeedSubmissionCount()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
     })
   })
 })
