@@ -14,7 +14,7 @@ describe('feeds', () => {
     it('throws a parsing error when the response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.feeds.getFeedSubmissionList()()).rejects.toStrictEqual(
+      await expect(() => mockMwsFail.feeds.getFeedSubmissionList()).rejects.toStrictEqual(
         new ParsingError(parsingError),
       )
     })

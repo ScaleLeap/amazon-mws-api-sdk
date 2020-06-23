@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`feeds getFeedSubmissionList returns a next token and feed submission info if succesful 1`] = `
+Array [
+  Object {
+    "FeedSubmissionInfo": Object {
+      "FeedProcessingStatus": "_SUBMITTED_",
+      "FeedSubmissionId": 2291326430,
+      "FeedType": "_POST_PRODUCT_DATA_",
+      "SubmittedDate": "2009-02-20T02:10:35+00:00",
+    },
+    "NextToken": NextToken {
+      "action": "GetFeedSubmissionList",
+      "token": "2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
