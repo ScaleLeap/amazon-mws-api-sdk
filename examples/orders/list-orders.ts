@@ -2,6 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /**
+ * More usage examples at
+ * /test/integration/orders.test.ts
+ * /test/unit/orders.test.ts
+ */
+
+/**
  * import from 'amazon-mws-api-sdk'
  */
 import {
@@ -30,10 +36,6 @@ const mwsOptions: MWSOptions = {
 }
 
 const http = new HttpClient(mwsOptions)
-/**
- * Configure which API you need
- *  Sellers, Orders, Fulfillment Inventory, Products, Reports, Subscriptions, Finances, Feeds
- */
 const orders = new Orders(http)
 
 const main = async () => {
