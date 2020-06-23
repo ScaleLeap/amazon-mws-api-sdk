@@ -4,6 +4,7 @@
  * import from 'amazon-mws-api-sdk'
  */
 import { amazonMarketplaces, HttpClient, MWSOptions, Sellers } from '../src'
+import { ServiceStatus } from '../src/parsing'
 
 /**
  * Configure the HttpClient
@@ -38,6 +39,7 @@ const main = async () => {
 
   /**
    * Check out Amazon's official docs for other available endpoints
+   * and definitions of possible request and response parameters
    * http://docs.developer.amazonservices.com/en_CA/dev_guide/index.html
    * Under the folder API References
    */
