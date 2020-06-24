@@ -1,3 +1,4 @@
+import crypto from 'crypto'
 import {
   array,
   boolean,
@@ -156,8 +157,58 @@ interface GetFeedSubmissionResultParameters {
   FeedSubmissionId: string
 }
 
+export interface SubmitFeedParameters {
+  FeedContent: string
+  FeedType: FeedType
+  MarketplaceIdList?: string[]
+  PurgeAndReplace?: boolean
+  AmazonOrderId?: string
+  DocumentId?: string
+}
+
+const SubmitFeed = Codec.interface({
+  FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
+})
+
+export type SubmitFeed = GetInterface<typeof SubmitFeed>
+
+const SubmitFeedResponse = Codec.interface({
+  SubmitFeedResponse: Codec.interface({
+    SubmitFeedResult: SubmitFeed,
+  }),
+})
+
 export class Feeds {
   constructor(private httpClient: HttpClient) {}
+
+  async submitFeed(parameters: SubmitFeedParameters): Promise<[SubmitFeed, RequestMeta]> {
+    const hash = crypto.createHash('md5').update(parameters.FeedContent).digest('base64')
+
+    const [response, meta] = await this.httpClient.request(
+      'POST',
+      {
+        resource: Resource.Feeds,
+        version: FEEDS_API_VERSION,
+        action: 'SubmitFeed',
+        parameters: {
+          FeedType: parameters.FeedType,
+          'MarketplaceIdList.Id': parameters.MarketplaceIdList,
+          PurgeAndReplace: parameters.PurgeAndReplace,
+          AmazonOrderId: parameters.AmazonOrderId,
+          DocumentId: parameters.DocumentId,
+          ContentMD5Value: hash,
+        },
+      },
+      parameters.FeedContent,
+    )
+
+    return SubmitFeedResponse.decode(response).caseOf({
+      Right: (x) => [x.SubmitFeedResponse.SubmitFeedResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getFeedSubmissionResult(
     parameters: GetFeedSubmissionResultParameters,

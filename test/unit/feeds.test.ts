@@ -1,8 +1,31 @@
-import { ParsingError } from '../../src'
+import { ParsingError, SubmitFeedParameters } from '../../src'
 import { NextToken } from '../../src/parsing'
 import { createMockHttpClient, mockMwsFail, parsingError } from '../utils'
 
 describe('feeds', () => {
+  describe('submitFeed', () => {
+    const parameters: SubmitFeedParameters = {
+      FeedContent: '',
+      FeedType: '_POST_PRODUCT_DATA_',
+    }
+
+    it('returns feed info of submitted feeds if succesful', async () => {
+      expect.assertions(1)
+
+      const mockSubmitFeed = createMockHttpClient('feeds_submit_feed')
+
+      expect(await mockSubmitFeed.feeds.submitFeed(parameters)).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.feeds.submitFeed(parameters)).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
+    })
+  })
+
   describe('getFeedSubmissionResult', () => {
     const parameters = { FeedSubmissionId: '' }
 
