@@ -273,6 +273,7 @@ export class HttpClient {
   public async request<TResource extends Resource, TRes>(
     method: HttpMethod,
     info: ResourceInfo<TResource>,
+    body?: string,
   ): Promise<[TRes | string, RequestMeta]> {
     const marketplaceUri = this.options.marketplace.webServiceUri
 
@@ -301,19 +302,35 @@ export class HttpClient {
       'user-agent': '@scaleleap/amazon-mws-api-sdk/1.0.0 (Language=JavaScript)',
     }
 
-    const config =
-      method === 'GET'
-        ? {
-            url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
-            method,
-            headers,
-          }
-        : {
-            url,
-            method,
-            headers,
-            data: canonicalizeParameters(parametersWithSignature),
-          }
+    let config: Request
+    if (method === 'GET') {
+      config = {
+        url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
+        method,
+        headers,
+      }
+      /**
+       * `SubmitFeed` has the feed passed as an XML file in the body
+       * and the other parameters as query parameters
+       */
+    } else if (body && info.action === 'SubmitFeed') {
+      config = {
+        url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
+        method,
+        headers: {
+          'Content-Type': 'text/xml',
+          ...headers,
+        },
+        data: body,
+      }
+    } else {
+      config = {
+        url,
+        method,
+        headers,
+        data: canonicalizeParameters(parametersWithSignature),
+      }
+    }
 
     try {
       const response = await this.fetch(config)

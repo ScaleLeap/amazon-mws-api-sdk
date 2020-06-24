@@ -108,3 +108,23 @@ Array [
   },
 ]
 `;
+
+exports[`feeds submitFeed returns feed info of submitted feeds if succesful 1`] = `
+Array [
+  Object {
+    "FeedSubmissionInfo": Object {
+      "FeedProcessingStatus": "_SUBMITTED_",
+      "FeedSubmissionId": "2291326430",
+      "FeedType": "_POST_PRODUCT_DATA_",
+      "SubmittedDate": 2009-02-20T02:10:35.000Z,
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
