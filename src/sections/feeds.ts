@@ -37,7 +37,7 @@ const FeedSubmissionInfo = Codec.interface({
 const GetFeedSubmissionList = Codec.interface({
   HasToken: optional(boolean),
   NextToken: optional(nextTokenCodec('GetFeedSubmissionList')),
-  FeedSubmissionInfo: oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')]),
+  FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
 })
 
 type GetFeedSubmissionList = GetInterface<typeof GetFeedSubmissionList>
@@ -126,7 +126,7 @@ export interface CancelFeedSubmissionsParameters {
 
 const CancelFeedSubmissions = Codec.interface({
   Count: number,
-  FeedSubmissionInfo: oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')]),
+  FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
 })
 
 export type CancelFeedSubmissions = GetInterface<typeof CancelFeedSubmissions>
