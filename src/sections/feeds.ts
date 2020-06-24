@@ -4,6 +4,7 @@ import {
   Codec,
   exactly,
   GetInterface,
+  Left,
   number,
   oneOf,
   optional,
@@ -136,8 +137,47 @@ const CancelFeedSubmissionsResponse = Codec.interface({
   }),
 })
 
+const FeedSubmission = string
+
+export type FeedSubmission = GetInterface<typeof FeedSubmission>
+
+const GetFeedSubmissionResultResponse = Codec.custom<string>({
+  decode: (feed) => {
+    if (typeof feed === 'string' && feed.length > 0) {
+      return string.decode(feed)
+    }
+
+    return Left('Expected feed to have length of more than 0')
+  },
+  encode: (feed) => feed,
+})
+
+interface GetFeedSubmissionResultParameters {
+  FeedSubmissionId: string
+}
+
 export class Feeds {
   constructor(private httpClient: HttpClient) {}
+
+  async getFeedSubmissionResult(
+    parameters: GetFeedSubmissionResultParameters,
+  ): Promise<[FeedSubmission, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Feeds,
+      version: FEEDS_API_VERSION,
+      action: 'GetFeedSubmissionResult',
+      parameters: {
+        FeedSubmissionId: parameters.FeedSubmissionId,
+      },
+    })
+
+    return GetFeedSubmissionResultResponse.decode(response).caseOf({
+      Right: (x) => [x, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async cancelFeedSubmissions(
     parameters: CancelFeedSubmissionsParameters = {},

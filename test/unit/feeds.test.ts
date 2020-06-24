@@ -4,20 +4,24 @@ import { createMockHttpClient, mockMwsFail, parsingError } from '../utils'
 
 describe('feeds', () => {
   describe('getFeedSubmissionResult', () => {
+    const parameters = { FeedSubmissionId: '' }
+
     it('returns an XML file when succesful', async () => {
       expect.assertions(1)
 
       const mockGetFeedSubmissionResult = createMockHttpClient('feeds_get_feed_submission_result')
 
-      expect(await mockGetFeedSubmissionResult.feeds.getFeedSubmissionResult()).toMatchSnapshot()
+      expect(
+        await mockGetFeedSubmissionResult.feeds.getFeedSubmissionResult(parameters),
+      ).toMatchSnapshot()
     })
 
     it('throws a parsing error when the response isnt valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.feeds.getFeedSubmissionResult()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
-      )
+      await expect(() =>
+        mockMwsFail.feeds.getFeedSubmissionResult(parameters),
+      ).rejects.toStrictEqual(new ParsingError('Expected feed to have length of more than 0'))
     })
   })
 
