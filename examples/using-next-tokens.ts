@@ -50,7 +50,31 @@ const main = async () => {
    * Using received NextTokens
    */
 
-  const newNextToken = marketplaceParticipationsList.NextToken?.token
+  const newNextToken = marketplaceParticipationsList.NextToken
+  if (newNextToken) {
+    const [
+      newMarketplaceParticipationsList,
+      newRequestMeta,
+    ] = await sellers.listMarketplaceParticipationsByNextToken(newNextToken)
+  }
+
+  /**
+   * If you have next tokens from outside the SDK you can instantiate your own
+   */
+
+  const myNextTokenFromOutsideTheApplication = new NextToken(
+    /**
+     * Action needs to match the original action instead of the "...ByNextToken" action
+     * i.e. use `ListMarketplaceParticipations` as your action instead of `ListMarketplaceParticipationsByNextToken`
+     */
+    'ListMarketplaceParticipations', // Action
+    'MYNEXTTOKEN123', // Next token value
+  )
+
+  const [
+    myMarketPlaceParticipationsList,
+    myRequestMeta,
+  ] = await sellers.listMarketplaceParticipationsByNextToken(myNextTokenFromOutsideTheApplication)
 
   /**
    * Check out Amazon's official docs for other available endpoints
