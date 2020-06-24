@@ -1,14 +1,18 @@
-import { boolean, Codec, GetInterface, number, optional, string } from 'purify-ts'
+import {
+  array,
+  boolean,
+  Codec,
+  exactly,
+  GetInterface,
+  number,
+  oneOf,
+  optional,
+  string,
+} from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import {
-  ensureArray,
-  ensureString,
-  mwsDate,
-  NextToken,
-  nextToken as nextTokenCodec,
-} from '../parsing'
+import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 
 const FEEDS_API_VERSION = '2009-01-01'
 interface GetFeedSubmissionListParameters {
@@ -32,7 +36,7 @@ const FeedSubmissionInfo = Codec.interface({
 const GetFeedSubmissionList = Codec.interface({
   HasToken: optional(boolean),
   NextToken: optional(nextTokenCodec('GetFeedSubmissionList')),
-  FeedSubmissionInfo: optional(ensureArray('FeedSubmissionInfo', FeedSubmissionInfo)),
+  FeedSubmissionInfo: oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')]),
 })
 
 type GetFeedSubmissionList = GetInterface<typeof GetFeedSubmissionList>
@@ -112,8 +116,51 @@ const GetFeedSubmissionCountResponse = Codec.interface({
   }),
 })
 
+export interface CancelFeedSubmissionsParameters {
+  FeedSubmissionIdList?: string[]
+  FeedTypeList?: string[]
+  SubmittedFromDate?: Date
+  SubmittedToDate?: Date
+}
+
+const CancelFeedSubmissions = Codec.interface({
+  Count: number,
+  FeedSubmissionInfo: oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')]),
+})
+
+export type CancelFeedSubmissions = GetInterface<typeof CancelFeedSubmissions>
+
+const CancelFeedSubmissionsResponse = Codec.interface({
+  CancelFeedSubmissionsResponse: Codec.interface({
+    CancelFeedSubmissionsResult: CancelFeedSubmissions,
+  }),
+})
+
 export class Feeds {
   constructor(private httpClient: HttpClient) {}
+
+  async cancelFeedSubmissions(
+    parameters: CancelFeedSubmissionsParameters = {},
+  ): Promise<[CancelFeedSubmissions, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Feeds,
+      version: FEEDS_API_VERSION,
+      action: 'CancelFeedSubmissions',
+      parameters: {
+        'FeedSubmissionIdList.Id': parameters.FeedSubmissionIdList,
+        'FeedTypeList.Type': parameters.FeedTypeList,
+        SubmittedFromDate: parameters.SubmittedFromDate?.toISOString(),
+        SubmittedToDate: parameters.SubmittedToDate?.toISOString(),
+      },
+    })
+
+    return CancelFeedSubmissionsResponse.decode(response).caseOf({
+      Right: (x) => [x.CancelFeedSubmissionsResponse.CancelFeedSubmissionsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getFeedSubmissionCount(
     parameters: GetFeedSubmissionCountParameters = {},
