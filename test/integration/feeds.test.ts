@@ -15,10 +15,9 @@ describe(`${Feeds.name}`, () => {
     expect.assertions(1)
 
     const parameters: SubmitFeedParameters = {
-      FeedContent: readFileSync(
-        join(__dirname, `/__fixtures__/submit_feed_sample_feed_content.xml`),
-        { encoding: 'utf8' },
-      ),
+      FeedContent: readFileSync(join(__dirname, `/submit_feed_sample_feed_content.xml`), {
+        encoding: 'utf8',
+      }),
       FeedType: '_POST_PRODUCT_DATA_',
     }
 
