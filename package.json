@@ -44,7 +44,7 @@
     "@types/jest": "25.2.3",
     "@types/node": "13.13.4",
     "ajv": "6.12.2",
-    "danger": "10.2.0",
+    "danger": "10.2.1",
     "global-agent": "2.1.12",
     "is-ci": "2.0.0",
     "jest": "25.5.3",
