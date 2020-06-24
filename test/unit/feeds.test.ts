@@ -3,6 +3,24 @@ import { NextToken } from '../../src/parsing'
 import { createMockHttpClient, mockMwsFail, parsingError } from '../utils'
 
 describe('feeds', () => {
+  describe('getFeedSubmissionResult', () => {
+    it('returns an XML file when succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetFeedSubmissionResult = createMockHttpClient('feeds_get_feed_submission_result')
+
+      expect(await mockGetFeedSubmissionResult.feeds.getFeedSubmissionResult()).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.feeds.getFeedSubmissionResult()).rejects.toStrictEqual(
+        new ParsingError(parsingError),
+      )
+    })
+  })
+
   describe('cancelFeedSubmissions', () => {
     it('returns count and submission info of canceled feed submissions', async () => {
       expect.assertions(1)

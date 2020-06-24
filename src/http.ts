@@ -247,19 +247,11 @@ const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestR
       return Promise.reject(error.response.data)
     })
 
-const parseGetReport = (response: RequestResponse): [string, RequestMeta] => [
-  response.data,
-  {
-    requestId: response.headers['x-mws-request-id'],
-    timestamp: new Date(response.headers['x-mws-timestamp']),
-    quotaMax: Number(response.headers['x-mws-quota-max']),
-    quotaRemaining: Number(response.headers['x-mws-quota-remaining']),
-    quotaResetOn: new Date(response.headers['x-mws-quota-resetson']),
-  },
-]
-
-const parseResponse = <T>(response: RequestResponse): [T, RequestMeta] => {
-  const responseData = parser.parse(response.data)
+const parseResponse = <T>(
+  response: RequestResponse,
+  parseString = false,
+): [T | string, RequestMeta] => {
+  const responseData = parseString ? response.data : parser.parse(response.data)
   return [
     responseData,
     {
@@ -334,10 +326,15 @@ export class HttpClient {
         throw new InvalidUPCIdentifier(`${info.action} request failed`)
       }
 
-      // GetReport returns a string that should be treated as a file instead of XML data
-      // http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReport.html
-      if (info.action === 'GetReport') {
-        return parseGetReport(response)
+      /**
+       * GetReport and GetFeedSubmissionResult returns a string that should be treated as a file instead of XML data
+       * Get Report
+       * http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReport.html
+       * GetFeedSubmissionResult
+       * http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_GetFeedSubmissionResult.html
+       */
+      if (info.action === 'GetReport' || info.action === 'GetFeedSubmissionResult') {
+        return parseResponse(response, true)
       }
 
       return parseResponse(response)
