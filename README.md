@@ -3,11 +3,7 @@
 📦 @scaleleap/amazon-mws-api-sdk
 ===================================
 
-A template for creating TypeScript applications.
-
----
-
-This package does one, two and three.
+A fully typed TypeScript SDK library for Amazon MWS API 
 
 ## Download & Installation
 
@@ -15,16 +11,53 @@ This package does one, two and three.
 $ npm i -s @scaleleap/amazon-mws-api-sdk
 ```
 
-## Contributing
+## Documentation (WIP)
 
-This repository uses [Conventional Commit](https://www.conventionalcommits.org/) style commit messages.
+[Click me!](docs)
 
-Testing uses [global-agent](https://github.com/gajus/global-agent) to allow for request proxying/interception
-for debugging.
+## Example
+---
 
-1. Use [Charles.app](https://www.charlesproxy.com), or a similar MiM tool to proxy the requests.
-2. Set the proxy server via `export GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:8080`
-3. Run tests `npm t` and you'll be able to inspect traffic going through.
+```TypeScript
+import { 
+  amazonMarketplaces, 
+  HttpClient, 
+  MWSOptions, 
+  Sellers, 
+  Orders 
+} from 'amazon-mws-api-sdk'
+
+const mwsOptions: MWSOptions = {
+  marketplace: amazonMarketplaces.US,
+  awsAccessKeyId: '',
+  mwsAuthToken: '',
+  sellerId: '',
+  secretKey: '',
+}
+
+const main = async () => {
+  const http = new HttpClient(mwsOptions)
+  
+  // Get status for Sellers API
+  const sellers = new Sellers(http)
+  const [serviceStatus] = await sellers.getServiceStatus()
+  if (serviceStatus.Status === 'GREEN') {
+    console.log(`Sellers API is up on ${serviceStatus.Timestamp}!`)
+  }
+
+  // List Orders
+  const orders = new Orders(http)
+  const [ordersList, requestMeta] = await orders.listOrders({ 
+    MarketplaceId: [amazonMarketplaces.US.id],
+    CreatedAfter: new Date(Date.now() - 100 * 24 * 60 * 60 * 1000)
+  })
+
+  ordersList.Orders.forEach((order) => {
+    console.log(`Order ID is ${order.AmazonOrderId}`)
+  })
+}
+```
+More examples in the `/examples` folder!
 
 ## Authors or Acknowledgments
 
