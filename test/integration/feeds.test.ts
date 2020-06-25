@@ -31,7 +31,7 @@ describe(`${Feeds.name}`, () => {
     expect(response.FeedSubmissionInfo).toBeDefined()
   })
 
-  itci('should be able to get count of feeds', async () => {
+  itci('should succesfully get count of feeds', async () => {
     expect.assertions(1)
 
     const [response] = await feeds.getFeedSubmissionCount()

@@ -88,7 +88,7 @@ export type FeedType =
   | '_POST_FLAT_FILE_FBA_UPDATE_INBOUND_PLAN_'
   | '_POST_FLAT_FILE_FBA_CREATE_REMOVAL_'
   | '_RFQ_UPLOAD_FEED_'
-  | '	_POST_EASYSHIP_DOCUMENTS_'
+  | '_POST_EASYSHIP_DOCUMENTS_'
 
 export type FeedProcessingStatus =
   | '_AWAITING_ASYNCHRONOUS_REPLY_'
@@ -259,7 +259,7 @@ export class Feeds {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Feeds,
       version: FEEDS_API_VERSION,
-      action: 'GetFeedSubmissionListByNextToken',
+      action: 'GetFeedSubmissionCount',
       parameters: {
         'FeedTypeList.Type': parameters.FeedTypeList,
         'FeedProcessingStatusList.Status': parameters.FeedProcessingStatusList,
