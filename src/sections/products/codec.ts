@@ -24,7 +24,7 @@ import {
  * Collection of codecs for the products api
  */
 
-enum ItemConditionEnum {
+export enum ItemConditionEnum {
   Any = 'Any',
   New = 'New',
   Used = 'Used',
@@ -37,7 +37,7 @@ const ItemCondition = enumeration(ItemConditionEnum)
 
 const CurrencyCode = enumeration(CurrencyCodeEnum)
 
-enum StatusEnum {
+export enum StatusEnum {
   Success = 'Success',
   ClientError = 'ClientError',
   ServiceError = 'ServiceError',
@@ -45,7 +45,7 @@ enum StatusEnum {
 
 const Status = enumeration(StatusEnum)
 
-enum IdTypeEnum {
+export enum IdTypeEnum {
   ASIN = 'ASIN',
   SKU = 'SKU',
 }
@@ -57,7 +57,7 @@ const MoneyType = Codec.interface({
   CurrencyCode,
 })
 
-export const Points = Codec.interface({
+export const PointsCodec = Codec.interface({
   PointsNumber: number,
   PointsMonetaryValue: MoneyType,
 })
@@ -71,7 +71,7 @@ const ErrorType = Codec.interface({
 const PriceToEstimateFees = Codec.interface({
   ListingPrice: MoneyType,
   Shipping: optional(MoneyType),
-  Points: optional(Points),
+  Points: optional(PointsCodec),
 })
 
 const FeesEstimateIdentifier = Codec.interface({
@@ -126,7 +126,7 @@ const SingleProductInterface = Codec.interface({
   Product,
 })
 
-const ListMatchingProducts = Codec.interface({
+export const ListMatchingProducts = Codec.interface({
   Products: ensureArray('Product', Product),
 })
 
@@ -218,14 +218,14 @@ const LowestPrice = Codec.interface({
   LandedPrice: MoneyType,
   ListingPrice: MoneyType,
   Shipping: MoneyType,
-  Points: optional(Points),
+  Points: optional(PointsCodec),
 })
 
 const BuyBoxPrice = Codec.interface({
   LandedPrice: MoneyType,
   ListingPrice: MoneyType,
   Shipping: MoneyType,
-  Points: optional(Points),
+  Points: optional(PointsCodec),
 })
 
 const Summary = Codec.interface({
@@ -275,7 +275,7 @@ const Offer = {
   SellerFeedbackRating: optional(SellerFeedbackRating),
   ShippingTime: DetailedShippingTimeType,
   ListingPrice: MoneyType,
-  Points: optional(Points),
+  Points: optional(PointsCodec),
   Shipping: MoneyType,
   ShipsFrom: optional(ShipsFrom),
   IsFulfilledByAmazon: boolean,
@@ -283,7 +283,7 @@ const Offer = {
   IsFeaturedMerchant: optional(boolean),
 }
 
-const GetLowestPricedOffersForSKU = Codec.interface({
+export const GetLowestPricedOffersForSKU = Codec.interface({
   Identifier: SkuIdentifier,
   Summary,
   Offers: ensureArray(
@@ -301,7 +301,7 @@ export const GetLowestPricedOffersForSKUResponse = Codec.interface({
   }),
 })
 
-const GetLowestPricedOffersForASIN = Codec.interface({
+export const GetLowestPricedOffersForASIN = Codec.interface({
   Identifier: AsinIdentifier,
   Summary,
   Offers: ensureArray(
@@ -318,13 +318,16 @@ export const GetLowestPricedOffersForASINResponse = Codec.interface({
   }),
 })
 
-const GetMyPriceForSKUResult = ensureArray('GetMyPriceForSKUResult', SingleProductInterface)
+export const GetMyPriceForSKUResult = ensureArray('GetMyPriceForSKUResult', SingleProductInterface)
 
 export const GetMyPriceForSKUResponse = Codec.interface({
   GetMyPriceForSKUResponse: GetMyPriceForSKUResult,
 })
 
-const GetMyPriceForASINResult = ensureArray('GetMyPriceForASINResult', SingleProductInterface)
+export const GetMyPriceForASINResult = ensureArray(
+  'GetMyPriceForASINResult',
+  SingleProductInterface,
+)
 
 export const GetMyPriceForASINResponse = Codec.interface({
   GetMyPriceForASINResponse: GetMyPriceForASINResult,
@@ -336,7 +339,7 @@ const ProductCategory: Codec<ProductCategoryInterface> = Codec.interface({
   Parent: optional(lazy(() => ProductCategory)),
 })
 
-const GetProductCategoriesForSKU = ensureArray('Self', ProductCategory)
+export const GetProductCategoriesForSKU = ensureArray('Self', ProductCategory)
 
 export const GetProductCategoriesForSKUResponse = Codec.interface({
   GetProductCategoriesForSKUResponse: Codec.interface({
@@ -344,7 +347,7 @@ export const GetProductCategoriesForSKUResponse = Codec.interface({
   }),
 })
 
-const GetProductCategoriesForASIN = ensureArray('Self', ProductCategory)
+export const GetProductCategoriesForASIN = ensureArray('Self', ProductCategory)
 
 export const GetProductCategoriesForASINResponse = Codec.interface({
   GetProductCategoriesForASINResponse: Codec.interface({

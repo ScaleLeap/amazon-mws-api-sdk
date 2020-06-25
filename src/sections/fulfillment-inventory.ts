@@ -8,7 +8,7 @@ import { RequireOnlyOne } from './types'
 
 const FULFILLMENT_INVENTORY_API_VERSION = '2010-10-01'
 
-enum Condition {
+export enum InventoryCondition {
   NewItem = 'NewItem',
   NewWithWarranty = 'NewWithWarranty',
   NewOEM = 'NewOEM',
@@ -31,13 +31,13 @@ enum Condition {
   '' = '',
 }
 
-enum TimepointType {
+export enum TimepointType {
   Immediately = 'Immediately',
   DateTime = 'DateTime',
   Unknown = 'Unknown',
 }
 
-enum SupplyType {
+export enum SupplyType {
   InStock = 'InStock',
   Inbound = 'Inbound',
   Transfer = 'Transfer',
@@ -59,14 +59,14 @@ const InventorySupply = Codec.interface({
   SellerSKU: optional(string),
   FNSKU: string,
   ASIN: optional(string),
-  Condition: optional(oneOf(Object.values(Condition).map((x) => exactly(x)))),
+  Condition: optional(oneOf(Object.values(InventoryCondition).map((x) => exactly(x)))),
   TotalSupplyQuantity: number,
   InStockSupplyQuantity: number,
   EarliestAvailability: optional(Timepoint),
   SupplyDetail: optional(ensureArray('member', InventorySupplyDetail)),
 })
 
-const InventorySupplyList = Codec.interface({
+export const InventorySupplyList = Codec.interface({
   NextToken: optional(nextTokenCodec('ListInventorySupply')),
   MarketplaceId: optional(string),
   InventorySupplyList: ensureArray('member', InventorySupply),
@@ -78,7 +78,7 @@ const ListInventorySupplyResponse = Codec.interface({
   }),
 })
 
-const InventorySupplyListByNextToken = Codec.interface({
+export const InventorySupplyListByNextToken = Codec.interface({
   NextToken: optional(nextTokenCodec('ListInventorySupply')),
   InventorySupplyList: ensureArray('member', InventorySupply),
 })

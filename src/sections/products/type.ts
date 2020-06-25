@@ -24,7 +24,7 @@ export enum CurrencyCodeEnum {
   MXN = 'MXN',
 }
 
-interface MoneyType {
+export interface MoneyType {
   Amount: number | undefined
   CurrencyCode: CurrencyCodeEnum
 }
@@ -38,12 +38,12 @@ export interface FeeDetail {
   IncludedFeeDetailList: FeeDetail[] | undefined
 }
 
-interface Points {
+export interface Points {
   PointsNumber: number
   PointsMonetaryValue: MoneyType
 }
 
-interface PriceToEstimateFees {
+export interface PriceToEstimateFees {
   ListingPrice: MoneyType
   Shipping?: MoneyType
   Points?: Points
