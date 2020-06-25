@@ -19,7 +19,7 @@ import {
   nextToken as nextTokenCodec,
 } from '../parsing'
 import { getServiceStatusByResource } from './shared'
-import { RequireOnlyOne } from './types'
+import { FulfillmentChannelEnum, RequireOnlyOne } from './types'
 
 const ORDERS_API_VERSION = '2013-09-01'
 
@@ -31,11 +31,6 @@ export enum OrderStatusEnum {
   Shipped = 'Shipped',
   Canceled = 'Canceled',
   Unfulfillable = 'Unfulfillable',
-}
-
-export enum FulfillmentChannelEnum {
-  AFN = 'AFN',
-  MFN = 'MFN',
 }
 
 export enum PaymentMethodEnum {
@@ -137,7 +132,7 @@ const Money = Codec.interface({
   Amount: optional(number),
 })
 
-const Order = Codec.interface({
+export const Order = Codec.interface({
   AmazonOrderId: string,
   SellerOrderId: optional(string),
   PurchaseDate: mwsDate,
@@ -185,7 +180,7 @@ const Order = Codec.interface({
   IsEstimatedShipDateSet: optional(boolean),
 })
 
-const ListOrders = Codec.interface({
+export const ListOrders = Codec.interface({
   NextToken: optional(nextTokenCodec('ListOrders')),
   LastUpdatedBefore: optional(mwsDate),
   CreatedBefore: optional(mwsDate),
@@ -212,7 +207,7 @@ const GetOrderResponse = Codec.interface({
   }),
 })
 
-const ListOrderItems = Codec.interface({
+export const ListOrderItems = Codec.interface({
   NextToken: optional(string),
   AmazonOrderId: string,
   OrderItems: ensureArray(

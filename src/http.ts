@@ -57,8 +57,8 @@ export interface MWSOptions {
   secretKey: string
 }
 
-type HttpMethod = 'GET' | 'POST'
-type ParameterTypes =
+export type HttpMethod = 'GET' | 'POST'
+export type ParameterTypes =
   | string
   | number
   | (number | string)[]
@@ -67,8 +67,8 @@ type ParameterTypes =
   | { [key: string]: ParameterTypes }
   | undefined
 
-type Parameters = Record<string, ParameterTypes>
-type CleanParameters = Record<string, string>
+export type Parameters = Record<string, ParameterTypes>
+export type CleanParameters = Record<string, string>
 
 export enum Resource {
   FulfilmentInventory = 'FulfillmentInventory',
@@ -80,7 +80,7 @@ export enum Resource {
   Subscriptions = 'Subscriptions',
 }
 
-interface ResourceActions {
+export interface ResourceActions {
   [Resource.Sellers]:
     | 'ListMarketplaceParticipations'
     | 'ListMarketplaceParticipationsByNextToken'
@@ -145,14 +145,14 @@ interface ResourceActions {
     | 'GetServiceStatus'
 }
 
-interface Request {
+export interface Request {
   url: string
   method: HttpMethod
   headers: Record<string, string>
   data?: string
 }
 
-interface ResourceInfo<TResource extends Resource> {
+export interface ResourceInfo<TResource extends Resource> {
   resource: TResource
   version: string
   action: ResourceActions[TResource]
@@ -167,7 +167,7 @@ export interface RequestMeta {
   quotaResetOn: Date
 }
 
-interface RequestResponse {
+export interface RequestResponse {
   data: string
   headers: Record<string, string>
 }
