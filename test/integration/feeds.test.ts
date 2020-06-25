@@ -11,6 +11,22 @@ const httpClient = new Config().createHttpClient()
 describe(`${Feeds.name}`, () => {
   const feeds = new Feeds(httpClient)
 
+  itci('should be able to list feed recently submitted', async () => {
+    expect.assertions(1)
+
+    const [response] = await feeds.getFeedSubmissionList()
+
+    expect(response.FeedSubmissionInfo).toBeDefined()
+  })
+
+  itci('should be able to get count of feeds', async () => {
+    expect.assertions(1)
+
+    const [response] = await feeds.getFeedSubmissionCount()
+
+    expect(typeof response.Count).toBe('number')
+  })
+
   itci('should be able to submit sample feed', async () => {
     expect.assertions(1)
 
