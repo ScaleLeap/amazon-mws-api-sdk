@@ -11,6 +11,18 @@ const httpClient = new Config().createHttpClient()
 describe(`${Feeds.name}`, () => {
   const feeds = new Feeds(httpClient)
 
+  itci('should be able to get XML string from get submission result', async () => {
+    expect.assertions(1)
+
+    const parameters = {
+      FeedSubmissionId: '51793018437',
+    }
+
+    const [response] = await feeds.getFeedSubmissionResult(parameters)
+
+    expect(typeof response).toBe('string')
+  })
+
   itci('should be able to list feed recently submitted', async () => {
     expect.assertions(1)
 
