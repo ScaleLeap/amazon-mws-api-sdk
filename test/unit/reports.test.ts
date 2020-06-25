@@ -148,9 +148,6 @@ describe('reports', () => {
 
   describe('getReportListByNextToken', () => {
     const mockNextToken = new NextToken('GetReportList', '123')
-    const parameters = {
-      NextToken: mockNextToken,
-    }
 
     it('returns report info and next token if succesful', async () => {
       expect.assertions(1)
@@ -158,7 +155,7 @@ describe('reports', () => {
       const mockGetReportListByNextToken = createMockHttpClient('reports_get_report_list_nt')
 
       expect(
-        await mockGetReportListByNextToken.reports.getReportListByNextToken(parameters),
+        await mockGetReportListByNextToken.reports.getReportListByNextToken(mockNextToken),
       ).toMatchSnapshot()
     })
 
@@ -166,7 +163,7 @@ describe('reports', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.reports.getReportListByNextToken(parameters),
+        mockMwsFail.reports.getReportListByNextToken(mockNextToken),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
@@ -245,9 +242,6 @@ describe('reports', () => {
 
   describe('getReportRequestListByNextToken', () => {
     const mockNextToken = new NextToken('GetReportRequestList', '123')
-    const parameters = {
-      NextToken: mockNextToken,
-    }
 
     it('returns report request info if succesful', async () => {
       expect.assertions(1)
@@ -258,7 +252,7 @@ describe('reports', () => {
 
       expect(
         await mockGetReportRequestListByNextToken.reports.getReportRequestListByNextToken(
-          parameters,
+          mockNextToken,
         ),
       ).toMatchSnapshot()
     })
@@ -267,7 +261,7 @@ describe('reports', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.reports.getReportRequestListByNextToken(parameters),
+        mockMwsFail.reports.getReportRequestListByNextToken(mockNextToken),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
