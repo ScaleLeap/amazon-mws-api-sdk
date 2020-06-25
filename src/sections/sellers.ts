@@ -7,7 +7,7 @@ import { getServiceStatusByResource } from './shared'
 
 const SELLERS_API_VERSION = '2011-07-01'
 
-const MarketplaceParticipations = Codec.interface({
+export const MarketplaceParticipations = Codec.interface({
   NextToken: optional(nextTokenCodec('ListMarketplaceParticipations')),
   ListParticipations: ensureArray(
     'Participation',
@@ -42,7 +42,7 @@ const MarketplaceParticipationsByNextTokenResponse = Codec.interface({
   }),
 })
 
-type MarketplaceParticipations = GetInterface<typeof MarketplaceParticipations>
+export type MarketplaceParticipations = GetInterface<typeof MarketplaceParticipations>
 
 export class Sellers {
   constructor(private httpClient: HttpClient) {}

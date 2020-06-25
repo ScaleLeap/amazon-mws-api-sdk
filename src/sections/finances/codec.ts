@@ -10,8 +10,9 @@ import {
 } from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
+import { FulfillmentChannelEnum } from '../types'
 
-enum ProcessingStatusEnum {
+export enum ProcessingStatusEnum {
   Open = 'Open',
   Closed = 'Closed',
 }
@@ -37,7 +38,7 @@ const FinancialEventGroup = Codec.interface({
   FinancialEventGroupEnd: optional(mwsDate),
 })
 
-const ListFinancialEventGroups = Codec.interface({
+export const ListFinancialEventGroups = Codec.interface({
   NextToken: optional(nextTokenCodec('ListFinancialEventGroups')),
   FinancialEventGroupList: ensureArray('FinancialEventGroup', FinancialEventGroup),
 })
@@ -68,7 +69,7 @@ const FeeComponent = Codec.interface({
   FeeAmount: optional(CurrencyAmount),
 })
 
-enum ChargeTypeEnum {
+export enum ChargeTypeEnum {
   Principal = 'Principal',
   Tax = 'Tax',
   'MarketplaceFacilitatorTax-Principal' = 'MarketplaceFacilitatorTax-Principal',
@@ -109,7 +110,7 @@ const ChargeComponent = Codec.interface({
   ChargeAmount: optional(CurrencyAmount),
 })
 
-enum DirectPaymentTypeEnum {
+export enum DirectPaymentTypeEnum {
   StoredValueCardRevenue = 'StoredValueCardRevenue',
   StoredValueCardRefund = 'StoredValueCardRefund',
   PrivateLabelCreditCardRevenue = 'PrivateLabelCreditCardRevenue',
@@ -125,7 +126,7 @@ const DirectPayment = Codec.interface({
   DirectPaymentAmount: optional(CurrencyAmount),
 })
 
-enum TaxCollectionModelEnum {
+export enum TaxCollectionModelEnum {
   MarketplaceFacilitator = 'MarketplaceFacilitator',
   Standard = 'Standard',
 }
@@ -178,11 +179,6 @@ const RefundEvent = ShipmentEvent
 const GuaranteeClaimEvent = ShipmentEvent
 const ChargebackEvent = ShipmentEvent
 
-enum FulfillmentChannelEnum {
-  AFN = 'AFN',
-  MFN = 'MFN',
-}
-
 const FulfillmentChannel = enumeration(FulfillmentChannelEnum)
 
 const PayWithAmazonEvent = Codec.interface({
@@ -198,7 +194,7 @@ const PayWithAmazonEvent = Codec.interface({
   StoreName: optional(string),
 })
 
-enum ProviderTransactionTypeEnum {
+export enum ProviderTransactionTypeEnum {
   ProviderCredit = 'ProviderCredit',
   ProviderCreditReversal = 'ProviderCreditReversal',
 }
@@ -216,7 +212,7 @@ const SolutionProviderCreditEvent = Codec.interface({
   ProviderStoreName: optional(string),
 })
 
-enum RetrochargeEventTypeEnum {
+export enum RetrochargeEventTypeEnum {
   Retrocharge = 'Retrocharge',
   RetrochargeReversal = 'RetrochargeReversal',
 }
@@ -235,7 +231,7 @@ const RetrochargeEvent = Codec.interface({
   ),
 })
 
-enum RentalEventTypeEnum {
+export enum RentalEventTypeEnum {
   'RentalCustomerPayment-Buyout' = 'RentalCustomerPayment-Buyout',
   'RentalCustomerPayment-Extension' = 'RentalCustomerPayment-Extension',
   'RentalCustomerRefund-Buyout' = 'RentalCustomerRefund-Buyout',
@@ -267,7 +263,7 @@ const PerformanceBondRefundEvent = unknown
 /**
  * Not sure what case MWS returns. Sample requests has them captialized but docs has them in lower case
  */
-enum transactionTypeEnum {
+export enum transactionTypeEnum {
   charge = 'charge',
   refund = 'refund',
   Charge = 'Charge',
@@ -311,7 +307,7 @@ const ChargeInstrument = Codec.interface({
   Amount: optional(CurrencyAmount),
 })
 
-enum DebtRecoveryTypeEnum {
+export enum DebtRecoveryTypeEnum {
   DebtPayment = 'DebtPayment',
   DebtPaymentFailure = 'DebtPaymentFailure',
   DebtAdjustment = 'DebtAdjustment',
@@ -327,7 +323,7 @@ const DebtRecoveryEvent = Codec.interface({
   ChargeInstrumentList: optional(ensureArray('ChargeInstrument', ChargeInstrument)),
 })
 
-enum SourceBusinessEventTypeEnum {
+export enum SourceBusinessEventTypeEnum {
   LoanAdvance = 'LoanAdvance',
   LoanPayment = 'LoanPayment',
   LoanRefund = 'LoanRefund',
@@ -340,7 +336,7 @@ const LoanServicingEvent = Codec.interface({
   SourceBusinessEventType: optional(SourceBusinessEventType),
 })
 
-enum AdjustmentTypeEnum {
+export enum AdjustmentTypeEnum {
   FBAInventoryReimbursement = 'FBAInventoryReimbursement',
   ReserveEvent = 'ReserveEvent',
   PostageBilling = 'PostageBilling',
@@ -441,7 +437,7 @@ const AffordabilityExpenseReversalEvent = Codec.interface({
   MarketplaceId: optional(string),
 })
 
-enum NetworkComminglingTransactionTypeEnum {
+export enum NetworkComminglingTransactionTypeEnum {
   ComminglingVAT = 'ComminglingVAT',
   NetCo = 'NetCo',
 }
@@ -516,7 +512,7 @@ const FinancialEvents = Codec.interface({
   TDSReimbursementEventList: optional(ensureArray('TDSReimbursementEvent', TDSReimbursementEvent)),
 })
 
-const ListFinancialEvents = Codec.interface({
+export const ListFinancialEvents = Codec.interface({
   NextToken: optional(nextTokenCodec('ListFinancialEvents')),
   FinancialEvents,
 })
