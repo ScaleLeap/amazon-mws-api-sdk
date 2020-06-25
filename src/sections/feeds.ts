@@ -17,7 +17,7 @@ import { HttpClient, RequestMeta, Resource } from '../http'
 import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 
 const FEEDS_API_VERSION = '2009-01-01'
-interface GetFeedSubmissionListParameters {
+export interface GetFeedSubmissionListParameters {
   FeedSubmissionIdList?: string[]
   MaxCount?: number
   FeedTypeList?: string[]
@@ -35,13 +35,13 @@ const FeedSubmissionInfo = Codec.interface({
   CompletedProcessingDate: optional(mwsDate),
 })
 
-const GetFeedSubmissionList = Codec.interface({
+export const GetFeedSubmissionList = Codec.interface({
   HasToken: optional(boolean),
   NextToken: optional(nextTokenCodec('GetFeedSubmissionList')),
   FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
 })
 
-type GetFeedSubmissionList = GetInterface<typeof GetFeedSubmissionList>
+export type GetFeedSubmissionList = GetInterface<typeof GetFeedSubmissionList>
 
 const GetFeedSubmissionListResponse = Codec.interface({
   GetFeedSubmissionListResponse: Codec.interface({
@@ -106,7 +106,7 @@ export interface GetFeedSubmissionCountParameters {
   SubmittedToDate?: Date
 }
 
-const GetFeedSubmissionCount = Codec.interface({
+export const GetFeedSubmissionCount = Codec.interface({
   Count: number,
 })
 
@@ -125,7 +125,7 @@ export interface CancelFeedSubmissionsParameters {
   SubmittedToDate?: Date
 }
 
-const CancelFeedSubmissions = Codec.interface({
+export const CancelFeedSubmissions = Codec.interface({
   Count: number,
   FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
 })
@@ -138,7 +138,7 @@ const CancelFeedSubmissionsResponse = Codec.interface({
   }),
 })
 
-const FeedSubmission = string
+export const FeedSubmission = string
 
 export type FeedSubmission = GetInterface<typeof FeedSubmission>
 
@@ -153,7 +153,7 @@ const GetFeedSubmissionResultResponse = Codec.custom<string>({
   encode: (feed) => feed,
 })
 
-interface GetFeedSubmissionResultParameters {
+export interface GetFeedSubmissionResultParameters {
   FeedSubmissionId: string
 }
 
@@ -166,7 +166,7 @@ export interface SubmitFeedParameters {
   DocumentId?: string
 }
 
-const SubmitFeed = Codec.interface({
+export const SubmitFeed = Codec.interface({
   FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
 })
 
