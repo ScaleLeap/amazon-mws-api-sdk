@@ -55,7 +55,33 @@
     + [cancelFeedSubmissions](#cancelfeedsubmissions)
     + [getFeedSubmissionResult](#getfeedsubmissionresult)
   * [Products](#products)
+    + [Types used in Products](#types-used-in-products)
+      - [FeesEstimateRequest](#feesestimaterequest)
+      - [PriceToEstimateFees](#pricetoestimatefees)
+      - [MoneyType](#moneytype)
+      - [Points](#points)
+    + [listMatchingProducts](#listmatchingproducts)
+    + [getMatchingProduct](#getmatchingproduct)
+    + [getMatchingProductForId](#getmatchingproductforid)
+    + [getCompetitivePricingForSku](#getcompetitivepricingforsku)
+    + [getCompetitivePricingForAsin](#getcompetitivepricingforasin)
+    + [getLowestOfferListingsForSku](#getlowestofferlistingsforsku)
+    + [getLowestOfferListingsForAsin](#getlowestofferlistingsforasin)
+    + [getLowestPricedOffersForSku](#getlowestpricedoffersforsku)
+    + [getLowestPricedOffersForSku](#getlowestpricedoffersforsku-1)
+    + [getMyFeesEstimate](#getmyfeesestimate)
+    + [getMyPriceForSku](#getmypriceforsku)
+    + [getMyPriceForAsin](#getmypriceforasin)
+    + [getProductCategoriesForSku](#getproductcategoriesforsku)
+    + [getProductCategoriesForAsin](#getproductcategoriesforasin)
+    + [getServiceStatus](#getservicestatus-4)
   * [Finances](#finances)
+    + [listFinancialEventGroups](#listfinancialeventgroups)
+    + [listFinancialEventGroupsByNextToken](#listfinancialeventgroupsbynexttoken)
+    + [listFinancialEvents](#listfinancialevents)
+    + [listFinancialEventsByNextToken](#listfinancialeventsbynexttoken)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 # Basics
 
@@ -484,9 +510,207 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 
 
 ## Products
+[Amazon MWS Finances API official documentation](http://docs.developer.amazonservices.com/en_CA/products/Products_Overview.html)
 
-_in progress_
+### Types used in Products
+#### FeesEstimateRequest
+
+      - [FeesEstimateRequest](#feesestimaterequest)
+      - [PriceToEstimateFees](#pricetoestimatefees)
+      - [MoneyType](#moneytype)
+      - [Points](#points)
+
+| Name                	| Type                	| Example          	                          | Required 	|
+|---------------------	|---------------------	|-------------------------------------------- |----------	|
+| MarketplaceId       	| string              	| 'A2EUQ1WTGCTBG2' 	                          | Yes      	|
+| IdType              	| string              	| 'ASIN'           	                          | Yes      	|
+| IdValue             	| string              	| 'MY-ASIN-1'      	                          | Yes      	|
+| PriceToEstimateFees 	| PriceToEstimateFees 	| [PriceToEstimateFees](#pricetoestimatefees) | Yes      	|
+| Identifier          	| string              	| 'request1'       	                          | Yes      	|
+| IsAmazonFulfilled   	| boolean             	| true             	                          | Yes      	|
+
+#### PriceToEstimateFees
+
+| Name                	| Type                	| Example    	            | Required 	|
+|---------------------	|---------------------	|-------------------------- |----------	|
+| ListingPrice        	| MoneyType           	| [MoneyType](#moneytype)  	| Yes      	|
+| Shipping            	| MoneyType           	| [MoneyType](#moneytype)  	| No       	|
+| Points              	| Points              	| [Points](#points)      	| No       	|
+
+#### MoneyType
+
+| Name                	| Type                	| Example    	| Required 	|
+|---------------------	|---------------------	|------------	|----------	|
+| Amount              	| number              	| 1000       	| No       	|
+| CurrencyCode        	| string              	| 'USD'      	| Yes      	|
+
+* [Possible values for CurrencyCode](http://docs.developer.amazonservices.com/en_CA/products/Products_Datatypes.html#MoneyType)
+
+#### Points
+
+| Name                	| Type                	| Example    	            | Required 	|
+|---------------------	|---------------------	|------------------------	|----------	|
+| PointsNumber        	| number              	| 1000       	            | Yes      	|
+| PointsMonetaryValue 	| MoneyType           	| [MoneyType](#moneytype)  	| Yes      	|
+
+### listMatchingProducts
+**Parameters**
+| Name           	| Type   	| Example            	| Required 	|
+|----------------	|--------	|--------------------	|----------	|
+| MarketplaceId  	| string 	| 'A2EUQ1WTGCTBG2'   	| Yes      	|
+| Query          	| string 	| 'harry potter dvd' 	| Yes      	|
+| QueryContextId 	| string 	| 'ArtsAndCrafts'    	| No       	|
+
+* [Possible values for QueryContextId](http://docs.developer.amazonservices.com/en_CA/products/Products_QueryContextIDs.html)
+
+### getMatchingProduct
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| ASINList       	| string[] 	| ['MY-ASIN-1']    	| Yes      	|
+
+### getMatchingProductForId
+**Parameters**
+| Name          	| Type     	| Example          	| Required 	|
+|---------------	|----------	|------------------	|----------	|
+| MarketplaceId 	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| IdType        	| string   	| 'ASIN'           	| Yes      	|
+| IdList        	| string[] 	| ['MY-ASIN-1']    	| No       	|
+
+* [Possible values for IdType](http://docs.developer.amazonservices.com/en_CA/products/Products_GetMatchingProductForId.html)
+
+### getCompetitivePricingForSku
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| SellerSKUList     | string[] 	| ['MY-SKU-1']    	| Yes      	|
+
+### getCompetitivePricingForAsin
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| ASINList       	| string[] 	| ['MY-ASIN-1']    	| Yes      	|
+
+### getLowestOfferListingsForSku
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| SellerSKUList     | string[] 	| ['MY-SKU-1']    	| Yes      	|
+| ItemCondition     | string 	| 'New'         	| No      	|
+
+* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
+
+### getLowestOfferListingsForAsin
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| ASINList       	| string[] 	| ['MY-ASIN-1']    	| Yes      	|
+| ItemCondition     | string 	| 'New'         	| No      	|
+
+* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForASIN.html)
+
+### getLowestPricedOffersForSku
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| SellerSKU         | string 	| 'MY-SKU-1'    	| Yes      	|
+| ItemCondition     | string 	| 'New'         	| Yes      	|
+
+* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
+
+### getLowestPricedOffersForSku
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| ASIN              | string 	| 'MY-ASIN-1'    	| Yes      	|
+| ItemCondition     | string 	| 'New'         	| Yes      	|
+
+* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
+
+### getMyFeesEstimate
+**Parameters**
+| Name           	        | Type     	                | Example                                        | Required 	|
+|-----------------------	|-----------------------	|----------------------------------------------- |----------	|
+| FeesEstimateRequestList  	| FeesEstimateRequest[]   	|  [FeesEstimateRequest](#feesestimaterequest)	 | Yes      	|
+
+### getMyPriceForSku
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| SellerSKUList     | string[] 	| ['MY-SKU-1']    	| Yes      	|
+| ItemCondition     | string 	| 'New'         	| No      	|
+* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
+
+### getMyPriceForAsin
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| ASINList          | string[] 	| ['MY-ASIN-1']    	| Yes      	|
+| ItemCondition     | string 	| 'New'         	| No      	|
+* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
+
+### getProductCategoriesForSku
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| SellerSKU         | string 	| 'MY-SKU-1'    	| Yes      	|
+
+### getProductCategoriesForAsin
+**Parameters**
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| ASIN              | string 	| 'MY-ASIN-1'    	| Yes      	|
+
+
+### getServiceStatus
+
+**Parameters**
+
+| None |
+|------|
+
 
 ## Finances
+[Amazon MWS Finances API official documentation](http://docs.developer.amazonservices.com/en_CA/finances/Finances_Overview.html)
 
-_in progress_
+### listFinancialEventGroups
+**Parameters**
+| Name                             	| Type     	| Example                           	| Required 	|
+|----------------------------------	|----------	|-----------------------------------	|----------	|
+| MaxResultsPerPage                	| number   	| 10                                	| No       	|
+| FinancialEventGroupsStartedAfter 	| Date     	| new Date()                        	| Yes      	|
+| FinancialEventGroupStartedBefore 	| Date     	| new Date()                        	| No       	|
+
+### listFinancialEventGroupsByNextToken
+**Parameters**
+| Name      | Type      | Example                                                               | Required |
+|-----------|-----------|-----------------------------------------------------------------------|----------|
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+
+### listFinancialEvents
+**Parameters**
+| Name                  	| Type   	| Example               	| Required                                                                                                                                 	|
+|-----------------------	|--------	|-----------------------	|------------------------------------------------------------------------------------------------------------------------------------------	|
+| MaxResultsPerPage     	| number 	| 10                    	| No                                                                                                                                       	|
+| AmazonOrderId         	| string 	| '902-3159896-1390916' 	| You can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
+| FinancialEventGroupId 	| string 	| 'FNCLEVTGRPID'        	| You can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
+| PostedAfter           	| Date   	| new Date()            	| You can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
+| PostedBefore          	| Date   	| new Date()            	| No                                                                                                                                       	|
+
+### listFinancialEventsByNextToken
+**Parameters**
+| Name      | Type      | Example                                                               | Required |
+|-----------|-----------|-----------------------------------------------------------------------|----------|
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+
