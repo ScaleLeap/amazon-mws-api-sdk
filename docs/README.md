@@ -302,12 +302,12 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 | Acknowledged    	| boolean  	| true       	| No       	|
 
 ## Subscriptions
+[Amazon MWS Subscriptions official API](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Overview.html)
 
 ### Types used in Subscriptions
 
 #### Subscription
-[Amazon MWS Subscriptions official API](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Overview.html)
-
+**Properties**
 | Name             	| Type        	| Example           	      | Required 	|
 |------------------	|-------------	|-------------------	      |----------	|
 | NotificationType 	| string      	| 'AnyOfferChanged' 	      | Yes      	|
@@ -317,7 +317,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
 #### Destination
-
+**Properties**
 | Name            	| Type              	| Example 	                            | Required 	|
 |-----------------	|-------------------	|------------------------------------   |----------	|
 | DeliveryChannel 	| string            	| 'SQS'   	                            | Yes      	|
@@ -326,7 +326,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for DeliveryChannel](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Datatypes.html#Destination)
 
 #### AttribueKeyValue
-
+**Properties**
 | Name  	| Type   	| Example                                                                        	| Required 	|
 |-------	|--------	|--------------------------------------------------------------------------------	|----------	|
 | Key   	| string 	| 'sqsQueueUrl'                                                                  	| Yes      	|
@@ -514,11 +514,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 
 ### Types used in Products
 #### FeesEstimateRequest
-
-      - [FeesEstimateRequest](#feesestimaterequest)
-      - [PriceToEstimateFees](#pricetoestimatefees)
-      - [MoneyType](#moneytype)
-      - [Points](#points)
+**Properties**
 
 | Name                	| Type                	| Example          	                          | Required 	|
 |---------------------	|---------------------	|-------------------------------------------- |----------	|
@@ -530,7 +526,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 | IsAmazonFulfilled   	| boolean             	| true             	                          | Yes      	|
 
 #### PriceToEstimateFees
-
+**Properties**
 | Name                	| Type                	| Example    	            | Required 	|
 |---------------------	|---------------------	|-------------------------- |----------	|
 | ListingPrice        	| MoneyType           	| [MoneyType](#moneytype)  	| Yes      	|
@@ -538,7 +534,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 | Points              	| Points              	| [Points](#points)      	| No       	|
 
 #### MoneyType
-
+**Properties**
 | Name                	| Type                	| Example    	| Required 	|
 |---------------------	|---------------------	|------------	|----------	|
 | Amount              	| number              	| 1000       	| No       	|
@@ -547,7 +543,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for CurrencyCode](http://docs.developer.amazonservices.com/en_CA/products/Products_Datatypes.html#MoneyType)
 
 #### Points
-
+**Properties**
 | Name                	| Type                	| Example    	            | Required 	|
 |---------------------	|---------------------	|------------------------	|----------	|
 | PointsNumber        	| number              	| 1000       	            | Yes      	|
