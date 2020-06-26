@@ -6,6 +6,10 @@ import { Feeds, SubmitFeedParameters } from '../../src'
 import { Config } from './config'
 import { itci } from './it'
 
+/**
+ * `submitFeed` modifies URL for each request which normally
+ * triggers Polly to re-record, this is a workaround to that
+ */
 jestPollyConfigService.config = {
   matchRequestsBy: {
     url: false,
