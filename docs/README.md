@@ -44,16 +44,18 @@
     + [updateSubscription](#updatesubscription)
     + [getServiceStatus](#getservicestatus-2)
   * [FulfillmentInventory](#fulfillmentinventory)
+    + [listInventorySupply](#listinventorysupply)
+    + [listInventorySupplyByNextToken](#listinventorysupplybynexttoken)
+    + [getServiceStatus](#getservicestatus-3)
   * [Feeds](#feeds)
+    + [submitFeed](#submitfeed)
+    + [getFeedSubmissionList](#getfeedsubmissionlist)
+    + [getFeedSubmissionListByNextToken](#getfeedsubmissionlistbynexttoken)
+    + [getFeedSubmissionCount](#getfeedsubmissioncount)
+    + [cancelFeedSubmissions](#cancelfeedsubmissions)
+    + [getFeedSubmissionResult](#getfeedsubmissionresult)
   * [Products](#products)
   * [Finances](#finances)
-
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
-
 
 # Basics
 
@@ -278,6 +280,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 ### Types used in Subscriptions
 
 #### Subscription
+[Amazon MWS Subscriptions official API](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Overview.html)
 
 | Name             	| Type        	| Example           	      | Required 	|
 |------------------	|-------------	|-------------------	      |----------	|
@@ -387,11 +390,98 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 
 ## FulfillmentInventory
 
-_in progress_
+[Amazon MWS Fulfillment Inventory official documentation](http://docs.developer.amazonservices.com/en_CA/fba_inventory/FBAInventory_Overview.html)
+
+### listInventorySupply
+**Parameters**
+| Name               	| Type     	| Example          	| Required                                                                      	|
+|--------------------	|----------	|------------------	|-------------------------------------------------------------------------------	|
+| SellerSkus         	| string[] 	| 'SAMPLESKU'      	| Yes, if QueryStartDateTime is not specified. Specifying both returns an error 	|
+| QueryStartDateTime 	| Date     	| new Date()       	| Yes, if SellerSkus is not specified. Specifying both returns an error         	|
+| ResponseGroup      	| string   	| 'Basic'          	| No                                                                            	|
+| MarketplaceId      	| string   	| 'A2EUQ1WTGCTBG2' 	| No                                                                            	|
+
+* [Possible values for ResponseGroup](http://docs.developer.amazonservices.com/en_CA/fba_inventory/FBAInventory_ListInventorySupply.html)
+
+### listInventorySupplyByNextToken
+**Parameters**
+| Name      | Type      | Example                                                               | Required |
+|-----------|-----------|-----------------------------------------------------------------------|----------|
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+
+### getServiceStatus
+
+**Parameters**
+
+| None |
+|------|
 
 ## Feeds
 
-_in progress_
+[Amazon MWS Feeds API official documentation](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_Overview.html)
+
+### submitFeed
+**Parameters**
+| Name              	| Type     	| Example               	| Required 	|
+|-------------------	|----------	|-----------------------	|----------	|
+| FeedContent       	| string   	| '<XML></XML>'         	| Yes      	|
+| FeedType          	| string   	| '_POST_PRODUCT_DATA_' 	| Yes      	|
+| MarketplaceIdList 	| string[] 	| ['A2EUQ1WTGCTBG2']    	| No       	|
+| PurgeAndReplace   	| boolean  	| false                 	| No       	|
+| AmazonOrderId     	| string   	| '902-3159896-1390916' 	| No       	|
+| DocumentId        	| string   	| 'DCMNTID'             	| No       	|
+
+* [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
+### getFeedSubmissionList
+**Parameters**
+
+| Name                     	| Type     	| Example                           	| Required 	|
+|--------------------------	|----------	|-----------------------------------	|----------	|
+| FeedSubmissionIdList     	| string[] 	| ['FEEDID']                        	| No       	|
+| MaxCount                 	| number   	| 10                                	| No       	|
+| FeedTypeList             	| string[] 	| ['_POST_PRODUCT_DATA_']           	| No       	|
+| FeedProcessingStatusList 	| string[] 	| ['_AWAITING_ASYNCHRONOUS_REPLY_'] 	| No       	|
+| SubmittedFromDate        	| Date     	| new Date()                        	| No       	|
+| SubmittedToDate          	| Date     	| new Date()                        	| No       	|
+
+* [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
+
+* [Possible values for FeedProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedProcessingStatus.html)
+### getFeedSubmissionListByNextToken
+**Parameters**
+| Name      | Type      | Example                                                               | Required |
+|-----------|-----------|-----------------------------------------------------------------------|----------|
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+
+### getFeedSubmissionCount
+**Parameters**
+
+| Name                     	| Type     	| Example                           	| Required 	|
+|--------------------------	|----------	|-----------------------------------	|----------	|
+| FeedTypeList             	| string[] 	| ['_POST_PRODUCT_DATA_']           	| No       	|
+| FeedProcessingStatusList 	| string[] 	| ['_AWAITING_ASYNCHRONOUS_REPLY_'] 	| No       	|
+| SubmittedFromDate        	| Date     	| new Date()                        	| No       	|
+| SubmittedToDate          	| Date     	| new Date()                        	| No       	|
+
+* [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
+
+* [Possible values for FeedProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedProcessingStatus.html)
+### cancelFeedSubmissions
+**Parameters**
+| Name                     	| Type     	| Example                           	| Required 	|
+|--------------------------	|----------	|-----------------------------------	|----------	|
+| FeedSubmissionIdList     	| string[] 	| ['FEEDID']                        	| No       	|
+| FeedTypeList             	| string[] 	| ['_POST_PRODUCT_DATA_']           	| No       	|
+| SubmittedFromDate        	| Date     	| new Date()                        	| No       	|
+| SubmittedToDate          	| Date     	| new Date()                        	| No       	|
+
+* [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
+
+### getFeedSubmissionResult
+**Parameters**
+| Name                  | Type      | Example                       | Required 	|
+| FeedSubmissionId     	| string 	| 'FEEDID'                        	| No       	|
+
 
 ## Products
 
