@@ -131,10 +131,6 @@ const GetReportRequestListByNextTokenResponse = Codec.interface({
   }),
 })
 
-export interface GetReportRequestListByNextTokenParameters {
-  NextToken: NextToken<'GetReportRequestList'>
-}
-
 export interface GetReportRequestCountParameters {
   ReportTypeList?: ReportType[]
   ReportProcessingStatusList?: ReportProcessing[]
@@ -204,10 +200,6 @@ const GetReportListResponse = Codec.interface({
     GetReportListResult,
   }),
 })
-
-export interface GetReportListByNextTokenParameters {
-  NextToken: NextToken<'GetReportList'>
-}
 
 const GetReportListByNextTokenResponse = Codec.interface({
   GetReportListByNextTokenResponse: Codec.interface({
@@ -464,14 +456,14 @@ export class Reports {
   }
 
   async getReportListByNextToken(
-    parameters: GetReportListByNextTokenParameters,
+    nextToken: NextToken<'GetReportList'>,
   ): Promise<[GetReportListResult, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReportListByNextToken',
       parameters: {
-        NextToken: parameters.NextToken.token,
+        NextToken: nextToken.token,
       },
     })
 
@@ -556,14 +548,14 @@ export class Reports {
   }
 
   async getReportRequestListByNextToken(
-    parameters: GetReportRequestListByNextTokenParameters,
+    nextToken: NextToken<'GetReportRequestList'>,
   ): Promise<[GetReportRequestListResult, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Reports,
       version: REPORTS_API_VERSION,
       action: 'GetReportListByNextToken',
       parameters: {
-        NextToken: parameters.NextToken.token,
+        NextToken: nextToken.token,
       },
     })
 
