@@ -4,57 +4,36 @@
 - [Sections](#sections)
   * [Sellers](#sellers)
     + [listMarketplaceParticipations](#listmarketplaceparticipations)
-      - [Parameters](#parameters)
     + [listMarketplaceParticipationsByNextToken](#listmarketplaceparticipationsbynexttoken)
-      - [Parameters](#parameters-1)
     + [getServiceStatus](#getservicestatus)
-      - [Parameters](#parameters-2)
   * [Orders](#orders)
     + [listOrders](#listorders)
-      - [Parameters](#parameters-3)
     + [listOrdersByNextToken](#listordersbynexttoken)
-      - [Parameters](#parameters-4)
     + [getOrder](#getorder)
-      - [Parameters](#parameters-5)
     + [listOrderItems](#listorderitems)
-      - [Parameters](#parameters-6)
     + [listOrderItemsByNextToken](#listorderitemsbynexttoken)
-      - [Parameters](#parameters-7)
     + [getServiceStatus](#getservicestatus-1)
-      - [Parameters](#parameters-8)
   * [Reports](#reports)
     + [requestReport](#requestreport)
-      - [Parameters](#parameters-9)
     + [getReportRequestList](#getreportrequestlist)
-      - [Parameters](#parameters-10)
     + [getReportRequestListByNextToken](#getreportrequestlistbynexttoken)
-      - [Parameters](#parameters-11)
     + [getReportRequestCount](#getreportrequestcount)
-      - [Parameters](#parameters-12)
     + [cancelReportRequests](#cancelreportrequests)
-      - [Parameters](#parameters-13)
     + [getReportList](#getreportlist)
-      - [Parameters](#parameters-14)
     + [getReportListByNextToken](#getreportlistbynexttoken)
-      - [Parameters](#parameters-15)
     + [getReportCount](#getreportcount)
-      - [Parameters](#parameters-16)
     + [getReport](#getreport)
-      - [Parameters](#parameters-17)
     + [manageReportSchedule](#managereportschedule)
-      - [Parameters](#parameters-18)
     + [getReportScheduleList](#getreportschedulelist)
-      - [Parameters](#parameters-19)
     + [getReportScheduleListByNextToken](#getreportschedulelistbynexttoken)
     + [getReportScheduleCount](#getreportschedulecount)
-      - [Parameters](#parameters-20)
     + [updateReportAcknowledgements](#updatereportacknowledgements)
-      - [Parameters](#parameters-21)
   * [Subscriptions](#subscriptions)
   * [FulfillmentInventory](#fulfillmentinventory)
   * [Feeds](#feeds)
   * [Products](#products)
   * [Finances](#finances)
+
 
 # Basics
 
@@ -68,20 +47,20 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 [Amazon MWS Sellers API official documentation](http://docs.developer.amazonservices.com/en_CA/sellers/Sellers_Overview.html)
 
 ### listMarketplaceParticipations
-#### Parameters 
+**Parameters** 
 
 | None |
 |------|
 
 ### listMarketplaceParticipationsByNextToken
 
-#### Parameters
+**Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
 ### getServiceStatus
 
-#### Parameters
+**Parameters**
 
 | None |
 |------|
@@ -91,7 +70,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 [Amazon MWS Orders API official documentation](http://docs.developer.amazonservices.com/en_CA/orders-2013-09-01/Orders_Overview.html)
 
 ### listOrders
-#### Parameters
+**Parameters**
 
 | Name               | Type     | Example                    | Required                                |
 |--------------------|----------|----------------------------|-----------------------------------------|
@@ -111,30 +90,30 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for FulfillmentChannel, PaymentMethod and EasyShipmentStatus ](http://docs.developer.amazonservices.com/en_CA/orders-2013-09-01/Orders_ListOrders.html)
 
 ### listOrdersByNextToken
-#### Parameters
+**Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
 
 ### getOrder
-#### Parameters
+**Parameters**
 | Name          | Type     | Example                 | Required |
 |---------------|----------|-------------------------|----------|
 | AmazonOrderId | string[] | ['902-3159896-1390916'] | Yes      |
 
 ### listOrderItems
-#### Parameters
+**Parameters**
 | Name          | Type   | Example               | Required |
 |---------------|--------|-----------------------|----------|
 | AmazonOrderId | string | '902-3159896-1390916' | Yes      |
 ### listOrderItemsByNextToken
-#### Parameters
+**Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
 ### getServiceStatus
 
-#### Parameters
+**Parameters**
 
 | None |
 |------|
@@ -144,7 +123,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 [Amazon MWS Reports API official documentation](http://docs.developer.amazonservices.com/en_CA/reports/Reports_Overview.html)
 
 ### requestReport
-#### Parameters
+**Parameters**
 | Name              	| Type     	| Example                              	| Required 	|
 |-------------------	|----------	|--------------------------------------	|----------	|
 | ReportType        	| string   	| '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_' 	| Yes      	|
@@ -156,7 +135,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
 ### getReportRequestList
-#### Parameters
+**Parameters**
 | Name                       	| Type     	| Example                                	| Required                                                                      	|
 |----------------------------	|----------	|----------------------------------------	|-------------------------------------------------------------------------------	|
 | ReportRequestIdList        	| string[] 	| ['12345']                              	| No. If you pass in ReportRequestId values, other query conditions are ignored 	|
@@ -170,13 +149,13 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
 ### getReportRequestListByNextToken
-#### Parameters
+**Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
 
 ### getReportRequestCount
-#### Parameters
+**Parameters**
 | Name                       	| Type     	| Example                                	| Required 	|
 |----------------------------	|----------	|----------------------------------------	|----------	|
 | ReportTypeList             	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
@@ -187,7 +166,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
 ### cancelReportRequests
-#### Parameters
+**Parameters**
 
 | Name                       	| Type     	| Example                                	| Required 	|
 |----------------------------	|----------	|----------------------------------------	|----------	|
@@ -201,7 +180,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
 ### getReportList
-#### Parameters
+**Parameters**
 
 | Name                	| Type     	| Example                                	| Required 	|
 |---------------------	|----------	|----------------------------------------	|----------	|
@@ -215,14 +194,14 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
 ### getReportListByNextToken
-#### Parameters
+**Parameters**
 
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
 
 ### getReportCount
-#### Parameters
+**Parameters**
 
 | Name              	| Type     	| Example                                	| Required 	|
 |-------------------	|----------	|----------------------------------------	|----------	|
@@ -234,13 +213,13 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
 ### getReport
-#### Parameters
+**Parameters**
 | Name              	| Type    	| Example    	| Required 	|
 |-------------------	|---------	|------------	|----------	|
 | ReportId          	| string  	| '12345'    	| Yes      	|
 
 ### manageReportSchedule
-#### Parameters
+**Parameters**
 | Name            	| Type   	| Example                              	| Required 	|
 |-----------------	|--------	|--------------------------------------	|----------	|
 | ReportType      	| string 	| '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_' 	| Yes      	|
@@ -250,7 +229,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 * [Possible values for Schedule](http://docs.developer.amazonservices.com/en_CA/reports/Reports_Schedule.html)
 
 ### getReportScheduleList
-#### Parameters
+**Parameters**
 
 | Name              	| Type     	| Example                                	| Required 	|
 |-------------------	|----------	|----------------------------------------	|----------	|
@@ -261,14 +240,14 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 [Currently this operation can never be called because the GetReportScheduleList operation cannot return more than 100 results. It is included for future compatibility.](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportScheduleListByNextToken.html)
 
 ### getReportScheduleCount
-#### Parameters
+**Parameters**
 | Name              	| Type     	| Example                                	| Required 	|
 |-------------------	|----------	|----------------------------------------	|----------	|
 | ReportTypeList    	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
 ### updateReportAcknowledgements
-#### Parameters
+**Parameters**
 | Name            	| Type     	| Example    	| Required 	|
 |-----------------	|----------	|------------	|----------	|
 | ReportIdList    	| string[] 	| ['12345']  	| Yes      	|
