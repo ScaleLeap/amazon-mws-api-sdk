@@ -1,4 +1,4 @@
-## Table of Contents
+# Table of Contents
 * [Table of Contents](#table-of-contents)
 * [Sellers](#sellers)
     * [listMarketplaceParticipations](#listmarketplaceparticipations)
@@ -20,33 +20,42 @@
 * [Products](#products)
 * [Finances](#finances)
 
+# Basics
+
+amazon-mws-api-sdk is divided up into different sections representing the different sections of the Amazon MWS API.
+Under each section are methods that perform "actions" on the MWS API parses the response, returns it and the request metadata in a JS object 
+
+# Sections
+
 ## Sellers
 
 [Amazon MWS Sellers API official documentation](http://docs.developer.amazonservices.com/en_CA/sellers/Sellers_Overview.html)
 
 ### listMarketplaceParticipations
-Parameters 
+#### Parameters 
 
 | None |
 |------|
 
 ### listMarketplaceParticipationsByNextToken
 
-Parameters
+#### Parameters
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
 ### getServiceStatus
 
-Parameters
+#### Parameters
 
 | None |
 |------|
 
 ## Orders
 
+[Amazon MWS Orders API official documentation](http://docs.developer.amazonservices.com/en_CA/orders-2013-09-01/Orders_Overview.html)
+
 ### listOrders
-Parameters
+#### Parameters
 
 | Name               | Type     | Example                    | Required                                |
 |--------------------|----------|----------------------------|-----------------------------------------|
@@ -66,38 +75,40 @@ Parameters
 * [Possible values for FulfillmentChannel, PaymentMethod and EasyShipmentStatus ](http://docs.developer.amazonservices.com/en_CA/orders-2013-09-01/Orders_ListOrders.html)
 
 ### listOrdersByNextToken
-Parameters
+#### Parameters
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
 
 ### getOrder
-Parameters
+#### Parameters
 | Name          | Type     | Example                 | Required |
 |---------------|----------|-------------------------|----------|
 | AmazonOrderId | string[] | ['902-3159896-1390916'] | Yes      |
 
 ### listOrderItems
-Parameters
+#### Parameters
 | Name          | Type   | Example               | Required |
 |---------------|--------|-----------------------|----------|
 | AmazonOrderId | string | '902-3159896-1390916' | Yes      |
 ### listOrderItemsByNextToken
-Parameters
+#### Parameters
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
 ### getServiceStatus
 
-Parameters
+#### Parameters
 
 | None |
 |------|
 
 ## Reports
 
+[Amazon MWS Reports API official documentation](http://docs.developer.amazonservices.com/en_CA/reports/Reports_Overview.html)
+
 ### requestReport
-Parameters
+#### Parameters
 | Name              	| Type     	| Example                              	| Required 	|
 |-------------------	|----------	|--------------------------------------	|----------	|
 | ReportType        	| string   	| '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_' 	| Yes      	|
@@ -109,12 +120,127 @@ Parameters
 * [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
 ### getReportRequestList
-Parameters
+#### Parameters
+| Name                       	| Type     	| Example                                	| Required                                                                      	|
+|----------------------------	|----------	|----------------------------------------	|-------------------------------------------------------------------------------	|
+| ReportRequestIdList        	| string[] 	| ['12345']                              	| No. If you pass in ReportRequestId values, other query conditions are ignored 	|
+| ReportTypeList             	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No                                                                            	|
+| ReportProcessingStatusList 	| string[] 	| ['_SUBMITTED_']                        	| No                                                                            	|
+| MaxCount                   	| number   	| 10                                     	| No                                                                            	|
+| RequestedFromDate          	| Date     	| new Date()                             	| No                                                                            	|
+| RequestedToDate            	| Date     	| new Date()                             	| No                                                                            	|
 
+* [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestList.html)
+* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+
+### getReportRequestListByNextToken
+#### Parameters
+| Name      | Type      | Example                                                               | Required |
+|-----------|-----------|-----------------------------------------------------------------------|----------|
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+
+### getReportRequestCount
+#### Parameters
+| Name                       	| Type     	| Example                                	| Required 	|
+|----------------------------	|----------	|----------------------------------------	|----------	|
+| ReportTypeList             	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+| ReportProcessingStatusList 	| string[] 	| ['_SUBMITTED_']                        	| No       	|
+| RequestedFromDate          	| Date     	| new Date()                             	| No       	|
+| RequestedToDate            	| Date     	| new Date()                             	| No       	|
+* [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestCount.html)
+* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+
+### cancelReportRequests
+#### Parameters
+
+| Name                       	| Type     	| Example                                	| Required 	|
+|----------------------------	|----------	|----------------------------------------	|----------	|
+| ReportRequestIdList        	| string[] 	| ['12345']                              	| No       	|
+| ReportTypeList             	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+| ReportProcessingStatusList 	| string[] 	| ['_SUBMITTED_']                        	| No       	|
+| RequestedFromDate          	| Date     	| new Date()                             	| No       	|
+| RequestedToDate            	| Date     	| new Date()                             	| No       	|
+
+* [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestList.html)
+* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+
+### getReportList
+#### Parameters
+
+| Name                	| Type     	| Example                                	| Required 	|
+|---------------------	|----------	|----------------------------------------	|----------	|
+| MaxCount            	| number   	| 10                                     	| No       	|
+| ReportTypeList      	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+| Acknowledged        	| boolean  	| true                                   	| No       	|
+| ReportRequestIdList 	| string[] 	| ['12345']                              	| No       	|
+| AvailableFromDate   	| Date     	| new Date()                             	| No       	|
+| AvailableToDate     	| Date     	| new Date()                             	| No       	|
+
+* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+
+### getReportListByNextToken
+#### Parameters
+
+| Name      | Type      | Example                                                               | Required |
+|-----------|-----------|-----------------------------------------------------------------------|----------|
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+
+### getReportCount
+#### Parameters
+
+| Name              	| Type     	| Example                                	| Required 	|
+|-------------------	|----------	|----------------------------------------	|----------	|
+| ReportTypeList    	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+| Acknowledged      	| boolean  	| true                                   	| No       	|
+| AvailableFromDate 	| Date     	| new Date()                             	| No       	|
+| AvailableToDate   	| Date     	| new Date()                             	| No       	|
+
+* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+
+### getReport
+#### Parameters
+| Name              	| Type    	| Example    	| Required 	|
+|-------------------	|---------	|------------	|----------	|
+| ReportId          	| string  	| '12345'    	| Yes      	|
+
+### manageReportSchedule
+#### Parameters
+| Name            	| Type   	| Example                              	| Required 	|
+|-----------------	|--------	|--------------------------------------	|----------	|
+| ReportType      	| string 	| '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_' 	| Yes      	|
+| Schedule        	| string 	| '_15_MINUTES_'                       	| Yes      	|
+| ScheduleDate    	| Date   	| new Date()                           	| No       	|
+* [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+* [Possible values for Schedule](http://docs.developer.amazonservices.com/en_CA/reports/Reports_Schedule.html)
+
+### getReportScheduleList
+#### Parameters
+
+| Name              	| Type     	| Example                                	| Required 	|
+|-------------------	|----------	|----------------------------------------	|----------	|
+| ReportTypeList    	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+
+### getReportScheduleListByNextToken
+[Currently this operation can never be called because the GetReportScheduleList operation cannot return more than 100 results. It is included for future compatibility.](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportScheduleListByNextToken.html)
+
+### getReportScheduleCount
+#### Parameters
+| Name              	| Type     	| Example                                	| Required 	|
+|-------------------	|----------	|----------------------------------------	|----------	|
+| ReportTypeList    	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+
+### updateReportAcknowledgements
+#### Parameters
+| Name            	| Type     	| Example    	| Required 	|
+|-----------------	|----------	|------------	|----------	|
+| ReportIdList    	| string[] 	| ['12345']  	| Yes      	|
+| Acknowledged    	| boolean  	| true       	| No       	|
 
 ## Subscriptions
 
-_coming soon_
+_in progress_
 
 ## FulfillmentInventory
 
