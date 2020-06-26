@@ -29,7 +29,10 @@
     + [getReportScheduleCount](#getreportschedulecount)
     + [updateReportAcknowledgements](#updatereportacknowledgements)
   * [Subscriptions](#subscriptions)
-    + [Types used in this section](#types-used-in-this-section)
+    + [Types used in Subscriptions](#types-used-in-subscriptions)
+      - [Subscription](#subscription)
+      - [Destination](#destination)
+      - [AttribueKeyValue](#attribuekeyvalue)
     + [registerDestination](#registerdestination)
     + [deregisterDestination](#deregisterdestination)
     + [listRegisteredDestinations](#listregistereddestinations)
@@ -44,6 +47,9 @@
   * [Feeds](#feeds)
   * [Products](#products)
   * [Finances](#finances)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -269,28 +275,28 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 
 ## Subscriptions
 
-### Types used in this section
+### Types used in Subscriptions
 
-**Subscription**
+#### Subscription
 
-| Name             	| Type        	| Example           	| Required 	|
-|------------------	|-------------	|-------------------	|----------	|
-| NotificationType 	| string      	| 'AnyOfferChanged' 	| Yes      	|
-| Destination      	| Destination 	|                   	| Yes      	|
-| IsEnabled        	| boolean     	| true              	| Yes      	|
+| Name             	| Type        	| Example           	      | Required 	|
+|------------------	|-------------	|-------------------	      |----------	|
+| NotificationType 	| string      	| 'AnyOfferChanged' 	      | Yes      	|
+| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
+| IsEnabled        	| boolean     	| true              	      | Yes      	|
 
 * [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
-**Destination**
+#### Destination
 
-| Name            	| Type              	| Example 	| Required 	|
-|-----------------	|-------------------	|---------	|----------	|
-| DeliveryChannel 	| string            	| 'SQS'   	| Yes      	|
-| AttributeList   	| AttributeKeyValue 	|         	| Yes      	|
+| Name            	| Type              	| Example 	                            | Required 	|
+|-----------------	|-------------------	|------------------------------------   |----------	|
+| DeliveryChannel 	| string            	| 'SQS'   	                            | Yes      	|
+| AttributeList   	| AttributeKeyValue 	| [AttribueKeyValue](#attribuekeyvalue) | Yes      	|
 
 * [Possible values for DeliveryChannel](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Datatypes.html#Destination)
 
-**AttributeKeyValue**
+#### AttribueKeyValue
 
 | Name  	| Type   	| Example                                                                        	| Required 	|
 |-------	|--------	|--------------------------------------------------------------------------------	|----------	|
@@ -302,18 +308,18 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 ### registerDestination
 **Parameters**
 
-| Name          	| Type        	| Example          	| Required 	|
-|---------------	|-------------	|------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| Destination   	| Destination 	|                  	| Yes      	|
+| Name          	| Type        	| Example                     | Required 	|
+|---------------	|-------------	|-----------------------------|-------------|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2'            | Yes      	|
+| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
 
 ### deregisterDestination
 **Parameters**
 
-| Name          	| Type        	| Example          	| Required 	|
-|---------------	|-------------	|------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| Destination   	| Destination 	|                  	| Yes      	|
+| Name          	| Type        	| Example                     | Required 	|
+|---------------	|-------------	|-----------------------------|-------------|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2'            | Yes      	|
+| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
 
 ### listRegisteredDestinations
 **Parameters**
@@ -324,37 +330,38 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 ### sendTestNotificationToDestination
 **Parameters**
 
-| Name          	| Type        	| Example          	| Required 	|
-|---------------	|-------------	|------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| Destination   	| Destination 	|                  	| Yes      	|
+| Name          	| Type        	| Example                     | Required 	|
+|---------------	|-------------	|-----------------------------|-------------|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2'            | Yes      	|
+| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
 
 ### createSubscription
 **Parameters**
-| Name          	| Type        	| Example          	| Required 	|
-|---------------	|-------------	|------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| Subscription   	| Subscription 	|                  	| Yes      	|
+| Name          	| Type        	| Example          	            | Required 	|
+|---------------	|-------------	|---------------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	            | Yes      	|
+| Subscription   	| Subscription 	| [Subscription](#subscription) | Yes      	|
 
 ### getSubscription
 **Parameters**
 
-| Name          	| Type        	| Example          	| Required 	|
-|---------------	|-------------	|------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| NotificationType 	| string      	| 'AnyOfferChanged' | Yes     	|
-| Destination      	| Destination 	|                   | Yes      	|
+| Name          	| Type        	| Example          	          | Required 	|
+|---------------	|-------------	|------------------	          |----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	          | Yes      	|
+| NotificationType 	| string      	| 'AnyOfferChanged'           | Yes     	|
+| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
+
 
 * [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
 ### deleteSubscription
 **Parameters**
 
-| Name          	| Type        	| Example          	| Required 	|
-|---------------	|-------------	|------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| NotificationType 	| string      	| 'AnyOfferChanged' | Yes     	|
-| Destination      	| Destination 	|                   | Yes      	|
+| Name          	| Type        	| Example          	          | Required 	|
+|---------------	|-------------	|------------------	          |----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	          | Yes      	|
+| NotificationType 	| string      	| 'AnyOfferChanged'           | Yes     	|
+| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
 
 * [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
@@ -366,10 +373,10 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 
 ### updateSubscription
 **Parameters**
-| Name          	| Type        	| Example          	| Required 	|
-|---------------	|-------------	|------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| Subscription   	| Subscription 	|                  	| Yes      	|
+| Name          	| Type        	| Example          	            | Required 	|
+|---------------	|-------------	|---------------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	            | Yes      	|
+| Subscription   	| Subscription 	| [Subscription](#subscription) | Yes      	|
 
 
 ### getServiceStatus
