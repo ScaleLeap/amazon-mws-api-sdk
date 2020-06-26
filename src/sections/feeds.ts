@@ -26,7 +26,7 @@ export interface GetFeedSubmissionListParameters {
   SubmittedFromDate?: Date
   SubmittedToDate?: Date
 }
-enum FeedProcessingStatusEnum {
+export enum FeedProcessingStatusEnum {
   _AWAITING_ASYNCHRONOUS_REPLY_ = '_AWAITING_ASYNCHRONOUS_REPLY_',
   _CANCELLED_ = '_CANCELLED_',
   _DONE_ = '_DONE_',
