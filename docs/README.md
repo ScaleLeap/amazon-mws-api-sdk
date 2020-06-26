@@ -538,7 +538,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 | Name                	| Type                	| Example    	| Required 	|
 |---------------------	|---------------------	|------------	|----------	|
 | Amount              	| number              	| 1000       	| No       	|
-| CurrencyCode        	| string              	| 'USD'      	| Yes      	|
+| CurrencyCode        	| string              	| 'USD'      	| No      	|
 
 * [Possible values for CurrencyCode](http://docs.developer.amazonservices.com/en_CA/products/Products_Datatypes.html#MoneyType)
 
