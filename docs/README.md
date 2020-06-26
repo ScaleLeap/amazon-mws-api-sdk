@@ -29,10 +29,24 @@
     + [getReportScheduleCount](#getreportschedulecount)
     + [updateReportAcknowledgements](#updatereportacknowledgements)
   * [Subscriptions](#subscriptions)
+    + [Types used in this section](#types-used-in-this-section)
+    + [registerDestination](#registerdestination)
+    + [deregisterDestination](#deregisterdestination)
+    + [listRegisteredDestinations](#listregistereddestinations)
+    + [sendTestNotificationToDestination](#sendtestnotificationtodestination)
+    + [createSubscription](#createsubscription)
+    + [getSubscription](#getsubscription)
+    + [deleteSubscription](#deletesubscription)
+    + [listSubscriptions](#listsubscriptions)
+    + [updateSubscription](#updatesubscription)
+    + [getServiceStatus](#getservicestatus-2)
   * [FulfillmentInventory](#fulfillmentinventory)
   * [Feeds](#feeds)
   * [Products](#products)
   * [Finances](#finances)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 
 # Basics
