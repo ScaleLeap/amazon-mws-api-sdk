@@ -26,7 +26,7 @@ export enum CurrencyCodeEnum {
 
 export interface MoneyType {
   Amount: number | undefined
-  CurrencyCode: CurrencyCodeEnum
+  CurrencyCode: keyof typeof CurrencyCodeEnum | undefined
 }
 
 export interface FeeDetail {

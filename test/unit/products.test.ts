@@ -1,5 +1,10 @@
 import { ParsingError } from '../../src'
-import { GetMatchingProductIdType, ItemCondition } from '../../src/sections/products/type'
+import {
+  FeesEstimateRequest,
+  GetMatchingProductIdType,
+  ItemCondition,
+  MoneyType,
+} from '../../src/sections/products/type'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 describe('products', () => {
@@ -364,13 +369,31 @@ describe('products', () => {
   })
 
   describe('getMyFeesEstimate', () => {
+    const moneyType: MoneyType = {
+      CurrencyCode: 'USD',
+      Amount: 1000,
+    }
+
+    const sampleFee: FeesEstimateRequest = {
+      MarketplaceId: '',
+      IdType: 'ASIN',
+      IdValue: 'ASD',
+      PriceToEstimateFees: {
+        ListingPrice: moneyType,
+      },
+      Identifier: 'request1',
+      IsAmazonFulfilled: false,
+    }
+
     it('returns a list fee estimates when the response is valid', async () => {
       expect.assertions(1)
 
       const mockGetMyFeesEstimate = createMockHttpClient('products_get_my_fees_estimate')
 
       expect(
-        await mockGetMyFeesEstimate.products.getMyFeesEstimate({ FeesEstimateRequestList: [] }),
+        await mockGetMyFeesEstimate.products.getMyFeesEstimate({
+          FeesEstimateRequestList: [sampleFee],
+        }),
       ).toMatchSnapshot()
     })
 
