@@ -255,7 +255,114 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 
 ## Subscriptions
 
-_in progress_
+### Types used in this section
+
+**Subscription**
+
+| Name             	| Type        	| Example           	| Required 	|
+|------------------	|-------------	|-------------------	|----------	|
+| NotificationType 	| string      	| 'AnyOfferChanged' 	| Yes      	|
+| Destination      	| Destination 	|                   	| Yes      	|
+| IsEnabled        	| boolean     	| true              	| Yes      	|
+
+* [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
+
+**Destination**
+
+| Name            	| Type              	| Example 	| Required 	|
+|-----------------	|-------------------	|---------	|----------	|
+| DeliveryChannel 	| string            	| 'SQS'   	| Yes      	|
+| AttributeList   	| AttributeKeyValue 	|         	| Yes      	|
+
+* [Possible values for DeliveryChannel](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Datatypes.html#Destination)
+
+**AttributeKeyValue**
+
+| Name  	| Type   	| Example                                                                        	| Required 	|
+|-------	|--------	|--------------------------------------------------------------------------------	|----------	|
+| Key   	| string 	| 'sqsQueueUrl'                                                                  	| Yes      	|
+| Value 	| string 	| 'https://sqs.us-east-1.amazonaws.com/51471EXAMPLE/mws_notifications' 	| Yes      	|
+
+* [Possible values for Key](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Datatypes.html#AttributeKeyValue)
+
+### registerDestination
+**Parameters**
+
+| Name          	| Type        	| Example          	| Required 	|
+|---------------	|-------------	|------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| Destination   	| Destination 	|                  	| Yes      	|
+
+### deregisterDestination
+**Parameters**
+
+| Name          	| Type        	| Example          	| Required 	|
+|---------------	|-------------	|------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| Destination   	| Destination 	|                  	| Yes      	|
+
+### listRegisteredDestinations
+**Parameters**
+| Name          	| Type        	| Example          	| Required 	|
+|---------------	|-------------	|------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+
+### sendTestNotificationToDestination
+**Parameters**
+
+| Name          	| Type        	| Example          	| Required 	|
+|---------------	|-------------	|------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| Destination   	| Destination 	|                  	| Yes      	|
+
+### createSubscription
+**Parameters**
+| Name          	| Type        	| Example          	| Required 	|
+|---------------	|-------------	|------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| Subscription   	| Subscription 	|                  	| Yes      	|
+
+### getSubscription
+**Parameters**
+
+| Name          	| Type        	| Example          	| Required 	|
+|---------------	|-------------	|------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| NotificationType 	| string      	| 'AnyOfferChanged' | Yes     	|
+| Destination      	| Destination 	|                   | Yes      	|
+
+* [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
+
+### deleteSubscription
+**Parameters**
+
+| Name          	| Type        	| Example          	| Required 	|
+|---------------	|-------------	|------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| NotificationType 	| string      	| 'AnyOfferChanged' | Yes     	|
+| Destination      	| Destination 	|                   | Yes      	|
+
+* [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
+
+### listSubscriptions
+**Parameters**
+| Name          	| Type        	| Example          	| Required 	|
+|---------------	|-------------	|------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+
+### updateSubscription
+**Parameters**
+| Name          	| Type        	| Example          	| Required 	|
+|---------------	|-------------	|------------------	|----------	|
+| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| Subscription   	| Subscription 	|                  	| Yes      	|
+
+
+### getServiceStatus
+**Parameters**
+
+| None |
+|------|
 
 ## FulfillmentInventory
 
