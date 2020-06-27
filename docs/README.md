@@ -2,91 +2,91 @@
 - [Table of Contents](#table-of-contents)
 - [Basics](#basics)
 - [Sections](#sections)
-  * [Sellers](#sellers)
-    + [listMarketplaceParticipations](#listmarketplaceparticipations)
-    + [listMarketplaceParticipationsByNextToken](#listmarketplaceparticipationsbynexttoken)
-    + [getServiceStatus](#getservicestatus)
-  * [Orders](#orders)
-    + [listOrders](#listorders)
-    + [listOrdersByNextToken](#listordersbynexttoken)
-    + [getOrder](#getorder)
-    + [listOrderItems](#listorderitems)
-    + [listOrderItemsByNextToken](#listorderitemsbynexttoken)
-    + [getServiceStatus](#getservicestatus-1)
-  * [Reports](#reports)
-    + [requestReport](#requestreport)
-    + [getReportRequestList](#getreportrequestlist)
-    + [getReportRequestListByNextToken](#getreportrequestlistbynexttoken)
-    + [getReportRequestCount](#getreportrequestcount)
-    + [cancelReportRequests](#cancelreportrequests)
-    + [getReportList](#getreportlist)
-    + [getReportListByNextToken](#getreportlistbynexttoken)
-    + [getReportCount](#getreportcount)
-    + [getReport](#getreport)
-    + [manageReportSchedule](#managereportschedule)
-    + [getReportScheduleList](#getreportschedulelist)
-    + [getReportScheduleListByNextToken](#getreportschedulelistbynexttoken)
-    + [getReportScheduleCount](#getreportschedulecount)
-    + [updateReportAcknowledgements](#updatereportacknowledgements)
-  * [Subscriptions](#subscriptions)
-    + [Types used in Subscriptions](#types-used-in-subscriptions)
+  - [Sellers](#sellers)
+    - [listMarketplaceParticipations](#listmarketplaceparticipations)
+    - [listMarketplaceParticipationsByNextToken](#listmarketplaceparticipationsbynexttoken)
+    - [getServiceStatus](#getservicestatus)
+  - [Orders](#orders)
+    - [listOrders](#listorders)
+    - [listOrdersByNextToken](#listordersbynexttoken)
+    - [getOrder](#getorder)
+    - [listOrderItems](#listorderitems)
+    - [listOrderItemsByNextToken](#listorderitemsbynexttoken)
+    - [getServiceStatus](#getservicestatus-1)
+  - [Reports](#reports)
+    - [requestReport](#requestreport)
+    - [getReportRequestList](#getreportrequestlist)
+    - [getReportRequestListByNextToken](#getreportrequestlistbynexttoken)
+    - [getReportRequestCount](#getreportrequestcount)
+    - [cancelReportRequests](#cancelreportrequests)
+    - [getReportList](#getreportlist)
+    - [getReportListByNextToken](#getreportlistbynexttoken)
+    - [getReportCount](#getreportcount)
+    - [getReport](#getreport)
+    - [manageReportSchedule](#managereportschedule)
+    - [getReportScheduleList](#getreportschedulelist)
+    - [getReportScheduleListByNextToken](#getreportschedulelistbynexttoken)
+    - [getReportScheduleCount](#getreportschedulecount)
+    - [updateReportAcknowledgements](#updatereportacknowledgements)
+  - [Subscriptions](#subscriptions)
+    - [Types used in Subscriptions](#types-used-in-subscriptions)
       - [Subscription](#subscription)
       - [Destination](#destination)
       - [AttribueKeyValue](#attribuekeyvalue)
-    + [registerDestination](#registerdestination)
-    + [deregisterDestination](#deregisterdestination)
-    + [listRegisteredDestinations](#listregistereddestinations)
-    + [sendTestNotificationToDestination](#sendtestnotificationtodestination)
-    + [createSubscription](#createsubscription)
-    + [getSubscription](#getsubscription)
-    + [deleteSubscription](#deletesubscription)
-    + [listSubscriptions](#listsubscriptions)
-    + [updateSubscription](#updatesubscription)
-    + [getServiceStatus](#getservicestatus-2)
-  * [FulfillmentInventory](#fulfillmentinventory)
-    + [listInventorySupply](#listinventorysupply)
-    + [listInventorySupplyByNextToken](#listinventorysupplybynexttoken)
-    + [getServiceStatus](#getservicestatus-3)
-  * [Feeds](#feeds)
-    + [submitFeed](#submitfeed)
-    + [getFeedSubmissionList](#getfeedsubmissionlist)
-    + [getFeedSubmissionListByNextToken](#getfeedsubmissionlistbynexttoken)
-    + [getFeedSubmissionCount](#getfeedsubmissioncount)
-    + [cancelFeedSubmissions](#cancelfeedsubmissions)
-    + [getFeedSubmissionResult](#getfeedsubmissionresult)
-  * [Products](#products)
-    + [Types used in Products](#types-used-in-products)
+    - [registerDestination](#registerdestination)
+    - [deregisterDestination](#deregisterdestination)
+    - [listRegisteredDestinations](#listregistereddestinations)
+    - [sendTestNotificationToDestination](#sendtestnotificationtodestination)
+    - [createSubscription](#createsubscription)
+    - [getSubscription](#getsubscription)
+    - [deleteSubscription](#deletesubscription)
+    - [listSubscriptions](#listsubscriptions)
+    - [updateSubscription](#updatesubscription)
+    - [getServiceStatus](#getservicestatus-2)
+  - [FulfillmentInventory](#fulfillmentinventory)
+    - [listInventorySupply](#listinventorysupply)
+    - [listInventorySupplyByNextToken](#listinventorysupplybynexttoken)
+    - [getServiceStatus](#getservicestatus-3)
+  - [Feeds](#feeds)
+    - [submitFeed](#submitfeed)
+    - [getFeedSubmissionList](#getfeedsubmissionlist)
+    - [getFeedSubmissionListByNextToken](#getfeedsubmissionlistbynexttoken)
+    - [getFeedSubmissionCount](#getfeedsubmissioncount)
+    - [cancelFeedSubmissions](#cancelfeedsubmissions)
+    - [getFeedSubmissionResult](#getfeedsubmissionresult)
+  - [Products](#products)
+    - [Types used in Products](#types-used-in-products)
       - [FeesEstimateRequest](#feesestimaterequest)
       - [PriceToEstimateFees](#pricetoestimatefees)
       - [MoneyType](#moneytype)
       - [Points](#points)
-    + [listMatchingProducts](#listmatchingproducts)
-    + [getMatchingProduct](#getmatchingproduct)
-    + [getMatchingProductForId](#getmatchingproductforid)
-    + [getCompetitivePricingForSku](#getcompetitivepricingforsku)
-    + [getCompetitivePricingForAsin](#getcompetitivepricingforasin)
-    + [getLowestOfferListingsForSku](#getlowestofferlistingsforsku)
-    + [getLowestOfferListingsForAsin](#getlowestofferlistingsforasin)
-    + [getLowestPricedOffersForSku](#getlowestpricedoffersforsku)
-    + [getLowestPricedOffersForSku](#getlowestpricedoffersforsku-1)
-    + [getMyFeesEstimate](#getmyfeesestimate)
-    + [getMyPriceForSku](#getmypriceforsku)
-    + [getMyPriceForAsin](#getmypriceforasin)
-    + [getProductCategoriesForSku](#getproductcategoriesforsku)
-    + [getProductCategoriesForAsin](#getproductcategoriesforasin)
-    + [getServiceStatus](#getservicestatus-4)
-  * [Finances](#finances)
-    + [listFinancialEventGroups](#listfinancialeventgroups)
-    + [listFinancialEventGroupsByNextToken](#listfinancialeventgroupsbynexttoken)
-    + [listFinancialEvents](#listfinancialevents)
-    + [listFinancialEventsByNextToken](#listfinancialeventsbynexttoken)
+    - [listMatchingProducts](#listmatchingproducts)
+    - [getMatchingProduct](#getmatchingproduct)
+    - [getMatchingProductForId](#getmatchingproductforid)
+    - [getCompetitivePricingForSku](#getcompetitivepricingforsku)
+    - [getCompetitivePricingForAsin](#getcompetitivepricingforasin)
+    - [getLowestOfferListingsForSku](#getlowestofferlistingsforsku)
+    - [getLowestOfferListingsForAsin](#getlowestofferlistingsforasin)
+    - [getLowestPricedOffersForSku](#getlowestpricedoffersforsku)
+    - [getLowestPricedOffersForSku](#getlowestpricedoffersforsku-1)
+    - [getMyFeesEstimate](#getmyfeesestimate)
+    - [getMyPriceForSku](#getmypriceforsku)
+    - [getMyPriceForAsin](#getmypriceforasin)
+    - [getProductCategoriesForSku](#getproductcategoriesforsku)
+    - [getProductCategoriesForAsin](#getproductcategoriesforasin)
+    - [getServiceStatus](#getservicestatus-4)
+  - [Finances](#finances)
+    - [listFinancialEventGroups](#listfinancialeventgroups)
+    - [listFinancialEventGroupsByNextToken](#listfinancialeventgroupsbynexttoken)
+    - [listFinancialEvents](#listfinancialevents)
+    - [listFinancialEventsByNextToken](#listfinancialeventsbynexttoken)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 # Basics
 
 amazon-mws-api-sdk is divided up into different sections representing the different sections of the Amazon MWS API.
-Under each section are methods that perform "actions" on the MWS API parses the response, returns it and the request metadata in a JS object 
+Under each section are methods that perform "actions" on the MWS API parses the response, returns it and the request metadata in a JS object
 
 # Sections
 
@@ -95,7 +95,7 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 [Amazon MWS Sellers API official documentation](http://docs.developer.amazonservices.com/en_CA/sellers/Sellers_Overview.html)
 
 ### listMarketplaceParticipations
-**Parameters** 
+**Parameters**
 
 | None |
 |------|
@@ -172,13 +172,13 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 
 ### requestReport
 **Parameters**
-| Name              	| Type     	| Example                              	| Required 	|
-|-------------------	|----------	|--------------------------------------	|----------	|
-| ReportType        	| string   	| '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_' 	| Yes      	|
-| StartDate         	| Date     	| new Date()                           	| No       	|
-| EndDate           	| Date     	| new Date()                           	| No       	|
-| ReportOptions     	| string   	| 'Report Option'                      	| No       	|
-| MarketplaceIdList 	| string[] 	| ['A2EUQ1WTGCTBG2']                   	| No       	|
+| Name              	| Type     	| Example                              	  | Required 	|
+|-------------------	|----------	|----------------------------------------	|----------	|
+| ReportType        	| string   	| `'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'` 	| Yes      	|
+| StartDate         	| Date     	| jsnew Date()                           	| No       	|
+| EndDate           	| Date     	| new Date()                           	  | No       	|
+| ReportOptions     	| string   	| 'Report Option'                      	  | No       	|
+| MarketplaceIdList 	| string[] 	| ['A2EUQ1WTGCTBG2']                   	  | No       	|
 
 * [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
