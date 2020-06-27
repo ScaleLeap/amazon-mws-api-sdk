@@ -3,7 +3,7 @@
 📦 @scaleleap/amazon-mws-api-sdk
 ===================================
 
-A fully typed TypeScript SDK library for Amazon MWS API 
+A fully typed TypeScript SDK library for Amazon MWS API
 
 ## Download & Installation
 
@@ -19,12 +19,12 @@ $ npm i -s @scaleleap/amazon-mws-api-sdk
 ---
 
 ```TypeScript
-import { 
-  amazonMarketplaces, 
-  HttpClient, 
-  MWSOptions, 
-  Sellers, 
-  Orders 
+import {
+  amazonMarketplaces,
+  HttpClient,
+  MWSOptions,
+  Sellers,
+  Orders
 } from 'amazon-mws-api-sdk'
 
 const mwsOptions: MWSOptions = {
@@ -37,7 +37,7 @@ const mwsOptions: MWSOptions = {
 
 const main = async () => {
   const http = new HttpClient(mwsOptions)
-  
+
   // Get status for Sellers API
   const sellers = new Sellers(http)
   const [serviceStatus] = await sellers.getServiceStatus()
@@ -47,7 +47,7 @@ const main = async () => {
 
   // List Orders
   const orders = new Orders(http)
-  const [ordersList, requestMeta] = await orders.listOrders({ 
+  const [ordersList, requestMeta] = await orders.listOrders({
     MarketplaceId: [amazonMarketplaces.US.id],
     CreatedAfter: new Date(Date.now() - 100 * 24 * 60 * 60 * 1000)
   })
@@ -70,7 +70,7 @@ This project is licensed under the MIT License.
 
 ## Badges
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ScaleLeap/amazon-mws-api-sdk/CI)](https://github.com/ScaleLeap/amazon-mws-api-sdk/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ScaleLeap/amazon-mws-api-sdk/Release)](https://github.com/ScaleLeap/amazon-mws-api-sdk/actions)
 [![NPM](https://img.shields.io/npm/v/@scaleleap/amazon-mws-api-sdk)](https://npm.im/@scaleleap/amazon-mws-api-sdk)
 [![License](https://img.shields.io/npm/l/@scaleleap/amazon-mws-api-sdk)](./LICENSE)
 [![Semantic Release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
