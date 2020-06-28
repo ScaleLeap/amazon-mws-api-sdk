@@ -3,6 +3,49 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.2](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2020-06-28)
+
+
+### Bug Fixes
+
+* add comment explaining change ([3a0aa56](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/3a0aa56880a06409db85059d15f7d8d551fd3947))
+* api extractor for feeds api ([d62b4f3](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d62b4f3d3d35962b43d1093ae0a276b59cc5afc2))
+* expose finances parameter types ([138b5c0](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/138b5c041ee4f0bda8173b845c50e66dbf537a7b))
+* expose parameters for orders ([ef1f805](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ef1f80581041b0e75f001da6e7e4502712169422))
+* expose parameters fulfillment inventory ([ffb5183](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ffb51834d6ac5282dca9c4a612a6576daeda0059))
+* expose parameters reports ([6000f7f](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/6000f7f747a1b26deef42b6f7c2a7fa2140496bc))
+* expose params for subscriptions ([fc877dd](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/fc877dd59009df3ae640486a3097c96d3ee173da))
+* expose products parameters ([5f4d59f](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/5f4d59f50be3aeae8e4ad822b7b4f3cd42652f32))
+* feed submission info can be multiple ([160548a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/160548af9a5db671e3bfd5fd3e9f4f2f27552e7e))
+* feed submission info is optional ([6c6d670](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/6c6d6705811b060d5dab4e913a2c7bc2cd9415a5))
+* fixed issues found in review ([cff0cc5](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/cff0cc5cde7a4448a3a72a639bf90fe4c6a8a33e))
+* import correct parameters ([617e5e1](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/617e5e14569759ca278260e20d07fe3d0a205e7e))
+* lint error in reports ([70ab096](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/70ab09605dd27afd42ba65c4dff28650ddfb4b25))
+* missed some parameters ([9869be1](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/9869be134b0cdb1d923e419dd1afdf5973c92b53))
+* refactor to fix api extractor warnings ([c9a392f](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c9a392f574012f2bceb4146f04a32a2026d6f4c8))
+* sample data directory ([79884b3](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/79884b3b13fa4a15e28bf730edaa5781a725ceee))
+* **deps:** update dependency @scaleleap/amazon-marketplaces to v5 ([d1286db](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d1286dbde48833b4d0754eb1cc3b1f1b7bc7adf0))
+* revert accidental parameter change ([f08cb36](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/f08cb36598cfc9f28800875b8163b3164a158674))
+* tests for products, reports, sellers, subscriptions ([09be2da](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/09be2dadda5e3836906977ed34203d61e0f3ee47))
+* unit test utils, finances and fulfillment inv unit tests ([d1b37a7](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d1b37a700ceb5a430c803ae4605ef408e6cc5e30))
+
+
+### Features
+
+* add example for using received next tokens ([7b305c7](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/7b305c757c2e940700361bff925c421b5ca28b84))
+* add get-service-status example ([ec9dc3b](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ec9dc3b5e60c49bf22e0d22360b05f592bb5253e))
+* add list orders example ([f28e97a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/f28e97a6ee4362962666288e8f41d9c409b8284d))
+* add using next tokens example ([9f2861d](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/9f2861da7e38b1abcf9709baeb5c4da4d64c3a4f))
+* create getFeedSubmissionList ([61ce9a3](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/61ce9a39f1119bbe3935ea0049bc8fe59f74b6d3))
+* created submitFeeds, integ and unit tests, http update ([01e0659](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/01e0659909967f4cc23bf2b0af50315c110ba74f))
+* example for list inventory supply ([426695d](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/426695d14e809750aa0aeb8468c007f5b579d277))
+* expound on using next tokens ([74e24ab](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/74e24ab8b167c55fe72df06d08a1a73922e0e64b))
+* init feeds ([501283c](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/501283c719f425e0eaf3d7423a5cb8b1c9921956))
+* made cancelfeedsubmissions ([1e3ad85](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/1e3ad854d33548e7f63c3fd404fc3bfefa6477f4))
+* made getFeedSubmissionCount ([d5bb2ec](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d5bb2ecd070d18a2d5a9bdd832837136b0561376))
+* made getFeedSubmissionsList and fix tests ([cf2c0f2](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/cf2c0f26793a011dc1e6e5f79bb1f5d5864865c7))
+* made getFeedSubmissionsListByNT and feedsubmissioninfo ([db928a3](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/db928a3ab19d6d970cb2c584ae288a864847fca8))
+
 # 1.0.0-alpha.1 (2020-06-22)
 
 
