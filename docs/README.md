@@ -2,8 +2,13 @@
 - [Table of Contents](#table-of-contents)
 - [Basics](#basics)
   * [Basic example](#basic-example)
+  * [Configuring `HttpClient` and configuring the sections](#configuring--httpclient--and-configuring-the-sections)
   * [Response Object](#response-object)
   * [Request Metadata](#request-metadata)
+  * [["Throttling: Limits to how often you can submit requests"](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_Throttling.html)](#--throttling--limits-to-how-often-you-can-submit-requests---http---docsdeveloperamazonservicescom-en-ca-dev-guide-dg-throttlinghtml-)
+  * [Next tokens](#next-tokens)
+    + [Creating `NextToken`s](#creating--nexttoken-s)
+    + [Reusing next tokens from previous responses](#reusing-next-tokens-from-previous-responses)
 - [Sections](#sections)
   * [Sellers](#sellers)
     + [listMarketplaceParticipations](#listmarketplaceparticipations)
@@ -71,7 +76,7 @@
     + [getLowestOfferListingsForSku](#getlowestofferlistingsforsku)
     + [getLowestOfferListingsForAsin](#getlowestofferlistingsforasin)
     + [getLowestPricedOffersForSku](#getlowestpricedoffersforsku)
-    + [getLowestPricedOffersForSku](#getlowestpricedoffersforsku-1)
+    + [getLowestPricedOffersForAsin](#getlowestpricedoffersforasin)
     + [getMyFeesEstimate](#getmyfeesestimate)
     + [getMyPriceForSku](#getmypriceforsku)
     + [getMyPriceForAsin](#getmypriceforasin)
@@ -107,6 +112,8 @@ console.log(`
 ```
 
 Each action returns a tuple containing [0] the actual request data and [1] the request metadata
+
+[getServiceStatus example file](../examples/get-service-status.ts)
 
 ---
 ## Configuring `HttpClient` and configuring the sections
@@ -158,6 +165,8 @@ This is consistent for all actions
 ---
 
 ## Next tokens
+
+[Using NextTokens example file](../examples/using-next-tokens.ts)
 
 ### Creating `NextToken`s
 ["Using NextToken to request additional pages" from the Amazon documentation](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_NextToken.html)   
