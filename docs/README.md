@@ -152,7 +152,7 @@ const sellers = new Sellers(httpClient)
 const [response, meta] = sellers.listMarketplaceParticipations()
 ```
 
-**Sample Response**
+**Response**
 
 [See sellers test snapshot](../test/unit/__snapshots__/sellers.test.ts.snap)
 
@@ -170,7 +170,7 @@ const sellers = new Sellers(httpClient)
 const [response, meta] = sellers.listMarketplaceParticipationsByNextToken(new NextToken('ListMarketplaceParticipations', '123'))
 ```
 
-**Sample Response**
+**Response**
 
 [See sellers test snapshot](../test/unit/__snapshots__/sellers.test.ts.snap)
 
@@ -188,7 +188,7 @@ const sellers = new Sellers(httpClient)
 const [response, meta] = sellers.getServiceStatus()
 ```
 
-**Sample Response**
+**Response**
 
 [See sellers test snapshot](../test/unit/__snapshots__/sellers.test.ts.snap)
 
@@ -225,7 +225,7 @@ const orders = new Orders(httpClient)
 const [response, meta] = orders.listOrders({ createdAfter: new Date() })
 ```
 
-**Sample Response**
+**Response**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
@@ -244,7 +244,7 @@ const orders = new Orders(httpClient)
 const [response, meta] = orders.listOrdersByNextToken(new NextToken('ListOrders', '123'))
 ```
 
-**Sample Response**
+**Response**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
@@ -261,7 +261,7 @@ const orders = new Orders(httpClient)
 const [response, meta] = orders.getOrder({ AmazonOrderId: ['902-3159896-1390916'] })
 ```
 
-**Sample Response**
+**Response**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
@@ -278,7 +278,7 @@ const orders = new Orders(httpClient)
 const [response, meta] = orders.listOrderItems({ AmazonOrderId: '902-3159896-1390916' })
 ```
 
-**Sample Response**
+**Response**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
@@ -297,7 +297,7 @@ const orders = new Orders(httpClient)
 const [response, meta] = orders.listOrderItemsByNextToken(new NextToken('ListOrderItems', '123'))
 ```
 
-**Sample Response**
+**Response**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
@@ -315,7 +315,7 @@ const orders = new Orders(httpClient)
 const [response, meta] = orders.getServiceStatus()
 ```
 
-**Sample Response**
+**Response**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
@@ -343,7 +343,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.requestReport({ ReportType: '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_' })
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -369,7 +369,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportRequestList()
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -386,7 +386,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportRequestListByNextToken(new NextToken('GetReportRequestList', '123'))
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -409,7 +409,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportRequestCount()
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -435,7 +435,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.cancelReportRequests()
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -460,7 +460,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportList()
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -478,7 +478,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportListByNextToken(new NextToken('GetReportList', '123'))
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 ### getReportCount
@@ -500,7 +500,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportCount()
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -517,7 +517,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.getReport('12345')
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -544,7 +544,7 @@ const [response, meta] = reports.manageReportSchedule({
 })
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -564,7 +564,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportScheduleList()
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -585,7 +585,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportScheduleCount()
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -604,7 +604,7 @@ const reports = new Reports(httpClient)
 const [response, meta] = reports.updateReportAcknowledgements({ ReportIdList: ['12345'] })
 ```
 
-**Sample Response**
+**Response**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -668,7 +668,7 @@ const [response, meta] = subscriptions.registerDestination({
     })
 ```
 
-**Sample Response**
+**Response**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -699,7 +699,7 @@ const [response, meta] = subscriptions.deregisterDestination({
     })
 ```
 
-**Sample Response**
+**Response**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -719,7 +719,7 @@ const [response, meta] = subscriptions.listRegisteredDestinations({
     })
 ```
 
-**Sample Response**
+**Response**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -750,7 +750,7 @@ const [response, meta] = subscriptions.sendTestNotificationToDestination({
     })
 ```
 
-**Sample Response**
+**Response**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -784,7 +784,7 @@ const [response, meta] = subscriptions.createSubscription({
     })
 ```
 
-**Sample Response**
+**Response**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -819,7 +819,7 @@ const [response, meta] = subscriptions.getSubscription({
     })
 ```
 
-**Sample Response**
+**Response**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -853,7 +853,7 @@ const [response, meta] = subscriptions.deleteSubscription({
     })
 ```
 
-**Sample Response**
+**Response**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -874,7 +874,7 @@ const [response, meta] = subscriptions.listSubscriptions({
     })
 ```
 
-**Sample Response**
+**Response**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -907,7 +907,7 @@ const [response, meta] = subscriptions.updateSubscription({
     })
 ```
 
-**Sample Response**
+**Response**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -926,7 +926,7 @@ const subscriptions = new Subscriptions(httpClient)
 const [response, meta] = subscriptions.getServiceStatus()
 ```
 
-**Sample Response**
+**Response**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -956,7 +956,7 @@ const [response, meta] = fulfillmentInventory.listInventorySupply({
 })
 ```
 
-**Sample Response**
+**Response**
 
 [See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
 
@@ -973,7 +973,7 @@ const fulfillmentInventory = new FulfillmentInventory(httpClient)
 const [response, meta] = fulfillmentInventory.listInventorySupplyByNextToken(new NextToken('ListInventorySupply', '123'))
 ```
 
-**Sample Response**
+**Response**
 
 [See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
 
@@ -991,7 +991,7 @@ const fulfillmentInventory = new FulfillmentInventory(httpClient)
 const [response, meta] = fulfillmentInventory.getServiceStatus()
 ```
 
-**Sample Response**
+**Response**
 
 [See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
 
@@ -1005,11 +1005,27 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 | Name              	| Type     	| Example               	| Required 	|
 |-------------------	|----------	|-----------------------	|----------	|
 | FeedContent       	| string   	| '<XML></XML>'         	| Yes      	|
-| FeedType          	| string   	| '_POST_PRODUCT_DATA_' 	| Yes      	|
+| FeedType          	| string   	| `'_POST_PRODUCT_DATA_'` 	| Yes      	|
 | MarketplaceIdList 	| string[] 	| ['A2EUQ1WTGCTBG2']    	| No       	|
 | PurgeAndReplace   	| boolean  	| false                 	| No       	|
 | AmazonOrderId     	| string   	| '902-3159896-1390916' 	| No       	|
 | DocumentId        	| string   	| 'DCMNTID'             	| No       	|
+
+* `FeedContent` is the actual content of the feed itself, in XML or flat file format as a string.
+
+**Example**
+
+```typescript
+const feeds = new Feeds(httpClient)
+const [response, meta] = feeds.submitFeed({
+  FeedContent: getMyXmlFileAsString(),
+  FeedType: '_POST_PRODUCT_DATA_',
+})
+```
+
+**Response**
+
+[See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
 * [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
 ### getFeedSubmissionList
@@ -1025,13 +1041,35 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 | SubmittedToDate          	| Date     	| new Date()                        	| No       	|
 
 * [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
-
 * [Possible values for FeedProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedProcessingStatus.html)
+
+**Example**
+
+```typescript
+const feeds = new Feeds(httpClient)
+const [response, meta] = feeds.getFeedSubmissionList()
+```
+
+**Response**
+
+[See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
+
 ### getFeedSubmissionListByNextToken
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+
+**Example**
+
+```typescript
+const feeds = new Feeds(httpClient)
+const [response, meta] = feeds.getFeedSubmissionListByNextToken(new NextToken('GetFeedSubmissionList', '123'))
+```
+
+**Response**
+
+[See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
 ### getFeedSubmissionCount
 **Parameters**
@@ -1044,8 +1082,19 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 | SubmittedToDate          	| Date     	| new Date()                        	| No       	|
 
 * [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
-
 * [Possible values for FeedProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedProcessingStatus.html)
+
+**Example**
+
+```typescript
+const feeds = new Feeds(httpClient)
+const [response, meta] = feeds.getFeedSubmissionCount()
+```
+
+**Response**
+
+[See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
+
 ### cancelFeedSubmissions
 **Parameters**
 | Name                     	| Type     	| Example                           	| Required 	|
@@ -1057,11 +1106,36 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 
 * [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
 
+**Example**
+
+```typescript
+const feeds = new Feeds(httpClient)
+const [response, meta] = feeds.cancelFeedSubmissions()
+```
+
+**Response**
+
+[See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
+
+
 ### getFeedSubmissionResult
 **Parameters**
 | Name                  | Type      | Example                       | Required 	|
-| FeedSubmissionId     	| string 	| 'FEEDID'                        	| No       	|
+| FeedSubmissionId     	| string 	  | 'FEEDID'                      | No       	|
 
+**Example**
+
+```typescript
+const feeds = new Feeds(httpClient)
+const [response, meta] = feeds.getFeedSubmissionResult()
+```
+
+**Response**
+
+* Amazon MWS returns an XML file that contains the response to a successful request or subscription.
+* Response is type `string`
+
+[See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
 ---
 ## Products
@@ -1114,12 +1188,40 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 
 * [Possible values for QueryContextId](http://docs.developer.amazonservices.com/en_CA/products/Products_QueryContextIDs.html)
 
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.listMatchingProducts({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  Query: 'harry potter dvd',
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
+
 ### getMatchingProduct
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
 | MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
 | ASINList       	| string[] 	| ['MY-ASIN-1']    	| Yes      	|
+
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getMatchingProduct({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  ASINList: ['MY-ASIN-1'],
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getMatchingProductForId
 **Parameters**
@@ -1131,12 +1233,41 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 
 * [Possible values for IdType](http://docs.developer.amazonservices.com/en_CA/products/Products_GetMatchingProductForId.html)
 
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getMatchingProductForId({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  IdType: 'ASIN',
+  IdList: ['MY-ASIN-1'],
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
+
 ### getCompetitivePricingForSku
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
 | MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| SellerSKUList     | string[] 	| ['MY-SKU-1']    	| Yes      	|
+| SellerSKUList    | string[] | ['MY-SKU-1']    	| Yes      	|
+
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getCompetitivePricingForSku({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  SellerSKUList: ['MY-SKU-1'],
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getCompetitivePricingForAsin
 **Parameters**
@@ -1144,6 +1275,20 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 |----------------	|----------	|------------------	|----------	|
 | MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
 | ASINList       	| string[] 	| ['MY-ASIN-1']    	| Yes      	|
+
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getCompetitivePricingForAsin({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  ASINList: ['MY-ASIN-1'],
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getLowestOfferListingsForSku
 **Parameters**
@@ -1155,6 +1300,21 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getLowestOfferListingsForSku({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  SellerSKUList: ['MY-SKU-1'],
+  ItemCondition: 'New',
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
+
 ### getLowestOfferListingsForAsin
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
@@ -1165,6 +1325,21 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForASIN.html)
 
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getLowestOfferListingsForAsin({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  ASINList: ['MY-ASIN-1'],
+  ItemCondition: 'New',
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
+
 ### getLowestPricedOffersForSku
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
@@ -1175,7 +1350,22 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
-### getLowestPricedOffersForSku
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getLowestPricedOffersForSku({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  SellerSKU: 'MY-SKU-1',
+  ItemCondition: 'New',
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
+
+### getLowestPricedOffersForAsin
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
@@ -1185,11 +1375,55 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getLowestPricedOffersForAsin({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  ASIN: 'MY-ASIN-1',
+  ItemCondition: 'New',
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
+
 ### getMyFeesEstimate
 **Parameters**
 | Name           	        | Type     	                | Example                                        | Required 	|
 |-----------------------	|-----------------------	|----------------------------------------------- |----------	|
-| FeesEstimateRequestList  	| FeesEstimateRequest[]   	|  [FeesEstimateRequest](#feesestimaterequest)	 | Yes      	|
+| FeesEstimateRequestList  	| FeesEstimateRequest[] |  [FeesEstimateRequest](#feesestimaterequest)	 | Yes      	|
+
+**Example**
+
+```typescript
+const moneyType: MoneyType = {
+  CurrencyCode: 'USD',
+  Amount: 1000,
+}
+
+const sampleFee: FeesEstimateRequest = {
+  MarketplaceId: '',
+  IdType: 'ASIN',
+  IdValue: 'ASD',
+  PriceToEstimateFees: {
+    ListingPrice: moneyType,
+  },
+  Identifier: 'request1',
+  IsAmazonFulfilled: false,
+}
+
+const products = new Products(httpClient)
+const [response, meta] = products.getMyFeesEstimate({
+  FeesEstimateRequestList: [sampleFee]
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getMyPriceForSku
 **Parameters**
@@ -1200,6 +1434,20 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 | ItemCondition     | string 	| 'New'         	| No      	|
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getMyPriceForSku({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  SellerSKUList: ['MY-SKU-1'],
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
+
 ### getMyPriceForAsin
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
@@ -1209,12 +1457,40 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 | ItemCondition     | string 	| 'New'         	| No      	|
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getMyPriceForAsin({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  ASINList: ['MY-ASIN-1'],
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
+
 ### getProductCategoriesForSku
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
 | MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
 | SellerSKU         | string 	| 'MY-SKU-1'    	| Yes      	|
+
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getProductCategoriesForSku({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  SellerSKU: 'MY-SKU-1',
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getProductCategoriesForAsin
 **Parameters**
@@ -1223,6 +1499,19 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 | MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
 | ASIN              | string 	| 'MY-ASIN-1'    	| Yes      	|
 
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getProductCategoriesForAsin({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  ASIN: 'MY-ASIN-1',
+})
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getServiceStatus
 
@@ -1231,6 +1520,16 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 | None |
 |------|
 
+**Example**
+
+```typescript
+const products = new Products(httpClient)
+const [response, meta] = products.getServiceStatus()
+```
+
+**Response**
+
+[See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ---
 ## Finances
@@ -1244,21 +1543,58 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 | FinancialEventGroupsStartedAfter 	| Date     	| new Date()                        	| Yes      	|
 | FinancialEventGroupStartedBefore 	| Date     	| new Date()                        	| No       	|
 
+**Example**
+
+```typescript
+const finances = new Finances(httpClient)
+const [response, meta] = finances.listFinancialEventGroups({
+  FinancialEventGroupsStartedAfter: new Date(),
+})
+```
+
+**Response**
+
+[See finances test snapshot](../test/unit/__snapshots__/finances.test.ts.snap)
+
 ### listFinancialEventGroupsByNextToken
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
+**Example**
+
+```typescript
+const finances = new Finances(httpClient)
+const [response, meta] = finances.listFinancialEventGroupsByNextToken(new NextToken('ListFinancialEventGroups', '123'))
+```
+
+**Response**
+
+[See finances test snapshot](../test/unit/__snapshots__/finances.test.ts.snap)
+
 ### listFinancialEvents
 **Parameters**
 | Name                  	| Type   	| Example               	| Required                                                                                                                                 	|
 |-----------------------	|--------	|-----------------------	|------------------------------------------------------------------------------------------------------------------------------------------	|
 | MaxResultsPerPage     	| number 	| 10                    	| No                                                                                                                                       	|
-| AmazonOrderId         	| string 	| '902-3159896-1390916' 	| You can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
-| FinancialEventGroupId 	| string 	| 'FNCLEVTGRPID'        	| You can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
-| PostedAfter           	| Date   	| new Date()            	| You can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
+| AmazonOrderId         	| string 	| '902-3159896-1390916' 	| Yes but you can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
+| FinancialEventGroupId 	| string 	| 'FNCLEVTGRPID'        	| Yes but you can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
+| PostedAfter           	| Date   	| new Date()            	| Yes but you can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
 | PostedBefore          	| Date   	| new Date()            	| No                                                                                                                                       	|
+
+**Example**
+
+```typescript
+const finances = new Finances(httpClient)
+const [response, meta] = finances.listFinancialEvents({
+  AmazonOrderId: '902-3159896-1390916',
+})
+```
+
+**Response**
+
+[See finances test snapshot](../test/unit/__snapshots__/finances.test.ts.snap)
 
 ### listFinancialEventsByNextToken
 **Parameters**
@@ -1266,3 +1602,13 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 |-----------|-----------|-----------------------------------------------------------------------|----------|
 | NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
+**Example**
+
+```typescript
+const finances = new Finances(httpClient)
+const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinancialEvents', '123'))
+```
+
+**Response**
+
+[See finances test snapshot](../test/unit/__snapshots__/finances.test.ts.snap)
