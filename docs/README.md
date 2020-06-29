@@ -109,6 +109,31 @@ console.log(`
 Each action returns a tuple containing [0] the actual request data and [1] the request metadata
 
 ---
+## Configuring `HttpClient` and configuring the sections
+
+```typescript
+/**
+ * Configure the HttpClient
+ */
+
+const mwsOptions: MWSOptions = {
+  marketplace: amazonMarketplaces.US,
+  awsAccessKeyId: '',
+  mwsAuthToken: '',
+  sellerId: '',
+  secretKey: '',
+}
+
+const http = new HttpClient(mwsOptions)
+
+/**
+ * Configure which API you need
+ *  Sellers, Orders, Fulfillment Inventory, Products, Reports, Subscriptions, Finances, Feeds
+ */
+const sellers = new Sellers(http)
+```
+
+---
 ## Response Object
 
 The actual request data varies between actions. Outside of some exceptions, all request data has been defined.
@@ -130,6 +155,43 @@ This is consistent for all actions
 | quotaResetOn   	| Date   	| new Date()                             	| Date the quota resets                      	|
 
 ["Throttling: Limits to how often you can submit requests"](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_Throttling.html)
+---
+
+## Next tokens
+
+### Creating `NextToken`s
+["Using NextToken to request additional pages" from the Amazon documentation](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_NextToken.html)   
+
+```typescript
+  /**
+   * Construct your next token with the following arguments
+   * 1. Valid Amazon MWS action. WITHOUT `...ByNextToken` AT THE END
+   * 2. Actual NextToken
+   */
+  const nextToken = new NextToken('ListMarketplaceParticipations', 'NEXTTOKEN123')
+  const [
+    marketplaceParticipationsList,
+    requestMeta,
+  ] = await sellers.listMarketplaceParticipationsByNextToken(nextToken)
+```
+
+### Reusing next tokens from previous responses
+```typescript
+  const [
+    marketplaceParticipationsList,
+    requestMeta,
+  ] = await sellers.listMarketplaceParticipationsByNextToken(nextToken)
+  const nextToken = marketplaceParticipationsList.NextToken
+  /**
+   * Possibly undefined
+   */
+  if (nextToken) {
+    const [
+      newMarketplaceParticipationsList,
+      newRequestMeta,
+    ] = await sellers.listMarketplaceParticipationsByNextToken(nextToken)
+  }
+```
 
 # Sections
 
