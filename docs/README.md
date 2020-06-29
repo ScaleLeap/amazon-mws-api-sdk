@@ -133,29 +133,58 @@ This is consistent for all actions
 
 ### listMarketplaceParticipations
 
-**Example**
-
-```typescript
-const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations()
-```
-
 **Parameters**
 
 | None |
 |------|
+
+**Example**
+
+```typescript
+const sellers = new Sellers(httpClient)
+const [response, meta] = sellers.listMarketplaceParticipations()
+```
+
+**Sample Response**
+
+[See sellers test snapshot](../test/unit/__snapshots__/sellers.test.ts.snap)
 
 ### listMarketplaceParticipationsByNextToken
 
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+
+**Example**
+
+```typescript
+const sellers = new Sellers(httpClient)
+const [response, meta] = sellers.listMarketplaceParticipationsByNextToken(new NextToken('ListMarketplaceParticipations', '123'))
+```
+
+**Sample Response**
+
+[See sellers test snapshot](../test/unit/__snapshots__/sellers.test.ts.snap)
+
 ### getServiceStatus
 
 **Parameters**
 
 | None |
 |------|
+
+**Example**
+
+```typescript
+const sellers = new Sellers(httpClient)
+const [response, meta] = sellers.getServiceStatus()
+```
+
+**Sample Response**
+
+[See sellers test snapshot](../test/unit/__snapshots__/sellers.test.ts.snap)
+
 
 ## Orders
 
@@ -181,11 +210,35 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 
 * [Possible values for FulfillmentChannel, PaymentMethod and EasyShipmentStatus ](http://docs.developer.amazonservices.com/en_CA/orders-2013-09-01/Orders_ListOrders.html)
 
+**Example**
+
+```typescript
+const orders = new Orders(httpClient)
+const [response, meta] = orders.listOrders({ createdAfter: new Date() })
+```
+
+**Sample Response**
+
+[See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
+
+
 ### listOrdersByNextToken
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+
+
+**Example**
+
+```typescript
+const orders = new Orders(httpClient)
+const [response, meta] = orders.listOrdersByNextToken(new NextToken('ListOrders', '123'))
+```
+
+**Sample Response**
+
+[See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
 ### getOrder
 **Parameters**
@@ -193,22 +246,70 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 |---------------|----------|-------------------------|----------|
 | AmazonOrderId | string[] | ['902-3159896-1390916'] | Yes      |
 
+**Example**
+
+```typescript
+const orders = new Orders(httpClient)
+const [response, meta] = orders.getOrder({ AmazonOrderId: ['902-3159896-1390916'] })
+```
+
+**Sample Response**
+
+[See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
+
 ### listOrderItems
 **Parameters**
 | Name          | Type   | Example               | Required |
 |---------------|--------|-----------------------|----------|
 | AmazonOrderId | string | '902-3159896-1390916' | Yes      |
+
+**Example**
+
+```typescript
+const orders = new Orders(httpClient)
+const [response, meta] = orders.listOrderItems({ AmazonOrderId: '902-3159896-1390916' })
+```
+
+**Sample Response**
+
+[See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
+
 ### listOrderItemsByNextToken
+
 **Parameters**
+
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+
+**Example**
+
+```typescript
+const orders = new Orders(httpClient)
+const [response, meta] = orders.listOrderItemsByNextToken(new NextToken('ListOrderItems', '123'))
+```
+
+**Sample Response**
+
+[See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
+
 ### getServiceStatus
 
 **Parameters**
 
 | None |
 |------|
+
+**Example**
+
+```typescript
+const orders = new Orders(httpClient)
+const [response, meta] = orders.getServiceStatus()
+```
+
+**Sample Response**
+
+[See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
 ## Reports
 
@@ -226,12 +327,24 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 
 * [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.requestReport({ ReportType: '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_' })
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
+
+
 ### getReportRequestList
 **Parameters**
 | Name                       	| Type     	| Example                                	| Required                                                                      	|
 |----------------------------	|----------	|----------------------------------------	|-------------------------------------------------------------------------------	|
 | ReportRequestIdList        	| string[] 	| ['12345']                              	| No. If you pass in ReportRequestId values, other query conditions are ignored 	|
-| ReportTypeList             	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No                                                                            	|
+| ReportTypeList             	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No                                                                            	|
 | ReportProcessingStatusList 	| string[] 	| ['_SUBMITTED_']                        	| No                                                                            	|
 | MaxCount                   	| number   	| 10                                     	| No                                                                            	|
 | RequestedFromDate          	| Date     	| new Date()                             	| No                                                                            	|
@@ -240,22 +353,57 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 * [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestList.html)
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.getReportRequestList()
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
+
 ### getReportRequestListByNextToken
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.getReportRequestListByNextToken(new NextToken('GetReportRequestList', '123'))
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
+
 
 ### getReportRequestCount
 **Parameters**
 | Name                       	| Type     	| Example                                	| Required 	|
 |----------------------------	|----------	|----------------------------------------	|----------	|
-| ReportTypeList             	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+| ReportTypeList             	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
 | ReportProcessingStatusList 	| string[] 	| ['_SUBMITTED_']                        	| No       	|
 | RequestedFromDate          	| Date     	| new Date()                             	| No       	|
 | RequestedToDate            	| Date     	| new Date()                             	| No       	|
 * [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestCount.html)
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.getReportRequestCount()
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
+
 
 ### cancelReportRequests
 **Parameters**
@@ -263,7 +411,7 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 | Name                       	| Type     	| Example                                	| Required 	|
 |----------------------------	|----------	|----------------------------------------	|----------	|
 | ReportRequestIdList        	| string[] 	| ['12345']                              	| No       	|
-| ReportTypeList             	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+| ReportTypeList             	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
 | ReportProcessingStatusList 	| string[] 	| ['_SUBMITTED_']                        	| No       	|
 | RequestedFromDate          	| Date     	| new Date()                             	| No       	|
 | RequestedToDate            	| Date     	| new Date()                             	| No       	|
@@ -271,13 +419,24 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 * [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestList.html)
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.cancelReportRequests()
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
+
 ### getReportList
 **Parameters**
 
 | Name                	| Type     	| Example                                	| Required 	|
 |---------------------	|----------	|----------------------------------------	|----------	|
 | MaxCount            	| number   	| 10                                     	| No       	|
-| ReportTypeList      	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+| ReportTypeList      	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
 | Acknowledged        	| boolean  	| true                                   	| No       	|
 | ReportRequestIdList 	| string[] 	| ['12345']                              	| No       	|
 | AvailableFromDate   	| Date     	| new Date()                             	| No       	|
@@ -285,24 +444,56 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.getReportList()
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
+
 ### getReportListByNextToken
 **Parameters**
 
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.getReportListByNextToken(new NextToken('GetReportList', '123'))
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 ### getReportCount
 **Parameters**
 
 | Name              	| Type     	| Example                                	| Required 	|
 |-------------------	|----------	|----------------------------------------	|----------	|
-| ReportTypeList    	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+| ReportTypeList    	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
 | Acknowledged      	| boolean  	| true                                   	| No       	|
 | AvailableFromDate 	| Date     	| new Date()                             	| No       	|
 | AvailableToDate   	| Date     	| new Date()                             	| No       	|
 
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.getReportCount()
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### getReport
 **Parameters**
@@ -310,23 +501,63 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 |-------------------	|---------	|------------	|----------	|
 | ReportId          	| string  	| '12345'    	| Yes      	|
 
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.getReport('12345')
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
+
+*Depending on the ReportType, this will either be a tab-delimited flat file, an XML document, or a PDF.*
+*Because of this, this action returns a `string` instead of a JS object and it is up to the user to determine how to handle the file*
+
 ### manageReportSchedule
 **Parameters**
 | Name            	| Type   	| Example                              	| Required 	|
 |-----------------	|--------	|--------------------------------------	|----------	|
-| ReportType      	| string 	| '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_' 	| Yes      	|
-| Schedule        	| string 	| '_15_MINUTES_'                       	| Yes      	|
+| ReportType      	| string 	| `'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`| Yes      	|
+| Schedule        	| string 	| `'_15_MINUTES_'`                      | Yes      	|
 | ScheduleDate    	| Date   	| new Date()                           	| No       	|
 * [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 * [Possible values for Schedule](http://docs.developer.amazonservices.com/en_CA/reports/Reports_Schedule.html)
 
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.manageReportSchedule({
+  ReportType: '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_',
+  Schedule: '_15_MINUTES_'
+})
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
+
 ### getReportScheduleList
+
 **Parameters**
 
 | Name              	| Type     	| Example                                	| Required 	|
 |-------------------	|----------	|----------------------------------------	|----------	|
-| ReportTypeList    	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+| ReportTypeList    	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.getReportScheduleList()
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### getReportScheduleListByNextToken
 [Currently this operation can never be called because the GetReportScheduleList operation cannot return more than 100 results. It is included for future compatibility.](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportScheduleListByNextToken.html)
@@ -335,15 +566,38 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 **Parameters**
 | Name              	| Type     	| Example                                	| Required 	|
 |-------------------	|----------	|----------------------------------------	|----------	|
-| ReportTypeList    	| string[] 	| ['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'] 	| No       	|
+| ReportTypeList    	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.getReportScheduleCount()
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
+
 ### updateReportAcknowledgements
+
 **Parameters**
 | Name            	| Type     	| Example    	| Required 	|
 |-----------------	|----------	|------------	|----------	|
 | ReportIdList    	| string[] 	| ['12345']  	| Yes      	|
 | Acknowledged    	| boolean  	| true       	| No       	|
+
+**Example**
+
+```typescript
+const reports = new Reports(httpClient)
+const [response, meta] = reports.updateReportAcknowledgements({ ReportIdList: ['12345'] })
+```
+
+**Sample Response**
+
+[See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ## Subscriptions
 [Amazon MWS Subscriptions official API](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Overview.html)
@@ -386,6 +640,29 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 | MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2'            | Yes      	|
 | Destination   	| Destination 	| [Destination](#destination) | Yes      	|
 
+**Example**
+
+```typescript
+const subscriptions = new Subscriptions(httpClient)
+const [response, meta] = subscriptions.registerDestination({
+      MarketplaceId: 'A2EUQ1WTGCTBG2' ,
+      Destination: {
+          AttributeList: [
+            {
+              Key: 'sqsQueueUrl',
+              Value: 'https://sqs.us-east-1.amazonaws.com/304786922662/mws-sub-testw',
+            },
+          ],
+          DeliveryChannel: 'SQS',
+        }
+    })
+```
+
+**Sample Response**
+
+[See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
+
+
 ### deregisterDestination
 **Parameters**
 
@@ -394,11 +671,48 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 | MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2'            | Yes      	|
 | Destination   	| Destination 	| [Destination](#destination) | Yes      	|
 
+**Example**
+
+```typescript
+const subscriptions = new Subscriptions(httpClient)
+const [response, meta] = subscriptions.deregisterDestination({
+      MarketplaceId: 'A2EUQ1WTGCTBG2',
+      Destination: {
+          AttributeList: [
+            {
+              Key: 'sqsQueueUrl',
+              Value: 'https://sqs.us-east-1.amazonaws.com/304786922662/mws-sub-testw',
+            },
+          ],
+          DeliveryChannel: 'SQS',
+        }
+    })
+```
+
+**Sample Response**
+
+[See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
+
+
 ### listRegisteredDestinations
 **Parameters**
 | Name          	| Type        	| Example          	| Required 	|
 |---------------	|-------------	|------------------	|----------	|
 | MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+
+**Example**
+
+```typescript
+const subscriptions = new Subscriptions(httpClient)
+const [response, meta] = subscriptions.listRegisteredDestinations({
+      MarketplaceId: 'A2EUQ1WTGCTBG2',
+    })
+```
+
+**Sample Response**
+
+[See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
+
 
 ### sendTestNotificationToDestination
 **Parameters**
@@ -408,6 +722,29 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 | MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2'            | Yes      	|
 | Destination   	| Destination 	| [Destination](#destination) | Yes      	|
 
+**Example**
+
+```typescript
+const subscriptions = new Subscriptions(httpClient)
+const [response, meta] = subscriptions.sendTestNotificationToDestination({
+      MarketplaceId: 'A2EUQ1WTGCTBG2',
+      Destination: {
+          AttributeList: [
+            {
+              Key: 'sqsQueueUrl',
+              Value: 'https://sqs.us-east-1.amazonaws.com/304786922662/mws-sub-testw',
+            },
+          ],
+          DeliveryChannel: 'SQS',
+        }
+    })
+```
+
+**Sample Response**
+
+[See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
+
+
 ### createSubscription
 **Parameters**
 | Name          	| Type        	| Example          	            | Required 	|
@@ -415,17 +752,66 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 | MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	            | Yes      	|
 | Subscription   	| Subscription 	| [Subscription](#subscription) | Yes      	|
 
+**Example**
+
+```typescript
+const subscriptions = new Subscriptions(httpClient)
+const [response, meta] = subscriptions.createSubscription({
+      MarketplaceId: 'A2EUQ1WTGCTBG2',
+      Subscription: {
+        IsEnabled: true,
+        NotificationType: 'AnyOfferChanged',
+        Destination: {
+          AttributeList: [
+            {
+              Key: 'sqsQueueUrl',
+              Value: 'https://sqs.us-east-1.amazonaws.com/304786922662/mws-sub-testw',
+            },
+          ],
+          DeliveryChannel: 'SQS',
+        },
+      }
+    })
+```
+
+**Sample Response**
+
+[See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
+
+
 ### getSubscription
 **Parameters**
 
 | Name          	| Type        	| Example          	          | Required 	|
 |---------------	|-------------	|------------------	          |----------	|
 | MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	          | Yes      	|
-| NotificationType 	| string      	| 'AnyOfferChanged'           | Yes     	|
+| NotificationType 	| string      | 'AnyOfferChanged'           | Yes     	|
 | Destination   	| Destination 	| [Destination](#destination) | Yes      	|
 
-
 * [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
+
+**Example**
+
+```typescript
+const subscriptions = new Subscriptions(httpClient)
+const [response, meta] = subscriptions.getSubscription({
+      MarketplaceId: 'A2EUQ1WTGCTBG2',
+      NotificationType: 'AnyOfferChanged',
+      Destination: {
+        AttributeList: [
+          {
+            Key: 'sqsQueueUrl',
+            Value: 'https://sqs.us-east-1.amazonaws.com/304786922662/mws-sub-testw',
+          },
+        ],
+        DeliveryChannel: 'SQS',
+      },
+    })
+```
+
+**Sample Response**
+
+[See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### deleteSubscription
 **Parameters**
@@ -438,11 +824,49 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 
 * [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
+**Example**
+
+```typescript
+const subscriptions = new Subscriptions(httpClient)
+const [response, meta] = subscriptions.deleteSubscription({
+      MarketplaceId: 'A2EUQ1WTGCTBG2',
+      NotificationType: 'AnyOfferChanged',
+      Destination: {
+        AttributeList: [
+          {
+            Key: 'sqsQueueUrl',
+            Value: 'https://sqs.us-east-1.amazonaws.com/304786922662/mws-sub-testw',
+          },
+        ],
+        DeliveryChannel: 'SQS',
+      },
+    })
+```
+
+**Sample Response**
+
+[See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
+
+
 ### listSubscriptions
 **Parameters**
 | Name          	| Type        	| Example          	| Required 	|
 |---------------	|-------------	|------------------	|----------	|
 | MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+
+
+**Example**
+
+```typescript
+const subscriptions = new Subscriptions(httpClient)
+const [response, meta] = subscriptions.listSubscriptions({
+      MarketplaceId: 'A2EUQ1WTGCTBG2',
+    })
+```
+
+**Sample Response**
+
+[See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### updateSubscription
 **Parameters**
@@ -451,12 +875,51 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 | MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	            | Yes      	|
 | Subscription   	| Subscription 	| [Subscription](#subscription) | Yes      	|
 
+**Example**
+
+```typescript
+const subscriptions = new Subscriptions(httpClient)
+const [response, meta] = subscriptions.updateSubscription({
+      MarketplaceId: 'A2EUQ1WTGCTBG2',
+      Subscription: {
+        IsEnabled: true,
+        NotificationType: 'AnyOfferChanged',
+        Destination: {
+          AttributeList: [
+            {
+              Key: 'sqsQueueUrl',
+              Value: 'https://sqs.us-east-1.amazonaws.com/304786922662/mws-sub-testw',
+            },
+          ],
+          DeliveryChannel: 'SQS',
+        },
+      }
+    })
+```
+
+**Sample Response**
+
+[See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
+
 
 ### getServiceStatus
 **Parameters**
 
 | None |
 |------|
+
+
+**Example**
+
+```typescript
+const subscriptions = new Subscriptions(httpClient)
+const [response, meta] = subscriptions.getServiceStatus()
+```
+
+**Sample Response**
+
+[See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
+
 
 ## FulfillmentInventory
 
@@ -466,18 +929,42 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 **Parameters**
 | Name               	| Type     	| Example          	| Required                                                                      	|
 |--------------------	|----------	|------------------	|-------------------------------------------------------------------------------	|
-| SellerSkus         	| string[] 	| 'SAMPLESKU'      	| Yes, if QueryStartDateTime is not specified. Specifying both returns an error 	|
+| SellerSkus         	| string[] 	| ['SAMPLESKU']     | Yes, if QueryStartDateTime is not specified. Specifying both returns an error 	|
 | QueryStartDateTime 	| Date     	| new Date()       	| Yes, if SellerSkus is not specified. Specifying both returns an error         	|
 | ResponseGroup      	| string   	| 'Basic'          	| No                                                                            	|
 | MarketplaceId      	| string   	| 'A2EUQ1WTGCTBG2' 	| No                                                                            	|
 
 * [Possible values for ResponseGroup](http://docs.developer.amazonservices.com/en_CA/fba_inventory/FBAInventory_ListInventorySupply.html)
 
+**Example**
+
+```typescript
+const fulfillmentInventory = new FulfillmentInventory(httpClient)
+const [response, meta] = fulfillmentInventory.listInventorySupply({
+  SellerSkus: ['SAMPLESKU'],
+})
+```
+
+**Sample Response**
+
+[See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
+
 ### listInventorySupplyByNextToken
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+
+**Example**
+
+```typescript
+const fulfillmentInventory = new FulfillmentInventory(httpClient)
+const [response, meta] = fulfillmentInventory.listInventorySupplyByNextToken(new NextToken('ListInventorySupply', '123'))
+```
+
+**Sample Response**
+
+[See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
 
 ### getServiceStatus
 
@@ -485,6 +972,17 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 
 | None |
 |------|
+
+**Example**
+
+```typescript
+const fulfillmentInventory = new FulfillmentInventory(httpClient)
+const [response, meta] = fulfillmentInventory.getServiceStatus()
+```
+
+**Sample Response**
+
+[See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
 
 ## Feeds
 
@@ -521,7 +1019,7 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 ### getFeedSubmissionCount
 **Parameters**
@@ -736,7 +1234,7 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 ### listFinancialEvents
 **Parameters**
@@ -752,5 +1250,5 @@ const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations(
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>See examples for sample usage | Yes      |
+| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
