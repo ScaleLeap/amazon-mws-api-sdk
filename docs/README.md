@@ -97,6 +97,8 @@ amazon-mws-api-sdk is divided up into different sections representing the differ
 Under each section are methods that perform "actions" on the MWS API parses the response, returns it and the request metadata in a JS object
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Basic example
 
 ```typescript
@@ -116,6 +118,8 @@ Each action returns a tuple containing [0] the actual request data and [1] the r
 [getServiceStatus example file](../examples/get-service-status.ts)
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Configuring `HttpClient` and configuring the sections
 
 ```typescript
@@ -141,12 +145,16 @@ const sellers = new Sellers(http)
 ```
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Response Object
 
 The actual request data varies between actions. Outside of some exceptions, all request data has been defined.
 Finding out the properties of the response object should be as easy as using your text editor's autocomplete 
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Request Metadata
 
 This is consistent for all actions
@@ -163,6 +171,8 @@ This is consistent for all actions
 
 ["Throttling: Limits to how often you can submit requests"](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_Throttling.html)
 ---
+[Table of Contents](#table-of-contents)
+
 
 ## Next tokens
 
@@ -205,6 +215,8 @@ This is consistent for all actions
 # Sections
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Sellers
 
 [Amazon MWS Sellers API official documentation](http://docs.developer.amazonservices.com/en_CA/sellers/Sellers_Overview.html)
@@ -265,6 +277,8 @@ const [response, meta] = sellers.getServiceStatus()
 
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Orders
 
 [Amazon MWS Orders API official documentation](http://docs.developer.amazonservices.com/en_CA/orders-2013-09-01/Orders_Overview.html)
@@ -391,6 +405,8 @@ const [response, meta] = orders.getServiceStatus()
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Reports
 
 [Amazon MWS Reports API official documentation](http://docs.developer.amazonservices.com/en_CA/reports/Reports_Overview.html)
@@ -680,6 +696,8 @@ const [response, meta] = reports.updateReportAcknowledgements({ ReportIdList: ['
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Subscriptions
 [Amazon MWS Subscriptions official API](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Overview.html)
 
@@ -1003,6 +1021,8 @@ const [response, meta] = subscriptions.getServiceStatus()
 
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## FulfillmentInventory
 
 [Amazon MWS Fulfillment Inventory official documentation](http://docs.developer.amazonservices.com/en_CA/fba_inventory/FBAInventory_Overview.html)
@@ -1067,6 +1087,8 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 [See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Feeds
 
 [Amazon MWS Feeds API official documentation](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_Overview.html)
@@ -1209,6 +1231,8 @@ const [response, meta] = feeds.getFeedSubmissionResult()
 [See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Products
 [Amazon MWS Finances API official documentation](http://docs.developer.amazonservices.com/en_CA/products/Products_Overview.html)
 
@@ -1603,6 +1627,8 @@ const [response, meta] = products.getServiceStatus()
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ---
+[Table of Contents](#table-of-contents)
+
 ## Finances
 [Amazon MWS Finances API official documentation](http://docs.developer.amazonservices.com/en_CA/finances/Finances_Overview.html)
 
