@@ -70,6 +70,7 @@ More examples in the `/examples` folder!
 
 * Roman Filippov ([Scale Leap](https://www.scaleleap.com))
 * Stanislav Iliev ([gigobyte](https://github.com/gigobyte))
+* Justin Emmanuel Mercado ([Justin Emmanuel Mercado](https://github.com/justinemmanuelmercado))
 
 ## License
 
