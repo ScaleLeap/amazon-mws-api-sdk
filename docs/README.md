@@ -88,6 +88,43 @@
 amazon-mws-api-sdk is divided up into different sections representing the different sections of the Amazon MWS API.
 Under each section are methods that perform "actions" on the MWS API parses the response, returns it and the request metadata in a JS object
 
+## Basic example
+
+```typescript
+const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations()
+
+const { ListParticipations } = response
+const { requestId, timestamp } = meta
+
+console.log(`
+  Request ${requestId} made on ${timestamp.toISOString()} returned ${ListParticipations.length} participations!
+`)
+// Request 598a82be-d4ed-4bb6-802d-8e9150036d43 made on 2020-10-05T14:48:00.000Z returned 2 participations!
+```
+
+Each action returns a tuple containing [0] the actual request data and [1] the request metadata
+
+## Actual request data
+
+The actual request data varies between actions. Outside of some exceptions, all request data has been defined.
+Finding out the properties of the response object should be as easy as using your text editor's autocomplete 
+
+## Request Metadata**
+
+This is consistent for all actions
+
+**Structure**
+
+| Name           	| Type   	| Example                                	| Description                                	|
+|----------------	|--------	|----------------------------------------	|--------------------------------------------	|
+| requestId      	| string 	| '598a82be-d4ed-4bb6-802d-8e9150036d43' 	| Amazon MWS Request Id                      	|
+| timestamp      	| Date   	| new Date()                             	| Timestamp of the request                   	|
+| quotaMax       	| number 	| 200                                    	| Max requests for throttling purposes       	|
+| quotaRemaining 	| number 	| 100                                    	| Requests remaining for throttling purposes 	|
+| quotaResetOn   	| Date   	| new Date()                             	| Date the quota resets                      	|
+
+["Throttling: Limits to how often you can submit requests"](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_Throttling.html)
+
 # Sections
 
 ## Sellers
@@ -95,6 +132,13 @@ Under each section are methods that perform "actions" on the MWS API parses the 
 [Amazon MWS Sellers API official documentation](http://docs.developer.amazonservices.com/en_CA/sellers/Sellers_Overview.html)
 
 ### listMarketplaceParticipations
+
+**Example**
+
+```typescript
+const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations()
+```
+
 **Parameters**
 
 | None |
