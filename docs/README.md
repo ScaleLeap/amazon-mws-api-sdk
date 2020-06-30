@@ -188,6 +188,7 @@ This is returned along with the API's response
 ## Next tokens
 
 ["using-next-tokens" example file](../examples/using-next-tokens.ts)
+
 ["Using NextToken to request additional pages" from the Amazon documentation](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_NextToken.html)
 
 ### Creating `NextToken`s
