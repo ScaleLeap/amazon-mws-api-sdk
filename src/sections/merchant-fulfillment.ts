@@ -219,6 +219,7 @@ const canonicalizeParametersGetEligibleShippingServiceParameters = (
   }
 }
 
+// @todo
 const GetEligibleShippingServicesResponse = record(string, unknown)
 
 export class MerchantFulfillment {
