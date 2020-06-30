@@ -79,6 +79,7 @@ export enum Resource {
   Sellers = 'Sellers',
   Subscriptions = 'Subscriptions',
   Feeds = 'Feeds',
+  MerchantFulfillment = 'MerchantFulfillment',
 }
 
 export interface ResourceActions {
@@ -151,6 +152,13 @@ export interface ResourceActions {
     | 'GetFeedSubmissionCount'
     | 'CancelFeedSubmissions'
     | 'GetFeedSubmissionResult'
+  [Resource.MerchantFulfillment]:
+    | 'GetEligibleShippingServices'
+    | 'GetAdditionalSellerInputs'
+    | 'CreateShipment'
+    | 'GetShipment'
+    | 'CancelShipment'
+    | 'GetServiceStatus'
 }
 
 export interface Request {
