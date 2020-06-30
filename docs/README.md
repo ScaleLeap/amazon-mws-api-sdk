@@ -139,6 +139,8 @@ const sellers = new Sellers(http)
 
 ```typescript
 const orders = new Orders(httpClient)
+
+// Each action returns a tuple containing [0] the actual request data and [1] the request metadata
 const [response, meta] = orders.listMarketplaceParticipations()
 
 const { ListParticipations } = response
@@ -149,8 +151,6 @@ console.log(`
 `)
 // Request 598a82be-d4ed-4bb6-802d-8e9150036d43 made on 2020-10-05T14:48:00.000Z returned 2 participations!
 ```
-
-Each action returns a tuple containing `[0]` the actual request data and `[1]` the request metadata
 
 The most basic usage can be seen in [the get-service-status example file](../examples/get-service-status.ts)
 
