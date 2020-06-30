@@ -18,7 +18,6 @@ import {
   HttpClient,
   ListOrderParameters,
   ListOrders,
-  MWSOptions,
   Orders,
   OrderStatus,
   PaymentMethod,
@@ -28,7 +27,7 @@ import {
  * Configure the HttpClient
  */
 
-const mwsOptions: MWSOptions = {
+const mwsOptions = {
   marketplace: amazonMarketplaces.US,
   awsAccessKeyId: '',
   mwsAuthToken: '',

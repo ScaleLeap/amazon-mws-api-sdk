@@ -5,19 +5,13 @@
 /**
  * import from '@scaleleap/amazon-mws-api-sdk'
  */
-import {
-  amazonMarketplaces,
-  HttpClient,
-  MWSOptions,
-  NextToken,
-  Sellers,
-} from '@scaleleap/amazon-mws-api-sdk'
+import { amazonMarketplaces, HttpClient, NextToken, Sellers } from '@scaleleap/amazon-mws-api-sdk'
 
 /**
  * Configure the HttpClient
  */
 
-const mwsOptions: MWSOptions = {
+const mwsOptions = {
   marketplace: amazonMarketplaces.US,
   awsAccessKeyId: '',
   mwsAuthToken: '',

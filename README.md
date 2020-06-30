@@ -27,12 +27,11 @@ $ npm i -s @scaleleap/amazon-mws-api-sdk
 import {
   amazonMarketplaces,
   HttpClient,
-  MWSOptions,
   Sellers,
   Orders
 } from '@scaleleap/amazon-mws-api-sdk'
 
-const mwsOptions: MWSOptions = {
+const mwsOptions = {
   marketplace: amazonMarketplaces.US,
   awsAccessKeyId: '',
   mwsAuthToken: '',

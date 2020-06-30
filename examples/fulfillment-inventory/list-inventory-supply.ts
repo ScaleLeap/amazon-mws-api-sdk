@@ -18,7 +18,6 @@ import {
   HttpClient,
   InventorySupplyList,
   ListInventorySupplyRequestParameters,
-  MWSOptions,
   RequestMeta,
   ResponseGroup,
 } from '@scaleleap/amazon-mws-api-sdk'
@@ -27,7 +26,7 @@ import {
  * Configure the HttpClient
  */
 
-const mwsOptions: MWSOptions = {
+const mwsOptions = {
   marketplace: amazonMarketplaces.US,
   awsAccessKeyId: '',
   mwsAuthToken: '',
