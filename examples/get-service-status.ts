@@ -1,9 +1,12 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /**
- * import from 'amazon-mws-api-sdk'
+ * import from '@scaleleap/amazon-mws-api-sdk'
  */
-import { amazonMarketplaces, HttpClient, MWSOptions, Sellers } from '../src'
+import { amazonMarketplaces, HttpClient, MWSOptions, Sellers } from '@scaleleap/amazon-mws-api-sdk'
+
 import { ServiceStatus } from '../src/parsing'
 
 /**

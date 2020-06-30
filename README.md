@@ -18,9 +18,7 @@ A fully typed TypeScript SDK library for Amazon MWS API
 $ npm i -s @scaleleap/amazon-mws-api-sdk
 ```
 
-## Documentation (WIP)
-
-[Click me!](docs)
+## [Click here for the full **Documentation**](docs)
 
 ## Example
 ---
@@ -32,7 +30,7 @@ import {
   MWSOptions,
   Sellers,
   Orders
-} from 'amazon-mws-api-sdk'
+} from '@scaleleap/amazon-mws-api-sdk'
 
 const mwsOptions: MWSOptions = {
   marketplace: amazonMarketplaces.US,
@@ -64,7 +62,7 @@ const main = async () => {
   })
 }
 ```
-More examples in the `/examples` folder!
+## [More examples in the `/examples` folder!](examples)
 
 ## Authors or Acknowledgments
 

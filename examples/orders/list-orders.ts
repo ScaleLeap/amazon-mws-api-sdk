@@ -1,6 +1,7 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
 /**
  * More usage examples at
  * /test/integration/orders.test.ts
@@ -8,7 +9,7 @@
  */
 
 /**
- * import from 'amazon-mws-api-sdk'
+ * import from '@scaleleap/amazon-mws-api-sdk'
  */
 import {
   amazonMarketplaces,
@@ -22,7 +23,7 @@ import {
   OrderStatus,
   PaymentMethod,
   RequestMeta,
-} from '../../src'
+} from '@scaleleap/amazon-mws-api-sdk'
 /**
  * Configure the HttpClient
  */
