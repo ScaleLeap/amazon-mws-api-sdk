@@ -7,7 +7,7 @@ on:
   push:
     branches:
       # https://semantic-release.gitbook.io/semantic-release/usage/configuration#branches
-      # - master
+      - master
       - next
       - next-major
       - beta
