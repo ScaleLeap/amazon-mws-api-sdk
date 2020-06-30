@@ -162,11 +162,11 @@ This is consistent for all actions
 
 | Name           	| Type   	| Example                                	| Description                                	|
 |----------------	|--------	|----------------------------------------	|--------------------------------------------	|
-| requestId      	| string 	| '598a82be-d4ed-4bb6-802d-8e9150036d43' 	| Amazon MWS Request Id                      	|
-| timestamp      	| Date   	| new Date()                             	| Timestamp of the request                   	|
-| quotaMax       	| number 	| 200                                    	| Max requests for throttling purposes       	|
-| quotaRemaining 	| number 	| 100                                    	| Requests remaining for throttling purposes 	|
-| quotaResetOn   	| Date   	| new Date()                             	| Date the quota resets                      	|
+| requestId      	| string 	| `'598a82be-d4ed-4bb6-802d-8e9150036d43'` 	| Amazon MWS Request Id                      	|
+| timestamp      	| Date   	| `new Date()`                             	| Timestamp of the request                   	|
+| quotaMax       	| number 	| `200`                                    	| Max requests for throttling purposes       	|
+| quotaRemaining 	| number 	| `100`                                    	| Requests remaining for throttling purposes 	|
+| quotaResetOn   	| Date   	| `new Date()`                             	| Date the quota resets                      	|
 
 ["Throttling: Limits to how often you can submit requests"](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_Throttling.html)
 
@@ -244,7 +244,7 @@ const [response, meta] = sellers.listMarketplaceParticipations()
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 **Example**
 
@@ -288,18 +288,18 @@ const [response, meta] = sellers.getServiceStatus()
 
 | Name               | Type     | Example                    | Required                                |
 |--------------------|----------|----------------------------|-----------------------------------------|
-| CreatedAfter       | Date     | new Date()                 | Yes if LastUpdatedAfter is not provided |
-| CreatedBefore      | Date     | new Date()                 | No                                      |
-| LastUpdatedAfter   | Date     | new Date()                 | Yes if CreatedAfter is not provided     |
-| LastUpdatedBefore  | Date     | new Date()                 | No                                      |
-| OrderStatus        | string   | 'PendingAvailability'      | No                                      |
-| MarketplaceId      | string[] | ['A2EUQ1WTGCTBG2']         | No                                      |
-| FulfillmentChannel | string[] | ['AFN']                    | No                                      |
-| PaymentMethod      | string[] | ['COD']                    | No                                      |
-| BuyerEmail         | string   | 'buyer@example.com'        | No                                      |
-| SellerOrderId      | string   | 'STRINGID'                 | No                                      |
-| MaxResultsPerPage  | number   | 10                         | No                                      |
-| EasyShipmentStatus | string[] | ['PendingPickUp']          | No                                      |
+| CreatedAfter       | Date     | `new Date()`                 | Yes if LastUpdatedAfter is not provided |
+| CreatedBefore      | Date     | `new Date()`                 | No                                      |
+| LastUpdatedAfter   | Date     | `new Date()`                 | Yes if CreatedAfter is not provided     |
+| LastUpdatedBefore  | Date     | `new Date()`                 | No                                      |
+| OrderStatus        | string   | `'PendingAvailability'`      | No                                      |
+| MarketplaceId      | string[] | `['A2EUQ1WTGCTBG2']`         | No                                      |
+| FulfillmentChannel | string[] | `['AFN']`                    | No                                      |
+| PaymentMethod      | string[] | `['COD']`                    | No                                      |
+| BuyerEmail         | string   | `'buyer@example.com'`        | No                                      |
+| SellerOrderId      | string   | `'STRINGID'`                 | No                                      |
+| MaxResultsPerPage  | number   | `10`                         | No                                      |
+| EasyShipmentStatus | string[] | `['PendingPickUp']`          | No                                      |
 
 * [Possible values for FulfillmentChannel, PaymentMethod and EasyShipmentStatus ](http://docs.developer.amazonservices.com/en_CA/orders-2013-09-01/Orders_ListOrders.html)
 
@@ -307,7 +307,7 @@ const [response, meta] = sellers.getServiceStatus()
 
 ```typescript
 const orders = new Orders(httpClient)
-const [response, meta] = orders.listOrders({ createdAfter: new Date() })
+const [response, meta] = orders.listOrders({ createdAfter: `new Date()` })
 ```
 
 **Response**
@@ -319,7 +319,7 @@ const [response, meta] = orders.listOrders({ createdAfter: new Date() })
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 
 **Example**
@@ -337,7 +337,7 @@ const [response, meta] = orders.listOrdersByNextToken(new NextToken('ListOrders'
 **Parameters**
 | Name          | Type     | Example                 | Required |
 |---------------|----------|-------------------------|----------|
-| AmazonOrderId | string[] | ['902-3159896-1390916'] | Yes      |
+| AmazonOrderId | string[] | `['902-3159896-1390916']` | Yes      |
 
 **Example**
 
@@ -354,7 +354,7 @@ const [response, meta] = orders.getOrder({ AmazonOrderId: ['902-3159896-1390916'
 **Parameters**
 | Name          | Type   | Example               | Required |
 |---------------|--------|-----------------------|----------|
-| AmazonOrderId | string | '902-3159896-1390916' | Yes      |
+| AmazonOrderId | string | `'902-3159896-1390916'` | Yes      |
 
 **Example**
 
@@ -373,7 +373,7 @@ const [response, meta] = orders.listOrderItems({ AmazonOrderId: '902-3159896-139
 
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 **Example**
 
@@ -416,10 +416,10 @@ const [response, meta] = orders.getServiceStatus()
 | Name              	| Type     	| Example                              	  | Required 	|
 |-------------------	|----------	|----------------------------------------	|----------	|
 | ReportType        	| string   	| `'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'` 	| Yes      	|
-| StartDate         	| Date     	| jsnew Date()                           	| No       	|
-| EndDate           	| Date     	| new Date()                           	  | No       	|
-| ReportOptions     	| string   	| 'Report Option'                      	  | No       	|
-| MarketplaceIdList 	| string[] 	| ['A2EUQ1WTGCTBG2']                   	  | No       	|
+| StartDate         	| Date     	| `new Date()`                           	| No       	|
+| EndDate           	| Date     	| `new Date()`                           	  | No       	|
+| ReportOptions     	| string   	| `'Report Option'`                      	  | No       	|
+| MarketplaceIdList 	| string[] 	| `['A2EUQ1WTGCTBG2']`                   	  | No       	|
 
 * [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
@@ -439,12 +439,12 @@ const [response, meta] = reports.requestReport({ ReportType: '_GET_FLAT_FILE_OPE
 **Parameters**
 | Name                       	| Type     	| Example                                	| Required                                                                      	|
 |----------------------------	|----------	|----------------------------------------	|-------------------------------------------------------------------------------	|
-| ReportRequestIdList        	| string[] 	| ['12345']                              	| No. If you pass in ReportRequestId values, other query conditions are ignored 	|
-| ReportTypeList             	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No                                                                            	|
-| ReportProcessingStatusList 	| string[] 	| ['_SUBMITTED_']                        	| No                                                                            	|
-| MaxCount                   	| number   	| 10                                     	| No                                                                            	|
-| RequestedFromDate          	| Date     	| new Date()                             	| No                                                                            	|
-| RequestedToDate            	| Date     	| new Date()                             	| No                                                                            	|
+| ReportRequestIdList        	| string[] 	| `['12345']`                              	| No. If you pass in ReportRequestId values, other query conditions are ignored 	|
+| ReportTypeList             	| string[] 	| `['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_']` 	| No                                                                            	|
+| ReportProcessingStatusList 	| string[] 	| `['_SUBMITTED_']`                        	| No                                                                            	|
+| MaxCount                   	| number   	| `10`                                     	| No                                                                            	|
+| RequestedFromDate          	| Date     	| `new Date()`                             	| No                                                                            	|
+| RequestedToDate            	| Date     	| `new Date()`                             	| No                                                                            	|
 
 * [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestList.html)
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
@@ -464,7 +464,7 @@ const [response, meta] = reports.getReportRequestList()
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 **Example**
 
@@ -482,10 +482,10 @@ const [response, meta] = reports.getReportRequestListByNextToken(new NextToken('
 **Parameters**
 | Name                       	| Type     	| Example                                	| Required 	|
 |----------------------------	|----------	|----------------------------------------	|----------	|
-| ReportTypeList             	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
-| ReportProcessingStatusList 	| string[] 	| ['_SUBMITTED_']                        	| No       	|
-| RequestedFromDate          	| Date     	| new Date()                             	| No       	|
-| RequestedToDate            	| Date     	| new Date()                             	| No       	|
+| ReportTypeList             	| string[] 	| `['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_']` 	| No       	|
+| ReportProcessingStatusList 	| string[] 	| `['_SUBMITTED_']`                        	| No       	|
+| RequestedFromDate          	| Date     	| `new Date()`                             	| No       	|
+| RequestedToDate            	| Date     	| `new Date()`                             	| No       	|
 * [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestCount.html)
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
@@ -506,11 +506,11 @@ const [response, meta] = reports.getReportRequestCount()
 
 | Name                       	| Type     	| Example                                	| Required 	|
 |----------------------------	|----------	|----------------------------------------	|----------	|
-| ReportRequestIdList        	| string[] 	| ['12345']                              	| No       	|
-| ReportTypeList             	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
-| ReportProcessingStatusList 	| string[] 	| ['_SUBMITTED_']                        	| No       	|
-| RequestedFromDate          	| Date     	| new Date()                             	| No       	|
-| RequestedToDate            	| Date     	| new Date()                             	| No       	|
+| ReportRequestIdList        	| string[] 	| `['12345']`                              	| No       	|
+| ReportTypeList             	| string[] 	| `['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_']` 	| No       	|
+| ReportProcessingStatusList 	| string[] 	| `['_SUBMITTED_']`                        	| No       	|
+| RequestedFromDate          	| Date     	| `new Date()`                             	| No       	|
+| RequestedToDate            	| Date     	| `new Date()`                             	| No       	|
 
 * [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestList.html)
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
@@ -531,12 +531,12 @@ const [response, meta] = reports.cancelReportRequests()
 
 | Name                	| Type     	| Example                                	| Required 	|
 |---------------------	|----------	|----------------------------------------	|----------	|
-| MaxCount            	| number   	| 10                                     	| No       	|
-| ReportTypeList      	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
-| Acknowledged        	| boolean  	| true                                   	| No       	|
-| ReportRequestIdList 	| string[] 	| ['12345']                              	| No       	|
-| AvailableFromDate   	| Date     	| new Date()                             	| No       	|
-| AvailableToDate     	| Date     	| new Date()                             	| No       	|
+| MaxCount            	| number   	| `10`                                     	| No       	|
+| ReportTypeList      	| string[] 	| `['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_']` 	| No       	|
+| Acknowledged        	| boolean  	| `true`                                   	| No       	|
+| ReportRequestIdList 	| string[] 	| `['12345']`                              	| No       	|
+| AvailableFromDate   	| Date     	| `new Date()`                             	| No       	|
+| AvailableToDate     	| Date     	| `new Date()`                             	| No       	|
 
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
@@ -556,7 +556,7 @@ const [response, meta] = reports.getReportList()
 
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 **Example**
 
@@ -573,10 +573,10 @@ const [response, meta] = reports.getReportListByNextToken(new NextToken('GetRepo
 
 | Name              	| Type     	| Example                                	| Required 	|
 |-------------------	|----------	|----------------------------------------	|----------	|
-| ReportTypeList    	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
-| Acknowledged      	| boolean  	| true                                   	| No       	|
-| AvailableFromDate 	| Date     	| new Date()                             	| No       	|
-| AvailableToDate   	| Date     	| new Date()                             	| No       	|
+| ReportTypeList    	| string[] 	| `['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_']` 	| No       	|
+| Acknowledged      	| boolean  	| `true`                                   	| No       	|
+| AvailableFromDate 	| Date     	| `new Date()`                             	| No       	|
+| AvailableToDate   	| Date     	| `new Date()`                             	| No       	|
 
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
@@ -617,7 +617,7 @@ const [response, meta] = reports.getReport('12345')
 |-----------------	|--------	|--------------------------------------	|----------	|
 | ReportType      	| string 	| `'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`| Yes      	|
 | Schedule        	| string 	| `'_15_MINUTES_'`                      | Yes      	|
-| ScheduleDate    	| Date   	| new Date()                           	| No       	|
+| ScheduleDate    	| Date   	| `new Date()`                           	| No       	|
 * [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 * [Possible values for Schedule](http://docs.developer.amazonservices.com/en_CA/reports/Reports_Schedule.html)
 
@@ -641,7 +641,7 @@ const [response, meta] = reports.manageReportSchedule({
 
 | Name              	| Type     	| Example                                	| Required 	|
 |-------------------	|----------	|----------------------------------------	|----------	|
-| ReportTypeList    	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
+| ReportTypeList    	| string[] 	| `['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_']` 	| No       	|
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
 **Example**
@@ -662,7 +662,7 @@ const [response, meta] = reports.getReportScheduleList()
 **Parameters**
 | Name              	| Type     	| Example                                	| Required 	|
 |-------------------	|----------	|----------------------------------------	|----------	|
-| ReportTypeList    	| string[] 	| [`'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'`] 	| No       	|
+| ReportTypeList    	| string[] 	| `['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_']` 	| No       	|
 * [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
 **Example**
@@ -681,8 +681,8 @@ const [response, meta] = reports.getReportScheduleCount()
 **Parameters**
 | Name            	| Type     	| Example    	| Required 	|
 |-----------------	|----------	|------------	|----------	|
-| ReportIdList    	| string[] 	| ['12345']  	| Yes      	|
-| Acknowledged    	| boolean  	| true       	| No       	|
+| ReportIdList    	| string[] 	| `['12345']`  	| Yes      	|
+| Acknowledged    	| boolean  	| `true`       	| No       	|
 
 **Example**
 
@@ -707,9 +707,9 @@ const [response, meta] = reports.updateReportAcknowledgements({ ReportIdList: ['
 **Properties**
 | Name             	| Type        	| Example           	      | Required 	|
 |------------------	|-------------	|-------------------	      |----------	|
-| NotificationType 	| string      	| 'AnyOfferChanged' 	      | Yes      	|
-| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
-| IsEnabled        	| boolean     	| true              	      | Yes      	|
+| NotificationType 	| string      	| `'AnyOfferChanged'` 	      | Yes      	|
+| Destination   	| Destination 	| [`Destination`](#destination) | Yes      	|
+| IsEnabled        	| boolean     	| `true`              	      | Yes      	|
 
 * [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
@@ -717,7 +717,7 @@ const [response, meta] = reports.updateReportAcknowledgements({ ReportIdList: ['
 **Properties**
 | Name            	| Type              	| Example 	                            | Required 	|
 |-----------------	|-------------------	|------------------------------------   |----------	|
-| DeliveryChannel 	| string            	| 'SQS'   	                            | Yes      	|
+| DeliveryChannel 	| string            	| `'SQS'`   	                            | Yes      	|
 | AttributeList   	| AttributeKeyValue 	| [AttribueKeyValue](#attribuekeyvalue) | Yes      	|
 
 * [Possible values for DeliveryChannel](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Datatypes.html#Destination)
@@ -736,8 +736,8 @@ const [response, meta] = reports.updateReportAcknowledgements({ ReportIdList: ['
 
 | Name          	| Type        	| Example                     | Required 	|
 |---------------	|-------------	|-----------------------------|-------------|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2'            | Yes      	|
-| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
+| MarketplaceId 	| string      	| `'A2EUQ1WTGCTBG2'`            | Yes      	|
+| Destination   	| Destination 	| [`Destination`](#destination) | Yes      	|
 
 **Example**
 
@@ -767,8 +767,8 @@ const [response, meta] = subscriptions.registerDestination({
 
 | Name          	| Type        	| Example                     | Required 	|
 |---------------	|-------------	|-----------------------------|-------------|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2'            | Yes      	|
-| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
+| MarketplaceId 	| string      	| `'A2EUQ1WTGCTBG2'`            | Yes      	|
+| Destination   	| Destination 	| [`Destination`](#destination) | Yes      	|
 
 **Example**
 
@@ -797,7 +797,7 @@ const [response, meta] = subscriptions.deregisterDestination({
 **Parameters**
 | Name          	| Type        	| Example          	| Required 	|
 |---------------	|-------------	|------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| MarketplaceId 	| string      	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
 
 **Example**
 
@@ -818,8 +818,8 @@ const [response, meta] = subscriptions.listRegisteredDestinations({
 
 | Name          	| Type        	| Example                     | Required 	|
 |---------------	|-------------	|-----------------------------|-------------|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2'            | Yes      	|
-| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
+| MarketplaceId 	| string      	| `'A2EUQ1WTGCTBG2'`            | Yes      	|
+| Destination   	| Destination 	| [`Destination`](#destination) | Yes      	|
 
 **Example**
 
@@ -848,8 +848,8 @@ const [response, meta] = subscriptions.sendTestNotificationToDestination({
 **Parameters**
 | Name          	| Type        	| Example          	            | Required 	|
 |---------------	|-------------	|---------------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	            | Yes      	|
-| Subscription   	| Subscription 	| [Subscription](#subscription) | Yes      	|
+| MarketplaceId 	| string      	| `'A2EUQ1WTGCTBG2'` 	            | Yes      	|
+| Subscription   	| Subscription 	| [`Subscription`](#subscription) | Yes      	|
 
 **Example**
 
@@ -883,9 +883,9 @@ const [response, meta] = subscriptions.createSubscription({
 
 | Name          	| Type        	| Example          	          | Required 	|
 |---------------	|-------------	|------------------	          |----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	          | Yes      	|
-| NotificationType 	| string      | 'AnyOfferChanged'           | Yes     	|
-| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
+| MarketplaceId 	| string      	| `'A2EUQ1WTGCTBG2'` 	          | Yes      	|
+| NotificationType 	| string      | `'AnyOfferChanged'`          | Yes     	|
+| Destination   	| Destination 	| [`Destination`](#destination) | Yes      	|
 
 * [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
@@ -917,9 +917,9 @@ const [response, meta] = subscriptions.getSubscription({
 
 | Name          	| Type        	| Example          	          | Required 	|
 |---------------	|-------------	|------------------	          |----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	          | Yes      	|
-| NotificationType 	| string      	| 'AnyOfferChanged'           | Yes     	|
-| Destination   	| Destination 	| [Destination](#destination) | Yes      	|
+| MarketplaceId 	| string      	| `'A2EUQ1WTGCTBG2'` 	          | Yes      	|
+| NotificationType 	| string      	| `'AnyOfferChanged'`          | Yes     	|
+| Destination   	| Destination 	| [`Destination`](#destination) | Yes      	|
 
 * [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
@@ -951,7 +951,7 @@ const [response, meta] = subscriptions.deleteSubscription({
 **Parameters**
 | Name          	| Type        	| Example          	| Required 	|
 |---------------	|-------------	|------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
+| MarketplaceId 	| string      	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
 
 
 **Example**
@@ -971,8 +971,8 @@ const [response, meta] = subscriptions.listSubscriptions({
 **Parameters**
 | Name          	| Type        	| Example          	            | Required 	|
 |---------------	|-------------	|---------------------------	|----------	|
-| MarketplaceId 	| string      	| 'A2EUQ1WTGCTBG2' 	            | Yes      	|
-| Subscription   	| Subscription 	| [Subscription](#subscription) | Yes      	|
+| MarketplaceId 	| string      	| `'A2EUQ1WTGCTBG2'` 	            | Yes      	|
+| Subscription   	| Subscription 	| [`Subscription`](#subscription) | Yes      	|
 
 **Example**
 
@@ -1031,10 +1031,10 @@ const [response, meta] = subscriptions.getServiceStatus()
 **Parameters**
 | Name               	| Type     	| Example          	| Required                                                                      	|
 |--------------------	|----------	|------------------	|-------------------------------------------------------------------------------	|
-| SellerSkus         	| string[] 	| ['SAMPLESKU']     | Yes, if QueryStartDateTime is not specified. Specifying both returns an error 	|
-| QueryStartDateTime 	| Date     	| new Date()       	| Yes, if SellerSkus is not specified. Specifying both returns an error         	|
-| ResponseGroup      	| string   	| 'Basic'          	| No                                                                            	|
-| MarketplaceId      	| string   	| 'A2EUQ1WTGCTBG2' 	| No                                                                            	|
+| SellerSkus         	| string[] 	| `['SAMPLESKU']`     | Yes, if QueryStartDateTime is not specified. Specifying both returns an error 	|
+| QueryStartDateTime 	| Date     	| `new Date()`       	| Yes, if SellerSkus is not specified. Specifying both returns an error         	|
+| ResponseGroup      	| string   	| `'Basic'`          	| No                                                                            	|
+| MarketplaceId      	| string   	| `'A2EUQ1WTGCTBG2'` 	| No                                                                            	|
 
 * [Possible values for ResponseGroup](http://docs.developer.amazonservices.com/en_CA/fba_inventory/FBAInventory_ListInventorySupply.html)
 
@@ -1055,7 +1055,7 @@ const [response, meta] = fulfillmentInventory.listInventorySupply({
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 **Example**
 
@@ -1099,10 +1099,10 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 |-------------------	|----------	|-----------------------	|----------	|
 | FeedContent       	| string   	| '<XML></XML>'         	| Yes      	|
 | FeedType          	| string   	| `'_POST_PRODUCT_DATA_'` 	| Yes      	|
-| MarketplaceIdList 	| string[] 	| ['A2EUQ1WTGCTBG2']    	| No       	|
-| PurgeAndReplace   	| boolean  	| false                 	| No       	|
-| AmazonOrderId     	| string   	| '902-3159896-1390916' 	| No       	|
-| DocumentId        	| string   	| 'DCMNTID'             	| No       	|
+| MarketplaceIdList 	| string[] 	| `['A2EUQ1WTGCTBG2']`    	| No       	|
+| PurgeAndReplace   	| boolean  	| `false`                 	| No       	|
+| AmazonOrderId     	| string   	| `'902-3159896-1390916'` 	| No       	|
+| DocumentId        	| string   	| `'DCMNTID'`             	| No       	|
 
 * `FeedContent` is the actual content of the feed itself, in XML or flat file format as a string.
 
@@ -1126,12 +1126,12 @@ const [response, meta] = feeds.submitFeed({
 
 | Name                     	| Type     	| Example                           	| Required 	|
 |--------------------------	|----------	|-----------------------------------	|----------	|
-| FeedSubmissionIdList     	| string[] 	| ['FEEDID']                        	| No       	|
-| MaxCount                 	| number   	| 10                                	| No       	|
-| FeedTypeList             	| string[] 	| ['_POST_PRODUCT_DATA_']           	| No       	|
-| FeedProcessingStatusList 	| string[] 	| ['_AWAITING_ASYNCHRONOUS_REPLY_'] 	| No       	|
-| SubmittedFromDate        	| Date     	| new Date()                        	| No       	|
-| SubmittedToDate          	| Date     	| new Date()                        	| No       	|
+| FeedSubmissionIdList     	| string[] 	| `['FEEDID']`                        	| No       	|
+| MaxCount                 	| number   	| `10`                                	| No       	|
+| FeedTypeList             	| string[] 	| `['_POST_PRODUCT_DATA_']`           	| No       	|
+| FeedProcessingStatusList 	| string[] 	| `['_AWAITING_ASYNCHRONOUS_REPLY_']` 	| No       	|
+| SubmittedFromDate        	| Date     	| `new Date()`                        	| No       	|
+| SubmittedToDate          	| Date     	| `new Date()`                        	| No       	|
 
 * [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
 * [Possible values for FeedProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedProcessingStatus.html)
@@ -1151,7 +1151,7 @@ const [response, meta] = feeds.getFeedSubmissionList()
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 **Example**
 
@@ -1169,10 +1169,10 @@ const [response, meta] = feeds.getFeedSubmissionListByNextToken(new NextToken('G
 
 | Name                     	| Type     	| Example                           	| Required 	|
 |--------------------------	|----------	|-----------------------------------	|----------	|
-| FeedTypeList             	| string[] 	| ['_POST_PRODUCT_DATA_']           	| No       	|
-| FeedProcessingStatusList 	| string[] 	| ['_AWAITING_ASYNCHRONOUS_REPLY_'] 	| No       	|
-| SubmittedFromDate        	| Date     	| new Date()                        	| No       	|
-| SubmittedToDate          	| Date     	| new Date()                        	| No       	|
+| FeedTypeList             	| string[] 	| `['_POST_PRODUCT_DATA_']`           	| No       	|
+| FeedProcessingStatusList 	| string[] 	| `['_AWAITING_ASYNCHRONOUS_REPLY_']` 	| No       	|
+| SubmittedFromDate        	| Date     	| `new Date()`                        	| No       	|
+| SubmittedToDate          	| Date     	| `new Date()`                        	| No       	|
 
 * [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
 * [Possible values for FeedProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedProcessingStatus.html)
@@ -1192,10 +1192,10 @@ const [response, meta] = feeds.getFeedSubmissionCount()
 **Parameters**
 | Name                     	| Type     	| Example                           	| Required 	|
 |--------------------------	|----------	|-----------------------------------	|----------	|
-| FeedSubmissionIdList     	| string[] 	| ['FEEDID']                        	| No       	|
-| FeedTypeList             	| string[] 	| ['_POST_PRODUCT_DATA_']           	| No       	|
-| SubmittedFromDate        	| Date     	| new Date()                        	| No       	|
-| SubmittedToDate          	| Date     	| new Date()                        	| No       	|
+| FeedSubmissionIdList     	| string[] 	| `['FEEDID']`                        	| No       	|
+| FeedTypeList             	| string[] 	| `['_POST_PRODUCT_DATA_']`           	| No       	|
+| SubmittedFromDate        	| Date     	| `new Date()`                        	| No       	|
+| SubmittedToDate          	| Date     	| `new Date()`                        	| No       	|
 
 * [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
 
@@ -1214,7 +1214,7 @@ const [response, meta] = feeds.cancelFeedSubmissions()
 ### getFeedSubmissionResult
 **Parameters**
 | Name                  | Type      | Example                       | Required 	|
-| FeedSubmissionId     	| string 	  | 'FEEDID'                      | No       	|
+| FeedSubmissionId     	| string 	  | `'FEEDID'`                      | No       	|
 
 **Example**
 
@@ -1242,27 +1242,27 @@ const [response, meta] = feeds.getFeedSubmissionResult()
 
 | Name                	| Type                	| Example          	                          | Required 	|
 |---------------------	|---------------------	|-------------------------------------------- |----------	|
-| MarketplaceId       	| string              	| 'A2EUQ1WTGCTBG2' 	                          | Yes      	|
-| IdType              	| string              	| 'ASIN'           	                          | Yes      	|
-| IdValue             	| string              	| 'MY-ASIN-1'      	                          | Yes      	|
-| PriceToEstimateFees 	| PriceToEstimateFees 	| [PriceToEstimateFees](#pricetoestimatefees) | Yes      	|
-| Identifier          	| string              	| 'request1'       	                          | Yes      	|
-| IsAmazonFulfilled   	| boolean             	| true             	                          | Yes      	|
+| MarketplaceId       	| string              	| `'A2EUQ1WTGCTBG2'` 	                          | Yes      	|
+| IdType              	| string              	| `'ASIN'`           	                          | Yes      	|
+| IdValue             	| string              	| `'MY-ASIN-1'`     	                          | Yes      	|
+| PriceToEstimateFees 	| PriceToEstimateFees 	| [`PriceToEstimateFees`](#pricetoestimatefees) | Yes      	|
+| Identifier          	| string              	| `'request1'`       	                          | Yes      	|
+| IsAmazonFulfilled   	| boolean             	| `true`             	                          | Yes      	|
 
 #### PriceToEstimateFees
 **Properties**
 | Name                	| Type                	| Example    	            | Required 	|
 |---------------------	|---------------------	|-------------------------- |----------	|
-| ListingPrice        	| MoneyType           	| [MoneyType](#moneytype)  	| Yes      	|
-| Shipping            	| MoneyType           	| [MoneyType](#moneytype)  	| No       	|
-| Points              	| Points              	| [Points](#points)      	| No       	|
+| ListingPrice        	| MoneyType           	| [`MoneyType`](#moneytype)  	| Yes      	|
+| Shipping            	| MoneyType           	| [`MoneyType`](#moneytype)  	| No       	|
+| Points              	| Points              	| [`Points`](#points)      	| No       	|
 
 #### MoneyType
 **Properties**
 | Name                	| Type                	| Example    	| Required 	|
 |---------------------	|---------------------	|------------	|----------	|
-| Amount              	| number              	| 1000       	| No       	|
-| CurrencyCode        	| string              	| 'USD'      	| No      	|
+| Amount              	| number              	| `1000`       	| No       	|
+| CurrencyCode        	| string              	| `'USD'`      	| No      	|
 
 * [Possible values for CurrencyCode](http://docs.developer.amazonservices.com/en_CA/products/Products_Datatypes.html#MoneyType)
 
@@ -1270,16 +1270,16 @@ const [response, meta] = feeds.getFeedSubmissionResult()
 **Properties**
 | Name                	| Type                	| Example    	            | Required 	|
 |---------------------	|---------------------	|------------------------	|----------	|
-| PointsNumber        	| number              	| 1000       	            | Yes      	|
-| PointsMonetaryValue 	| MoneyType           	| [MoneyType](#moneytype)  	| Yes      	|
+| PointsNumber        	| number              	| `1000`       	            | Yes      	|
+| PointsMonetaryValue 	| MoneyType           	| [`MoneyType`](#moneytype)  	| Yes      	|
 
 ### listMatchingProducts
 **Parameters**
 | Name           	| Type   	| Example            	| Required 	|
 |----------------	|--------	|--------------------	|----------	|
-| MarketplaceId  	| string 	| 'A2EUQ1WTGCTBG2'   	| Yes      	|
-| Query          	| string 	| 'harry potter dvd' 	| Yes      	|
-| QueryContextId 	| string 	| 'ArtsAndCrafts'    	| No       	|
+| MarketplaceId  	| string 	| `'A2EUQ1WTGCTBG2'`   	| Yes      	|
+| Query          	| string 	| `'harry potter dvd'` 	| Yes      	|
+| QueryContextId 	| string 	| `'ArtsAndCrafts'`    	| No       	|
 
 * [Possible values for QueryContextId](http://docs.developer.amazonservices.com/en_CA/products/Products_QueryContextIDs.html)
 
@@ -1301,8 +1301,8 @@ const [response, meta] = products.listMatchingProducts({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| ASINList       	| string[] 	| ['MY-ASIN-1']    	| Yes      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| ASINList       	| string[] 	| `['MY-ASIN-1']`    	| Yes      	|
 
 **Example**
 
@@ -1322,9 +1322,9 @@ const [response, meta] = products.getMatchingProduct({
 **Parameters**
 | Name          	| Type     	| Example          	| Required 	|
 |---------------	|----------	|------------------	|----------	|
-| MarketplaceId 	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| IdType        	| string   	| 'ASIN'           	| Yes      	|
-| IdList        	| string[] 	| ['MY-ASIN-1']    	| No       	|
+| MarketplaceId 	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| IdType        	| string   	| `'ASIN'`           	| Yes      	|
+| IdList        	| string[] 	| `['MY-ASIN-1']`    	| No       	|
 
 * [Possible values for IdType](http://docs.developer.amazonservices.com/en_CA/products/Products_GetMatchingProductForId.html)
 
@@ -1347,8 +1347,8 @@ const [response, meta] = products.getMatchingProductForId({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| SellerSKUList    | string[] | ['MY-SKU-1']    	| Yes      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| SellerSKUList    | string[] | `['MY-SKU-1']`    	| Yes      	|
 
 **Example**
 
@@ -1368,8 +1368,8 @@ const [response, meta] = products.getCompetitivePricingForSku({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| ASINList       	| string[] 	| ['MY-ASIN-1']    	| Yes      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| ASINList       	| string[] 	| `['MY-ASIN-1']`    	| Yes      	|
 
 **Example**
 
@@ -1389,9 +1389,9 @@ const [response, meta] = products.getCompetitivePricingForAsin({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| SellerSKUList     | string[] 	| ['MY-SKU-1']    	| Yes      	|
-| ItemCondition     | string 	| 'New'         	| No      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| SellerSKUList     | string[] 	| `['MY-SKU-1']`    	| Yes      	|
+| ItemCondition     | string 	| `'New'`         	| No      	|
 
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
@@ -1414,9 +1414,9 @@ const [response, meta] = products.getLowestOfferListingsForSku({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| ASINList       	| string[] 	| ['MY-ASIN-1']    	| Yes      	|
-| ItemCondition     | string 	| 'New'         	| No      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| ASINList       	| string[] 	| `['MY-ASIN-1']`    	| Yes      	|
+| ItemCondition     | string 	| `'New'`         	| No      	|
 
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForASIN.html)
 
@@ -1439,9 +1439,9 @@ const [response, meta] = products.getLowestOfferListingsForAsin({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| SellerSKU         | string 	| 'MY-SKU-1'    	| Yes      	|
-| ItemCondition     | string 	| 'New'         	| Yes      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| SellerSKU         | string 	| `'MY-SKU-1'`    	| Yes      	|
+| ItemCondition     | string 	| `'New'`         	| Yes      	|
 
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
@@ -1464,9 +1464,9 @@ const [response, meta] = products.getLowestPricedOffersForSku({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| ASIN              | string 	| 'MY-ASIN-1'    	| Yes      	|
-| ItemCondition     | string 	| 'New'         	| Yes      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| ASIN              | string 	| `'MY-ASIN-1'`    	| Yes      	|
+| ItemCondition     | string 	| `'New'`         	| Yes      	|
 
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
@@ -1489,7 +1489,7 @@ const [response, meta] = products.getLowestPricedOffersForAsin({
 **Parameters**
 | Name           	        | Type     	                | Example                                        | Required 	|
 |-----------------------	|-----------------------	|----------------------------------------------- |----------	|
-| FeesEstimateRequestList  	| FeesEstimateRequest[] |  [FeesEstimateRequest](#feesestimaterequest)	 | Yes      	|
+| FeesEstimateRequestList  	| FeesEstimateRequest[] |  [`FeesEstimateRequest`](#feesestimaterequest)	 | Yes      	|
 
 **Example**
 
@@ -1524,9 +1524,9 @@ const [response, meta] = products.getMyFeesEstimate({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| SellerSKUList     | string[] 	| ['MY-SKU-1']    	| Yes      	|
-| ItemCondition     | string 	| 'New'         	| No      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| SellerSKUList     | string[] 	| `['MY-SKU-1']`    	| Yes      	|
+| ItemCondition     | string 	| `'New'`         	| No      	|
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
 **Example**
@@ -1547,9 +1547,9 @@ const [response, meta] = products.getMyPriceForSku({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| ASINList          | string[] 	| ['MY-ASIN-1']    	| Yes      	|
-| ItemCondition     | string 	| 'New'         	| No      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| ASINList          | string[] 	| `['MY-ASIN-1']`    	| Yes      	|
+| ItemCondition     | string 	| `'New'`         	| No      	|
 * [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
 **Example**
@@ -1570,8 +1570,8 @@ const [response, meta] = products.getMyPriceForAsin({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| SellerSKU         | string 	| 'MY-SKU-1'    	| Yes      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| SellerSKU         | string 	| `'MY-SKU-1'`    	| Yes      	|
 
 **Example**
 
@@ -1591,8 +1591,8 @@ const [response, meta] = products.getProductCategoriesForSku({
 **Parameters**
 | Name           	| Type     	| Example          	| Required 	|
 |----------------	|----------	|------------------	|----------	|
-| MarketplaceId  	| string   	| 'A2EUQ1WTGCTBG2' 	| Yes      	|
-| ASIN              | string 	| 'MY-ASIN-1'    	| Yes      	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| ASIN              | string 	| `'MY-ASIN-1'`    	| Yes      	|
 
 **Example**
 
@@ -1636,16 +1636,16 @@ const [response, meta] = products.getServiceStatus()
 **Parameters**
 | Name                             	| Type     	| Example                           	| Required 	|
 |----------------------------------	|----------	|-----------------------------------	|----------	|
-| MaxResultsPerPage                	| number   	| 10                                	| No       	|
-| FinancialEventGroupsStartedAfter 	| Date     	| new Date()                        	| Yes      	|
-| FinancialEventGroupStartedBefore 	| Date     	| new Date()                        	| No       	|
+| MaxResultsPerPage                	| number   	| `10`                                	| No       	|
+| FinancialEventGroupsStartedAfter 	| Date     	| `new Date()`                        	| Yes      	|
+| FinancialEventGroupStartedBefore 	| Date     	| `new Date()`                        	| No       	|
 
 **Example**
 
 ```typescript
 const finances = new Finances(httpClient)
 const [response, meta] = finances.listFinancialEventGroups({
-  FinancialEventGroupsStartedAfter: new Date(),
+  FinancialEventGroupsStartedAfter: `new Date()`,
 })
 ```
 
@@ -1657,7 +1657,7 @@ const [response, meta] = finances.listFinancialEventGroups({
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 **Example**
 
@@ -1674,11 +1674,11 @@ const [response, meta] = finances.listFinancialEventGroupsByNextToken(new NextTo
 **Parameters**
 | Name                  	| Type   	| Example               	| Required                                                                                                                                 	|
 |-----------------------	|--------	|-----------------------	|------------------------------------------------------------------------------------------------------------------------------------------	|
-| MaxResultsPerPage     	| number 	| 10                    	| No                                                                                                                                       	|
-| AmazonOrderId         	| string 	| '902-3159896-1390916' 	| Yes but you can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
-| FinancialEventGroupId 	| string 	| 'FNCLEVTGRPID'        	| Yes but you can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
-| PostedAfter           	| Date   	| new Date()            	| Yes but you can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
-| PostedBefore          	| Date   	| new Date()            	| No                                                                                                                                       	|
+| MaxResultsPerPage     	| number 	| `10`                    	| No                                                                                                                                       	|
+| AmazonOrderId         	| string 	| `'902-3159896-1390916'` 	| Yes but you can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
+| FinancialEventGroupId 	| string 	| `'FNCLEVTGRPID'`        	| Yes but you can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
+| PostedAfter           	| Date   	| `new Date()`            	| Yes but you can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore 	|
+| PostedBefore          	| Date   	| `new Date()`            	| No                                                                                                                                       	|
 
 **Example**
 
@@ -1697,7 +1697,7 @@ const [response, meta] = finances.listFinancialEvents({
 **Parameters**
 | Name      | Type      | Example                                                               | Required |
 |-----------|-----------|-----------------------------------------------------------------------|----------|
-| NextToken | NextToken | new NextToken('action', 'nexttoken')<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
 
 **Example**
 
