@@ -77,6 +77,11 @@ const main = async () => {
   ] = await sellers.listMarketplaceParticipationsByNextToken(myNextTokenFromOutsideTheApplication)
 
   /**
+   * "Using NextToken to request additional pages" from the Amazon documentation
+   * http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_NextToken.html
+   */
+
+  /**
    * Check out Amazon's official docs for other available endpoints
    * and definitions of possible request and response parameters
    * http://docs.developer.amazonservices.com/en_CA/dev_guide/index.html

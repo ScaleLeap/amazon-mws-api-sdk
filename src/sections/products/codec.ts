@@ -35,7 +35,7 @@ export enum ItemConditionEnum {
 
 const ItemCondition = enumeration(ItemConditionEnum)
 
-const CurrencyCode = enumeration(CurrencyCodeEnum)
+const CurrencyCode = enumeration(CurrencyCodeEnum) as Codec<keyof typeof CurrencyCodeEnum>
 
 export enum StatusEnum {
   Success = 'Success',
@@ -54,7 +54,7 @@ const IdType = enumeration(IdTypeEnum)
 
 const MoneyType = Codec.interface({
   Amount: optional(number),
-  CurrencyCode,
+  CurrencyCode: optional(CurrencyCode),
 })
 
 export const PointsCodec = Codec.interface({

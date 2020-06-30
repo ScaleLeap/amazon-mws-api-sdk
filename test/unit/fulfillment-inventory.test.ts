@@ -5,7 +5,7 @@ import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError }
 describe('fulfillment-inventory', () => {
   describe('listInventorySupply', () => {
     const parameters = {
-      MarketplaceId: '',
+      SellerSkus: [''],
     }
 
     it('returns a parsed model when the response is valid', async () => {

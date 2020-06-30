@@ -91,7 +91,7 @@ const ListInventorySupplyByNextTokenResponse = Codec.interface({
 
 const canonicalizeParameters = (parameters: ListInventorySupplyRequestParameters) => {
   return {
-    'SellersSkus.member': parameters.SellerSku,
+    'SellersSkus.member': parameters.SellerSkus,
     QueryStartDateTime: parameters.QueryStartDateTime?.toISOString(),
     ResponseGroup: parameters.ResponseGroup,
     MarketplaceId: parameters.MarketplaceId,
@@ -102,12 +102,12 @@ export type ResponseGroup = 'Basic' | 'Detailed'
 
 export type ListInventorySupplyRequestParameters = RequireOnlyOne<
   {
-    SellerSku?: string[]
+    SellerSkus?: string[]
     QueryStartDateTime?: Date
     ResponseGroup?: ResponseGroup
     MarketplaceId?: string
   },
-  'MarketplaceId' | 'QueryStartDateTime'
+  'SellerSkus' | 'QueryStartDateTime'
 >
 export type InventorySupplyList = GetInterface<typeof InventorySupplyList>
 export type InventorySupplyListByNextToken = GetInterface<typeof InventorySupplyListByNextToken>

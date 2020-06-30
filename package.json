@@ -7,6 +7,17 @@
     "email": "roman@scaleleap.com",
     "url": "https://www.scaleleap.com/"
   },
+  "contributors": [
+    {
+      "name": "Justin Emmanuel Mercado",
+      "email": "ej@ejmercado.com",
+      "url": "https://github.com/justinemmanuelmercado"
+    },
+    {
+      "name": "Stanislav Iliev",
+      "url": "https://github.com/gigobyte"
+    }
+  ],
   "homepage": "https://github.com/ScaleLeap/amazon-mws-api-sdk/#readme",
   "version": "1.0.0",
   "main": "lib/index.js",

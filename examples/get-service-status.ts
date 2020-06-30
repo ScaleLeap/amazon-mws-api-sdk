@@ -37,6 +37,10 @@ const main = async () => {
    */
   const [serviceStatus, requestMeta] = await sellers.getServiceStatus()
 
+  if (serviceStatus.Status === 'GREEN') {
+    console.log(`Sellers API is up on ${serviceStatus.Timestamp}!`)
+  }
+
   /**
    * Check out Amazon's official docs for other available endpoints
    * and definitions of possible request and response parameters

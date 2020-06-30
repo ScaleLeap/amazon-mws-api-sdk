@@ -3,6 +3,7 @@ import {
   array,
   boolean,
   Codec,
+  enumeration,
   exactly,
   GetInterface,
   Left,
@@ -20,17 +21,28 @@ const FEEDS_API_VERSION = '2009-01-01'
 export interface GetFeedSubmissionListParameters {
   FeedSubmissionIdList?: string[]
   MaxCount?: number
-  FeedTypeList?: string[]
-  FeedProcessingStatusList?: string[]
+  FeedTypeList?: FeedType[]
+  FeedProcessingStatusList?: FeedProcessingStatus[]
   SubmittedFromDate?: Date
   SubmittedToDate?: Date
 }
+export enum FeedProcessingStatusEnum {
+  _AWAITING_ASYNCHRONOUS_REPLY_ = '_AWAITING_ASYNCHRONOUS_REPLY_',
+  _CANCELLED_ = '_CANCELLED_',
+  _DONE_ = '_DONE_',
+  _IN_PROGRESS_ = '_IN_PROGRESS_',
+  _IN_SAFETY_NET_ = '_IN_SAFETY_NET_',
+  _SUBMITTED_ = '_SUBMITTED_',
+  _UNCONFIRMED_ = '_UNCONFIRMED_',
+}
+
+const FeedProcessingStatusCodec = enumeration(FeedProcessingStatusEnum)
 
 const FeedSubmissionInfo = Codec.interface({
   FeedSubmissionId: ensureString,
   FeedType: string,
   SubmittedDate: mwsDate,
-  FeedProcessingStatus: string,
+  FeedProcessingStatus: FeedProcessingStatusCodec,
   StartedProcessingDate: optional(mwsDate),
   CompletedProcessingDate: optional(mwsDate),
 })
@@ -120,7 +132,7 @@ const GetFeedSubmissionCountResponse = Codec.interface({
 
 export interface CancelFeedSubmissionsParameters {
   FeedSubmissionIdList?: string[]
-  FeedTypeList?: string[]
+  FeedTypeList?: FeedType[]
   SubmittedFromDate?: Date
   SubmittedToDate?: Date
 }

@@ -26,7 +26,7 @@ export enum CurrencyCodeEnum {
 
 export interface MoneyType {
   Amount: number | undefined
-  CurrencyCode: CurrencyCodeEnum
+  CurrencyCode: keyof typeof CurrencyCodeEnum | undefined
 }
 
 export interface FeeDetail {
@@ -49,7 +49,7 @@ export interface PriceToEstimateFees {
   Points?: Points
 }
 
-export interface FeeEstimateRequest {
+export interface FeesEstimateRequest {
   MarketplaceId: string
   IdType: FeeEstimateIdType
   IdValue: string
@@ -59,8 +59,8 @@ export interface FeeEstimateRequest {
 }
 
 export interface GetMyFeesEstimateParameters {
-  FeesEstimateRequestList: FeeEstimateRequest[]
-  [key: string]: FeeEstimateRequest[]
+  FeesEstimateRequestList: FeesEstimateRequest[]
+  [key: string]: FeesEstimateRequest[]
 }
 
 export interface ListMatchingProductsRequestParameters {

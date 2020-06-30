@@ -72,7 +72,10 @@ const main = async () => {
     // EasyShipShipmentStatus: easyShipmentStatus,
   }
 
-  const [listOrders, requestMeta]: [ListOrders, RequestMeta] = await orders.listOrders(parameters)
+  const [ordersList, requestMeta]: [ListOrders, RequestMeta] = await orders.listOrders(parameters)
+  ordersList.Orders.forEach((order) => {
+    console.log(`Order ID is ${order.AmazonOrderId}`)
+  })
 
   /**
    * Check out Amazon's official docs for other available endpoints
