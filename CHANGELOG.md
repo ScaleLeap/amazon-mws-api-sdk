@@ -3,6 +3,33 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.0.0...v1.1.0) (2020-06-30)
+
+
+### Bug Fixes
+
+* affected unit test ([e2ded78](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/e2ded78aaaef1da1bd966784620ef1b0cc45e094))
+* api extractor fix for feeds ([5174ff5](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/5174ff553e1efcbc0015a170686842a8f7bdb50c))
+* cleaning up placeholder text, add Properties to 'Types used ...' ([13c4086](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/13c4086b834da1920d32995675ea9a513d9ad555))
+* fix which parameter is required ([530118d](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/530118d62d8a905b56c1152f1431e68807601037))
+* make CurrencyCode optional ([6081b3f](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/6081b3f6b5e882f628587a89bf339aa671d1b685))
+* minor nomenclature change ([bcb1767](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/bcb176745f1bbc7d5e588ec280dba5c06306b36d))
+* missed an enum ([e56109d](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/e56109d5c682f19362342456ab29428aa8acb5e5))
+* prob with incorrect type from codec, add sample args for test ([dcffdec](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/dcffdec4deb099436c0c96bea8680694fa5d8219))
+
+
+### Features
+
+* add docs for feeds ([de6b822](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/de6b822322400c90181f10017f0f5cb7c23c1e85))
+* finish docs for finances and products ([ef10709](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ef10709a8ba26567b5bc86be0e35c8d4c3f0c75c))
+* initial pass at documentation. Sellers, Orders, Reports ([dc86860](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/dc86860cc66b3a4743fdce07674e085fa3e73c81))
+* table of contents update ([04b7d5c](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/04b7d5c7c20c8ce670c4e6f8d103df3761a45aea))
+* table of contents update and headers update ([6c851c4](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/6c851c49a16d74e29e45f73cedfc5fb1972ef022))
+* update docs for reports api ([505de0a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/505de0a43e87c291e5129e5f10c620806b471337))
+* update docs for subscriptions ([07847e1](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/07847e1f1196ab0655a7c994decaef6f22acdece))
+* update examples with links ([a4bd3ec](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/a4bd3ec32dd3817a782479ee89504af929572ca9))
+* update TOC ([b8ffaa9](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/b8ffaa912395ede17487e8eff693b0e6620bf07f))
+
 # 1.0.0 (2020-06-30)
 
 
