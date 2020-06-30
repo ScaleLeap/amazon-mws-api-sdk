@@ -92,34 +92,13 @@
 
 # Basics
 
-amazon-mws-api-sdk is divided up into different sections representing the different sections of the Amazon MWS API.
-Under each section are methods that perform "actions" on the MWS API parses the response, returns it and the request metadata in a JS object
+`amazon-mws-api-sdk` is divided up into different sections representing the different sections of the Amazon MWS API.
+Under each section are methods that perform "actions" on the MWS API, the response is parsed and returned along with the the request metadata
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
-## Basic example
-
-```typescript
-const [response, meta] = (new Orders(httpClient)).listMarketplaceParticipations()
-
-const { ListParticipations } = response
-const { requestId, timestamp } = meta
-
-console.log(`
-  Request ${requestId} made on ${timestamp.toISOString()} returned ${ListParticipations.length} participations!
-`)
-// Request 598a82be-d4ed-4bb6-802d-8e9150036d43 made on 2020-10-05T14:48:00.000Z returned 2 participations!
-```
-
-Each action returns a tuple containing [0] the actual request data and [1] the request metadata
-
-[getServiceStatus example file](../examples/get-service-status.ts)
-
----
-[Table of Contents](#table-of-contents)
-
-## Configuring `HttpClient` and configuring the sections
+## Configuring `HttpClient` and using it with the different sections
 
 ```typescript
 /**
@@ -141,22 +120,54 @@ const http = new HttpClient(mwsOptions)
  *  Sellers, Orders, Fulfillment Inventory, Products, Reports, Subscriptions, Finances, Feeds
  */
 const sellers = new Sellers(http)
+// new Orders(http), new FulfillmentInventory(http), new Products(http), new Reports(http)
+// new Subscriptions(http), new Finances(http), new Feeds(http)
 ```
 
+**MWSOptions attributes**
+| Name           	| Type   	| Example            	| Description           	| Required 	|
+|----------------	|--------	|--------------------	|-----------------------	|----------	|
+| marketplace    	| string 	| `'A2EUQ1WTGCTBG2'` 	| Amazon Marketplace ID 	| Yes      	|
+| awsAccessKeyId 	| string 	| `'AWSACCESSKEYID'` 	| AWS Access Key ID     	| Yes      	|
+| mwsAuthToken   	| string 	| `'MWSAUTHTOKEN'`   	| MWS Auth Token        	| Yes      	|
+| sellerId       	| string 	| `'SellerId'`       	| Seller ID             	| Yes      	|
+| secretKey      	| string 	| `'SECREEET'`       	| Secret Key            	| Yes      	|
+
 ---
-[Table of Contents](#table-of-contents)
+
+## Basic usage example
+
+```typescript
+const orders = new Orders(httpClient)
+const [response, meta] = orders.listMarketplaceParticipations()
+
+const { ListParticipations } = response
+const { requestId, timestamp } = meta
+
+console.log(`
+  Request ${requestId} made on ${timestamp.toISOString()} returned ${ListParticipations.length} participations!
+`)
+// Request 598a82be-d4ed-4bb6-802d-8e9150036d43 made on 2020-10-05T14:48:00.000Z returned 2 participations!
+```
+
+Each action returns a tuple containing `[0]` the actual request data and `[1]` the request metadata
+
+The most basic usage can be seen in [the get-service-status example file](../examples/get-service-status.ts)
+
+---
+[go back to table of contents](#table-of-contents)
 
 ## Response Object
 
 The actual request data varies between actions. Outside of some exceptions, all request data has been defined.
-Finding out the properties of the response object should be as easy as using your text editor's autocomplete 
+Finding out the properties of the response object should be as easy as using your text editor's autocomplete suggestions 
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
 ## Request Metadata
 
-This is consistent for all actions
+This is returned along with the API's response
 
 **Structure**
 
@@ -171,15 +182,15 @@ This is consistent for all actions
 ["Throttling: Limits to how often you can submit requests"](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_Throttling.html)
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
 
 ## Next tokens
 
-[Using NextTokens example file](../examples/using-next-tokens.ts)
+["using-next-tokens" example file](../examples/using-next-tokens.ts)
+["Using NextToken to request additional pages" from the Amazon documentation](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_NextToken.html)
 
 ### Creating `NextToken`s
-["Using NextToken to request additional pages" from the Amazon documentation](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_NextToken.html)   
 
 ```typescript
   /**
@@ -194,15 +205,15 @@ This is consistent for all actions
   ] = await sellers.listMarketplaceParticipationsByNextToken(nextToken)
 ```
 
-### Reusing next tokens from previous responses
+### Reusing next tokens from a previous response
 ```typescript
   const [
     marketplaceParticipationsList,
     requestMeta,
-  ] = await sellers.listMarketplaceParticipationsByNextToken(nextToken)
+  ] = await sellers.1etplaceParticipationsByNextToken(nextToken)
   const nextToken = marketplaceParticipationsList.NextToken
   /**
-   * Possibly undefined
+   * NextToken is possibly undefined
    */
   if (nextToken) {
     const [
@@ -215,7 +226,7 @@ This is consistent for all actions
 # Sections
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
 ## Sellers
 
@@ -235,7 +246,7 @@ const sellers = new Sellers(httpClient)
 const [response, meta] = sellers.listMarketplaceParticipations()
 ```
 
-**Response**x
+**Response**
 
 [See sellers test snapshot](../test/unit/__snapshots__/sellers.test.ts.snap)
 
@@ -277,7 +288,7 @@ const [response, meta] = sellers.getServiceStatus()
 
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
 ## Orders
 
@@ -307,7 +318,7 @@ const [response, meta] = sellers.getServiceStatus()
 
 ```typescript
 const orders = new Orders(httpClient)
-const [response, meta] = orders.listOrders({ createdAfter: `new Date()` })
+const [response, meta] = orders.listOrders({ createdAfter: new Date() })
 ```
 
 **Response**
@@ -405,7 +416,7 @@ const [response, meta] = orders.getServiceStatus()
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
 ## Reports
 
@@ -696,12 +707,12 @@ const [response, meta] = reports.updateReportAcknowledgements({ ReportIdList: ['
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
 ## Subscriptions
 [Amazon MWS Subscriptions official API](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Overview.html)
 
-### Types used in Subscriptions
+### Types used in `Subscriptions`
 
 #### Subscription
 **Properties**
@@ -1021,7 +1032,7 @@ const [response, meta] = subscriptions.getServiceStatus()
 
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
 ## FulfillmentInventory
 
@@ -1087,7 +1098,7 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 [See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
 ## Feeds
 
@@ -1213,14 +1224,18 @@ const [response, meta] = feeds.cancelFeedSubmissions()
 
 ### getFeedSubmissionResult
 **Parameters**
-| Name                  | Type      | Example                       | Required 	|
-| FeedSubmissionId     	| string 	  | `'FEEDID'`                      | No       	|
+
+| Name                  | Type      | Example                         | Required 	|
+|---------------------	|-------- 	|-------------------------------- |----------	|
+| FeedSubmissionId     	| string 	  | `'FEEDID'`                      | Yes       	|
 
 **Example**
 
 ```typescript
 const feeds = new Feeds(httpClient)
-const [response, meta] = feeds.getFeedSubmissionResult()
+const [response, meta] = feeds.getFeedSubmissionResult({
+  FeedSubmissionId: 'FEEDID'
+})
 ```
 
 **Response**
@@ -1231,12 +1246,12 @@ const [response, meta] = feeds.getFeedSubmissionResult()
 [See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
 ## Products
 [Amazon MWS Finances API official documentation](http://docs.developer.amazonservices.com/en_CA/products/Products_Overview.html)
 
-### Types used in Products
+### Types used in `Products`
 #### FeesEstimateRequest
 **Properties**
 
@@ -1627,7 +1642,7 @@ const [response, meta] = products.getServiceStatus()
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ---
-[Table of Contents](#table-of-contents)
+[go back to table of contents](#table-of-contents)
 
 ## Finances
 [Amazon MWS Finances API official documentation](http://docs.developer.amazonservices.com/en_CA/finances/Finances_Overview.html)
@@ -1645,7 +1660,7 @@ const [response, meta] = products.getServiceStatus()
 ```typescript
 const finances = new Finances(httpClient)
 const [response, meta] = finances.listFinancialEventGroups({
-  FinancialEventGroupsStartedAfter: `new Date()`,
+  FinancialEventGroupsStartedAfter: new Date(),
 })
 ```
 
