@@ -211,7 +211,7 @@ This is returned along with the API's response
   const [
     marketplaceParticipationsList,
     requestMeta,
-  ] = await sellers.1etplaceParticipationsByNextToken(nextToken)
+  ] = await sellers.listMarketplaceParticipationsByNextToken(nextToken)
   const nextToken = marketplaceParticipationsList.NextToken
   /**
    * NextToken is possibly undefined
