@@ -1,4 +1,4 @@
-import { boolean, Codec, enumeration, GetInterface, optional, string } from 'purify-ts'
+import { boolean, Codec, enumeration, GetInterface, optional, string, unknown } from 'purify-ts'
 
 import { ParsingError } from '../../error'
 import { HttpClient, RequestMeta, Resource } from '../../http'
@@ -74,9 +74,36 @@ const GetEligibleShippingServicesResponse = Codec.interface({
     GetEligibleShippingServicesResult: GetEligibleShippingServices,
   }),
 })
+// interface GetAdditionalSellerInputsParameters {}
 
+const GetAdditionalSellerInputs = unknown
+type GetAdditionalSellerInputs = GetInterface<typeof GetAdditionalSellerInputs>
+
+const GetAdditionalSellerInputsResponse = Codec.interface({
+  GetAdditionalSellerInputsResponse: Codec.interface({
+    GetAdditionalSellerInputsResult: GetAdditionalSellerInputs,
+  }),
+})
 export class MerchantFulfillment {
   constructor(private httpClient: HttpClient) {}
+
+  async getAddtionalSellerInputs(parameters: {}): Promise<
+    [GetAdditionalSellerInputs, RequestMeta]
+  > {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.MerchantFulfillment,
+      version: MERCHANT_FULFILLMENT_API_VERSION,
+      action: 'GetAdditionalSellerInputs',
+      parameters,
+    })
+
+    return GetAdditionalSellerInputsResponse.decode(response).caseOf({
+      Right: (x) => [x.GetAdditionalSellerInputsResponse.GetAdditionalSellerInputsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getEligibleShippingServices(
     parameters: GetEligibleShippingServicesParameters,

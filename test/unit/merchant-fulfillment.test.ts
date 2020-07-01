@@ -6,18 +6,48 @@ import {
 } from '../../src/sections/merchant-fulfillment/type'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
+const mockAddress = {
+  Name: '',
+  AddressLine1: '',
+  Email: '',
+  City: '',
+  PostalCode: '',
+  CountryCode: '',
+  Phone: '',
+}
+
 describe('merchant-fulfillment', () => {
-  describe('getEligiblShippingServices', () => {
-    const Address = {
-      Name: '',
-      AddressLine1: '',
-      Email: '',
-      City: '',
-      PostalCode: '',
-      CountryCode: '',
-      Phone: '',
+  describe('getAdditionalSellerInputs', () => {
+    const parameters = {
+      OrderId: '',
+      ShippingServiceId: '',
+      ShipFromAddress: mockAddress,
     }
 
+    it('returns shipment level fields and item level fields if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetAdditionalSellerInputs = createMockHttpClient(
+        'merchant_get_additional_seller_inputs',
+      )
+
+      expect(
+        await mockGetAdditionalSellerInputs.merchantFulfillment.getAddtionalSellerInputs(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it("throws a parsing error when the status response isn't valid", async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.merchantFulfillment.getAddtionalSellerInputs(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
+  describe('getEligiblShippingServices', () => {
     const PackageDimensions = {
       PredefinePackageDimensions: 'FedEx_Box_10kg',
     }
@@ -36,7 +66,7 @@ describe('merchant-fulfillment', () => {
       AmazonOrderId: '',
       SellerOrderId: '',
       ItemList: [],
-      ShipFromAddress: Address,
+      ShipFromAddress: mockAddress,
       PackageDimensions,
       Weight,
       MustArriveByDate: new Date(),
