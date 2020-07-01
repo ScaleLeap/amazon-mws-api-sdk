@@ -144,7 +144,7 @@ export type DeliveryExperience =
 export interface ShippingServiceOptions {
   DeliveryExperience: DeliveryExperience
   DeclaredValue?: CurrencyAmount
-  CarrierWillPickup: boolean
+  CarrierWillPickUp: boolean
   LabelFormat?: string
   [key: string]: string | boolean | undefined | DeliveryExperience | CurrencyAmount
 }

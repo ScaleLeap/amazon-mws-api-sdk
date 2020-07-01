@@ -29,7 +29,7 @@ describe('merchant-fulfillment', () => {
 
     const ShippingServiceOptions: ShippingServiceOptionsInterface = {
       DeliveryExperience: 'DeliveryConfirmationWithAdultSignature',
-      CarrierWillPickup: false,
+      CarrierWillPickUp: false,
     }
 
     const ShipmentRequestDetails = {
