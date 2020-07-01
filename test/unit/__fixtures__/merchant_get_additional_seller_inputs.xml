@@ -1,0 +1,189 @@
+<GetAdditionalSellerInputsResponse xmlns="https://mws.amazonservices.com/MerchantFulfillment/2015-06-01">
+  <GetAdditionalSellerInputsResult>
+    <ShipmentLevelFields>
+      <member>
+        <SellerInputDefinition>
+          <IsRequired>true</IsRequired>
+          <RestrictedSetValues>
+            <member>Abandon</member>
+            <member>Return</member>
+          </RestrictedSetValues>
+          <DataType>String</DataType>
+          <InputTarget>SHIPMENT_LEVEL</InputTarget>
+          <StoredValue>
+            <ValueAsString>ABANDON</ValueAsString>
+            <DataType>STRING</DataType>
+            <ValueAsBoolean>false</ValueAsBoolean>
+            <ValueAsInteger>0</ValueAsInteger>
+          </StoredValue>
+          <InputDisplayText>Non-Deliverable Instructions</InputDisplayText>
+          <Constraints/>
+        </SellerInputDefinition>
+        <AdditionalInputFieldName>NON_DELIVERABLE_INSTRUCTIONS</AdditionalInputFieldName>
+      </member>
+      <member>
+        <SellerInputDefinition>
+          <IsRequired>true</IsRequired>
+          <RestrictedSetValues/>
+          <DataType>Address</DataType>
+          <InputTarget>SHIPMENT_LEVEL</InputTarget>
+          <InputDisplayText>Ship From Address(Chinese)</InputDisplayText>
+          <Constraints>
+            <member>
+              <ValidationRegEx>putjust5digitRegex</ValidationRegEx>
+              <ValidationString>Please enter Ship From Address in
+                                Chinese</ValidationString>
+            </member>
+          </Constraints>
+        </SellerInputDefinition>
+        <AdditionalInputFieldName>SENDER_ADDRESS_TRANSLATED</AdditionalInputFieldName>
+      </member>
+    </ShipmentLevelFields>
+    <ItemLevelFieldsList>
+      <member>
+        <Asin>B004U9TL66</Asin>
+        <AdditionalInputs>
+          <member>
+            <SellerInputDefinition>
+              <IsRequired>true</IsRequired>
+              <RestrictedSetValues/>
+              <DataType>Weight</DataType>
+              <InputTarget>ITEM_LEVEL</InputTarget>
+              <StoredValue>
+                <ValueAsWeight>
+                  <Value>600</Value>
+                  <Unit>G</Unit>
+                </ValueAsWeight>
+                <DataType>WEIGHT</DataType>
+                <ValueAsBoolean>false</ValueAsBoolean>
+                <ValueAsInteger>0</ValueAsInteger>
+              </StoredValue>
+              <InputDisplayText>Item weight</InputDisplayText>
+              <Constraints>
+                <member>
+                  <ValidationRegEx>^[0-9]{1,3}(.[0-9]{1,2})?$</ValidationRegEx>
+                  <ValidationString>Please enter item weight (max 6
+                                        digits)</ValidationString>
+                </member>
+              </Constraints>
+            </SellerInputDefinition>
+            <AdditionalInputFieldName>ITEM_WEIGHT</AdditionalInputFieldName>
+          </member>
+          <member>
+            <SellerInputDefinition>
+              <IsRequired>true</IsRequired>
+              <RestrictedSetValues/>
+              <DataType>String</DataType>
+              <InputTarget>ITEM_LEVEL</InputTarget>
+              <StoredValue>
+                <ValueAsString>CN</ValueAsString>
+                <DataType>STRING</DataType>
+                <ValueAsBoolean>false</ValueAsBoolean>
+                <ValueAsInteger>0</ValueAsInteger>
+              </StoredValue>
+              <InputDisplayText>Country of Origin</InputDisplayText>
+              <Constraints>
+                <member>
+                  <ValidationRegEx>^[a-zA-Z]{2}$</ValidationRegEx>
+                  <ValidationString>Please enter country code of the country of
+                                        manufacture (e.g. CN)</ValidationString>
+                </member>
+              </Constraints>
+            </SellerInputDefinition>
+            <AdditionalInputFieldName>COUNTRY_OF_ORIGIN</AdditionalInputFieldName>
+          </member>
+          <member>
+            <SellerInputDefinition>
+              <IsRequired>true</IsRequired>
+              <RestrictedSetValues/>
+              <DataType>String</DataType>
+              <InputTarget>ITEM_LEVEL</InputTarget>
+              <StoredValue>
+                <ValueAsString>è¡£æœ�</ValueAsString>
+                <DataType>STRING</DataType>
+                <ValueAsBoolean>false</ValueAsBoolean>
+                <ValueAsInteger>0</ValueAsInteger>
+              </StoredValue>
+              <InputDisplayText>Item Description(Chinese)</InputDisplayText>
+              <Constraints>
+                <member>
+                  <ValidationRegEx>^[^a-zA-Z]{1,10}$</ValidationRegEx>
+                  <ValidationString>Please enter item description in Chinese up to
+                                        10 characters </ValidationString>
+                </member>
+              </Constraints>
+            </SellerInputDefinition>
+            <AdditionalInputFieldName>ITEM_DESCRIPTION_TRANSLATED</AdditionalInputFieldName>
+          </member>
+          <member>
+            <SellerInputDefinition>
+              <IsRequired>true</IsRequired>
+              <RestrictedSetValues/>
+              <DataType>String</DataType>
+              <InputTarget>ITEM_LEVEL</InputTarget>
+              <StoredValue>
+                <ValueAsString>200</ValueAsString>
+                <DataType>CURRENCY</DataType>
+                <ValueAsBoolean>false</ValueAsBoolean>
+                <ValueAsInteger>0</ValueAsInteger>
+              </StoredValue>
+              <InputDisplayText>Item Value(USD)</InputDisplayText>
+              <Constraints>
+                <member>
+                  <ValidationRegEx>^[0-9]{1,3}(.[0-9]{1,2})?$</ValidationRegEx>
+                  <ValidationString>Please enter item value in USD (max 6
+                                        digits)</ValidationString>
+                </member>
+              </Constraints>
+            </SellerInputDefinition>
+            <AdditionalInputFieldName>ITEM_VALUE</AdditionalInputFieldName>
+          </member>
+          <member>
+            <SellerInputDefinition>
+              <IsRequired>false</IsRequired>
+              <RestrictedSetValues/>
+              <DataType>String</DataType>
+              <InputTarget>ITEM_LEVEL</InputTarget>
+              <InputDisplayText>HS Code</InputDisplayText>
+              <Constraints>
+                <member>
+                  <ValidationRegEx>^[0-9a-zA-Z -]{1,10}?$</ValidationRegEx>
+                  <ValidationString>Please enter HS Code containing letters and
+                                        numbers only up to 10 characters</ValidationString>
+                </member>
+              </Constraints>
+            </SellerInputDefinition>
+            <AdditionalInputFieldName>HS_CODE</AdditionalInputFieldName>
+          </member>
+          <member>
+            <SellerInputDefinition>
+              <IsRequired>true</IsRequired>
+              <RestrictedSetValues/>
+              <DataType>String</DataType>
+              <InputTarget>ITEM_LEVEL</InputTarget>
+              <StoredValue>
+                <ValueAsString>Diapers</ValueAsString>
+                <DataType>STRING</DataType>
+                <ValueAsBoolean>false</ValueAsBoolean>
+                <ValueAsInteger>0</ValueAsInteger>
+              </StoredValue>
+              <InputDisplayText>Item Description</InputDisplayText>
+              <Constraints>
+                <member>
+                  <ValidationRegEx>^[a-zA-Z0-9-._&amp; ]{3,25}$</ValidationRegEx>
+                  <ValidationString>Please enter item description using
+                                        alphanumeric characters (max 25
+                                        characters)</ValidationString>
+                </member>
+              </Constraints>
+            </SellerInputDefinition>
+            <AdditionalInputFieldName>ITEM_DESCRIPTION</AdditionalInputFieldName>
+          </member>
+        </AdditionalInputs>
+      </member>
+    </ItemLevelFieldsList>
+  </GetAdditionalSellerInputsResult>
+  <ResponseMetadata>
+    <RequestId>c16c3c89-6dcd-11e9-b318-db190c5bb6ad</RequestId>
+  </ResponseMetadata>
+</GetAdditionalSellerInputsResponse>
