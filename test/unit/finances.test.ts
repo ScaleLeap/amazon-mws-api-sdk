@@ -8,7 +8,7 @@ function mockFunctions() {
    *  except for `enumeration` which will be stubbed
    * https://github.com/facebook/jest/issues/936#issuecomment-265074320
    */
-  const original = require.requireActual('purify-ts')
+  const original = jest.requireActual('purify-ts')
   return {
     ...original, // Pass down all the exported objects
     enumeration: () => {
