@@ -1752,13 +1752,13 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | AmazonOrderId          	| string                 	| `'902-3159896-1390916'`                          	| Yes      	|
 | SellerOrderId          	| string                 	| `'SellerId'`                        	| No       	|
 | ItemList               	| Item[]                 	| `[Item](#item)`                 	| Yes      	|
-| ShipFromAddress        	| Address                	| `[Address](#address)`                	| Yes      	|
-| PackageDimensions      	| PackageDimensions      	| `[PackageDimensions](#packagedimensions)`      	| Yes      	|
-| Weight                 	| Weight                 	| `[Weight](#weight)`                 	| Yes      	|
+| ShipFromAddress        	| Address                	| [`Address`](#address)                	| Yes      	|
+| PackageDimensions      	| PackageDimensions      	| [`PackageDimensions`](#packagedimensions)`      	| Yes      	|
+| Weight                 	| Weight                 	| [`Weight`](#weight)                 	| Yes      	|
 | MustArriveByDate       	| Date                   	| `new Date()`                     	| No       	|
 | ShipDate               	| Date                   	| `new Date()`                     	| No       	|
-| ShippingServiceOptions 	| ShippingServiceOptions 	| `[ShippingServiceOptions](#shippingserviceoptions)` 	| Yes      	|
-| LabelCustomization     	| LabelCustomization     	| `[LabelCustomization](#labelcustomization)`     	| No       	|
+| ShippingServiceOptions 	| ShippingServiceOptions 	| [`ShippingServiceOptions`](#shippingserviceoptions) 	| Yes      	|
+| LabelCustomization     	| LabelCustomization     	| [`LabelCustomization`](#labelcustomization)     	| No       	|
 
 #### Item
 
@@ -1768,10 +1768,10 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 |---------------------------	|--------------------------	|------------------------------------	|----------	|
 | OrderItemId               	| string                   	| `'1234'`                            	| Yes      	|
 | Quantity                  	| number                   	| `1`                                	| Yes      	|
-| ItemWeight                	| Weight                   	| `[Weight](#weight)`                   	| No       	|
+| ItemWeight                	| Weight                   	| [`Weight`](#weight)                   	| No       	|
 | ItemDescription           	| string                   	| `'This is an item'`                  	| No       	|
 | TransparencyCodeList      	| string[]                 	| `'CODE'`                             	| No       	|
-| ItemLevelSellerInputsList 	| AdditionalSellerInputs[] 	| `[AdditionalSellerInputs](#additionalsellerinputs)` 	| Yes      	|
+| ItemLevelSellerInputsList 	| AdditionalSellerInputs[] 	| [`AdditionalSellerInputs`](#additionalsellerinputs) 	| Yes      	|
 
 #### Address
 
@@ -1823,7 +1823,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | Name                        	| Type                   	| Example                                    	| Required 	|
 |-----------------------------	|------------------------	|--------------------------------------------	|----------	|
 | DeliveryExperience          	| number                 	| `'DeliveryConfirmationWithAdultSignature'` 	| Yes      	|
-| DeclaredValue               	| CurrencyAmount         	| `[CurrencyAmount](#currencyamount)`                  	| No       	|
+| DeclaredValue               	| CurrencyAmount         	| [`CurrencyAmount`](#currencyamount)                  	| No       	|
 | CarrierWillPickUp           	| boolean                	| `false`                                    	| Yes      	|
 | LabelFormat                 	| string                 	| `Label Format`                             	| No       	|
 
@@ -1844,7 +1844,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | Name                        	| Type                   	| Example                         	| Required 	|
 |-----------------------------	|------------------------	|---------------------------------	|----------	|
 | DataType                    	| string                 	| `'SENDER_ADDRESS_TRANSLATED'`   	| Yes      	|
-| AdditionalSellerInput       	| AdditionalSellerInput  	| `[AdditionalSellerInput](#additionalsellerinput)` 	| Yes      	|
+| AdditionalSellerInput       	| AdditionalSellerInput  	| [`AdditionalSellerInput`](#additionalsellerinput) 	| Yes      	|
 
 #### AdditionalSellerInput
 **Parameters**
@@ -1856,10 +1856,10 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | ValueAsBoolean   	| boolean           	| `false`                     	| No       	|
 | ValueAsInteger   	| number            	| `10`                        	| No       	|
 | ValueAsTimestamp 	| Date              	| `new Date()`                	| No       	|
-| ValueAsAddress   	| Address           	| `[Address](#address)`           	| No       	|
-| ValueAsWeight    	| Weight            	| `[Weight](#weight)`            	| No       	|
-| ValueAsDimension 	| PackageDimensions 	| `[PackageDimensions](#packagedimensions)` 	| No       	|
-| ValueAsCurrency  	| CurrencyAmount    	| `[CurrencyAmount](#currencyamount)`   	| No       	|
+| ValueAsAddress   	| Address           	| [`Address`](#address)           	| No       	|
+| ValueAsWeight    	| Weight            	| [`Weight`](#weight)            	| No       	|
+| ValueAsDimension 	| PackageDimensions 	| [`PackageDimensions`](#packagedimensions)` 	| No       	|
+| ValueAsCurrency  	| CurrencyAmount    	| [`CurrencyAmount`](#currencyamount)   	| No       	|
 
 * Possible values for `DataType`:   `'String'`, `'Boolean'`, `'Integer'`, `'Timestamp'`, `'Address'`, `'Weight'`, `'Dimension'`, `'Currency'`,
 * Fill in `ValueAs[DataType]` depending on the value for `DataType`
