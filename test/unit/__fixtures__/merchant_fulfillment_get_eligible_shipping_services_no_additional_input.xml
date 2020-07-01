@@ -15,7 +15,8 @@
                 </Rate>
                 <ShippingServiceOptions>
                     <DeliveryExperience>DeliveryConfirmationWithoutSignature</DeliveryExperience>
-                    <CarrierWillPickUp>False</CarrierWillPickUp>
+                    <!-- For some reason this was capitalized previously, mistake on the doc writer? -->
+                    <CarrierWillPickUp>false</CarrierWillPickUp>
                 </ShippingServiceOptions>
                 <AvailableLabelFormats>
                     <LabelFormat>ZPL203</LabelFormat>
@@ -23,7 +24,7 @@
                     <LabelFormat>PDF</LabelFormat>
                     <LabelFormat>PNG</LabelFormat>
                 </AvailableLabelFormats>
-                <RequiresAdditionalSellerInputs>False</RequiresAdditionalSellerInputs>
+                <RequiresAdditionalSellerInputs>false</RequiresAdditionalSellerInputs>
             </ShippingService>
         </ShippingServiceList>
         <RejectedShippingServiceList>

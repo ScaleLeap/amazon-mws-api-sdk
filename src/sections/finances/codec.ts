@@ -10,6 +10,7 @@ import {
 } from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
+import { CurrencyAmount } from '../codec'
 import { FulfillmentChannelEnum } from '../types'
 
 export enum ProcessingStatusEnum {
@@ -18,11 +19,6 @@ export enum ProcessingStatusEnum {
 }
 
 const ProcessingStatus = enumeration(ProcessingStatusEnum)
-
-const CurrencyAmount = Codec.interface({
-  CurrencyCode: optional(string),
-  CurrencyAmount: optional(number),
-})
 
 const FinancialEventGroup = Codec.interface({
   FinancialEventGroupId: optional(string),

@@ -1,5 +1,204 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`merchant-fulfillment getEligiblShippingServices returns lists of shipping services if succesful with additional input 1`] = `
+Array [
+  Object {
+    "RejectedShippingServiceList": Array [
+      Object {
+        "CarrierName": "CHINA_POST",
+        "RejectionReasonCode": "INELIGIBLE",
+        "RejectionReasonMessage": "This ship method is not eligible for this
+                    order.",
+        "ShippingServiceId": "CHINA_POST_E_PACKET",
+        "ShippingServiceName": "China Post e-Packet",
+      },
+    ],
+    "ShippingServiceList": Array [
+      Object {
+        "AvailableLabelFormats": Array [
+          "ShippingServiceDefault",
+          "PDF",
+        ],
+        "CarrierName": "CHINA_POST",
+        "EarliestEstimatedDeliveryDate": 2019-08-27T18:00:00.000Z,
+        "LatestEstimatedDeliveryDate": 2019-08-27T18:00:00.000Z,
+        "Rate": Object {
+          "CurrencyCode": "CNY",
+        },
+        "RequiresAdditionalSellerInputs": true,
+        "ShipDate": 2019-08-08T07:00:00.000Z,
+        "ShippingServiceId": "CHINA_POST_E_EMS",
+        "ShippingServiceName": "CHINA_POST_E_EMS",
+        "ShippingServiceOfferId": "NH0sNBYSrqUP2+5yJdI14yLsCwFfk2413sYQHKbp0ILv8xkJemzkFK/wgUXeC9y4j6dNKuYn3EpQh7YJSc4gvPUfNDsISoAi9tCikbPjI5KOajdY75KvPLXPEC57Od/gAlOQv07JravlVU6oURFoVtc8nwZDviBPfA43owEPmxPglPTttIuS9LfcI0ky/kIP/OT7h+acfQj8JxAtomwX1WUYGZSbzkSL9c6ic5CAeriif1Kr0k8Y0RuloSZs2ZQwOv//nLvV3ZCZic8vU8cGVGHExM9sMKamBDopoh0Kx2JHcDwWHDcKB+lOntkABC84",
+        "ShippingServiceOptions": Object {
+          "CarrierWillPickUp": true,
+          "DeliveryExperience": "DeliveryConfirmationWithoutSignature",
+        },
+      },
+    ],
+    "TemporarilyUnavailableCarrierList": Array [
+      Object {
+        "CarrierName": "DPD",
+      },
+    ],
+    "TermsAndConditionsNotAcceptedCarrierList": Array [
+      Object {
+        "CarrierName": "DHL",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`merchant-fulfillment getEligiblShippingServices returns lists of shipping services if succesful with no additional input 1`] = `
+Array [
+  Object {
+    "RejectedShippingServiceList": Array [
+      Object {
+        "CarrierName": "UPS",
+        "RejectionReasonCode": "INELIGIBLE",
+        "RejectionReasonMessage": "This ship method is not eligible for this
+                    order.",
+        "ShippingServiceId": "UPS_PTP_3DS",
+        "ShippingServiceName": "UPS Three Day Saver",
+      },
+    ],
+    "ShippingServiceList": Array [
+      Object {
+        "AvailableLabelFormats": Array [
+          "ZPL203",
+          "ShippingServiceDefault",
+          "PDF",
+          "PNG",
+        ],
+        "CarrierName": "UPS",
+        "EarliestEstimatedDeliveryDate": 2018-10-17T18:00:00.000Z,
+        "LatestEstimatedDeliveryDate": 2018-10-17T18:00:00.000Z,
+        "Rate": Object {
+          "CurrencyCode": "USD",
+        },
+        "RequiresAdditionalSellerInputs": false,
+        "ShipDate": 2018-10-15T23:41:12.000Z,
+        "ShippingServiceId": "UPS_PTP_GND",
+        "ShippingServiceName": "UPS Ground",
+        "ShippingServiceOfferId": "ly51yzA1nAXlJzmYlKaH+7WbKOWz2BTujIOPx5PU8luilmZYK/JFhbx177aKey8MdZcG90uABbT5q8WAgPI+uxcxx/XDtIbI7c161j5spbfsiPTwIJg4Bk66bnP6Ip+JJtuSU5++rAdv4mzXvKpisLGYGrc+FuJvBAjTersJhq4=",
+        "ShippingServiceOptions": Object {
+          "CarrierWillPickUp": false,
+          "DeliveryExperience": "DeliveryConfirmationWithoutSignature",
+        },
+      },
+    ],
+    "TemporarilyUnavailableCarrierList": Array [
+      Object {
+        "CarrierName": "DYNAMEX",
+      },
+      Object {
+        "CarrierName": "USPS",
+      },
+      Object {
+        "CarrierName": "DHLECOMMERCE",
+      },
+      Object {
+        "CarrierName": "SELF_DELIVERY",
+      },
+      Object {
+        "CarrierName": "ONTRAC",
+      },
+      Object {
+        "CarrierName": "DHLMX",
+      },
+      Object {
+        "CarrierName": "DHLM",
+      },
+      Object {
+        "CarrierName": "FEDEX",
+      },
+    ],
+    "TermsAndConditionsNotAcceptedCarrierList": Array [
+      Object {
+        "CarrierName": "AMZN_US",
+      },
+      Object {
+        "CarrierName": "ONTRAC",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`merchant-fulfillment getEligiblShippingServices returns lists of shipping services if succesful with test from C# mocks 1`] = `
+Array [
+  Object {
+    "RejectedShippingServiceList": Array [
+      Object {
+        "CarrierName": "String",
+        "RejectionReasonCode": "String",
+        "RejectionReasonMessage": "String",
+        "ShippingServiceId": "String",
+        "ShippingServiceName": "String",
+      },
+    ],
+    "ShippingServiceList": Array [
+      Object {
+        "AvailableLabelFormats": Array [
+          "String",
+        ],
+        "CarrierName": "String",
+        "EarliestEstimatedDeliveryDate": 1969-07-21T02:56:03.000Z,
+        "LatestEstimatedDeliveryDate": 1969-07-21T02:56:03.000Z,
+        "Rate": Object {
+          "CurrencyCode": "String",
+        },
+        "RequiresAdditionalSellerInputs": true,
+        "ShipDate": 1969-07-21T02:56:03.000Z,
+        "ShippingServiceId": "String",
+        "ShippingServiceName": "String",
+        "ShippingServiceOfferId": "String",
+        "ShippingServiceOptions": Object {
+          "CarrierWillPickUp": true,
+          "DeclaredValue": Object {
+            "CurrencyCode": "String",
+          },
+          "DeliveryExperience": "DeliveryConfirmationWithAdultSignature",
+          "LabelFormat": "String",
+        },
+      },
+    ],
+    "TemporarilyUnavailableCarrierList": Array [
+      Object {
+        "CarrierName": "String",
+      },
+    ],
+    "TermsAndConditionsNotAcceptedCarrierList": Array [
+      Object {
+        "CarrierName": "String",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`merchant-fulfillment getServiceStatus returns a parsed model when the status response is valid 1`] = `
 Array [
   Object {

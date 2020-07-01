@@ -1,4 +1,9 @@
 import { ParsingError } from '../../src'
+import {
+  GetEligibleShippingServicesParameters,
+  ShippingServiceOptions as ShippingServiceOptionsInterface,
+  Weight as WeightInterface,
+} from '../../src/sections/merchant-fulfillment/type'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 describe('merchant-fulfillment', () => {
@@ -17,17 +22,12 @@ describe('merchant-fulfillment', () => {
       PredefinePackageDimensions: 'FedEx_Box_10kg',
     }
 
-    const Weight = {
+    const Weight: WeightInterface = {
       Value: 1,
-      Unit: '',
+      Unit: 'ounces',
     }
 
-    // const CurrencyAmount = {
-    //   CurrencyCode: 'PHP',
-    //   Amount: 1,
-    // }
-
-    const ShippingServiceOptions = {
+    const ShippingServiceOptions: ShippingServiceOptionsInterface = {
       DeliveryExperience: 'DeliveryConfirmationWithAdultSignature',
       CarrierWillPickup: false,
     }
@@ -44,9 +44,23 @@ describe('merchant-fulfillment', () => {
       ShippingServiceOptions,
     }
 
-    const parameters = {
+    const parameters: GetEligibleShippingServicesParameters = {
       ShipmentRequestDetails,
     }
+
+    it('returns lists of shipping services if succesful with test from C# mocks', async () => {
+      expect.assertions(1)
+
+      const mockGetEligibleShippingServices = createMockHttpClient(
+        'merchant_fulfillment_get_eligible_shipping_services_no_from_c_sharp',
+      )
+
+      expect(
+        await mockGetEligibleShippingServices.merchantFulfillment.getEligibleShippingServices(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
 
     it('returns lists of shipping services if succesful with no additional input', async () => {
       expect.assertions(1)
@@ -80,7 +94,7 @@ describe('merchant-fulfillment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.merchantFulfillment.getEligibleShippingServices(),
+        mockMwsFail.merchantFulfillment.getEligibleShippingServices(parameters),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })

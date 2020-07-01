@@ -1,14 +1,14 @@
-import { record, string, unknown } from 'purify-ts'
+/**
+ * START GetEligibleShippingServicesParameters
+ * AS OF July 1 2020, this hasn't been battle tested,
+ * but I would like to
+ */
 
-import { ParsingError } from '../error'
-import { HttpClient, Resource } from '../http'
-import { getServiceStatusByResource } from './shared'
-
-const MERCHANT_FULFILLMENT_API_VERSION = '2015-06-01'
+export type WeightUnit = 'ounces' | 'grams'
 
 export interface Weight {
   Value: number
-  Unit: 'ounces' | 'grams'
+  Unit: WeightUnit
   [key: string]: string | number
 }
 
@@ -50,8 +50,8 @@ export type PredefinedPackageDimensions =
   | 'FedEx_Box_Small_2'
   | 'FedEx_Envelope'
   | 'FedEx_Padded_Pak'
-  | 'FedEx_Pak_1'
   | 'FedEx_Pak_2'
+  | 'FedEx_Pak_1'
   | 'FedEx_Tube'
   | 'FedEx_XL_Pak'
   | 'UPS_Box_10kg'
@@ -108,18 +108,12 @@ export interface AdditionalSellerInput {
   ValueAsString?: string
   ValueAsBoolean?: boolean
   ValueAsInteger?: number
-  // @todo
-  // ValueAsTimestamp?: Date // this needs an issue. "parameters should be able to handle Date objects"
-  ValueAsTimestamp?: string
+  ValueAsTimestamp?: Date
   ValueAsAddress?: Address
   ValueAsWeight?: Weight
   ValueAsDimension?: PackageDimensions
   ValueAsCurrency?: CurrencyAmount
-}
-
-interface AdditionalSellerInputs {
-  AdditionalInputFieldName: string
-  AdditionalSellerInput: AdditionalSellerInput
+  [key: string]: undefined | string | boolean | number | object
 }
 
 /**
@@ -127,8 +121,9 @@ interface AdditionalSellerInputs {
  * @todo
  * http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_Datatypes.html#ItemLevelSellerInputs
  */
-export interface ItemLevelSellerInputsList {
-  AdditionalSellerInputs: AdditionalSellerInputs[]
+interface AdditionalSellerInputs {
+  AdditionalInputFieldName: string
+  AdditionalSellerInput: AdditionalSellerInput
 }
 
 export interface Item {
@@ -137,7 +132,7 @@ export interface Item {
   ItemWeight?: Weight
   ItemDescription?: string
   TransparencyCodeList?: string[]
-  // ItemLevelSellerInputsList?: ItemLevelSellerInputsList // Need to do more research on this
+  ItemLevelSellerInputsList?: AdditionalSellerInputs[] // Need to do more research on this
 }
 
 export type DeliveryExperience =
@@ -180,7 +175,7 @@ export interface GetEligibleShippingServicesParameters {
   ShippingOfferingFilter?: ShippingOfferingFilter
 }
 
-const canonicalizeParametersGetEligibleShippingServiceParameters = (
+export const canonicalizeParametersGetEligibleShippingServiceParameters = (
   parameters: GetEligibleShippingServicesParameters,
 ) => {
   const { ShipmentRequestDetails, ShippingOfferingFilter } = parameters
@@ -195,11 +190,25 @@ const canonicalizeParametersGetEligibleShippingServiceParameters = (
     ShippingServiceOptions,
     LabelCustomization,
   } = ShipmentRequestDetails
-  const ItemsList = ShipmentRequestDetails?.ItemList.map((item) => ({
-    ...item,
-    TransparencyCodeList: undefined,
-    'TransparemcyCodeList.TransparencyCode': item.TransparencyCodeList,
-  }))
+  const itemsList = ShipmentRequestDetails?.ItemList.map((item) => {
+    const fixedInputsList = item.ItemLevelSellerInputsList?.map((input) => {
+      return {
+        AdditionalInputFieldName: input.AdditionalInputFieldName,
+        AdditionalSellerInput: {
+          ...input.AdditionalSellerInput,
+          ValueAsTimestamp: input.AdditionalSellerInput.ValueAsTimestamp?.toISOString(),
+        },
+      }
+    })
+
+    return {
+      ...item,
+      TransparencyCodeList: undefined,
+      'transparencyCodeList.member': item.TransparencyCodeList, // Lower case 't' because that's what' in the C# lib
+      ItemLevelSellerInputsList: undefined,
+      'ItemLevelSellerInputsList.member': fixedInputsList,
+    }
+  })
   return {
     ShippingOfferingFilter: {
       IncludeComplexShippingOptions: ShippingOfferingFilter?.IncludeComplexShippingOptions,
@@ -207,7 +216,7 @@ const canonicalizeParametersGetEligibleShippingServiceParameters = (
     ShipmentRequestDetails: {
       AmazonOrderId,
       SellerOrderId,
-      'ItemList.Item': ItemsList,
+      'ItemList.Item': itemsList,
       ShipFromAddress,
       PackageDimensions,
       Weight,
@@ -219,33 +228,6 @@ const canonicalizeParametersGetEligibleShippingServiceParameters = (
   }
 }
 
-// @todo
-const GetEligibleShippingServicesResponse = record(string, unknown)
-
-export class MerchantFulfillment {
-  constructor(private httpClient: HttpClient) {}
-
-  async getEligibleShippingServices(parameters: GetEligibleShippingServicesParameters) {
-    const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.MerchantFulfillment,
-      version: MERCHANT_FULFILLMENT_API_VERSION,
-      action: 'GetEligibleShippingServices',
-      parameters: canonicalizeParametersGetEligibleShippingServiceParameters(parameters),
-    })
-
-    return GetEligibleShippingServicesResponse.decode(response).caseOf({
-      Right: (x) => [x.GetEligibleShippingServicesResponse.GetEligibleShippingServicesResult, meta],
-      Left: (error) => {
-        throw new ParsingError(error)
-      },
-    })
-  }
-
-  async getServiceStatus() {
-    return getServiceStatusByResource(
-      this.httpClient,
-      Resource.MerchantFulfillment,
-      MERCHANT_FULFILLMENT_API_VERSION,
-    )
-  }
-}
+/**
+ * END GetEligibleShippingServicesParameters
+ */
