@@ -23,12 +23,13 @@ $ npm i -s @scaleleap/amazon-mws-api-sdk
 ## Example
 ---
 
-```TypeScript
+```typescript
 import {
   amazonMarketplaces,
   HttpClient,
   Sellers,
-  Orders
+  Orders,
+  MWS
 } from '@scaleleap/amazon-mws-api-sdk'
 
 const mwsOptions = {
@@ -38,19 +39,23 @@ const mwsOptions = {
   sellerId: '',
   secretKey: '',
 }
-
+// Using sections directly
 const main = async () => {
   const http = new HttpClient(mwsOptions)
-
-  // Get status for Sellers API
+  /**
+   * Get status for Sellers API
+   */
   const sellers = new Sellers(http)
   const [serviceStatus] = await sellers.getServiceStatus()
   if (serviceStatus.Status === 'GREEN') {
     console.log(`Sellers API is up on ${serviceStatus.Timestamp}!`)
   }
 
-  // List Orders
+  /**
+   *  List Orders
+   */
   const orders = new Orders(http)
+  // or
   const [ordersList, requestMeta] = await orders.listOrders({
     MarketplaceId: [amazonMarketplaces.US.id],
     CreatedAfter: new Date(Date.now() - 100 * 24 * 60 * 60 * 1000)
@@ -60,6 +65,32 @@ const main = async () => {
     console.log(`Order ID is ${order.AmazonOrderId}`)
   })
 }
+
+// Using MWS client
+const main = async () => {
+  const http = new HttpClient(mwsOptions)
+  const mws = new MWS(http)
+  /**
+   * Get status for Sellers API
+   */
+  const [serviceStatus] = await mws.sellers.getServiceStatus()
+  if (serviceStatus.Status === 'GREEN') {
+    console.log(`Sellers API is up on ${serviceStatus.Timestamp}!`)
+  }
+
+  /**
+   *  List Orders
+   */
+  const [ordersList, requestMeta] = await mws.orders.listOrders({
+    MarketplaceId: [amazonMarketplaces.US.id],
+    CreatedAfter: new Date(Date.now() - 100 * 24 * 60 * 60 * 1000)
+  })
+
+  ordersList.Orders.forEach((order) => {
+    console.log(`Order ID is ${order.AmazonOrderId}`)
+  })
+}
+
 ```
 ## [More examples in the `/examples` folder!](examples)
 

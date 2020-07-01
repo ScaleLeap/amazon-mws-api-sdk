@@ -8,6 +8,7 @@
   * [Next tokens](#next-tokens)
     * [Creating `NextToken`s](#creating--nexttoken-s)
     * [Reusing next tokens from a previous response](#reusing-next-tokens-from-a-previous-response)
+  * [MWS Class](#mws-class)
 * [Sections](#sections)
   * [Sellers](#sellers)
     * [listMarketplaceParticipations](#listmarketplaceparticipations)
@@ -235,6 +236,32 @@ This is returned along with the API's response
       newRequestMeta,
     ] = await sellers.listMarketplaceParticipationsByNextToken(nextToken)
   }
+```
+
+## MWS Class
+It is also possible to use the `MWS` access the sections and all their actions
+
+**Example**
+```typescript
+// Using MWS client
+const usingMws = async () => {
+  const http = new HttpClient(mwsOptions)
+
+  /**
+   * Configure MWS with the same http client
+   */
+  const mws = new MWS(http)
+
+  const [serviceStatus] = await mws.sellers.getServiceStatus()
+  /**
+   * Also available 
+   * mws.orders, mws.feeds, mws.finances, mws.fulfillmentInventory, 
+   * mws.products, mws.reports, mws.subscriptions
+   */
+  if (serviceStatus.Status === 'GREEN') {
+    console.log(`Sellers API is up on ${serviceStatus.Timestamp}!`)
+  }
+}
 ```
 
 # Sections
