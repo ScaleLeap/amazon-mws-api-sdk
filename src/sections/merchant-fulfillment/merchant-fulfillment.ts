@@ -7,6 +7,7 @@ import { CurrencyAmount } from '../codec'
 import { getServiceStatusByResource } from '../shared'
 import {
   canonicalizeParametersGetEligibleShippingServiceParameters,
+  GetAdditionalSellerInputsParameters,
   GetEligibleShippingServicesParameters,
   PredefinedPackageDimensionsEnum,
 } from './type'
@@ -75,12 +76,6 @@ const GetEligibleShippingServicesResponse = Codec.interface({
     GetEligibleShippingServicesResult: GetEligibleShippingServices,
   }),
 })
-interface GetAdditionalSellerInputsParameters {
-  OrderId: string
-  ShippingServiceId: string
-  ShipFromAddress: string
-  [key: string]: string
-}
 
 enum DataTypeEnum {
   String = 'String',
@@ -148,7 +143,7 @@ const PackageDimensions = Codec.interface({
   Width: optional(number),
   Height: optional(number),
   Unit: optional(DimensionsUnit),
-  PredefinedPackageDimensions,
+  PredefinedPackageDimensions: optional(PredefinedPackageDimensions),
 })
 
 const StoredValue = Codec.interface({

@@ -196,6 +196,119 @@ Array [
 ]
 `;
 
+exports[`merchant-fulfillment getAdditionalSellerInputs should properly match complete response structure from c# 1`] = `
+Array [
+  Object {
+    "ItemLevelFieldsList": Array [
+      Object {
+        "AdditionalInputs": Array [
+          Object {
+            "AdditionalInputFieldName": "String",
+            "SellerInputDefinition": Object {
+              "Constraints": Array [
+                Object {
+                  "ValidationRegEx": "String",
+                  "ValidationString": "String",
+                },
+              ],
+              "DataType": "String",
+              "InputDisplayText": "String",
+              "InputTarget": "String",
+              "IsRequired": true,
+              "RestrictedSetValues": Array [
+                "String",
+              ],
+              "StoredValue": Object {
+                "DataType": "String",
+                "ValueAsAddress": Object {
+                  "AddressLine1": "String",
+                  "AddressLine2": "String",
+                  "AddressLine3": "String",
+                  "City": "String",
+                  "CountryCode": "String",
+                  "DistrictOrCounty": "String",
+                  "Email": "String",
+                  "Name": "String",
+                  "Phone": "String",
+                  "PostalCode": "String",
+                  "StateOrProvinceCode": "String",
+                },
+                "ValueAsBoolean": true,
+                "ValueAsCurrency": Object {
+                  "CurrencyCode": "String",
+                },
+                "ValueAsDimension": Object {},
+                "ValueAsInteger": 1,
+                "ValueAsString": "String",
+                "ValueAsWeight": Object {
+                  "Unit": "String",
+                  "Value": 100,
+                },
+              },
+            },
+          },
+        ],
+        "Asin": "String",
+      },
+    ],
+    "ShipmentLevelFields": Array [
+      Object {
+        "AdditionalInputFieldName": "String",
+        "SellerInputDefinition": Object {
+          "Constraints": Array [
+            Object {
+              "ValidationRegEx": "String",
+              "ValidationString": "String",
+            },
+          ],
+          "DataType": "String",
+          "InputDisplayText": "String",
+          "InputTarget": "String",
+          "IsRequired": true,
+          "RestrictedSetValues": Array [
+            "String",
+          ],
+          "StoredValue": Object {
+            "DataType": "String",
+            "ValueAsAddress": Object {
+              "AddressLine1": "String",
+              "AddressLine2": "String",
+              "AddressLine3": "String",
+              "City": "String",
+              "CountryCode": "String",
+              "DistrictOrCounty": "String",
+              "Email": "String",
+              "Name": "String",
+              "Phone": "String",
+              "PostalCode": "String",
+              "StateOrProvinceCode": "String",
+            },
+            "ValueAsBoolean": true,
+            "ValueAsCurrency": Object {
+              "CurrencyCode": "String",
+            },
+            "ValueAsDimension": Object {},
+            "ValueAsInteger": 1,
+            "ValueAsString": "String",
+            "ValueAsWeight": Object {
+              "Unit": "String",
+              "Value": 100,
+            },
+          },
+        },
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`merchant-fulfillment getEligiblShippingServices returns lists of shipping services if succesful with additional input 1`] = `
 Array [
   Object {

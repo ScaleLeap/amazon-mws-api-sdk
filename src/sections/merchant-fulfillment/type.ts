@@ -236,3 +236,10 @@ export const canonicalizeParametersGetEligibleShippingServiceParameters = (
 /**
  * END GetEligibleShippingServicesParameters
  */
+
+export interface GetAdditionalSellerInputsParameters {
+  OrderId: string
+  ShippingServiceId: string
+  ShipFromAddress: Address
+  [key: string]: string | Address
+}

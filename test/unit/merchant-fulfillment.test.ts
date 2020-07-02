@@ -15,6 +15,26 @@ const mockAddress = {
   CountryCode: '',
   Phone: '',
 }
+function mockFunctions() {
+  /**
+   * Mock everything in purify-ts, restore it back to normal,
+   *  except for `enumeration` which will be stubbed
+   * https://github.com/facebook/jest/issues/936#issuecomment-265074320
+   */
+  const original = jest.requireActual('purify-ts')
+  return {
+    ...original, // Pass down all the exported objects
+    enumeration: () => {
+      return original.Codec.custom({
+        decode: (input: string | number) => {
+          return original.Right(input)
+        },
+        encode: original.identity,
+      })
+    },
+  }
+}
+jest.mock('purify-ts', () => mockFunctions())
 
 describe('merchant-fulfillment', () => {
   describe('getAdditionalSellerInputs', () => {
@@ -24,11 +44,27 @@ describe('merchant-fulfillment', () => {
       ShipFromAddress: mockAddress,
     }
 
+    it('should properly match complete response structure from c#', async () => {
+      expect.assertions(1)
+
+      const mockGetAdditionalSellerInputs = createMockHttpClient(
+        'merchant_fulfillment_get_additional_seller_inputs_from_c_sharp',
+      )
+
+      expect(
+        await mockGetAdditionalSellerInputs.merchantFulfillment.getAddtionalSellerInputs(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+
+      jest.clearAllMocks()
+    })
+
     it('returns shipment level fields and item level fields if succesful', async () => {
       expect.assertions(1)
 
       const mockGetAdditionalSellerInputs = createMockHttpClient(
-        'merchant_get_additional_seller_inputs',
+        'merchant_fulfillment_get_additional_seller_inputs',
       )
 
       expect(
