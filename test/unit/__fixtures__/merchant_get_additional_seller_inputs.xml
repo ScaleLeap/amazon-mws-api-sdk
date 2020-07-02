@@ -12,7 +12,8 @@
           <InputTarget>SHIPMENT_LEVEL</InputTarget>
           <StoredValue>
             <ValueAsString>ABANDON</ValueAsString>
-            <DataType>STRING</DataType>
+            <!-- This was all caps previously. Could that cause a problem? -->
+            <DataType>STRING</DataType> 
             <ValueAsBoolean>false</ValueAsBoolean>
             <ValueAsInteger>0</ValueAsInteger>
           </StoredValue>

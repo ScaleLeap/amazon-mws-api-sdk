@@ -1889,7 +1889,6 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | ValueAsCurrency  	| CurrencyAmount    	| [`CurrencyAmount`](#currencyamount)   	| No       	|
 
 * Possible values for `DataType`:   `'String'`, `'Boolean'`, `'Integer'`, `'Timestamp'`, `'Address'`, `'Weight'`, `'Dimension'`, `'Currency'`,
-* Fill in `ValueAs[DataType]` depending on the value for `DataType`
 
 #### CurrencyAmount
 **Parameters**
