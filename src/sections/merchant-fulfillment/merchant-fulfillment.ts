@@ -2,6 +2,8 @@ import { ParsingError } from '../../error'
 import { HttpClient, RequestMeta, Resource } from '../../http'
 import { getServiceStatusByResource } from '../shared'
 import {
+  CreateShipment,
+  CreateShipmentResponse,
   GetAdditionalSellerInputs,
   GetAdditionalSellerInputsResponse,
   GetEligibleShippingServices,
@@ -17,6 +19,24 @@ const MERCHANT_FULFILLMENT_API_VERSION = '2015-06-01'
 
 export class MerchantFulfillment {
   constructor(private httpClient: HttpClient) {}
+
+  async createShipment(
+    parameters: CreateShipmentParameters,
+  ): Promise<[CreateShipment, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.MerchantFulfillment,
+      version: MERCHANT_FULFILLMENT_API_VERSION,
+      action: 'CreateShipment',
+      parameters,
+    })
+
+    return CreateShipmentResponse.decode(response).caseOf({
+      Right: (x) => [x.CreateShipmentResponse.CreateShipmentResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getAddtionalSellerInputs(
     parameters: GetAdditionalSellerInputsParameters,

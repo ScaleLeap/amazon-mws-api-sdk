@@ -1,4 +1,13 @@
-import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
+import {
+  boolean,
+  Codec,
+  enumeration,
+  GetInterface,
+  number,
+  optional,
+  string,
+  unknown,
+} from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate } from '../../parsing'
 import { CurrencyAmount } from '../codec'
@@ -191,4 +200,40 @@ export const GetAdditionalSellerInputsResponse = Codec.interface({
   GetAdditionalSellerInputsResponse: Codec.interface({
     GetAdditionalSellerInputsResult: GetAdditionalSellerInputs,
   }),
+})
+
+enum StatusEnum {
+  Purchase = 'Purchased',
+  RefundPending = 'RefundPending',
+  RefundRejected = 'RefundRejected',
+  RefundApplied = 'RefundApplied ',
+}
+
+const Status = enumeration(StatusEnum)
+const Item = unknown
+
+export const Shipment = Codec.interface({
+  ShipmentId: string,
+  AmazonOrderId: string,
+  SellerOrderId: optional(string),
+  ItemList: ensureArray('Item', Item),
+  ShipFromAddress: Address,
+  ShipToAddress: Address,
+  PackageDimensions,
+  Weight,
+  Insurance: CurrencyAmount,
+  ShippingService,
+  Label: unknown,
+  Status,
+  TrackingId: optional(string),
+  CreatedDate: mwsDate,
+  LastUpdatedDate: optional(mwsDate),
+})
+
+export const CreateShipment = Codec.interface({
+  Shipment,
+})
+
+export const CreateShipmentResponse = Codec.interface({
+  CreateShipmentResult: CreateShipment,
 })
