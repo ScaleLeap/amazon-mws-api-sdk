@@ -15,6 +15,33 @@ const mockAddress = {
   CountryCode: '',
   Phone: '',
 }
+
+const PackageDimensions = {
+  PredefinePackageDimensions: 'FedEx_Box_10kg',
+}
+
+const Weight: WeightInterface = {
+  Value: 1,
+  Unit: 'ounces',
+}
+
+const ShippingServiceOptions: ShippingServiceOptionsInterface = {
+  DeliveryExperience: 'DeliveryConfirmationWithAdultSignature',
+  CarrierWillPickUp: false,
+}
+
+const mockShipmentRequestDetails = {
+  AmazonOrderId: '',
+  SellerOrderId: '',
+  ItemList: [],
+  ShipFromAddress: mockAddress,
+  PackageDimensions,
+  Weight,
+  MustArriveByDate: new Date(),
+  ShipDate: new Date(),
+  ShippingServiceOptions,
+}
+
 function mockFunctions() {
   /**
    * Mock everything in purify-ts, restore it back to normal,
@@ -83,35 +110,34 @@ describe('merchant-fulfillment', () => {
     })
   })
 
-  describe('getEligiblShippingServices', () => {
-    const PackageDimensions = {
-      PredefinePackageDimensions: 'FedEx_Box_10kg',
+  describe('createShipment', () => {
+    const parameters = {
+      ShipmentRequestDetails: mockShipmentRequestDetails,
+      ShippingServiceId: '',
     }
 
-    const Weight: WeightInterface = {
-      Value: 1,
-      Unit: 'ounces',
-    }
+    it('returns details of the shipment if succesful', async () => {
+      expect.assertions(1)
 
-    const ShippingServiceOptions: ShippingServiceOptionsInterface = {
-      DeliveryExperience: 'DeliveryConfirmationWithAdultSignature',
-      CarrierWillPickUp: false,
-    }
+      const mockCreateShipment = createMockHttpClient('merchant_fulfillment_create_shipment')
 
-    const ShipmentRequestDetails = {
-      AmazonOrderId: '',
-      SellerOrderId: '',
-      ItemList: [],
-      ShipFromAddress: mockAddress,
-      PackageDimensions,
-      Weight,
-      MustArriveByDate: new Date(),
-      ShipDate: new Date(),
-      ShippingServiceOptions,
-    }
+      expect(
+        await mockCreateShipment.merchantFulfillment.createShipment(parameters),
+      ).toMatchSnapshot()
+    })
 
+    it("throws a parsing error when the status response isn't valid", async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.merchantFulfillment.createShipment(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
+  describe('getEligibleShippingServices', () => {
     const parameters: GetEligibleShippingServicesParameters = {
-      ShipmentRequestDetails,
+      ShipmentRequestDetails: mockShipmentRequestDetails,
     }
 
     it('returns lists of shipping services if succesful with test from C# mocks', async () => {
