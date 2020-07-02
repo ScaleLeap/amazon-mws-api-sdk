@@ -1,11 +1,15 @@
 import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate } from '../../parsing'
-import { CurrencyAmount } from '../codec'
 import { PredefinedPackageDimensionsEnum } from './type'
 
 export const TemporarilyUnavailableCarrier = Codec.interface({
   CarrierName: string,
+})
+
+export const CurrencyAmount = Codec.interface({
+  CurrencyCode: string,
+  Amount: number,
 })
 
 export const RejectedShippingService = Codec.interface({
