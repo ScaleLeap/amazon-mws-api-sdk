@@ -7,6 +7,7 @@ Array [
       "AmazonOrderId": "903-1713775-3598252",
       "CreatedDate": 2015-09-23T20:11:12.908Z,
       "Insurance": Object {
+        "Amount": 10,
         "CurrencyCode": "USD",
       },
       "ItemList": Array [
@@ -68,6 +69,7 @@ Array [
         "EarliestEstimatedDeliveryDate": 2015-09-24T10:30:00.000Z,
         "LatestEstimatedDeliveryDate": 2015-09-24T10:30:00.000Z,
         "Rate": Object {
+          "Amount": 27.81,
           "CurrencyCode": "USD",
         },
         "ShipDate": 2015-09-23T20:10:56.829Z,
@@ -78,6 +80,7 @@ Array [
         "ShippingServiceOptions": Object {
           "CarrierWillPickUp": false,
           "DeclaredValue": Object {
+            "Amount": 10,
             "CurrencyCode": "USD",
           },
           "DeliveryExperience": "DELIVERY_CONFIRMATION",
@@ -336,6 +339,7 @@ Array [
                 },
                 "ValueAsBoolean": true,
                 "ValueAsCurrency": Object {
+                  "Amount": 100,
                   "CurrencyCode": "String",
                 },
                 "ValueAsDimension": Object {},
@@ -386,6 +390,7 @@ Array [
             },
             "ValueAsBoolean": true,
             "ValueAsCurrency": Object {
+              "Amount": 100,
               "CurrencyCode": "String",
             },
             "ValueAsDimension": Object {},
@@ -433,6 +438,7 @@ Array [
         "EarliestEstimatedDeliveryDate": 2019-08-27T18:00:00.000Z,
         "LatestEstimatedDeliveryDate": 2019-08-27T18:00:00.000Z,
         "Rate": Object {
+          "Amount": 90,
           "CurrencyCode": "CNY",
         },
         "RequiresAdditionalSellerInputs": true,
@@ -492,6 +498,7 @@ Array [
         "EarliestEstimatedDeliveryDate": 2018-10-17T18:00:00.000Z,
         "LatestEstimatedDeliveryDate": 2018-10-17T18:00:00.000Z,
         "Rate": Object {
+          "Amount": 16.83,
           "CurrencyCode": "USD",
         },
         "RequiresAdditionalSellerInputs": false,
@@ -571,6 +578,7 @@ Array [
         "EarliestEstimatedDeliveryDate": 1969-07-21T02:56:03.000Z,
         "LatestEstimatedDeliveryDate": 1969-07-21T02:56:03.000Z,
         "Rate": Object {
+          "Amount": 100,
           "CurrencyCode": "String",
         },
         "RequiresAdditionalSellerInputs": true,
@@ -581,6 +589,7 @@ Array [
         "ShippingServiceOptions": Object {
           "CarrierWillPickUp": true,
           "DeclaredValue": Object {
+            "Amount": 100,
             "CurrencyCode": "String",
           },
           "DeliveryExperience": "DeliveryConfirmationWithAdultSignature",
