@@ -10,7 +10,9 @@ import {
   GetEligibleShippingServicesResponse,
 } from './codec'
 import {
+  canonicalizeCreateShipmentParameters,
   canonicalizeParametersGetEligibleShippingServiceParameters,
+  CreateShipmentParameters,
   GetAdditionalSellerInputsParameters,
   GetEligibleShippingServicesParameters,
 } from './type'
@@ -27,7 +29,7 @@ export class MerchantFulfillment {
       resource: Resource.MerchantFulfillment,
       version: MERCHANT_FULFILLMENT_API_VERSION,
       action: 'CreateShipment',
-      parameters,
+      parameters: canonicalizeCreateShipmentParameters(parameters),
     })
 
     return CreateShipmentResponse.decode(response).caseOf({

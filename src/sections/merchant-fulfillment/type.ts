@@ -1,7 +1,68 @@
+// @todo define output on canonicalize functions
+
+// @todo unit test both of these
+export const canonicalizeAdditionalSellerInputs = (
+  inputList: AdditionalSellerInputs[] | undefined,
+) => {
+  return inputList?.map((input) => {
+    return {
+      AdditionalInputFieldName: input.AdditionalInputFieldName,
+      AdditionalSellerInput: {
+        ...input.AdditionalSellerInput,
+        ValueAsTimestamp: input.AdditionalSellerInput.ValueAsTimestamp?.toISOString(),
+      },
+    }
+  })
+}
+
+// @todo unit test both of these
+export const canonicalizeShipmentRequestDetails = (
+  shipmentRequestDetails: ShipmentRequestDetails,
+) => {
+  const {
+    AmazonOrderId,
+    SellerOrderId,
+    ShipFromAddress,
+    PackageDimensions,
+    Weight,
+    MustArriveByDate,
+    ShipDate,
+    ShippingServiceOptions,
+    LabelCustomization,
+  } = shipmentRequestDetails
+
+  const itemsList = shipmentRequestDetails?.ItemList.map((item) => {
+    const fixedInputsList = canonicalizeAdditionalSellerInputs(item.ItemLevelSellerInputsList)
+
+    return {
+      ...item,
+      TransparencyCodeList: undefined,
+      'transparencyCodeList.member': item.TransparencyCodeList, // Lower case 't' because that's what' in the C# lib
+      ItemLevelSellerInputsList: undefined,
+      'ItemLevelSellerInputsList.member': fixedInputsList,
+    }
+  })
+
+  return {
+    AmazonOrderId,
+    SellerOrderId,
+    'ItemList.Item': itemsList,
+    ShipFromAddress,
+    PackageDimensions,
+    Weight,
+    MustArriveByDate: MustArriveByDate?.toISOString(),
+    ShipDate: ShipDate?.toISOString(),
+    ShippingServiceOptions,
+    LabelCustomization,
+  }
+}
+
+/**
+ * END common functions
+ */
+
 /**
  * START GetEligibleShippingServicesParameters
- * AS OF July 1 2020, this hasn't been battle tested,
- * but I would like to
  */
 
 export type WeightUnit = 'ounces' | 'grams'
@@ -180,56 +241,16 @@ export interface GetEligibleShippingServicesParameters {
   ShippingOfferingFilter?: ShippingOfferingFilter
 }
 
+// @todo unit test
 export const canonicalizeParametersGetEligibleShippingServiceParameters = (
   parameters: GetEligibleShippingServicesParameters,
 ) => {
   const { ShipmentRequestDetails, ShippingOfferingFilter } = parameters
-  const {
-    AmazonOrderId,
-    SellerOrderId,
-    ShipFromAddress,
-    PackageDimensions,
-    Weight,
-    MustArriveByDate,
-    ShipDate,
-    ShippingServiceOptions,
-    LabelCustomization,
-  } = ShipmentRequestDetails
-  const itemsList = ShipmentRequestDetails?.ItemList.map((item) => {
-    const fixedInputsList = item.ItemLevelSellerInputsList?.map((input) => {
-      return {
-        AdditionalInputFieldName: input.AdditionalInputFieldName,
-        AdditionalSellerInput: {
-          ...input.AdditionalSellerInput,
-          ValueAsTimestamp: input.AdditionalSellerInput.ValueAsTimestamp?.toISOString(),
-        },
-      }
-    })
-
-    return {
-      ...item,
-      TransparencyCodeList: undefined,
-      'transparencyCodeList.member': item.TransparencyCodeList, // Lower case 't' because that's what' in the C# lib
-      ItemLevelSellerInputsList: undefined,
-      'ItemLevelSellerInputsList.member': fixedInputsList,
-    }
-  })
   return {
     ShippingOfferingFilter: {
       IncludeComplexShippingOptions: ShippingOfferingFilter?.IncludeComplexShippingOptions,
     },
-    ShipmentRequestDetails: {
-      AmazonOrderId,
-      SellerOrderId,
-      'ItemList.Item': itemsList,
-      ShipFromAddress,
-      PackageDimensions,
-      Weight,
-      MustArriveByDate: MustArriveByDate?.toISOString(),
-      ShipDate: ShipDate?.toISOString(),
-      ShippingServiceOptions,
-      LabelCustomization,
-    },
+    ShipmentRequestDetails: canonicalizeShipmentRequestDetails(ShipmentRequestDetails),
   }
 }
 
@@ -243,3 +264,48 @@ export interface GetAdditionalSellerInputsParameters {
   ShipFromAddress: Address
   [key: string]: string | Address
 }
+
+/**
+ * START CreateShipmentParameters
+ */
+
+export type HazmatType = 'None' | 'LQHazmat'
+
+export interface LabelFormatOption {
+  IncludePackingSlipWithLabel: boolean
+  [key: string]: boolean
+}
+export interface CreateShipmentParameters {
+  ShipmentRequestDetails: ShipmentRequestDetails
+  ShippingServiceId: string
+  ShippingServiceOfferId?: string
+  HazmatType?: HazmatType
+  LabelFormatOption?: LabelFormatOption
+  ShipmentLevelSellerInputsList?: AdditionalSellerInputs[]
+}
+
+// @todo unit test
+export const canonicalizeCreateShipmentParameters = (parameters: CreateShipmentParameters) => {
+  const {
+    ShipmentRequestDetails,
+    ShippingServiceId,
+    ShippingServiceOfferId,
+    HazmatType,
+    LabelFormatOption,
+    ShipmentLevelSellerInputsList,
+  } = parameters
+  return {
+    ShipmentRequestDetails: canonicalizeShipmentRequestDetails(ShipmentRequestDetails),
+    ShippingServiceId,
+    ShippingServiceOfferId,
+    HazmatType,
+    LabelFormatOption,
+    'ShipmentLevelSellerInputsList.member': canonicalizeAdditionalSellerInputs(
+      ShipmentLevelSellerInputsList,
+    ),
+  }
+}
+
+/**
+ * END CreateShipmentParameters
+ */

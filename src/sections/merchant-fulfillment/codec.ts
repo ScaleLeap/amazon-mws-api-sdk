@@ -1,13 +1,4 @@
-import {
-  boolean,
-  Codec,
-  enumeration,
-  GetInterface,
-  number,
-  optional,
-  string,
-  unknown,
-} from 'purify-ts'
+import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate } from '../../parsing'
 import { CurrencyAmount } from '../codec'
@@ -19,7 +10,7 @@ export const TemporarilyUnavailableCarrier = Codec.interface({
 
 export const RejectedShippingService = Codec.interface({
   CarrierName: string,
-  ShippingServiceId: string,
+  ShippingServiceId: ensureString,
   RejectionReasonCode: string,
   RejectionReasonMessage: string,
   ShippingServiceName: string,
@@ -52,7 +43,7 @@ export const ShippingService = Codec.interface({
   Rate: CurrencyAmount,
   ShippingServiceOptions,
   AvailableLabelFormats: optional(ensureArray('LabelFormat', string)),
-  RequiresAdditionalSellerInputs: boolean,
+  RequiresAdditionalSellerInputs: optional(boolean),
 })
 
 export const GetEligibleShippingServices = Codec.interface({
@@ -118,9 +109,9 @@ export const Address = Codec.interface({
   Email: string,
   City: string,
   StateOrProvinceCode: optional(string),
-  PostalCode: string,
+  PostalCode: ensureString,
   CountryCode: string,
-  Phone: string,
+  Phone: ensureString,
 })
 
 export const Weight = Codec.interface({
@@ -209,12 +200,51 @@ enum StatusEnum {
   RefundApplied = 'RefundApplied ',
 }
 
+const ItemLevelSellerInputsList = Codec.interface({
+  DataType,
+  ValueAsString: optional(string),
+  ValueAsBoolean: optional(boolean),
+  ValueAsInteger: optional(number),
+  ValueAsTimestamp: optional(mwsDate),
+  ValueAsAddress: optional(Address),
+  ValueAsWeight: optional(Weight),
+  ValueAsDimension: optional(PackageDimensions),
+  ValueAsCurrency: optional(CurrencyAmount),
+})
+
 const Status = enumeration(StatusEnum)
-const Item = unknown
+const Item = Codec.interface({
+  OrderItemId: ensureString,
+  Quantity: number,
+  ItemWeight: optional(Weight),
+  ItemDescription: optional(string),
+  transparencyCodeList: optional(ensureArray('member', string)),
+  ItemLevelSellerInputsList: optional(ensureArray('member', ItemLevelSellerInputsList)),
+})
+
+const LabelDimensions = Codec.interface({
+  Length: number,
+  Width: number,
+  Unit: DimensionsUnit,
+})
+
+const FileContents = Codec.interface({
+  Contents: string,
+  FileType: string,
+  Checksum: string,
+})
+
+const Label = Codec.interface({
+  CustomTextForLabel: optional(string),
+  Dimensions: LabelDimensions,
+  FileContents,
+  LabelFormat: optional(string),
+  StandardIdForLabel: optional(string),
+})
 
 export const Shipment = Codec.interface({
-  ShipmentId: string,
-  AmazonOrderId: string,
+  ShipmentId: ensureString,
+  AmazonOrderId: ensureString,
   SellerOrderId: optional(string),
   ItemList: ensureArray('Item', Item),
   ShipFromAddress: Address,
@@ -223,9 +253,9 @@ export const Shipment = Codec.interface({
   Weight,
   Insurance: CurrencyAmount,
   ShippingService,
-  Label: unknown,
+  Label,
   Status,
-  TrackingId: optional(string),
+  TrackingId: optional(ensureString),
   CreatedDate: mwsDate,
   LastUpdatedDate: optional(mwsDate),
 })
@@ -234,6 +264,10 @@ export const CreateShipment = Codec.interface({
   Shipment,
 })
 
+export type CreateShipment = GetInterface<typeof CreateShipment>
+
 export const CreateShipmentResponse = Codec.interface({
-  CreateShipmentResult: CreateShipment,
+  CreateShipmentResponse: Codec.interface({
+    CreateShipmentResult: CreateShipment,
+  }),
 })
