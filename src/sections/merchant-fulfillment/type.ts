@@ -1,10 +1,28 @@
-interface CanonicalizedAddtionalSellerInput
-  extends Omit<AdditionalSellerInput, 'ValueAsTimestamp'> {
+interface CanonicalizedAddtionalSellerInput {
+  ValueAsString?: string
+  ValueAsBoolean?: boolean
+  ValueAsInteger?: number
+  ValueAsAddress?: Address
+  ValueAsWeight?: Weight
+  ValueAsDimension?: PackageDimensions
+  ValueAsCurrency?: CurrencyAmount
   ValueAsTimestamp?: string
+  DataType: SellerInputDataType
+  [key: string]:
+    | string
+    | boolean
+    | number
+    | Address
+    | Weight
+    | PackageDimensions
+    | CurrencyAmount
+    | string
+    | undefined
 }
 interface CanonicalizedSellerInputs {
   AdditionalInputFieldName: string
   AdditionalSellerInput: CanonicalizedAddtionalSellerInput
+  [key: string]: string | CanonicalizedAddtionalSellerInput
 }
 
 export const canonicalizeAdditionalSellerInputs = (
@@ -41,10 +59,42 @@ export const canonicalizeAdditionalSellerInputs = (
   })
 }
 
+interface CanonicalizedItem {
+  OrderItemId: string
+  Quantity: number
+  ItemWeight?: Weight
+  ItemDescription?: string
+  TransparencyCodeList?: string[]
+  ItemLevelSellerInputsList?: CanonicalizedSellerInputs[]
+  [key: string]: string | number | Weight | string[] | CanonicalizedSellerInputs[] | undefined
+}
+
+interface CanonicalizedShipmentRequestDetails {
+  AmazonOrderId: string
+  SellerOrderId?: string
+  'ItemList.Item': CanonicalizedItem[]
+  ShipFromAddress: Address
+  PackageDimensions: PackageDimensions
+  Weight: Weight
+  MustArriveByDate?: string
+  ShipDate?: string
+  ShippingServiceOptions: ShippingServiceOptions
+  LabelCustomization?: LabelCustomization
+  [key: string]:
+    | string
+    | CanonicalizedItem[]
+    | Address
+    | PackageDimensions
+    | Weight
+    | ShippingServiceOptions
+    | LabelCustomization
+    | undefined
+}
+
 // @todo unit test both of these
 export const canonicalizeShipmentRequestDetails = (
   shipmentRequestDetails: ShipmentRequestDetails,
-) => {
+): CanonicalizedShipmentRequestDetails => {
   const {
     AmazonOrderId,
     SellerOrderId,
@@ -221,7 +271,6 @@ export interface Item {
   ItemDescription?: string
   TransparencyCodeList?: string[]
   ItemLevelSellerInputsList?: AdditionalSellerInputs[]
-  [key: string]: string | Weight | AdditionalSellerInputs[] | number | undefined | string[]
 }
 
 export type DeliveryExperience =
@@ -307,8 +356,25 @@ export interface CreateShipmentParameters {
   ShipmentLevelSellerInputsList?: AdditionalSellerInputs[]
 }
 
-// @todo unit test
-export const canonicalizeCreateShipmentParameters = (parameters: CreateShipmentParameters) => {
+interface CanonicalizedCreateShipmentParameters {
+  ShipmentRequestDetails: CanonicalizedShipmentRequestDetails
+  ShippingServiceId: string
+  ShippingServiceOfferId?: string
+  HazmatType?: HazmatType
+  LabelFormatOption?: LabelFormatOption
+  'ShipmentLevelSellerInputsList.member'?: CanonicalizedSellerInputs[]
+  [key: string]:
+    | CanonicalizedShipmentRequestDetails
+    | string
+    | HazmatType
+    | LabelFormatOption
+    | CanonicalizedSellerInputs[]
+    | undefined
+}
+
+export const canonicalizeCreateShipmentParameters = (
+  parameters: CreateShipmentParameters,
+): CanonicalizedCreateShipmentParameters => {
   const {
     ShipmentRequestDetails,
     ShippingServiceId,

@@ -61,10 +61,9 @@ export type HttpMethod = 'GET' | 'POST'
 export type ParameterTypes =
   | string
   | number
-  | (number | string)[]
+  | (number | string | object)[]
   | boolean
   | { [key: string]: ParameterTypes }
-  | { [key: string]: ParameterTypes }[]
   | undefined
 
 export type Parameters = Record<string, ParameterTypes>
@@ -205,7 +204,7 @@ export const cleanParameters = (
     .filter(([, parameter]) => parameter !== undefined)
 
     // Loop through each key
-    .reduce((result, [key, parameter]) => {
+    .reduce((_, [key, parameter]) => {
       const trueKey = outerKey ? `${outerKey}.${key}` : key
       /**
        * If parameter is type string, number, boolean assign it to result
@@ -220,7 +219,7 @@ export const cleanParameters = (
         /**
          * If parameter is type array reduce it to dotnotation
          */
-        parameter.forEach((parameterChild: ParameterTypes, index: number) => {
+        parameter.forEach((parameterChild: object | string | number | boolean, index: number) => {
           if (
             typeof parameterChild === 'string' ||
             !Number.isNaN(Number(parameterChild)) ||
