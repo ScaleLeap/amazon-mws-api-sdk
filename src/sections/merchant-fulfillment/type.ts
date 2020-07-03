@@ -1,15 +1,44 @@
-// @todo define output on canonicalize functions
+interface CanonicalizedSellerInputs {
+  AdditionalInputFieldName: string
+  AdditionalSellerInput: {
+    ValueAsString?: string
+    ValueAsBoolean?: boolean
+    ValueAsInteger?: number
+    ValueAsAddress?: Address
+    ValueAsWeight?: Weight
+    ValueAsTimestamp?: string
+    ValueAsDimension?: PackageDimensions
+    ValueAsCurrency?: CurrencyAmount
+  }
+}
 
-// @todo unit test both of these
 export const canonicalizeAdditionalSellerInputs = (
   inputList: AdditionalSellerInputs[] | undefined,
-) => {
+): CanonicalizedSellerInputs[] | undefined => {
   return inputList?.map((input) => {
+    const { AdditionalInputFieldName, AdditionalSellerInput } = input
+    const {
+      ValueAsString,
+      ValueAsBoolean,
+      ValueAsInteger,
+      ValueAsAddress,
+      ValueAsWeight,
+      ValueAsTimestamp,
+      ValueAsDimension,
+      ValueAsCurrency,
+    } = AdditionalSellerInput
+
     return {
-      AdditionalInputFieldName: input.AdditionalInputFieldName,
+      AdditionalInputFieldName,
       AdditionalSellerInput: {
-        ...input.AdditionalSellerInput,
-        ValueAsTimestamp: input.AdditionalSellerInput.ValueAsTimestamp?.toISOString(),
+        ValueAsString,
+        ValueAsBoolean,
+        ValueAsInteger,
+        ValueAsAddress,
+        ValueAsWeight,
+        ValueAsDimension,
+        ValueAsCurrency,
+        ValueAsTimestamp: ValueAsTimestamp?.toISOString(),
       },
     }
   })
@@ -35,10 +64,11 @@ export const canonicalizeShipmentRequestDetails = (
     const fixedInputsList = canonicalizeAdditionalSellerInputs(item.ItemLevelSellerInputsList)
 
     return {
-      ...item,
-      TransparencyCodeList: undefined,
+      OrderItemId: item.OrderItemId,
+      Quantity: item.Quantity,
+      ItemWeight: item.ItemWeight,
+      ItemDescription: item.ItemDescription,
       'transparencyCodeList.member': item.TransparencyCodeList, // Lower case 't' because that's what' in the C# lib
-      ItemLevelSellerInputsList: undefined,
       'ItemLevelSellerInputsList.member': fixedInputsList,
     }
   })
