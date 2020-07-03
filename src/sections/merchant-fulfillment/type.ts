@@ -211,12 +211,6 @@ export interface AdditionalSellerInput {
   ValueAsCurrency?: CurrencyAmount
   [key: string]: undefined | string | boolean | number | object
 }
-
-/**
- * Needs clarification
- * @todo
- * http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_Datatypes.html#ItemLevelSellerInputs
- */
 interface AdditionalSellerInputs {
   AdditionalInputFieldName: string
   AdditionalSellerInput: AdditionalSellerInput

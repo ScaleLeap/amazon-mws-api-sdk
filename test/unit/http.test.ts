@@ -8,6 +8,12 @@ import {
   MWSError,
 } from '../../src'
 import { cleanParameters, Resource } from '../../src/http'
+import {
+  canonicalizeParametersGetEligibleShippingServiceParameters,
+  GetEligibleShippingServicesParameters,
+  SellerInputDataType,
+  Weight,
+} from '../../src/sections/merchant-fulfillment/type'
 import { getFixture } from '../utils'
 
 const httpClientThatThrows = (error: unknown) =>
@@ -239,6 +245,192 @@ describe('httpClient', () => {
       }
 
       expect(cleanParameters(parameters)).toStrictEqual(results)
+    })
+
+    it('should properly clean canonicalized parameters from merchant-fulfillment', () => {
+      expect.assertions(1)
+
+      const weight: Weight = {
+        Value: 1,
+        Unit: 'grams',
+      }
+      const testDate = 'Jul 03 2020 15:28:55 UTC+00:00'
+      const expectedDate = '2020-07-03T15:28:55.000Z'
+
+      const item = {
+        OrderItemId: '1',
+        Quantity: 1,
+        ItemWeight: weight,
+        ItemDescription: 'a',
+        TransparencyCodeList: ['A', 'B'],
+        ItemLevelSellerInputsList: [
+          {
+            AdditionalInputFieldName: 'FieldName',
+            AdditionalSellerInput: {
+              DataType: 'Timestamp' as SellerInputDataType,
+              ValueAsTimestamp: new Date(testDate),
+            },
+          },
+          {
+            AdditionalInputFieldName: 'FieldName',
+            AdditionalSellerInput: {
+              DataType: 'Boolean' as SellerInputDataType,
+              ValueAsBoolean: true,
+            },
+          },
+        ],
+      }
+
+      const items = [...new Array(4)].map((_, index) => {
+        return {
+          ...item,
+          OrderItemId: `ITEM${index + 1}`,
+          ItemDescription: `This is item #${index + 1}`,
+        }
+      })
+
+      /**
+       * This uses all possible values in the request parameter, even the optional parameters
+       */
+      const parameters: GetEligibleShippingServicesParameters = {
+        ShippingOfferingFilter: {
+          IncludeComplexShippingOptions: true,
+        },
+        ShipmentRequestDetails: {
+          AmazonOrderId: 'A',
+          SellerOrderId: 'B',
+          ItemList: items,
+          ShipFromAddress: {
+            Name: 'string',
+            AddressLine1: 'string',
+            AddressLine2: 'string',
+            AddressLine3: 'string',
+            DistrictOrCounty: 'string',
+            Email: 'string',
+            City: 'string',
+            StateOrProvinceCode: 'string',
+            PostalCode: 'string',
+            CountryCode: 'string',
+            Phone: 'string',
+          },
+          PackageDimensions: {
+            PredefinedPackageDimensions: 'FedEx_Box_10kg',
+          },
+          Weight: weight,
+          MustArriveByDate: new Date(testDate),
+          ShipDate: new Date(testDate),
+          ShippingServiceOptions: {
+            DeliveryExperience: 'DeliveryConfirmationWithAdultSignature',
+            DeclaredValue: {
+              CurrencyCode: 'USD',
+              Amount: 1,
+            },
+            CarrierWillPickUp: true,
+            LabelFormat: 'A',
+          },
+          LabelCustomization: {
+            CustomTextForLabel: 'B',
+            StandardIdForLabel: 'C',
+          },
+        },
+      }
+      const canonicalized = canonicalizeParametersGetEligibleShippingServiceParameters(parameters)
+      const output = {
+        'ShippingOfferingFilter.IncludeComplexShippingOptions': 'true',
+        'ShipmentRequestDetails.AmazonOrderId': 'A',
+        'ShipmentRequestDetails.SellerOrderId': 'B',
+        'ShipmentRequestDetails.ItemList.Item.1.OrderItemId': 'ITEM1',
+        'ShipmentRequestDetails.ItemList.Item.1.Quantity': '1',
+        'ShipmentRequestDetails.ItemList.Item.1.ItemWeight.Value': '1',
+        'ShipmentRequestDetails.ItemList.Item.1.ItemWeight.Unit': 'grams',
+        'ShipmentRequestDetails.ItemList.Item.1.ItemDescription': 'This is item #1',
+        'ShipmentRequestDetails.ItemList.Item.1.transparencyCodeList.member.1': 'A',
+        'ShipmentRequestDetails.ItemList.Item.1.transparencyCodeList.member.2': 'B',
+        'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.1.AdditionalInputFieldName':
+          'FieldName',
+
+        'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.ValueAsTimestamp': expectedDate,
+        'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.2.AdditionalInputFieldName':
+          'FieldName',
+
+        'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean': true,
+
+        'ShipmentRequestDetails.ItemList.Item.2.OrderItemId': 'ITEM2',
+        'ShipmentRequestDetails.ItemList.Item.2.Quantity': '1',
+        'ShipmentRequestDetails.ItemList.Item.2.ItemWeight.Value': '1',
+        'ShipmentRequestDetails.ItemList.Item.2.ItemWeight.Unit': 'grams',
+        'ShipmentRequestDetails.ItemList.Item.2.ItemDescription': 'This is item #2',
+        'ShipmentRequestDetails.ItemList.Item.2.transparencyCodeList.member.1': 'A',
+        'ShipmentRequestDetails.ItemList.Item.2.transparencyCodeList.member.2': 'B',
+        'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.1.AdditionalInputFieldName':
+          'FieldName',
+
+        'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.ValueAsTimestamp': expectedDate,
+        'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.2.AdditionalInputFieldName':
+          'FieldName',
+
+        'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean': true,
+
+        'ShipmentRequestDetails.ItemList.Item.3.OrderItemId': 'ITEM3',
+        'ShipmentRequestDetails.ItemList.Item.3.Quantity': '1',
+        'ShipmentRequestDetails.ItemList.Item.3.ItemWeight.Value': '1',
+        'ShipmentRequestDetails.ItemList.Item.3.ItemWeight.Unit': 'grams',
+        'ShipmentRequestDetails.ItemList.Item.3.ItemDescription': 'This is item #3',
+        'ShipmentRequestDetails.ItemList.Item.3.transparencyCodeList.member.1': 'A',
+        'ShipmentRequestDetails.ItemList.Item.3.transparencyCodeList.member.2': 'B',
+        'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.1.AdditionalInputFieldName':
+          'FieldName',
+
+        'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.ValueAsTimestamp': expectedDate,
+        'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.2.AdditionalInputFieldName':
+          'FieldName',
+
+        'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean': true,
+
+        'ShipmentRequestDetails.ItemList.Item.4.OrderItemId': 'ITEM4',
+        'ShipmentRequestDetails.ItemList.Item.4.Quantity': '1',
+        'ShipmentRequestDetails.ItemList.Item.4.ItemWeight.Value': '1',
+        'ShipmentRequestDetails.ItemList.Item.4.ItemWeight.Unit': 'grams',
+        'ShipmentRequestDetails.ItemList.Item.4.ItemDescription': 'This is item #4',
+        'ShipmentRequestDetails.ItemList.Item.4.transparencyCodeList.member.1': 'A',
+        'ShipmentRequestDetails.ItemList.Item.4.transparencyCodeList.member.2': 'B',
+        'ShipmentRequestDetails.ItemList.Item.4.ItemLevelSellerInputsList.member.1.AdditionalInputFieldName':
+          'FieldName',
+
+        'ShipmentRequestDetails.ItemList.Item.4.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.ValueAsTimestamp': expectedDate,
+        'ShipmentRequestDetails.ItemList.Item.4.ItemLevelSellerInputsList.member.2.AdditionalInputFieldName':
+          'FieldName',
+
+        'ShipmentRequestDetails.ItemList.Item.4.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean': true,
+
+        'ShipmentRequestDetails.ShipFromAddress.Name': 'string',
+        'ShipmentRequestDetails.ShipFromAddress.AddressLine1': 'string',
+        'ShipmentRequestDetails.ShipFromAddress.AddressLine2': 'string',
+        'ShipmentRequestDetails.ShipFromAddress.AddressLine3': 'string',
+        'ShipmentRequestDetails.ShipFromAddress.DistrictOrCounty': 'string',
+        'ShipmentRequestDetails.ShipFromAddress.Email': 'string',
+        'ShipmentRequestDetails.ShipFromAddress.City': 'string',
+        'ShipmentRequestDetails.ShipFromAddress.StateOrProvinceCode': 'string',
+        'ShipmentRequestDetails.ShipFromAddress.PostalCode': 'string',
+        'ShipmentRequestDetails.ShipFromAddress.CountryCode': 'string',
+        'ShipmentRequestDetails.ShipFromAddress.Phone': 'string',
+        'ShipmentRequestDetails.PackageDimensions.PredefinedPackageDimensions': 'FedEx_Box_10kg',
+        'ShipmentRequestDetails.Weight.Value': '1',
+        'ShipmentRequestDetails.Weight.Unit': 'grams',
+        'ShipmentRequestDetails.MustArriveByDate': expectedDate,
+        'ShipmentRequestDetails.ShipDate': expectedDate,
+        'ShipmentRequestDetails.ShippingServiceOptions.DeliveryExperience':
+          'DeliveryConfirmationWithAdultSignature',
+        'ShipmentRequestDetails.ShippingServiceOptions.DeclaredValue.CurrencyCode': 'USD',
+        'ShipmentRequestDetails.ShippingServiceOptions.DeclaredValue.Amount': '1',
+        'ShipmentRequestDetails.ShippingServiceOptions.CarrierWillPickUp': 'true',
+        'ShipmentRequestDetails.ShippingServiceOptions.LabelFormat': 'A',
+        'ShipmentRequestDetails.LabelCustomization.CustomTextForLabel': 'B',
+        'ShipmentRequestDetails.LabelCustomization.StandardIdForLabel': 'C',
+      }
+      const cleaned = cleanParameters(canonicalized)
+
+      expect(cleaned).toStrictEqual(output)
     })
   })
 })
