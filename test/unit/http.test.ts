@@ -7,10 +7,11 @@ import {
   InvalidUPCIdentifier,
   MWSError,
 } from '../../src'
-import { cleanParameters, Resource } from '../../src/http'
+import { cleanParameters, Parameters, Resource } from '../../src/http'
 import {
   canonicalizeParametersGetEligibleShippingServiceParameters,
   GetEligibleShippingServicesParameters,
+  Item,
   SellerInputDataType,
   Weight,
 } from '../../src/sections/merchant-fulfillment/type'
@@ -281,7 +282,7 @@ describe('httpClient', () => {
         ],
       }
 
-      const items = [...new Array(4)].map((_, index) => {
+      const items: Item[] = [...new Array(4)].map((_, index) => {
         return {
           ...item,
           OrderItemId: `ITEM${index + 1}`,
@@ -348,12 +349,16 @@ describe('httpClient', () => {
         'ShipmentRequestDetails.ItemList.Item.1.transparencyCodeList.member.2': 'B',
         'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.1.AdditionalInputFieldName':
           'FieldName',
-
+        'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.DataType':
+          'Timestamp',
         'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.ValueAsTimestamp': expectedDate,
         'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.2.AdditionalInputFieldName':
           'FieldName',
+        'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.DataType':
+          'Boolean',
 
-        'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean': true,
+        'ShipmentRequestDetails.ItemList.Item.1.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean':
+          'true',
 
         'ShipmentRequestDetails.ItemList.Item.2.OrderItemId': 'ITEM2',
         'ShipmentRequestDetails.ItemList.Item.2.Quantity': '1',
@@ -364,12 +369,16 @@ describe('httpClient', () => {
         'ShipmentRequestDetails.ItemList.Item.2.transparencyCodeList.member.2': 'B',
         'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.1.AdditionalInputFieldName':
           'FieldName',
-
+        'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.DataType':
+          'Timestamp',
         'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.ValueAsTimestamp': expectedDate,
         'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.2.AdditionalInputFieldName':
           'FieldName',
+        'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.DataType':
+          'Boolean',
 
-        'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean': true,
+        'ShipmentRequestDetails.ItemList.Item.2.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean':
+          'true',
 
         'ShipmentRequestDetails.ItemList.Item.3.OrderItemId': 'ITEM3',
         'ShipmentRequestDetails.ItemList.Item.3.Quantity': '1',
@@ -380,13 +389,17 @@ describe('httpClient', () => {
         'ShipmentRequestDetails.ItemList.Item.3.transparencyCodeList.member.2': 'B',
         'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.1.AdditionalInputFieldName':
           'FieldName',
+        'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.DataType':
+          'Timestamp',
 
         'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.ValueAsTimestamp': expectedDate,
         'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.2.AdditionalInputFieldName':
           'FieldName',
+        'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.DataType':
+          'Boolean',
 
-        'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean': true,
-
+        'ShipmentRequestDetails.ItemList.Item.3.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean':
+          'true',
         'ShipmentRequestDetails.ItemList.Item.4.OrderItemId': 'ITEM4',
         'ShipmentRequestDetails.ItemList.Item.4.Quantity': '1',
         'ShipmentRequestDetails.ItemList.Item.4.ItemWeight.Value': '1',
@@ -398,11 +411,15 @@ describe('httpClient', () => {
           'FieldName',
 
         'ShipmentRequestDetails.ItemList.Item.4.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.ValueAsTimestamp': expectedDate,
+        'ShipmentRequestDetails.ItemList.Item.4.ItemLevelSellerInputsList.member.1.AdditionalSellerInput.DataType':
+          'Timestamp',
         'ShipmentRequestDetails.ItemList.Item.4.ItemLevelSellerInputsList.member.2.AdditionalInputFieldName':
           'FieldName',
 
-        'ShipmentRequestDetails.ItemList.Item.4.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean': true,
-
+        'ShipmentRequestDetails.ItemList.Item.4.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.ValueAsBoolean':
+          'true',
+        'ShipmentRequestDetails.ItemList.Item.4.ItemLevelSellerInputsList.member.2.AdditionalSellerInput.DataType':
+          'Boolean',
         'ShipmentRequestDetails.ShipFromAddress.Name': 'string',
         'ShipmentRequestDetails.ShipFromAddress.AddressLine1': 'string',
         'ShipmentRequestDetails.ShipFromAddress.AddressLine2': 'string',
@@ -428,7 +445,8 @@ describe('httpClient', () => {
         'ShipmentRequestDetails.LabelCustomization.CustomTextForLabel': 'B',
         'ShipmentRequestDetails.LabelCustomization.StandardIdForLabel': 'C',
       }
-      const cleaned = cleanParameters(canonicalized)
+
+      const cleaned = cleanParameters(canonicalized as Parameters)
 
       expect(cleaned).toStrictEqual(output)
     })

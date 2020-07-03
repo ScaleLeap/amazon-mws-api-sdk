@@ -62,9 +62,9 @@ export type ParameterTypes =
   | string
   | number
   | (number | string)[]
-  | object[]
   | boolean
   | { [key: string]: ParameterTypes }
+  | { [key: string]: ParameterTypes }[]
   | undefined
 
 export type Parameters = Record<string, ParameterTypes>
@@ -194,55 +194,51 @@ const canonicalizeParameters = (parameters: CleanParameters): string => {
   return sp.toString().replace(/\+/g, '%20')
 }
 
-export const toDotNotation = (object: object, prefix: string) => {
-  const result: { [key: string]: string | number | boolean } = {}
-  function dotify(plainObject: object, currentKey?: string | number) {
-    Object.entries(plainObject).forEach(([key, value]) => {
-      const newKey = currentKey ? `${currentKey}.${key}` : key // joined key with dot
-      if (value && typeof value === 'object') {
-        dotify(value, newKey) // it's a nested object, so do it again
-      } else {
-        Object.assign(result, { [`${prefix}.${newKey}`]: value }) // it's not an object, so set the property
-      }
-    })
-  }
-
-  dotify(object)
-  return result
-}
-
-export const cleanParameters = (parameters: Parameters): CleanParameters =>
+export const cleanParameters = (
+  parameters: Parameters,
+  baseObject: Record<string, string> = {},
+  outerKey?: string,
+): CleanParameters =>
   Object.entries(parameters)
+
+    // Filter undefined
     .filter(([, parameter]) => parameter !== undefined)
+
+    // Loop through each key
     .reduce((result, [key, parameter]) => {
-      if (typeof parameter === 'string' || !Number.isNaN(Number(parameter))) {
-        /**
-         * If parameter is type string or number, assign it to result
-         */
-        Object.assign(result, { [key]: String(parameter) })
+      const trueKey = outerKey ? `${outerKey}.${key}` : key
+      /**
+       * If parameter is type string, number, boolean assign it to result
+       */
+      if (
+        typeof parameter === 'string' ||
+        !Number.isNaN(Number(parameter)) ||
+        typeof parameter === 'boolean'
+      ) {
+        Object.assign(baseObject, { [trueKey]: String(parameter) })
       } else if (Array.isArray(parameter)) {
         /**
          * If parameter is type array reduce it to dotnotation
          */
-        parameter.forEach((parameterChild: string | number | object, index: number) => {
-          if (typeof parameterChild === 'string' || !Number.isNaN(Number(parameterChild))) {
-            Object.assign(result, { [`${key}.${index + 1}`]: String(parameterChild) })
+        parameter.forEach((parameterChild: ParameterTypes, index: number) => {
+          if (
+            typeof parameterChild === 'string' ||
+            !Number.isNaN(Number(parameterChild)) ||
+            typeof parameter === 'boolean'
+          ) {
+            Object.assign(baseObject, { [`${trueKey}.${index + 1}`]: String(parameterChild) })
           } else {
-            Object.assign(result, toDotNotation(parameterChild as object, `${key}.${index + 1}`))
+            cleanParameters(parameterChild as Parameters, baseObject, `${trueKey}.${index + 1}`)
           }
         })
       } else {
         /**
          * If parameter is type object parameterize it
          */
-        Object.entries(
-          cleanParameters(parameter as Parameters),
-        ).forEach(([innerKey, innerValue]: [string, string]) =>
-          Object.assign(result, { [`${key}.${innerKey}`]: innerValue }),
-        )
+        cleanParameters(parameter as Parameters, baseObject, `${trueKey}`)
       }
 
-      return result
+      return baseObject
     }, {} as CleanParameters)
 
 const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestResponse> =>

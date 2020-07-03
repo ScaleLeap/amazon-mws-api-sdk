@@ -1,15 +1,10 @@
+interface CanonicalizedAddtionalSellerInput
+  extends Omit<AdditionalSellerInput, 'ValueAsTimestamp'> {
+  ValueAsTimestamp?: string
+}
 interface CanonicalizedSellerInputs {
   AdditionalInputFieldName: string
-  AdditionalSellerInput: {
-    ValueAsString?: string
-    ValueAsBoolean?: boolean
-    ValueAsInteger?: number
-    ValueAsAddress?: Address
-    ValueAsWeight?: Weight
-    ValueAsTimestamp?: string
-    ValueAsDimension?: PackageDimensions
-    ValueAsCurrency?: CurrencyAmount
-  }
+  AdditionalSellerInput: CanonicalizedAddtionalSellerInput
 }
 
 export const canonicalizeAdditionalSellerInputs = (
@@ -26,11 +21,13 @@ export const canonicalizeAdditionalSellerInputs = (
       ValueAsTimestamp,
       ValueAsDimension,
       ValueAsCurrency,
+      DataType,
     } = AdditionalSellerInput
 
     return {
       AdditionalInputFieldName,
       AdditionalSellerInput: {
+        DataType,
         ValueAsString,
         ValueAsBoolean,
         ValueAsInteger,
@@ -214,6 +211,7 @@ export interface AdditionalSellerInput {
 interface AdditionalSellerInputs {
   AdditionalInputFieldName: string
   AdditionalSellerInput: AdditionalSellerInput
+  [key: string]: string | AdditionalSellerInput
 }
 
 export interface Item {
@@ -222,7 +220,8 @@ export interface Item {
   ItemWeight?: Weight
   ItemDescription?: string
   TransparencyCodeList?: string[]
-  ItemLevelSellerInputsList?: AdditionalSellerInputs[] // Need to do more research on this
+  ItemLevelSellerInputsList?: AdditionalSellerInputs[]
+  [key: string]: string | Weight | AdditionalSellerInputs[] | number | undefined | string[]
 }
 
 export type DeliveryExperience =
