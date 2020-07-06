@@ -1,5 +1,100 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`merchant-fulfillment cancelShipment should return shipment info if succesful 1`] = `
+Array [
+  Object {
+    "Shipment": Object {
+      "AmazonOrderId": "903-1713775-3598252",
+      "CreatedDate": 2015-09-23T20:11:12.908Z,
+      "Insurance": Object {
+        "Amount": 10,
+        "CurrencyCode": "USD",
+      },
+      "ItemList": Array [
+        Object {
+          "OrderItemId": "40525960574974",
+          "Quantity": 1,
+        },
+      ],
+      "Label": Object {
+        "Dimensions": Object {
+          "Length": 11,
+          "Unit": "inches",
+          "Width": 8.5,
+        },
+        "FileContents": Object {
+          "Checksum": "DmsWbJpdMPALN3jV4wHOrg==",
+          "Contents": "H4sIAAAAAAAAAK16WbeqyrLmO2Pc/zBVRLG...
+...kI0Ycv76w378UfL6O6ev7UsAwmkWBfL6nycD/Bd+Zx3S8LwAA",
+          "FileType": "application/pdf",
+        },
+      },
+      "PackageDimensions": Object {
+        "Height": 5,
+        "Length": 5,
+        "Unit": "inches",
+        "Width": 5,
+      },
+      "ShipFromAddress": Object {
+        "AddressLine1": "1234 Westlake Ave",
+        "City": "Seattle",
+        "CountryCode": "US",
+        "Email": "",
+        "Name": "John Doe",
+        "Phone": "2061234567",
+        "PostalCode": "98121",
+        "StateOrProvinceCode": "WA",
+      },
+      "ShipToAddress": Object {
+        "AddressLine1": "321 Main St",
+        "City": "Seattle",
+        "CountryCode": "US",
+        "Email": "",
+        "Name": "Jane Smith",
+        "Phone": "",
+        "PostalCode": "98121-2778",
+        "StateOrProvinceCode": "WA",
+      },
+      "ShipmentId": "6f77095e-9f75-47eb-aaab-a42d5428fa1a",
+      "ShippingService": Object {
+        "CarrierName": "FEDEX",
+        "EarliestEstimatedDeliveryDate": 2015-09-24T10:30:00.000Z,
+        "LatestEstimatedDeliveryDate": 2015-09-24T10:30:00.000Z,
+        "Rate": Object {
+          "Amount": 27.81,
+          "CurrencyCode": "USD",
+        },
+        "ShipDate": 2015-09-23T20:10:56.829Z,
+        "ShippingServiceId": "FEDEX_PTP_PRIORITY_OVERNIGHT",
+        "ShippingServiceName": "FedEx Priority OvernightÂ®",
+        "ShippingServiceOfferId": "HDDUKqtQVFetpBZAqx5c1yaCZ9vuFfND0kudyw3lLWCa 3mN2+zUOsRCAZS2oYt0ey6fXKdOAucmYVXR9LAkU9O9eys9V3FJCgvQ+vAqm4bSAzHVH04vD8oLy oUPKqxa8Otbek97Z85LFUSsfcUf8frNRMEfNLP8t5RyLXa4ZOjc=",
+        "ShippingServiceOptions": Object {
+          "CarrierWillPickUp": false,
+          "DeclaredValue": Object {
+            "Amount": 10,
+            "CurrencyCode": "USD",
+          },
+          "DeliveryExperience": "DELIVERY_CONFIRMATION",
+        },
+      },
+      "Status": "Purchased",
+      "TrackingId": "794657111237",
+      "Weight": Object {
+        "Unit": "oz",
+        "Value": 10,
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`merchant-fulfillment createShipment returns details of the shipment if succesful 1`] = `
 Array [
   Object {
