@@ -25,6 +25,8 @@ enum DeliveryExperienceEnum {
   DeliveryConfirmationWithSignature = 'DeliveryConfirmationWithSignature',
   DeliveryConfirmationWithoutSignature = 'DeliveryConfirmationWithoutSignature',
   NoTracking = 'NoTracking',
+  // Adding this in because it has been in two mock requests from Amazon, but is not in the docs
+  DELIVERY_CONFIRMATION = 'DELIVERY_CONFIRMATION',
 }
 
 export const DeliveryExperience = enumeration(DeliveryExperienceEnum)
@@ -273,5 +275,17 @@ export type CreateShipment = GetInterface<typeof CreateShipment>
 export const CreateShipmentResponse = Codec.interface({
   CreateShipmentResponse: Codec.interface({
     CreateShipmentResult: CreateShipment,
+  }),
+})
+
+const GetShipment = Codec.interface({
+  Shipment,
+})
+
+export type GetShipment = GetInterface<typeof GetShipment>
+
+export const GetShipmentResponse = Codec.interface({
+  GetShipmentResponse: Codec.interface({
+    GetShipmentResult: GetShipment,
   }),
 })

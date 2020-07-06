@@ -8,6 +8,8 @@ import {
   GetAdditionalSellerInputsResponse,
   GetEligibleShippingServices,
   GetEligibleShippingServicesResponse,
+  GetShipment,
+  GetShipmentResponse,
 } from './codec'
 import {
   canonicalizeCreateShipmentParameters,
@@ -15,12 +17,31 @@ import {
   CreateShipmentParameters,
   GetAdditionalSellerInputsParameters,
   GetEligibleShippingServicesParameters,
+  GetShipmentParameters,
 } from './type'
 
 const MERCHANT_FULFILLMENT_API_VERSION = '2015-06-01'
 
 export class MerchantFulfillment {
   constructor(private httpClient: HttpClient) {}
+
+  async getShipment(parameters: GetShipmentParameters): Promise<[GetShipment, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.MerchantFulfillment,
+      version: MERCHANT_FULFILLMENT_API_VERSION,
+      action: 'GetShipment',
+      parameters: {
+        ShipmentId: parameters.ShipmentId,
+      },
+    })
+
+    return GetShipmentResponse.decode(response).caseOf({
+      Right: (x) => [x.GetShipmentResponse.GetShipmentResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async createShipment(
     parameters: CreateShipmentParameters,

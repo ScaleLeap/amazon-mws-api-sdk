@@ -44,9 +44,9 @@
             <CurrencyCode>USD</CurrencyCode>
             <Amount>10.00</Amount>
           </DeclaredValue>
-          <DeliveryExperience>DELIVERY_CONFIRMATION </DeliveryExperience>
+          <DeliveryExperience>DELIVERY_CONFIRMATION</DeliveryExperience>
         </ShippingServiceOptions>
-        <ShippingServiceId>FEDEX_PTP_PRIORITY_OVERNIGHT </ShippingServiceId>
+        <ShippingServiceId>FEDEX_PTP_PRIORITY_OVERNIGHT</ShippingServiceId>
         <Rate>
           <CurrencyCode>USD</CurrencyCode>
           <Amount>27.81</Amount>
@@ -66,6 +66,7 @@
       </PackageDimensions>
       <CreatedDate>2015-09-23T20:11:12.908Z</CreatedDate>
       <ShipFromAddress>
+        <Email/>
         <City>Seattle</City>
         <Phone>2061234567</Phone>
         <CountryCode>US</CountryCode>
