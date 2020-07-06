@@ -76,6 +76,28 @@ function mockFunctions() {
 jest.mock('purify-ts', () => mockFunctions())
 
 describe('merchant-fulfillment', () => {
+  describe('cancelShipment', () => {
+    const parameters = { ShipmentId: '' }
+
+    it('should return shipment info if succesful', async () => {
+      expect.assertions(1)
+
+      const mockCancelShipment = createMockHttpClient('merchant_fulfillment_cancel_shipment')
+
+      expect(
+        await mockCancelShipment.merchantFulfillment.cancelShipment(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.merchantFulfillment.cancelShipment(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getShipment', () => {
     const parameters = { ShipmentId: '' }
 

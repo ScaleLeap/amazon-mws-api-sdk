@@ -289,3 +289,15 @@ export const GetShipmentResponse = Codec.interface({
     GetShipmentResult: GetShipment,
   }),
 })
+
+const CancelShipment = Codec.interface({
+  Shipment,
+})
+
+export type CancelShipment = GetInterface<typeof CancelShipment>
+
+export const CancelShipmentResponse = Codec.interface({
+  CancelShipmentResponse: Codec.interface({
+    CancelShipmentResult: CancelShipment,
+  }),
+})

@@ -399,9 +399,10 @@ export const canonicalizeCreateShipmentParameters = (
  * END CreateShipmentParameters
  */
 
-/**
- * START GetShipmentParameters
- */
 export interface GetShipmentParameters {
+  ShipmentId: string
+}
+
+export interface CancelShipmentParameters {
   ShipmentId: string
 }

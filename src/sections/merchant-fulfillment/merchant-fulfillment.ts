@@ -2,6 +2,8 @@ import { ParsingError } from '../../error'
 import { HttpClient, RequestMeta, Resource } from '../../http'
 import { getServiceStatusByResource } from '../shared'
 import {
+  CancelShipment,
+  CancelShipmentResponse,
   CreateShipment,
   CreateShipmentResponse,
   GetAdditionalSellerInputs,
@@ -12,6 +14,7 @@ import {
   GetShipmentResponse,
 } from './codec'
 import {
+  CancelShipmentParameters,
   canonicalizeCreateShipmentParameters,
   canonicalizeParametersGetEligibleShippingServiceParameters,
   CreateShipmentParameters,
@@ -24,6 +27,26 @@ const MERCHANT_FULFILLMENT_API_VERSION = '2015-06-01'
 
 export class MerchantFulfillment {
   constructor(private httpClient: HttpClient) {}
+
+  async cancelShipment(
+    parameters: CancelShipmentParameters,
+  ): Promise<[CancelShipment, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.MerchantFulfillment,
+      version: MERCHANT_FULFILLMENT_API_VERSION,
+      action: 'CancelShipment',
+      parameters: {
+        ShipmentId: parameters.ShipmentId,
+      },
+    })
+
+    return CancelShipmentResponse.decode(response).caseOf({
+      Right: (x) => [x.CancelShipmentResponse.CancelShipmentResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getShipment(parameters: GetShipmentParameters): Promise<[GetShipment, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
