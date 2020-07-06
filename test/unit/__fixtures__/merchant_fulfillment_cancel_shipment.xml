@@ -67,6 +67,7 @@
       <CreatedDate>2015-09-23T20:11:12.908Z</CreatedDate>
       <ShipFromAddress>
         <City>Seattle</City>
+        <Email/>
         <Phone>2061234567</Phone>
         <CountryCode>US</CountryCode>
         <PostalCode>98121</PostalCode>
