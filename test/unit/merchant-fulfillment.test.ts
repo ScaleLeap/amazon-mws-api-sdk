@@ -45,18 +45,30 @@ const mockShipmentRequestDetails = {
 function mockFunctions() {
   /**
    * Mock everything in purify-ts, restore it back to normal,
-   *  except for `enumeration` which will be stubbed
+   *  except for `enumeration` which will be stubbed to accept
    * https://github.com/facebook/jest/issues/936#issuecomment-265074320
    */
   const original = jest.requireActual('purify-ts')
+
   return {
     ...original, // Pass down all the exported objects
-    enumeration: () => {
+    enumeration: <T extends Record<string, string | number>>(enumeration: T) => {
+      const enumValues = Object.values(enumeration)
+
       return original.Codec.custom({
         decode: (input: string | number) => {
-          return original.Right(input)
+          if (typeof input !== 'string' && typeof input !== 'number') {
+            return original.Left(`Expected enum, received ${input}`)
+          }
+
+          const enumIndex = enumValues.indexOf(input)
+
+          return enumIndex !== -1 || input === 'String'
+            ? original.Right(enumValues[enumIndex] as T[keyof T])
+            : original.Left(`Expected enum, received ${input}`)
         },
         encode: original.identity,
+        schema: () => ({ enum: enumValues }),
       })
     },
   }
@@ -83,8 +95,6 @@ describe('merchant-fulfillment', () => {
           parameters,
         ),
       ).toMatchSnapshot()
-
-      jest.clearAllMocks()
     })
 
     it('returns shipment level fields and item level fields if succesful', async () => {
@@ -144,7 +154,7 @@ describe('merchant-fulfillment', () => {
       expect.assertions(1)
 
       const mockGetEligibleShippingServices = createMockHttpClient(
-        'merchant_fulfillment_get_eligible_shipping_services_no_from_c_sharp',
+        'merchant_fulfillment_get_eligible_shipping_services_from_c_sharp',
       )
 
       expect(

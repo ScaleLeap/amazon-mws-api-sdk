@@ -83,7 +83,7 @@ Array [
             "Amount": 10,
             "CurrencyCode": "USD",
           },
-          "DeliveryExperience": "DELIVERY_CONFIRMATION",
+          "DeliveryExperience": "DeliveryConfirmationWithAdultSignature",
         },
       },
       "Status": "Purchased",
@@ -317,7 +317,6 @@ Array [
               ],
               "DataType": "String",
               "InputDisplayText": "String",
-              "InputTarget": "String",
               "IsRequired": true,
               "RestrictedSetValues": Array [
                 "String",
@@ -358,7 +357,6 @@ Array [
     ],
     "ShipmentLevelFields": Array [
       Object {
-        "AdditionalInputFieldName": "String",
         "SellerInputDefinition": Object {
           "Constraints": Array [
             Object {
@@ -368,7 +366,6 @@ Array [
           ],
           "DataType": "String",
           "InputDisplayText": "String",
-          "InputTarget": "String",
           "IsRequired": true,
           "RestrictedSetValues": Array [
             "String",

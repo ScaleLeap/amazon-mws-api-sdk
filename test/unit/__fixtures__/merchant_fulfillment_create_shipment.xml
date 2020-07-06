@@ -45,7 +45,7 @@
             <CurrencyCode>USD</CurrencyCode>
             <Amount>10.00</Amount>
           </DeclaredValue>
-          <DeliveryExperience>DELIVERY_CONFIRMATION </DeliveryExperience>
+          <DeliveryExperience>DeliveryConfirmationWithAdultSignature</DeliveryExperience>
         </ShippingServiceOptions>
         <ShippingServiceId>FEDEX_PTP_PRIORITY_OVERNIGHT </ShippingServiceId>
         <Rate>
