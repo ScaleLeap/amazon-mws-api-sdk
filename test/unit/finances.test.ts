@@ -79,8 +79,6 @@ describe('finances', () => {
       expect(
         await mockListFinancialEvents.finances.listFinancialEvents(parameters),
       ).toMatchSnapshot()
-
-      jest.clearAllMocks()
     })
 
     it('returns a next token and financial events list if succesful', async () => {
