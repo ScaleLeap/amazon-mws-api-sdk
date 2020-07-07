@@ -6,6 +6,7 @@ import { Orders } from './sections/orders'
 import { Products } from './sections/products/products'
 import { Reports } from './sections/reports'
 import { Sellers } from './sections/sellers'
+import { ShipmentInvoicing } from './sections/shipment-invoicing'
 import { Subscriptions } from './sections/subscriptions'
 
 export class MWS {
@@ -24,6 +25,8 @@ export class MWS {
   private _sellers!: Sellers
 
   private _subscriptions!: Subscriptions
+
+  private _shipmentInvoicing!: ShipmentInvoicing
 
   constructor(private httpClient: HttpClient) {}
 
@@ -81,6 +84,14 @@ export class MWS {
     }
 
     return this._reports
+  }
+
+  get shipmentInvoicing() {
+    if (!this._shipmentInvoicing) {
+      this._shipmentInvoicing = new ShipmentInvoicing(this.httpClient)
+    }
+
+    return this._shipmentInvoicing
   }
 
   get subscriptions() {

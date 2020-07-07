@@ -79,6 +79,7 @@ export enum Resource {
   Sellers = 'Sellers',
   Subscriptions = 'Subscriptions',
   Feeds = 'Feeds',
+  ShipmentInvoicing = 'ShipmentInvoicing',
 }
 
 export interface ResourceActions {
@@ -151,6 +152,11 @@ export interface ResourceActions {
     | 'GetFeedSubmissionCount'
     | 'CancelFeedSubmissions'
     | 'GetFeedSubmissionResult'
+  [Resource.ShipmentInvoicing]:
+    | 'GetFBAOutboundShipmentDetail'
+    | 'SubmitFBAOutboundShipmentInvoice'
+    | 'GetFBAOutboundShipmentInvoiceStatus'
+    | 'GetServiceStatus'
 }
 
 export interface Request {
