@@ -1,5 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`shipmentInvoicing getFbaOutboundShipmentDetail returns the shipment detail if succesful 1`] = `
+Array [
+  Object {
+    "ShipmentDetail": Object {
+      "AmazonOrderId": "701-0000000-0000000",
+      "AmazonShipmentId": "DrLqQwqvb",
+      "BuyerName": "Fulano da Silva",
+      "BuyerTaxInfo": Object {
+        "TaxClassifications": Object {
+          "TaxClassification": Object {
+            "Name": "CPF",
+            "Value": 99999999999,
+          },
+        },
+      },
+      "MarketplaceId": "A2Q3Y263D00KWC",
+      "PaymentMethodDetails": Array [
+        "CreditCard",
+      ],
+      "PurchaseDate": "2018-04-16T14:44:38Z",
+      "ShipmentItems": Array [
+        Object {
+          "ASIN": "B078HVJB69",
+          "GiftWrapPrice": Object {
+            "Amount": "0",
+            "CurrencyCode": "BRL",
+          },
+          "ItemPrice": Object {
+            "Amount": "5099.99",
+            "CurrencyCode": "BRL",
+          },
+          "OrderItemId": "19441439621890",
+          "PromotionDiscount": Object {
+            "Amount": "0",
+            "CurrencyCode": "BRL",
+          },
+          "QuantityOrdered": 2,
+          "SellerSKU": "XY-1A0O-B1CD",
+          "SerialNumbers": Array [
+            "1234567890",
+            "1234567687",
+          ],
+          "ShippingDiscount": Object {
+            "Amount": "0",
+            "CurrencyCode": "BRL",
+          },
+          "ShippingPrice": Object {
+            "Amount": "30",
+            "CurrencyCode": "BRL",
+          },
+          "Title": "iPhone X Apple Cinza Espacial, 64 GB e CÃ¢mera 12 MP",
+        },
+      ],
+      "ShippingAddress": Object {
+        "AddressLine1": "Rua da ConsolaÃ§Ã£o, 700",
+        "AddressLine2": "Apto 32",
+        "City": "SAO PAULO",
+        "CountryCode": "BR",
+        "Name": "Beltrano da Silva",
+        "Phone": "11912345678",
+        "PostalCode": "00000-000",
+        "StateOrRegion": "SP",
+      },
+      "WarehouseId": "XXXX",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`shipmentInvoicing getServiceStatus returns a parsed model when the status response is valid 1`] = `
 Array [
   Object {

@@ -5,7 +5,7 @@ describe('shipmentInvoicing', () => {
   describe('getFbaOutboundShipmentDetail', () => {
     const parameters = {
       MarketplaceId: '',
-      AmazonShipmenId: '',
+      AmazonShipmentId: '',
     }
 
     it('returns the shipment detail if succesful', async () => {
