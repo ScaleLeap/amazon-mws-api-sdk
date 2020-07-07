@@ -2,6 +2,36 @@ import { ParsingError } from '../../src'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 describe('shipmentInvoicing', () => {
+  describe('submitFbaOutboundShipmentInvoice', () => {
+    const parameters = {
+      MarketplaceId: '',
+      AmazonShipmentId: '',
+      InvoiceContent: '<XML></XML>',
+    }
+
+    it('returns the statndard response if succesful', async () => {
+      expect.assertions(1)
+
+      const mockSubmitFbaOutboundShipmentInvoice = createMockHttpClient(
+        'shipment_invoicing_submit_fba_outbound_shipment_invoice',
+      )
+
+      expect(
+        await mockSubmitFbaOutboundShipmentInvoice.shipmentInvoicing.submitFbaOutboundShipmentInvoice(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.shipmentInvoicing.submitFbaOutboundShipmentInvoice(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getFbaOutboundShipmentDetail', () => {
     const parameters = {
       MarketplaceId: '',
