@@ -76,6 +76,26 @@ Array [
 ]
 `;
 
+exports[`shipmentInvoicing getFbaOutboundShipmentInvoiceStatus returns a list of shipments if request is succesful 1`] = `
+Array [
+  Object {
+    "Shipments": Array [
+      Object {
+        "AmazonShipmentId": "DrLqQwqvb",
+        "InvoiceStatus": "Accepted",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`shipmentInvoicing getServiceStatus returns a parsed model when the status response is valid 1`] = `
 Array [
   Object {

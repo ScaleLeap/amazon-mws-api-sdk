@@ -22,7 +22,7 @@ export interface GetFbaOutboundShipmentDetailParameters {
   AmazonShipmentId: string
 }
 
-enum AddressTypeEnum {
+export enum AddressTypeEnum {
   Commercial = 'Commercial',
   Residential = 'Residential',
 }
@@ -83,7 +83,7 @@ const ShipmentDetail = Codec.interface({
   WarehouseId: optional(string),
 })
 
-const GetFBAOutboundShipmentDetail = Codec.interface({
+export const GetFBAOutboundShipmentDetail = Codec.interface({
   ShipmentDetail,
 })
 
@@ -93,15 +93,15 @@ const GetFBAOutboundShipmentDetailResponse = Codec.interface({
   }),
 })
 
-interface SubmitFBAOutboundShipmentInvoiceParameters {
+export interface SubmitFBAOutboundShipmentInvoiceParameters {
   MarketplaceId: string
   AmazonShipmentId: string
   InvoiceContent: string
 }
 
-const SubmitFBAOutboundShipmentInvoiceResult = optional(exactly(''))
+export const SubmitFBAOutboundShipmentInvoiceResult = optional(exactly(''))
 
-type SubmitFBAOutboundShipmentInvoiceResult = GetInterface<
+export type SubmitFBAOutboundShipmentInvoiceResult = GetInterface<
   typeof SubmitFBAOutboundShipmentInvoiceResult
 >
 
@@ -110,10 +110,57 @@ const SubmitFBAOutboundShipmentInvoiceResponse = Codec.interface({
     SubmitFBAOutboundShipmentInvoiceResult,
   }),
 })
-
+export interface GetFBAOutboundShipmentInvoiceStatusParameters {
+  MarketplaceId: string
+  AmazonShipmentId: string
+}
 export type GetFBAOutboundShipmentDetail = GetInterface<typeof GetFBAOutboundShipmentDetail>
+
+const Shipment = Codec.interface({
+  AmazonShipmentId: string,
+  InvoiceStatus: string,
+})
+
+export const GetFBAOutboundShipmentInvoiceStatus = Codec.interface({
+  Shipments: ensureArray('Shipment', Shipment),
+})
+
+export type GetFBAOutboundShipmentInvoiceStatus = GetInterface<
+  typeof GetFBAOutboundShipmentInvoiceStatus
+>
+
+const GetFBAOutboundShipmentInvoiceStatusResponse = Codec.interface({
+  GetFBAOutboundShipmentInvoiceStatusResponse: Codec.interface({
+    GetFBAOutboundShipmentInvoiceStatusResult: GetFBAOutboundShipmentInvoiceStatus,
+  }),
+})
+
 export class ShipmentInvoicing {
   constructor(private httpClient: HttpClient) {}
+
+  async getFbaOutboundShipmentInvoiceStatus(
+    parameters: GetFBAOutboundShipmentInvoiceStatusParameters,
+  ): Promise<[GetFBAOutboundShipmentInvoiceStatus, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.ShipmentInvoicing,
+      version: SHIPMENT_INVOICING_API_VERSION,
+      action: 'GetFBAOutboundShipmentInvoiceStatus',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        AmazonShipmentId: parameters.AmazonShipmentId,
+      },
+    })
+
+    return GetFBAOutboundShipmentInvoiceStatusResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.GetFBAOutboundShipmentInvoiceStatusResponse.GetFBAOutboundShipmentInvoiceStatusResult,
+        meta,
+      ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async submitFbaOutboundShipmentInvoice(
     parameters: SubmitFBAOutboundShipmentInvoiceParameters,
