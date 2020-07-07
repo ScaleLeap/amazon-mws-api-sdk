@@ -1,0 +1,70 @@
+<GetFBAOutboundShipmentDetailResponse xmlns="http://mws.amazonservices.com/schema/ShipmentInvoicing/2018-09-01">
+    <GetFBAOutboundShipmentDetailResult>
+        <ShipmentDetail>
+            <PurchaseDate>2018-04-16T14:44:38Z</PurchaseDate>
+            <WarehouseId>XXXX</WarehouseId>
+            <AmazonOrderId>701-0000000-0000000</AmazonOrderId>
+            <AmazonShipmentId>DrLqQwqvb</AmazonShipmentId>
+            <BuyerTaxInfo>
+                <TaxClassifications>
+                    <TaxClassification>
+                        <Name>CPF</Name>
+                        <Value>99999999999</Value>
+                    </TaxClassification>
+                </TaxClassifications>
+            </BuyerTaxInfo>
+            <PaymentMethodDetails>
+                <PaymentMethodDetail>CreditCard</PaymentMethodDetail>
+            </PaymentMethodDetails>
+            <BuyerCounty>Centro</BuyerCounty>
+            <BuyerName>Fulano da Silva</BuyerName>
+            <MarketplaceId>A2Q3Y263D00KWC</MarketplaceId>
+            <ShippingAddress>
+                <City>SAO PAULO</City>
+                <PostalCode>00000-000</PostalCode>
+                <StateOrRegion>SP</StateOrRegion>
+                <Phone>11912345678</Phone>
+                <CountryCode>BR</CountryCode>
+                <Name>Beltrano da Silva</Name>
+                <AddressLine1>Rua da ConsolaÃ§Ã£o, 700</AddressLine1>
+                <AddressLine2>Apto 32</AddressLine2>
+            </ShippingAddress>
+            <ShipmentItems>
+                <ShipmentItem>
+                    <QuantityOrdered>2</QuantityOrdered>
+                    <Title>iPhone X Apple Cinza Espacial, 64 GB e CÃ¢mera 12 MP</Title>
+                    <PromotionDiscount>
+                        <CurrencyCode>BRL</CurrencyCode>
+                        <Amount>0.00</Amount>
+                    </PromotionDiscount>
+                    <ASIN>B078HVJB69</ASIN>
+                    <SellerSKU>XY-1A0O-B1CD</SellerSKU>
+                    <OrderItemId>19441439621890</OrderItemId>
+                    <ShippingPrice>
+                        <CurrencyCode>BRL</CurrencyCode>
+                        <Amount>30.00</Amount>
+                    </ShippingPrice>
+                    <GiftWrapPrice>
+                        <CurrencyCode>BRL</CurrencyCode>
+                        <Amount>0.00</Amount>
+                    </GiftWrapPrice>
+                    <ItemPrice>
+                        <CurrencyCode>BRL</CurrencyCode>
+                        <Amount>5099.99</Amount>
+                    </ItemPrice>
+                    <ShippingDiscount>
+                        <CurrencyCode>BRL</CurrencyCode>
+                        <Amount>0.00</Amount>
+                    </ShippingDiscount>
+                    <SerialNumbers>
+                        <SerialNumber>1234567890</SerialNumber>
+                        <SerialNumber>1234567687</SerialNumber>
+                    </SerialNumbers>
+                </ShipmentItem>
+            </ShipmentItems>
+        </ShipmentDetail>
+    </GetFBAOutboundShipmentDetailResult>
+    <ResponseMetadata>
+        <RequestId>88faca76-b600-46d2-b53c-0c8c4533e43a</RequestId>
+    </ResponseMetadata>
+</GetFBAOutboundShipmentDetailResponse>
