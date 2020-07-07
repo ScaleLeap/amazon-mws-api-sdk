@@ -33,7 +33,7 @@ const AddressType = enumeration(AddressTypeEnum)
  * Documentation has this as different from
  * MerchantFulfillment's address
  */
-export const Address = Codec.interface({
+export const ShipmentInvoicingAddress = Codec.interface({
   Name: string,
   AddressLine1: optional(string),
   AddressLine2: optional(string),
@@ -71,7 +71,7 @@ const ShipmentDetail = Codec.interface({
   AmazonOrderId: string,
   AmazonShipmentId: string,
   PurchaseDate: string,
-  ShippingAddress: optional(Address),
+  ShippingAddress: optional(ShipmentInvoicingAddress),
   PaymentMethodDetails: ensureArray('PaymentMethodDetail', string),
   MarketplaceId: string,
   BuyerName: optional(string),
