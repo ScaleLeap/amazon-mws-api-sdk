@@ -1,4 +1,4 @@
-interface CanonicalizedAddtionalSellerInput {
+export interface CanonicalizedAddtionalSellerInput {
   ValueAsString?: string
   ValueAsBoolean?: boolean
   ValueAsInteger?: number
@@ -19,7 +19,7 @@ interface CanonicalizedAddtionalSellerInput {
     | string
     | undefined
 }
-interface CanonicalizedSellerInputs {
+export interface CanonicalizedSellerInputs {
   AdditionalInputFieldName: string
   AdditionalSellerInput: CanonicalizedAddtionalSellerInput
   [key: string]: string | CanonicalizedAddtionalSellerInput
@@ -59,7 +59,7 @@ export const canonicalizeAdditionalSellerInputs = (
   })
 }
 
-interface CanonicalizedItem {
+export interface CanonicalizedItem {
   OrderItemId: string
   Quantity: number
   ItemWeight?: Weight
@@ -69,7 +69,7 @@ interface CanonicalizedItem {
   [key: string]: string | number | Weight | string[] | CanonicalizedSellerInputs[] | undefined
 }
 
-interface CanonicalizedShipmentRequestDetails {
+export interface CanonicalizedShipmentRequestDetails {
   AmazonOrderId: string
   SellerOrderId?: string
   'ItemList.Item': CanonicalizedItem[]
@@ -258,7 +258,7 @@ export interface AdditionalSellerInput {
   ValueAsCurrency?: CurrencyAmount
   [key: string]: undefined | string | boolean | number | object
 }
-interface AdditionalSellerInputs {
+export interface AdditionalSellerInputs {
   AdditionalInputFieldName: string
   AdditionalSellerInput: AdditionalSellerInput
   [key: string]: string | AdditionalSellerInput
@@ -356,7 +356,7 @@ export interface CreateShipmentParameters {
   ShipmentLevelSellerInputsList?: AdditionalSellerInputs[]
 }
 
-interface CanonicalizedCreateShipmentParameters {
+export interface CanonicalizedCreateShipmentParameters {
   ShipmentRequestDetails: CanonicalizedShipmentRequestDetails
   ShippingServiceId: string
   ShippingServiceOfferId?: string

@@ -7,7 +7,7 @@ export const TemporarilyUnavailableCarrier = Codec.interface({
   CarrierName: string,
 })
 
-export const CurrencyAmount = Codec.interface({
+const CurrencyAmount = Codec.interface({
   CurrencyCode: string,
   Amount: number,
 })
@@ -20,7 +20,7 @@ export const RejectedShippingService = Codec.interface({
   ShippingServiceName: string,
 })
 
-enum DeliveryExperienceEnum {
+export enum DeliveryExperienceEnum {
   DeliveryConfirmationWithAdultSignature = 'DeliveryConfirmationWithAdultSignature',
   DeliveryConfirmationWithSignature = 'DeliveryConfirmationWithSignature',
   DeliveryConfirmationWithoutSignature = 'DeliveryConfirmationWithoutSignature',
@@ -29,9 +29,9 @@ enum DeliveryExperienceEnum {
   DELIVERY_CONFIRMATION = 'DELIVERY_CONFIRMATION',
 }
 
-export const DeliveryExperience = enumeration(DeliveryExperienceEnum)
+const DeliveryExperience = enumeration(DeliveryExperienceEnum)
 
-export const ShippingServiceOptions = Codec.interface({
+const ShippingServiceOptions = Codec.interface({
   DeliveryExperience,
   DeclaredValue: optional(CurrencyAmount),
   CarrierWillPickUp: boolean,
@@ -73,7 +73,7 @@ export const GetEligibleShippingServicesResponse = Codec.interface({
   }),
 })
 
-enum DataTypeEnum {
+export enum DataTypeEnum {
   String = 'String',
   Boolean = 'Boolean',
   Integer = 'Integer',
@@ -99,14 +99,14 @@ export const Constraints = Codec.interface({
   ValidationString: string,
 })
 
-enum InputTargetEnum {
+export enum InputTargetEnum {
   ITEM_LEVEL = 'ITEM_LEVEL',
   SHIPMENT_LEVEL = 'SHIPMENT_LEVEL',
 }
 
 export const InputTarget = enumeration(InputTargetEnum)
 
-export const Address = Codec.interface({
+const Address = Codec.interface({
   Name: string,
   AddressLine1: string,
   AddressLine2: optional(string),
@@ -120,21 +120,21 @@ export const Address = Codec.interface({
   Phone: ensureString,
 })
 
-export const Weight = Codec.interface({
+const Weight = Codec.interface({
   Value: number,
   Unit: string,
 })
 
-export const PredefinedPackageDimensions = enumeration(PredefinedPackageDimensionsEnum)
+const PredefinedPackageDimensions = enumeration(PredefinedPackageDimensionsEnum)
 
-enum DimensionsUnitEnum {
+export enum DimensionsUnitEnum {
   inches = 'inches',
   centimeters = 'centimeters',
 }
 
 export const DimensionsUnit = enumeration(DimensionsUnitEnum)
 
-export const PackageDimensions = Codec.interface({
+const PackageDimensions = Codec.interface({
   Length: optional(number),
   Width: optional(number),
   Height: optional(number),
@@ -165,7 +165,7 @@ export const SellerInputDefinition = Codec.interface({
   RestrictedSetValues: optional(ensureArray('member', string)),
 })
 
-enum AdditionalInputFieldNameEnum {
+export enum AdditionalInputFieldNameEnum {
   NON_DELIVERABLE_INSTRUCTIONS = 'NON_DELIVERABLE_INSTRUCTIONS',
   SENDER_ADDRESS_TRANSLATED = 'SENDER_ADDRESS_TRANSLATED',
 }
@@ -199,7 +199,7 @@ export const GetAdditionalSellerInputsResponse = Codec.interface({
   }),
 })
 
-enum StatusEnum {
+export enum MerchantFulfillmentStatusEnum {
   Purchase = 'Purchased',
   RefundPending = 'RefundPending',
   RefundRejected = 'RefundRejected',
@@ -218,7 +218,7 @@ const ItemLevelSellerInputsList = Codec.interface({
   ValueAsCurrency: optional(CurrencyAmount),
 })
 
-const Status = enumeration(StatusEnum)
+const Status = enumeration(MerchantFulfillmentStatusEnum)
 const Item = Codec.interface({
   OrderItemId: ensureString,
   Quantity: number,
@@ -278,7 +278,7 @@ export const CreateShipmentResponse = Codec.interface({
   }),
 })
 
-const GetShipment = Codec.interface({
+export const GetShipment = Codec.interface({
   Shipment,
 })
 
@@ -290,7 +290,7 @@ export const GetShipmentResponse = Codec.interface({
   }),
 })
 
-const CancelShipment = Codec.interface({
+export const CancelShipment = Codec.interface({
   Shipment,
 })
 
