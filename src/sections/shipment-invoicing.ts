@@ -2,7 +2,7 @@ import { HttpClient, Resource } from '../http'
 import { getServiceStatusByResource } from './shared'
 
 /**
- * The first API version is what's written in the folder name
+ * The first API version is what's written in the docs directory name
  * but the second one is what's used in the request examples
  */
 // const SHIPMENT_INVOICING_API_VERSION = '2018-11-01'
