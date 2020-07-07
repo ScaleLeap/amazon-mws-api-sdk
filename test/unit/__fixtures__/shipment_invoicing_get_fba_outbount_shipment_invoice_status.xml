@@ -1,0 +1,13 @@
+<GetFBAOutboundShipmentInvoiceStatusResponse xmlns="http://mws.amazonservices.com/schema/ShipmentInvoicing/2018-09-01">
+  <GetFBAOutboundShipmentInvoiceStatusResult>
+    <Shipments>
+      <Shipment>
+        <AmazonShipmentId>DrLqQwqvb</AmazonShipmentId>
+        <InvoiceStatus>Accepted</InvoiceStatus>
+      </Shipment>
+    </Shipments>
+  </GetFBAOutboundShipmentInvoiceStatusResult>
+  <ResponseMetadata>
+    <RequestId>98bbbfc7-22fe-42cf-9ae7-7cfb1849b90f</RequestId>
+  </ResponseMetadata>
+</GetFBAOutboundShipmentInvoiceStatusResponse>
