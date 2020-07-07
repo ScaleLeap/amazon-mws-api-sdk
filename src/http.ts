@@ -80,6 +80,7 @@ export enum Resource {
   Feeds = 'Feeds',
   ShipmentInvoicing = 'ShipmentInvoicing',
   MerchantFulfillment = 'MerchantFulfillment',
+  Recommendations = 'Recommendations',
 }
 
 export interface ResourceActions {
@@ -163,6 +164,11 @@ export interface ResourceActions {
     | 'CreateShipment'
     | 'GetShipment'
     | 'CancelShipment'
+    | 'GetServiceStatus'
+  [Resource.Recommendations]:
+    | 'GetLastUpdatedTimeForRecommendations'
+    | 'ListRecommendations'
+    | 'ListRecommendationsByNextToken'
     | 'GetServiceStatus'
 }
 
