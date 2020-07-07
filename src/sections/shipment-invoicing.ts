@@ -1,4 +1,14 @@
-import { Codec, enumeration, GetInterface, number, optional, string, unknown } from 'purify-ts'
+import crypto from 'crypto'
+import {
+  Codec,
+  enumeration,
+  exactly,
+  GetInterface,
+  number,
+  optional,
+  string,
+  unknown,
+} from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -83,17 +93,65 @@ const GetFBAOutboundShipmentDetailResponse = Codec.interface({
   }),
 })
 
+interface SubmitFBAOutboundShipmentInvoiceParameters {
+  MarketplaceId: string
+  AmazonShipmentId: string
+  InvoiceContent: string
+}
+
+const SubmitFBAOutboundShipmentInvoiceResult = optional(exactly(''))
+
+type SubmitFBAOutboundShipmentInvoiceResult = GetInterface<
+  typeof SubmitFBAOutboundShipmentInvoiceResult
+>
+
+const SubmitFBAOutboundShipmentInvoiceResponse = Codec.interface({
+  SubmitFBAOutboundShipmentInvoiceResponse: Codec.interface({
+    SubmitFBAOutboundShipmentInvoiceResult,
+  }),
+})
+
 export type GetFBAOutboundShipmentDetail = GetInterface<typeof GetFBAOutboundShipmentDetail>
 export class ShipmentInvoicing {
   constructor(private httpClient: HttpClient) {}
+
+  async submitFbaOutboundShipmentInvoice(
+    parameters: SubmitFBAOutboundShipmentInvoiceParameters,
+  ): Promise<[SubmitFBAOutboundShipmentInvoiceResult, RequestMeta]> {
+    const hash = crypto.createHash('md5').update(parameters.InvoiceContent).digest('base64')
+    const [response, meta] = await this.httpClient.request(
+      'POST',
+      {
+        resource: Resource.ShipmentInvoicing,
+        version: SHIPMENT_INVOICING_API_VERSION,
+        action: 'SubmitFBAOutboundShipmentInvoice',
+        parameters: {
+          MarketplaceId: parameters.MarketplaceId,
+          AmazonShipmentId: parameters.AmazonShipmentId,
+          ContentMD5Value: hash,
+        },
+      },
+      parameters.InvoiceContent,
+    )
+
+    return SubmitFBAOutboundShipmentInvoiceResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.SubmitFBAOutboundShipmentInvoiceResponse.SubmitFBAOutboundShipmentInvoiceResult,
+        meta,
+      ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getFbaOutboundShipmentDetail(
     parameters: GetFbaOutboundShipmentDetailParameters,
   ): Promise<[GetFBAOutboundShipmentDetail, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Sellers,
+      resource: Resource.ShipmentInvoicing,
       version: SHIPMENT_INVOICING_API_VERSION,
-      action: 'ListMarketplaceParticipationsByNextToken',
+      action: 'GetFBAOutboundShipmentDetail',
       parameters: {
         MarketplaceId: parameters.MarketplaceId,
         AmazonShipmentId: parameters.AmazonShipmentId,

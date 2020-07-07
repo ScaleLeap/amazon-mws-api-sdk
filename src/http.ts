@@ -186,6 +186,12 @@ export interface RequestResponse {
   headers: Record<string, string>
 }
 
+/**
+ * `SubmitFeed` and `SubmitFBAOutboundShipmentInvoice` has the feed passed as an XML file in the body
+ * and the other parameters as query parameters
+ */
+const REQUEST_HAS_BODY = new Set(['SubmitFeed', 'SubmitFBAOutboundShipmentInvoice'])
+
 const canonicalizeParameters = (parameters: CleanParameters): string => {
   const sp = new URLSearchParams(parameters)
   sp.sort()
@@ -315,11 +321,7 @@ export class HttpClient {
         method,
         headers,
       }
-      /**
-       * `SubmitFeed` has the feed passed as an XML file in the body
-       * and the other parameters as query parameters
-       */
-    } else if (body && info.action === 'SubmitFeed') {
+    } else if (body && REQUEST_HAS_BODY.has(info.action)) {
       config = {
         url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
         method,
