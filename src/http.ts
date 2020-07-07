@@ -79,6 +79,7 @@ export enum Resource {
   Sellers = 'Sellers',
   Subscriptions = 'Subscriptions',
   Feeds = 'Feeds',
+  Recommendations = 'Recommendations',
 }
 
 export interface ResourceActions {
@@ -151,6 +152,11 @@ export interface ResourceActions {
     | 'GetFeedSubmissionCount'
     | 'CancelFeedSubmissions'
     | 'GetFeedSubmissionResult'
+  [Resource.Recommendations]:
+    | 'GetLastUpdatedTimeForRecommendations'
+    | 'ListRecommendations'
+    | 'ListRecommendationsByNextToken'
+    | 'GetServiceStatus'
 }
 
 export interface Request {

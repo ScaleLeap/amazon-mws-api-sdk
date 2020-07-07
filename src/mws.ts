@@ -4,6 +4,7 @@ import { Finances } from './sections/finances/finances'
 import { FulfillmentInventory } from './sections/fulfillment-inventory'
 import { Orders } from './sections/orders'
 import { Products } from './sections/products/products'
+import { Recommendations } from './sections/recommendations'
 import { Reports } from './sections/reports'
 import { Sellers } from './sections/sellers'
 import { Subscriptions } from './sections/subscriptions'
@@ -20,6 +21,8 @@ export class MWS {
   private _products!: Products
 
   private _reports!: Reports
+
+  private _recommendations!: Recommendations
 
   private _sellers!: Sellers
 
@@ -73,6 +76,14 @@ export class MWS {
     }
 
     return this._products
+  }
+
+  get recommendations() {
+    if (!this._recommendations) {
+      this._recommendations = new Recommendations(this.httpClient)
+    }
+
+    return this._recommendations
   }
 
   get reports() {
