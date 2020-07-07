@@ -64,7 +64,7 @@ function mockFunctions() {
           const enumIndex = enumValues.indexOf(input)
 
           return enumIndex !== -1 || input === 'String'
-            ? original.Right(enumValues[enumIndex] as T[keyof T])
+            ? original.Right((enumValues[enumIndex] as T[keyof T]) || 'String')
             : original.Left(`Expected enum, received ${input}`)
         },
         encode: original.identity,

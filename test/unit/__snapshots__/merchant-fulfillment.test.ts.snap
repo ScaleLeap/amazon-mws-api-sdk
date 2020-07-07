@@ -412,6 +412,7 @@ Array [
               ],
               "DataType": "String",
               "InputDisplayText": "String",
+              "InputTarget": "String",
               "IsRequired": true,
               "RestrictedSetValues": Array [
                 "String",
@@ -452,6 +453,7 @@ Array [
     ],
     "ShipmentLevelFields": Array [
       Object {
+        "AdditionalInputFieldName": "String",
         "SellerInputDefinition": Object {
           "Constraints": Array [
             Object {
@@ -461,6 +463,7 @@ Array [
           ],
           "DataType": "String",
           "InputDisplayText": "String",
+          "InputTarget": "String",
           "IsRequired": true,
           "RestrictedSetValues": Array [
             "String",

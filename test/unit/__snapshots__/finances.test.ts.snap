@@ -280,6 +280,7 @@ Array [
               },
             },
           ],
+          "AdjustmentType": "String",
           "PostedDate": 1969-07-21T02:56:03.000Z,
         },
       ],
@@ -308,6 +309,7 @@ Array [
             "CurrencyAmount": 100,
             "CurrencyCode": "String",
           },
+          "TransactionType": "String",
         },
       ],
       "AffordabilityExpenseReversalEventList": Array [
@@ -335,6 +337,7 @@ Array [
             "CurrencyAmount": 100,
             "CurrencyCode": "String",
           },
+          "TransactionType": "String",
         },
       ],
       "ChargebackEventList": Array [
@@ -346,6 +349,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "DirectPaymentType": "String",
             },
           ],
           "MarketplaceName": "String",
@@ -355,6 +359,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "ChargeType": "String",
             },
           ],
           "OrderChargeList": Array [
@@ -363,6 +368,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "ChargeType": "String",
             },
           ],
           "OrderFeeAdjustmentList": Array [
@@ -419,6 +425,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemChargeList": Array [
@@ -427,6 +434,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemFeeAdjustmentList": Array [
@@ -449,12 +457,14 @@ Array [
               ],
               "ItemTaxWithheldList": Array [
                 Object {
+                  "TaxCollectionModel": "String",
                   "TaxesWithheld": Array [
                     Object {
                       "ChargeAmount": Object {
                         "CurrencyAmount": 100,
                         "CurrencyCode": "String",
                       },
+                      "ChargeType": "String",
                     },
                   ],
                 },
@@ -501,6 +511,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemChargeList": Array [
@@ -509,6 +520,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemFeeAdjustmentList": Array [
@@ -531,12 +543,14 @@ Array [
               ],
               "ItemTaxWithheldList": Array [
                 Object {
+                  "TaxCollectionModel": "String",
                   "TaxesWithheld": Array [
                     Object {
                       "ChargeAmount": Object {
                         "CurrencyAmount": 100,
                         "CurrencyCode": "String",
                       },
+                      "ChargeType": "String",
                     },
                   ],
                 },
@@ -576,6 +590,7 @@ Array [
               "CurrencyAmount": 100,
               "CurrencyCode": "String",
             },
+            "ChargeType": "String",
           },
           "ClipOrRedemptionCount": 1,
           "CouponId": "String",
@@ -621,6 +636,7 @@ Array [
               },
             },
           ],
+          "DebtRecoveryType": "String",
           "OverPaymentCredit": Object {
             "CurrencyAmount": 100,
             "CurrencyCode": "String",
@@ -654,6 +670,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "DirectPaymentType": "String",
             },
           ],
           "MarketplaceName": "String",
@@ -663,6 +680,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "ChargeType": "String",
             },
           ],
           "OrderChargeList": Array [
@@ -671,6 +689,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "ChargeType": "String",
             },
           ],
           "OrderFeeAdjustmentList": Array [
@@ -727,6 +746,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemChargeList": Array [
@@ -735,6 +755,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemFeeAdjustmentList": Array [
@@ -757,12 +778,14 @@ Array [
               ],
               "ItemTaxWithheldList": Array [
                 Object {
+                  "TaxCollectionModel": "String",
                   "TaxesWithheld": Array [
                     Object {
                       "ChargeAmount": Object {
                         "CurrencyAmount": 100,
                         "CurrencyCode": "String",
                       },
+                      "ChargeType": "String",
                     },
                   ],
                 },
@@ -809,6 +832,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemChargeList": Array [
@@ -817,6 +841,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemFeeAdjustmentList": Array [
@@ -839,12 +864,14 @@ Array [
               ],
               "ItemTaxWithheldList": Array [
                 Object {
+                  "TaxCollectionModel": "String",
                   "TaxesWithheld": Array [
                     Object {
                       "ChargeAmount": Object {
                         "CurrencyAmount": 100,
                         "CurrencyCode": "String",
                       },
+                      "ChargeType": "String",
                     },
                   ],
                 },
@@ -899,6 +926,7 @@ Array [
             "CurrencyAmount": 100,
             "CurrencyCode": "String",
           },
+          "SourceBusinessEventType": "String",
         },
       ],
       "NetworkComminglingTransactionEventList": Array [
@@ -916,6 +944,7 @@ Array [
             "CurrencyAmount": 100,
             "CurrencyCode": "String",
           },
+          "TransactionType": "String",
         },
       ],
       "PayWithAmazonEventList": Array [
@@ -927,6 +956,7 @@ Array [
               "CurrencyAmount": 100,
               "CurrencyCode": "String",
             },
+            "ChargeType": "String",
           },
           "FeeList": Array [
             Object {
@@ -937,6 +967,7 @@ Array [
               "FeeType": "String",
             },
           ],
+          "FulfillmentChannel": "String",
           "PaymentAmountType": "String",
           "SalesChannel": "String",
           "SellerOrderId": "String",
@@ -968,6 +999,7 @@ Array [
             "CurrencyAmount": 100,
             "CurrencyCode": "String",
           },
+          "transactionType": "String",
           "transactionValue": Object {
             "CurrencyAmount": 100,
             "CurrencyCode": "String",
@@ -983,6 +1015,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "DirectPaymentType": "String",
             },
           ],
           "MarketplaceName": "String",
@@ -992,6 +1025,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "ChargeType": "String",
             },
           ],
           "OrderChargeList": Array [
@@ -1000,6 +1034,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "ChargeType": "String",
             },
           ],
           "OrderFeeAdjustmentList": Array [
@@ -1056,6 +1091,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemChargeList": Array [
@@ -1064,6 +1100,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemFeeAdjustmentList": Array [
@@ -1086,12 +1123,14 @@ Array [
               ],
               "ItemTaxWithheldList": Array [
                 Object {
+                  "TaxCollectionModel": "String",
                   "TaxesWithheld": Array [
                     Object {
                       "ChargeAmount": Object {
                         "CurrencyAmount": 100,
                         "CurrencyCode": "String",
                       },
+                      "ChargeType": "String",
                     },
                   ],
                 },
@@ -1138,6 +1177,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemChargeList": Array [
@@ -1146,6 +1186,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemFeeAdjustmentList": Array [
@@ -1168,12 +1209,14 @@ Array [
               ],
               "ItemTaxWithheldList": Array [
                 Object {
+                  "TaxCollectionModel": "String",
                   "TaxesWithheld": Array [
                     Object {
                       "ChargeAmount": Object {
                         "CurrencyAmount": 100,
                         "CurrencyCode": "String",
                       },
+                      "ChargeType": "String",
                     },
                   ],
                 },
@@ -1218,8 +1261,10 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "ChargeType": "String",
             },
           ],
+          "RentalEventType": "String",
           "RentalFeeList": Array [
             Object {
               "FeeAmount": Object {
@@ -1249,6 +1294,7 @@ Array [
           },
           "MarketplaceName": "String",
           "PostedDate": 1969-07-21T02:56:03.000Z,
+          "RetrochargeEventType": "String",
           "ShippingTax": Object {
             "CurrencyAmount": 100,
             "CurrencyCode": "String",
@@ -1275,6 +1321,7 @@ Array [
               "CurrencyAmount": 100,
               "CurrencyCode": "String",
             },
+            "ChargeType": "String",
           },
           "EnrollmentId": "String",
           "FeeComponent": Object {
@@ -1316,6 +1363,7 @@ Array [
           "MarketplaceId": "String",
           "ProviderId": "String",
           "ProviderStoreName": "String",
+          "ProviderTransactionType": "String",
           "SellerId": "String",
           "SellerOrderId": "String",
           "SellerStoreName": "String",
@@ -1330,6 +1378,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "DirectPaymentType": "String",
             },
           ],
           "MarketplaceName": "String",
@@ -1339,6 +1388,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "ChargeType": "String",
             },
           ],
           "OrderChargeList": Array [
@@ -1347,6 +1397,7 @@ Array [
                 "CurrencyAmount": 100,
                 "CurrencyCode": "String",
               },
+              "ChargeType": "String",
             },
           ],
           "OrderFeeAdjustmentList": Array [
@@ -1403,6 +1454,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemChargeList": Array [
@@ -1411,6 +1463,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemFeeAdjustmentList": Array [
@@ -1433,12 +1486,14 @@ Array [
               ],
               "ItemTaxWithheldList": Array [
                 Object {
+                  "TaxCollectionModel": "String",
                   "TaxesWithheld": Array [
                     Object {
                       "ChargeAmount": Object {
                         "CurrencyAmount": 100,
                         "CurrencyCode": "String",
                       },
+                      "ChargeType": "String",
                     },
                   ],
                 },
@@ -1485,6 +1540,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemChargeList": Array [
@@ -1493,6 +1549,7 @@ Array [
                     "CurrencyAmount": 100,
                     "CurrencyCode": "String",
                   },
+                  "ChargeType": "String",
                 },
               ],
               "ItemFeeAdjustmentList": Array [
@@ -1515,12 +1572,14 @@ Array [
               ],
               "ItemTaxWithheldList": Array [
                 Object {
+                  "TaxCollectionModel": "String",
                   "TaxesWithheld": Array [
                     Object {
                       "ChargeAmount": Object {
                         "CurrencyAmount": 100,
                         "CurrencyCode": "String",
                       },
+                      "ChargeType": "String",
                     },
                   ],
                 },
