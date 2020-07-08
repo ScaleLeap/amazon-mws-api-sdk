@@ -2,6 +2,30 @@ import { ParsingError } from '../../src'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 describe('recommendations', () => {
+  describe('listRecommendations', () => {
+    const parameters = {
+      MarketplaceId: '',
+    }
+
+    it('returns a list of recommendations if succesful', async () => {
+      expect.assertions(1)
+
+      const mockListRecommendations = createMockHttpClient('recommendations_list_recommendations')
+
+      expect(
+        await mockListRecommendations.recommendations.listRecommendations(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.recommendations.listRecommendations(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getLastUpdatedTimeForRecommendations', () => {
     const parameters = {
       MarketplaceId: '',
