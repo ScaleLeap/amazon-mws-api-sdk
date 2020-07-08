@@ -2,7 +2,7 @@ import { Codec, enumeration, GetInterface, number, optional, string } from 'puri
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray, mwsDate, nextToken as nextTokenCodec } from '../parsing'
+import { ensureArray, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { FulfillmentChannelEnum } from './types'
 
@@ -177,8 +177,37 @@ const ListRecommendationsResponse = Codec.interface({
   }),
 })
 
+const ListRecommendationsByNextTokenResponse = Codec.interface({
+  ListRecommendationsByNextTokenResponse: Codec.interface({
+    ListRecommendationsByNextTokenResult: ListRecommendations,
+  }),
+})
+
 export class Recommendations {
   constructor(private httpClient: HttpClient) {}
+
+  async listRecommendationsByNextToken(
+    nextToken: NextToken<'ListRecommendations'>,
+  ): Promise<[ListRecommendations, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Recommendations,
+      version: RECOMMENDATIONS_API_VERSION,
+      action: 'ListRecommendationsByNextToken',
+      parameters: {
+        NextToken: nextToken.token,
+      },
+    })
+
+    return ListRecommendationsByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.ListRecommendationsByNextTokenResponse.ListRecommendationsByNextTokenResult,
+        meta,
+      ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async listRecommendations(
     parameters: ListRecommendationsParameters,
@@ -189,6 +218,8 @@ export class Recommendations {
       action: 'ListRecommendations',
       parameters: {
         MarketplaceId: parameters.MarketplaceId,
+        RecommendationCategory: parameters.RecommendationCategory,
+        'CategoryQueryList.CategoryQuery': parameters.CategoryQueryList,
       },
     })
 
