@@ -79,8 +79,8 @@ export enum Resource {
   Subscriptions = 'Subscriptions',
   Feeds = 'Feeds',
   ShipmentInvoicing = 'ShipmentInvoicing',
-  MerchantFulfillment = 'MerchantFulfillment',
   Recommendations = 'Recommendations',
+  MerchantFulfillment = 'MerchantFulfillment',
 }
 
 export interface ResourceActions {
