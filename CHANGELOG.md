@@ -3,6 +3,25 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.2.0...v1.3.0) (2020-07-08)
+
+
+### Bug Fixes
+
+* check both api vers ([2775650](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/27756500fe6e90a47415666bc46a46c8d2f8ccd2))
+* fix api extractor issues ([167110a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/167110a20490414a044415456c7a39723cfc287a))
+* fix api version ([edaf222](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/edaf22205bf61edb308a4ff325bd4e8a33326a7d))
+* make comment clearer ([56029b1](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/56029b1b194b406d0ef818267e16833a4517bf3a))
+* make name of address different from MerchantFulfillment ([7e6afb9](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/7e6afb9e2e3656c35050c23de1ffd149d7b6a0a6))
+* this is the correct API ver ([a455fbf](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/a455fbfa3a759a69c03b8b8671cbbfe303c16aa1))
+
+
+### Features
+
+* create GetFbaOutboundShipmentDetail ([f259195](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/f259195a53742ebbb619f2ec8858f3d5d2b5d651))
+* init shipmentInvoicing ([c7f36ab](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c7f36ab1eb320cb4687f41c0a59d306c47891a9d))
+* make submitFbaOutboundShipmentInvoice ([a5541be](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/a5541bee71f733f5fe0e59db682b6668231bf5ef))
+
 # [1.2.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.1.1...v1.2.0) (2020-07-08)
 
 
