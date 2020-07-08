@@ -1,0 +1,829 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`merchant-fulfillment cancelShipment should return shipment info if succesful 1`] = `
+Array [
+  Object {
+    "Shipment": Object {
+      "AmazonOrderId": "903-1713775-3598252",
+      "CreatedDate": 2015-09-23T20:11:12.908Z,
+      "Insurance": Object {
+        "Amount": 10,
+        "CurrencyCode": "USD",
+      },
+      "ItemList": Array [
+        Object {
+          "OrderItemId": "40525960574974",
+          "Quantity": 1,
+        },
+      ],
+      "Label": Object {
+        "Dimensions": Object {
+          "Length": 11,
+          "Unit": "inches",
+          "Width": 8.5,
+        },
+        "FileContents": Object {
+          "Checksum": "DmsWbJpdMPALN3jV4wHOrg==",
+          "Contents": "H4sIAAAAAAAAAK16WbeqyrLmO2Pc/zBVRLG...
+...kI0Ycv76w378UfL6O6ev7UsAwmkWBfL6nycD/Bd+Zx3S8LwAA",
+          "FileType": "application/pdf",
+        },
+      },
+      "PackageDimensions": Object {
+        "Height": 5,
+        "Length": 5,
+        "Unit": "inches",
+        "Width": 5,
+      },
+      "ShipFromAddress": Object {
+        "AddressLine1": "1234 Westlake Ave",
+        "City": "Seattle",
+        "CountryCode": "US",
+        "Email": "",
+        "Name": "John Doe",
+        "Phone": "2061234567",
+        "PostalCode": "98121",
+        "StateOrProvinceCode": "WA",
+      },
+      "ShipToAddress": Object {
+        "AddressLine1": "321 Main St",
+        "City": "Seattle",
+        "CountryCode": "US",
+        "Email": "",
+        "Name": "Jane Smith",
+        "Phone": "",
+        "PostalCode": "98121-2778",
+        "StateOrProvinceCode": "WA",
+      },
+      "ShipmentId": "6f77095e-9f75-47eb-aaab-a42d5428fa1a",
+      "ShippingService": Object {
+        "CarrierName": "FEDEX",
+        "EarliestEstimatedDeliveryDate": 2015-09-24T10:30:00.000Z,
+        "LatestEstimatedDeliveryDate": 2015-09-24T10:30:00.000Z,
+        "Rate": Object {
+          "Amount": 27.81,
+          "CurrencyCode": "USD",
+        },
+        "ShipDate": 2015-09-23T20:10:56.829Z,
+        "ShippingServiceId": "FEDEX_PTP_PRIORITY_OVERNIGHT",
+        "ShippingServiceName": "FedEx Priority OvernightÂ®",
+        "ShippingServiceOfferId": "HDDUKqtQVFetpBZAqx5c1yaCZ9vuFfND0kudyw3lLWCa 3mN2+zUOsRCAZS2oYt0ey6fXKdOAucmYVXR9LAkU9O9eys9V3FJCgvQ+vAqm4bSAzHVH04vD8oLy oUPKqxa8Otbek97Z85LFUSsfcUf8frNRMEfNLP8t5RyLXa4ZOjc=",
+        "ShippingServiceOptions": Object {
+          "CarrierWillPickUp": false,
+          "DeclaredValue": Object {
+            "Amount": 10,
+            "CurrencyCode": "USD",
+          },
+          "DeliveryExperience": "DELIVERY_CONFIRMATION",
+        },
+      },
+      "Status": "Purchased",
+      "TrackingId": "794657111237",
+      "Weight": Object {
+        "Unit": "oz",
+        "Value": 10,
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`merchant-fulfillment createShipment returns details of the shipment if succesful 1`] = `
+Array [
+  Object {
+    "Shipment": Object {
+      "AmazonOrderId": "903-1713775-3598252",
+      "CreatedDate": 2015-09-23T20:11:12.908Z,
+      "Insurance": Object {
+        "Amount": 10,
+        "CurrencyCode": "USD",
+      },
+      "ItemList": Array [
+        Object {
+          "ItemDescription": "Poster",
+          "ItemWeight": Object {
+            "Unit": "gram",
+            "Value": 100,
+          },
+          "OrderItemId": "40525960574974",
+          "Quantity": 1,
+        },
+      ],
+      "Label": Object {
+        "CustomTextForLabel": "ABC123",
+        "Dimensions": Object {
+          "Length": 11,
+          "Unit": "inches",
+          "Width": 8.5,
+        },
+        "FileContents": Object {
+          "Checksum": "DmsWbJpdMPALN3jV4wHOrg==",
+          "Contents": "H4sIAAAAAAAAAK16WbeqyrLmO2Pc/zBVRLG...
+                        ...kI0Ycv76w378UfL6O6ev7UsAwmkWBfL6nycD/Bd+Zx3S8LwAA",
+          "FileType": "application/zpl",
+        },
+        "LabelFormat": "ZPL203",
+        "StandardIdForLabel": "AmazonOrderId",
+      },
+      "PackageDimensions": Object {
+        "Height": 5,
+        "Length": 5,
+        "Unit": "inches",
+        "Width": 5,
+      },
+      "ShipFromAddress": Object {
+        "AddressLine1": "1234 Westlake Ave",
+        "City": "Seattle",
+        "CountryCode": "US",
+        "Email": "String",
+        "Name": "John Doe",
+        "Phone": "2061234567",
+        "PostalCode": "98121",
+        "StateOrProvinceCode": "WA",
+      },
+      "ShipToAddress": Object {
+        "AddressLine1": "321 Main St",
+        "City": "Seattle",
+        "CountryCode": "US",
+        "Email": "",
+        "Name": "Jane Smith",
+        "Phone": "",
+        "PostalCode": "98121-2778",
+        "StateOrProvinceCode": "WA",
+      },
+      "ShipmentId": "6f77095e-9f75-47eb-aaab-a42d5428fa1a",
+      "ShippingService": Object {
+        "CarrierName": "FEDEX",
+        "EarliestEstimatedDeliveryDate": 2015-09-24T10:30:00.000Z,
+        "LatestEstimatedDeliveryDate": 2015-09-24T10:30:00.000Z,
+        "Rate": Object {
+          "Amount": 27.81,
+          "CurrencyCode": "USD",
+        },
+        "ShipDate": 2015-09-23T20:10:56.829Z,
+        "ShippingServiceId": "FEDEX_PTP_PRIORITY_OVERNIGHT",
+        "ShippingServiceName": "FedEx Priority OvernightÂ®",
+        "ShippingServiceOfferId": "HDDUKqtQVFetpBZAqx5c1yaCZ9vuFfND0kudyw3lLWCa
+                    3mN2+zUOsRCAZS2oYt0ey6fXKdOAucmYVXR9LAkU9O9eys9V3FJCgvQ+vAqm4bSAzHVH04vD8oLy oUPKqxa8Otbek97Z85LFUSsfcUf8frNRMEfNLP8t5RyLXa4ZOjc=",
+        "ShippingServiceOptions": Object {
+          "CarrierWillPickUp": false,
+          "DeclaredValue": Object {
+            "Amount": 10,
+            "CurrencyCode": "USD",
+          },
+          "DeliveryExperience": "DeliveryConfirmationWithAdultSignature",
+        },
+      },
+      "Status": "Purchased",
+      "TrackingId": "794657111237",
+      "Weight": Object {
+        "Unit": "oz",
+        "Value": 10,
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`merchant-fulfillment getAdditionalSellerInputs returns shipment level fields and item level fields if succesful 1`] = `
+Array [
+  Object {
+    "ItemLevelFieldsList": Array [
+      Object {
+        "AdditionalInputs": Array [
+          Object {
+            "AdditionalInputFieldName": "ITEM_WEIGHT",
+            "SellerInputDefinition": Object {
+              "Constraints": Array [
+                Object {
+                  "ValidationRegEx": "^[0-9]{1,3}(.[0-9]{1,2})?$",
+                  "ValidationString": "Please enter item weight (max 6
+                                        digits)",
+                },
+              ],
+              "DataType": "Weight",
+              "InputDisplayText": "Item weight",
+              "InputTarget": "ITEM_LEVEL",
+              "IsRequired": true,
+              "RestrictedSetValues": Array [],
+              "StoredValue": Object {
+                "DataType": "WEIGHT",
+                "ValueAsBoolean": false,
+                "ValueAsInteger": 0,
+                "ValueAsWeight": Object {
+                  "Unit": "G",
+                  "Value": 600,
+                },
+              },
+            },
+          },
+          Object {
+            "AdditionalInputFieldName": "COUNTRY_OF_ORIGIN",
+            "SellerInputDefinition": Object {
+              "Constraints": Array [
+                Object {
+                  "ValidationRegEx": "^[a-zA-Z]{2}$",
+                  "ValidationString": "Please enter country code of the country of
+                                        manufacture (e.g. CN)",
+                },
+              ],
+              "DataType": "String",
+              "InputDisplayText": "Country of Origin",
+              "InputTarget": "ITEM_LEVEL",
+              "IsRequired": true,
+              "RestrictedSetValues": Array [],
+              "StoredValue": Object {
+                "DataType": "STRING",
+                "ValueAsBoolean": false,
+                "ValueAsInteger": 0,
+                "ValueAsString": "CN",
+              },
+            },
+          },
+          Object {
+            "AdditionalInputFieldName": "ITEM_DESCRIPTION_TRANSLATED",
+            "SellerInputDefinition": Object {
+              "Constraints": Array [
+                Object {
+                  "ValidationRegEx": "^[^a-zA-Z]{1,10}$",
+                  "ValidationString": "Please enter item description in Chinese up to
+                                        10 characters",
+                },
+              ],
+              "DataType": "String",
+              "InputDisplayText": "Item Description(Chinese)",
+              "InputTarget": "ITEM_LEVEL",
+              "IsRequired": true,
+              "RestrictedSetValues": Array [],
+              "StoredValue": Object {
+                "DataType": "STRING",
+                "ValueAsBoolean": false,
+                "ValueAsInteger": 0,
+                "ValueAsString": "è¡£æœ�",
+              },
+            },
+          },
+          Object {
+            "AdditionalInputFieldName": "ITEM_VALUE",
+            "SellerInputDefinition": Object {
+              "Constraints": Array [
+                Object {
+                  "ValidationRegEx": "^[0-9]{1,3}(.[0-9]{1,2})?$",
+                  "ValidationString": "Please enter item value in USD (max 6
+                                        digits)",
+                },
+              ],
+              "DataType": "String",
+              "InputDisplayText": "Item Value(USD)",
+              "InputTarget": "ITEM_LEVEL",
+              "IsRequired": true,
+              "RestrictedSetValues": Array [],
+              "StoredValue": Object {
+                "DataType": "CURRENCY",
+                "ValueAsBoolean": false,
+                "ValueAsInteger": 0,
+                "ValueAsString": "200",
+              },
+            },
+          },
+          Object {
+            "AdditionalInputFieldName": "HS_CODE",
+            "SellerInputDefinition": Object {
+              "Constraints": Array [
+                Object {
+                  "ValidationRegEx": "^[0-9a-zA-Z -]{1,10}?$",
+                  "ValidationString": "Please enter HS Code containing letters and
+                                        numbers only up to 10 characters",
+                },
+              ],
+              "DataType": "String",
+              "InputDisplayText": "HS Code",
+              "InputTarget": "ITEM_LEVEL",
+              "IsRequired": false,
+              "RestrictedSetValues": Array [],
+            },
+          },
+          Object {
+            "AdditionalInputFieldName": "ITEM_DESCRIPTION",
+            "SellerInputDefinition": Object {
+              "Constraints": Array [
+                Object {
+                  "ValidationRegEx": "^[a-zA-Z0-9-._&amp; ]{3,25}$",
+                  "ValidationString": "Please enter item description using
+                                        alphanumeric characters (max 25
+                                        characters)",
+                },
+              ],
+              "DataType": "String",
+              "InputDisplayText": "Item Description",
+              "InputTarget": "ITEM_LEVEL",
+              "IsRequired": true,
+              "RestrictedSetValues": Array [],
+              "StoredValue": Object {
+                "DataType": "STRING",
+                "ValueAsBoolean": false,
+                "ValueAsInteger": 0,
+                "ValueAsString": "Diapers",
+              },
+            },
+          },
+        ],
+        "Asin": "B004U9TL66",
+      },
+    ],
+    "ShipmentLevelFields": Array [
+      Object {
+        "AdditionalInputFieldName": "NON_DELIVERABLE_INSTRUCTIONS",
+        "SellerInputDefinition": Object {
+          "Constraints": Array [],
+          "DataType": "String",
+          "InputDisplayText": "Non-Deliverable Instructions",
+          "InputTarget": "SHIPMENT_LEVEL",
+          "IsRequired": true,
+          "RestrictedSetValues": Array [
+            "Abandon",
+            "Return",
+          ],
+          "StoredValue": Object {
+            "DataType": "STRING",
+            "ValueAsBoolean": false,
+            "ValueAsInteger": 0,
+            "ValueAsString": "ABANDON",
+          },
+        },
+      },
+      Object {
+        "AdditionalInputFieldName": "SENDER_ADDRESS_TRANSLATED",
+        "SellerInputDefinition": Object {
+          "Constraints": Array [
+            Object {
+              "ValidationRegEx": "putjust5digitRegex",
+              "ValidationString": "Please enter Ship From Address in
+                                Chinese",
+            },
+          ],
+          "DataType": "Address",
+          "InputDisplayText": "Ship From Address(Chinese)",
+          "InputTarget": "SHIPMENT_LEVEL",
+          "IsRequired": true,
+          "RestrictedSetValues": Array [],
+        },
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`merchant-fulfillment getAdditionalSellerInputs should properly match complete response structure from c# 1`] = `
+Array [
+  Object {
+    "ItemLevelFieldsList": Array [
+      Object {
+        "AdditionalInputs": Array [
+          Object {
+            "AdditionalInputFieldName": "String",
+            "SellerInputDefinition": Object {
+              "Constraints": Array [
+                Object {
+                  "ValidationRegEx": "String",
+                  "ValidationString": "String",
+                },
+              ],
+              "DataType": "String",
+              "InputDisplayText": "String",
+              "InputTarget": "String",
+              "IsRequired": true,
+              "RestrictedSetValues": Array [
+                "String",
+              ],
+              "StoredValue": Object {
+                "DataType": "String",
+                "ValueAsAddress": Object {
+                  "AddressLine1": "String",
+                  "AddressLine2": "String",
+                  "AddressLine3": "String",
+                  "City": "String",
+                  "CountryCode": "String",
+                  "DistrictOrCounty": "String",
+                  "Email": "String",
+                  "Name": "String",
+                  "Phone": "String",
+                  "PostalCode": "String",
+                  "StateOrProvinceCode": "String",
+                },
+                "ValueAsBoolean": true,
+                "ValueAsCurrency": Object {
+                  "Amount": 100,
+                  "CurrencyCode": "String",
+                },
+                "ValueAsDimension": Object {},
+                "ValueAsInteger": 1,
+                "ValueAsString": "String",
+                "ValueAsWeight": Object {
+                  "Unit": "String",
+                  "Value": 100,
+                },
+              },
+            },
+          },
+        ],
+        "Asin": "String",
+      },
+    ],
+    "ShipmentLevelFields": Array [
+      Object {
+        "AdditionalInputFieldName": "String",
+        "SellerInputDefinition": Object {
+          "Constraints": Array [
+            Object {
+              "ValidationRegEx": "String",
+              "ValidationString": "String",
+            },
+          ],
+          "DataType": "String",
+          "InputDisplayText": "String",
+          "InputTarget": "String",
+          "IsRequired": true,
+          "RestrictedSetValues": Array [
+            "String",
+          ],
+          "StoredValue": Object {
+            "DataType": "String",
+            "ValueAsAddress": Object {
+              "AddressLine1": "String",
+              "AddressLine2": "String",
+              "AddressLine3": "String",
+              "City": "String",
+              "CountryCode": "String",
+              "DistrictOrCounty": "String",
+              "Email": "String",
+              "Name": "String",
+              "Phone": "String",
+              "PostalCode": "String",
+              "StateOrProvinceCode": "String",
+            },
+            "ValueAsBoolean": true,
+            "ValueAsCurrency": Object {
+              "Amount": 100,
+              "CurrencyCode": "String",
+            },
+            "ValueAsDimension": Object {},
+            "ValueAsInteger": 1,
+            "ValueAsString": "String",
+            "ValueAsWeight": Object {
+              "Unit": "String",
+              "Value": 100,
+            },
+          },
+        },
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`merchant-fulfillment getEligibleShippingServices returns lists of shipping services if succesful with additional input 1`] = `
+Array [
+  Object {
+    "RejectedShippingServiceList": Array [
+      Object {
+        "CarrierName": "CHINA_POST",
+        "RejectionReasonCode": "INELIGIBLE",
+        "RejectionReasonMessage": "This ship method is not eligible for this
+                    order.",
+        "ShippingServiceId": "CHINA_POST_E_PACKET",
+        "ShippingServiceName": "China Post e-Packet",
+      },
+    ],
+    "ShippingServiceList": Array [
+      Object {
+        "AvailableLabelFormats": Array [
+          "ShippingServiceDefault",
+          "PDF",
+        ],
+        "CarrierName": "CHINA_POST",
+        "EarliestEstimatedDeliveryDate": 2019-08-27T18:00:00.000Z,
+        "LatestEstimatedDeliveryDate": 2019-08-27T18:00:00.000Z,
+        "Rate": Object {
+          "Amount": 90,
+          "CurrencyCode": "CNY",
+        },
+        "RequiresAdditionalSellerInputs": true,
+        "ShipDate": 2019-08-08T07:00:00.000Z,
+        "ShippingServiceId": "CHINA_POST_E_EMS",
+        "ShippingServiceName": "CHINA_POST_E_EMS",
+        "ShippingServiceOfferId": "NH0sNBYSrqUP2+5yJdI14yLsCwFfk2413sYQHKbp0ILv8xkJemzkFK/wgUXeC9y4j6dNKuYn3EpQh7YJSc4gvPUfNDsISoAi9tCikbPjI5KOajdY75KvPLXPEC57Od/gAlOQv07JravlVU6oURFoVtc8nwZDviBPfA43owEPmxPglPTttIuS9LfcI0ky/kIP/OT7h+acfQj8JxAtomwX1WUYGZSbzkSL9c6ic5CAeriif1Kr0k8Y0RuloSZs2ZQwOv//nLvV3ZCZic8vU8cGVGHExM9sMKamBDopoh0Kx2JHcDwWHDcKB+lOntkABC84",
+        "ShippingServiceOptions": Object {
+          "CarrierWillPickUp": true,
+          "DeliveryExperience": "DeliveryConfirmationWithoutSignature",
+        },
+      },
+    ],
+    "TemporarilyUnavailableCarrierList": Array [
+      Object {
+        "CarrierName": "DPD",
+      },
+    ],
+    "TermsAndConditionsNotAcceptedCarrierList": Array [
+      Object {
+        "CarrierName": "DHL",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`merchant-fulfillment getEligibleShippingServices returns lists of shipping services if succesful with no additional input 1`] = `
+Array [
+  Object {
+    "RejectedShippingServiceList": Array [
+      Object {
+        "CarrierName": "UPS",
+        "RejectionReasonCode": "INELIGIBLE",
+        "RejectionReasonMessage": "This ship method is not eligible for this
+                    order.",
+        "ShippingServiceId": "UPS_PTP_3DS",
+        "ShippingServiceName": "UPS Three Day Saver",
+      },
+    ],
+    "ShippingServiceList": Array [
+      Object {
+        "AvailableLabelFormats": Array [
+          "ZPL203",
+          "ShippingServiceDefault",
+          "PDF",
+          "PNG",
+        ],
+        "CarrierName": "UPS",
+        "EarliestEstimatedDeliveryDate": 2018-10-18T02:00:00.000Z,
+        "LatestEstimatedDeliveryDate": 2018-10-18T02:00:00.000Z,
+        "Rate": Object {
+          "Amount": 16.83,
+          "CurrencyCode": "USD",
+        },
+        "RequiresAdditionalSellerInputs": false,
+        "ShipDate": 2018-10-16T07:41:12.000Z,
+        "ShippingServiceId": "UPS_PTP_GND",
+        "ShippingServiceName": "UPS Ground",
+        "ShippingServiceOfferId": "ly51yzA1nAXlJzmYlKaH+7WbKOWz2BTujIOPx5PU8luilmZYK/JFhbx177aKey8MdZcG90uABbT5q8WAgPI+uxcxx/XDtIbI7c161j5spbfsiPTwIJg4Bk66bnP6Ip+JJtuSU5++rAdv4mzXvKpisLGYGrc+FuJvBAjTersJhq4=",
+        "ShippingServiceOptions": Object {
+          "CarrierWillPickUp": false,
+          "DeliveryExperience": "DeliveryConfirmationWithoutSignature",
+        },
+      },
+    ],
+    "TemporarilyUnavailableCarrierList": Array [
+      Object {
+        "CarrierName": "DYNAMEX",
+      },
+      Object {
+        "CarrierName": "USPS",
+      },
+      Object {
+        "CarrierName": "DHLECOMMERCE",
+      },
+      Object {
+        "CarrierName": "SELF_DELIVERY",
+      },
+      Object {
+        "CarrierName": "ONTRAC",
+      },
+      Object {
+        "CarrierName": "DHLMX",
+      },
+      Object {
+        "CarrierName": "DHLM",
+      },
+      Object {
+        "CarrierName": "FEDEX",
+      },
+    ],
+    "TermsAndConditionsNotAcceptedCarrierList": Array [
+      Object {
+        "CarrierName": "AMZN_US",
+      },
+      Object {
+        "CarrierName": "ONTRAC",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`merchant-fulfillment getEligibleShippingServices returns lists of shipping services if succesful with test from C# mocks 1`] = `
+Array [
+  Object {
+    "RejectedShippingServiceList": Array [
+      Object {
+        "CarrierName": "String",
+        "RejectionReasonCode": "String",
+        "RejectionReasonMessage": "String",
+        "ShippingServiceId": "String",
+        "ShippingServiceName": "String",
+      },
+    ],
+    "ShippingServiceList": Array [
+      Object {
+        "AvailableLabelFormats": Array [
+          "String",
+        ],
+        "CarrierName": "String",
+        "EarliestEstimatedDeliveryDate": 1969-07-21T02:56:03.000Z,
+        "LatestEstimatedDeliveryDate": 1969-07-21T02:56:03.000Z,
+        "Rate": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "RequiresAdditionalSellerInputs": true,
+        "ShipDate": 1969-07-21T02:56:03.000Z,
+        "ShippingServiceId": "String",
+        "ShippingServiceName": "String",
+        "ShippingServiceOfferId": "String",
+        "ShippingServiceOptions": Object {
+          "CarrierWillPickUp": true,
+          "DeclaredValue": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+          "DeliveryExperience": "DeliveryConfirmationWithAdultSignature",
+          "LabelFormat": "String",
+        },
+      },
+    ],
+    "TemporarilyUnavailableCarrierList": Array [
+      Object {
+        "CarrierName": "String",
+      },
+    ],
+    "TermsAndConditionsNotAcceptedCarrierList": Array [
+      Object {
+        "CarrierName": "String",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`merchant-fulfillment getServiceStatus returns a parsed model when the status response is valid 1`] = `
+Array [
+  Object {
+    "Status": "GREEN",
+    "Timestamp": "2020-05-06T08:22:23.582Z",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`merchant-fulfillment getShipment should properly return shipment if succesful 1`] = `
+Array [
+  Object {
+    "Shipment": Object {
+      "AmazonOrderId": "903-1713775-3598252",
+      "CreatedDate": 2015-09-23T20:11:12.908Z,
+      "Insurance": Object {
+        "Amount": 10,
+        "CurrencyCode": "USD",
+      },
+      "ItemList": Array [
+        Object {
+          "OrderItemId": "40525960574974",
+          "Quantity": 1,
+        },
+      ],
+      "Label": Object {
+        "CustomTextForLabel": "ABC123",
+        "Dimensions": Object {
+          "Length": 11,
+          "Unit": "inches",
+          "Width": 8.5,
+        },
+        "FileContents": Object {
+          "Checksum": "DmsWbJpdMPALN3jV4wHOrg==",
+          "Contents": "H4sIAAAAAAAAAK16WbeqyrLmO2Pc/zBVRLG...
+                        ...kI0Ycv76w378UfL6O6ev7UsAwmkWBfL6nycD/Bd+Zx3S8LwAA",
+          "FileType": "application/zpl",
+        },
+        "LabelFormat": "ZPL203",
+        "StandardIdForLabel": "AmazonOrderId",
+      },
+      "PackageDimensions": Object {
+        "Height": 5,
+        "Length": 5,
+        "Unit": "inches",
+        "Width": 5,
+      },
+      "ShipFromAddress": Object {
+        "AddressLine1": "1234 Westlake Ave",
+        "City": "Seattle",
+        "CountryCode": "US",
+        "Email": "",
+        "Name": "John Doe",
+        "Phone": "2061234567",
+        "PostalCode": "98121",
+        "StateOrProvinceCode": "WA",
+      },
+      "ShipToAddress": Object {
+        "AddressLine1": "321 Main St",
+        "City": "Seattle",
+        "CountryCode": "US",
+        "Email": "",
+        "Name": "Jane Smith",
+        "Phone": "",
+        "PostalCode": "98121-2778",
+        "StateOrProvinceCode": "WA",
+      },
+      "ShipmentId": "6f77095e-9f75-47eb-aaab-a42d5428fa1a",
+      "ShippingService": Object {
+        "CarrierName": "FEDEX",
+        "EarliestEstimatedDeliveryDate": 2015-09-24T10:30:00.000Z,
+        "LatestEstimatedDeliveryDate": 2015-09-24T10:30:00.000Z,
+        "Rate": Object {
+          "Amount": 27.81,
+          "CurrencyCode": "USD",
+        },
+        "ShipDate": 2015-09-23T20:10:56.829Z,
+        "ShippingServiceId": "FEDEX_PTP_PRIORITY_OVERNIGHT",
+        "ShippingServiceName": "FedEx Priority OvernightÂ®",
+        "ShippingServiceOfferId": "HDDUKqtQVFetpBZAqx5c1yaCZ9vuFfND0kudyw3lLWCa
+                    3mN2+zUOsRCAZS2oYt0ey6fXKdOAucmYVXR9LAkU9O9eys9V3FJCgvQ+vAqm4bSAzHVH04vD8oLy oUPKqxa8Otbek97Z85LFUSsfcUf8frNRMEfNLP8t5RyLXa4ZOjc=",
+        "ShippingServiceOptions": Object {
+          "CarrierWillPickUp": false,
+          "DeclaredValue": Object {
+            "Amount": 10,
+            "CurrencyCode": "USD",
+          },
+          "DeliveryExperience": "DELIVERY_CONFIRMATION",
+        },
+      },
+      "Status": "Purchased",
+      "TrackingId": "794657111237",
+      "Weight": Object {
+        "Unit": "oz",
+        "Value": 10,
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;

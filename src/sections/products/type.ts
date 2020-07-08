@@ -60,7 +60,6 @@ export interface FeesEstimateRequest {
 
 export interface GetMyFeesEstimateParameters {
   FeesEstimateRequestList: FeesEstimateRequest[]
-  [key: string]: FeesEstimateRequest[]
 }
 
 export interface ListMatchingProductsRequestParameters {

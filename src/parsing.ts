@@ -59,7 +59,17 @@ export const mwsBoolean = Codec.custom<boolean>({
 })
 
 export const mwsDate = Codec.custom<Date>({
-  decode: (x) => string.decode(x).chain((aString) => date.decode(decodeURIComponent(aString))),
+  decode: (x) =>
+    string.decode(x).chain((aString) => {
+      let toDecode = aString
+      // @todo
+      // Temp fix. Add UTC if no letter is found in string passed
+      // (crude way to check if time has timezone)
+      if (!/[A-Za-z]/g.test(aString)) {
+        toDecode += ' UTC+00:00'
+      }
+      return date.decode(decodeURIComponent(toDecode))
+    }),
   encode: date.encode,
   schema: date.schema,
 })
