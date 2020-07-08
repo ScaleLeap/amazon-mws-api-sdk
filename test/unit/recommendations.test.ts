@@ -1,4 +1,4 @@
-import { ParsingError } from '../../src'
+import { NextToken, ParsingError } from '../../src'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 function mockEnum() {
@@ -35,6 +35,32 @@ function mockEnum() {
 jest.mock('purify-ts', () => mockEnum())
 
 describe('recommendations', () => {
+  describe('listRecommendationsByNextToken', () => {
+    const mockNextToken = new NextToken('ListRecommendations', '123')
+
+    it('returns a list of recommendations if next token is valid', async () => {
+      expect.assertions(1)
+
+      const mockListRecommendationsNT = createMockHttpClient(
+        'recommendations_list_recommendations_nt',
+      )
+
+      expect(
+        await mockListRecommendationsNT.recommendations.listRecommendationsByNextToken(
+          mockNextToken,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.recommendations.listRecommendationsByNextToken(mockNextToken),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('listRecommendations', () => {
     const parameters = {
       MarketplaceId: '',
