@@ -1660,7 +1660,7 @@ Array [
               },
             },
           ],
-          "AdjustmentType": "REVERSAL_REIMBURSEMENT",
+          "AdjustmentType": "ReserveEvent",
         },
       ],
       "AffordabilityExpenseEventList": Array [

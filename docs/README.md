@@ -88,6 +88,26 @@
     * [listFinancialEventGroupsByNextToken](#listfinancialeventgroupsbynexttoken)
     * [listFinancialEvents](#listfinancialevents)
     * [listFinancialEventsByNextToken](#listfinancialeventsbynexttoken)
+  * [MerchantFulfillemnt](#merchantfulfillemnt)
+    * [Types used in MerchantFulfillemnt](#types-used-in-merchantfulfillemnt)
+      * [ShipmentRequestDetails](#shipmentrequestdetails)
+      * [Item](#item)
+      * [Address](#address)
+      * [PackageDimensions](#packagedimensions)
+      * [Weight](#weight)
+      * [ShippingServiceOptions](#shippingserviceoptions)
+      * [LabelCustomization](#labelcustomization)
+      * [AdditionalSellerInputs](#additionalsellerinputs)
+      * [AdditionalSellerInput](#additionalsellerinput)
+      * [CurrencyAmount](#currencyamount)
+      * [LabelFormatOption](#labelformatoption)
+      * [ShippingOfferingFilter](#shippingofferingfilter)
+    * [getEligibleShippingServices](#geteligibleshippingservices)
+    * [getAddtionalSellerInputs](#getaddtionalsellerinputs)
+    * [createShipment](#createshipment)
+    * [getShipment](#getshipment)
+    * [cancelShipment](#cancelshipment)
+    * [getServiceStatus](#getservicestatus-5)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -1752,3 +1772,367 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 **Response**
 
 [See finances test snapshot](../test/unit/__snapshots__/finances.test.ts.snap)
+
+## MerchantFulfillemnt
+
+### Types used in MerchantFulfillemnt
+
+#### ShipmentRequestDetails
+
+**Properties**
+
+| Name                   	| Type                   	| Example                          	| Required 	|
+|------------------------	|------------------------	|----------------------------------	|----------	|
+| AmazonOrderId          	| string                 	| `'902-3159896-1390916'`                          	| Yes      	|
+| SellerOrderId          	| string                 	| `'SellerId'`                        	| No       	|
+| ItemList               	| Item[]                 	| `[Item](#item)`                 	| Yes      	|
+| ShipFromAddress        	| Address                	| [`Address`](#address)                	| Yes      	|
+| PackageDimensions      	| PackageDimensions      	| [`PackageDimensions`](#packagedimensions)     	| Yes      	|
+| Weight                 	| Weight                 	| [`Weight`](#weight)                 	| Yes      	|
+| MustArriveByDate       	| Date                   	| `new Date()`                     	| No       	|
+| ShipDate               	| Date                   	| `new Date()`                     	| No       	|
+| ShippingServiceOptions 	| ShippingServiceOptions 	| [`ShippingServiceOptions`](#shippingserviceoptions) 	| Yes      	|
+| LabelCustomization     	| LabelCustomization     	| [`LabelCustomization`](#labelcustomization)     	| No       	|
+
+#### Item
+
+**Properties**
+
+| Name                      	| Type                     	| Example                            	| Required 	|
+|---------------------------	|--------------------------	|------------------------------------	|----------	|
+| OrderItemId               	| string                   	| `'1234'`                            	| Yes      	|
+| Quantity                  	| number                   	| `1`                                	| Yes      	|
+| ItemWeight                	| Weight                   	| [`Weight`](#weight)                   	| No       	|
+| ItemDescription           	| string                   	| `'This is an item'`                  	| No       	|
+| TransparencyCodeList      	| string[]                 	| `'CODE'`                             	| No       	|
+| ItemLevelSellerInputsList 	| AdditionalSellerInputs[] 	| [`AdditionalSellerInputs`](#additionalsellerinputs) 	| Yes      	|
+
+#### Address
+
+**Properties**
+
+| Name                	| Type                   	| Example               	| Required                                                                                                 	|
+|---------------------	|------------------------	|-----------------------	|----------------------------------------------------------------------------------------------------------	|
+| Name                	| string                 	| `'Jane Doe'`            	| Yes                                                                                                      	|
+| AddressLine1        	| string                 	| `'#123 Address Street'` 	| Yes                                                                                                      	|
+| AddressLine2        	| string                 	| `'Address Boulevard'`   	| No                                                                                                       	|
+| AddressLine3        	| string                 	| `'Address Town'`        	| No                                                                                                       	|
+| DistrictOrCounty    	| string                 	| `'Address County'`      	| No                                                                                                       	|
+| Email               	| string                 	| `'email@example.com'`   	| Yes                                                                                                      	|
+| City                	| string                 	| `'Gotham City'`         	| Yes                                                                                                      	|
+| StateOrProvinceCode 	| string                 	| `'WI'`                  	| No. Required in the Canada, US, and UK marketplaces. Also required for shipments originating from China. 	|
+| PostalCode          	| ShippingServiceOptions 	| `'99501'`               	| Yes                                                                                                      	|
+| CountryCode         	| string                 	| `'US'`                  	| Yes                                                                                                      	|
+| Phone               	| string                 	| `'5555551234'`          	| Yes                                                                                                      	|
+
+#### PackageDimensions
+
+**Properties**
+
+| Name                        	| Type                   	| Example             	| Required                                                                                                 	|
+|-----------------------------	|------------------------	|---------------------	|----------------------------------------------------------------------------------------------------------	|
+| Length                      	| number                 	| `10`                	| No. Unless a value for `PredefinedPackageDimensions` is not specified                                    	|
+| Width                       	| number                 	| `10`                	| No. Unless a value for `PredefinedPackageDimensions` is not specified                                    	|
+| Height                      	| number                 	| `10`                	| No. Unless a value for `PredefinedPackageDimensions` is not specified                                    	|
+| Unit                        	| string                 	| `'inches'`            	| No. Unless a value for `PredefinedPackageDimensions` is not specified                                    	|
+| PredefinedPackageDimensions 	| string                 	| `'FedEx_Box_10kg'`    	| No. Unless values for `Length`, `Width`, `Height` and `Unit` were not specified                          	|
+
+* Possible values for `Unit`: '`inches'` or `'centimeters'`
+* [Possible values for PredefinedPackageDimensions](http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_PrePackDimenEnum.html)
+
+#### Weight
+
+**Parameters**
+| Name                        	| Type                   	| Example             	| Required 	|
+|-----------------------------	|------------------------	|---------------------	|----------	|
+| Value                       	| number                 	| `10`                	| Yes      	|
+| Unit                        	| string                 	| `'ounces'`          	| Yes      	|
+
+* Possible values for `Unit`: `'ounces'` or `'grams'`
+
+#### ShippingServiceOptions
+
+**Parameters**
+
+| Name                        	| Type                   	| Example                                    	| Required 	|
+|-----------------------------	|------------------------	|--------------------------------------------	|----------	|
+| DeliveryExperience          	| number                 	| `'DeliveryConfirmationWithAdultSignature'` 	| Yes      	|
+| DeclaredValue               	| CurrencyAmount         	| [`CurrencyAmount`](#currencyamount)                  	| No       	|
+| CarrierWillPickUp           	| boolean                	| `false`                                    	| Yes      	|
+| LabelFormat                 	| string                 	| `Label Format`                             	| No       	|
+
+* [Possible values for DeliveryExperience](http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_Datatypes.html#ShippingServiceOptions)
+
+#### LabelCustomization
+
+**Parameters**
+
+| Name                        	| Type                   	| Example                	| Required 	|
+|-----------------------------	|------------------------	|------------------------	|----------	|
+| CustomTextForLabel          	| string                 	| `'CustomTextForLabel'` 	| No       	|
+| StandardIdForLabel          	| string                 	| `'StandardIdForLabel'` 	| No       	|
+
+#### AdditionalSellerInputs
+**Parameters**
+
+| Name                        	| Type                   	| Example                         	| Required 	|
+|-----------------------------	|------------------------	|---------------------------------	|----------	|
+| DataType                    	| string                 	| `'SENDER_ADDRESS_TRANSLATED'`   	| Yes      	|
+| AdditionalSellerInput       	| AdditionalSellerInput  	| [`AdditionalSellerInput`](#additionalsellerinput) 	| Yes      	|
+
+#### AdditionalSellerInput
+**Parameters**
+
+| Name             	| Type              	| Example                     	| Required 	|
+|------------------	|-------------------	|-----------------------------	|----------	|
+| DataType         	| string            	| `'String'`                  	| Yes      	|
+| ValueAsString    	| string            	| `'MyValue'`                 	| No       	|
+| ValueAsBoolean   	| boolean           	| `false`                     	| No       	|
+| ValueAsInteger   	| number            	| `10`                        	| No       	|
+| ValueAsTimestamp 	| Date              	| `new Date()`                	| No       	|
+| ValueAsAddress   	| Address           	| [`Address`](#address)           	| No       	|
+| ValueAsWeight    	| Weight            	| [`Weight`](#weight)            	| No       	|
+| ValueAsDimension 	| PackageDimensions 	| [`PackageDimensions`](#packagedimensions)` 	| No       	|
+| ValueAsCurrency  	| CurrencyAmount    	| [`CurrencyAmount`](#currencyamount)   	| No       	|
+
+* Possible values for `DataType`:   `'String'`, `'Boolean'`, `'Integer'`, `'Timestamp'`, `'Address'`, `'Weight'`, `'Dimension'`, `'Currency'`,
+
+#### CurrencyAmount
+**Parameters**
+| Name             	| Type              	| Example                     	| Required 	|
+|------------------	|-------------------	|-----------------------------	|----------	|
+| CurrencyCode     	| string            	| `'USD'`                     	| Yes      	|
+| Amount           	| number            	| `100`                       	| Yes      	|
+
+#### LabelFormatOption
+**Parameters**
+| Name                            	| Type              	| Example                     	| Required 	|
+|---------------------------------	|-------------------	|------------------------------	|----------	|
+| IncludePackingSlipWithLabel     	| boolean            	| `true`                      	| Yes      	|
+
+#### ShippingOfferingFilter
+**Parameters**
+| Name                              	| Type              	| Example                     	| Required 	|
+|-----------------------------------	|-------------------	|------------------------------	|----------	|
+| IncludeComplexShippingOptions     	| boolean            	| `true`                      	| No      	|
+
+### getEligibleShippingServices
+
+**Parameters**
+
+| Name                   	| Type                   	| Example                                               	| Required 	|
+|------------------------	|------------------------	|--------------------------------------------------------	|----------	|
+| ShipmentRequestDetails 	| ShipmentRequestDetails 	| [`ShipmentRequestDetails`](#shipmentrequestdetails)   	| Yes      	|
+| ShippingOfferingFilter 	| ShippingOfferingFilter 	| [`ShippingOfferingFilter`](#shippingofferingfilter) 	  | No       	|
+
+**Example**
+
+```typescript
+    const Address = {
+      Name: '',
+      AddressLine1: '',
+      Email: '',
+      City: '',
+      PostalCode: '',
+      CountryCode: '',
+      Phone: '',
+    }
+
+    const PackageDimensions = {
+      PredefinePackageDimensions: 'FedEx_Box_10kg',
+    }
+
+    const Weight = {
+      Value: 1,
+      Unit: 'ounces',
+    }
+
+    const ShippingServiceOptions = {
+      DeliveryExperience: 'DeliveryConfirmationWithAdultSignature',
+      CarrierWillPickup: false,
+    }
+
+    const ShipmentRequestDetails = {
+      AmazonOrderId: '',
+      SellerOrderId: '',
+      ItemList: [],
+      ShipFromAddress: Address,
+      PackageDimensions,
+      Weight,
+      MustArriveByDate: new Date(),
+      ShipDate: new Date(),
+      ShippingServiceOptions,
+    }
+
+    const parameters = {
+      ShipmentRequestDetails,
+    }
+
+    const merchantFulfillment = new MerchantFulfillment(httpClient)
+    const [response, meta] = merchantFulfillment.getEligibleShippingServices(parameters)
+```
+
+**Response**
+
+[See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
+
+### getAddtionalSellerInputs
+
+**Parameters**
+
+| Name              	| Type    	| Example               	| Required 	|
+|-------------------	|---------	|-----------------------	|----------	|
+| OrderId           	| string  	| `'ORDERID'`           	| Yes      	|
+| ShippingServiceId 	| number  	| `'SHIPPINGSERVICEID'` 	| Yes      	|
+| ShipFromAddress   	| Address 	| [`Address`](#address)   | Yes      	|
+
+**Example**
+
+```typescript
+    const Address = {
+      Name: '',
+      AddressLine1: '',
+      Email: '',
+      City: '',
+      PostalCode: '',
+      CountryCode: '',
+      Phone: '',
+    }
+
+    const parameters = {
+      OrderId: 'ORDERID',
+      ShippingServiceId: 'SHIPPINGSERVICEID',
+      ShipmentRequestDetails,
+    }
+
+    const merchantFulfillment = new MerchantFulfillment(httpClient)
+    const [response, meta] = merchantFulfillment.getAdditionalSellerInputs(parameters)
+```
+
+**Response**
+
+[See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
+
+### createShipment
+
+**Parameters**
+
+| Name                          	| Type                     	| Example                                                               	| Required 	|
+|-------------------------------	|--------------------------	|-----------------------------------------------------------------------	|----------	|
+| ShipmentRequestDetails        	| ShipmentRequestDetails   	| [`ShipmentRequestDetails`](#shipmentrequestdetails)                  	  | Yes      	|
+| ShippingServiceId             	| string                   	| `'SHIPPINGSERVICEID'`      	                                            | Yes       |
+| ShippingServiceOfferId        	| string                   	| `'ShippingServiceOfferId'` 	                                            | No        |
+| HazmatType                    	| string                   	| `'LQHazmat'`               	                                            | No        |
+| LabelFormatOption             	| LabelFormatOption        	| [`LabelFormatOption`](#labelformatoption)                  	            | No       	|
+| ShipmentLevelSellerInputsList 	| AdditionalSellerInputs[] 	| [`[AdditionalSellerInputs]`](#additionalsellerinputs)                  	| No       	|
+
+* [Possible values for HazmatType](http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_Datatypes.html#HazmatType)
+
+**Example**
+
+```typescript
+    const Address = {
+      Name: '',
+      AddressLine1: '',
+      Email: '',
+      City: '',
+      PostalCode: '',
+      CountryCode: '',
+      Phone: '',
+    }
+
+    const PackageDimensions = {
+      PredefinePackageDimensions: 'FedEx_Box_10kg',
+    }
+
+    const Weight = {
+      Value: 1,
+      Unit: 'ounces',
+    }
+
+    const ShippingServiceOptions = {
+      DeliveryExperience: 'DeliveryConfirmationWithAdultSignature',
+      CarrierWillPickup: false,
+    }
+
+    const ShipmentRequestDetails = {
+      AmazonOrderId: '',
+      SellerOrderId: '',
+      ItemList: [],
+      ShipFromAddress: Address,
+      PackageDimensions,
+      Weight,
+      MustArriveByDate: new Date(),
+      ShipDate: new Date(),
+      ShippingServiceOptions,
+    }
+
+    const parameters = {
+      ShipmentRequestDetails,
+      ShippingServiceId: 'SHIPPINGSERVICEID',
+    }
+
+    const merchantFulfillment = new MerchantFulfillment(httpClient)
+    const [response, meta] = merchantFulfillment.createShipment(parameters)
+```
+
+
+**Response**
+
+[See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
+
+### getShipment
+
+| Name              	| Type                     	| Example     -	| Required 	|
+|---------------    	|--------------------------	|--------------	|----------	|
+| ShipmentId        	| string                  	| `'SHIPMENTID'`| Yes      	|
+
+**Example**
+
+```typescript
+    const parameters = { ShipmentId: 'SHIPMENTID' }
+
+    const merchantFulfillment = new MerchantFulfillment(httpClient)
+    const [response, meta] = merchantFulfillment.getShipment(parameters)
+```
+
+**Response**
+
+[See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
+
+### cancelShipment 
+
+| Name              	| Type                     	| Example     -	| Required 	|
+|---------------    	|--------------------------	|--------------	|----------	|
+| ShipmentId        	| string                  	| `'SHIPMENTID'`| Yes      	|
+
+**Example**
+
+```typescript
+    const parameters = { ShipmentId: 'SHIPMENTID' }
+
+    const merchantFulfillment = new MerchantFulfillment(httpClient)
+    const [response, meta] = merchantFulfillment.cancelShipment(parameters)
+```
+
+**Response**
+
+[See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
+
+### getServiceStatus
+
+**Parameters**
+
+| None |
+|------|
+
+**Example**
+
+```typescript
+const merchantFulfillment = new MerchantFulfillment(httpClient)
+const [response, meta] = merchantFulfillment.getServiceStatus()
+```
+
+**Response**
+
+[See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)

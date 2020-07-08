@@ -82,7 +82,9 @@ export class Products {
       resource: Resource.Products,
       version: PRODUCTS_API_VERSION,
       action: 'GetMyFeesEstimate',
-      parameters,
+      parameters: {
+        'FeesEstimateRequestList.FeesEstimateRequest': parameters.FeesEstimateRequestList,
+      },
     })
 
     return GetMyFeesEstimateResponse.decode(response).caseOf({
