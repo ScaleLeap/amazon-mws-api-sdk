@@ -2,7 +2,7 @@ import { ParsingError } from '../../src'
 import { NextToken } from '../../src/parsing'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
-function mockFunctions() {
+function mockEnum() {
   /**
    * Mock everything in purify-ts, restore it back to normal,
    *  except for `enumeration` which will be stubbed to accept
@@ -33,7 +33,7 @@ function mockFunctions() {
     },
   }
 }
-jest.mock('purify-ts', () => mockFunctions())
+jest.mock('purify-ts', () => mockEnum())
 
 describe('finances', () => {
   describe('listFinancialEventsByNextToken', () => {

@@ -1,9 +1,10 @@
-import { Codec, GetInterface } from 'purify-ts'
+import { Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { mwsDate } from '../parsing'
+import { ensureArray, mwsDate, nextToken as nextTokenCodec } from '../parsing'
 import { getServiceStatusByResource } from './shared'
+import { FulfillmentChannelEnum } from './types'
 
 const RECOMMENDATIONS_API_VERSION = '2013-04-01'
 
@@ -29,8 +30,175 @@ const GetLastUpdatedTimeForRecommendationsResponse = Codec.interface({
   }),
 })
 
+type RecommedationCategory =
+  | 'Inventory'
+  | 'Selection'
+  | 'Pricing'
+  | 'Fulfillment'
+  | 'ListingQuality'
+  | 'GlobalSelling'
+  | 'Advertising'
+
+interface CategoryQuery {
+  RecommendationCategory: RecommedationCategory
+  FilterOptions: string
+}
+
+interface ListRecommendationsParameters {
+  MarketplaceId: string
+  RecommendationCategory?: RecommedationCategory
+  CategoryQueryList?: CategoryQuery[]
+}
+
+const ProductIdentifier = Codec.interface({
+  Asin: string,
+  Sku: string,
+  Upc: string,
+})
+
+const Price = Codec.interface({
+  CurrencyCode: string,
+  Amount: number,
+})
+
+const DimensionMeasure = Codec.interface({
+  Value: number,
+  Unit: string,
+})
+
+const WeightMeasure = Codec.interface({
+  Value: number,
+  Unit: string,
+})
+
+const ItemDimensions = Codec.interface({
+  Height: DimensionMeasure,
+  Width: DimensionMeasure,
+  Length: DimensionMeasure,
+  Weight: WeightMeasure,
+})
+
+const FulfillmentRecommendation = Codec.interface({
+  RecommendationId: string,
+  RecommendationReason: string,
+  LastUpdated: mwsDate,
+  ItemIdentifier: ProductIdentifier,
+  ItemName: optional(string),
+  BrandName: optional(string),
+  ProductCategory: optional(string),
+  SalesRank: optional(number),
+  BuyBoxPrice: optional(Price),
+  NumberOfOffers: optional(number),
+  NumberOfOffersFulfilledByAmazon: optional(number),
+  AverageCustomerReview: optional(number),
+  NumberOfCustomerReviews: optional(number),
+  ItemDimensions: optional(ItemDimensions),
+})
+
+const FulfillmentChannel = enumeration(FulfillmentChannelEnum)
+
+const InventoryRecommendation = Codec.interface({
+  RecommendationId: string,
+  RecommendationReason: string,
+  LastUpdated: mwsDate,
+  ItemIdentifier: ProductIdentifier,
+  ItemName: optional(string),
+  FulfillmentChannel: optional(FulfillmentChannel),
+  AvailableQuantity: optional(number),
+  DaysUntilStockRunsOut: optional(number),
+  DaysOutOfStockLast30Days: optional(number),
+})
+
+const PricingRecommendation = Codec.interface({
+  RecommendationId: string,
+  RecommendationReason: string,
+  LastUpdated: mwsDate,
+  ItemIdentifier: ProductIdentifier,
+  ItemName: optional(string),
+  Condition: optional(string),
+  SubCondition: optional(string),
+  FulfillmentChannel: optional(FulfillmentChannel),
+  YourPricePluShipping: optional(Price),
+  LowestPricePlusShipping: optional(Price),
+  PriceDifferenceToLowPrice: optional(Price),
+  MedianPricePlusShipping: optional(Price),
+  LowestMerchantFulfilledOfferPrice: optional(Price),
+  LowestAmazonFulfilledOfferPrice: optional(Price),
+  NumberOfMerchatFulfilledfOffers: optional(number),
+  NumberOfAmazonFulfilledOrders: optional(number),
+})
+
+const GlobalSellingRecommendation = Codec.interface({
+  RecommendationId: string,
+  RecommendationReason: string,
+  LastUpdated: mwsDate,
+  ItemIdentifier: ProductIdentifier,
+  ItemName: optional(string),
+  BrandName: optional(string),
+  ProductCategory: optional(string),
+  SalesRank: optional(number),
+  BuyBoxPrice: optional(Price),
+  NumberOfOffers: optional(number),
+  NumberOfOffersFulfilledByAmazon: optional(number),
+  AverageCustomerReview: optional(number),
+  NumberOfCustomerReviews: optional(number),
+  ItemDimensions: optional(ItemDimensions),
+})
+
+const AdvertisingRecommendation = Codec.interface({
+  RecommendationId: string,
+  RecommendationReason: string,
+  LastUpdated: mwsDate,
+  ItemIdentifier: ProductIdentifier,
+  ItemName: optional(string),
+  BrandName: optional(string),
+  ProductCategory: optional(string),
+  SalesRank: optional(number),
+  YourPricePluShipping: optional(Price),
+  LowestPricePlusShipping: optional(Price),
+  AvailableQuantity: optional(number),
+  SalesForTheLast30Days: optional(number),
+})
+
+const ListRecommendations = Codec.interface({
+  NextToken: optional(nextTokenCodec('ListRecommendations')),
+  FulfillmentRecommendations: optional(ensureArray('member', FulfillmentRecommendation)),
+  InventoryRecommendations: optional(ensureArray('member', InventoryRecommendation)),
+  PricingRecommendations: optional(ensureArray('member', PricingRecommendation)),
+  GlobalSellingRecommendations: optional(ensureArray('member', GlobalSellingRecommendation)),
+  AdvertisingRecommendations: optional(ensureArray('member', AdvertisingRecommendation)),
+})
+
+type ListRecommendations = GetInterface<typeof ListRecommendations>
+
+const ListRecommendationsResponse = Codec.interface({
+  ListRecommendationsResponse: Codec.interface({
+    ListRecommendationsResult: ListRecommendations,
+  }),
+})
+
 export class Recommendations {
   constructor(private httpClient: HttpClient) {}
+
+  async listRecommendations(
+    parameters: ListRecommendationsParameters,
+  ): Promise<[ListRecommendations, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.Recommendations,
+      version: RECOMMENDATIONS_API_VERSION,
+      action: 'ListRecommendations',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+      },
+    })
+
+    return ListRecommendationsResponse.decode(response).caseOf({
+      Right: (x) => [x.ListRecommendationsResponse.ListRecommendationsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getLastUpdatedTimeForRecommendations(
     parameters: GetLastUpdatedTimeForRecommendationsParameters,
