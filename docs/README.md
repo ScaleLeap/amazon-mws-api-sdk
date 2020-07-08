@@ -2136,3 +2136,105 @@ const [response, meta] = merchantFulfillment.getServiceStatus()
 **Response**
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
+
+## Recommendations
+[Amazon MWS Recommendations API official documentation](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_Overview.html)
+
+### Types used in MerchantFulfillemnt
+
+#### CategoryQuery
+
+| Name              	| Type                     	| Example     -	| Required 	|
+|---------------    	|--------------------------	|--------------	|----------	|
+| RecommendationCategory       | string                  	| `'Selection '`| Yes      	|
+| FilterOptions       | string                  	| `'QualitySet=Defect'`| Yes      	|
+
+* [Possible values for RecommendationCategory and FilterOptions ](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
+
+### getLastUpdatedTimeForRecommendations
+
+**Parameters**
+
+| Name              	| Type                     	| Example     -	| Required 	|
+|---------------    	|--------------------------	|--------------	|----------	|
+| MarketplaceId       | string                  	| `'A2EUQ1WTGCTBG2'`| Yes      	|
+
+
+**Example**
+
+```typescript
+const parameters = { MarketplaceId: 'A2EUQ1WTGCTBG2' }
+
+const recommendations = new Recommendations(httpClient)
+const [response, meta] = recommendations.getLastUpdatedTimeForRecommendations(parameters)
+```
+
+**Response**
+
+[See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
+
+### listRecommendations
+
+**Parameters**
+
+| Name              	| Type                     	| Example     -	| Required 	|
+|---------------    	|--------------------------	|--------------	|----------	|
+| MarketplaceId       | string                  	| `'A2EUQ1WTGCTBG2'`| Yes      	|
+| RecommendationCategory       | string                  	| `'Inventory'`| No. To retrieve all recommendations, do not specify a value for this parameter.       	|
+| CategoryQueryList       | CategoryQuery[]                  	| [`[CategoryQuery]`](#categoryquery)| No      	|
+
+* [Possible values for RecommendationCategory ](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
+
+**Example**
+
+```typescript
+const parameters = { MarketplaceId: 'A2EUQ1WTGCTBG2' }
+
+const recommendations = new Recommendations(httpClient)
+const [response, meta] = recommendations.listRecommendations(parameters)
+```
+
+**Response**
+
+[See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
+
+
+### listRecommendationsByNextToken
+
+**Parameters**
+
+| Name      | Type      | Example                                                               | Required |
+|-----------|-----------|-----------------------------------------------------------------------|----------|
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+
+**Example**
+
+```typescript
+const parameters = { MarketplaceId: 'A2EUQ1WTGCTBG2' }
+
+const recommendations = new Recommendations(httpClient)
+const [response, meta] = recommendations.listRecommendationsNextToken(new NextToken('ListRecommendations', '123'))
+```
+
+**Response**
+
+[See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
+
+
+### getServiceStatus
+
+**Parameters**
+
+| None |
+|------|
+
+**Example**
+
+```typescript
+const recommendations = new Recommendations(httpClient)
+const [response, meta] = recommendations.getServiceStatus()
+```
+
+**Response**
+
+[See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
