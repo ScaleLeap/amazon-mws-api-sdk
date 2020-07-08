@@ -78,6 +78,7 @@ export enum Resource {
   Sellers = 'Sellers',
   Subscriptions = 'Subscriptions',
   Feeds = 'Feeds',
+  ShipmentInvoicing = 'ShipmentInvoicing',
   MerchantFulfillment = 'MerchantFulfillment',
 }
 
@@ -151,6 +152,11 @@ export interface ResourceActions {
     | 'GetFeedSubmissionCount'
     | 'CancelFeedSubmissions'
     | 'GetFeedSubmissionResult'
+  [Resource.ShipmentInvoicing]:
+    | 'GetFBAOutboundShipmentDetail'
+    | 'SubmitFBAOutboundShipmentInvoice'
+    | 'GetFBAOutboundShipmentInvoiceStatus'
+    | 'GetServiceStatus'
   [Resource.MerchantFulfillment]:
     | 'GetEligibleShippingServices'
     | 'GetAdditionalSellerInputs'
@@ -186,6 +192,12 @@ export interface RequestResponse {
   data: string
   headers: Record<string, string>
 }
+
+/**
+ * `SubmitFeed` and `SubmitFBAOutboundShipmentInvoice` has the feed passed as an XML file in the body
+ * and the other parameters as query parameters
+ */
+const REQUEST_HAS_BODY = new Set(['SubmitFeed', 'SubmitFBAOutboundShipmentInvoice'])
 
 const canonicalizeParameters = (parameters: CleanParameters): string => {
   const sp = new URLSearchParams(parameters)
@@ -312,11 +324,7 @@ export class HttpClient {
         method,
         headers,
       }
-      /**
-       * `SubmitFeed` has the feed passed as an XML file in the body
-       * and the other parameters as query parameters
-       */
-    } else if (body && info.action === 'SubmitFeed') {
+    } else if (body && REQUEST_HAS_BODY.has(info.action)) {
       config = {
         url: `${url}?${canonicalizeParameters(parametersWithSignature)}`,
         method,
