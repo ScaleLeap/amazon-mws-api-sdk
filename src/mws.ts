@@ -2,6 +2,7 @@ import { HttpClient } from './http'
 import { Feeds } from './sections/feeds'
 import { Finances } from './sections/finances/finances'
 import { FulfillmentInventory } from './sections/fulfillment-inventory'
+import { MerchantFulfillment } from './sections/merchant-fulfillment/merchant-fulfillment'
 import { Orders } from './sections/orders'
 import { Products } from './sections/products/products'
 import { Recommendations } from './sections/recommendations'
@@ -15,6 +16,8 @@ export class MWS {
   private _finances!: Finances
 
   private _fulfillmentInventory!: FulfillmentInventory
+
+  private _merchantFulfillment!: MerchantFulfillment
 
   private _orders!: Orders
 
@@ -68,6 +71,14 @@ export class MWS {
     }
 
     return this._fulfillmentInventory
+  }
+
+  get merchantFulfillment() {
+    if (!this._merchantFulfillment) {
+      this._merchantFulfillment = new MerchantFulfillment(this.httpClient)
+    }
+
+    return this._merchantFulfillment
   }
 
   get products() {

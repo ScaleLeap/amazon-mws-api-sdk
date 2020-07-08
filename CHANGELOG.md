@@ -3,6 +3,37 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.1.1...v1.2.0) (2020-07-08)
+
+
+### Bug Fixes
+
+* add definitions for CanonicalizedSellerInputs ([d0c8c9f](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d0c8c9fbe2d15689ab2e2986befa67a3acde8612))
+* add mark to where I last stopped ([9726bf9](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/9726bf9020c1ac2dc824dec02f70111df70f3f3f))
+* add temp fix to uniform TZ ([692af1b](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/692af1bfea1b6a50e1352d8fa10727824cb704d7))
+* add todo to mwsDate ([b0bb0ff](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/b0bb0ff6f3e7ad32fc7273decb31374d942bca24))
+* api-extractor issues ([85780de](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/85780dece43e4f7c48d22641aa4f7fcf650bf300))
+* currency amount is different in merchant-fulfillment ([7df0580](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/7df05802a32e5d182737bcc68975a968f262d67e))
+* fix issues that popped up due to cleanParameters change ([5fe2987](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/5fe2987811e034003108fa75e9c5f8cd1f4a1ad6))
+* issue with updated mocks ([6710542](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/6710542e0129dd2cd04d51151930f704ef5b6939))
+* test structure ([16ba997](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/16ba997b74c9561f3354347b70f4a94646405b20))
+* update version ([49c4859](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/49c4859f4cd43d43dd9b556c43ac41acd9a8d990))
+
+
+### Features
+
+* create cancelShipment ([a0c0942](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/a0c094278c9e653239beb3bebbf876a10b864b12))
+* create codec for getAdditionalSellerInputs ([c264821](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c264821cac62b80c5323eeaa59456641e4c52a4c))
+* create createShipment method ([927d10a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/927d10a6141d926aee01cdd678ce31e252abfd3f))
+* create getShipment ([5902f39](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/5902f39f09154f6291da7e2dd654d9b76fad273f))
+* in progress getEligibleShippingServices ([1cad3b3](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/1cad3b362ffa98ef6d5498b6cafddd5122a1b863))
+* init create shipment ([a653451](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/a6534519038b39ff8e22f416a13ee695d27658f1))
+* init get additional seller inputs ([2223441](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/2223441243090f1f1b90f626bfedd9157252dbe4))
+* init merchant fulfillment ([6cc6dc5](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/6cc6dc51e9ac9fc88b64d4d9d41be3457b9b7027))
+* init MerchantFulfillment ([bf7754f](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/bf7754fd021f826cf9728385b55ac13d60269a21))
+* made cancelShipment and tests ([18a1d97](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/18a1d97ba823169725c71e9b7615b79f97d16599))
+* made getEligibleShippingServices codecs and added more tests ([d2b577a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d2b577aeee620a4df6bf874e84602a6acd8d8054))
+
 ## [1.1.1](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.1.0...v1.1.1) (2020-07-06)
 
 

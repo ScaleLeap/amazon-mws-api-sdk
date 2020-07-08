@@ -156,7 +156,7 @@
                 Steel (Silver)</ProductDescription>
             </AdjustmentItem>
           </AdjustmentItemList>
-          <AdjustmentType>REVERSAL_REIMBURSEMENT</AdjustmentType>
+          <AdjustmentType>ReserveEvent</AdjustmentType>
         </AdjustmentEvent>
       </AdjustmentEventList>
       <PerformanceBondRefundEventList/>
