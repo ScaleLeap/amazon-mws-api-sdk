@@ -2137,6 +2137,20 @@ const [response, meta] = merchantFulfillment.getServiceStatus()
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Recommendations
 [Amazon MWS Recommendations API official documentation](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_Overview.html)
 
