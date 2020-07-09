@@ -1,4 +1,4 @@
-import { ParsingError } from '../../src'
+import { CreateInboundShipmentParameters, InboundShipmentHeader, ParsingError } from '../../src'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 function mockFunctions() {
@@ -51,15 +51,15 @@ describe('fulfillmentInboundShipment', () => {
       QuantityShipped: 1,
     }
 
-    const mockInboundShipmentHeader = {
+    const mockInboundShipmentHeader: InboundShipmentHeader = {
       ShipmentName: '',
       ShipFromAddress: mockAddress,
       DestinationFulfillmentCenterId: '',
-      LabelPrePreference: 'SELLER_LABEL',
+      LabelPrepPreference: 'SELLER_LABEL',
       ShipmentStatus: 'WORKING',
     }
 
-    const parameters = {
+    const parameters: CreateInboundShipmentParameters = {
       ShipmentId: '',
       InboundShipmentHeader: mockInboundShipmentHeader,
       InboundShipmentItems: [mockInboundShipmentItem],

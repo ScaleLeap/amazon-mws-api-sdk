@@ -91,7 +91,7 @@ interface AddressFIS {
   [key: string]: string | undefined
 }
 
-type LabelPrepPreference = 'SELLER_LABEL' | 'AMAZON_LABEL_ONLY' | 'AMAZON_LABEL_PREFERRED'
+export type LabelPrepPreference = 'SELLER_LABEL' | 'AMAZON_LABEL_ONLY' | 'AMAZON_LABEL_PREFERRED'
 type ConditionFIS =
   | 'NewItem'
   | 'NewWithWarranty'
@@ -235,8 +235,110 @@ const CreateInboundShipmentPlanResponse = Codec.interface({
   }),
 })
 
+export type ShipmentStatus = 'WORKING' | 'SHIPPED' | 'CANCELLED'
+
+type IntendedBoxContentsSource = 'NONE' | 'FEED' | '2D_BARCODE'
+
+export interface InboundShipmentHeader {
+  ShipmentName: string
+  ShipFromAddress: AddressFIS
+  DestinationFulfillmentCenterId: string
+  LabelPrepPreference: LabelPrepPreference
+  AreCasesRequired?: boolean
+  ShipmentStatus: ShipmentStatus
+  IntendedBoxContentsSource?: IntendedBoxContentsSource
+  [key: string]: string | undefined | boolean | AddressFIS
+}
+
+interface InboundShipmentItem {
+  ShipmentId?: string
+  SellerSKU: string
+  FulfillmentNetworkSKU?: string
+  QuantityShipped: number
+  QuantityReceived?: number
+  QuantityInCase?: number
+  PrepDetailsList?: PrepDetails[]
+  ReleaseDate?: Date // convert to YYYY-MM-DD format
+}
+
+export interface CreateInboundShipmentParameters {
+  ShipmentId: string
+  InboundShipmentHeader: InboundShipmentHeader
+  InboundShipmentItems: InboundShipmentItem[]
+}
+
+const canonicalizeInboundShipmentItem = (item: InboundShipmentItem) => {
+  let releaseDateString
+  if (item.ReleaseDate) {
+    // convert releaseDate to YYYY-MM-DD
+    const offset = item.ReleaseDate.getTimezoneOffset()
+    const releaseDate = new Date(item.ReleaseDate.getTime() + offset * 60 * 1000)
+    const [newDate] = releaseDate.toISOString().split('T')
+    releaseDateString = newDate
+  }
+
+  return {
+    ShipmentId: item.ShipmentId,
+    SellerSKU: item.SellerSKU,
+    FulfillmentNetworkSKU: item.FulfillmentNetworkSKU,
+    QuantityShipped: item.QuantityShipped,
+    QuantityReceived: item.QuantityReceived,
+    QuantityInCase: item.QuantityInCase,
+    /**
+     * Note: // C# library has this field as 'PrepDetailsList.PrepDetails'
+     * but documentation says it's 'PrepDetailsList.member'.
+     * Following C# because docs is unreliable
+     */
+    'PrepDetailsList.PrepDetails': item.PrepDetailsList,
+    ReleaseDate: releaseDateString,
+  }
+}
+
+const canonicalizeParametersCreateInboundShipment = (
+  parameters: CreateInboundShipmentParameters,
+) => {
+  const shipmentItemsCanonicalized = parameters.InboundShipmentItems.map((item) =>
+    canonicalizeInboundShipmentItem(item),
+  )
+  return {
+    ShipmentId: parameters.ShipmentId,
+    InboundShipmentHeader: parameters.InboundShipmentHeader,
+    'InboundShipmentItems.member': shipmentItemsCanonicalized,
+  }
+}
+
+const CreateInboundShipment = Codec.interface({
+  ShipmentId: string,
+})
+
+type CreateInboundShipment = GetInterface<typeof CreateInboundShipment>
+
+const CreateInboundShipmentResponse = Codec.interface({
+  CreateInboundShipmentResponse: Codec.interface({
+    CreateInboundShipmentResult: CreateInboundShipment,
+  }),
+})
+
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async createInboundShipment(
+    parameters: CreateInboundShipmentParameters,
+  ): Promise<[CreateInboundShipment, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'CreateInboundShipment',
+      parameters: canonicalizeParametersCreateInboundShipment(parameters),
+    })
+
+    return CreateInboundShipmentResponse.decode(response).caseOf({
+      Right: (x) => [x.CreateInboundShipmentResponse.CreateInboundShipmentResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async createInboundShipmentPlan(
     parameters: CreateInboundShipmentPlanParameters,
