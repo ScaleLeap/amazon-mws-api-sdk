@@ -34,18 +34,61 @@ function mockFunctions() {
 }
 jest.mock('purify-ts', () => mockFunctions())
 
+const mockAddress = {
+  Name: '',
+  AddressLine1: '',
+  Email: '',
+  City: '',
+  PostalCode: '',
+  CountryCode: '',
+  Phone: '',
+}
+
 describe('fulfillmentInboundShipment', () => {
-  describe('createInboundShipmentPlan', () => {
-    const mockAddress = {
-      Name: '',
-      AddressLine1: '',
-      Email: '',
-      City: '',
-      PostalCode: '',
-      CountryCode: '',
-      Phone: '',
+  describe('createInboundShipment', () => {
+    const mockInboundShipmentItem = {
+      SellerSKU: '',
+      QuantityShipped: 1,
     }
 
+    const mockInboundShipmentHeader = {
+      ShipmentName: '',
+      ShipFromAddress: mockAddress,
+      DestinationFulfillmentCenterId: '',
+      LabelPrePreference: 'SELLER_LABEL',
+      ShipmentStatus: 'WORKING',
+    }
+
+    const parameters = {
+      ShipmentId: '',
+      InboundShipmentHeader: mockInboundShipmentHeader,
+      InboundShipmentItems: [mockInboundShipmentItem],
+    }
+
+    it('returns the shipment ID if succesful', async () => {
+      expect.assertions(1)
+
+      const mockCreateInboundShipment = createMockHttpClient(
+        'fulfillment_inbound_shipment_create_inbound_shipment',
+      )
+
+      expect(
+        await mockCreateInboundShipment.fulfillmentInboundShipment.createInboundShipment(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it("throws a parsing error when the status response isn't valid", async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.createInboundShipment(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
+  describe('createInboundShipmentPlan', () => {
     const mockInboundShipmentPlanRequestItem = {
       SellerSKU: '',
       Quantity: 1,

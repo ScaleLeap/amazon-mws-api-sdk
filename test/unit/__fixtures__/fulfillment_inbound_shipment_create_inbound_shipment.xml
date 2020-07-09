@@ -1,0 +1,8 @@
+<CreateInboundShipmentResponse xmlns="http://mws.amazonaws.com/FulfillmentInboundShipment/2010-10-01/">
+  <CreateInboundShipmentResult>
+    <ShipmentId>FBA2F50GYX</ShipmentId>
+  </CreateInboundShipmentResult>
+  <ResponseMetadata>
+    <RequestId>2a1455aa-c5f9-4993-9b18-dc10407e09ba</RequestId>
+  </ResponseMetadata>
+</CreateInboundShipmentResponse>
