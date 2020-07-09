@@ -108,6 +108,16 @@
     * [getShipment](#getshipment)
     * [cancelShipment](#cancelshipment)
     * [getServiceStatus](#getservicestatus-5)
+  * [Recommendations](#recommendations)
+    * [Types used in MerchantFulfillemnt](#types-used-in-merchantfulfillemnt-1)
+      * [CategoryQuery](#categoryquery)
+    * [getLastUpdatedTimeForRecommendations](#getlastupdatedtimeforrecommendations)
+    * [listRecommendations](#listrecommendations)
+    * [listRecommendationsByNextToken](#listrecommendationsbynexttoken)
+    * [getServiceStatus](#getservicestatus-6)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
