@@ -17,11 +17,11 @@ import { FulfillmentChannelEnum } from './types'
 
 const RECOMMENDATIONS_API_VERSION = '2013-04-01'
 
-interface GetLastUpdatedTimeForRecommendationsParameters {
+export interface GetLastUpdatedTimeForRecommendationsParameters {
   MarketplaceId: string
 }
 
-const GetLastUpdatedTimeForRecommendations = oneOf([
+export const GetLastUpdatedTimeForRecommendations = oneOf([
   Codec.interface({
     InventoryRecommendationsLastUpdated: mwsDate,
     PricingRecommendationsLastUpdated: mwsDate,
@@ -32,7 +32,7 @@ const GetLastUpdatedTimeForRecommendations = oneOf([
   exactly(''),
 ])
 
-type GetLastUpdatedTimeForRecommendations = GetInterface<
+export type GetLastUpdatedTimeForRecommendations = GetInterface<
   typeof GetLastUpdatedTimeForRecommendations
 >
 
@@ -42,7 +42,7 @@ const GetLastUpdatedTimeForRecommendationsResponse = Codec.interface({
   }),
 })
 
-type RecommedationCategory =
+export type RecommedationCategory =
   | 'Inventory'
   | 'Selection'
   | 'Pricing'
@@ -51,12 +51,12 @@ type RecommedationCategory =
   | 'GlobalSelling'
   | 'Advertising'
 
-interface CategoryQuery {
+export interface CategoryQuery {
   RecommendationCategory: RecommedationCategory
   FilterOptions: string
 }
 
-interface ListRecommendationsParameters {
+export interface ListRecommendationsParameters {
   MarketplaceId: string
   RecommendationCategory?: RecommedationCategory
   CategoryQueryList?: CategoryQuery[]
@@ -172,7 +172,7 @@ const AdvertisingRecommendation = Codec.interface({
   SalesForTheLast30Days: optional(number),
 })
 
-const ListRecommendations = Codec.interface({
+export const ListRecommendations = Codec.interface({
   NextToken: optional(nextTokenCodec('ListRecommendations')),
   FulfillmentRecommendations: optional(ensureArray('member', FulfillmentRecommendation)),
   InventoryRecommendations: optional(ensureArray('member', InventoryRecommendation)),
@@ -181,7 +181,7 @@ const ListRecommendations = Codec.interface({
   AdvertisingRecommendations: optional(ensureArray('member', AdvertisingRecommendation)),
 })
 
-type ListRecommendations = GetInterface<typeof ListRecommendations>
+export type ListRecommendations = GetInterface<typeof ListRecommendations>
 
 const ListRecommendationsResponse = Codec.interface({
   ListRecommendationsResponse: Codec.interface({
