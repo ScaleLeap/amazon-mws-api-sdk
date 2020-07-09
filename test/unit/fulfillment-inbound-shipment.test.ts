@@ -2,6 +2,50 @@ import { ParsingError } from '../../src'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 describe('fulfillmentInboundShipment', () => {
+  describe('createInboundShipmentPlan', () => {
+    const mockAddress = {
+      Name: '',
+      AddressLine1: '',
+      Email: '',
+      City: '',
+      PostalCode: '',
+      CountryCode: '',
+      Phone: '',
+    }
+
+    const mockInboundShipmentPlanRequestItem = {
+      SellerSKU: '',
+      Quantity: 1,
+    }
+
+    const parameters = {
+      ShipFromAddress: mockAddress,
+      InboundShipmetPlanRequestItems: [mockInboundShipmentPlanRequestItem],
+    }
+
+    it('returns inbound shipment plans if succesful', async () => {
+      expect.assertions(1)
+
+      const mockCreateInboundShipmentPlan = createMockHttpClient(
+        'fulfillment_inbound_shipmet_create_inbound_shipment_plan',
+      )
+
+      expect(
+        await mockCreateInboundShipmentPlan.fulfillmentInboundShipment.createInboundShipmentPlan(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.createInboundShipmentPlan(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getInboundGuidanceForAsin', () => {
     const parameters = {
       ASINList: [],
