@@ -80,6 +80,7 @@ export enum Resource {
   Feeds = 'Feeds',
   ShipmentInvoicing = 'ShipmentInvoicing',
   MerchantFulfillment = 'MerchantFulfillment',
+  FulfillmentInboundShipment = 'FulfillmentInboundShipment',
 }
 
 export interface ResourceActions {
@@ -163,6 +164,30 @@ export interface ResourceActions {
     | 'CreateShipment'
     | 'GetShipment'
     | 'CancelShipment'
+    | 'GetServiceStatus'
+  [Resource.FulfillmentInboundShipment]:
+    | 'GetInboundGuidanceForSKU'
+    | 'GetInboundGuidanceForASIN'
+    | 'CreateInboundShipmentPlan'
+    | 'CreateInboundShipment'
+    | 'UpdateInboundShipment'
+    | 'GetPreorderInfo'
+    | 'ConfirmPreorder'
+    | 'GetPrepInstructionsForSKU'
+    | 'GetPrepInstructionsForASIN'
+    | 'PutTransportContent'
+    | 'EstimateTransportRequest'
+    | 'GetTransportContent'
+    | 'ConfirmTransportRequest'
+    | 'VoidTransportRequest'
+    | 'GetPackageLabels'
+    | 'GetUniquePackageLabels'
+    | 'GetPalletLabels'
+    | 'GetBillOfLading'
+    | 'ListInboundShipments'
+    | 'ListInboundShipmentsByNextToken'
+    | 'ListInboundShipmentItems'
+    | 'ListInboundShipmentItemsByNextToken'
     | 'GetServiceStatus'
 }
 

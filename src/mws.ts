@@ -1,6 +1,7 @@
 import { HttpClient } from './http'
 import { Feeds } from './sections/feeds'
 import { Finances } from './sections/finances/finances'
+import { FulfillmentInboundShipment } from './sections/fulfillment-inbound-shipment'
 import { FulfillmentInventory } from './sections/fulfillment-inventory'
 import { MerchantFulfillment } from './sections/merchant-fulfillment/merchant-fulfillment'
 import { Orders } from './sections/orders'
@@ -16,6 +17,8 @@ export class MWS {
   private _finances!: Finances
 
   private _fulfillmentInventory!: FulfillmentInventory
+
+  private _fulfillmentInboundShipment!: FulfillmentInboundShipment
 
   private _merchantFulfillment!: MerchantFulfillment
 
@@ -63,6 +66,14 @@ export class MWS {
     }
 
     return this._finances
+  }
+
+  get fulfillmentInboundShipment() {
+    if (!this._fulfillmentInboundShipment) {
+      this._fulfillmentInboundShipment = new FulfillmentInboundShipment(this.httpClient)
+    }
+
+    return this._fulfillmentInboundShipment
   }
 
   get fulfillmentInventory() {
