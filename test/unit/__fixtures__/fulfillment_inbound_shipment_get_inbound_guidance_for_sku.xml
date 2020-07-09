@@ -1,12 +1,14 @@
 <GetInboundGuidanceForSKUResponse xmlns="https://mws.amazonservices.com/FulfillmentInboundShipment/2010-10-01">
   <GetInboundGuidanceForSKUResult>
     <SKUInboundGuidanceList>
-      <SellerSKU>us001</SellerSKU>
-      <ASIN>B00005N5PF</ASIN>
-      <InboundGuidance>InboundNotRecommended</InboundGuidance>
-      <GuidanceReasonList>
-        <GuidanceReason>SlowMovingASIN</GuidanceReason>
-      </GuidanceReasonList>
+      <SKUInboundGuidance>
+        <SellerSKU>us001</SellerSKU>
+        <ASIN>B00005N5PF</ASIN>
+        <InboundGuidance>InboundNotRecommended</InboundGuidance>
+        <GuidanceReasonList>
+          <GuidanceReason>SlowMovingASIN</GuidanceReason>
+        </GuidanceReasonList>
+      </SKUInboundGuidance>
     </SKUInboundGuidanceList>
     <InvalidSKUList></InvalidSKUList>
   </GetInboundGuidanceForSKUResult>
