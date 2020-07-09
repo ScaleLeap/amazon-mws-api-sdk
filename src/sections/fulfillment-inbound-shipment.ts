@@ -32,9 +32,14 @@ const SKUInboundGuidance = Codec.interface({
   GuidanceReasonList: optional(ensureArray('GuidanceReason', GuidanceReason)),
 })
 
+const InvalidSKU = Codec.interface({
+  SellerSKU: string,
+  ErrorReason: string,
+})
+
 const GetInboundGuidanceForSKU = Codec.interface({
   SKUInboundGuidanceList: ensureArray('SKUInboundGuidance', SKUInboundGuidance),
-  InvalidSKUList: optional(string),
+  InvalidSKUList: optional(ensureArray('InvalidSKU', InvalidSKU)),
 })
 
 type GetInboundGuidanceForSKU = GetInterface<typeof GetInboundGuidanceForSKU>
@@ -45,8 +50,58 @@ const GetInboundGuidanceForSKUResponse = Codec.interface({
   }),
 })
 
+const InvalidASIN = Codec.interface({
+  ASIN: string,
+  ErrorReason: string,
+})
+
+const ASINInboundGuidance = Codec.interface({
+  ASIN: string,
+  InboundGuidance,
+  GuidanceReasonList: optional(ensureArray('GuidanceReason', GuidanceReason)),
+})
+
+const GetInboundGuidanceForASIN = Codec.interface({
+  ASINInboundGuidanceList: ensureArray('ASINInboundGuidance', ASINInboundGuidance),
+  InvalidASINList: ensureArray('InvalidASIN', InvalidASIN),
+})
+
+type GetInboundGuidanceForASIN = GetInterface<typeof GetInboundGuidanceForASIN>
+
+const GetInboundGuidanceForASINResponse = Codec.interface({
+  GetInboundGuidanceForASINResponse: Codec.interface({
+    GetInboundGuidanceForASINResult: GetInboundGuidanceForASIN,
+  }),
+})
+
+interface GetInboundGuidanceForASINParameters {
+  ASINList: string[]
+  MarketplaceId: string
+}
+
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async getInboundGuidanceForAsin(
+    parameters: GetInboundGuidanceForASINParameters,
+  ): Promise<[GetInboundGuidanceForASIN, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'GetInboundGuidanceForASIN',
+      parameters: {
+        'ASINList.Id': parameters.ASINList,
+        MarketplaceId: parameters.MarketplaceId,
+      },
+    })
+
+    return GetInboundGuidanceForASINResponse.decode(response).caseOf({
+      Right: (x) => [x.GetInboundGuidanceForASINResponse.GetInboundGuidanceForASINResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getInboundGuidanceForSku(
     parameters: GetInboundGuidanceForSKUParameters,
