@@ -109,15 +109,12 @@
     * [cancelShipment](#cancelshipment)
     * [getServiceStatus](#getservicestatus-5)
   * [Recommendations](#recommendations)
-    * [Types used in MerchantFulfillemnt](#types-used-in-merchantfulfillemnt-1)
+    * [Types used in Recommendations](#types-used-in-recommendations)
       * [CategoryQuery](#categoryquery)
     * [getLastUpdatedTimeForRecommendations](#getlastupdatedtimeforrecommendations)
     * [listRecommendations](#listrecommendations)
     * [listRecommendationsByNextToken](#listrecommendationsbynexttoken)
     * [getServiceStatus](#getservicestatus-6)
-
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -2164,7 +2161,7 @@ const [response, meta] = merchantFulfillment.getServiceStatus()
 ## Recommendations
 [Amazon MWS Recommendations API official documentation](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_Overview.html)
 
-### Types used in MerchantFulfillemnt
+### Types used in Recommendations
 
 #### CategoryQuery
 
@@ -2237,7 +2234,7 @@ const [response, meta] = recommendations.listRecommendations(parameters)
 const parameters = { MarketplaceId: 'A2EUQ1WTGCTBG2' }
 
 const recommendations = new Recommendations(httpClient)
-const [response, meta] = recommendations.listRecommendationsNextToken(new NextToken('ListRecommendations', '123'))
+const [response, meta] = recommendations.listRecommendationsByNextToken(new NextToken('ListRecommendations', '123'))
 ```
 
 **Response**
