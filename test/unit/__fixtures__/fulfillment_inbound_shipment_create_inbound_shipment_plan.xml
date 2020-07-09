@@ -1,46 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <CreateInboundShipmentPlanResponse xmlns="http://mws.amazonaws.com/FulfillmentInboundShipment/2010-10-01/">
   <CreateInboundShipmentPlanResult>
     <InboundShipmentPlans>
       <member>
-        <DestinationFulfillmentCenterId>ABE2</DestinationFulfillmentCenterId>
-        <LabelPrepType>SELLER_LABEL</LabelPrepType>
+        <ShipmentId>String</ShipmentId>
+        <DestinationFulfillmentCenterId>String</DestinationFulfillmentCenterId>
         <ShipToAddress>
-          <City>Breinigsville</City>
-          <CountryCode>US</CountryCode>
-          <PostalCode>18031</PostalCode>
-          <Name>Amazon.com</Name>
-          <AddressLine1>705 Boulder Drive</AddressLine1>
-          <StateOrProvinceCode>PA</StateOrProvinceCode>
+          <Name>String</Name>
+          <AddressLine1>String</AddressLine1>
+          <AddressLine2>String</AddressLine2>
+          <DistrictOrCounty>String</DistrictOrCounty>
+          <City>String</City>
+          <StateOrProvinceCode>String</StateOrProvinceCode>
+          <CountryCode>String</CountryCode>
+          <PostalCode>String</PostalCode>
         </ShipToAddress>
-        <EstimatedBoxContentsFee>
-          <TotalUnits>10</TotalUnits>
-          <FeePerUnit>
-            <CurrencyCode>USD</CurrencyCode>
-            <Value>0.10</Value>
-          </FeePerUnit>
-          <TotalFee>
-            <CurrencyCode>USD</CurrencyCode>
-            <Value>10.0</Value>
-          </TotalFee>
-        </EstimatedBoxContentsFee>
+        <LabelPrepType>String</LabelPrepType>
         <Items>
           <member>
-            <FulfillmentNetworkSKU>FNSKU00001</FulfillmentNetworkSKU>
+            <SellerSKU>String</SellerSKU>
+            <FulfillmentNetworkSKU>String</FulfillmentNetworkSKU>
             <Quantity>1</Quantity>
-            <SellerSKU>SKU00001</SellerSKU>
             <PrepDetailsList>
               <PrepDetails>
-                <PrepInstruction>Taping</PrepInstruction>
-                <PrepOwner>AMAZON</PrepOwner>
+                <PrepInstruction>String</PrepInstruction>
+                <PrepOwner>String</PrepOwner>
               </PrepDetails>
             </PrepDetailsList>
           </member>
         </Items>
-        <ShipmentId>FBA0000001</ShipmentId>
+        <EstimatedBoxContentsFee>
+          <TotalUnits>1</TotalUnits>
+          <FeePerUnit>
+            <CurrencyCode>String</CurrencyCode>
+            <Value>100</Value>
+          </FeePerUnit>
+          <TotalFee>
+            <CurrencyCode>String</CurrencyCode>
+            <Value>100</Value>
+          </TotalFee>
+        </EstimatedBoxContentsFee>
       </member>
     </InboundShipmentPlans>
   </CreateInboundShipmentPlanResult>
   <ResponseMetadata>
-    <RequestId>babd156d-8b2f-40b1-a770-d117f9ccafef</RequestId>
+    <RequestId>String</RequestId>
   </ResponseMetadata>
 </CreateInboundShipmentPlanResponse>

@@ -1,5 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`fulfillmentInboundShipment createInboundShipmentPlan returns inbound shipment plans if succesful 1`] = `
+Array [
+  Object {
+    "InboundShipmentPlans": Array [
+      Object {
+        "DestinationFulfillmentCenterId": "String",
+        "EstimatedBoxContentsFee": Object {
+          "FeePerUnit": Object {
+            "CurrencyCode": "String",
+            "Value": "100",
+          },
+          "TotalFee": Object {
+            "CurrencyCode": "String",
+            "Value": "100",
+          },
+          "TotalUnits": 1,
+        },
+        "Items": Array [
+          Object {
+            "FulfillmentNetworkSKU": "String",
+            "PrepDetailsList": Array [
+              Object {
+                "PrepInstruction": "String",
+                "PrepOwner": "String",
+              },
+            ],
+            "Quantity": 1,
+            "SellerSKU": "String",
+          },
+        ],
+        "LabelPrepType": "String",
+        "ShipToAddress": Object {
+          "AddressLine1": "String",
+          "AddressLine2": "String",
+          "City": "String",
+          "CountryCode": "String",
+          "DistrictOrCounty": "String",
+          "Name": "String",
+          "PostalCode": "String",
+          "StateOrProvinceCode": "String",
+        },
+        "ShipmentId": "String",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`fulfillmentInboundShipment getInboundGuidanceForAsin returns sku inbound guidance list if succesful 1`] = `
 Array [
   Object {

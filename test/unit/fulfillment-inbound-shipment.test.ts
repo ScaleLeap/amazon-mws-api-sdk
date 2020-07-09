@@ -1,6 +1,39 @@
 import { ParsingError } from '../../src'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
+function mockFunctions() {
+  /**
+   * Mock everything in purify-ts, restore it back to normal,
+   *  except for `enumeration` which will be stubbed to accept
+   * https://github.com/facebook/jest/issues/936#issuecomment-265074320
+   */
+  const original = jest.requireActual('purify-ts')
+
+  return {
+    ...original, // Pass down all the exported objects
+    enumeration: <T extends Record<string, string | number>>(enumeration: T) => {
+      const enumValues = Object.values(enumeration)
+
+      return original.Codec.custom({
+        decode: (input: string | number) => {
+          if (typeof input !== 'string' && typeof input !== 'number') {
+            return original.Left(`Expected enum, received ${input}`)
+          }
+
+          const enumIndex = enumValues.indexOf(input)
+
+          return enumIndex !== -1 || input === 'String'
+            ? original.Right((enumValues[enumIndex] as T[keyof T]) || 'String')
+            : original.Left(`Expected enum, received ${input}`)
+        },
+        encode: original.identity,
+        schema: () => ({ enum: enumValues }),
+      })
+    },
+  }
+}
+jest.mock('purify-ts', () => mockFunctions())
+
 describe('fulfillmentInboundShipment', () => {
   describe('createInboundShipmentPlan', () => {
     const mockAddress = {
@@ -20,14 +53,14 @@ describe('fulfillmentInboundShipment', () => {
 
     const parameters = {
       ShipFromAddress: mockAddress,
-      InboundShipmetPlanRequestItems: [mockInboundShipmentPlanRequestItem],
+      InboundShipmentPlanRequestItems: [mockInboundShipmentPlanRequestItem],
     }
 
     it('returns inbound shipment plans if succesful', async () => {
       expect.assertions(1)
 
       const mockCreateInboundShipmentPlan = createMockHttpClient(
-        'fulfillment_inbound_shipmet_create_inbound_shipment_plan',
+        'fulfillment_inbound_shipment_create_inbound_shipment_plan',
       )
 
       expect(
