@@ -1,4 +1,13 @@
-import { Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
+import {
+  Codec,
+  enumeration,
+  exactly,
+  GetInterface,
+  number,
+  oneOf,
+  optional,
+  string,
+} from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -12,13 +21,16 @@ interface GetLastUpdatedTimeForRecommendationsParameters {
   MarketplaceId: string
 }
 
-const GetLastUpdatedTimeForRecommendations = Codec.interface({
-  InventoryRecommendationsLastUpdated: mwsDate,
-  PricingRecommendationsLastUpdated: mwsDate,
-  FulfillmentRecommendationsLastUpdated: mwsDate,
-  GlobalSellingRecommendationsLastUpdated: mwsDate,
-  AdvertisingRecommendationsLastUpdated: mwsDate,
-})
+const GetLastUpdatedTimeForRecommendations = oneOf([
+  Codec.interface({
+    InventoryRecommendationsLastUpdated: mwsDate,
+    PricingRecommendationsLastUpdated: mwsDate,
+    FulfillmentRecommendationsLastUpdated: mwsDate,
+    GlobalSellingRecommendationsLastUpdated: mwsDate,
+    AdvertisingRecommendationsLastUpdated: mwsDate,
+  }),
+  exactly(''),
+])
 
 type GetLastUpdatedTimeForRecommendations = GetInterface<
   typeof GetLastUpdatedTimeForRecommendations
