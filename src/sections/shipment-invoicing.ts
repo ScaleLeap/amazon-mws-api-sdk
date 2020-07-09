@@ -77,7 +77,7 @@ const ShipmentDetail = Codec.interface({
   BuyerName: optional(string),
   BuyerCountry: optional(string),
   // Documentation type it as just a string, but the sample response is an object,
-  // Unfortunately Amazon official docs don't have module for `ShipmentInvoicing`
+  // Unfortunately Amazon official docs don't have the definition for this
   BuyerTaxInfo: optional(unknown),
   ShipmentItems: ensureArray('ShipmentItem', ShipmentItem),
   WarehouseId: optional(string),

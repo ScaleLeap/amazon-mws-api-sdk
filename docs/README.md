@@ -1,115 +1,11 @@
 # Table of Contents
-* [Table of Contents](#table-of-contents)
-* [Basics](#basics)
-  * [Configuring `HttpClient` and using it with the different sections](#configuring--httpclient--and-using-it-with-the-different-sections)
-  * [Basic usage example](#basic-usage-example)
-  * [Response Object](#response-object)
-  * [Request Metadata](#request-metadata)
-  * [Next tokens](#next-tokens)
-    * [Creating `NextToken`s](#creating--nexttoken-s)
-    * [Reusing next tokens from a previous response](#reusing-next-tokens-from-a-previous-response)
-  * [MWS Class](#mws-class)
-* [Sections](#sections)
-  * [Sellers](#sellers)
-    * [listMarketplaceParticipations](#listmarketplaceparticipations)
-    * [listMarketplaceParticipationsByNextToken](#listmarketplaceparticipationsbynexttoken)
-    * [getServiceStatus](#getservicestatus)
-  * [Orders](#orders)
-    * [listOrders](#listorders)
-    * [listOrdersByNextToken](#listordersbynexttoken)
-    * [getOrder](#getorder)
-    * [listOrderItems](#listorderitems)
-    * [listOrderItemsByNextToken](#listorderitemsbynexttoken)
-    * [getServiceStatus](#getservicestatus-1)
-  * [Reports](#reports)
-    * [requestReport](#requestreport)
-    * [getReportRequestList](#getreportrequestlist)
-    * [getReportRequestListByNextToken](#getreportrequestlistbynexttoken)
-    * [getReportRequestCount](#getreportrequestcount)
-    * [cancelReportRequests](#cancelreportrequests)
-    * [getReportList](#getreportlist)
-    * [getReportListByNextToken](#getreportlistbynexttoken)
-    * [getReportCount](#getreportcount)
-    * [getReport](#getreport)
-    * [manageReportSchedule](#managereportschedule)
-    * [getReportScheduleList](#getreportschedulelist)
-    * [getReportScheduleListByNextToken](#getreportschedulelistbynexttoken)
-    * [getReportScheduleCount](#getreportschedulecount)
-    * [updateReportAcknowledgements](#updatereportacknowledgements)
-  * [Subscriptions](#subscriptions)
-    * [Types used in `Subscriptions`](#types-used-in--subscriptions-)
-      * [Subscription](#subscription)
-      * [Destination](#destination)
-      * [AttribueKeyValue](#attribuekeyvalue)
-    * [registerDestination](#registerdestination)
-    * [deregisterDestination](#deregisterdestination)
-    * [listRegisteredDestinations](#listregistereddestinations)
-    * [sendTestNotificationToDestination](#sendtestnotificationtodestination)
-    * [createSubscription](#createsubscription)
-    * [getSubscription](#getsubscription)
-    * [deleteSubscription](#deletesubscription)
-    * [listSubscriptions](#listsubscriptions)
-    * [updateSubscription](#updatesubscription)
-    * [getServiceStatus](#getservicestatus-2)
-  * [FulfillmentInventory](#fulfillmentinventory)
-    * [listInventorySupply](#listinventorysupply)
-    * [listInventorySupplyByNextToken](#listinventorysupplybynexttoken)
-    * [getServiceStatus](#getservicestatus-3)
-  * [Feeds](#feeds)
-    * [submitFeed](#submitfeed)
-    * [getFeedSubmissionList](#getfeedsubmissionlist)
-    * [getFeedSubmissionListByNextToken](#getfeedsubmissionlistbynexttoken)
-    * [getFeedSubmissionCount](#getfeedsubmissioncount)
-    * [cancelFeedSubmissions](#cancelfeedsubmissions)
-    * [getFeedSubmissionResult](#getfeedsubmissionresult)
-  * [Products](#products)
-    * [Types used in `Products`](#types-used-in--products-)
-      * [FeesEstimateRequest](#feesestimaterequest)
-      * [PriceToEstimateFees](#pricetoestimatefees)
-      * [MoneyType](#moneytype)
-      * [Points](#points)
-    * [listMatchingProducts](#listmatchingproducts)
-    * [getMatchingProduct](#getmatchingproduct)
-    * [getMatchingProductForId](#getmatchingproductforid)
-    * [getCompetitivePricingForSku](#getcompetitivepricingforsku)
-    * [getCompetitivePricingForAsin](#getcompetitivepricingforasin)
-    * [getLowestOfferListingsForSku](#getlowestofferlistingsforsku)
-    * [getLowestOfferListingsForAsin](#getlowestofferlistingsforasin)
-    * [getLowestPricedOffersForSku](#getlowestpricedoffersforsku)
-    * [getLowestPricedOffersForAsin](#getlowestpricedoffersforasin)
-    * [getMyFeesEstimate](#getmyfeesestimate)
-    * [getMyPriceForSku](#getmypriceforsku)
-    * [getMyPriceForAsin](#getmypriceforasin)
-    * [getProductCategoriesForSku](#getproductcategoriesforsku)
-    * [getProductCategoriesForAsin](#getproductcategoriesforasin)
-    * [getServiceStatus](#getservicestatus-4)
-  * [Finances](#finances)
-    * [listFinancialEventGroups](#listfinancialeventgroups)
-    * [listFinancialEventGroupsByNextToken](#listfinancialeventgroupsbynexttoken)
-    * [listFinancialEvents](#listfinancialevents)
-    * [listFinancialEventsByNextToken](#listfinancialeventsbynexttoken)
-  * [MerchantFulfillemnt](#merchantfulfillemnt)
-    * [Types used in MerchantFulfillemnt](#types-used-in-merchantfulfillemnt)
-      * [ShipmentRequestDetails](#shipmentrequestdetails)
-      * [Item](#item)
-      * [Address](#address)
-      * [PackageDimensions](#packagedimensions)
-      * [Weight](#weight)
-      * [ShippingServiceOptions](#shippingserviceoptions)
-      * [LabelCustomization](#labelcustomization)
-      * [AdditionalSellerInputs](#additionalsellerinputs)
-      * [AdditionalSellerInput](#additionalsellerinput)
-      * [CurrencyAmount](#currencyamount)
-      * [LabelFormatOption](#labelformatoption)
-      * [ShippingOfferingFilter](#shippingofferingfilter)
-    * [getEligibleShippingServices](#geteligibleshippingservices)
-    * [getAddtionalSellerInputs](#getaddtionalsellerinputs)
-    * [createShipment](#createshipment)
-    * [getShipment](#getshipment)
-    * [cancelShipment](#cancelshipment)
-    * [getServiceStatus](#getservicestatus-5)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
+
+
+
+
 
 # Basics
 
@@ -1156,7 +1052,7 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 **Parameters**
 | Name              	| Type     	| Example               	| Required 	|
 |-------------------	|----------	|-----------------------	|----------	|
-| FeedContent       	| string   	| '<XML></XML>'         	| Yes      	|
+| FeedContent       	| string   	| `'<XML></XML>'`         	| Yes      	|
 | FeedType          	| string   	| `'_POST_PRODUCT_DATA_'` 	| Yes      	|
 | MarketplaceIdList 	| string[] 	| `['A2EUQ1WTGCTBG2']`    	| No       	|
 | PurgeAndReplace   	| boolean  	| `false`                 	| No       	|
@@ -2136,3 +2032,82 @@ const [response, meta] = merchantFulfillment.getServiceStatus()
 **Response**
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
+
+## ShipmentInvoicing
+
+### getFbaOutboundShipmentDetail
+
+**Parameters**
+
+| Name             	| Type   	| Example            	| Required 	|
+|------------------	|--------	|--------------------	|----------	|
+| MarketplaceId    	| string 	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| AmazonShipmentId 	| string 	| `'SHIPMENTID'`     	| Yes      	|
+
+**Example**
+
+```typescript
+const parameters = {
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  AmazonShipmentId: 'SHIPMENTID',
+}
+
+const shipmentInvoicing = new ShipmentInvoicing(httpClient)
+const [response, meta] = shipmentInvoicing.getFbaOutboundShipmentDetail(parameters)
+```
+
+**Response**
+
+[See shipment invoicing test snapshot](../test/unit/__snapshots__/shipment-invoicing.test.ts.snap)
+
+### submitFBAOutboundShipmentInvoice
+
+**Parameters**
+**Parameters**
+| Name              	| Type     	| Example                 	| Required 	|
+|-------------------	|----------	|-------------------------	|----------	|
+| MarketplaceId     	| string 	  | `'A2EUQ1WTGCTBG2'`      	| Yes     	|
+| AmazonShipmentId   	| string   	| `'SHIPMENTID'` 	          | Yes       |
+| InvoiceContent     	| string   	| `'<XML></XML>'`         	| Yes      	|
+
+**Example**
+
+```typescript
+const parameters = {
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  AmazonShipmentId: 'SHIPMENTID',
+  InvoiceContent: '<XML></XML>',
+}
+
+const shipmentInvoicing = new ShipmentInvoicing(httpClient)
+const [response, meta] = shipmentInvoicing.submitFBAOutboundShipmentInvoice(parameters)
+```
+
+**Response**
+
+[See shipment invoicing test snapshot](../test/unit/__snapshots__/shipment-invoicing.test.ts.snap)
+
+### getFBAOutboundShipmentInvoiceStatus
+
+**Parameters**
+
+| Name             	| Type   	| Example            	| Required 	|
+|------------------	|--------	|--------------------	|----------	|
+| MarketplaceId    	| string 	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| AmazonShipmentId 	| string 	| `'SHIPMENTID'`     	| Yes      	|
+
+**Example**
+
+```typescript
+const parameters = {
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  AmazonShipmentId: 'SHIPMENTID',
+}
+
+const shipmentInvoicing = new ShipmentInvoicing(httpClient)
+const [response, meta] = shipmentInvoicing.getFBAOutboundShipmentInvoiceStatus(parameters)
+```
+
+**Response**
+
+[See shipment invoicing test snapshot](../test/unit/__snapshots__/shipment-invoicing.test.ts.snap)
