@@ -44,21 +44,51 @@ const mockAddress = {
   Phone: '',
 }
 
+const mockInboundShipmentItem = {
+  SellerSKU: '',
+  QuantityShipped: 1,
+}
+
+const mockInboundShipmentHeader: InboundShipmentHeader = {
+  ShipmentName: '',
+  ShipFromAddress: mockAddress,
+  DestinationFulfillmentCenterId: '',
+  LabelPrepPreference: 'SELLER_LABEL',
+  ShipmentStatus: 'WORKING',
+}
+
 describe('fulfillmentInboundShipment', () => {
+  describe('updateInboundShipment', () => {
+    const parameters = {
+      ShipmentId: '',
+      InboundShipmentHeader: mockInboundShipmentHeader,
+      InboundShipmentItems: [mockInboundShipmentItem],
+    }
+
+    it('return the shipment id if succesful', async () => {
+      expect.assertions(1)
+
+      const mockUpdateInboundShipment = createMockHttpClient(
+        'fulfillment-inbound-shipment-update-inbound-shipment',
+      )
+
+      expect(
+        await mockUpdateInboundShipment.fulfillmentInboundShipment.updateInboundShipment(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it("throws a parsing error when the status response isn't valid", async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.updateInboundShipment(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('createInboundShipment', () => {
-    const mockInboundShipmentItem = {
-      SellerSKU: '',
-      QuantityShipped: 1,
-    }
-
-    const mockInboundShipmentHeader: InboundShipmentHeader = {
-      ShipmentName: '',
-      ShipFromAddress: mockAddress,
-      DestinationFulfillmentCenterId: '',
-      LabelPrepPreference: 'SELLER_LABEL',
-      ShipmentStatus: 'WORKING',
-    }
-
     const parameters: CreateInboundShipmentParameters = {
       ShipmentId: '',
       InboundShipmentHeader: mockInboundShipmentHeader,
