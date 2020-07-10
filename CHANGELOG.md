@@ -3,6 +3,23 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.3.0...v1.4.0) (2020-07-10)
+
+
+### Bug Fixes
+
+* fix api-extrator issues ([0db5be3](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/0db5be3c05fb62b31a153fb3fb09d6d4c85d0e59))
+* fix GetLastUpdatedTimeForRecommendations sometimes return blank ([32ad730](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/32ad7303cd211079b27c5ff55ad5db7d9f72d7fb))
+
+
+### Features
+
+* create listRecommendations, add enum mock to unit test ([458df2a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/458df2ac7a3ac9cd3430f133531d46be6b09e070))
+* init recommendations ([00cdc9a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/00cdc9afc83b7ed7649fb415862da0b23ee08138))
+* init recommendations ([f7bd758](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/f7bd7583157c9dac6a6b2dd82c1478784dea3aca))
+* made getLastUpdatedTimeForRecommendations ([c33b71c](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c33b71ced2dda3627fe31002d1ea5a7497ee56fe))
+* made listRecommendationByNextToken ([f1f79a7](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/f1f79a7c79a086eed043fd7d80664436a7453088))
+
 # [1.3.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.2.0...v1.3.0) (2020-07-08)
 
 
