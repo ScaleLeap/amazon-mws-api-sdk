@@ -108,6 +108,18 @@
     * [getShipment](#getshipment)
     * [cancelShipment](#cancelshipment)
     * [getServiceStatus](#getservicestatus-5)
+  * [ShipmentInvoicing](#shipmentinvoicing)
+    * [getFbaOutboundShipmentDetail](#getfbaoutboundshipmentdetail)
+    * [submitFBAOutboundShipmentInvoice](#submitfbaoutboundshipmentinvoice)
+    * [getFBAOutboundShipmentInvoiceStatus](#getfbaoutboundshipmentinvoicestatus)
+    * [getServiceStatus](#getservicestatus-6)
+  * [Recommendations](#recommendations)
+    * [Types used in Recommendations](#types-used-in-recommendations)
+      * [CategoryQuery](#categoryquery)
+    * [getLastUpdatedTimeForRecommendations](#getlastupdatedtimeforrecommendations)
+    * [listRecommendations](#listrecommendations)
+    * [listRecommendationsByNextToken](#listrecommendationsbynexttoken)
+    * [getServiceStatus](#getservicestatus-7)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -276,6 +288,12 @@ const usingMws = async () => {
 ---
 [go back to table of contents](#table-of-contents)
 
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START SELLERS/////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
 ## Sellers
 
 [Amazon MWS Sellers API official documentation](http://docs.developer.amazonservices.com/en_CA/sellers/Sellers_Overview.html)
@@ -337,6 +355,12 @@ const [response, meta] = sellers.getServiceStatus()
 
 ---
 [go back to table of contents](#table-of-contents)
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START ORDERS//////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 ## Orders
 
@@ -465,6 +489,12 @@ const [response, meta] = orders.getServiceStatus()
 
 ---
 [go back to table of contents](#table-of-contents)
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START REPORTS/////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 ## Reports
 
@@ -756,6 +786,12 @@ const [response, meta] = reports.updateReportAcknowledgements({ ReportIdList: ['
 
 ---
 [go back to table of contents](#table-of-contents)
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START SUBSCRIPTIONS///////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 ## Subscriptions
 [Amazon MWS Subscriptions official API](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Overview.html)
@@ -1082,6 +1118,12 @@ const [response, meta] = subscriptions.getServiceStatus()
 ---
 [go back to table of contents](#table-of-contents)
 
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START FULFILLMENTINVENTORY////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
 ## FulfillmentInventory
 
 [Amazon MWS Fulfillment Inventory official documentation](http://docs.developer.amazonservices.com/en_CA/fba_inventory/FBAInventory_Overview.html)
@@ -1148,6 +1190,13 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 ---
 [go back to table of contents](#table-of-contents)
 
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START FEEDS///////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
 ## Feeds
 
 [Amazon MWS Feeds API official documentation](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_Overview.html)
@@ -1156,7 +1205,7 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 **Parameters**
 | Name              	| Type     	| Example               	| Required 	|
 |-------------------	|----------	|-----------------------	|----------	|
-| FeedContent       	| string   	| '<XML></XML>'         	| Yes      	|
+| FeedContent       	| string   	| `'<XML></XML>'`         	| Yes      	|
 | FeedType          	| string   	| `'_POST_PRODUCT_DATA_'` 	| Yes      	|
 | MarketplaceIdList 	| string[] 	| `['A2EUQ1WTGCTBG2']`    	| No       	|
 | PurgeAndReplace   	| boolean  	| `false`                 	| No       	|
@@ -1295,6 +1344,12 @@ const [response, meta] = feeds.getFeedSubmissionResult({
 
 ---
 [go back to table of contents](#table-of-contents)
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START PRODUCTS////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 ## Products
 [Amazon MWS Finances API official documentation](http://docs.developer.amazonservices.com/en_CA/products/Products_Overview.html)
@@ -1692,6 +1747,12 @@ const [response, meta] = products.getServiceStatus()
 ---
 [go back to table of contents](#table-of-contents)
 
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START FINANCES///////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
 ## Finances
 [Amazon MWS Finances API official documentation](http://docs.developer.amazonservices.com/en_CA/finances/Finances_Overview.html)
 
@@ -1772,6 +1833,12 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 **Response**
 
 [See finances test snapshot](../test/unit/__snapshots__/finances.test.ts.snap)
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START MERCHANTFULFILLMENT/////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 ## MerchantFulfillemnt
 
@@ -2136,3 +2203,212 @@ const [response, meta] = merchantFulfillment.getServiceStatus()
 **Response**
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START SHIPMENTINVOICING///////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+## ShipmentInvoicing
+
+### getFbaOutboundShipmentDetail
+
+**Parameters**
+
+| Name             	| Type   	| Example            	| Required 	|
+|------------------	|--------	|--------------------	|----------	|
+| MarketplaceId    	| string 	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| AmazonShipmentId 	| string 	| `'SHIPMENTID'`     	| Yes      	|
+
+**Example**
+
+```typescript
+const parameters = {
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  AmazonShipmentId: 'SHIPMENTID',
+}
+
+const shipmentInvoicing = new ShipmentInvoicing(httpClient)
+const [response, meta] = shipmentInvoicing.getFbaOutboundShipmentDetail(parameters)
+```
+
+**Response**
+
+[See shipment invoicing test snapshot](../test/unit/__snapshots__/shipment-invoicing.test.ts.snap)
+
+### submitFBAOutboundShipmentInvoice
+
+**Parameters**
+| Name              	| Type     	| Example                 	| Required 	|
+|-------------------	|----------	|-------------------------	|----------	|
+| MarketplaceId     	| string 	  | `'A2EUQ1WTGCTBG2'`      	| Yes     	|
+| AmazonShipmentId   	| string   	| `'SHIPMENTID'` 	          | Yes       |
+| InvoiceContent     	| string   	| `'<XML></XML>'`         	| Yes      	|
+
+**Example**
+```typescript
+const parameters = {
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  AmazonShipmentId: 'SHIPMENTID',
+  InvoiceContent: '<XML></XML>',
+}
+
+const shipmentInvoicing = new ShipmentInvoicing(httpClient)
+const [response, meta] = shipmentInvoicing.submitFBAOutboundShipmentInvoice(parameters)
+```
+
+**Response**
+
+[See shipment invoicing test snapshot](../test/unit/__snapshots__/shipment-invoicing.test.ts.snap)
+
+
+### getFBAOutboundShipmentInvoiceStatus
+
+**Parameters**
+
+| Name             	| Type   	| Example            	| Required 	|
+|------------------	|--------	|--------------------	|----------	|
+| MarketplaceId    	| string 	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| AmazonShipmentId 	| string 	| `'SHIPMENTID'`     	| Yes      	|
+
+**Example**
+```typescript
+const parameters = {
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  AmazonShipmentId: 'SHIPMENTID',
+}
+
+const shipmentInvoicing = new ShipmentInvoicing(httpClient)
+const [response, meta] = shipmentInvoicing.getFBAOutboundShipmentInvoiceStatus(parameters)
+```
+
+[See shipment invoicing test snapshot](../test/unit/__snapshots__/shipment-invoicing.test.ts.snap)
+
+### getServiceStatus
+
+**Parameters**
+
+| None |
+|------|
+
+**Example**
+
+```typescript
+const shipmentInvoicing = new ShipmentInvoicing(httpClient)
+const [response, meta] = shipmentInvoicing.getServiceStatus()
+```
+
+**Response**
+
+[See shipment invoicing test snapshot](../test/unit/__snapshots__/shipment-invoicing.test.ts.snap)
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////START RECOMMENDATIONS/////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+## Recommendations 
+
+[Amazon MWS Recommendations API official documentation](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_Overview.html)
+
+### Types used in Recommendations
+
+#### CategoryQuery
+
+| Name              	     | Type                     | Example              | Required 	|
+|-----------------------   |------------------------- |----------------------|----------	|
+| RecommendationCategory   | string                  	| `'Selection '`       | Yes      	|
+| FilterOptions            | string                  	| `'QualitySet=Defect'`| Yes      	|
+
+* [Possible values for RecommendationCategory and FilterOptions ](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
+
+### getLastUpdatedTimeForRecommendations
+
+**Parameters**
+
+| Name              	| Type                     	| Example     -	| Required 	|
+|---------------    	|--------------------------	|--------------	|----------	|
+| MarketplaceId       | string                  	| `'A2EUQ1WTGCTBG2'`| Yes      	|
+
+**Example**
+
+```typescript
+const parameters = { MarketplaceId: 'A2EUQ1WTGCTBG2' }
+
+const recommendations = new Recommendations(httpClient)
+const [response, meta] = recommendations.getLastUpdatedTimeForRecommendations(parameters)
+```
+
+**Response**
+
+[See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
+
+### listRecommendations
+
+**Parameters**
+
+| Name              	| Type                     	| Example     -	| Required 	|
+|---------------    	|--------------------------	|--------------	|----------	|
+| MarketplaceId       | string                  	| `'A2EUQ1WTGCTBG2'`| Yes      	|
+| RecommendationCategory       | string                  	| `'Inventory'`| No. To retrieve all recommendations, do not specify a value for this parameter.       	|
+| CategoryQueryList       | CategoryQuery[]                  	| [`[CategoryQuery]`](#categoryquery)| No      	|
+
+* [Possible values for RecommendationCategory ](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
+
+**Example**
+
+```typescript
+const parameters = { MarketplaceId: 'A2EUQ1WTGCTBG2' }
+
+const recommendations = new Recommendations(httpClient)
+const [response, meta] = recommendations.listRecommendations(parameters)
+```
+
+**Response**
+
+[See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
+
+
+### listRecommendationsByNextToken
+
+**Parameters**
+
+| Name      | Type      | Example                                                               | Required |
+|-----------|-----------|-----------------------------------------------------------------------|----------|
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts)| Yes      |
+
+**Example**
+
+```typescript
+const parameters = { MarketplaceId: 'A2EUQ1WTGCTBG2' }
+
+const recommendations = new Recommendations(httpClient)
+const [response, meta] = recommendations.listRecommendationsByNextToken(new NextToken('ListRecommendations', '123'))
+```
+
+**Response**
+
+[See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
+
+
+### getServiceStatus
+
+**Parameters**
+
+| None |
+|------|
+
+**Example**
+
+```typescript
+const recommendations = new Recommendations(httpClient)
+const [response, meta] = recommendations.getServiceStatus()
+```
+
+**Response**
+
+[See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
