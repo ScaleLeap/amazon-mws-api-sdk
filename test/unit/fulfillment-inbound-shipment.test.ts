@@ -69,7 +69,7 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       const mockUpdateInboundShipment = createMockHttpClient(
-        'fulfillment-inbound-shipment-update-inbound-shipment',
+        'fulfillment_inbound_shipment_update_inbound_shipment',
       )
 
       expect(

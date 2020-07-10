@@ -165,7 +165,7 @@ const canonicalizeInboundShipmentPlanRequestItems = (
   }
 }
 
-const canonicalizeParametersCreateInboundShipmentPlan = (
+const canonicalizeParametersCreateInboUpdateundShipmentPlan = (
   parameters: CreateInboundShipmentPlanParameters,
 ) => {
   const fixedInboundShipmentPlanRequestItems = parameters.InboundShipmentPlanRequestItems.map(
@@ -294,7 +294,7 @@ const canonicalizeInboundShipmentItem = (item: InboundShipmentItem) => {
   }
 }
 
-const canonicalizeParametersCreateInboundShipment = (
+const canonicalizeParametersCreateUpdateInboundShipment = (
   parameters: CreateInboundShipmentParameters,
 ) => {
   const shipmentItemsCanonicalized = parameters.InboundShipmentItems.map((item) =>
@@ -319,8 +319,40 @@ const CreateInboundShipmentResponse = Codec.interface({
   }),
 })
 
+type UpdateInboundShipmentParameters = CreateInboundShipmentParameters
+
+const UpdateInboundShipment = Codec.interface({
+  ShipmentId: string,
+})
+
+type UpdateInboundShipment = GetInterface<typeof UpdateInboundShipment>
+
+const UpdateInboundShipmentResponse = Codec.interface({
+  UpdateInboundShipmentResponse: Codec.interface({
+    UpdateInboundShipmentResult: UpdateInboundShipment,
+  }),
+})
+
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async updateInboundShipment(
+    parameters: UpdateInboundShipmentParameters,
+  ): Promise<[UpdateInboundShipment, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'UpdateInboundShipment',
+      parameters: canonicalizeParametersCreateUpdateInboundShipment(parameters),
+    })
+
+    return UpdateInboundShipmentResponse.decode(response).caseOf({
+      Right: (x) => [x.UpdateInboundShipmentResponse.UpdateInboundShipmentResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async createInboundShipment(
     parameters: CreateInboundShipmentParameters,
@@ -329,7 +361,7 @@ export class FulfillmentInboundShipment {
       resource: Resource.FulfillmentInboundShipment,
       version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
       action: 'CreateInboundShipment',
-      parameters: canonicalizeParametersCreateInboundShipment(parameters),
+      parameters: canonicalizeParametersCreateUpdateInboundShipment(parameters),
     })
 
     return CreateInboundShipmentResponse.decode(response).caseOf({
@@ -347,7 +379,7 @@ export class FulfillmentInboundShipment {
       resource: Resource.FulfillmentInboundShipment,
       version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
       action: 'CreateInboundShipmentPlan',
-      parameters: canonicalizeParametersCreateInboundShipmentPlan(parameters),
+      parameters: canonicalizeParametersCreateInboUpdateundShipmentPlan(parameters),
     })
 
     return CreateInboundShipmentPlanResponse.decode(response).caseOf({
