@@ -58,6 +58,33 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 }
 
 describe('fulfillmentInboundShipment', () => {
+  describe('confirmPreorder', () => {
+    const parameters = {
+      ShipmentId: '',
+      NeedByDate: new Date(),
+    }
+
+    it('returns confirmed dates if succesful', async () => {
+      expect.assertions(1)
+
+      const mockConfirmPreorder = createMockHttpClient(
+        'fulfillment_inbound_shipment_confirm_preorder',
+      )
+
+      expect(
+        await mockConfirmPreorder.fulfillmentInboundShipment.confirmPreorder(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isn t valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.confirmPreorder(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getPreorderInfo', () => {
     const parameters = { ShipmentId: '' }
 
