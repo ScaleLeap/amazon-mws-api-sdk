@@ -1,7 +1,7 @@
 import { HttpClient } from './http'
 import { Feeds } from './sections/feeds'
 import { Finances } from './sections/finances/finances'
-import { FulfillmentInboundShipment } from './sections/fulfillment-inbound-shipment'
+import { FulfillmentInboundShipment } from './sections/fulfillment-inbound-shipment/fulfillment-inbound-shipment'
 import { FulfillmentInventory } from './sections/fulfillment-inventory'
 import { MerchantFulfillment } from './sections/merchant-fulfillment/merchant-fulfillment'
 import { Orders } from './sections/orders'
