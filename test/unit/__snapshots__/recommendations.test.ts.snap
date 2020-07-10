@@ -1,0 +1,374 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recommendations getLastUpdatedTimeForRecommendations returns last updated time for recommendations if succesful 1`] = `
+Array [
+  Object {
+    "AdvertisingRecommendationsLastUpdated": 1969-07-21T02:56:03.000Z,
+    "FulfillmentRecommendationsLastUpdated": 1969-07-21T02:56:03.000Z,
+    "GlobalSellingRecommendationsLastUpdated": 1969-07-21T02:56:03.000Z,
+    "InventoryRecommendationsLastUpdated": 1969-07-21T02:56:03.000Z,
+    "PricingRecommendationsLastUpdated": 1969-07-21T02:56:03.000Z,
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`recommendations getServiceStatus returns a parsed model when the status response is valid 1`] = `
+Array [
+  Object {
+    "Status": "GREEN",
+    "Timestamp": "2020-05-06T08:22:23.582Z",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`recommendations listRecommendations returns a list of recommendations if succesful 1`] = `
+Array [
+  Object {
+    "AdvertisingRecommendations": Array [
+      Object {
+        "AvailableQuantity": 1,
+        "BrandName": "String",
+        "ItemIdentifier": Object {
+          "Asin": "String",
+          "Sku": "String",
+          "Upc": "String",
+        },
+        "ItemName": "String",
+        "LastUpdated": 1969-07-21T02:56:03.000Z,
+        "LowestPricePlusShipping": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "ProductCategory": "String",
+        "RecommendationId": "String",
+        "RecommendationReason": "String",
+        "SalesForTheLast30Days": 1,
+        "SalesRank": 1,
+      },
+    ],
+    "FulfillmentRecommendations": Array [
+      Object {
+        "AverageCustomerReview": 100,
+        "BrandName": "String",
+        "ItemDimensions": Object {
+          "Height": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Length": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Weight": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Width": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+        },
+        "ItemIdentifier": Object {
+          "Asin": "String",
+          "Sku": "String",
+          "Upc": "String",
+        },
+        "ItemName": "String",
+        "LastUpdated": 1969-07-21T02:56:03.000Z,
+        "NumberOfCustomerReviews": 1,
+        "NumberOfOffers": 1,
+        "NumberOfOffersFulfilledByAmazon": 1,
+        "ProductCategory": "String",
+        "RecommendationId": "String",
+        "RecommendationReason": "String",
+        "SalesRank": 1,
+      },
+    ],
+    "GlobalSellingRecommendations": Array [
+      Object {
+        "AverageCustomerReview": 100,
+        "BrandName": "String",
+        "ItemDimensions": Object {
+          "Height": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Length": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Weight": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Width": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+        },
+        "ItemIdentifier": Object {
+          "Asin": "String",
+          "Sku": "String",
+          "Upc": "String",
+        },
+        "ItemName": "String",
+        "LastUpdated": 1969-07-21T02:56:03.000Z,
+        "NumberOfCustomerReviews": 1,
+        "NumberOfOffers": 1,
+        "NumberOfOffersFulfilledByAmazon": 1,
+        "ProductCategory": "String",
+        "RecommendationId": "String",
+        "RecommendationReason": "String",
+        "SalesRank": 1,
+      },
+    ],
+    "InventoryRecommendations": Array [
+      Object {
+        "AvailableQuantity": 1,
+        "DaysOutOfStockLast30Days": 1,
+        "DaysUntilStockRunsOut": 1,
+        "FulfillmentChannel": "String",
+        "ItemIdentifier": Object {
+          "Asin": "String",
+          "Sku": "String",
+          "Upc": "String",
+        },
+        "ItemName": "String",
+        "LastUpdated": 1969-07-21T02:56:03.000Z,
+        "RecommendationId": "String",
+        "RecommendationReason": "String",
+      },
+    ],
+    "NextToken": NextToken {
+      "action": "ListRecommendations",
+      "token": "String",
+    },
+    "PricingRecommendations": Array [
+      Object {
+        "Condition": "String",
+        "FulfillmentChannel": "String",
+        "ItemIdentifier": Object {
+          "Asin": "String",
+          "Sku": "String",
+          "Upc": "String",
+        },
+        "ItemName": "String",
+        "LastUpdated": 1969-07-21T02:56:03.000Z,
+        "LowestAmazonFulfilledOfferPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "LowestMerchantFulfilledOfferPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "LowestPricePlusShipping": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "MedianPricePlusShipping": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "PriceDifferenceToLowPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "RecommendationId": "String",
+        "RecommendationReason": "String",
+        "SubCondition": "String",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`recommendations listRecommendationsByNextToken returns a list of recommendations if next token is valid 1`] = `
+Array [
+  Object {
+    "AdvertisingRecommendations": Array [
+      Object {
+        "AvailableQuantity": 1,
+        "BrandName": "String",
+        "ItemIdentifier": Object {
+          "Asin": "String",
+          "Sku": "String",
+          "Upc": "String",
+        },
+        "ItemName": "String",
+        "LastUpdated": 1969-07-21T02:56:03.000Z,
+        "LowestPricePlusShipping": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "ProductCategory": "String",
+        "RecommendationId": "String",
+        "RecommendationReason": "String",
+        "SalesForTheLast30Days": 1,
+        "SalesRank": 1,
+      },
+    ],
+    "FulfillmentRecommendations": Array [
+      Object {
+        "AverageCustomerReview": 100,
+        "BrandName": "String",
+        "ItemDimensions": Object {
+          "Height": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Length": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Weight": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Width": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+        },
+        "ItemIdentifier": Object {
+          "Asin": "String",
+          "Sku": "String",
+          "Upc": "String",
+        },
+        "ItemName": "String",
+        "LastUpdated": 1969-07-21T02:56:03.000Z,
+        "NumberOfCustomerReviews": 1,
+        "NumberOfOffers": 1,
+        "NumberOfOffersFulfilledByAmazon": 1,
+        "ProductCategory": "String",
+        "RecommendationId": "String",
+        "RecommendationReason": "String",
+        "SalesRank": 1,
+      },
+    ],
+    "GlobalSellingRecommendations": Array [
+      Object {
+        "AverageCustomerReview": 100,
+        "BrandName": "String",
+        "ItemDimensions": Object {
+          "Height": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Length": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Weight": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+          "Width": Object {
+            "Unit": "String",
+            "Value": 100,
+          },
+        },
+        "ItemIdentifier": Object {
+          "Asin": "String",
+          "Sku": "String",
+          "Upc": "String",
+        },
+        "ItemName": "String",
+        "LastUpdated": 1969-07-21T02:56:03.000Z,
+        "NumberOfCustomerReviews": 1,
+        "NumberOfOffers": 1,
+        "NumberOfOffersFulfilledByAmazon": 1,
+        "ProductCategory": "String",
+        "RecommendationId": "String",
+        "RecommendationReason": "String",
+        "SalesRank": 1,
+      },
+    ],
+    "InventoryRecommendations": Array [
+      Object {
+        "AvailableQuantity": 1,
+        "DaysOutOfStockLast30Days": 1,
+        "DaysUntilStockRunsOut": 1,
+        "FulfillmentChannel": "String",
+        "ItemIdentifier": Object {
+          "Asin": "String",
+          "Sku": "String",
+          "Upc": "String",
+        },
+        "ItemName": "String",
+        "LastUpdated": 1969-07-21T02:56:03.000Z,
+        "RecommendationId": "String",
+        "RecommendationReason": "String",
+      },
+    ],
+    "NextToken": NextToken {
+      "action": "ListRecommendations",
+      "token": "String",
+    },
+    "PricingRecommendations": Array [
+      Object {
+        "Condition": "String",
+        "FulfillmentChannel": "String",
+        "ItemIdentifier": Object {
+          "Asin": "String",
+          "Sku": "String",
+          "Upc": "String",
+        },
+        "ItemName": "String",
+        "LastUpdated": 1969-07-21T02:56:03.000Z,
+        "LowestAmazonFulfilledOfferPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "LowestMerchantFulfilledOfferPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "LowestPricePlusShipping": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "MedianPricePlusShipping": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "PriceDifferenceToLowPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "RecommendationId": "String",
+        "RecommendationReason": "String",
+        "SubCondition": "String",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
