@@ -180,3 +180,7 @@ export interface CreateInboundShipmentParameters {
   InboundShipmentHeader: InboundShipmentHeader
   InboundShipmentItems: InboundShipmentItem[]
 }
+
+export interface GetPreorderInfoParameters {
+  ShipmentId: string
+}

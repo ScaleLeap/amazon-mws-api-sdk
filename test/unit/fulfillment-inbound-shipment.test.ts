@@ -68,7 +68,9 @@ describe('fulfillmentInboundShipment', () => {
         'fulfillment_inbound_shipment_get_preorder_info',
       )
 
-      expect(await mockGetPreorderInfo.getPreorderInfo(parameters)).toMatchSnapshot()
+      expect(
+        await mockGetPreorderInfo.fulfillmentInboundShipment.getPreorderInfo(parameters),
+      ).toMatchSnapshot()
     })
 
     it('throws a parsing error when the status response isn t valid', async () => {

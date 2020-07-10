@@ -10,6 +10,8 @@ import {
   GetInboundGuidanceForASINResponse,
   GetInboundGuidanceForSKU,
   GetInboundGuidanceForSKUResponse,
+  GetPreorderInfo,
+  GetPreorderInfoResponse,
   UpdateInboundShipment,
   UpdateInboundShipmentParameters,
   UpdateInboundShipmentResponse,
@@ -21,12 +23,33 @@ import {
   CreateInboundShipmentPlanParameters,
   GetInboundGuidanceForASINParameters,
   GetInboundGuidanceForSKUParameters,
+  GetPreorderInfoParameters,
 } from './type'
 
 const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async getPreorderInfo(
+    parameters: GetPreorderInfoParameters,
+  ): Promise<[GetPreorderInfo, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'GetPreorderInfo',
+      parameters: {
+        ShipmentId: parameters.ShipmentId,
+      },
+    })
+
+    return GetPreorderInfoResponse.decode(response).caseOf({
+      Right: (x) => [x.GetPreorderInfoResponse.GetPreorderInfoResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async updateInboundShipment(
     parameters: UpdateInboundShipmentParameters,

@@ -1,4 +1,4 @@
-import { Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
+import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
 
 import { ensureArray, ensureString } from '../../parsing'
 import { CreateInboundShipmentParameters, PrepInstructionEnum, PrepOwnerEnum } from './type'
@@ -143,5 +143,20 @@ export type CreateInboundShipmentPlan = GetInterface<typeof CreateInboundShipmen
 export const CreateInboundShipmentPlanResponse = Codec.interface({
   CreateInboundShipmentPlanResponse: Codec.interface({
     CreateInboundShipmentPlanResult: CreateInboundShipmentPlan,
+  }),
+})
+
+export const GetPreorderInfo = Codec.interface({
+  ShipmentContainsPreorderableItems: boolean,
+  NeedByDate: string,
+  ConfirmedFulfillableDate: string,
+  ShipmentConfirmedForPreorder: boolean,
+})
+
+export type GetPreorderInfo = GetInterface<typeof GetPreorderInfo>
+
+export const GetPreorderInfoResponse = Codec.interface({
+  GetPreorderInfoResponse: Codec.interface({
+    GetPreorderInfoResult: GetPreorderInfo,
   }),
 })
