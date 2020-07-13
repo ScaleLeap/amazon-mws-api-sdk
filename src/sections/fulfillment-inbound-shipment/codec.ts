@@ -1,4 +1,13 @@
-import { boolean, Codec, enumeration, GetInterface, number, optional, string, unknown } from 'purify-ts'
+import {
+  boolean,
+  Codec,
+  enumeration,
+  GetInterface,
+  number,
+  optional,
+  string,
+  unknown,
+} from 'purify-ts'
 
 import { ensureArray, ensureString } from '../../parsing'
 import { CreateInboundShipmentParameters, PrepInstructionEnum, PrepOwnerEnum } from './type'
