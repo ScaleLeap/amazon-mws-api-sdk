@@ -58,6 +58,33 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 }
 
 describe('fulfillmentInboundShipment', () => {
+  describe('getPrepInstructionsForAsin', () => {
+    const parameters = {
+      ASINList: [''],
+      ShipToCountryCode: 'US',
+    }
+
+    it('returns list of prep instructions if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetPrepInstructionsForAsin = createMockHttpClient(
+        'fulfillment_inbound_shipmnt_get_prep_instructions_for_asin',
+      )
+
+      expect(
+        await mockGetPrepInstructionsForAsin.getPrepInstructionsForAsin(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is nt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.getPrepInstructionsForAsin(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getPrepInstructionsForSku', () => {
     const parameters = {
       SellerSKUList: [],
