@@ -65,7 +65,7 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 describe('fulfillmentInboundShipment', () => {
   describe('getTransportContent', () => {
     const parameters = {
-      ShipmentId: ''
+      ShipmentId: '',
     }
 
     it('returns the transport content if succesful', async () => {
