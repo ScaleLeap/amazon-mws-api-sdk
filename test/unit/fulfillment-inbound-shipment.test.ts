@@ -58,6 +58,35 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 }
 
 describe('fulfillmentInboundShipment', () => {
+  describe('getPrepInstructionsForSku', () => {
+    const parameters = {
+      SellerSKUList: [],
+      ShipToCountryCode: 'US',
+    }
+
+    it('returns prep instructions list if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetPrepInstructionsForSku = createMockHttpClient(
+        'fulfillmnt_inbound_shipment_get_prep_instrutions_for_sku',
+      )
+
+      expect(
+        await mockGetPrepInstructionsForSku.fulfillmentInboundShipment.getPrepInstructionsForSku(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is nt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.getPrepInstructionsForSku(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('confirmPreorder', () => {
     const parameters = {
       ShipmentId: '',
