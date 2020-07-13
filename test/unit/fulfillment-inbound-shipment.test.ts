@@ -68,11 +68,13 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       const mockGetPrepInstructionsForAsin = createMockHttpClient(
-        'fulfillment_inbound_shipmnt_get_prep_instructions_for_asin',
+        'fulfillment_inbound_shipment_get_prep_instructions_for_asin',
       )
 
       expect(
-        await mockGetPrepInstructionsForAsin.getPrepInstructionsForAsin(parameters),
+        await mockGetPrepInstructionsForAsin.fulfillmentInboundShipment.getPrepInstructionsForAsin(
+          parameters,
+        ),
       ).toMatchSnapshot()
     })
 

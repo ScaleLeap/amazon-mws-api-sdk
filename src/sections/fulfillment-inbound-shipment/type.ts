@@ -194,3 +194,8 @@ export interface GetPrepInstructionsForSKUParameters {
   SellerSKUList: string[]
   ShipToCountryCode: string
 }
+
+export interface GetPrepInstructionsForASINParameters {
+  ASINList: string[]
+  ShipToCountryCode: string
+}

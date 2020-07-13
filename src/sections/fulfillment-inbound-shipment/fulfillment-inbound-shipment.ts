@@ -14,6 +14,8 @@ import {
   GetInboundGuidanceForSKUResponse,
   GetPreorderInfo,
   GetPreorderInfoResponse,
+  GetPrepInstructionsForASIN,
+  GetPrepInstructionsForASINResponse,
   GetPrepInstructionsForSKU,
   GetPrepInstructionsForSKUResponse,
   UpdateInboundShipment,
@@ -29,6 +31,7 @@ import {
   GetInboundGuidanceForASINParameters,
   GetInboundGuidanceForSKUParameters,
   GetPreorderInfoParameters,
+  GetPrepInstructionsForASINParameters,
   GetPrepInstructionsForSKUParameters,
 } from './type'
 
@@ -36,6 +39,27 @@ const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async getPrepInstructionsForAsin(
+    parameters: GetPrepInstructionsForASINParameters,
+  ): Promise<[GetPrepInstructionsForASIN, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'GetPrepInstructionsForASIN',
+      parameters: {
+        'ASINList.Id': parameters.ASINList,
+        ShipToCountryCode: parameters.ShipToCountryCode,
+      },
+    })
+
+    return GetPrepInstructionsForASINResponse.decode(response).caseOf({
+      Right: (x) => [x.GetPrepInstructionsForASINResponse.GetPrepInstructionsForASINResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getPrepInstructionsForSku(
     parameters: GetPrepInstructionsForSKUParameters,

@@ -217,3 +217,23 @@ export const GetPrepInstructionsForSKUResponse = Codec.interface({
     GetPrepInstructionsForSKUResult: GetPrepInstructionsForSKU,
   }),
 })
+
+const ASINPrepInstructions = Codec.interface({
+  ASIN: string,
+  BarcodeInstruction,
+  PrepGuidance,
+  PrepInstructionList: ensureArray('PrepInstruction', PrepInstruction),
+})
+
+const GetPrepInstructionsForASIN = Codec.interface({
+  ASINPrepInstructionsList: ensureArray('ASINPrepInstructions', ASINPrepInstructions),
+  InvalidASINList: ensureArray('InvalidASIN', InvalidASIN),
+})
+
+export type GetPrepInstructionsForASIN = GetInterface<typeof GetPrepInstructionsForASIN>
+
+export const GetPrepInstructionsForASINResponse = Codec.interface({
+  GetPrepInstructionsForASINResponse: Codec.interface({
+    GetPrepInstructionsForASINResult: GetPrepInstructionsForASIN,
+  }),
+})
