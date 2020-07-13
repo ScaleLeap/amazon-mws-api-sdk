@@ -68,7 +68,7 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       const mockGetPrepInstructionsForSku = createMockHttpClient(
-        'fulfillmnt_inbound_shipment_get_prep_instrutions_for_sku',
+        'fulfillment_inbound_shipment_get_prep_instructions_for_sku',
       )
 
       expect(

@@ -153,6 +153,57 @@ Array [
 ]
 `;
 
+exports[`fulfillmentInboundShipment getPrepInstructionsForSku returns prep instructions list if succesful 1`] = `
+Array [
+  Object {
+    "InvalidSKUList": Array [],
+    "SKUPrepInstructionsList": Array [
+      Object {
+        "ASIN": "B00EXAMPLE",
+        "AmazonPrepFeesDetailsList": Array [
+          Object {
+            "FeePerUnit": Object {
+              "CurrencyCode": "USD",
+              "Value": "0.2",
+            },
+            "PrepInstruction": "Polybagging",
+          },
+          Object {
+            "FeePerUnit": Object {
+              "CurrencyCode": "USD",
+              "Value": "0.2",
+            },
+            "PrepInstruction": "Taping",
+          },
+          Object {
+            "FeePerUnit": Object {
+              "CurrencyCode": "USD",
+              "Value": "0.2",
+            },
+            "PrepInstruction": "Labeling",
+          },
+        ],
+        "BarcodeInstruction": "RequiresFNSKULabel",
+        "PrepGuidance": "SeePrepInstructionsList",
+        "PrepInstructionList": Array [
+          "Polybagging",
+          "Taping",
+          "Labeling",
+        ],
+        "SellerSKU": "ca_001",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`fulfillmentInboundShipment getServiceStatus returns a parsed model when the status response is valid 1`] = `
 Array [
   Object {

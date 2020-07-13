@@ -189,3 +189,8 @@ export interface ConfirmPreorderParameters {
   ShipmentId: string
   NeedByDate: Date
 }
+
+export interface GetPrepInstructionsForSKUParameters {
+  SellerSKUList: string[]
+  ShipToCountryCode: string
+}

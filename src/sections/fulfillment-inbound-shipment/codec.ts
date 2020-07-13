@@ -173,3 +173,47 @@ export const ConfirmPreorderResponse = Codec.interface({
     ConfirmPreorderResult: ConfirmPreorder,
   }),
 })
+
+enum BarcodeInstructionEnum {
+  RequiresFNSKULabel = 'RequiresFNSKULabel',
+  CanUseOriginalBarcode = 'CanUserOriginalBarcode',
+}
+
+const BarcodeInstruction = enumeration(BarcodeInstructionEnum)
+
+enum PrepGuidanceEnum {
+  ConsultHelpDocuments = 'ConsultHelpDocuments',
+  NoAdditionalPrepRequired = 'NoAdditionalPrepRequired',
+  SeePrepInstructionsList = 'SeePrepInstructionsList',
+}
+
+const PrepGuidance = enumeration(PrepGuidanceEnum)
+
+const PrepInstruction = enumeration(PrepInstructionEnum)
+
+const AmazonPrepFeesDetails = Codec.interface({
+  PrepInstruction,
+  FeePerUnit: Amount,
+})
+
+const SKUPrepInstructions = Codec.interface({
+  SellerSKU: string,
+  ASIN: string,
+  BarcodeInstruction,
+  PrepGuidance,
+  PrepInstructionList: ensureArray('PrepInstruction', PrepInstruction),
+  AmazonPrepFeesDetailsList: ensureArray('AmazonPrepFeesDetails', AmazonPrepFeesDetails),
+})
+
+const GetPrepInstructionsForSKU = Codec.interface({
+  SKUPrepInstructionsList: ensureArray('SKUPrepInstructions', SKUPrepInstructions),
+  InvalidSKUList: ensureArray('InvalidSKU', InvalidSKU),
+})
+
+export type GetPrepInstructionsForSKU = GetInterface<typeof GetPrepInstructionsForSKU>
+
+export const GetPrepInstructionsForSKUResponse = Codec.interface({
+  GetPrepInstructionsForSKUResponse: Codec.interface({
+    GetPrepInstructionsForSKUResult: GetPrepInstructionsForSKU,
+  }),
+})

@@ -14,24 +14,25 @@
         <AmazonPrepFeesDetailsList>
           <AmazonPrepFeesDetails>
             <PrepInstruction>Polybagging</PrepInstruction>
-            <Amount>
+            <FeePerUnit>
               <CurrencyCode>USD</CurrencyCode>
               <Value>0.2</Value>
-            </Amount>
+            </FeePerUnit>
           </AmazonPrepFeesDetails>
           <AmazonPrepFeesDetails>
             <PrepInstruction>Taping</PrepInstruction>
-            <Amount>
+            <FeePerUnit>
               <CurrencyCode>USD</CurrencyCode>
               <Value>0.2</Value>
-            </Amount>
+            </FeePerUnit>
           </AmazonPrepFeesDetails>
           <AmazonPrepFeesDetails>
             <PrepInstruction>Labeling</PrepInstruction>
-            <Amount>
+            <!-- changed the below because c# library has it differently -->
+            <FeePerUnit>
               <CurrencyCode>USD</CurrencyCode>
               <Value>0.2</Value>
-            </Amount>
+            </FeePerUnit>
           </AmazonPrepFeesDetails>
         </AmazonPrepFeesDetailsList>
       </SKUPrepInstructions>
