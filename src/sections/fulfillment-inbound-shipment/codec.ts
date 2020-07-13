@@ -1,4 +1,4 @@
-import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
+import { boolean, Codec, enumeration, GetInterface, number, optional, string, unknown } from 'purify-ts'
 
 import { ensureArray, ensureString } from '../../parsing'
 import { CreateInboundShipmentParameters, PrepInstructionEnum, PrepOwnerEnum } from './type'
@@ -278,5 +278,34 @@ export type EstimateTransportRequest = GetInterface<typeof EstimateTransportRequ
 export const EstimateTransportRequestResponse = Codec.interface({
   EstimateTransportRequestResponse: Codec.interface({
     EstimateTransportRequestResult: EstimateTransportRequest,
+  }),
+})
+
+const TransportHeader = Codec.interface({
+  SellerId: string,
+  ShipmentId: ensureString,
+  IsPartnered: boolean,
+  ShipmentType: string,
+})
+
+// const TransportDetails = Codec.interface({
+
+// })
+
+const TransportContent = Codec.interface({
+  TransportHeader,
+  TransportDetails: unknown,
+  TransportResult: unknown,
+})
+
+const GetTransportContent = Codec.interface({
+  TransportContent,
+})
+
+export type GetTransportContent = GetInterface<typeof GetTransportContent>
+
+export const GetTransportContentResponse = Codec.interface({
+  GetTransportContentResponse: Codec.interface({
+    GetTransportContentResult: GetTransportContent,
   }),
 })

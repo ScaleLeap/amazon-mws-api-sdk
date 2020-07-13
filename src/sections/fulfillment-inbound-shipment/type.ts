@@ -351,3 +351,7 @@ export const canonicalizePutTransportContentParameters = (
 export interface EstimateTransportRequestParameters {
   ShipmentId: string
 }
+
+export interface GetTransportContentParameters {
+  ShipmentId: string
+}

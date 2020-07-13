@@ -20,6 +20,8 @@ import {
   GetPrepInstructionsForASINResponse,
   GetPrepInstructionsForSKU,
   GetPrepInstructionsForSKUResponse,
+  GetTransportContent,
+  GetTransportContentResponse,
   PutTransportContent,
   PutTransportContentResponse,
   UpdateInboundShipment,
@@ -39,6 +41,7 @@ import {
   GetPreorderInfoParameters,
   GetPrepInstructionsForASINParameters,
   GetPrepInstructionsForSKUParameters,
+  GetTransportContentParameters,
   PutTransportContentParameters,
 } from './type'
 
@@ -46,6 +49,26 @@ const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async getTransportContent(
+    parameters: GetTransportContentParameters,
+  ): Promise<[GetTransportContent, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'GetTransportContent',
+      parameters: {
+        ShipmentId: parameters.ShipmentId,
+      },
+    })
+
+    return GetTransportContentResponse.decode(response).caseOf({
+      Right: (x) => [x.GetTransportContentResponse.GetTransportContentResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async estimateTransportRequest(
     parameters: EstimateTransportRequestParameters,
