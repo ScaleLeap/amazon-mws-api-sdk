@@ -1,4 +1,9 @@
-import { CreateInboundShipmentParameters, InboundShipmentHeader, ParsingError } from '../../src'
+import {
+  CreateInboundShipmentParameters,
+  InboundShipmentHeader,
+  ParsingError,
+  PartneredSmallParcelPackageInput,
+} from '../../src'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 function mockFunctions() {
@@ -58,6 +63,55 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 }
 
 describe('fulfillmentInboundShipment', () => {
+  describe('putTransportContent', () => {
+    const mockPartneredSmallParcelPackageInput: PartneredSmallParcelPackageInput = {
+      Dimensions: {
+        Unit: 'inches',
+        Length: 1,
+        Width: 1,
+        Height: 1,
+      },
+      Weight: {
+        Unit: 'pounds',
+        Value: 1,
+      },
+    }
+
+    const mockTransportDetailInput = {
+      PartneredSmallParcelData: {
+        CarrierName: '',
+        PackageList: [mockPartneredSmallParcelPackageInput],
+      },
+    }
+
+    const parameters = {
+      ShipmentId: '',
+      IsPartnered: true,
+      ShipmentType: 'SP',
+      TransportDetails: mockTransportDetailInput,
+    }
+
+    it('returns tranport result if succesful', async () => {
+      expect.assertions(1)
+
+      const mockPutTransportContent = createMockHttpClient(
+        'fulfillment_inbound_shipment_put_transport_content',
+      )
+
+      expect(
+        await mockPutTransportContent.fulfillmentInboundShipment.putTransportContent(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response i snt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.putTransportContent(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getPrepInstructionsForAsin', () => {
     const parameters = {
       ASINList: [''],

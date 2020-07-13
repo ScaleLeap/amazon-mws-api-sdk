@@ -237,3 +237,32 @@ export const GetPrepInstructionsForASINResponse = Codec.interface({
     GetPrepInstructionsForASINResult: GetPrepInstructionsForASIN,
   }),
 })
+
+enum TransportStatusEnum {
+  WORKING = 'WORKING',
+  ERROR_ON_ESTIMATING = 'ERROR_ON_ESTIMATING',
+  ESTIMATING = 'ESTIMATING',
+  ESTIMATED = 'ESTIMATED',
+  ERROR_ON_CONFIRMING = 'ERROR_ON_CONFIRMING',
+  CONFIRMING = 'CONFIRMING',
+  CONFIRMED = 'CONFIRMED',
+  VOIDING = 'VOIDING',
+  VOIDED = 'VOIDED',
+  ERROR_IN_VOIDING = 'ERROR_IN_VOIDING',
+}
+
+const TransportStatus = enumeration(TransportStatusEnum)
+
+const PutTransportContent = Codec.interface({
+  TransportResult: Codec.interface({
+    TransportStatus,
+  }),
+})
+
+export type PutTransportContent = GetInterface<typeof PutTransportContent>
+
+export const PutTransportContentResponse = Codec.interface({
+  PutTransportContentResponse: Codec.interface({
+    PutTransportContentResult: PutTransportContent,
+  }),
+})

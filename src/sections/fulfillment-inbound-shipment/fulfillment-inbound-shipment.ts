@@ -18,6 +18,8 @@ import {
   GetPrepInstructionsForASINResponse,
   GetPrepInstructionsForSKU,
   GetPrepInstructionsForSKUResponse,
+  PutTransportContent,
+  PutTransportContentResponse,
   UpdateInboundShipment,
   UpdateInboundShipmentParameters,
   UpdateInboundShipmentResponse,
@@ -25,6 +27,7 @@ import {
 import {
   canonicalizeParametersCreateInboUpdateundShipmentPlan,
   canonicalizeParametersCreateUpdateInboundShipment,
+  canonicalizePutTransportContentParameters,
   ConfirmPreorderParameters,
   CreateInboundShipmentParameters,
   CreateInboundShipmentPlanParameters,
@@ -33,12 +36,31 @@ import {
   GetPreorderInfoParameters,
   GetPrepInstructionsForASINParameters,
   GetPrepInstructionsForSKUParameters,
+  PutTransportContentParameters,
 } from './type'
 
 const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async putTransportContent(
+    parameters: PutTransportContentParameters,
+  ): Promise<[PutTransportContent, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'PutTransportContent',
+      parameters: canonicalizePutTransportContentParameters(parameters),
+    })
+
+    return PutTransportContentResponse.decode(response).caseOf({
+      Right: (x) => [x.PutTransportContentResponse.PutTransportContentResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getPrepInstructionsForAsin(
     parameters: GetPrepInstructionsForASINParameters,

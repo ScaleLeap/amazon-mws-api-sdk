@@ -1,3 +1,6 @@
+import { Parameters, ParameterTypes } from '../../http'
+import { RequireOnlyOne } from '../types'
+
 export const canonicalizeInboundShipmentPlanRequestItems = (
   requestItem: InboundShipmentPlanRequestItem,
 ) => {
@@ -26,15 +29,18 @@ export const canonicalizeParametersCreateInboUpdateundShipmentPlan = (
   }
 }
 
-export const canonicalizeInboundShipmentItem = (item: InboundShipmentItem) => {
-  let releaseDateString
-  if (item.ReleaseDate) {
+const canonicalizeDate = (date: Date | undefined): string | undefined => {
+  if (date) {
     // convert releaseDate to YYYY-MM-DD
-    const offset = item.ReleaseDate.getTimezoneOffset()
-    const releaseDate = new Date(item.ReleaseDate.getTime() + offset * 60 * 1000)
-    const [newDate] = releaseDate.toISOString().split('T')
-    releaseDateString = newDate
+    const offset = date.getTimezoneOffset()
+    const releaseDate = new Date(date.getTime() + offset * 60 * 1000)
+    return releaseDate.toISOString().split('T')[0]
   }
+  return undefined
+}
+
+export const canonicalizeInboundShipmentItem = (item: InboundShipmentItem) => {
+  const releaseDateString = canonicalizeDate(item.ReleaseDate)
 
   return {
     ShipmentId: item.ShipmentId,
@@ -198,4 +204,146 @@ export interface GetPrepInstructionsForSKUParameters {
 export interface GetPrepInstructionsForASINParameters {
   ASINList: string[]
   ShipToCountryCode: string
+}
+
+interface Amount {
+  CurrencyCode: string
+  Value: string
+}
+interface PartneredEstimate {
+  Amount?: Amount
+  ConfirmDeadline?: Date
+  VoidDeadline?: Date
+}
+
+type DimensionsUnit = 'inches' | 'centimeters'
+
+interface FIBDimensions {
+  Unit: DimensionsUnit
+  Length: number
+  Width: number
+  Height: number
+}
+
+type WeightUnit = 'pounds' | 'kilograms'
+
+interface FIBWeight {
+  Unit: WeightUnit
+  Value: number
+}
+
+type PackageStatus = 'SHIPPED' | 'IN_TRANSIT' | 'DELIVERED' | 'CHECKED_IN' | 'RECEIVING' | 'CLOSED'
+
+export interface PartneredSmallParcelPackageInput {
+  Dimensions: FIBDimensions
+  Weight: FIBWeight
+}
+
+interface PartneredSmallParcelDataInput {
+  CarrierName: string
+  PackageList: PartneredSmallParcelPackageInput[]
+}
+
+interface NonPartneredSmallParcelPackageOutput {
+  TrackingId: string
+}
+
+interface NonPartneredSmallParcelDataInput {
+  CarrierName: string
+  PackageList: NonPartneredSmallParcelPackageOutput[]
+}
+
+interface Contact {
+  Name: string
+  Phone: string
+  Email: string
+  Fax: string
+}
+
+interface Pallet {
+  Dimension: FIBDimensions
+  Weight?: FIBWeight
+  IsStacked: boolean
+}
+
+interface PartneredLtlDataInput {
+  Contact: Contact
+  BoxCount: number
+  SellerFreightClass?: string
+  FreightReadyDate: Date // YYYY-MM-DD
+  PalletList?: Pallet[]
+  TotalWeight?: FIBWeight
+  SellerDeclaredValue?: Amount
+}
+
+interface NonPartneredLtlDataInput {
+  CarrierName: string
+  ProNumber: string
+}
+
+export interface PutTransportContentParameters {
+  ShipmentId: string
+  IsPartnered: boolean
+  ShipmentType: string
+  TransportDetails: RequireOnlyOne<
+    {
+      PartneredSmallParcelData?: PartneredSmallParcelDataInput
+      NonPartneredSmallParcelData?: NonPartneredSmallParcelDataInput
+      PartneredLtlData?: PartneredLtlDataInput
+      NonPartneredLtlData?: NonPartneredLtlDataInput
+    },
+    | 'PartneredSmallParcelData'
+    | 'NonPartneredSmallParcelData'
+    | 'PartneredLtlData'
+    | 'NonPartneredLtlData'
+  >
+}
+
+export const canonicalizePutTransportContentParameters = (
+  parameters: PutTransportContentParameters,
+): Parameters => {
+  const { TransportDetails } = parameters
+  const {
+    PartneredSmallParcelData,
+    NonPartneredSmallParcelData,
+    PartneredLtlData,
+    NonPartneredLtlData,
+  } = TransportDetails
+  const transportDetails: ParameterTypes = {
+    PartneredSmallParcelData: PartneredSmallParcelData
+      ? {
+          'PackageList.member': PartneredSmallParcelData?.PackageList,
+          CarrierName: PartneredSmallParcelData?.CarrierName,
+        }
+      : undefined,
+    NonPartneredSmallParcelData: NonPartneredSmallParcelData
+      ? {
+          CarrierName: NonPartneredSmallParcelData.CarrierName,
+          'PackageList.member': NonPartneredSmallParcelData.PackageList,
+        }
+      : undefined,
+    PartneredLtlData: PartneredLtlData
+      ? {
+          Contact: PartneredLtlData.Contact,
+          BoxCount: PartneredLtlData.BoxCount,
+          SellerFreightClass: PartneredLtlData.SellerFreightClass,
+          FreightReadyDate: canonicalizeDate(PartneredLtlData.FreightReadyDate),
+          'PalletList.member': PartneredLtlData.PalletList,
+          TotalWeight: PartneredLtlData.TotalWeight,
+          SellerDeclaredValue: PartneredLtlData.SellerDeclaredValue,
+        }
+      : undefined,
+    NonPartneredLtlData: NonPartneredLtlData
+      ? {
+          CarrierName: NonPartneredLtlData.CarrierName,
+          ProNumber: NonPartneredLtlData.ProNumber,
+        }
+      : undefined,
+  } as { [key: string]: undefined | Record<string, ParameterTypes> }
+  return {
+    ShipmentId: parameters.ShipmentId,
+    IsPartnered: parameters.IsPartnered,
+    ShipmentType: parameters.ShipmentType,
+    TransportDetails: transportDetails,
+  }
 }
