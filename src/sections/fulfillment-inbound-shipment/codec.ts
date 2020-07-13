@@ -266,3 +266,17 @@ export const PutTransportContentResponse = Codec.interface({
     PutTransportContentResult: PutTransportContent,
   }),
 })
+
+const EstimateTransportRequest = Codec.interface({
+  TransportResult: Codec.interface({
+    TransportStatus,
+  }),
+})
+
+export type EstimateTransportRequest = GetInterface<typeof EstimateTransportRequest>
+
+export const EstimateTransportRequestResponse = Codec.interface({
+  EstimateTransportRequestResponse: Codec.interface({
+    EstimateTransportRequestResult: EstimateTransportRequest,
+  }),
+})
