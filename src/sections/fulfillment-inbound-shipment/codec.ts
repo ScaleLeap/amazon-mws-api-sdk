@@ -160,3 +160,16 @@ export const GetPreorderInfoResponse = Codec.interface({
     GetPreorderInfoResult: GetPreorderInfo,
   }),
 })
+
+const ConfirmPreorder = Codec.interface({
+  ConfirmedNeedByDate: string,
+  ConfirmedFulfillableDate: string,
+})
+
+export type ConfirmPreorder = GetInterface<typeof ConfirmPreorder>
+
+export const ConfirmPreorderResponse = Codec.interface({
+  ConfirmPreorderResponse: Codec.interface({
+    ConfirmPreorderResult: ConfirmPreorder,
+  }),
+})

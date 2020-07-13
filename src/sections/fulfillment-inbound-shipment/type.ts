@@ -184,3 +184,8 @@ export interface CreateInboundShipmentParameters {
 export interface GetPreorderInfoParameters {
   ShipmentId: string
 }
+
+export interface ConfirmPreorderParameters {
+  ShipmentId: string
+  NeedByDate: Date
+}

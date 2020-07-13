@@ -2,6 +2,8 @@ import { ParsingError } from '../../error'
 import { HttpClient, RequestMeta, Resource } from '../../http'
 import { getServiceStatusByResource } from '../shared'
 import {
+  ConfirmPreorder,
+  ConfirmPreorderResponse,
   CreateInboundShipment,
   CreateInboundShipmentPlan,
   CreateInboundShipmentPlanResponse,
@@ -19,6 +21,7 @@ import {
 import {
   canonicalizeParametersCreateInboUpdateundShipmentPlan,
   canonicalizeParametersCreateUpdateInboundShipment,
+  ConfirmPreorderParameters,
   CreateInboundShipmentParameters,
   CreateInboundShipmentPlanParameters,
   GetInboundGuidanceForASINParameters,
@@ -30,6 +33,27 @@ const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async confirmPreorder(
+    parameters: ConfirmPreorderParameters,
+  ): Promise<[ConfirmPreorder, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'ConfirmPreorder',
+      parameters: {
+        ShipmentId: parameters.ShipmentId,
+        NeedByDate: parameters.NeedByDate.toISOString(),
+      },
+    })
+
+    return ConfirmPreorderResponse.decode(response).caseOf({
+      Right: (x) => [x.ConfirmPreorderResponse.ConfirmPreorderResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getPreorderInfo(
     parameters: GetPreorderInfoParameters,
