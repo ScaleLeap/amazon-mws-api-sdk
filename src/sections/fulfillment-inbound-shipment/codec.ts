@@ -1,16 +1,14 @@
-import {
-  boolean,
-  Codec,
-  enumeration,
-  GetInterface,
-  number,
-  optional,
-  string,
-  unknown,
-} from 'purify-ts'
+import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
 
-import { ensureArray, ensureString } from '../../parsing'
-import { CreateInboundShipmentParameters, PrepInstructionEnum, PrepOwnerEnum } from './type'
+import { ensureArray, ensureString, mwsDate } from '../../parsing'
+import { DimensionsUnitEnum } from '../merchant-fulfillment/codec'
+import {
+  CreateInboundShipmentParameters,
+  PackageStatusEnum,
+  PrepInstructionEnum,
+  PrepOwnerEnum,
+  WeightUnitEnum,
+} from './type'
 
 enum GuidanceReasonEnum {
   SlowMovingASIN = 'SlowMovingASIN',
@@ -297,14 +295,103 @@ const TransportHeader = Codec.interface({
   ShipmentType: string,
 })
 
-// const TransportDetails = Codec.interface({
+const PartneredEstimate = Codec.interface({
+  Amount: optional(Amount),
+  ConfirmDeadline: optional(mwsDate),
+  VoidDeadline: optional(mwsDate),
+})
 
-// })
+const PackageStatus = enumeration(PackageStatusEnum)
+
+const DimensionsUnit = enumeration(DimensionsUnitEnum)
+
+const FIBDimensions = Codec.interface({
+  Unit: DimensionsUnit,
+  Length: number,
+  Width: number,
+  Height: number,
+})
+
+const WeightUnit = enumeration(WeightUnitEnum)
+
+const FIBWeight = Codec.interface({
+  Unit: WeightUnit,
+  Value: number,
+})
+
+const PartneredSmallParcelPackageOutput = Codec.interface({
+  Dimensions: FIBDimensions,
+  Weight: FIBWeight,
+  TrackingId: ensureString,
+  PackageStatus,
+  CarrierName: string,
+})
+
+const NonPartneredSmallParcelPackageOutput = Codec.interface({
+  CarrierName: string,
+  TrackingId: ensureString,
+  PackageStatus,
+})
+
+const NonPartneredSmallParcelDataOutput = Codec.interface({
+  PackageList: ensureArray('member', NonPartneredSmallParcelPackageOutput),
+})
+
+const PartneredSmallParcelDataOutput = Codec.interface({
+  PackageList: ensureArray('member', PartneredSmallParcelPackageOutput),
+  PartneredEstimate: optional(PartneredEstimate),
+})
+
+const Contact = Codec.interface({
+  Name: string,
+  Phone: string,
+  Email: string,
+  Fax: string,
+})
+
+const Pallet = Codec.interface({
+  Dimensions: FIBDimensions,
+  Weight: optional(FIBWeight),
+  IsStacked: boolean,
+})
+
+const PartneredLtlDataOutput = Codec.interface({
+  Contact,
+  BoxCount: number,
+  SellerFreightClass: optional(string),
+  FreightReadyDate: string,
+  PalletList: ensureArray('member', Pallet),
+  SellerDeclaredValue: optional(Amount),
+  AmazonCalculatedValue: optional(Amount),
+  PreviewPickupDate: mwsDate,
+  PreviewDeliveryDate: mwsDate,
+  PreviewFreightClass: string,
+  AmazonReferenceId: ensureString,
+  IsBillOfLadingAvailable: boolean,
+  PartneredEstimate: optional(PartneredEstimate),
+  CarrierName: string,
+})
+
+const NonPartneredLtlDataOutput = Codec.interface({
+  CarrierName: string,
+  ProNumber: ensureString,
+})
+
+const TransportDetails = Codec.interface({
+  PartneredSmallParcelData: optional(PartneredSmallParcelDataOutput),
+  NonPartneredSmallParcelData: optional(NonPartneredSmallParcelDataOutput),
+  PartneredLtlData: optional(PartneredLtlDataOutput),
+  NonPartneredLtlData: optional(NonPartneredLtlDataOutput),
+})
+
+const TransportResult = Codec.interface({
+  TransportStatus,
+})
 
 const TransportContent = Codec.interface({
   TransportHeader,
-  TransportDetails: unknown,
-  TransportResult: unknown,
+  TransportDetails,
+  TransportResult,
 })
 
 const GetTransportContent = Codec.interface({

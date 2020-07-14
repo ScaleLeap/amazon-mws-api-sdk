@@ -1,4 +1,5 @@
 import { Parameters, ParameterTypes } from '../../http'
+import { DimensionsUnitEnum } from '../merchant-fulfillment/codec'
 import { RequireOnlyOne } from '../types'
 
 export const canonicalizeInboundShipmentPlanRequestItems = (
@@ -216,7 +217,7 @@ interface PartneredEstimate {
   VoidDeadline?: Date
 }
 
-type DimensionsUnit = 'inches' | 'centimeters'
+type DimensionsUnit = keyof typeof DimensionsUnitEnum
 
 interface FIBDimensions {
   Unit: DimensionsUnit
@@ -225,14 +226,28 @@ interface FIBDimensions {
   Height: number
 }
 
-type WeightUnit = 'pounds' | 'kilograms'
+export enum WeightUnitEnum {
+  'pounds',
+  'kilograms',
+}
+
+type WeightUnit = keyof typeof WeightUnitEnum
 
 interface FIBWeight {
   Unit: WeightUnit
   Value: number
 }
 
-type PackageStatus = 'SHIPPED' | 'IN_TRANSIT' | 'DELIVERED' | 'CHECKED_IN' | 'RECEIVING' | 'CLOSED'
+export enum PackageStatusEnum {
+  'SHIPPED',
+  'IN_TRANSIT',
+  'DELIVERED',
+  'CHECKED_IN',
+  'RECEIVING',
+  'CLOSED',
+}
+
+type PackageStatus = keyof typeof PackageStatusEnum
 
 export interface PartneredSmallParcelPackageInput {
   Dimensions: FIBDimensions
