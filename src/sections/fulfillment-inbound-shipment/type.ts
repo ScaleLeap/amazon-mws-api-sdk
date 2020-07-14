@@ -188,9 +188,7 @@ export interface CreateInboundShipmentParameters {
   InboundShipmentItems: InboundShipmentItem[]
 }
 
-export interface GetPreorderInfoParameters {
-  ShipmentId: string
-}
+export type GetPreorderInfoParameters = SingleShipmentIdParameters
 
 export interface ConfirmPreorderParameters {
   ShipmentId: string
@@ -363,14 +361,13 @@ export const canonicalizePutTransportContentParameters = (
   }
 }
 
-export interface EstimateTransportRequestParameters {
+interface SingleShipmentIdParameters {
   ShipmentId: string
 }
+export type EstimateTransportRequestParameters = SingleShipmentIdParameters
 
-export interface GetTransportContentParameters {
-  ShipmentId: string
-}
+export type GetTransportContentParameters = SingleShipmentIdParameters
 
-export interface ConfirmTransportRequestParameters {
-  ShipmentId: string
-}
+export type ConfirmTransportRequestParameters = SingleShipmentIdParameters
+
+export type VoidTransportRequestParameters = SingleShipmentIdParameters

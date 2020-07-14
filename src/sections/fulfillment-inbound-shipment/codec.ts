@@ -417,3 +417,15 @@ export const ConfirmTransportRequestResponse = Codec.interface({
     ConfirmTransportRequestResult: ConfirmTransportRequest,
   }),
 })
+
+const VoidTransportRequest = Codec.interface({
+  TransportResult,
+})
+
+export type VoidTransportRequest = GetInterface<typeof VoidTransportRequest>
+
+export const VoidTransportRequestResponse = Codec.interface({
+  VoidTransportRequestResponse: Codec.interface({
+    VoidTransportRequestResult: VoidTransportRequest,
+  }),
+})

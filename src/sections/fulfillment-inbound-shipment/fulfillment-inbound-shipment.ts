@@ -29,6 +29,8 @@ import {
   UpdateInboundShipment,
   UpdateInboundShipmentParameters,
   UpdateInboundShipmentResponse,
+  VoidTransportRequest,
+  VoidTransportRequestResponse,
 } from './codec'
 import {
   canonicalizeParametersCreateInboUpdateundShipmentPlan,
@@ -46,12 +48,33 @@ import {
   GetPrepInstructionsForSKUParameters,
   GetTransportContentParameters,
   PutTransportContentParameters,
+  VoidTransportRequestParameters,
 } from './type'
 
 const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async voidTransportRequest(
+    parameters: VoidTransportRequestParameters,
+  ): Promise<[VoidTransportRequest, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'VoidTransportRequest',
+      parameters: {
+        ShipmentId: parameters.ShipmentId,
+      },
+    })
+
+    return VoidTransportRequestResponse.decode(response).caseOf({
+      Right: (x) => [x.VoidTransportRequestResponse.VoidTransportRequestResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async confirmTransportRequest(
     parameters: ConfirmTransportRequestParameters,
