@@ -63,6 +63,32 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 }
 
 describe('fulfillmentInboundShipment', () => {
+  describe('voidTransportRequest', () => {
+    const parameters = {
+      ShipmentId: '',
+    }
+
+    it('returns the transport result if voiding is succesful', async () => {
+      expect.assertions(1)
+
+      const mockVoidTransportRequest = createMockHttpClient(
+        'fulfillment_inbound_shipment_void_transport_request',
+      )
+
+      expect(
+        await mockVoidTransportRequest.fulfillmentInboundShipment.voidTransportRequest(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is  not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.voidTransportRequest(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('confirmTransportRequest', () => {
     const parameters = {
       ShipmentId: '',
