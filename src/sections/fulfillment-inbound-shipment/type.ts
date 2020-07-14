@@ -371,3 +371,19 @@ export type GetTransportContentParameters = SingleShipmentIdParameters
 export type ConfirmTransportRequestParameters = SingleShipmentIdParameters
 
 export type VoidTransportRequestParameters = SingleShipmentIdParameters
+
+enum PageTypeEnum {
+  'PackageLabel_Letter_2',
+  'PackageLabel_Letter_6',
+  'PackageLabel_A4_2',
+  'PackageLabel_A4_4',
+  'PackageLabel_Plain_Paper',
+}
+
+type PageType = keyof typeof PageTypeEnum
+
+export interface GetPackageLabelsParameters {
+  ShipmentId: string
+  PageType: PageType
+  NumberOfPackages?: number
+}

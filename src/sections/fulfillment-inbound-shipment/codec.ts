@@ -429,3 +429,24 @@ export const VoidTransportRequestResponse = Codec.interface({
     VoidTransportRequestResult: VoidTransportRequest,
   }),
 })
+
+const TransportDocument = Codec.interface({
+  PdfDocument: string,
+  Checksum: string,
+})
+
+const GetPackageLabels = Codec.interface({
+  /**
+   * Docs has a mistake in the response type
+   * They have `TransportContent` instead of `TransportDocument`
+   */
+  TransportDocument,
+})
+
+export type GetPackageLabels = GetInterface<typeof GetPackageLabels>
+
+export const GetPackageLabelsResponse = Codec.interface({
+  GetPackageLabelsResponse: Codec.interface({
+    GetPackageLabelsResult: GetPackageLabels,
+  }),
+})
