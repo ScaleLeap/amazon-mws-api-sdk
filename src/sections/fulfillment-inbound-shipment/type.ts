@@ -370,3 +370,7 @@ export interface EstimateTransportRequestParameters {
 export interface GetTransportContentParameters {
   ShipmentId: string
 }
+
+export interface ConfirmTransportRequestParameters {
+  ShipmentId: string
+}

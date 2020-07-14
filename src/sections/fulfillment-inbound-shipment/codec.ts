@@ -405,3 +405,15 @@ export const GetTransportContentResponse = Codec.interface({
     GetTransportContentResult: GetTransportContent,
   }),
 })
+
+const ConfirmTransportRequest = Codec.interface({
+  TransportResult,
+})
+
+export type ConfirmTransportRequest = GetInterface<typeof ConfirmTransportRequest>
+
+export const ConfirmTransportRequestResponse = Codec.interface({
+  ConfirmTransportRequestResponse: Codec.interface({
+    ConfirmTransportRequestResult: ConfirmTransportRequest,
+  }),
+})

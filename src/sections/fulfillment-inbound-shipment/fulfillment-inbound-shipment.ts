@@ -4,6 +4,8 @@ import { getServiceStatusByResource } from '../shared'
 import {
   ConfirmPreorder,
   ConfirmPreorderResponse,
+  ConfirmTransportRequest,
+  ConfirmTransportRequestResponse,
   CreateInboundShipment,
   CreateInboundShipmentPlan,
   CreateInboundShipmentPlanResponse,
@@ -33,6 +35,7 @@ import {
   canonicalizeParametersCreateUpdateInboundShipment,
   canonicalizePutTransportContentParameters,
   ConfirmPreorderParameters,
+  ConfirmTransportRequestParameters,
   CreateInboundShipmentParameters,
   CreateInboundShipmentPlanParameters,
   EstimateTransportRequestParameters,
@@ -49,6 +52,26 @@ const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async confirmTransportRequest(
+    parameters: ConfirmTransportRequestParameters,
+  ): Promise<[ConfirmTransportRequest, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'ConfirmTransportRequest',
+      parameters: {
+        ShipmentId: parameters.ShipmentId,
+      },
+    })
+
+    return ConfirmTransportRequestResponse.decode(response).caseOf({
+      Right: (x) => [x.ConfirmTransportRequestResponse.ConfirmTransportRequestResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getTransportContent(
     parameters: GetTransportContentParameters,
