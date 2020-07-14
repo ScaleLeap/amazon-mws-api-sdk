@@ -68,6 +68,18 @@ describe('fulfillmentInboundShipment', () => {
       ShipmentId: '',
     }
 
+    it('returns the transport content for LTL if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetTransportContent = createMockHttpClient(
+        'fulfillment_inbound_shipment_get_transport_content_ltl',
+      )
+
+      expect(
+        await mockGetTransportContent.fulfillmentInboundShipment.getTransportContent(parameters),
+      ).toMatchSnapshot()
+    })
+
     it('returns the transport content if succesful', async () => {
       expect.assertions(1)
 
