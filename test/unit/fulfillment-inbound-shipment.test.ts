@@ -68,6 +68,32 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 const mockPageType: PageType = 'PackageLabel_Letter_2'
 
 describe('fulfillmentInboundShipment', () => {
+  describe('getBillOfLading', () => {
+    const parameters = {
+      ShipmentId: '',
+    }
+
+    it('returns PDF document data if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetBillOfLading = createMockHttpClient(
+        'fulfillment_inbound_shipment_get_bill_of_lading',
+      )
+
+      expect(
+        await mockGetBillOfLading.fulfillmentInboundShipment.getBillOfLading(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the  status response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.getBillOfLading(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getPalletLabels', () => {
     const parameters = {
       ShipmentId: '',
