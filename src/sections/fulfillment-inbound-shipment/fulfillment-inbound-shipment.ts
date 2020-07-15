@@ -91,7 +91,10 @@ export class FulfillmentInboundShipment {
     })
 
     return ListInboundShipmentItemsByNextTokenResponse.decode(response).caseOf({
-      Right: (x) => [x.ListInboundShipmentItemsByNextTokenResponse.ListInboundShipmentItemsByNextTokenResult, meta],
+      Right: (x) => [
+        x.ListInboundShipmentItemsByNextTokenResponse.ListInboundShipmentItemsByNextTokenResult,
+        meta,
+      ],
       Left: (error) => {
         throw new ParsingError(error)
       },

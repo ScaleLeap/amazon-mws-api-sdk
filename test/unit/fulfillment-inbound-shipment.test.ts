@@ -80,7 +80,9 @@ describe('fulfillmentInboundShipment', () => {
       )
 
       expect(
-        await mockListInboundShipmentItemsByNextToken.fulfillmentInboundShipment.listInboundShipmentItemsByNextToken(mockNextToken),
+        await mockListInboundShipmentItemsByNextToken.fulfillmentInboundShipment.listInboundShipmentItemsByNextToken(
+          mockNextToken,
+        ),
       ).toMatchSnapshot()
     })
 
