@@ -450,3 +450,19 @@ export const GetPackageLabelsResponse = Codec.interface({
     GetPackageLabelsResult: GetPackageLabels,
   }),
 })
+
+const GetUniquePackageLabels = Codec.interface({
+  /**
+   * Docs has a mistake in the response type
+   * They have `TransportContent` instead of `TransportDocument`
+   */
+  TransportDocument,
+})
+
+export type GetUniquePackageLabels = GetInterface<typeof GetUniquePackageLabels>
+
+export const GetUniquePackageLabelsResponse = Codec.interface({
+  GetUniquePackageLabelsResponse: Codec.interface({
+    GetUniquePackageLabelsResult: GetUniquePackageLabels,
+  }),
+})

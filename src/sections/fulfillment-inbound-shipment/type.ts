@@ -387,3 +387,9 @@ export interface GetPackageLabelsParameters {
   PageType: PageType
   NumberOfPackages?: number
 }
+
+export interface GetUniquePackageLabelsParameters {
+  ShipmentId: string
+  PageType: PageType
+  PackageLabelsToPrint: string[]
+}

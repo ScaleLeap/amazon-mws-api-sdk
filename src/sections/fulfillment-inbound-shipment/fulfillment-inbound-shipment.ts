@@ -26,6 +26,8 @@ import {
   GetPrepInstructionsForSKUResponse,
   GetTransportContent,
   GetTransportContentResponse,
+  GetUniquePackageLabels,
+  GetUniquePackageLabelsResponse,
   PutTransportContent,
   PutTransportContentResponse,
   UpdateInboundShipment,
@@ -50,6 +52,7 @@ import {
   GetPrepInstructionsForASINParameters,
   GetPrepInstructionsForSKUParameters,
   GetTransportContentParameters,
+  GetUniquePackageLabelsParameters,
   PutTransportContentParameters,
   VoidTransportRequestParameters,
 } from './type'
@@ -58,6 +61,28 @@ const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async getUniquePackageLabels(
+    parameters: GetUniquePackageLabelsParameters,
+  ): Promise<[GetUniquePackageLabels, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'GetUniquePackageLabels',
+      parameters: {
+        ShipmentId: parameters.ShipmentId,
+        PageType: parameters.PageType,
+        'PackageLabelsToPrint.member': parameters.PackageLabelsToPrint,
+      },
+    })
+
+    return GetUniquePackageLabelsResponse.decode(response).caseOf({
+      Right: (x) => [x.GetUniquePackageLabelsResponse.GetUniquePackageLabelsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getPackageLabels(
     parameters: GetPackageLabelsParameters,

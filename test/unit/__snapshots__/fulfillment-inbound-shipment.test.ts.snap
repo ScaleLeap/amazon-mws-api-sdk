@@ -169,7 +169,7 @@ Array [
 ]
 `;
 
-exports[`fulfillmentInboundShipment getPackageLabels returns transport content if succesful 1`] = `
+exports[`fulfillmentInboundShipment getPackageLabels returns the transport document if succesful 1`] = `
 Array [
   Object {
     "TransportDocument": Object {
@@ -358,6 +358,24 @@ Array [
       "TransportResult": Object {
         "TransportStatus": "WORKING",
       },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getUniquePackageLabels returns the transport document if succesful 1`] = `
+Array [
+  Object {
+    "TransportDocument": Object {
+      "Checksum": "WGQwqA+NlzMVL1plHc/7ZA==",
+      "PdfDocument": "ABEAAAAAAlbHMucGRmUEsFBgAAAAABAAEAPwAAALQXAQAAAA==",
     },
   },
   Object {

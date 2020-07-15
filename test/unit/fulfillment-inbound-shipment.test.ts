@@ -4,6 +4,7 @@ import {
   ParsingError,
   PartneredSmallParcelPackageInput,
   GetPackageLabelsParameters,
+  GetUniquePackageLabelsParameters,
 } from '../../src'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
@@ -65,7 +66,7 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 
 describe('fulfillmentInboundShipment', () => {
   describe('getUniquePackageLabels', () => {
-    const parameters = {
+    const parameters: GetUniquePackageLabelsParameters = {
       ShipmentId: '',
       PageType: 'PackageLabel_Letter_2',
       PackageLabelsToPrint: [''],
