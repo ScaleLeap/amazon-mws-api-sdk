@@ -65,6 +65,34 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 }
 
 describe('fulfillmentInboundShipment', () => {
+  describe('getPalletLabels', () => {
+    const parameters = {
+      ShipmentId: '',
+      PageType: 'PackageLabel_Letter_2',
+      NumberOfPallets: 1,
+    }
+
+    it('returns PDF document data if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetPalletLabels = createMockHttpClient(
+        'fulfillment_inbound_shipment_get_pallet_labels',
+      )
+
+      expect(
+        await mockGetPalletLabels.fulfillmentInboundShipment.getPalletLabels(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status  response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.getPalletLabels(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getUniquePackageLabels', () => {
     const parameters: GetUniquePackageLabelsParameters = {
       ShipmentId: '',
