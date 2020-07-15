@@ -33,6 +33,8 @@ import {
   GetTransportContentResponse,
   GetUniquePackageLabels,
   GetUniquePackageLabelsResponse,
+  ListInboundShipmentItems,
+  ListInboundShipmentItemsResponse,
   ListInboundShipments,
   ListInboundShipmentsByNextToken,
   ListInboundShipmentsByNextTokenResponse,
@@ -64,6 +66,7 @@ import {
   GetPrepInstructionsForSKUParameters,
   GetTransportContentParameters,
   GetUniquePackageLabelsParameters,
+  ListInboundShipmentItemsParameters,
   ListInboundShipmentsParameters,
   PutTransportContentParameters,
   VoidTransportRequestParameters,
@@ -74,13 +77,35 @@ const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
 
+  async listInboundShipmentItems(
+    parameters: ListInboundShipmentItemsParameters,
+  ): Promise<[ListInboundShipmentItems, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'ListInboundShipmentItems',
+      parameters: {
+        ShipmentId: parameters.ShipmentId,
+        LastUpdatedAfter: parameters.LastUpdatedAfter?.toISOString(),
+        LastUpdatedBefore: parameters.LastUpdatedBefore?.toISOString(),
+      },
+    })
+
+    return ListInboundShipmentItemsResponse.decode(response).caseOf({
+      Right: (x) => [x.ListInboundShipmentItemsResponse.ListInboundShipmentItemsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
   async listInboundShipmentsByNextToken(
     nextToken: NextToken<'ListInboundShipments'>,
   ): Promise<[ListInboundShipmentsByNextToken, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.FulfillmentInboundShipment,
       version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
-      action: 'ListInboundShipments',
+      action: 'ListInboundShipmentsByNextToken',
       parameters: {
         NextToken: nextToken.token,
       },

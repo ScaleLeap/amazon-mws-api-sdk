@@ -408,3 +408,12 @@ export interface ListInboundShipmentsParameters {
   LastUpdatedAfter?: Date
   LastUpdatedBefore?: Date
 }
+
+export type ListInboundShipmentItemsParameters = RequireOnlyOne<
+  {
+    ShipmentId?: string
+    LastUpdatedAfter?: Date
+    LastUpdatedBefore?: Date
+  },
+  'ShipmentId' | 'LastUpdatedAfter'
+>

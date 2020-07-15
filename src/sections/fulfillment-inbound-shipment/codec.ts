@@ -550,3 +550,27 @@ export const ListInboundShipmentsByNextTokenResponse = Codec.interface({
     ListInboundShipmentsByNextTokenResult: ListInboundShipmentsByNextToken,
   }),
 })
+
+const InboundShipmentItem = Codec.interface({
+  ShipmentId: optional(ensureString),
+  SellerSKU: string,
+  FulfillmentNetworkSKU: optional(string),
+  QuantityShipped: number,
+  QuantityReceived: optional(number),
+  QuantityInCase: optional(number),
+  PrepDetailsList: optional(ensureArray('PrepDetails', PrepDetails)),
+  ReleaseDate: optional(string),
+})
+
+const ListInboundShipmentItems = Codec.interface({
+  NextToken: optional(nextTokenCodec('ListInboundShipmentItems')),
+  ItemData: ensureArray('member', InboundShipmentItem),
+})
+
+export type ListInboundShipmentItems = GetInterface<typeof ListInboundShipmentItems>
+
+export const ListInboundShipmentItemsResponse = Codec.interface({
+  ListInboundShipmentItemsResponse: Codec.interface({
+    ListInboundShipmentItemsResult: ListInboundShipmentItems,
+  }),
+})
