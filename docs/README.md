@@ -2412,3 +2412,78 @@ const [response, meta] = recommendations.getServiceStatus()
 **Response**
 
 [See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- /////////////////////////////START FULFILLMENTINBOUNDSHIPMENT///////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+## FulfillmentInboundShipment 
+
+[Amazon MWS FulfillmentInboundShipment API official documentation](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Overview.html)
+
+### getInboundGuidanceForSku
+
+**Parameters**
+
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| SellerSKUList    | string[] | `['MY-SKU-1']`    	| Yes      	|
+
+**Example**
+
+```typescript
+const products = new fis(httpClient)
+const [response, meta] = fis.getInboundGuidanceForSku({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  SellerSKUList: ['MY-SKU-1'],
+})
+```
+
+**Response**
+
+[See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
+
+### getInboundGuidanceForAsin
+
+**Parameters**
+
+| Name           	| Type     	| Example          	| Required 	|
+|----------------	|----------	|------------------	|----------	|
+| MarketplaceId  	| string   	| `'A2EUQ1WTGCTBG2'` 	| Yes      	|
+| ASINList        | string[]  | `['MY-ASIN-1']`    	| Yes      	|
+
+**Example**
+
+```typescript
+const products = new fis(httpClient)
+const [response, meta] = fis.getInboundGuidanceForAsin({
+  MarketplaceId: 'A2EUQ1WTGCTBG2',
+  SellerSKUList: ['MY-ASIN-1'],
+})
+```
+
+**Response**
+
+[See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
+
+
+### getServiceStatus
+
+**Parameters**
+
+| None |
+|------|
+
+**Example**
+
+```typescript
+const fis = new FulfillmentInboundShipment(httpClient)
+const [response, meta] = fis.getServiceStatus()
+```
+
+**Response**
+
+[See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
