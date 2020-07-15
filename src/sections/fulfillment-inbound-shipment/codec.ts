@@ -98,7 +98,7 @@ export const UpdateInboundShipmentResponse = Codec.interface({
   }),
 })
 
-const AddressFIS = Codec.interface({
+const FISAddress = Codec.interface({
   Name: string,
   AddressLine1: string,
   AddressLine2: optional(string),
@@ -106,7 +106,7 @@ const AddressFIS = Codec.interface({
   DistrictOrCounty: optional(string),
   StateOrProvinceCode: optional(string),
   CountryCode: string,
-  PostalCode: optional(string),
+  PostalCode: optional(ensureString),
 })
 
 const PrepDetails = Codec.interface({
@@ -135,7 +135,7 @@ export const BoxContentsFeeDetails = Codec.interface({
 export const InboundShipmentPlan = Codec.interface({
   ShipmentId: string,
   DestinationFulfillmentCenterId: string,
-  ShipToAddress: AddressFIS,
+  ShipToAddress: FISAddress,
   LabelPrepType: string,
   Items: ensureArray('member', InboundShipmentPlanItem),
   EstimatedBoxContentsFee: optional(BoxContentsFeeDetails),
@@ -491,17 +491,6 @@ export const GetBillOfLadingResponse = Codec.interface({
   }),
 })
 
-const FIBAddress = Codec.interface({
-  Name: string,
-  AddressLine1: string,
-  AddressLine2: optional(string),
-  City: string,
-  DistrictOrCounty: optional(string),
-  StateOrProvinceCode: optional(string),
-  CountryCode: string,
-  PostalCode: optional(string),
-})
-
 enum LabelPrepTypeEnum {
   'NO_LABEL',
   'SELLER_LABEL',
@@ -528,7 +517,7 @@ const ShipmentStatus = enumeration(ShipmentStatusEnum)
 const InboundShipmentInfo = Codec.interface({
   ShipmentId: optional(ensureString),
   ShipmentName: optional(string),
-  ShipFromAddress: FIBAddress,
+  ShipFromAddress: FISAddress,
   DestinationFulfillmentCenterId: optional(ensureString),
   LabelPrepType: optional(LabelPrepType),
   ShipmentStatus: optional(ShipmentStatus),
@@ -547,5 +536,17 @@ export type ListInboundShipments = GetInterface<typeof ListInboundShipments>
 export const ListInboundShipmentsResponse = Codec.interface({
   ListInboundShipmentsResponse: Codec.interface({
     ListInboundShipmentsResult: ListInboundShipments,
+  }),
+})
+
+const ListInboundShipmentsByNextToken = Codec.interface({
+  NextToken: optional(nextTokenCodec('ListInboundShipments')),
+  ShipmentData: ensureArray('member', InboundShipmentInfo),
+})
+
+export type ListInboundShipmentsByNextToken = GetInterface<typeof ListInboundShipments>
+export const ListInboundShipmentsByNextTokenResponse = Codec.interface({
+  ListInboundShipmentsByNextTokenResponse: Codec.interface({
+    ListInboundShipmentsByNextTokenResult: ListInboundShipmentsByNextToken,
   }),
 })

@@ -511,6 +511,62 @@ Array [
 ]
 `;
 
+exports[`fulfillmentInboundShipment listInboundShipmentsByNextToken returns shipment data if succesful 1`] = `
+Array [
+  Object {
+    "NextToken": NextToken {
+      "action": "ListInboundShipments",
+      "token": "QVYyVTY5NUVaQzBDWHw0ODh8MjAwfCB8IHw1OTM0MDZ8IHwwLDJ8
+            IHwgfCB8IHx0cnVl",
+    },
+    "ShipmentData": Array [
+      Object {
+        "AreCasesRequired": false,
+        "DestinationFulfillmentCenterId": "RNO2",
+        "LabelPrepType": "SELLER_LABEL",
+        "ShipFromAddress": Object {
+          "AddressLine1": "876 Elm St",
+          "AddressLine2": "Apt 2",
+          "City": "Seattle",
+          "CountryCode": "US",
+          "Name": "Joan Doe",
+          "PostalCode": "98101",
+          "StateOrProvinceCode": "WA",
+        },
+        "ShipmentId": "SSF85DGIZZ7PKF",
+        "ShipmentName": "ExampleShipmentName4",
+        "ShipmentStatus": "WORKING",
+      },
+      Object {
+        "AreCasesRequired": true,
+        "ConfirmedNeedByDate": "2015-12-30",
+        "DestinationFulfillmentCenterId": "RNO2",
+        "LabelPrepType": "SELLER_LABEL",
+        "ShipFromAddress": Object {
+          "AddressLine1": "876 Elm St",
+          "AddressLine2": "Apt 2",
+          "City": "Seattle",
+          "CountryCode": "US",
+          "Name": "Joan Doe",
+          "PostalCode": "98101",
+          "StateOrProvinceCode": "WA",
+        },
+        "ShipmentId": "SSF85DGIZZ7PL3",
+        "ShipmentName": "ExampleShipmentName5",
+        "ShipmentStatus": "SHIPPED",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`fulfillmentInboundShipment putTransportContent returns tranport result if succesful 1`] = `
 Array [
   Object {

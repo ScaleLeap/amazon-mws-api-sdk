@@ -1,5 +1,6 @@
 import { ParsingError } from '../../error'
 import { HttpClient, RequestMeta, Resource } from '../../http'
+import { NextToken } from '../../parsing'
 import { getServiceStatusByResource } from '../shared'
 import {
   ConfirmPreorder,
@@ -33,6 +34,8 @@ import {
   GetUniquePackageLabels,
   GetUniquePackageLabelsResponse,
   ListInboundShipments,
+  ListInboundShipmentsByNextToken,
+  ListInboundShipmentsByNextTokenResponse,
   ListInboundShipmentsResponse,
   PutTransportContent,
   PutTransportContentResponse,
@@ -70,6 +73,29 @@ const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async listInboundShipmentsByNextToken(
+    nextToken: NextToken<'ListInboundShipments'>,
+  ): Promise<[ListInboundShipmentsByNextToken, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'ListInboundShipments',
+      parameters: {
+        NextToken: nextToken.token,
+      },
+    })
+
+    return ListInboundShipmentsByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [
+        x.ListInboundShipmentsByNextTokenResponse.ListInboundShipmentsByNextTokenResult,
+        meta,
+      ],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async listInboundShipments(
     parameters: ListInboundShipmentsParameters,
