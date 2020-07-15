@@ -457,6 +457,40 @@ Array [
 ]
 `;
 
+exports[`fulfillmentInboundShipment listInboundShipmentItemsByNextToken returns a list of inbound shipment item data if succesful 1`] = `
+Array [
+  Object {
+    "ItemData": Array [
+      Object {
+        "FulfillmentNetworkSKU": "FNSKU1",
+        "PrepDetailsList": Array [
+          Object {
+            "PrepInstruction": "Taping",
+            "PrepOwner": "AMAZON",
+          },
+          Object {
+            "PrepInstruction": "Polybagging",
+            "PrepOwner": "AMAZON",
+          },
+        ],
+        "QuantityInCase": 0,
+        "QuantityReceived": 0,
+        "QuantityShipped": 2,
+        "SellerSKU": "SKU00001",
+        "ShipmentId": "FBA0000001",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`fulfillmentInboundShipment listInboundShipments returns shipment data if succesful 1`] = `
 Array [
   Object {

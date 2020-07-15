@@ -574,3 +574,9 @@ export const ListInboundShipmentItemsResponse = Codec.interface({
     ListInboundShipmentItemsResult: ListInboundShipmentItems,
   }),
 })
+
+export const ListInboundShipmentItemsByNextTokenResponse = Codec.interface({
+  ListInboundShipmentItemsByNextTokenResponse: Codec.interface({
+    ListInboundShipmentItemsByNextTokenResult: ListInboundShipmentItems,
+  }),
+})

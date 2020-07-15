@@ -34,6 +34,7 @@ import {
   GetUniquePackageLabels,
   GetUniquePackageLabelsResponse,
   ListInboundShipmentItems,
+  ListInboundShipmentItemsByNextTokenResponse,
   ListInboundShipmentItemsResponse,
   ListInboundShipments,
   ListInboundShipmentsByNextToken,
@@ -76,6 +77,26 @@ const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async listInboundShipmentItemsByNextToken(
+    nextToken: NextToken<'ListInboundShipmentItems'>,
+  ): Promise<[ListInboundShipmentItems, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'ListInboundShipmentItemsByNextToken',
+      parameters: {
+        NextToken: nextToken.token,
+      },
+    })
+
+    return ListInboundShipmentItemsByNextTokenResponse.decode(response).caseOf({
+      Right: (x) => [x.ListInboundShipmentItemsByNextTokenResponse.ListInboundShipmentItemsByNextTokenResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async listInboundShipmentItems(
     parameters: ListInboundShipmentItemsParameters,
