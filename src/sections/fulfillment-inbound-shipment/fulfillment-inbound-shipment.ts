@@ -68,6 +68,8 @@ export class FulfillmentInboundShipment {
       action: 'GetPackageLabels',
       parameters: {
         ShipmentId: parameters.ShipmentId,
+        PageType: parameters.PageType,
+        NumberOfPackages: parameters.NumberOfPackages,
       },
     })
 
