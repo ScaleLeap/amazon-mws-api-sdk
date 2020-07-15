@@ -1,10 +1,11 @@
 import {
   CreateInboundShipmentParameters,
-  InboundShipmentHeader,
-  ParsingError,
-  PartneredSmallParcelPackageInput,
   GetPackageLabelsParameters,
   GetUniquePackageLabelsParameters,
+  InboundShipmentHeader,
+  PageType,
+  ParsingError,
+  PartneredSmallParcelPackageInput,
 } from '../../src'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
@@ -64,11 +65,13 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
   ShipmentStatus: 'WORKING',
 }
 
+const mockPageType: PageType = 'PackageLabel_Letter_2'
+
 describe('fulfillmentInboundShipment', () => {
   describe('getPalletLabels', () => {
     const parameters = {
       ShipmentId: '',
-      PageType: 'PackageLabel_Letter_2',
+      PageType: mockPageType,
       NumberOfPallets: 1,
     }
 
@@ -96,7 +99,7 @@ describe('fulfillmentInboundShipment', () => {
   describe('getUniquePackageLabels', () => {
     const parameters: GetUniquePackageLabelsParameters = {
       ShipmentId: '',
-      PageType: 'PackageLabel_Letter_2',
+      PageType: mockPageType,
       PackageLabelsToPrint: [''],
     }
 
@@ -126,7 +129,7 @@ describe('fulfillmentInboundShipment', () => {
   describe('getPackageLabels', () => {
     const parameters: GetPackageLabelsParameters = {
       ShipmentId: '',
-      PageType: 'PackageLabel_Letter_2',
+      PageType: mockPageType,
     }
 
     it('returns the transport document if succesful', async () => {
