@@ -3,6 +3,7 @@ import {
   GetPackageLabelsParameters,
   GetUniquePackageLabelsParameters,
   InboundShipmentHeader,
+  NextToken,
   PageType,
   ParsingError,
   PartneredSmallParcelPackageInput,
@@ -68,6 +69,32 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 const mockPageType: PageType = 'PackageLabel_Letter_2'
 
 describe('fulfillmentInboundShipment', () => {
+  describe('listInboundShipmentsByNextToken', () => {
+    const mockNextToken = new NextToken('ListInboundShipments', '123')
+
+    it('returns shipment data if succesful', async () => {
+      expect.assertions(1)
+
+      const mockListInboundShipmentsNT = createMockHttpClient(
+        'fulfillment_inbound_shipment_list_inbound_shipments_nt',
+      )
+
+      expect(
+        await mockListInboundShipmentsNT.fulfillmentInboundShipment.listInboundShipmentsByNextToken(
+          mockNextToken,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when  the status response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.listInboundShipmentsByNextToken(mockNextToken),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('listInboundShipments', () => {
     const parameters = {
       ShipmentStatusList: ['WORKING'],
