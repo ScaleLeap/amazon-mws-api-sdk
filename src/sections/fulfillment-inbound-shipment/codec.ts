@@ -1,6 +1,6 @@
 import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
 
-import { ensureArray, ensureString, mwsDate } from '../../parsing'
+import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
 import { DimensionsUnitEnum } from '../merchant-fulfillment/codec'
 import {
   CreateInboundShipmentParameters,
@@ -488,5 +488,64 @@ export type GetBillOfLading = GetInterface<typeof GetBillOfLading>
 export const GetBillOfLadingResponse = Codec.interface({
   GetBillOfLadingResponse: Codec.interface({
     GetBillOfLadingResult: GetBillOfLading,
+  }),
+})
+
+const FIBAddress = Codec.interface({
+  Name: string,
+  AddressLine1: string,
+  AddressLine2: optional(string),
+  City: string,
+  DistrictOrCounty: optional(string),
+  StateOrProvinceCode: optional(string),
+  CountryCode: string,
+  PostalCode: optional(string),
+})
+
+enum LabelPrepTypeEnum {
+  'NO_LABEL',
+  'SELLER_LABEL',
+  'AMAZON_LABEL',
+}
+
+const LabelPrepType = enumeration(LabelPrepTypeEnum)
+
+enum ShipmentStatusEnum {
+  'WORKING',
+  'SHIPPED',
+  'IN_TRANSIT',
+  'DELIVERED',
+  'CHECKED_IN',
+  'RECEIVING',
+  'CLOSED',
+  'CANCELLED',
+  'DELETED',
+  'ERROR',
+}
+
+const ShipmentStatus = enumeration(ShipmentStatusEnum)
+
+const InboundShipmentInfo = Codec.interface({
+  ShipmentId: optional(ensureString),
+  ShipmentName: optional(string),
+  ShipFromAddress: FIBAddress,
+  DestinationFulfillmentCenterId: optional(ensureString),
+  LabelPrepType: optional(LabelPrepType),
+  ShipmentStatus: optional(ShipmentStatus),
+  AreCasesRequired: optional(boolean),
+  ConfirmedNeedByDate: optional(string),
+  BoxContentsSource: optional(string),
+  EstimatedBoxContentsFeeDetails: optional(BoxContentsFeeDetails),
+})
+
+const ListInboundShipments = Codec.interface({
+  NextToken: optional(nextTokenCodec('ListInboundShipments')),
+  ShipmentData: ensureArray('member', InboundShipmentInfo),
+})
+
+export type ListInboundShipments = GetInterface<typeof ListInboundShipments>
+export const ListInboundShipmentsResponse = Codec.interface({
+  ListInboundShipmentsResponse: Codec.interface({
+    ListInboundShipmentsResult: ListInboundShipments,
   }),
 })

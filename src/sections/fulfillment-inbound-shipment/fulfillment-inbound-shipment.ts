@@ -32,6 +32,8 @@ import {
   GetTransportContentResponse,
   GetUniquePackageLabels,
   GetUniquePackageLabelsResponse,
+  ListInboundShipments,
+  ListInboundShipmentsResponse,
   PutTransportContent,
   PutTransportContentResponse,
   UpdateInboundShipment,
@@ -59,6 +61,7 @@ import {
   GetPrepInstructionsForSKUParameters,
   GetTransportContentParameters,
   GetUniquePackageLabelsParameters,
+  ListInboundShipmentsParameters,
   PutTransportContentParameters,
   VoidTransportRequestParameters,
 } from './type'
@@ -67,6 +70,29 @@ const FULFILLMENT_INBOUND_SHIPMENT_API_VERSION = '2010-10-01'
 
 export class FulfillmentInboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async listInboundShipments(
+    parameters: ListInboundShipmentsParameters,
+  ): Promise<[ListInboundShipments, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentInboundShipment,
+      version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
+      action: 'ListInboundShipments',
+      parameters: {
+        'ShipmentStatusList.member': parameters.ShipmentStatusList,
+        'ShipmentIdList.member': parameters.ShipmentIdList,
+        LastUpdatedAfter: parameters.LastUpdatedAfter?.toISOString(),
+        LastUpdatedBefore: parameters.LastUpdatedBefore?.toISOString(),
+      },
+    })
+
+    return ListInboundShipmentsResponse.decode(response).caseOf({
+      Right: (x) => [x.ListInboundShipmentsResponse.ListInboundShipmentsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getBillOfLading(
     parameters: GetBillOfLadingParameters,
@@ -108,7 +134,7 @@ export class FulfillmentInboundShipment {
         throw new ParsingError(error)
       },
     })
-}
+  }
 
   async getUniquePackageLabels(
     parameters: GetUniquePackageLabelsParameters,

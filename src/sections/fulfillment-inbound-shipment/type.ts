@@ -401,3 +401,10 @@ export interface GetPalletLabelsParameters {
 }
 
 export type GetBillOfLadingParameters = SingleShipmentIdParameters
+
+export interface ListInboundShipmentsParameters {
+  ShipmentStatusList?: string[]
+  ShipmentIdList?: string[]
+  LastUpdatedAfter?: Date
+  LastUpdatedBefore?: Date
+}
