@@ -69,6 +69,34 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 const mockPageType: PageType = 'PackageLabel_Letter_2'
 
 describe('fulfillmentInboundShipment', () => {
+  describe('listInboundShipmentItems', () => {
+    const parameters = {
+      ShipmentId: '',
+    }
+
+    it('returns list of item data if succesful', async () => {
+      expect.assertions(1)
+
+      const mockListInboundShipmentItems = createMockHttpClient(
+        'fulfillment_inbound_shipment_list_inbound_shipment_items',
+      )
+
+      expect(
+        await mockListInboundShipmentItems.fulfillmentInboundShipment.listInboundShipmentItems(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when  the status response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.listInboundShipmentItems(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('listInboundShipmentsByNextToken', () => {
     const mockNextToken = new NextToken('ListInboundShipments', '123')
 
