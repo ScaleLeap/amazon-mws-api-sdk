@@ -399,3 +399,5 @@ export interface GetPalletLabelsParameters {
   PageType: PageType
   NumberOfPallets: number
 }
+
+export type GetBillOfLadingParameters = SingleShipmentIdParameters

@@ -478,3 +478,15 @@ export const GetPalletLabelsResponse = Codec.interface({
     GetPalletLabelsResult: GetPalletLabels,
   }),
 })
+
+const GetBillOfLading = Codec.interface({
+  TransportDocument,
+})
+
+export type GetBillOfLading = GetInterface<typeof GetBillOfLading>
+
+export const GetBillOfLadingResponse = Codec.interface({
+  GetBillOfLadingResponse: Codec.interface({
+    GetBillOfLadingResult: GetBillOfLading,
+  }),
+})
