@@ -74,6 +74,18 @@ describe('fulfillmentInboundShipment', () => {
       ShipmentIdList: [''],
     }
 
+    it('returns the correct structure succesfully', async () => {
+      expect.assertions(1)
+
+      const mockListInboundShipments = createMockHttpClient(
+        'fulfillment_inbound_shipment_list_inbound_shipments_from_c_sharp',
+      )
+
+      expect(
+        await mockListInboundShipments.fulfillmentInboundShipment.listInboundShipments(parameters),
+      ).toMatchSnapshot()
+    })
+
     it('returns shipment data if succesful', async () => {
       expect.assertions(1)
 
