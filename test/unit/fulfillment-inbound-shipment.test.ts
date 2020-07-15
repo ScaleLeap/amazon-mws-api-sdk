@@ -64,13 +64,43 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 }
 
 describe('fulfillmentInboundShipment', () => {
+  describe('getUniquePackageLabels', () => {
+    const parameters = {
+      ShipmentId: '',
+      PageType: 'PackageLabel_Letter_2',
+      PackageLabelsToPrint: [''],
+    }
+
+    it('returns the transport document if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetUniquePackageLabels = createMockHttpClient(
+        'fulfillment_inbound_shipment_get_unique_package_labels',
+      )
+
+      expect(
+        await mockGetUniquePackageLabels.fulfillmentInboundShipment.getUniquePackageLabels(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status  response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentInboundShipment.getUniquePackageLabels(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getPackageLabels', () => {
     const parameters: GetPackageLabelsParameters = {
       ShipmentId: '',
       PageType: 'PackageLabel_Letter_2',
     }
 
-    it('returns transport content if succesful', async () => {
+    it('returns the transport document if succesful', async () => {
       expect.assertions(1)
 
       const mockGetPackageLabels = createMockHttpClient(
