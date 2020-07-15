@@ -466,3 +466,15 @@ export const GetUniquePackageLabelsResponse = Codec.interface({
     GetUniquePackageLabelsResult: GetUniquePackageLabels,
   }),
 })
+
+const GetPalletLabels = Codec.interface({
+  TransportDocument,
+})
+
+export type GetPalletLabels = GetInterface<typeof GetPalletLabels>
+
+export const GetPalletLabelsResponse = Codec.interface({
+  GetPalletLabelsResponse: Codec.interface({
+    GetPalletLabelsResult: GetPalletLabels,
+  }),
+})

@@ -380,7 +380,7 @@ enum PageTypeEnum {
   'PackageLabel_Plain_Paper',
 }
 
-type PageType = keyof typeof PageTypeEnum
+export type PageType = keyof typeof PageTypeEnum
 
 export interface GetPackageLabelsParameters {
   ShipmentId: string
@@ -392,4 +392,10 @@ export interface GetUniquePackageLabelsParameters {
   ShipmentId: string
   PageType: PageType
   PackageLabelsToPrint: string[]
+}
+
+export interface GetPalletLabelsParameters {
+  ShipmentId: string
+  PageType: PageType
+  NumberOfPallets: number
 }
