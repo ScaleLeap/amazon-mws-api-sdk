@@ -43,7 +43,7 @@
     "@scaleleap/amazon-marketplaces": "5.0.1",
     "axios": "0.19.2",
     "fast-xml-parser": "3.17.4",
-    "purify-ts": "0.16.0-beta.2",
+    "purify-ts": "0.16.0-beta.3",
     "ts-error": "1.0.6"
   },
   "devDependencies": {
