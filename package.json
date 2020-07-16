@@ -29,7 +29,7 @@
     "api-extractor": "api-extractor run --local --verbose",
     "prebuild": "npm run clean",
     "build": "tsc --build tsconfig.build.json",
-    "clean": "rimraf lib/* dist/*",
+    "clean": "rimraf lib/* dist temp",
     "dev": "ts-node-dev --respawn --transpileOnly src",
     "lint": "eslint --ext ts,js src/ test/",
     "lint:fix": "npm run lint -- --fix",
