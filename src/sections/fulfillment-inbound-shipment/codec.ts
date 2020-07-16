@@ -10,12 +10,12 @@ import {
   WeightUnitEnum,
 } from './type'
 
-enum GuidanceReasonEnum {
+export enum GuidanceReasonEnum {
   SlowMovingASIN = 'SlowMovingASIN',
   NoApplicableGuidance = 'NoApplicableGuidance',
 }
 
-enum InboundGuidanceEnum {
+export enum InboundGuidanceEnum {
   InboundNotRecommended = 'InboundNotRecommended',
   InboundOK = 'InboundOK',
 }
@@ -181,14 +181,14 @@ export const ConfirmPreorderResponse = Codec.interface({
   }),
 })
 
-enum BarcodeInstructionEnum {
+export enum BarcodeInstructionEnum {
   RequiresFNSKULabel = 'RequiresFNSKULabel',
   CanUseOriginalBarcode = 'CanUserOriginalBarcode',
 }
 
 export const BarcodeInstruction = enumeration(BarcodeInstructionEnum)
 
-enum PrepGuidanceEnum {
+export enum PrepGuidanceEnum {
   ConsultHelpDocuments = 'ConsultHelpDocuments',
   NoAdditionalPrepRequired = 'NoAdditionalPrepRequired',
   SeePrepInstructionsList = 'SeePrepInstructionsList',
@@ -196,7 +196,7 @@ enum PrepGuidanceEnum {
 
 export const PrepGuidance = enumeration(PrepGuidanceEnum)
 
-export const PrepInstruction = enumeration(PrepInstructionEnum)
+const PrepInstruction = enumeration(PrepInstructionEnum)
 
 export const AmazonPrepFeesDetails = Codec.interface({
   PrepInstruction,
@@ -245,7 +245,7 @@ export const GetPrepInstructionsForASINResponse = Codec.interface({
   }),
 })
 
-enum TransportStatusEnum {
+export enum TransportStatusEnum {
   WORKING = 'WORKING',
   ERROR_ON_ESTIMATING = 'ERROR_ON_ESTIMATING',
   ESTIMATING = 'ESTIMATING',
@@ -305,7 +305,7 @@ export const PackageStatus = enumeration(PackageStatusEnum)
 
 const DimensionsUnit = enumeration(DimensionsUnitEnum)
 
-export const FIBDimensions = Codec.interface({
+const FIBDimensions = Codec.interface({
   Unit: DimensionsUnit,
   Length: number,
   Width: number,
@@ -314,7 +314,7 @@ export const FIBDimensions = Codec.interface({
 
 const WeightUnit = enumeration(WeightUnitEnum)
 
-export const FIBWeight = Codec.interface({
+const FIBWeight = Codec.interface({
   Unit: WeightUnit,
   Value: number,
 })
@@ -327,7 +327,7 @@ export const PartneredSmallParcelPackageOutput = Codec.interface({
   CarrierName: string,
 })
 
-export const NonPartneredSmallParcelPackageOutput = Codec.interface({
+const NonPartneredSmallParcelPackageOutput = Codec.interface({
   CarrierName: string,
   TrackingId: ensureString,
   PackageStatus,
@@ -342,14 +342,14 @@ export const PartneredSmallParcelDataOutput = Codec.interface({
   PartneredEstimate: optional(PartneredEstimate),
 })
 
-export const Contact = Codec.interface({
+const Contact = Codec.interface({
   Name: string,
   Phone: string,
   Email: string,
   Fax: string,
 })
 
-export const Pallet = Codec.interface({
+const Pallet = Codec.interface({
   Dimensions: FIBDimensions,
   Weight: optional(FIBWeight),
   IsStacked: boolean,
@@ -491,7 +491,7 @@ export const GetBillOfLadingResponse = Codec.interface({
   }),
 })
 
-enum LabelPrepTypeEnum {
+export enum LabelPrepTypeEnum {
   'NO_LABEL',
   'SELLER_LABEL',
   'AMAZON_LABEL',
@@ -499,7 +499,7 @@ enum LabelPrepTypeEnum {
 
 export const LabelPrepType = enumeration(LabelPrepTypeEnum)
 
-enum ShipmentStatusEnum {
+export enum ShipmentStatusEnum {
   'WORKING',
   'SHIPPED',
   'IN_TRANSIT',

@@ -125,7 +125,7 @@ export enum PrepInstructionEnum {
   HangGarment = 'HangGarment',
 }
 
-type PrepInstruction = keyof typeof PrepInstructionEnum
+export type PrepInstruction = keyof typeof PrepInstructionEnum
 
 export enum PrepOwnerEnum {
   AMAZON = 'AMAZON',
@@ -205,20 +205,20 @@ export interface GetPrepInstructionsForASINParameters {
   ShipToCountryCode: string
 }
 
-interface Amount {
+export interface FIBAmount {
   CurrencyCode: string
   Value: string
 }
 interface PartneredEstimate {
-  Amount?: Amount
+  Amount?: FIBAmount
   ConfirmDeadline?: Date
   VoidDeadline?: Date
 }
 
-type DimensionsUnit = keyof typeof DimensionsUnitEnum
+export type FIBDimensionsUnit = keyof typeof DimensionsUnitEnum
 
-interface FIBDimensions {
-  Unit: DimensionsUnit
+export interface FIBDimensions {
+  Unit: FIBDimensionsUnit
   Length: number
   Width: number
   Height: number
@@ -229,10 +229,10 @@ export enum WeightUnitEnum {
   'kilograms',
 }
 
-type WeightUnit = keyof typeof WeightUnitEnum
+export type FIBWeightUnit = keyof typeof WeightUnitEnum
 
-interface FIBWeight {
-  Unit: WeightUnit
+export interface FIBWeight {
+  Unit: FIBWeightUnit
   Value: number
 }
 
@@ -252,44 +252,44 @@ export interface PartneredSmallParcelPackageInput {
   Weight: FIBWeight
 }
 
-interface PartneredSmallParcelDataInput {
+export interface PartneredSmallParcelDataInput {
   CarrierName: string
   PackageList: PartneredSmallParcelPackageInput[]
 }
 
-interface NonPartneredSmallParcelPackageOutput {
+export interface NonPartneredSmallParcelPackageOutput {
   TrackingId: string
 }
 
-interface NonPartneredSmallParcelDataInput {
+export interface NonPartneredSmallParcelDataInput {
   CarrierName: string
   PackageList: NonPartneredSmallParcelPackageOutput[]
 }
 
-interface Contact {
+export interface Contact {
   Name: string
   Phone: string
   Email: string
   Fax: string
 }
 
-interface Pallet {
+export interface Pallet {
   Dimension: FIBDimensions
   Weight?: FIBWeight
   IsStacked: boolean
 }
 
-interface PartneredLtlDataInput {
+export interface PartneredLtlDataInput {
   Contact: Contact
   BoxCount: number
   SellerFreightClass?: string
   FreightReadyDate: Date // YYYY-MM-DD
   PalletList?: Pallet[]
   TotalWeight?: FIBWeight
-  SellerDeclaredValue?: Amount
+  SellerDeclaredValue?: FIBAmount
 }
 
-interface NonPartneredLtlDataInput {
+export interface NonPartneredLtlDataInput {
   CarrierName: string
   ProNumber: string
 }
@@ -361,7 +361,7 @@ export const canonicalizePutTransportContentParameters = (
   }
 }
 
-interface SingleShipmentIdParameters {
+export interface SingleShipmentIdParameters {
   ShipmentId: string
 }
 export type EstimateTransportRequestParameters = SingleShipmentIdParameters
@@ -372,7 +372,7 @@ export type ConfirmTransportRequestParameters = SingleShipmentIdParameters
 
 export type VoidTransportRequestParameters = SingleShipmentIdParameters
 
-enum PageTypeEnum {
+export enum PageTypeEnum {
   'PackageLabel_Letter_2',
   'PackageLabel_Letter_6',
   'PackageLabel_A4_2',
