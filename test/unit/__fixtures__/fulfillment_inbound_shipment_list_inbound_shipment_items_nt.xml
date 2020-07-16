@@ -1,0 +1,27 @@
+<ListInboundShipmentItemsByNextTokenResponse xmlns="http://mws.amazonaws.com/FulfillmentInboundShipment/2010-10-01/">
+  <ListInboundShipmentItemsByNextTokenResult>
+    <ItemData>
+      <member>
+        <QuantityShipped>2</QuantityShipped>
+        <ShipmentId>FBA0000001</ShipmentId>
+        <FulfillmentNetworkSKU>FNSKU1</FulfillmentNetworkSKU>
+        <SellerSKU>SKU00001</SellerSKU>
+        <QuantityReceived>0</QuantityReceived>
+        <QuantityInCase>0</QuantityInCase>
+        <PrepDetailsList>
+          <PrepDetails>
+            <PrepInstruction>Taping</PrepInstruction>
+            <PrepOwner>AMAZON</PrepOwner>
+          </PrepDetails>
+          <PrepDetails>
+            <PrepInstruction>Polybagging</PrepInstruction>
+            <PrepOwner>AMAZON</PrepOwner>
+          </PrepDetails>
+        </PrepDetailsList>
+      </member>
+    </ItemData>
+  </ListInboundShipmentItemsByNextTokenResult>
+  <ResponseMetadata>
+    <RequestId>9581f746-c8fb-42ca-ad20-42f8a5333a1b</RequestId>
+  </ResponseMetadata>
+</ListInboundShipmentItemsByNextTokenResponse>

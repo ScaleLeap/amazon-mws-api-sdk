@@ -1,0 +1,18 @@
+<GetInboundGuidanceForASINResponse xmlns="https://mws.amazonservices.com/FulfillmentInboundShipment/2010-10-01">
+  <GetInboundGuidanceForASINResult>
+    <ASINInboundGuidanceList>
+      <ASINInboundGuidance>
+        <ASIN>B00005N5PF</ASIN>
+        <InboundGuidance>InboundNotRecommended</InboundGuidance>
+        <GuidanceReasonList>
+          <GuidanceReason>SlowMovingASIN</GuidanceReason>
+        </GuidanceReasonList>
+      </ASINInboundGuidance>
+    </ASINInboundGuidanceList>
+    <InvalidASINList></InvalidASINList>
+  </GetInboundGuidanceForASINResult>
+  <ResponseMetadata>
+    <RequestId>d80c6c7b-f7c7-4fa7-bdd7-854711cb3bcc</RequestId>
+  </ResponseMetadata>
+</GetInboundGuidanceForASINResponse>
+

@@ -1,0 +1,684 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fulfillmentInboundShipment confirmPreorder returns confirmed dates if succesful 1`] = `
+Array [
+  Object {
+    "ConfirmedFulfillableDate": "2015-12-31",
+    "ConfirmedNeedByDate": "2015-12-27",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment confirmTransportRequest returns the transport result if succesful 1`] = `
+Array [
+  Object {
+    "TransportResult": Object {
+      "TransportStatus": "CONFIRMING",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment createInboundShipment returns the shipment ID if succesful 1`] = `
+Array [
+  Object {
+    "ShipmentId": "FBA2F50GYX",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment createInboundShipmentPlan returns inbound shipment plans if succesful 1`] = `
+Array [
+  Object {
+    "InboundShipmentPlans": Array [
+      Object {
+        "DestinationFulfillmentCenterId": "String",
+        "EstimatedBoxContentsFee": Object {
+          "FeePerUnit": Object {
+            "CurrencyCode": "String",
+            "Value": "100",
+          },
+          "TotalFee": Object {
+            "CurrencyCode": "String",
+            "Value": "100",
+          },
+          "TotalUnits": 1,
+        },
+        "Items": Array [
+          Object {
+            "FulfillmentNetworkSKU": "String",
+            "PrepDetailsList": Array [
+              Object {
+                "PrepInstruction": "String",
+                "PrepOwner": "String",
+              },
+            ],
+            "Quantity": 1,
+            "SellerSKU": "String",
+          },
+        ],
+        "LabelPrepType": "String",
+        "ShipToAddress": Object {
+          "AddressLine1": "String",
+          "AddressLine2": "String",
+          "City": "String",
+          "CountryCode": "String",
+          "DistrictOrCounty": "String",
+          "Name": "String",
+          "PostalCode": "String",
+          "StateOrProvinceCode": "String",
+        },
+        "ShipmentId": "String",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment estimateTransportRequest returns the workflow status for a shipment if succesful 1`] = `
+Array [
+  Object {
+    "TransportResult": Object {
+      "TransportStatus": "ESTIMATING",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getBillOfLading returns PDF document data if succesful 1`] = `
+Array [
+  Object {
+    "TransportDocument": Object {
+      "Checksum": "WGQwqA+NlzMVL1plHc/7ZA==",
+      "PdfDocument": "ABEAAAAAAlbHMucGRmUEsFBgAAAAABAAEAPwAAALQXAQAAAA==",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getInboundGuidanceForAsin returns sku inbound guidance list if succesful 1`] = `
+Array [
+  Object {
+    "ASINInboundGuidanceList": Array [
+      Object {
+        "ASIN": "B00005N5PF",
+        "GuidanceReasonList": Array [
+          "SlowMovingASIN",
+        ],
+        "InboundGuidance": "InboundNotRecommended",
+      },
+    ],
+    "InvalidASINList": Array [],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getInboundGuidanceForSku returns sku inbound guidance list if succesful 1`] = `
+Array [
+  Object {
+    "InvalidSKUList": Array [],
+    "SKUInboundGuidanceList": Array [
+      Object {
+        "ASIN": "B00005N5PF",
+        "GuidanceReasonList": Array [
+          "SlowMovingASIN",
+        ],
+        "InboundGuidance": "InboundNotRecommended",
+        "SellerSKU": "us001",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getPackageLabels returns the transport document if succesful 1`] = `
+Array [
+  Object {
+    "TransportDocument": Object {
+      "Checksum": "WGQwqA+NlzMVL1plHc/7ZA==",
+      "PdfDocument": "ABEAAAAAAlbHMucGRmUEsFBgAAAAABAAEAPwAAALQXAQAAAA==",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getPalletLabels returns PDF document data if succesful 1`] = `
+Array [
+  Object {
+    "TransportDocument": Object {
+      "Checksum": "WGQwqA+NlzMVL1plHc/7ZA==",
+      "PdfDocument": "ABEAAAAAAlbHMucGRmUEsFBgAAAAABAAEAPwAAALQXAQAAAA==",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getPreorderInfo returns preorderinfo if succesful 1`] = `
+Array [
+  Object {
+    "ConfirmedFulfillableDate": "2015-12-31",
+    "NeedByDate": "2015-12-27",
+    "ShipmentConfirmedForPreorder": true,
+    "ShipmentContainsPreorderableItems": true,
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getPrepInstructionsForAsin returns list of prep instructions if succesful 1`] = `
+Array [
+  Object {
+    "ASINPrepInstructionsList": Array [
+      Object {
+        "ASIN": "B00005N5PF",
+        "BarcodeInstruction": "RequiresFNSKULabel",
+        "PrepGuidance": "SeePrepInstructionsList",
+        "PrepInstructionList": Array [
+          "Polybagging",
+          "Taping",
+        ],
+      },
+    ],
+    "InvalidASINList": Array [
+      Object {
+        "ASIN": "B0INVALIDF",
+        "ErrorReason": "InvalidASIN",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getPrepInstructionsForSku returns prep instructions list if succesful 1`] = `
+Array [
+  Object {
+    "InvalidSKUList": Array [],
+    "SKUPrepInstructionsList": Array [
+      Object {
+        "ASIN": "B00EXAMPLE",
+        "AmazonPrepFeesDetailsList": Array [
+          Object {
+            "FeePerUnit": Object {
+              "CurrencyCode": "USD",
+              "Value": "0.2",
+            },
+            "PrepInstruction": "Polybagging",
+          },
+          Object {
+            "FeePerUnit": Object {
+              "CurrencyCode": "USD",
+              "Value": "0.2",
+            },
+            "PrepInstruction": "Taping",
+          },
+          Object {
+            "FeePerUnit": Object {
+              "CurrencyCode": "USD",
+              "Value": "0.2",
+            },
+            "PrepInstruction": "Labeling",
+          },
+        ],
+        "BarcodeInstruction": "RequiresFNSKULabel",
+        "PrepGuidance": "SeePrepInstructionsList",
+        "PrepInstructionList": Array [
+          "Polybagging",
+          "Taping",
+          "Labeling",
+        ],
+        "SellerSKU": "ca_001",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getServiceStatus returns a parsed model when the status response is valid 1`] = `
+Array [
+  Object {
+    "Status": "GREEN",
+    "Timestamp": "2020-05-06T08:22:23.582Z",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getTransportContent returns the transport content for LTL if succesful 1`] = `
+Array [
+  Object {
+    "TransportContent": Object {
+      "TransportDetails": Object {
+        "NonPartneredLtlData": Object {
+          "CarrierName": "ABF FREIGHT SYSTEM INC",
+          "ProNumber": "123456",
+        },
+      },
+      "TransportHeader": Object {
+        "IsPartnered": false,
+        "SellerId": "A135KKEKWF1J56",
+        "ShipmentId": "FBAQFGQZ",
+        "ShipmentType": "LTL",
+      },
+      "TransportResult": Object {
+        "TransportStatus": "WORKING",
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getTransportContent returns the transport content if succesful 1`] = `
+Array [
+  Object {
+    "TransportContent": Object {
+      "TransportDetails": Object {
+        "NonPartneredSmallParcelData": Object {
+          "PackageList": Array [
+            Object {
+              "CarrierName": "UNITED PARCEL SERVICE INC",
+              "PackageStatus": "SHIPPED",
+              "TrackingId": "1Z6Y68W00342402864",
+            },
+          ],
+        },
+      },
+      "TransportHeader": Object {
+        "IsPartnered": false,
+        "SellerId": "A135KKEKWF1J56",
+        "ShipmentId": "FBAQ6QBP",
+        "ShipmentType": "SP",
+      },
+      "TransportResult": Object {
+        "TransportStatus": "WORKING",
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment getUniquePackageLabels returns the transport document if succesful 1`] = `
+Array [
+  Object {
+    "TransportDocument": Object {
+      "Checksum": "WGQwqA+NlzMVL1plHc/7ZA==",
+      "PdfDocument": "ABEAAAAAAlbHMucGRmUEsFBgAAAAABAAEAPwAAALQXAQAAAA==",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment listInboundShipmentItems returns list of item data if succesful 1`] = `
+Array [
+  Object {
+    "ItemData": Array [
+      Object {
+        "FulfillmentNetworkSKU": "B000FADVPQ",
+        "QuantityInCase": 0,
+        "QuantityReceived": 0,
+        "QuantityShipped": 3,
+        "ReleaseDate": "2014-12-31",
+        "SellerSKU": "SampleSKU1",
+        "ShipmentId": "SSF85DGIZZ3OF1",
+      },
+      Object {
+        "FulfillmentNetworkSKU": "B0011VECH4",
+        "QuantityInCase": 0,
+        "QuantityReceived": 0,
+        "QuantityShipped": 10,
+        "SellerSKU": "SampleSKU2",
+        "ShipmentId": "SSF85DGIZZ3OF1",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment listInboundShipmentItemsByNextToken returns a list of inbound shipment item data if succesful 1`] = `
+Array [
+  Object {
+    "ItemData": Array [
+      Object {
+        "FulfillmentNetworkSKU": "FNSKU1",
+        "PrepDetailsList": Array [
+          Object {
+            "PrepInstruction": "Taping",
+            "PrepOwner": "AMAZON",
+          },
+          Object {
+            "PrepInstruction": "Polybagging",
+            "PrepOwner": "AMAZON",
+          },
+        ],
+        "QuantityInCase": 0,
+        "QuantityReceived": 0,
+        "QuantityShipped": 2,
+        "SellerSKU": "SKU00001",
+        "ShipmentId": "FBA0000001",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment listInboundShipments returns shipment data if succesful 1`] = `
+Array [
+  Object {
+    "ShipmentData": Array [
+      Object {
+        "DestinationFulfillmentCenterId": "YYZ1",
+        "LabelPrepType": "NO_LABEL",
+        "ShipFromAddress": Object {
+          "AddressLine1": "Address Line 1",
+          "City": "Vancouver",
+          "CountryCode": "CA",
+          "Name": "jsowprni Devo CA20",
+          "PostalCode": "V5V 1A1",
+          "StateOrProvinceCode": "BC",
+        },
+        "ShipmentId": "FBAN4QNH",
+        "ShipmentName": "FBA (8/27/12 1:55 PM)",
+        "ShipmentStatus": "WORKING",
+      },
+      Object {
+        "BoxContentsSource": "NONE",
+        "DestinationFulfillmentCenterId": "RIC2",
+        "LabelPrepType": "NO_LABEL",
+        "ShipFromAddress": Object {
+          "AddressLine1": "Address 1",
+          "City": "Vancouver",
+          "CountryCode": "CA",
+          "Name": "Janani Arvind FBA QA",
+          "PostalCode": "V5V 1A1",
+          "StateOrProvinceCode": "BC",
+        },
+        "ShipmentId": "FBA1123",
+        "ShipmentName": "Test MWS CA Shipment 1",
+        "ShipmentStatus": "WORKING",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment listInboundShipments returns the correct structure succesfully 1`] = `
+Array [
+  Object {
+    "NextToken": NextToken {
+      "action": "ListInboundShipments",
+      "token": "String",
+    },
+    "ShipmentData": Array [
+      Object {
+        "AreCasesRequired": true,
+        "BoxContentsSource": "String",
+        "ConfirmedNeedByDate": "String",
+        "DestinationFulfillmentCenterId": "String",
+        "LabelPrepType": "String",
+        "ShipFromAddress": Object {
+          "AddressLine1": "String",
+          "AddressLine2": "String",
+          "City": "String",
+          "CountryCode": "String",
+          "DistrictOrCounty": "String",
+          "Name": "String",
+          "PostalCode": "String",
+          "StateOrProvinceCode": "String",
+        },
+        "ShipmentId": "String",
+        "ShipmentName": "String",
+        "ShipmentStatus": "String",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment listInboundShipmentsByNextToken returns shipment data if succesful 1`] = `
+Array [
+  Object {
+    "NextToken": NextToken {
+      "action": "ListInboundShipments",
+      "token": "QVYyVTY5NUVaQzBDWHw0ODh8MjAwfCB8IHw1OTM0MDZ8IHwwLDJ8
+            IHwgfCB8IHx0cnVl",
+    },
+    "ShipmentData": Array [
+      Object {
+        "AreCasesRequired": false,
+        "DestinationFulfillmentCenterId": "RNO2",
+        "LabelPrepType": "SELLER_LABEL",
+        "ShipFromAddress": Object {
+          "AddressLine1": "876 Elm St",
+          "AddressLine2": "Apt 2",
+          "City": "Seattle",
+          "CountryCode": "US",
+          "Name": "Joan Doe",
+          "PostalCode": "98101",
+          "StateOrProvinceCode": "WA",
+        },
+        "ShipmentId": "SSF85DGIZZ7PKF",
+        "ShipmentName": "ExampleShipmentName4",
+        "ShipmentStatus": "WORKING",
+      },
+      Object {
+        "AreCasesRequired": true,
+        "ConfirmedNeedByDate": "2015-12-30",
+        "DestinationFulfillmentCenterId": "RNO2",
+        "LabelPrepType": "SELLER_LABEL",
+        "ShipFromAddress": Object {
+          "AddressLine1": "876 Elm St",
+          "AddressLine2": "Apt 2",
+          "City": "Seattle",
+          "CountryCode": "US",
+          "Name": "Joan Doe",
+          "PostalCode": "98101",
+          "StateOrProvinceCode": "WA",
+        },
+        "ShipmentId": "SSF85DGIZZ7PL3",
+        "ShipmentName": "ExampleShipmentName5",
+        "ShipmentStatus": "SHIPPED",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment putTransportContent returns tranport result if succesful 1`] = `
+Array [
+  Object {
+    "TransportResult": Object {
+      "TransportStatus": "WORKING",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment updateInboundShipment return the shipment id if succesful 1`] = `
+Array [
+  Object {
+    "ShipmentId": "FBA2F50GYX",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentInboundShipment voidTransportRequest returns the transport result if voiding is succesful 1`] = `
+Array [
+  Object {
+    "TransportResult": Object {
+      "TransportStatus": "VOIDING",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
