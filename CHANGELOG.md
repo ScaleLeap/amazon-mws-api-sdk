@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.4.1...v1.4.2) (2020-07-16)
+
+
+### Bug Fixes
+
+* npm audit ([2847e2c](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/2847e2c3dc8f86fbdce05d6e7565de7e068f756c))
+
 ## [1.4.1](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.4.0...v1.4.1) (2020-07-15)
 
 
