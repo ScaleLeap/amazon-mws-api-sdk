@@ -125,7 +125,7 @@ export enum PrepInstructionEnum {
   HangGarment = 'HangGarment',
 }
 
-export type PrepInstruction = keyof typeof PrepInstructionEnum
+type PrepInstruction = keyof typeof PrepInstructionEnum
 
 export enum PrepOwnerEnum {
   AMAZON = 'AMAZON',

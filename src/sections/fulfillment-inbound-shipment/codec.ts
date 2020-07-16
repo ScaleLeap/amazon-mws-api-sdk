@@ -98,7 +98,7 @@ export const UpdateInboundShipmentResponse = Codec.interface({
   }),
 })
 
-const FISAddress = Codec.interface({
+export const FISAddress = Codec.interface({
   Name: string,
   AddressLine1: string,
   AddressLine2: optional(string),
@@ -168,7 +168,7 @@ export const GetPreorderInfoResponse = Codec.interface({
   }),
 })
 
-const ConfirmPreorder = Codec.interface({
+export const ConfirmPreorder = Codec.interface({
   ConfirmedNeedByDate: string,
   ConfirmedFulfillableDate: string,
 })
@@ -186,7 +186,7 @@ enum BarcodeInstructionEnum {
   CanUseOriginalBarcode = 'CanUserOriginalBarcode',
 }
 
-const BarcodeInstruction = enumeration(BarcodeInstructionEnum)
+export const BarcodeInstruction = enumeration(BarcodeInstructionEnum)
 
 enum PrepGuidanceEnum {
   ConsultHelpDocuments = 'ConsultHelpDocuments',
@@ -194,16 +194,16 @@ enum PrepGuidanceEnum {
   SeePrepInstructionsList = 'SeePrepInstructionsList',
 }
 
-const PrepGuidance = enumeration(PrepGuidanceEnum)
+export const PrepGuidance = enumeration(PrepGuidanceEnum)
 
-const PrepInstruction = enumeration(PrepInstructionEnum)
+export const PrepInstruction = enumeration(PrepInstructionEnum)
 
-const AmazonPrepFeesDetails = Codec.interface({
+export const AmazonPrepFeesDetails = Codec.interface({
   PrepInstruction,
   FeePerUnit: Amount,
 })
 
-const SKUPrepInstructions = Codec.interface({
+export const SKUPrepInstructions = Codec.interface({
   SellerSKU: string,
   ASIN: string,
   BarcodeInstruction,
@@ -212,7 +212,7 @@ const SKUPrepInstructions = Codec.interface({
   AmazonPrepFeesDetailsList: ensureArray('AmazonPrepFeesDetails', AmazonPrepFeesDetails),
 })
 
-const GetPrepInstructionsForSKU = Codec.interface({
+export const GetPrepInstructionsForSKU = Codec.interface({
   SKUPrepInstructionsList: ensureArray('SKUPrepInstructions', SKUPrepInstructions),
   InvalidSKUList: ensureArray('InvalidSKU', InvalidSKU),
 })
@@ -225,14 +225,14 @@ export const GetPrepInstructionsForSKUResponse = Codec.interface({
   }),
 })
 
-const ASINPrepInstructions = Codec.interface({
+export const ASINPrepInstructions = Codec.interface({
   ASIN: string,
   BarcodeInstruction,
   PrepGuidance,
   PrepInstructionList: ensureArray('PrepInstruction', PrepInstruction),
 })
 
-const GetPrepInstructionsForASIN = Codec.interface({
+export const GetPrepInstructionsForASIN = Codec.interface({
   ASINPrepInstructionsList: ensureArray('ASINPrepInstructions', ASINPrepInstructions),
   InvalidASINList: ensureArray('InvalidASIN', InvalidASIN),
 })
@@ -258,9 +258,9 @@ enum TransportStatusEnum {
   ERROR_IN_VOIDING = 'ERROR_IN_VOIDING',
 }
 
-const TransportStatus = enumeration(TransportStatusEnum)
+export const TransportStatus = enumeration(TransportStatusEnum)
 
-const PutTransportContent = Codec.interface({
+export const PutTransportContent = Codec.interface({
   TransportResult: Codec.interface({
     TransportStatus,
   }),
@@ -274,7 +274,7 @@ export const PutTransportContentResponse = Codec.interface({
   }),
 })
 
-const EstimateTransportRequest = Codec.interface({
+export const EstimateTransportRequest = Codec.interface({
   TransportResult: Codec.interface({
     TransportStatus,
   }),
@@ -288,24 +288,24 @@ export const EstimateTransportRequestResponse = Codec.interface({
   }),
 })
 
-const TransportHeader = Codec.interface({
+export const TransportHeader = Codec.interface({
   SellerId: string,
   ShipmentId: ensureString,
   IsPartnered: boolean,
   ShipmentType: string,
 })
 
-const PartneredEstimate = Codec.interface({
+export const PartneredEstimate = Codec.interface({
   Amount: optional(Amount),
   ConfirmDeadline: optional(mwsDate),
   VoidDeadline: optional(mwsDate),
 })
 
-const PackageStatus = enumeration(PackageStatusEnum)
+export const PackageStatus = enumeration(PackageStatusEnum)
 
 const DimensionsUnit = enumeration(DimensionsUnitEnum)
 
-const FIBDimensions = Codec.interface({
+export const FIBDimensions = Codec.interface({
   Unit: DimensionsUnit,
   Length: number,
   Width: number,
@@ -314,12 +314,12 @@ const FIBDimensions = Codec.interface({
 
 const WeightUnit = enumeration(WeightUnitEnum)
 
-const FIBWeight = Codec.interface({
+export const FIBWeight = Codec.interface({
   Unit: WeightUnit,
   Value: number,
 })
 
-const PartneredSmallParcelPackageOutput = Codec.interface({
+export const PartneredSmallParcelPackageOutput = Codec.interface({
   Dimensions: FIBDimensions,
   Weight: FIBWeight,
   TrackingId: ensureString,
@@ -327,35 +327,35 @@ const PartneredSmallParcelPackageOutput = Codec.interface({
   CarrierName: string,
 })
 
-const NonPartneredSmallParcelPackageOutput = Codec.interface({
+export const NonPartneredSmallParcelPackageOutput = Codec.interface({
   CarrierName: string,
   TrackingId: ensureString,
   PackageStatus,
 })
 
-const NonPartneredSmallParcelDataOutput = Codec.interface({
+export const NonPartneredSmallParcelDataOutput = Codec.interface({
   PackageList: ensureArray('member', NonPartneredSmallParcelPackageOutput),
 })
 
-const PartneredSmallParcelDataOutput = Codec.interface({
+export const PartneredSmallParcelDataOutput = Codec.interface({
   PackageList: ensureArray('member', PartneredSmallParcelPackageOutput),
   PartneredEstimate: optional(PartneredEstimate),
 })
 
-const Contact = Codec.interface({
+export const Contact = Codec.interface({
   Name: string,
   Phone: string,
   Email: string,
   Fax: string,
 })
 
-const Pallet = Codec.interface({
+export const Pallet = Codec.interface({
   Dimensions: FIBDimensions,
   Weight: optional(FIBWeight),
   IsStacked: boolean,
 })
 
-const PartneredLtlDataOutput = Codec.interface({
+export const PartneredLtlDataOutput = Codec.interface({
   Contact,
   BoxCount: number,
   SellerFreightClass: optional(string),
@@ -372,29 +372,29 @@ const PartneredLtlDataOutput = Codec.interface({
   CarrierName: string,
 })
 
-const NonPartneredLtlDataOutput = Codec.interface({
+export const NonPartneredLtlDataOutput = Codec.interface({
   CarrierName: string,
   ProNumber: ensureString,
 })
 
-const TransportDetails = Codec.interface({
+export const TransportDetails = Codec.interface({
   PartneredSmallParcelData: optional(PartneredSmallParcelDataOutput),
   NonPartneredSmallParcelData: optional(NonPartneredSmallParcelDataOutput),
   PartneredLtlData: optional(PartneredLtlDataOutput),
   NonPartneredLtlData: optional(NonPartneredLtlDataOutput),
 })
 
-const TransportResult = Codec.interface({
+export const TransportResult = Codec.interface({
   TransportStatus,
 })
 
-const TransportContent = Codec.interface({
+export const TransportContent = Codec.interface({
   TransportHeader,
   TransportDetails,
   TransportResult,
 })
 
-const GetTransportContent = Codec.interface({
+export const GetTransportContent = Codec.interface({
   TransportContent,
 })
 
@@ -406,7 +406,7 @@ export const GetTransportContentResponse = Codec.interface({
   }),
 })
 
-const ConfirmTransportRequest = Codec.interface({
+export const ConfirmTransportRequest = Codec.interface({
   TransportResult,
 })
 
@@ -418,7 +418,7 @@ export const ConfirmTransportRequestResponse = Codec.interface({
   }),
 })
 
-const VoidTransportRequest = Codec.interface({
+export const VoidTransportRequest = Codec.interface({
   TransportResult,
 })
 
@@ -430,12 +430,12 @@ export const VoidTransportRequestResponse = Codec.interface({
   }),
 })
 
-const TransportDocument = Codec.interface({
+export const TransportDocument = Codec.interface({
   PdfDocument: string,
   Checksum: string,
 })
 
-const GetPackageLabels = Codec.interface({
+export const GetPackageLabels = Codec.interface({
   /**
    * Docs has a mistake in the response type
    * They have `TransportContent` instead of `TransportDocument`
@@ -451,7 +451,7 @@ export const GetPackageLabelsResponse = Codec.interface({
   }),
 })
 
-const GetUniquePackageLabels = Codec.interface({
+export const GetUniquePackageLabels = Codec.interface({
   /**
    * Docs has a mistake in the response type
    * They have `TransportContent` instead of `TransportDocument`
@@ -467,7 +467,7 @@ export const GetUniquePackageLabelsResponse = Codec.interface({
   }),
 })
 
-const GetPalletLabels = Codec.interface({
+export const GetPalletLabels = Codec.interface({
   TransportDocument,
 })
 
@@ -479,7 +479,7 @@ export const GetPalletLabelsResponse = Codec.interface({
   }),
 })
 
-const GetBillOfLading = Codec.interface({
+export const GetBillOfLading = Codec.interface({
   TransportDocument,
 })
 
@@ -497,7 +497,7 @@ enum LabelPrepTypeEnum {
   'AMAZON_LABEL',
 }
 
-const LabelPrepType = enumeration(LabelPrepTypeEnum)
+export const LabelPrepType = enumeration(LabelPrepTypeEnum)
 
 enum ShipmentStatusEnum {
   'WORKING',
@@ -514,7 +514,7 @@ enum ShipmentStatusEnum {
 
 const ShipmentStatus = enumeration(ShipmentStatusEnum)
 
-const InboundShipmentInfo = Codec.interface({
+export const InboundShipmentInfo = Codec.interface({
   ShipmentId: optional(ensureString),
   ShipmentName: optional(string),
   ShipFromAddress: FISAddress,
@@ -527,7 +527,7 @@ const InboundShipmentInfo = Codec.interface({
   EstimatedBoxContentsFeeDetails: optional(BoxContentsFeeDetails),
 })
 
-const ListInboundShipments = Codec.interface({
+export const ListInboundShipments = Codec.interface({
   NextToken: optional(nextTokenCodec('ListInboundShipments')),
   ShipmentData: ensureArray('member', InboundShipmentInfo),
 })
@@ -539,7 +539,7 @@ export const ListInboundShipmentsResponse = Codec.interface({
   }),
 })
 
-const ListInboundShipmentsByNextToken = Codec.interface({
+export const ListInboundShipmentsByNextToken = Codec.interface({
   NextToken: optional(nextTokenCodec('ListInboundShipments')),
   ShipmentData: ensureArray('member', InboundShipmentInfo),
 })
@@ -562,7 +562,7 @@ const InboundShipmentItem = Codec.interface({
   ReleaseDate: optional(string),
 })
 
-const ListInboundShipmentItems = Codec.interface({
+export const ListInboundShipmentItems = Codec.interface({
   NextToken: optional(nextTokenCodec('ListInboundShipmentItems')),
   ItemData: ensureArray('member', InboundShipmentItem),
 })
