@@ -123,6 +123,22 @@
   - [FulfillmentInboundShipment](#fulfillmentinboundshipment)
     - [Types used in FulfillmentInboundShipment](#types-used-in-fulfillmentinboundshipment)
       - [Address](#address-1)
+      - [InboundShipmentPlanRequestItem](#inboundshipmentplanrequestitem)
+      - [PrepDetails](#prepdetails)
+      - [InboundShipmentHeader](#inboundshipmentheader)
+      - [InboundShipmentItem](#inboundshipmentitem)
+      - [TransportDetailInput](#transportdetailinput)
+      - [Dimensions](#dimensions)
+      - [Weight](#weight-1)
+      - [PartneredSmallParcelPackageInput](#partneredsmallparcelpackageinput)
+      - [PartneredSmallParcelDataInput](#partneredsmallparceldatainput)
+      - [NonPartneredSmallParcelPackageOutput](#nonpartneredsmallparcelpackageoutput)
+      - [NonPartneredSmallParcelDataInput](#nonpartneredsmallparceldatainput)
+      - [Contact](#contact)
+      - [Pallet](#pallet)
+      - [Amount](#amount)
+      - [PartneredLtlDataInput](#partneredltldatainput)
+      - [NonPartneredLtlDataInput](#nonpartneredltldatainput)
     - [getInboundGuidanceForSku](#getinboundguidanceforsku)
     - [getInboundGuidanceForAsin](#getinboundguidanceforasin)
     - [createInboundShipmentPlan](#createinboundshipmentplan)
@@ -2464,6 +2480,186 @@ const [response, meta] = recommendations.getServiceStatus()
 | CountryCode         | string                 | `'US'`                  | Yes                                                                                                                                                                                                                               |
 | PostalCode          | ShippingServiceOptions | `'99501'`               | No. If postal codes are used in your marketplace, it is recommended that you include one with your request. This helps Amazon to select the most appropriate Amazon fulfillment center for your inbound shipment plan             |
 
+#### InboundShipmentPlanRequestItem
+
+**Properties**
+
+| Name            | Type        | Example                       | Required |
+| --------------- | ----------- | ----------------------------- | -------- |
+| SellerSKU       | string      | `'Jane Doe'`                  | Yes      |
+| ASIN            | string      | `'#123 Address Street'`       | No       |
+| Condition       | string      | `'Address Boulevard'`         | No       |
+| Quantity        | number      | `'Gotham City'`               | Yes      |
+| QuantityInCase  | number      | `'Address County'`            | No       |
+| PrepDetailsList | PrepDetails | [`PrepDetails`](#prepdetails) | No       |
+
+#### PrepDetails
+
+**Properties**
+
+| Name            | Type   | Example         | Required |
+| --------------- | ------ | --------------- | -------- |
+| PrepInstruction | string | `'Polybagging'` | Yes      |
+| PrepOwner       | string | `'AMAZON'`      | No       |
+
+* [Possible values for PrepInstruction ](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Datatypes.html#PrepInstruction)
+* [Possible values for PrepOwner ](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Datatypes.html#PrepDetails)
+
+
+#### InboundShipmentHeader
+
+**Properties**
+
+| Name                           | Type    | Example                 | Required |
+| ------------------------------ | ------- | ----------------------- | -------- |
+| ShipmentName                   | string  | `'SHIPMENT_NAME'`       | Yes      |
+| ShipFromAddress                | Address | [`Address`](#address-1) | Yes      |
+| DestinationFulfillmentCenterId | string  | `'ABE2'`                | Yes      |
+| LabelPrepPreference            | string  | `'SELLER_LABEL'`        | Yes      |
+| AreCasesRequired               | boolean | `true`                  | No       |
+| ShipmentStatus                 | string  | `'WORKING'`             | Yes      |
+| IntendedBoxContentsSource      | string  | `'NONE'`                | No       |
+
+* [Possible values for LabelPrepPreference, ShipmentStatus, IntendedBoxContentsSource ](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Datatypes.html#InboundShipmentHeader)
+
+#### InboundShipmentItem
+
+**Properties**
+
+| Name                  | Type          | Example                       | Required |
+| --------------------- | ------------- | ----------------------------- | -------- |
+| ShipmentId            | string        | `'SKU00001'`                  | No       |
+| SellerSKU             | string        | `'SKU00001'`                  | Yes      |
+| FulfillmentNetworkSKU | string        | `'SKU00001'`                  | No       |
+| QuantityShipped       | number        | `1`                           | Yes      |
+| QuantityReceived      | number        | `1`                           | No       |
+| QuantityInCase        | number        | `1`                           | No       |
+| PrepDetailsList       | PrepDetails[] | [`PrepDetails`](#prepdetails) | No       |
+| ReleaseDate           | Date          | `new Date()`                  | No       |
+
+#### TransportDetailInput
+
+**Properties**
+
+| Name                        | Type                             | Example                                                                 | Required                                                                      |
+| --------------------------- | -------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| PartneredSmallParcelData    | PartneredSmallParcelDataInput    | [`PartneredSmallParcelDataInput`](#partneredsmallparceldatainput)       | Yes, if no other element from the TransportDetailInput datatype is specified. |
+| NonPartneredSmallParcelData | NonPartneredSmallParcelDataInput | [`NonPartneredSmallParcelDataInput`](#nonpartneredsmallparceldatainput) | Yes, if no other element from the TransportDetailInput datatype is specified. |
+| PartneredLtlData            | PartneredLtlDataInput            | [`PartneredLtlDataInput`](#partneredltldatainput)                       | Yes, if no other element from the TransportDetailInput datatype is specified. |
+| NonPartneredLtlData         | NonPartneredLtlDataInput         | [`NonPartneredLtlDataInput`](#nonpartneredltldatainput)                 | Yes, if no other element from the TransportDetailInput datatype is specified. |
+
+
+#### Dimensions
+
+**Properties**
+
+| Name   | Type   | Example  | Required |
+| ------ | ------ | -------- | -------- |
+| Unit   | string | `inches` | Yes      |
+| Length | number | `1`      | Yes      |
+| Width: | number | `1`      | Yes      |
+| Height | number | `1`      | Yes      |
+
+* Possible values for `Unit`: `'inches'`, `'centimeters'`
+
+#### Weight
+
+**Properties**
+
+| Name  | Type   | Example  | Required |
+| ----- | ------ | -------- | -------- |
+| Unit  | string | `pounds` | Yes      |
+| Value | number | `1`      | Yes      |
+
+
+* Possible values for `Unit`: `'pounds'`, `'kilograms'`
+
+#### PartneredSmallParcelPackageInput
+
+**Properties**
+
+| Name       | Type       | Example                     | Required |
+| ---------- | ---------- | --------------------------- | -------- |
+| Dimensions | Dimensions | [`Dimensions`](#dimensions) | Yes      |
+| Weight     | Weight     | [`Weight`](#weight)         | Yes      |
+
+
+#### PartneredSmallParcelDataInput
+
+**Properties**
+| Name        | Type                               | Example                                                                   | Required |
+| ----------- | ---------------------------------- | ------------------------------------------------------------------------- | -------- |
+| CarrierName | string                             | `'UNITED_PARCEL_SERVICE_INC'`                                             | Yes      |
+| PackageList | PartneredSmallParcelPackageInput[] | [`[PartneredSmallParcelPackageInput]`](#partneredsmallparcelpackageinput) | Yes      |
+
+
+#### NonPartneredSmallParcelPackageOutput
+
+**Properties**
+| Name       | Type   | Example   | Required |
+| ---------- | ------ | --------- | -------- |
+| TrackingId | string | `'12345'` | Yes      |
+
+#### NonPartneredSmallParcelDataInput
+
+**Properties**
+| Name        | Type                                   | Example                                                                           | Required |
+| ----------- | -------------------------------------- | --------------------------------------------------------------------------------- | -------- |
+| CarrierName | string                                 | `'UNITED_PARCEL_SERVICE_INC'`                                                     | Yes      |
+| PackageList | NonPartneredSmallParcelPackageOutput[] | [`[NonPartneredSmallParcelPackageOutput]`](#nonpartneredsmallparcelpackageoutput) | Yes      |
+
+#### Contact
+
+**Properties**
+
+| Name  | Type   | Example               | Required |
+| ----- | ------ | --------------------- | -------- |
+| Name  | string | `'Name McPerson'`     | Yes      |
+| Phone | string | `'12345678'`          | Yes      |
+| Email | string | `'email@example.com'` | Yes      |
+| Fax   | string | `'12345678'`          | Yes      |
+
+#### Pallet
+
+**Properties**
+
+| Name      | Type       | Example                     | Required |
+| --------- | ---------- | --------------------------- | -------- |
+| Dimension | Dimensions | [`Dimensions`](#dimensions) | Yes      |
+| Weight    | Weight     | [`Weight`](#weight)         | No       |
+| IsStacked | boolean    | `true`                      | Yes      |
+
+
+#### Amount
+
+**Properties**
+
+| Name         | Type   | Example | Required |
+| ------------ | ------ | ------- | -------- |
+| CurrencyCode | string | `'USD'` | Yes      |
+| Value        | number | `100`   | Yes      |
+
+#### PartneredLtlDataInput
+
+**Properties**
+
+| Name                | Type     | Example               | Required |
+| ------------------- | -------- | --------------------- | -------- |
+| Contact             | Contact  | [`Contact`](#contact) | Yes      |
+| BoxCount            | number   | `100`                 | Yes      |
+| SellerFreightClass  | string   | `'50'`                | No       |
+| FreightReadyDate    | Date     | `new Date()`          | Yes      |
+| PalletList          | Pallet[] | [`[Pallet]`](#pallet) | No       |
+| TotalWeight         | Weight   | [`Weight`](#weight)   | No       |
+| SellerDeclaredValue | Amount   | [`Amount`](#amount)   | No       |
+
+#### NonPartneredLtlDataInput
+
+| Name     | Type   | Example           | Required |
+| -------- | ------ | ----------------- | -------- |
+| Contact  | string | `'BUSINESS_POST'` | Yes      |
+| BoxCount | string | `'1234'`          | Yes      |
+
 ### getInboundGuidanceForSku
 
 **Parameters**
@@ -2515,13 +2711,13 @@ const [response, meta] = fis.getInboundGuidanceForAsin({
 
 **Parameters**
 
-| Name                            | Type                             | Example                                                                       | Required                                                                                 |
-| ------------------------------- | -------------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| ShipFromAddress                 | Address                          | [`Address`](#address-1)                                                       | Yes                                                                                      |
-| ShipToCountryCode               | string                           | `'US'`                                                                        | No. Specifying both ShipToCountryCode and ShipToCountrySubdivisionCode returns an error. |
-| ShipToCountrySubdivisionCode    | string                           | `IN-AP`                                                                       | No. Specifying both ShipToCountryCode and ShipToCountrySubdivisionCode returns an error. |
-| LabelPrepPreference             | string                           | `AMAZON_LABEL_ONLY`                                                           | No                                                                                       |
-| InboundShipmentPlanRequestItems | InboundShipmentPlanRequestItem[] | [`[InboundShipmentPlanRequestItem]`](#inboundshipmentplanrequestitem) //@todo | Yes                                                                                      |
+| Name                            | Type                             | Example                                                               | Required                                                                                 |
+| ------------------------------- | -------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| ShipFromAddress                 | Address                          | [`Address`](#address-1)                                               | Yes                                                                                      |
+| ShipToCountryCode               | string                           | `'US'`                                                                | No. Specifying both ShipToCountryCode and ShipToCountrySubdivisionCode returns an error. |
+| ShipToCountrySubdivisionCode    | string                           | `IN-AP`                                                               | No. Specifying both ShipToCountryCode and ShipToCountrySubdivisionCode returns an error. |
+| LabelPrepPreference             | string                           | `AMAZON_LABEL_ONLY`                                                   | No                                                                                       |
+| InboundShipmentPlanRequestItems | InboundShipmentPlanRequestItem[] | [`[InboundShipmentPlanRequestItem]`](#inboundshipmentplanrequestitem) | Yes                                                                                      |
 
 * [Possible values for LabelPrepPreference ](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
 
@@ -2560,11 +2756,11 @@ const [response, meta] = fis.createInboundShipmentPlan(parameters)
 
 **Parameters**
 
-| Name                  | Type                  | Example      | Required |
-| --------------------- | --------------------- | ------------ | -------- |
-| ShipmentId            | string                | `'SHPMNTID'` | Yes      |
-| InboundShipmentHeader | InboundShipmentHeader | `//@todo`    | Yes      |
-| InboundShipmentItems  | InboundShipmentItem[] | `//@todo`    | Yes      |
+| Name                  | Type                  | Example                                             | Required |
+| --------------------- | --------------------- | --------------------------------------------------- | -------- |
+| ShipmentId            | string                | `'SHPMNTID'`                                        | Yes      |
+| InboundShipmentHeader | InboundShipmentHeader | [`InboundShipmentHeader`](#inboundshipmentheader)   | Yes      |
+| InboundShipmentItems  | InboundShipmentItem[] | [`[InboundShipmentItem]`](#inboundshipmentplanitem) | Yes      |
 
 **Example**
 
@@ -2611,11 +2807,11 @@ const [response, meta] = fis.createInboundShipment(parameters)
 
 **Parameters**
 
-| Name                  | Type                  | Example      | Required |
-| --------------------- | --------------------- | ------------ | -------- |
-| ShipmentId            | string                | `'SHPMNTID'` | Yes      |
-| InboundShipmentHeader | InboundShipmentHeader | `//@todo`    | Yes      |
-| InboundShipmentItems  | InboundShipmentItem[] | `//@todo`    | Yes      |
+| Name                  | Type                  | Example                                           | Required |
+| --------------------- | --------------------- | ------------------------------------------------- | -------- |
+| ShipmentId            | string                | `'SHPMNTID'`                                      | Yes      |
+| InboundShipmentHeader | InboundShipmentHeader | [`InboundShipmentHeader`](#inboundshipmentheader) | Yes      |
+| InboundShipmentItems  | InboundShipmentItem[] | [`[InboundShipmentItem]`](#inboundshipmentitem)   | Yes      |
 
 **Example**
 
@@ -2656,8 +2852,6 @@ const [response, meta] = fis.updateInboundShipment(parameters)
 **Response**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
-
-
 
 ### getPreorderInfo
 
@@ -2765,12 +2959,12 @@ const [response, meta] = fis.getPrepInstructionsForAsin(parameters)
 
 **Parameters**
 
-| Name             | Type                 | Example      | Required |
-| ---------------- | -------------------- | ------------ | -------- |
-| ShipmentId       | string               | `'SHPMNTID'` | Yes      |
-| IsPartnered      | boolean              | `true`       | Yes      |
-| ShipmentType     | string               | `'SP'`       | Yes      |
-| TransportDetails | TransportDetailInput | //@todo      | Yes      |
+| Name             | Type                 | Example                                         | Required |
+| ---------------- | -------------------- | ----------------------------------------------- | -------- |
+| ShipmentId       | string               | `'SHPMNTID'`                                    | Yes      |
+| IsPartnered      | boolean              | `true`                                          | Yes      |
+| ShipmentType     | string               | `'SP'`                                          | Yes      |
+| TransportDetails | TransportDetailInput | [`TransportDetailInput`](#transportdetailinput) | Yes      |
 
 * [Possible values for ShipmentType ](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_PutTransportContent.html)
 
