@@ -3,6 +3,46 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.4.2...v1.5.0) (2020-07-16)
+
+
+### Bug Fixes
+
+* api-extractor issues ([c02eebe](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c02eebea3944717bba56f5f8732fee72f23ecdc9))
+* fix lint issues ([25330f5](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/25330f50a424828a24674b1e48fbd8dfd243d291))
+* fix minor lint issue ([d2c1a04](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d2c1a0414efc88640ab1baf6d99bc1da0e623705))
+* fix minor lint issue ([f7c964e](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/f7c964eeebbdecd84218637dedf0a8bf5e646935))
+* parameters fix for getPackageLabels ([477fd37](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/477fd37f6108307cebd810b240d1f8dbeea7c446))
+* workaround for api-extractor not running ([a2a78f9](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/a2a78f9f63ca761fb7a9e386db89feae010ad0e8))
+
+
+### Features
+
+* create confirmPreorder ([a17ac2e](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/a17ac2e89657b40de36fb8c2bc7dab02587dd618))
+* create createInboundShipment ([e7d650b](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/e7d650bcf110c84c161c6847e9688a387bbaa129))
+* create createInboundShipmentPlan ([4e67963](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/4e679633a4b061adfcb098fb3f9325b23a332316))
+* create estimateTransportRequest ([ab8b492](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ab8b492b23fb118c64d8880a2a79618c3dfeba14))
+* create getInboundGuidanceForAsin ([ffd38df](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ffd38df5c572b51a4131afcf1ab20975bdd13d05))
+* create getPackageLabels ([ce1a01e](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ce1a01e4810989b9b5153d88bc14d95958889021))
+* create getPreorderInfo ([0be869d](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/0be869d80afa4a36f62e6202f46205dc9b5ba3c5))
+* create getPrepInstructionsForAsin ([6eafbe4](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/6eafbe40712126cc4a0fc22549a948a673be9324))
+* create getPrepInstructionsForSku ([9835206](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/9835206217c79c66050c7c30f3a34187dc56b347))
+* create putTransportContent ([4f88d6a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/4f88d6a0046da9e1746f9c400b14371a9d07b03e))
+* create updateInboundShipment ([8719bf3](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/8719bf37ec056b81802e3164c47bde5cd7ba522f))
+* finish confirmTransportRequest ([a75f674](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/a75f6740a8b4d86fae06b8cf192ae55c426ba0c4))
+* init fulfillmentInboundShipment ([112fb4a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/112fb4a3c7efbb0044b276adbb1ff4a3d0d0097a))
+* init getTransportContent ([239739e](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/239739e1839d7d33ec27fb2d6890add91c2c3c9c))
+* made getBillOfLading ([16cfd9a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/16cfd9a64e9cc17b401086e4d412c5539562e851))
+* made getInboundGuidanceForSku ([ea63761](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ea637614d82fe999a1725d4a995fd7f891bc2933))
+* made getUniquePackageLabels ([8078e97](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/8078e97875eaa2f66c69f451504e92d186f0bc48))
+* made listInboundShipment by NT, fix codec address ([c323bc3](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c323bc35a7b1095a4ffa1d1e1797df358465525d))
+* made listInboundShipmentItems ([35155be](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/35155be96ebbe4c8f13894c9b7d5fccfaa6c96d9))
+* made listInboundShipmentItemsByNextToken ([0de78b9](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/0de78b968b5fd4424b65c5808ed39b854366d177))
+* made listInboundShipments ([71c366d](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/71c366d1b0dec043c77335d0a78ca2ea6726645d))
+* made voidTransportRequest ([2b3239c](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/2b3239ccb114cb9117c4bae2780846a5de5e8e74))
+* make getPalletLabels ([6dffe69](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/6dffe69c5cf20a6b3a650ff5503c68fc707ae1b2))
+* update getTransportContent ([1e9f3b2](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/1e9f3b2281f63b993b5b31bd43194cac92060b90))
+
 ## [1.4.2](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.4.1...v1.4.2) (2020-07-16)
 
 
