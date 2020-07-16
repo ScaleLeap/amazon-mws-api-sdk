@@ -19,16 +19,17 @@
     }
   ],
   "homepage": "https://github.com/ScaleLeap/amazon-mws-api-sdk/#readme",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "main": "lib/index.js",
   "files": [
     "/lib"
   ],
   "scripts": {
+    "preapi-extractor": "npm run build",
     "api-extractor": "api-extractor run --local --verbose",
     "prebuild": "npm run clean",
     "build": "tsc --build tsconfig.build.json",
-    "clean": "rimraf lib",
+    "clean": "rimraf lib/* dist temp",
     "dev": "ts-node-dev --respawn --transpileOnly src",
     "lint": "eslint --ext ts,js src/ test/",
     "lint:fix": "npm run lint -- --fix",
@@ -43,14 +44,14 @@
     "@scaleleap/amazon-marketplaces": "5.0.1",
     "axios": "0.19.2",
     "fast-xml-parser": "3.17.4",
-    "purify-ts": "0.16.0-beta.2",
+    "purify-ts": "0.16.0-beta.3",
     "ts-error": "1.0.6"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "7.8.1",
     "@scaleleap/config": "2.0.2",
     "@scaleleap/jest-polly": "1.5.2",
-    "@scaleleap/utils": "1.7.4",
+    "@scaleleap/utils": "1.7.6",
     "@types/is-ci": "2.0.0",
     "@types/jest": "26.0.3",
     "@types/node": "13.13.4",
