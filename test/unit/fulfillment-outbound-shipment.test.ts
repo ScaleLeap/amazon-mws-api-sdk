@@ -1,4 +1,5 @@
 import { ParsingError } from '../../src'
+import { CreateFulfillmentOrderParameters } from '../../src/sections/fulfillment-outbound-shipment/type'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 const mockAddress = {
@@ -22,8 +23,8 @@ const mockCreateFulfillmentOrderItem = {
 
 describe('fulfillmentOutboundShipment', () => {
   describe('createFulfillmentOrder', () => {
-    const parameters = {
-      SellerFulfillmentOrderItemId: '',
+    const parameters: CreateFulfillmentOrderParameters = {
+      SellerFulfillmentOrderId: '',
       DisplayableOrderId: '',
       DisplayableOrderDateTime: new Date(),
       DisplayableOrderComment: '',

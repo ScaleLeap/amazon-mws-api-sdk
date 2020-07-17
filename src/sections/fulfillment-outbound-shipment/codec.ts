@@ -81,3 +81,15 @@ export const GetFulfillmentPreviewResponse = Codec.interface({
     GetFulfillmentPreviewResult: GetFulfillmentPreview,
   }),
 })
+
+export const CreateFulfillmentOrderResponse = Codec.interface({
+  CreateFulfillmentOrderResponse: Codec.interface({
+    /**
+     * This part of the response is usually ignored but, this response returns exactly nothing
+     * This is just here to make sure the response is parsed correctly
+     */
+    ResponseMetadata: Codec.interface({
+      RequestId: string,
+    }),
+  }),
+})
