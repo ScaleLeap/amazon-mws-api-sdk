@@ -3,6 +3,7 @@ import { Feeds } from './sections/feeds'
 import { Finances } from './sections/finances/finances'
 import { FulfillmentInboundShipment } from './sections/fulfillment-inbound-shipment/fulfillment-inbound-shipment'
 import { FulfillmentInventory } from './sections/fulfillment-inventory'
+import { FulfillmentOutboundShipment } from './sections/fulfillment-outbound-shipment/fulfillment-outbound-shipment'
 import { MerchantFulfillment } from './sections/merchant-fulfillment/merchant-fulfillment'
 import { Orders } from './sections/orders'
 import { Products } from './sections/products/products'
@@ -20,6 +21,8 @@ export class MWS {
   private _fulfillmentInventory!: FulfillmentInventory
 
   private _fulfillmentInboundShipment!: FulfillmentInboundShipment
+
+  private _fulfillmentOutboundShipment!: FulfillmentOutboundShipment
 
   private _merchantFulfillment!: MerchantFulfillment
 
@@ -85,6 +88,14 @@ export class MWS {
     }
 
     return this._fulfillmentInventory
+  }
+
+  get fulfillmentOutboundShipment() {
+    if (!this._fulfillmentOutboundShipment) {
+      this._fulfillmentOutboundShipment = new FulfillmentOutboundShipment(this.httpClient)
+    }
+
+    return this._fulfillmentOutboundShipment
   }
 
   get merchantFulfillment() {
