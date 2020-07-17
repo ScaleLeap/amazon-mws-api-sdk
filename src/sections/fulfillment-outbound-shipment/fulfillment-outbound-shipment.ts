@@ -7,6 +7,10 @@ export class FulfillmentOutboundShipment {
   constructor(private httpClient: HttpClient) {}
 
   async getServiceStatus() {
-    return getServiceStatusByResource(this.httpClient, Resource.Sellers, FOS_API_VERSION)
+    return getServiceStatusByResource(
+      this.httpClient,
+      Resource.FulfillmentOutboundShipment,
+      FOS_API_VERSION,
+    )
   }
 }
