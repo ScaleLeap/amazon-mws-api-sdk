@@ -15,7 +15,7 @@ export const canonicalizeInboundShipmentPlanRequestItems = (
   }
 }
 
-export const canonicalizeParametersCreateInboUpdateundShipmentPlan = (
+export const canonicalizeParametersCreateUpdateInboundShipmentPlan = (
   parameters: CreateInboundShipmentPlanParameters,
 ) => {
   const fixedInboundShipmentPlanRequestItems = parameters.InboundShipmentPlanRequestItems.map(
@@ -30,9 +30,9 @@ export const canonicalizeParametersCreateInboUpdateundShipmentPlan = (
   }
 }
 
-const canonicalizeDate = (date: Date | undefined): string | undefined => {
+export const canonicalizeDate = (date: Date | undefined): string | undefined => {
   if (date) {
-    // convert releaseDate to YYYY-MM-DD
+    // convert date to YYYY-MM-DD
     const offset = date.getTimezoneOffset()
     const releaseDate = new Date(date.getTime() + offset * 60 * 1000)
     return releaseDate.toISOString().split('T')[0]
@@ -312,6 +312,9 @@ export interface PutTransportContentParameters {
   >
 }
 
+/**
+ *  Maybe define the exact return more deeply if needed?
+ */
 export const canonicalizePutTransportContentParameters = (
   parameters: PutTransportContentParameters,
 ): Parameters => {
