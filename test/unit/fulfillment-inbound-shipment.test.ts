@@ -1,8 +1,18 @@
 import {
+  canonicalizeDate,
+  canonicalizeInboundShipmentItem,
+  canonicalizeInboundShipmentPlanRequestItems,
+  canonicalizeParametersCreateUpdateInboundShipment,
+  canonicalizeParametersCreateUpdateInboundShipmentPlan,
+  canonicalizePutTransportContentParameters,
   CreateInboundShipmentParameters,
+  CreateInboundShipmentPlanParameters,
+  FIBDimensions,
   GetPackageLabelsParameters,
   GetUniquePackageLabelsParameters,
   InboundShipmentHeader,
+  InboundShipmentItem,
+  InboundShipmentPlanRequestItem,
   NextToken,
   PageType,
   ParsingError,
@@ -68,7 +78,139 @@ const mockInboundShipmentHeader: InboundShipmentHeader = {
 
 const mockPageType: PageType = 'PackageLabel_Letter_2'
 
+const mockContact = {
+  Name: '',
+  Phone: '',
+  Email: '',
+  Fax: '',
+}
+
+const mockDimensions: FIBDimensions = {
+  Unit: 'inches',
+  Length: 1,
+  Width: 1,
+  Height: 1,
+}
+
+const mockPallet = {
+  Dimension: mockDimensions,
+  IsStacked: false,
+}
+
 describe('fulfillmentInboundShipment', () => {
+  describe('parameters', () => {
+    describe('canonicalizeParametersCreateUpdateInboundShipmentPlan', () => {
+      it('properly canonicalizes ParametersCreateUpdateInboundShipmentPlan', () => {
+        expect.assertions(1)
+
+        const mock: CreateInboundShipmentPlanParameters = {
+          ShipToCountryCode: '',
+          ShipFromAddress: mockAddress,
+          ShipToCountrySubdivisionCode: '',
+          InboundShipmentPlanRequestItems: [],
+        }
+
+        expect(
+          canonicalizeParametersCreateUpdateInboundShipmentPlan(mock)[
+            'InboundShipmentPlanRequestItems.member'
+          ],
+        ).toStrictEqual(mock.InboundShipmentPlanRequestItems)
+      })
+    })
+
+    describe('canonicalizeDate', () => {
+      it('properly canonicalizes date to YYYY-MM-DD', () => {
+        expect.assertions(1)
+
+        const date = canonicalizeDate(new Date()) as string
+        const dateRegex = new RegExp(/^(\d{4})([/-])(\d{1,2})\2(\d{1,2})$/)
+
+        expect(dateRegex.test(date)).toStrictEqual(true)
+      })
+    })
+
+    describe('canonicalizeInboundShipmentPlanRequestItems', () => {
+      it('properly canonicalizes InboundShipmentPlanRequestItems', () => {
+        expect.assertions(1)
+
+        const mock: InboundShipmentPlanRequestItem = {
+          SellerSKU: '',
+          ASIN: '',
+          Quantity: 1,
+          QuantityInCase: 1,
+          PrepDetailsList: [],
+        }
+
+        expect(
+          canonicalizeInboundShipmentPlanRequestItems(mock)['PrepDetailsList.PrepDetails'],
+        ).toStrictEqual(mock.PrepDetailsList)
+      })
+    })
+
+    describe('canonicalizeInboundShipmentItem', () => {
+      it('properly canonicalizes InboundShipmentItem', () => {
+        expect.assertions(2)
+
+        const mockDate = new Date()
+        const mock: InboundShipmentItem = {
+          ShipmentId: '',
+          SellerSKU: '',
+          PrepDetailsList: [],
+          QuantityShipped: 1,
+          ReleaseDate: mockDate,
+        }
+        const canonicalized = canonicalizeInboundShipmentItem(mock)
+
+        expect(canonicalized['PrepDetailsList.PrepDetails']).toStrictEqual(mock.PrepDetailsList)
+        expect(canonicalized.ReleaseDate).toStrictEqual(canonicalizeDate(mockDate))
+      })
+    })
+
+    describe('canonicalizeParametersCreateUpdateInboundShipment', () => {
+      it('properly canonicalized CreateInboundShipmentParameters', () => {
+        expect.assertions(1)
+
+        const mock: CreateInboundShipmentParameters = {
+          ShipmentId: '',
+          InboundShipmentHeader: mockInboundShipmentHeader,
+          InboundShipmentItems: [mockInboundShipmentItem],
+        }
+
+        const canonicalized = canonicalizeParametersCreateUpdateInboundShipment(mock)
+
+        expect(canonicalized['InboundShipmentItems.member'][0]).toStrictEqual(
+          canonicalizeInboundShipmentItem(mock.InboundShipmentItems[0]),
+        )
+      })
+    })
+
+    describe('canonicalizePutTransportContentParameters', () => {
+      it('properly canonicalizes PutTransportContentParameters', () => {
+        expect.assertions(1)
+
+        const mockDate = new Date()
+        const mock = {
+          ShipmentId: '',
+          IsPartnered: true,
+          ShipmentType: '',
+          TransportDetails: {
+            PartneredLtlData: {
+              Contact: mockContact,
+              BoxCount: 1,
+              FreightReadyDate: mockDate,
+              PalletList: [mockPallet],
+            },
+          },
+        }
+        const canonicalized = canonicalizePutTransportContentParameters(mock)
+
+        expect(
+          (canonicalized as any).TransportDetails.PartneredLtlData['PalletList.member'],
+        ).toStrictEqual(mock.TransportDetails.PartneredLtlData.PalletList)
+      })
+    })
+  })
+
   describe('listInboundShipmentItemsByNextToken', () => {
     const mockNextToken = new NextToken('ListInboundShipmentItems', '123')
 
