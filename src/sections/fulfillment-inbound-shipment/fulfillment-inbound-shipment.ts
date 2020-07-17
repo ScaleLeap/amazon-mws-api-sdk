@@ -49,8 +49,8 @@ import {
   VoidTransportRequestResponse,
 } from './codec'
 import {
-  canonicalizeParametersCreateInboUpdateundShipmentPlan,
   canonicalizeParametersCreateUpdateInboundShipment,
+  canonicalizeParametersCreateUpdateInboundShipmentPlan,
   canonicalizePutTransportContentParameters,
   ConfirmPreorderParameters,
   ConfirmTransportRequestParameters,
@@ -479,7 +479,7 @@ export class FulfillmentInboundShipment {
       resource: Resource.FulfillmentInboundShipment,
       version: FULFILLMENT_INBOUND_SHIPMENT_API_VERSION,
       action: 'CreateInboundShipmentPlan',
-      parameters: canonicalizeParametersCreateInboUpdateundShipmentPlan(parameters),
+      parameters: canonicalizeParametersCreateUpdateInboundShipmentPlan(parameters),
     })
 
     return CreateInboundShipmentPlanResponse.decode(response).caseOf({

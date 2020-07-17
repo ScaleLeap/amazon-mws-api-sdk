@@ -450,5 +450,44 @@ describe('httpClient', () => {
 
       expect(cleaned).toStrictEqual(output)
     })
+
+    it('should not include deep undefined in parameters', () => {
+      expect.assertions(1)
+
+      const parametersWithUndefined = {
+        ShipmentId: '',
+        InboundShipmentHeader: {
+          ShipmentName: '',
+          ShipFromAddress: {
+            Name: '',
+            AddressLine1: '',
+            Email: '',
+            City: '',
+            PostalCode: '',
+            CountryCode: '',
+            Phone: '',
+          },
+          DestinationFulfillmentCenterId: '',
+          LabelPrepPreference: 'SELLER_LABEL',
+          ShipmentStatus: 'WORKING',
+        },
+        'InboundShipmentItems.member': [
+          {
+            ShipmentId: undefined,
+            SellerSKU: '',
+            FulfillmentNetworkSKU: undefined,
+            QuantityShipped: 1,
+            QuantityReceived: undefined,
+            QuantityInCase: undefined,
+            'PrepDetailsList.PrepDetails': undefined,
+            ReleaseDate: undefined,
+          },
+        ],
+      }
+
+      const cleaned = cleanParameters(parametersWithUndefined)
+
+      expect(cleaned['InboundShipmentItems.member.1.ReleaseDate']).toBeUndefined()
+    })
   })
 })
