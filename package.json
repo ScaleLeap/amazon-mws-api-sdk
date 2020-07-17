@@ -65,7 +65,7 @@
     "ts-node": "8.10.2",
     "ts-node-dev": "1.0.0-pre.52",
     "tsconfigs": "4.0.2",
-    "typescript": "3.9.6"
+    "typescript": "3.9.7"
   },
   "keywords": [],
   "publishConfig": {
