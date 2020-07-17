@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fulfillmentOutboundShipment getFulfillmentPreview returns a list of fulfillment previews if succesful 1`] = `
+Array [
+  Object {
+    "FulfillmentPreviews": Array [
+      Object {
+        "EstimatedFees": Array [
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "225",
+            },
+            "Name": "FBAPerUnitFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "475",
+            },
+            "Name": "FBAPerOrderFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "660",
+            },
+            "Name": "FBATransportationFee",
+          },
+        ],
+        "EstimatedShippingWeight": Object {
+          "Unit": "kilograms",
+          "Value": "12",
+        },
+        "FulfillmentPreviewShipments": Array [
+          Object {
+            "EarliestArrivalDate": 2014-01-05T07:00:00.000Z,
+            "EarliestShipDate": 2014-01-04T00:30:00.000Z,
+            "FulfillmentPreviewItems": Array [
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "10",
+                },
+                "Quantity": 2,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-2",
+                "SellerSKU": "SampleSKU1",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "2",
+                },
+                "Quantity": 1,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-1",
+                "SellerSKU": "SampleSKU2",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+            ],
+            "LatestArrivalDate": 2014-01-06T06:59:59.000Z,
+            "LatestShipDate": 2014-01-04T00:30:00.000Z,
+          },
+        ],
+        "IsCODCapable": false,
+        "IsFulfillable": true,
+        "MarketplaceId": "ATVPDKIKX0DER",
+        "ShippingSpeedCategory": "Expedited",
+        "UnfulfillablePreviewItems": Array [],
+      },
+      Object {
+        "EstimatedFees": Array [
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "225",
+            },
+            "Name": "FBAPerUnitFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "475",
+            },
+            "Name": "FBAPerOrderFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "660",
+            },
+            "Name": "FBATransportationFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "315",
+            },
+            "Name": "FBAFulfillmentCODFee",
+          },
+        ],
+        "EstimatedShippingWeight": Object {
+          "Unit": "kilograms",
+          "Value": "12",
+        },
+        "FulfillmentPreviewShipments": Array [
+          Object {
+            "EarliestArrivalDate": 2014-01-05T07:00:00.000Z,
+            "EarliestShipDate": 2014-01-04T00:30:00.000Z,
+            "FulfillmentPreviewItems": Array [
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "10",
+                },
+                "Quantity": 2,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-2",
+                "SellerSKU": "SampleSKU1",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "2",
+                },
+                "Quantity": 1,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-1",
+                "SellerSKU": "SampleSKU2",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+            ],
+            "LatestArrivalDate": 2014-07-09T06:59:59.000Z,
+            "LatestShipDate": 2014-01-04T00:30:00.000Z,
+          },
+        ],
+        "IsCODCapable": true,
+        "IsFulfillable": true,
+        "ShippingSpeedCategory": "Standard",
+        "UnfulfillablePreviewItems": Array [],
+      },
+      Object {
+        "EstimatedFees": Array [
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "225",
+            },
+            "Name": "FBAPerUnitFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "475",
+            },
+            "Name": "FBAPerOrderFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "660",
+            },
+            "Name": "FBATransportationFee",
+          },
+        ],
+        "EstimatedShippingWeight": Object {
+          "Unit": "kilograms",
+          "Value": "12",
+        },
+        "FulfillmentPreviewShipments": Array [
+          Object {
+            "EarliestArrivalDate": 2014-01-05T07:00:00.000Z,
+            "EarliestShipDate": 2014-01-04T00:30:00.000Z,
+            "FulfillmentPreviewItems": Array [
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "10",
+                },
+                "Quantity": 2,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-2",
+                "SellerSKU": "SampleSKU1",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "2",
+                },
+                "Quantity": 1,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-1",
+                "SellerSKU": "SampleSKU2",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+            ],
+            "LatestArrivalDate": 2014-01-06T06:59:59.000Z,
+            "LatestShipDate": 2014-01-04T00:30:00.000Z,
+          },
+        ],
+        "IsCODCapable": false,
+        "IsFulfillable": true,
+        "ScheduledDeliveryInfo": Object {
+          "DeliveryTimeZone": "Asia/Tokyo",
+          "DeliveryWindows": Array [
+            Object {
+              "EndDateTime": 2014-01-05T03:00:00.000Z,
+              "StartDateTime": 2014-01-04T23:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-05T05:00:00.000Z,
+              "StartDateTime": 2014-01-05T03:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-05T07:00:00.000Z,
+              "StartDateTime": 2014-01-05T05:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-05T09:00:00.000Z,
+              "StartDateTime": 2014-01-05T07:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-05T11:00:00.000Z,
+              "StartDateTime": 2014-01-05T09:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-05T12:00:00.000Z,
+              "StartDateTime": 2014-01-05T11:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T03:00:00.000Z,
+              "StartDateTime": 2014-01-05T23:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T05:00:00.000Z,
+              "StartDateTime": 2014-01-06T03:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T07:00:00.000Z,
+              "StartDateTime": 2014-01-06T05:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T09:00:00.000Z,
+              "StartDateTime": 2014-01-06T07:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T11:00:00.000Z,
+              "StartDateTime": 2014-01-06T09:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T12:00:00.000Z,
+              "StartDateTime": 2014-01-06T11:00:00.000Z,
+            },
+          ],
+        },
+        "ShippingSpeedCategory": "ScheduledDelivery",
+        "UnfulfillablePreviewItems": Array [],
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment getServiceStatus returns a parsed model when the status response is valid 1`] = `
+Array [
+  Object {
+    "Status": "GREEN",
+    "Timestamp": "2020-05-06T08:22:23.582Z",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;

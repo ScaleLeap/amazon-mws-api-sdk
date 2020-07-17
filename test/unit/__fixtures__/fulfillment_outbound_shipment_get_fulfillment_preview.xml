@@ -157,78 +157,86 @@
         <ShippingSpeedCategory>ScheduledDelivery</ShippingSpeedCategory>
         <ScheduledDeliveryInfo>
           <DeliveryTimeZone>Asia/Tokyo</DeliveryTimeZone>
+          <!-- Had to modify all DeliveryWindow -->
+          
+          <!-- This was from the docs -->
+          <!-- Previously <member><DeliveryWindow>...</DeliveryWindow></member> -->
+          
+          <!-- And this is what the C# library says is the correct struture -->
+          <!-- Modified <member>...</member> -->
+
           <DeliveryWindows>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-04T23:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-05T03:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-04T23:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-05T03:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-05T03:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-05T05:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-05T03:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-05T05:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-05T05:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-05T07:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-05T05:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-05T07:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-05T07:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-05T09:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-05T07:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-05T09:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-05T09:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-05T11:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-05T09:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-05T11:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-05T11:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-05T12:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-05T11:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-05T12:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-05T23:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-06T03:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-05T23:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-06T03:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-06T03:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-06T05:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-06T03:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-06T05:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-06T05:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-06T07:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-06T05:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-06T07:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-06T07:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-06T09:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-06T07:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-06T09:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-06T09:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-06T11:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-06T09:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-06T11:00:00Z</EndDateTime>
+
             </member>
             <member>
-              <DeliveryWindow>
-                <StartDateTime>2014-01-06T11:00:00Z</StartDateTime>
-                <EndDateTime>2014-01-06T12:00:00Z</EndDateTime>
-              </DeliveryWindow>
+
+              <StartDateTime>2014-01-06T11:00:00Z</StartDateTime>
+              <EndDateTime>2014-01-06T12:00:00Z</EndDateTime>
+
             </member>
           </DeliveryWindows>
         </ScheduledDeliveryInfo>
