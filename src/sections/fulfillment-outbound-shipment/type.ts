@@ -190,3 +190,7 @@ export const canonicalizeUpdateFulfillmentOrderParameters = (
     'Items.member': parameters.Items,
   }
 }
+
+export interface ListAllFulfillmentOrdersParameters {
+  QueryStartDateTime?: Date
+}

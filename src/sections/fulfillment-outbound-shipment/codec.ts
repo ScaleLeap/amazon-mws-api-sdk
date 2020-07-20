@@ -1,6 +1,6 @@
 import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
 
-import { ensureArray, ensureString, mwsDate } from '../../parsing'
+import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
 import { FISFeeTypesEnum, FISWeightUnitEnum, ShippingSpeedCategoryEnum } from './type'
 
 const ShippingSpeedCategory = enumeration(ShippingSpeedCategoryEnum)
@@ -98,4 +98,84 @@ export const CreateFulfillmentOrderResponse = Codec.interface({
 
 export const UpdateFulfillmentOrderResponse = Codec.interface({
   UpdateFulfillmentOrderResponse: StandardResponse,
+})
+
+const FOSAddress = Codec.interface({
+  Name: string,
+  Line1: string,
+  Line2: optional(string),
+  Line3: optional(string),
+  DistrictOrCounty: optional(string),
+  City: optional(string),
+  StateOrProvinceCode: string,
+  CountryCode: string,
+  PostalCode: optional(ensureString),
+  PhoneNumber: optional(string),
+})
+
+enum FulfillmentOrderStatusEnum {
+  'RECEIVED',
+  'INVALID',
+  'PLANNING',
+  'PROCESSING',
+  'CANCELLED',
+  'COMPLETE',
+  'COMPLETE_PARTIALLED',
+  'UNFULFILLABLE',
+}
+
+enum FulfillmentActionEnum {
+  'Ship',
+  'Hold',
+}
+
+enum FulfillmentPolicyEnum {
+  'FillOrKill',
+  'FillAll',
+  'FillAllAvailable',
+}
+
+const FulfillmentPolicy = enumeration(FulfillmentPolicyEnum)
+
+const FulfillmentAction = enumeration(FulfillmentActionEnum)
+
+const FulfillmentOrderStatus = enumeration(FulfillmentOrderStatusEnum)
+
+const CODSettings = Codec.interface({
+  IsCODRequired: optional(boolean),
+  CODCharge: optional(FISCurrency),
+  CODChargeTax: optional(FISCurrency),
+  ShippingCharge: optional(FISCurrency),
+  ShippingChargeTax: optional(FISCurrency),
+})
+
+const FulfillmentOrder = Codec.interface({
+  SellerFulfillmentOrderId: string,
+  MarketplaceId: optional(string),
+  DisplayableOrderId: ensureString,
+  DisplayableOrderDateTime: mwsDate,
+  DisplayableOrderComment: string,
+  ShippingSpeedCategory,
+  DeliveryWindow: optional(DeliveryWindow),
+  DestinationAddress: FOSAddress,
+  FulfillmentAction: optional(FulfillmentAction),
+  FulfillmentPolicy: optional(FulfillmentPolicy),
+  ReceivedDateTime: mwsDate,
+  FulfillmentOrderStatus,
+  StatusUpdatedDateTime: mwsDate,
+  NotificationEmailList: optional(ensureArray('member', string)),
+  CODSettings: optional(CODSettings),
+})
+
+const ListAllFulfillmentOrders = Codec.interface({
+  NextToken: nextTokenCodec('ListAllFulfillmentOrders'),
+  FulfillmentOrders: ensureArray('member', FulfillmentOrder),
+})
+
+export type ListAllFulfillmentOrders = GetInterface<typeof ListAllFulfillmentOrders>
+
+export const ListAllFulfillmentOrdersResponse = Codec.interface({
+  ListAllFulfillmentOrdersResponse: Codec.interface({
+    ListAllFulfillmentOrdersResult: ListAllFulfillmentOrders,
+  }),
 })

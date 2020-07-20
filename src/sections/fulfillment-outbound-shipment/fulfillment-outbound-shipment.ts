@@ -5,6 +5,8 @@ import {
   CreateFulfillmentOrderResponse,
   GetFulfillmentPreview,
   GetFulfillmentPreviewResponse,
+  ListAllFulfillmentOrders,
+  ListAllFulfillmentOrdersResponse,
   UpdateFulfillmentOrderResponse,
 } from './codec'
 import {
@@ -13,6 +15,7 @@ import {
   canonicalizeUpdateFulfillmentOrderParameters,
   CreateFulfillmentOrderParameters,
   GetFulfillmentPreviewParameters,
+  ListAllFulfillmentOrdersParameters,
   UpdateFulfillmentOrderParameters,
 } from './type'
 
@@ -20,6 +23,26 @@ const FOS_API_VERSION = '2010-10-01'
 
 export class FulfillmentOutboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async listAllFulfillmentOrders(
+    parameters: ListAllFulfillmentOrdersParameters = {},
+  ): Promise<[ListAllFulfillmentOrders, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentOutboundShipment,
+      version: FOS_API_VERSION,
+      action: 'ListAllFulfillmentOrders',
+      parameters: {
+        QueryStartDateTime: parameters.QueryStartDateTime?.toISOString(),
+      },
+    })
+
+    return ListAllFulfillmentOrdersResponse.decode(response).caseOf({
+      Right: (x) => [x.ListAllFulfillmentOrdersResponse.ListAllFulfillmentOrdersResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async updateFulfillmentOrder(
     parameters: UpdateFulfillmentOrderParameters,

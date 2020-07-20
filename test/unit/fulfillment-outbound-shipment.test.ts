@@ -30,7 +30,9 @@ describe('fulfillmentOutboundShipment', () => {
         'fulfillment_outbound_shipment_list_all_fulfillment_orders',
       )
 
-      expect(await mockListAllFulfillmentOrders.listAllFulfillmentOrders()).toMatchSnapshot()
+      expect(
+        await mockListAllFulfillmentOrders.fulfillmentOutboundShipment.listAllFulfillmentOrders(),
+      ).toMatchSnapshot()
     })
 
     it('throws a parsing error when the status response is nt valid', async () => {

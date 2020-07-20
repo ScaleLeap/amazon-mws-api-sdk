@@ -295,6 +295,73 @@ Array [
 ]
 `;
 
+exports[`fulfillmentOutboundShipment listAllFulfillmentOrders returns a list of fulfillment orders if succesful 1`] = `
+Array [
+  Object {
+    "FulfillmentOrders": Array [
+      Object {
+        "DestinationAddress": Object {
+          "City": "Seattle",
+          "CountryCode": "US",
+          "Line1": "123 Oak St.",
+          "Line2": "Apt. 321",
+          "Name": "Jane Adams",
+          "PhoneNumber": "321-098-7654",
+          "PostalCode": "98101",
+          "StateOrProvinceCode": "WA",
+        },
+        "DisplayableOrderComment": "Sample comment text.",
+        "DisplayableOrderDateTime": 2011-02-05T17:26:56.000Z,
+        "DisplayableOrderId": "test_displayable_id",
+        "FulfillmentOrderStatus": "PROCESSING",
+        "FulfillmentPolicy": "FillOrKill",
+        "NotificationEmailList": Array [
+          "o8c2EXAMPLsfr7o@marketplace.amazon.com",
+        ],
+        "ReceivedDateTime": 2011-02-06T17:26:56.000Z,
+        "SellerFulfillmentOrderId": "extern_id_1154539615776",
+        "ShippingSpeedCategory": "Standard",
+        "StatusUpdatedDateTime": 2011-01-28T23:48:48.000Z,
+      },
+      Object {
+        "DestinationAddress": Object {
+          "City": "Seattle",
+          "CountryCode": "US",
+          "Line1": "2345 5th Ave",
+          "Name": "George Jones",
+          "PhoneNumber": "123-123-4567",
+          "PostalCode": "98104",
+          "StateOrProvinceCode": "WA",
+        },
+        "DisplayableOrderComment": "Sample order comment.",
+        "DisplayableOrderDateTime": 2011-03-11T18:48:52.000Z,
+        "DisplayableOrderId": "test-order-test-1159210132812",
+        "FulfillmentOrderStatus": "PLANNING",
+        "FulfillmentPolicy": "FillAllAvailable",
+        "ReceivedDateTime": 2011-03-03T18:48:53.000Z,
+        "SellerFulfillmentOrderId": "external-order-ebaytime1154557376014",
+        "ShippingSpeedCategory": "Standard",
+        "StatusUpdatedDateTime": 2011-03-05T18:48:53.000Z,
+      },
+    ],
+    "NextToken": NextToken {
+      "action": "ListAllFulfillmentOrders",
+      "token": "H4sIAAAAAAAAAC2MwQqDMBBEfyXsPXU3ITUEEyjFQ6FWUNt7sbEI
+            alH7/3SVwjLLG3iTzeLjoe6n9xAv3ziWyysuIFoPCjGVqCWmDaZOWYckkRNB9B4MgZj
+            4MY0euuewRhBxswhZkaQbUk5pZ+iA1nK1m+u+ayXxlmnwyCXffzdkXTiXt/pe5FWWdB
+            tWeVE+Ttedkjn8AF4nvJquAAAA",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`fulfillmentOutboundShipment updateFulfillmentOrder returns the standard response elements if succesful 1`] = `
 Array [
   "",
