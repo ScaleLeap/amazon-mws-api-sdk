@@ -194,3 +194,7 @@ export const canonicalizeUpdateFulfillmentOrderParameters = (
 export interface ListAllFulfillmentOrdersParameters {
   QueryStartDateTime?: Date
 }
+
+export interface GetFulfillmentOrderParameters {
+  SellerFulfillmentOrderId: string
+}

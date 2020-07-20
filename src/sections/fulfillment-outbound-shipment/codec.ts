@@ -179,3 +179,100 @@ export const ListAllFulfillmentOrdersResponse = Codec.interface({
     ListAllFulfillmentOrdersResult: ListAllFulfillmentOrders,
   }),
 })
+
+const FulfillmentOrderItem = Codec.interface({
+  SellerSKU: string,
+  SellerFulfillmentOrderItemId: string,
+  Quantity: number,
+  GiftMessage: optional(string),
+  DisplayableComment: optional(string),
+  FulfillmentNetworkSKU: optional(string),
+  CancelledQuantity: number,
+  UnfulfillableQuantity: number,
+  EstimatedShipDateTime: optional(mwsDate),
+  EstimatedArrivalDateTime: optional(mwsDate),
+  PerUnitDecalredValue: optional(FISCurrency),
+  PerUnitPrice: optional(FISCurrency),
+  PerUnitTax: optional(FISCurrency),
+})
+
+enum FulfillmentShipmentStatusEnum {
+  'PENDING',
+  'SHIPPED',
+  'CANCELLED_BY_FULFILLER',
+  'CANCELLED_BY_SELLER',
+}
+
+const FulfillmentShipmentStatus = enumeration(FulfillmentShipmentStatusEnum)
+
+const FulfillmentShipmentItem = Codec.interface({
+  SellerSKU: optional(string),
+  SellerFulfillmentOrderItemId: ensureString,
+  Quantity: number,
+  PackageNumber: optional(number),
+})
+
+const FulfillmentShipmentPackage = Codec.interface({
+  PackageNumber: number,
+  CarrierCode: ensureString,
+  TrackingNumber: optional(ensureString),
+  EstimatedArrivalDateTime: optional(mwsDate),
+})
+
+const FulfillmentShipment = Codec.interface({
+  AmazonShipmentId: string,
+  FulfillmentCenterId: string,
+  FulfillmentShipmentStatus,
+  ShippingDateTime: optional(mwsDate),
+  EstimatedArrivalDateTime: optional(mwsDate),
+  FulfillmentShipmentItem: ensureArray('member', FulfillmentShipmentItem),
+  FulfillmentShipmentPackage: optional(ensureArray('member', FulfillmentShipmentPackage)),
+})
+
+enum ReturnReceivedConditionEnum {
+  'CarrierDamaged',
+  'CustomerDamaged',
+  'Defective',
+  'FulfillerDamaged',
+  'Sellable',
+}
+
+const ReturnReceivedCondition = enumeration(ReturnReceivedConditionEnum)
+
+const ReturnItem = Codec.interface({
+  SellerReturnItemId: ensureString,
+  SellerFulfillmentOrderItemId: ensureString,
+  AmazonShipmentId: ensureString,
+  SellerReturnReasonCode: ensureString,
+  ReturnComment: optional(string),
+  AmazonReturnReasonCode: optional(ensureString),
+  Status: string,
+  StatusChangedDate: mwsDate,
+  ReturnAuthorizationId: optional(ensureString),
+  ReturnReceivedCondition: optional(ReturnReceivedCondition),
+  FulfillmentCenterId: optional(string),
+})
+
+const ReturnAuthorization = Codec.interface({
+  ReturnAuthorizationId: ensureString,
+  FulfillmentCenterId: ensureString,
+  ReturnToAddress: FOSAddress,
+  AmazonRmaId: ensureString,
+  RmaPageURL: string,
+})
+
+const GetFulfillmentOrder = Codec.interface({
+  FulfillmentOrder,
+  FulfillmentOrderItem: ensureArray('member', FulfillmentOrderItem),
+  FulfillmentShipment: ensureArray('member', FulfillmentShipment),
+  ReturnItemList: ensureArray('member', ReturnItem),
+  ReturnAuthorizationList: ensureArray('member', ReturnAuthorization),
+})
+
+export type GetFulfillmentOrder = GetInterface<typeof GetFulfillmentOrder>
+
+export const GetFulfillmentOrderResponse = Codec.interface({
+  GetFulfillmentOrderResponse: Codec.interface({
+    GetFulfillmentOrderResult: GetFulfillmentOrder,
+  }),
+})
