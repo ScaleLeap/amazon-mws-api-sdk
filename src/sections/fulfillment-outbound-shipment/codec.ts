@@ -82,14 +82,20 @@ export const GetFulfillmentPreviewResponse = Codec.interface({
   }),
 })
 
-export const CreateFulfillmentOrderResponse = Codec.interface({
-  CreateFulfillmentOrderResponse: Codec.interface({
-    /**
-     * This part of the response is usually ignored but, this response returns exactly nothing
-     * This is just here to make sure the response is parsed correctly
-     */
-    ResponseMetadata: Codec.interface({
-      RequestId: string,
-    }),
+const StandardResponse = Codec.interface({
+  /**
+   * This part of the response is usually ignored but, this response returns exactly nothing
+   * This is just here to make sure the response is parsed correctly
+   */
+  ResponseMetadata: Codec.interface({
+    RequestId: string,
   }),
+})
+
+export const CreateFulfillmentOrderResponse = Codec.interface({
+  CreateFulfillmentOrderResponse: StandardResponse,
+})
+
+export const UpdateFulfillmentOrderResponse = Codec.interface({
+  UpdateFulfillmentOrderResponse: StandardResponse,
 })

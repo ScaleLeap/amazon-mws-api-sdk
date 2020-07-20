@@ -31,11 +31,13 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       const mockUpdateFulfillmentOrder = createMockHttpClient(
-        'fulfillment_update_fulfillment_order',
+        'fulfillment_outbound_shipment_update_fulfillment_order',
       )
 
       expect(
-        await mockUpdateFulfillmentOrder.fulfillmentOutboundShipment.updateFulfillmentOrder(),
+        await mockUpdateFulfillmentOrder.fulfillmentOutboundShipment.updateFulfillmentOrder(
+          parameters,
+        ),
       ).toMatchSnapshot()
     })
 

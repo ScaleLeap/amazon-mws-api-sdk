@@ -148,3 +148,45 @@ export const canonicalizeCreateFulfillmentOrderParameters = (
       : undefined,
   }
 }
+
+interface UpdateFulfillmentOrderItem {
+  SellerFulfillmentOrderItemId: string
+  Quantity: number
+  GiftMessage?: string
+  DisplayableComment?: string
+  PerUnitDeclaredValue?: FISCurrency
+  PerUnitPrice?: FISCurrency
+  PerUnitTax?: FISCurrency
+}
+
+export interface UpdateFulfillmentOrderParameters {
+  MarketplaceId?: string
+  SellerFulfillmentOrderId: string
+  FulfillmentAction?: FulfillmentAction
+  DisplayableOrderId?: string
+  DisplayableOrderDateTime?: Date
+  DisplayableOrderComment?: string
+  ShippingSpeedCategory?: ShippingSpeedCategory
+  DestinationAddress?: FOSAddress
+  FulfillmentPolicy?: FulfillmentPolicy
+  NotificationEmailList?: string[]
+  Items?: UpdateFulfillmentOrderItem[]
+}
+
+export const canonicalizeUpdateFulfillmentOrderParameters = (
+  parameters: UpdateFulfillmentOrderParameters,
+) => {
+  return {
+    MarketplaceId: parameters.MarketplaceId,
+    SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
+    FulfillmentAction: parameters.FulfillmentAction,
+    DisplayableOrderId: parameters.DisplayableOrderId,
+    DisplayableOrderDateTime: parameters.DisplayableOrderDateTime?.toISOString(),
+    DisplayableOrderComment: parameters.DisplayableOrderComment,
+    ShippingSpeedCategory: parameters.ShippingSpeedCategory,
+    DestinationAddress: parameters.DestinationAddress,
+    FulfillmentPolicy: parameters.FulfillmentPolicy,
+    'NotificationEmailList.member': parameters.NotificationEmailList,
+    'Items.member': parameters.Items,
+  }
+}
