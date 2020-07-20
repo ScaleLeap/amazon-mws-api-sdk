@@ -136,11 +136,13 @@
       </member>
     </FulfillmentShipment>
     <ReturnItemList>
-      <ReturnItem>
+      <!-- changed below from `ReturnItem` to `member`, because it's different in the c sharp example -->
+      <member>
         <SellerReturnItemId>16a6a142EXAMPLE</SellerReturnItemId>
         <SellerFulfillmentOrderItemId>order-item-1</SellerFulfillmentOrderItemId>
         <AmazonShipmentId>DLHg36GDN</AmazonShipmentId >
-        <ReturnReasonCode>REASON-CODE</ReturnReasonCode>
+        <!-- changed below from `ReturnReasonCode` to `SellerReturnReasonCode`, because it's different in the c sharp example -->
+        <SellerReturnReasonCode>REASON-CODE</SellerReturnReasonCode>
         <ReturnComment>Did not like color</ReturnComment>
         <AmazonReturnReasonCode>OTHER-REASON-CODE</AmazonReturnReasonCode>
         <Status>Processed</Status>
@@ -148,23 +150,25 @@
         <ReturnAuthorizationId>amzn-rma-id</ReturnAuthorizationId>
         <ReturnReceivedCondition>Sellable</ReturnReceivedCondition>
         <FulfillmentCenterId>FC123</FulfillmentCenterId>
-      </ReturnItem>
+      </member>
     </ReturnItemList>
     <ReturnAuthorizationList>
-      <ReturnAuthorization>
+      <!-- changed below from `ReturnAuthorization` to `member`, because it's different in the c sharp example -->
+      <member>
         <ReturnAuthorizationId>amzn-rma-id</ReturnAuthorizationId>
         <FulfillmentCenterId>FC123</FulfillmentCenterId>
         <ReturnToAddress>
           <Name>Amazon FC</Name>
           <Line1>123 Main Street</Line1>
           <City>Anywhere</City>
-          <StateOrRegionCode>WA</StateOrRegionCode>
+          <!-- changed below from `StateOrRegionCode` to `StateOrProvinceCode`, because it's different in the c sharp example -->
+          <StateOrProvinceCode>WA</StateOrProvinceCode>
           <PostalCode>98122</PostalCode>
           <CountryCode>US</CountryCode>
         </ReturnToAddress>
         <AmazonRmaId>test123</AmazonRmaId>
         <RmaPageURL>https://sellercentral.amazon.com/URL</RmaPageURL>
-      </ReturnAuthorization>
+      </member>
     </ReturnAuthorizationList>
   </GetFulfillmentOrderResult>
   <ResponseMetadata>

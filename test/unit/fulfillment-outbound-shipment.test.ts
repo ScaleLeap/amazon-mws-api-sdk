@@ -2,6 +2,39 @@ import { ParsingError } from '../../src'
 import { CreateFulfillmentOrderParameters } from '../../src/sections/fulfillment-outbound-shipment/type'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
+function mockEnum() {
+  /**
+   * Mock everything in purify-ts, restore it back to normal,
+   *  except for `enumeration` which will be stubbed to accept
+   * https://github.com/facebook/jest/issues/936#issuecomment-265074320
+   */
+  const original = jest.requireActual('purify-ts')
+
+  return {
+    ...original, // Pass down all the exported objects
+    enumeration: <T extends Record<string, string | number>>(enumeration: T) => {
+      const enumValues = Object.values(enumeration)
+
+      return original.Codec.custom({
+        decode: (input: string | number) => {
+          if (typeof input !== 'string' && typeof input !== 'number') {
+            return original.Left(`Expected enum, received ${input}`)
+          }
+
+          const enumIndex = enumValues.indexOf(input)
+
+          return enumIndex !== -1 || input === 'String'
+            ? original.Right((enumValues[enumIndex] as T[keyof T]) || 'String')
+            : original.Left(`Expected enum, received ${input}`)
+        },
+        encode: original.identity,
+        schema: () => ({ enum: enumValues }),
+      })
+    },
+  }
+}
+jest.mock('purify-ts', () => mockEnum())
+
 const mockAddress = {
   Name: '',
   Line1: '',
@@ -24,6 +57,18 @@ const mockCreateFulfillmentOrderItem = {
 describe('fulfillmentOutboundShipment', () => {
   describe('getFulfillmentOrder', () => {
     const parameters = { SellerFulfillmentOrderId: '' }
+
+    it('succesfully parses response structure, from c sharp', async () => {
+      expect.assertions(1)
+
+      const mockGetFulfillmentOrder = createMockHttpClient(
+        'fulfillment_outbound_shipment_get_fulfillment_order_from_c_sharp',
+      )
+
+      expect(
+        await mockGetFulfillmentOrder.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
+      ).toMatchSnapshot()
+    })
 
     it('returns a fulfillment order based on a SellerFulfillmentOrderId if succesful', async () => {
       expect.assertions(1)
