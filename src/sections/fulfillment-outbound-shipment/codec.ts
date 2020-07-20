@@ -168,7 +168,7 @@ const FulfillmentOrder = Codec.interface({
 })
 
 const ListAllFulfillmentOrders = Codec.interface({
-  NextToken: nextTokenCodec('ListAllFulfillmentOrders'),
+  NextToken: optional(nextTokenCodec('ListAllFulfillmentOrders')),
   FulfillmentOrders: ensureArray('member', FulfillmentOrder),
 })
 
@@ -274,5 +274,11 @@ export type GetFulfillmentOrder = GetInterface<typeof GetFulfillmentOrder>
 export const GetFulfillmentOrderResponse = Codec.interface({
   GetFulfillmentOrderResponse: Codec.interface({
     GetFulfillmentOrderResult: GetFulfillmentOrder,
+  }),
+})
+
+export const ListAllFulfillmentOrdersByNextTokenResponse = Codec.interface({
+  ListAllFulfillmentOrdersByNextTokenResponse: Codec.interface({
+    ListAllFulfillmentOrdersByNextTokenResult: ListAllFulfillmentOrders,
   }),
 })
