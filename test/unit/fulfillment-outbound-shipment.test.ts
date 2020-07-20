@@ -22,6 +22,26 @@ const mockCreateFulfillmentOrderItem = {
 }
 
 describe('fulfillmentOutboundShipment', () => {
+  describe('listAllFulfillmentOrders', () => {
+    it('returns a list of fulfillment orders if succesful', async () => {
+      expect.assertions(1)
+
+      const mockListAllFulfillmentOrders = createMockHttpClient(
+        'fulfillment_outbound_shipment_list_all_fulfillment_orders',
+      )
+
+      expect(await mockListAllFulfillmentOrders.listAllFulfillmentOrders()).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is nt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.listAllFulfillmentOrders(),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('updateFulfillmentOrder', () => {
     const parameters = {
       SellerFulfillmentOrderId: '',
