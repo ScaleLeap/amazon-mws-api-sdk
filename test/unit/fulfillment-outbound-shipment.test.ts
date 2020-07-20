@@ -22,6 +22,30 @@ const mockCreateFulfillmentOrderItem = {
 }
 
 describe('fulfillmentOutboundShipment', () => {
+  describe('getFulfillmentOrder', () => {
+    const parameters = { SellerFulfillmentOrderId: '' }
+
+    it('returns a fulfillment order based on a SellerFulfillmentOrderId if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetFulfillmentOrder = createMockHttpClient(
+        'fulfillment_outbound_shipment_get_fulfillment_order',
+      )
+
+      expect(
+        await mockGetFulfillmentOrder.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is nt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('listAllFulfillmentOrders', () => {
     it('returns a list of fulfillment orders if succesful', async () => {
       expect.assertions(1)
