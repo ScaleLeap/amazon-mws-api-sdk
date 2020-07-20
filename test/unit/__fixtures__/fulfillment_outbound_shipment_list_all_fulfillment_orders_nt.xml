@@ -1,9 +1,9 @@
 <ListAllFulfillmentOrdersByNextTokenResponse xmlns="http://mws.amazonaws.com/FulfillmentOutboundShipment/2010-10-01/">
-  <NextToken>H4sIAAAAAAAAAC2M0QqCQBBFf2WZ982ZXVeHxRUifMsEs96jVhIq0fX/ab
+  <ListAllFulfillmentOrdersByNextTokenResult>
+    <NextToken>H4sIAAAAAAAAAC2M0QqCQBBFf2WZ982ZXVeHxRUifMsEs96jVhIq0fX/ab
         VguMw5cG8xidFBGJanXHxY5Dg//Px7ibI0N0YTMacg7g4UYha1VNyRschWGxkTEcTggJBAf
         ByYiG8H/e0VPAi/1ggl5pJ0R8oqbQ3tkDmqrRq2YV6H0XSYRRnvP1wWfdlWdXP
         dH4ukX+nQnM6Xumo3TKbyC+hpQInCAAAA</NextToken>
-  <ListAllFulfillmentOrdersByNextTokenResult>
     <FulfillmentOrders>
       <member>
         <ShippingSpeedCategory>Standard</ShippingSpeedCategory>

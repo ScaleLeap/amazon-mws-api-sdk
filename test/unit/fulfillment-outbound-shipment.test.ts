@@ -80,174 +80,176 @@ describe('fulfillmentOutboundShipment', () => {
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
-})
 
-describe('getFulfillmentOrder', () => {
-  const parameters = { SellerFulfillmentOrderId: '' }
+  describe('getFulfillmentOrder', () => {
+    const parameters = { SellerFulfillmentOrderId: '' }
 
-  it('succesfully parses response structure, from c sharp', async () => {
-    expect.assertions(1)
+    it('succesfully parses response structure, from c sharp', async () => {
+      expect.assertions(1)
 
-    const mockGetFulfillmentOrder = createMockHttpClient(
-      'fulfillment_outbound_shipment_get_fulfillment_order_from_c_sharp',
-    )
+      const mockGetFulfillmentOrder = createMockHttpClient(
+        'fulfillment_outbound_shipment_get_fulfillment_order_from_c_sharp',
+      )
 
-    expect(
-      await mockGetFulfillmentOrder.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
-    ).toMatchSnapshot()
+      expect(
+        await mockGetFulfillmentOrder.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('returns a fulfillment order based on a SellerFulfillmentOrderId if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetFulfillmentOrder = createMockHttpClient(
+        'fulfillment_outbound_shipment_get_fulfillment_order',
+      )
+
+      expect(
+        await mockGetFulfillmentOrder.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is nt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
   })
 
-  it('returns a fulfillment order based on a SellerFulfillmentOrderId if succesful', async () => {
-    expect.assertions(1)
+  describe('listAllFulfillmentOrders', () => {
+    it('returns a list of fulfillment orders if succesful', async () => {
+      expect.assertions(1)
 
-    const mockGetFulfillmentOrder = createMockHttpClient(
-      'fulfillment_outbound_shipment_get_fulfillment_order',
-    )
+      const mockListAllFulfillmentOrders = createMockHttpClient(
+        'fulfillment_outbound_shipment_list_all_fulfillment_orders',
+      )
 
-    expect(
-      await mockGetFulfillmentOrder.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
-    ).toMatchSnapshot()
+      expect(
+        await mockListAllFulfillmentOrders.fulfillmentOutboundShipment.listAllFulfillmentOrders(),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is nt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.listAllFulfillmentOrders(),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
   })
 
-  it('throws a parsing error when the status response is nt valid', async () => {
-    expect.assertions(1)
+  describe('updateFulfillmentOrder', () => {
+    const parameters = {
+      SellerFulfillmentOrderId: '',
+    }
 
-    await expect(() =>
-      mockMwsFail.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
-    ).rejects.toStrictEqual(new ParsingError(parsingError))
-  })
-})
+    it('returns the standard response elements if succesful', async () => {
+      expect.assertions(1)
 
-describe('listAllFulfillmentOrders', () => {
-  it('returns a list of fulfillment orders if succesful', async () => {
-    expect.assertions(1)
+      const mockUpdateFulfillmentOrder = createMockHttpClient(
+        'fulfillment_outbound_shipment_update_fulfillment_order',
+      )
 
-    const mockListAllFulfillmentOrders = createMockHttpClient(
-      'fulfillment_outbound_shipment_list_all_fulfillment_orders',
-    )
+      expect(
+        await mockUpdateFulfillmentOrder.fulfillmentOutboundShipment.updateFulfillmentOrder(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
 
-    expect(
-      await mockListAllFulfillmentOrders.fulfillmentOutboundShipment.listAllFulfillmentOrders(),
-    ).toMatchSnapshot()
-  })
+    it('throws a parsing error when the status response isnt valid', async () => {
+      expect.assertions(1)
 
-  it('throws a parsing error when the status response is nt valid', async () => {
-    expect.assertions(1)
-
-    await expect(() =>
-      mockMwsFail.fulfillmentOutboundShipment.listAllFulfillmentOrders(),
-    ).rejects.toStrictEqual(new ParsingError(parsingError))
-  })
-})
-
-describe('updateFulfillmentOrder', () => {
-  const parameters = {
-    SellerFulfillmentOrderId: '',
-  }
-
-  it('returns the standard response elements if succesful', async () => {
-    expect.assertions(1)
-
-    const mockUpdateFulfillmentOrder = createMockHttpClient(
-      'fulfillment_outbound_shipment_update_fulfillment_order',
-    )
-
-    expect(
-      await mockUpdateFulfillmentOrder.fulfillmentOutboundShipment.updateFulfillmentOrder(
-        parameters,
-      ),
-    ).toMatchSnapshot()
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.updateFulfillmentOrder(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
   })
 
-  it('throws a parsing error when the status response isnt valid', async () => {
-    expect.assertions(1)
+  describe('createFulfillmentOrder', () => {
+    const parameters: CreateFulfillmentOrderParameters = {
+      SellerFulfillmentOrderId: '',
+      DisplayableOrderId: '',
+      DisplayableOrderDateTime: new Date(),
+      DisplayableOrderComment: '',
+      ShippingSpeedCategory: 'Priority',
+      DestinationAddress: mockAddress,
+      Items: [mockCreateFulfillmentOrderItem],
+    }
 
-    await expect(() =>
-      mockMwsFail.fulfillmentOutboundShipment.updateFulfillmentOrder(parameters),
-    ).rejects.toStrictEqual(new ParsingError(parsingError))
-  })
-})
+    it('returns the standard response elements if succesful', async () => {
+      expect.assertions(1)
 
-describe('createFulfillmentOrder', () => {
-  const parameters: CreateFulfillmentOrderParameters = {
-    SellerFulfillmentOrderId: '',
-    DisplayableOrderId: '',
-    DisplayableOrderDateTime: new Date(),
-    DisplayableOrderComment: '',
-    ShippingSpeedCategory: 'Priority',
-    DestinationAddress: mockAddress,
-    Items: [mockCreateFulfillmentOrderItem],
-  }
+      const mockCreateFulfillmentOrder = createMockHttpClient(
+        'fulfillment_outbound_shipment_create_fulfillment_order',
+      )
 
-  it('returns the standard response elements if succesful', async () => {
-    expect.assertions(1)
+      expect(
+        await mockCreateFulfillmentOrder.fulfillmentOutboundShipment.createFulfillmentOrder(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
 
-    const mockCreateFulfillmentOrder = createMockHttpClient(
-      'fulfillment_outbound_shipment_create_fulfillment_order',
-    )
+    it('throws a parsing error when the status response isnt valid', async () => {
+      expect.assertions(1)
 
-    expect(
-      await mockCreateFulfillmentOrder.fulfillmentOutboundShipment.createFulfillmentOrder(
-        parameters,
-      ),
-    ).toMatchSnapshot()
-  })
-
-  it('throws a parsing error when the status response isnt valid', async () => {
-    expect.assertions(1)
-
-    await expect(() =>
-      mockMwsFail.fulfillmentOutboundShipment.createFulfillmentOrder(parameters),
-    ).rejects.toStrictEqual(new ParsingError(parsingError))
-  })
-})
-
-describe('getFulfillmentPreview', () => {
-  const mockGetFulfillmentPreviewItem = {
-    SellerSKU: '',
-    SellerFulfillmentOrderItemId: '',
-    Quantity: 1,
-  }
-  const parameters = {
-    Address: mockAddress,
-    Items: [mockGetFulfillmentPreviewItem],
-  }
-
-  it('returns a list of fulfillment previews if succesful', async () => {
-    expect.assertions(1)
-
-    const mockGetFulfillmentPreview = createMockHttpClient(
-      'fulfillment_outbound_shipment_get_fulfillment_preview',
-    )
-
-    expect(
-      await mockGetFulfillmentPreview.fulfillmentOutboundShipment.getFulfillmentPreview(parameters),
-    ).toMatchSnapshot()
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.createFulfillmentOrder(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
   })
 
-  it('throws a parsing error when the status response is not valid', async () => {
-    expect.assertions(1)
+  describe('getFulfillmentPreview', () => {
+    const mockGetFulfillmentPreviewItem = {
+      SellerSKU: '',
+      SellerFulfillmentOrderItemId: '',
+      Quantity: 1,
+    }
+    const parameters = {
+      Address: mockAddress,
+      Items: [mockGetFulfillmentPreviewItem],
+    }
 
-    await expect(() =>
-      mockMwsFail.fulfillmentOutboundShipment.getFulfillmentPreview(parameters),
-    ).rejects.toStrictEqual(new ParsingError(parsingError))
+    it('returns a list of fulfillment previews if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetFulfillmentPreview = createMockHttpClient(
+        'fulfillment_outbound_shipment_get_fulfillment_preview',
+      )
+
+      expect(
+        await mockGetFulfillmentPreview.fulfillmentOutboundShipment.getFulfillmentPreview(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.getFulfillmentPreview(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
   })
-})
 
-describe('getServiceStatus', () => {
-  it('returns a parsed model when the status response is valid', async () => {
-    expect.assertions(1)
+  describe('getServiceStatus', () => {
+    it('returns a parsed model when the status response is valid', async () => {
+      expect.assertions(1)
 
-    expect(
-      await mockMwsServiceStatus.fulfillmentOutboundShipment.getServiceStatus(),
-    ).toMatchSnapshot()
-  })
+      expect(
+        await mockMwsServiceStatus.fulfillmentOutboundShipment.getServiceStatus(),
+      ).toMatchSnapshot()
+    })
 
-  it('throws a parsing error when the status response is not valid', async () => {
-    expect.assertions(1)
+    it('throws a parsing error when the status response is not valid', async () => {
+      expect.assertions(1)
 
-    await expect(() =>
-      mockMwsFail.fulfillmentOutboundShipment.getServiceStatus(),
-    ).rejects.toStrictEqual(new ParsingError(parsingError))
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.getServiceStatus(),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
   })
 })
