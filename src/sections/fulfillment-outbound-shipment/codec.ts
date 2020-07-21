@@ -1,7 +1,13 @@
 import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
-import { FISFeeTypesEnum, FISWeightUnitEnum, ShippingSpeedCategoryEnum } from './type'
+import {
+  FISFeeTypesEnum,
+  FISWeightUnitEnum,
+  FulfillmentActionEnum,
+  FulfillmentPolicyEnum,
+  ShippingSpeedCategoryEnum,
+} from './type'
 
 const ShippingSpeedCategory = enumeration(ShippingSpeedCategoryEnum)
 
@@ -70,7 +76,7 @@ const FulfillmentPreview = Codec.interface({
   ScheduledDeliveryInfo: optional(ScheduledDeliveryInfo),
 })
 
-const GetFulfillmentPreview = Codec.interface({
+export const GetFulfillmentPreview = Codec.interface({
   FulfillmentPreviews: ensureArray('member', FulfillmentPreview),
 })
 
@@ -113,7 +119,7 @@ const FOSAddress = Codec.interface({
   PhoneNumber: optional(string),
 })
 
-enum FulfillmentOrderStatusEnum {
+export enum FulfillmentOrderStatusEnum {
   'RECEIVED',
   'INVALID',
   'PLANNING',
@@ -122,17 +128,6 @@ enum FulfillmentOrderStatusEnum {
   'COMPLETE',
   'COMPLETE_PARTIALLED',
   'UNFULFILLABLE',
-}
-
-enum FulfillmentActionEnum {
-  'Ship',
-  'Hold',
-}
-
-enum FulfillmentPolicyEnum {
-  'FillOrKill',
-  'FillAll',
-  'FillAllAvailable',
 }
 
 const FulfillmentPolicy = enumeration(FulfillmentPolicyEnum)
@@ -167,7 +162,7 @@ const FulfillmentOrder = Codec.interface({
   CODSettings: optional(CODSettings),
 })
 
-const ListAllFulfillmentOrders = Codec.interface({
+export const ListAllFulfillmentOrders = Codec.interface({
   NextToken: optional(nextTokenCodec('ListAllFulfillmentOrders')),
   FulfillmentOrders: ensureArray('member', FulfillmentOrder),
 })
@@ -196,7 +191,7 @@ const FulfillmentOrderItem = Codec.interface({
   PerUnitTax: optional(FISCurrency),
 })
 
-enum FulfillmentShipmentStatusEnum {
+export enum FulfillmentShipmentStatusEnum {
   'PENDING',
   'SHIPPED',
   'CANCELLED_BY_FULFILLER',
@@ -229,7 +224,7 @@ const FulfillmentShipment = Codec.interface({
   FulfillmentShipmentPackage: optional(ensureArray('member', FulfillmentShipmentPackage)),
 })
 
-enum ReturnReceivedConditionEnum {
+export enum ReturnReceivedConditionEnum {
   'CarrierDamaged',
   'CustomerDamaged',
   'Defective',
@@ -261,7 +256,7 @@ const ReturnAuthorization = Codec.interface({
   RmaPageURL: string,
 })
 
-const GetFulfillmentOrder = Codec.interface({
+export const GetFulfillmentOrder = Codec.interface({
   FulfillmentOrder,
   FulfillmentOrderItem: ensureArray('member', FulfillmentOrderItem),
   FulfillmentShipment: ensureArray('member', FulfillmentShipment),
@@ -289,7 +284,7 @@ const TrackingAddress = Codec.interface({
   Country: string,
 })
 
-enum CurrentStatusEnum {
+export enum CurrentStatusEnum {
   'IN_TRANSIT',
   'DELIVERED',
   'RETURNING',
@@ -302,7 +297,7 @@ enum CurrentStatusEnum {
 
 const CurrentStatus = enumeration(CurrentStatusEnum)
 
-enum EventCodeEnum {
+export enum EventCodeEnum {
   'EVENT_101',
   'EVENT_102',
   'EVENT_201',
@@ -346,7 +341,7 @@ const TrackingEvent = Codec.interface({
   EventCode,
 })
 
-enum AdditionalLocationInfoEnum {
+export enum AdditionalLocationInfoEnum {
   'AS_INSTRUCTED',
   'CARPORT',
   'CUSTOMER_PICKUP',
@@ -377,7 +372,7 @@ enum AdditionalLocationInfoEnum {
 
 const AdditionalLocationInfo = enumeration(AdditionalLocationInfoEnum)
 
-const GetPackageTrackingDetails = Codec.interface({
+export const GetPackageTrackingDetails = Codec.interface({
   PackageNumber: number,
   TrackingNumber: ensureString,
   CarrierCode: string,
@@ -410,7 +405,7 @@ const ReasonCodeDetails = Codec.interface({
   TranslatedDescription: optional(string),
 })
 
-const ListReturnReasonCodes = Codec.interface({
+export const ListReturnReasonCodes = Codec.interface({
   ReasonCodeDetailsList: ensureArray('member', ReasonCodeDetails),
 })
 
@@ -422,7 +417,7 @@ export const ListReturnReasonCodesResponse = Codec.interface({
   }),
 })
 
-enum InvalidItemReasonCodeEnum {
+export enum InvalidItemReasonCodeEnum {
   'InvalidValues',
   'DuplicateRequest',
   'NoCompletedShipItems',
@@ -442,7 +437,7 @@ const InvalidReturnItem = Codec.interface({
   InvalidItemReason,
 })
 
-const CreateFulfillmentReturn = Codec.interface({
+export const CreateFulfillmentReturn = Codec.interface({
   ReturnItemList: optional(ensureArray('member', ReturnItem)),
   InvalidReturmItemList: optional(ensureArray('member', InvalidReturnItem)),
   ReturnAuthorizationList: optional(ensureArray('member', ReturnAuthorization)),

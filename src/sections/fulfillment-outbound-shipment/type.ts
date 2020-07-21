@@ -1,6 +1,6 @@
 import { RequireOnlyOne } from '../types'
 
-interface FOSAddress {
+export interface FOSAddress {
   Name: string
   Line1: string
   Line2?: string
@@ -14,7 +14,7 @@ interface FOSAddress {
   [key: string]: string | undefined
 }
 
-interface GetFulfillmentPreviewItem {
+export interface GetFulfillmentPreviewItem {
   SellerSKU: string
   SellerFulfillmentOrderItemId: string
   Quantity: number
@@ -27,7 +27,7 @@ export enum ShippingSpeedCategoryEnum {
   'ScheduledDelivery',
 }
 
-type ShippingSpeedCategory = keyof typeof ShippingSpeedCategoryEnum
+export type ShippingSpeedCategory = keyof typeof ShippingSpeedCategoryEnum
 
 export interface GetFulfillmentPreviewParameters {
   MarketplaceId?: string
@@ -63,28 +63,28 @@ export enum FISFeeTypesEnum {
   'FBAFulfillmentCODFee',
 }
 
-enum FulfillmentActionEnum {
+export enum FulfillmentActionEnum {
   'Ship',
   'Hold',
 }
 
-type FulfillmentAction = keyof typeof FulfillmentActionEnum
+export type FulfillmentAction = keyof typeof FulfillmentActionEnum
 
-enum FulfillmentPolicyEnum {
+export enum FulfillmentPolicyEnum {
   'FillOrKill',
   'FillAll',
   'FillAllAvailable',
 }
 
-type FulfillmentPolicy = keyof typeof FulfillmentPolicyEnum
+export type FulfillmentPolicy = keyof typeof FulfillmentPolicyEnum
 
-interface FISCurrency {
+export interface FISCurrency {
   CurrencyCode: string
   Value: string
   [key: string]: string
 }
 
-interface CreateFulfillmentOrderItem {
+export interface CreateFulfillmentOrderItem {
   SellerSKU: string
   SellerFulfillmentOrderItemId: string
   Quantity: number
@@ -96,7 +96,7 @@ interface CreateFulfillmentOrderItem {
   PerUnitTax?: FISCurrency
 }
 
-interface CODSettings {
+export interface CODSettings {
   IsCODRequired?: boolean
   CODCharge?: FISCurrency
   CODChargeTax?: FISCurrency
@@ -105,7 +105,7 @@ interface CODSettings {
   [key: string]: boolean | undefined | FISCurrency
 }
 
-interface DeliveryWindow {
+export interface DeliveryWindow {
   StartDateTime: Date
   EndDateTime: Date
 }
@@ -151,7 +151,7 @@ export const canonicalizeCreateFulfillmentOrderParameters = (
   }
 }
 
-interface UpdateFulfillmentOrderItem {
+export interface UpdateFulfillmentOrderItem {
   SellerFulfillmentOrderItemId: string
   Quantity: number
   GiftMessage?: string
@@ -219,7 +219,7 @@ export type ListReturnReasonCodesParameters = RequireOnlyOne<
   'MarketplaceId' | 'SellerFulfillmentOrderId'
 >
 
-interface CreateReturnItem {
+export interface CreateReturnItem {
   SellerReturnItemId: string
   SellerFulfillmentOrderItemId: string
   AmazonShipmentId: string
