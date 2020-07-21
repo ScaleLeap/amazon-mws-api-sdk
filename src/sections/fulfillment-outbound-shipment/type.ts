@@ -198,3 +198,7 @@ export interface ListAllFulfillmentOrdersParameters {
 export interface GetFulfillmentOrderParameters {
   SellerFulfillmentOrderId: string
 }
+
+export interface GetPackageTrackingDetailsParameters {
+  PackageNumber: number
+}

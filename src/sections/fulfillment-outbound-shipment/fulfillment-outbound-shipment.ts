@@ -8,6 +8,8 @@ import {
   GetFulfillmentOrderResponse,
   GetFulfillmentPreview,
   GetFulfillmentPreviewResponse,
+  GetPackageTrackingDetails,
+  GetPackageTrackingDetailsResponse,
   ListAllFulfillmentOrders,
   ListAllFulfillmentOrdersByNextTokenResponse,
   ListAllFulfillmentOrdersResponse,
@@ -20,6 +22,7 @@ import {
   CreateFulfillmentOrderParameters,
   GetFulfillmentOrderParameters,
   GetFulfillmentPreviewParameters,
+  GetPackageTrackingDetailsParameters,
   ListAllFulfillmentOrdersParameters,
   UpdateFulfillmentOrderParameters,
 } from './type'
@@ -28,6 +31,26 @@ const FOS_API_VERSION = '2010-10-01'
 
 export class FulfillmentOutboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async getPackageTrackingDetails(
+    parameters: GetPackageTrackingDetailsParameters,
+  ): Promise<[GetPackageTrackingDetails, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentOutboundShipment,
+      version: FOS_API_VERSION,
+      action: 'GetPackageTrackingDetails',
+      parameters: {
+        PackageNumber: parameters.PackageNumber,
+      },
+    })
+
+    return GetPackageTrackingDetailsResponse.decode(response).caseOf({
+      Right: (x) => [x.GetPackageTrackingDetailsResponse.GetPackageTrackingDetailsResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async listAllFulfillmentOrdersByNextToken(
     nextToken: NextToken<'ListAllFulfillmentOrders'>,

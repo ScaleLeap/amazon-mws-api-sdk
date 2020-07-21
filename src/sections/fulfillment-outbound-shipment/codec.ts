@@ -282,3 +282,120 @@ export const ListAllFulfillmentOrdersByNextTokenResponse = Codec.interface({
     ListAllFulfillmentOrdersByNextTokenResult: ListAllFulfillmentOrders,
   }),
 })
+
+const TrackingAddress = Codec.interface({
+  City: string,
+  State: string,
+  Country: string,
+})
+
+enum CurrentStatusEnum {
+  'IN_TRANSIT',
+  'DELIVERED',
+  'RETURNING',
+  'RETURNED',
+  'UNDELIVERABLE',
+  'DELAYED',
+  'AVAILABLE_FOR_PICKUP',
+  'CUSTOMER_ACTION',
+}
+
+const CurrentStatus = enumeration(CurrentStatusEnum)
+
+enum EventCodeEnum {
+  'EVENT_101',
+  'EVENT_102',
+  'EVENT_201',
+  'EVENT_202',
+  'EVENT_203',
+  'EVENT_204',
+  'EVENT_205',
+  'EVENT_206',
+  'EVENT_301',
+  'EVENT_302',
+  'EVENT_304',
+  'EVENT_306',
+  'EVENT_307',
+  'EVENT_308',
+  'EVENT_309',
+  'EVENT_401',
+  'EVENT_402',
+  'EVENT_403',
+  'EVENT_404',
+  'EVENT_405',
+  'EVENT_406',
+  'EVENT_407',
+  'EVENT_408',
+  'EVENT_409',
+  'EVENT_411',
+  'EVENT_412',
+  'EVENT_413',
+  'EVENT_414',
+  'EVENT_415',
+  'EVENT_416',
+  'EVENT_417',
+  'EVENT_418',
+  'EVENT_419',
+}
+
+const EventCode = enumeration(EventCodeEnum)
+
+const TrackingEvent = Codec.interface({
+  EventDate: mwsDate,
+  EventAddress: TrackingAddress,
+  EventCode,
+})
+
+enum AdditionalLocationInfoEnum {
+  'AS_INSTRUCTED',
+  'CARPORT',
+  'CUSTOMER_PICKUP',
+  'DECK',
+  'DOOR_PERSON',
+  'FRONT_DESK',
+  'FRONT_DOOR',
+  'GARAGE',
+  'GUARD',
+  'MAIL_ROOM',
+  'MAIL_SLOT',
+  'MAILBOX',
+  'MC_BOY',
+  'MC_GIRL',
+  'MC_MAN',
+  'MC_WOMAN',
+  'NEIGHBOR',
+  'OFFICE',
+  'OUTBUILDING',
+  'PATIO',
+  'PORCH',
+  'REAR_DOOR',
+  'RECEPTIONIST',
+  'RECEIVER',
+  'SECURE_LOCATION',
+  'SIDE_DOOR',
+}
+
+const AdditionalLocationInfo = enumeration(AdditionalLocationInfoEnum)
+
+const GetPackageTrackingDetails = Codec.interface({
+  PackageNumber: number,
+  TrackingNumber: ensureString,
+  CarrierCode: string,
+  CarrierPhoneNumber: ensureString,
+  CarrierURL: string,
+  ShipDate: mwsDate,
+  ShipToAddress: TrackingAddress,
+  CurrentStatus,
+  SignedForBy: string,
+  EstimatedArrivalDate: mwsDate,
+  TrackingEvents: optional(ensureArray('member', TrackingEvent)),
+  AdditionalLocationInfo: optional(AdditionalLocationInfo),
+})
+
+export type GetPackageTrackingDetails = GetInterface<typeof GetPackageTrackingDetails>
+
+export const GetPackageTrackingDetailsResponse = Codec.interface({
+  GetPackageTrackingDetailsResponse: Codec.interface({
+    GetPackageTrackingDetailsResult: GetPackageTrackingDetails,
+  }),
+})
