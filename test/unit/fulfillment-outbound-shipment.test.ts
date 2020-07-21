@@ -55,6 +55,42 @@ const mockCreateFulfillmentOrderItem = {
 }
 
 describe('fulfillmentOutboundShipment', () => {
+  describe('createFulfillmentReturn', () => {
+    const mockCreateReturnItem = {
+      SellerReturnItemId: '',
+      SellerFulfillmentOrderItemId: '',
+      AmazonShipmentId: '',
+      ReturnReasonCode: '',
+    }
+
+    const parameters = {
+      SellerFulfillmentOrderId: '',
+      Items: [mockCreateReturnItem],
+    }
+
+    it('returns the list of invalid and valid items for return if succesful', async () => {
+      expect.assertions(1)
+
+      const mockCreateFulfillmentReturn = createMockHttpClient(
+        'fulfillment_outbound_shipment_create_fulfillment_return',
+      )
+
+      expect(
+        await mockCreateFulfillmentReturn.fulfillmentOutboundShipment.createFulfillmentReturn(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isnt  valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.createFulfillmentReturn(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('listReturnReasonCodes', () => {
     const parameters = {
       SellerFulfillmentOrderId: '',
