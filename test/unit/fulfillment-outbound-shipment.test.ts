@@ -55,6 +55,32 @@ const mockCreateFulfillmentOrderItem = {
 }
 
 describe('fulfillmentOutboundShipment', () => {
+  describe('cancelFulfillmentOrder', () => {
+    const parameters = { SellerFulfillmentOrderId: '' }
+
+    it('returns the standard response if succesful', async () => {
+      expect.assertions(1)
+
+      const mockCancelFulfillmentOrder = createMockHttpClient(
+        'fulfillment_outbound_shipment_cancel_fulfillment_order',
+      )
+
+      expect(
+        await mockCancelFulfillmentOrder.fulfillmentOutboundShipment.cancelFulfillmentOrder(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response  isnt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.cancelFulfillmentOrder(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('getPackageTrackingDetails', () => {
     const parameters = { PackageNumber: 0 }
 
