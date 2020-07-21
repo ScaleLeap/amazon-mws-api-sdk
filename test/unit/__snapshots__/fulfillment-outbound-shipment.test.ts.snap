@@ -26,6 +26,51 @@ Array [
 ]
 `;
 
+exports[`fulfillmentOutboundShipment createFulfillmentReturn returns the list of invalid and valid items for return if succesful 1`] = `
+Array [
+  Object {
+    "ReturnAuthorizationList": Array [
+      Object {
+        "AmazonRmaId": "test123",
+        "FulfillmentCenterId": "FC123",
+        "ReturnAuthorizationId": "amzn-rma-id",
+        "ReturnToAddress": Object {
+          "City": "Anywhere",
+          "CountryCode": "US",
+          "Line1": "123 Main Street",
+          "Name": "Amazon FC",
+          "PostalCode": "98122",
+          "StateOrProvinceCode": "WA",
+        },
+        "RmaPageURL": "https://sellercentral.amazon.com/URL",
+      },
+    ],
+    "ReturnItemList": Array [
+      Object {
+        "AmazonReturnReasonCode": "OTHER-REASON-CODE",
+        "AmazonShipmentId": "DLHg36GDN",
+        "FulfillmentCenterId": "FC123",
+        "ReturnAuthorizationId": "amzn-rma-id",
+        "ReturnComment": "Did not like color",
+        "ReturnReceivedCondition": "Sellable",
+        "SellerFulfillmentOrderItemId": "order-item-1",
+        "SellerReturnItemId": "16a6a142EXAMPLE",
+        "SellerReturnReasonCode": "REASON-CODE",
+        "Status": "Processed",
+        "StatusChangedDate": 2016-09-29T02:40:36.000Z,
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`fulfillmentOutboundShipment getFulfillmentOrder returns a fulfillment order based on a SellerFulfillmentOrderId if succesful 1`] = `
 Array [
   Object {

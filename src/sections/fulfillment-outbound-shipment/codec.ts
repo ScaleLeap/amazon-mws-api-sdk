@@ -421,3 +421,37 @@ export const ListReturnReasonCodesResponse = Codec.interface({
     ListReturnReasonCodesResult: ListReturnReasonCodes,
   }),
 })
+
+enum InvalidItemReasonCodeEnum {
+  'InvalidValues',
+  'DuplicateRequest',
+  'NoCompletedShipItems',
+  'NoReturnableQuantity',
+}
+
+const InvalidItemReasonCode = enumeration(InvalidItemReasonCodeEnum)
+
+const InvalidItemReason = Codec.interface({
+  InvalidItemReasonCode,
+  Description: string,
+})
+
+const InvalidReturnItem = Codec.interface({
+  SellerReturnItemId: string,
+  SellerFulfillmentOrderId: string,
+  InvalidItemReason,
+})
+
+const CreateFulfillmentReturn = Codec.interface({
+  ReturnItemList: optional(ensureArray('member', ReturnItem)),
+  InvalidReturmItemList: optional(ensureArray('member', InvalidReturnItem)),
+  ReturnAuthorizationList: optional(ensureArray('member', ReturnAuthorization)),
+})
+
+export type CreateFulfillmentReturn = GetInterface<typeof CreateFulfillmentReturn>
+
+export const CreateFulfillmentReturnResponse = Codec.interface({
+  CreateFulfillmentReturnResponse: Codec.interface({
+    CreateFulfillmentReturnResult: CreateFulfillmentReturn,
+  }),
+})

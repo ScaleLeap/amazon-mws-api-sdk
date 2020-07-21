@@ -218,3 +218,16 @@ export type ListReturnReasonCodesParameters = RequireOnlyOne<
   },
   'MarketplaceId' | 'SellerFulfillmentOrderId'
 >
+
+interface CreateReturnItem {
+  SellerReturnItemId: string
+  SellerFulfillmentOrderItemId: string
+  AmazonShipmentId: string
+  ReturnReasonCode: string
+  ReturnComment?: string
+}
+
+export interface CreateFulfillmentReturnParameters {
+  SellerFulfillmentOrderId: string
+  Items: CreateReturnItem[]
+}

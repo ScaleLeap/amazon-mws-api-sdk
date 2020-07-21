@@ -5,6 +5,8 @@ import { getServiceStatusByResource } from '../shared'
 import {
   CancelFulfillmentOrderResponse,
   CreateFulfillmentOrderResponse,
+  CreateFulfillmentReturn,
+  CreateFulfillmentReturnResponse,
   GetFulfillmentOrder,
   GetFulfillmentOrderResponse,
   GetFulfillmentPreview,
@@ -24,6 +26,7 @@ import {
   canonicalizeGetFulfillmentPreviewParameters,
   canonicalizeUpdateFulfillmentOrderParameters,
   CreateFulfillmentOrderParameters,
+  CreateFulfillmentReturnParameters,
   GetFulfillmentOrderParameters,
   GetFulfillmentPreviewParameters,
   GetPackageTrackingDetailsParameters,
@@ -37,13 +40,33 @@ const FOS_API_VERSION = '2010-10-01'
 export class FulfillmentOutboundShipment {
   constructor(private httpClient: HttpClient) {}
 
+  async createFulfillmentReturn(
+    parameters: CreateFulfillmentReturnParameters,
+  ): Promise<[CreateFulfillmentReturn, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentOutboundShipment,
+      version: FOS_API_VERSION,
+      action: 'CreateFulfillmentReturn',
+      parameters: {
+        SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
+      },
+    })
+
+    return CreateFulfillmentReturnResponse.decode(response).caseOf({
+      Right: (x) => [x.CreateFulfillmentReturnResponse.CreateFulfillmentReturnResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
+
   async listReturnReasonCodes(
     parameters: ListReturnReasonCodesParameters,
   ): Promise<[ListReturnReasonCodes, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.FulfillmentOutboundShipment,
       version: FOS_API_VERSION,
-      action: 'UpdateFulfillmentOrder',
+      action: 'ListReturnReasonCodes',
       parameters: {
         SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
       },
@@ -63,7 +86,7 @@ export class FulfillmentOutboundShipment {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.FulfillmentOutboundShipment,
       version: FOS_API_VERSION,
-      action: 'UpdateFulfillmentOrder',
+      action: 'CancelFulfillmentOrder',
       parameters: {
         SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
       },

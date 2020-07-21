@@ -1,7 +1,8 @@
-<CreateFulfillmenReturnResponse xmlns="http://mws.amazonaws.com/FulfillmentOutboundShipment/2010-10-01/">
+<!-- Changed all names of list objects to `member`. Following c# libraries naming scheme -->
+<CreateFulfillmentReturnResponse xmlns="http://mws.amazonaws.com/FulfillmentOutboundShipment/2010-10-01/">
   <CreateFulfillmentReturnResult>
     <ReturnItemList>
-      <ReturnItem>
+      <member>
         <SellerReturnItemId>16a6a142EXAMPLE</SellerReturnItemId>
         <SellerFulfillmentOrderItemId>order-item-1 </SellerFulfillmentOrderItemId>
         <AmazonShipmentId>DLHg36GDN</AmazonShipmentId >
@@ -13,33 +14,33 @@
         <ReturnAuthorizationId>amzn-rma-id</ReturnAuthorizationId>
         <ReturnReceivedCondition>Sellable</ReturnReceivedCondition>
         <FulfillmentCenterId>FC123</FulfillmentCenterId>
-      </ReturnItem>
+      </member>
     </ReturnItemList>
     <InvalidReturnItemList>
-      <InvalidReturnItem>
+      <member>
         <SellerReturnItemId>20a6a142EXAMPLE</SellerReturnItemId>
         <SellerFulfillmentOrderItemId>order-item-2</SellerFulfillmentOrderItemId>
         <InvalidItemReason>
           <InvalidItemReasonCode>DuplicateRequest</InvalidItemReasonCode>
           <Description>There are duplicate return requests for this item.</Description>
         </InvalidItemReason>
-      </InvalidReturnItem>
+      </member>
     </InvalidReturnItemList>
     <ReturnAuthorizationList>
-      <ReturnAuthorization>
+      <member>
         <ReturnAuthorizationId>amzn-rma-id</ReturnAuthorizationId>
         <FulfillmentCenterId>FC123</FulfillmentCenterId>
         <ReturnToAddress>
           <Name>Amazon FC</Name>
           <Line1>123 Main Street</Line1>
           <City>Anywhere</City>
-          <StateOrRegionCode>WA</StateOrRegionCode>
+          <StateOrProvinceCode>WA</StateOrProvinceCode>
           <PostalCode>98122</PostalCode>
           <CountryCode>US</CountryCode>
         </ReturnToAddress>
         <AmazonRmaId>test123</AmazonRmaId>
         <RmaPageURL>https://sellercentral.amazon.com/URL</RmaPageURL>
-      </ReturnAuthorization>
+      </member>
     </ReturnAuthorizationList>
   </CreateFulfillmentReturnResult>
   <ResponseMetadata>
