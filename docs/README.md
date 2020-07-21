@@ -162,6 +162,18 @@
     - [listInboundShipmentItems](#listinboundshipmentitems)
     - [listInboundShipmentItemsByNextToken](#listinboundshipmentitemsbynexttoken)
     - [getServiceStatus](#getservicestatus-8)
+  - [FulfillmentOutboundShipment](#fulfillmentoutboundshipment)
+    - [getFulfillmentPreview](#getfulfillmentpreview)
+    - [createFulfillmentOrder](#createfulfillmentorder)
+    - [updateFulfillmentOrder](#updatefulfillmentorder)
+    - [listAllFulfillmentOrders](#listallfulfillmentorders)
+    - [getFulfillmentOrder](#getfulfillmentorder)
+    - [listAllFulfillmentOrdersByNextToken](#listallfulfillmentordersbynexttoken)
+    - [getPackageTrackingDetails](#getpackagetrackingdetails)
+    - [cancelFulfillmentOrder](#cancelfulfillmentorder)
+    - [listReturnReasonCodes](#listreturnreasoncodes)
+    - [createFulfillmentReturn](#createfulfillmentreturn)
+    - [getServiceStatus](#getservicestatus-9)
 
 # Basics
 
@@ -3327,3 +3339,321 @@ const [response, meta] = fis.getServiceStatus()
 **Response**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
+
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- /////////////////////////////START FULFILLMENTOUTBOUNDSHIPMENT//////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+## FulfillmentOutboundShipment
+
+### getFulfillmentPreview
+
+| Name                         | Type                        | Example            | Required |
+| ---------------------------- | --------------------------- | ------------------ | -------- |
+| MarketplaceId                | string                      | `'A2EUQ1WTGCTBG2'` | No       |
+| Address                      | Address                     | `//@todo`          | Yes      |
+| Items                        | GetFulfillmentPreviewItem[] | `//@todo`          | Yes      |
+| ShippingSpeedCategories      | string                      | `'Standard'`       | No       |
+| IncludeCODFulfillmentPreview | boolean                     | `true`             | No       |
+| IncludeDeliveryWindows       | boolean                     | `true`             | No       |
+
+**Example**
+
+```typescript
+
+const mockAddress = {
+  Name: '',
+  Line1: '',
+  Line2: '',
+  Line3: '',
+  DistrictOrCounty: '',
+  City: '',
+  StateOrProvinceCode: '',
+  CountryCode: '',
+  PostalCode: '',
+  PhoneNumber: '',
+}
+
+const mockGetFulfillmentPreviewItem = {
+  SellerSKU: '',
+  SellerFulfillmentOrderItemId: '',
+  Quantity: 1,
+}
+
+
+const parameters = {
+  Address: mockAddress,
+  Items: [mockGetFulfillmentPreviewItem],
+}
+
+
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.getFulfillmentPreview(parameters)
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
+### createFulfillmentOrder
+
+| Name                     | Type                         | Example                 | Required                                                           |
+| ------------------------ | ---------------------------- | ----------------------- | ------------------------------------------------------------------ |
+| MarketplaceId            | string                       | `'A2EUQ1WTGCTBG2'`      | No                                                                 |
+| SellerFulfillmentOrderId | string                       | `'FLFLMNTID'`           | Yes                                                                |
+| FulfillmentAction        | string                       | `'Ship'`                | No                                                                 |
+| DisplayableOrderId       | string                       | `'ORDERID'`             | Yes                                                                |
+| DisplayableOrderDateTime | Date                         | `new Date()`            | Yes                                                                |
+| DisplayableOrderComment  | string                       | `Some Comment`          | Yes                                                                |
+| ShippingSpeedCategory    | string                       | `Standard`              | Yes                                                                |
+| DestinationAddress       | Address                      | `//@todo`               | Yes                                                                |
+| FulfillmentPolicy        | string                       | `FillAll`               | No                                                                 |
+| NotificationEmailList    | string[]                     | `['email@example.com']` | No                                                                 |
+| CODSettings              | CODSettings                  | `//@todo`               | No                                                                 |
+| Items                    | CreateFulfillmentOrderItem[] | `//@todo`               | Yes                                                                |
+| DeliveryWindow           | DeliveryWindow               | `//@todo`               | No. Required only if ShippingSpeedCategory = `'ScheduledDelivery'` |
+
+**Example**
+
+```typescript
+
+const mockAddress = {
+  Name: '',
+  Line1: '',
+  Line2: '',
+  Line3: '',
+  DistrictOrCounty: '',
+  City: '',
+  StateOrProvinceCode: '',
+  CountryCode: '',
+  PostalCode: '',
+  PhoneNumber: '',
+}
+
+const mockCreateFulfillmentOrderItem = {
+  SellerSKU: '',
+  SellerFulfillmentOrderItemId: '',
+  Quantity: 1,
+}
+
+const parameters = {
+  SellerFulfillmentOrderId: '',
+  DisplayableOrderId: '',
+  DisplayableOrderDateTime: new Date(),
+  DisplayableOrderComment: '',
+  ShippingSpeedCategory: 'Priority',
+  DestinationAddress: mockAddress,
+  Items: [mockCreateFulfillmentOrderItem],
+}
+
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.createFulfillmentOrder(parameters)
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
+### updateFulfillmentOrder
+
+| Name                     | Type                         | Example                 | Required |
+| ------------------------ | ---------------------------- | ----------------------- | -------- |
+| MarketplaceId            | string                       | `'A2EUQ1WTGCTBG2'`      | No       |
+| SellerFulfillmentOrderId | string                       | `'FLFLMNTID'`           | Yes      |
+| FulfillmentAction        | string                       | `'Ship'`                | No       |
+| DisplayableOrderId       | string                       | `'ORDERID'`             | No       |
+| DisplayableOrderDateTime | Date                         | `new Date()`            | No       |
+| DisplayableOrderComment  | string                       | `Some Comment`          | No       |
+| ShippingSpeedCategory    | string                       | `Standard`              | No       |
+| DestinationAddress       | Address                      | `//@todo`               | No       |
+| FulfillmentPolicy        | string                       | `FillAll`               | No       |
+| NotificationEmailList    | string[]                     | `['email@example.com']` | No       |
+| Items                    | CreateFulfillmentOrderItem[] | `//@todo`               | No       |
+
+**Example**
+
+```typescript
+const parameters = {
+  SellerFulfillmentOrderId: '',
+}
+
+
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.updateFulfillmentOrder(parameters)
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
+### listAllFulfillmentOrders
+
+| Name               | Type | Example      | Required |
+| ------------------ | ---- | ------------ | -------- |
+| QueryStartDateTime | Date | `new Date()` | No       |
+
+**Example**
+
+```typescript
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.listAllFulfillmentOrders()
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
+### getFulfillmentOrder
+
+| Name                     | Type   | Example           | Required |
+| ------------------------ | ------ | ----------------- | -------- |
+| SellerFulfillmentOrderId | string | `'SELLERORDERID'` | Yes      |
+
+**Example**
+
+```typescript
+const parameters = { SellerFulfillmentOrderId: '' }
+
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.getFulfillmentOrder(parameters)
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
+### listAllFulfillmentOrdersByNextToken
+
+| Name      | Type      | Example                                                                                                      | Required |
+| --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage ](../examples/using-next-tokens.ts) | Yes      |
+
+**Example**
+
+```typescript
+const nextToken = new NextToken('ListFinancialEvents', '123')
+
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.listAllFulfillmentOrdersByNextToken(nextToken)
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
+### getPackageTrackingDetails
+
+| Name          | Type   | Example | Required |
+| ------------- | ------ | ------- | -------- |
+| PackageNumber | number | `1234`  | Yes      |
+
+**Example**
+
+```typescript
+const parameters = { PackageNumber: 1234 }
+
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.getPackageTrackingDetails(parameters)
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
+### cancelFulfillmentOrder
+
+| Name                     | Type   | Example     | Required |
+| ------------------------ | ------ | ----------- | -------- |
+| SellerFulfillmentOrderId | string | `'ORDERID'` | Yes      |
+
+**Example**
+
+```typescript
+const parameters = { SellerFulfillmentOrderId: 'ORDERID' }
+
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.cancelFulfillmentOrder(parameters)
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
+### listReturnReasonCodes
+
+| Name                     | Type   | Example            | Required                                                     |
+| ------------------------ | ------ | ------------------ | ------------------------------------------------------------ |
+| MarketplaceId            | string | `'A2EUQ1WTGCTBG2'` | No. Not required if `SellerFulfillmentOrderId` is specified. |
+| SellerFulfillmentOrderId | string | `'ORDERID'`        | No. Not required if `MarketplaceId` is specified.            |
+| SellerSKU                | string | `'SELLERSKU'`      | Yes                                                          |
+| Language                 | string | `'fr_CA'`          | No                                                           |
+
+**Example**
+
+```typescript
+const parameters = {
+  SellerFulfillmentOrderId: '',
+  SellerSKU: '',
+}
+
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.listReturnReasonCodes(parameters)
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
+### createFulfillmentReturn
+
+| Name                     | Type               | Example     | Required |
+| ------------------------ | ------------------ | ----------- | -------- |
+| SellerFulfillmentOrderId | string             | `'ORDERID'` | Yes      |
+| Items                    | CreateReturnItem[] | `//@todo`   | Yes      |
+
+**Example**
+
+```typescript
+const mockCreateReturnItem = {
+  SellerReturnItemId: '',
+  SellerFulfillmentOrderItemId: '',
+  AmazonShipmentId: '',
+  ReturnReasonCode: '',
+}
+
+const parameters = {
+  SellerFulfillmentOrderId: '',
+  Items: [mockCreateReturnItem],
+}
+
+
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.createFulfillmentReturn(parameters)
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
+### getServiceStatus
+
+**Parameters**
+
+| None |
+| ---- |
+
+**Example**
+
+```typescript
+const fos = new FulfillmentOutboundShipment(httpClient)
+const [response, meta] = fos.getServiceStatus()
+```
+
+**Response**
+
+[See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
+
