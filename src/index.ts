@@ -9,6 +9,8 @@ export * from './sections/fulfillment-inbound-shipment/fulfillment-inbound-shipm
 export * from './sections/fulfillment-inbound-shipment/codec'
 export * from './sections/fulfillment-inbound-shipment/type'
 export * from './sections/fulfillment-outbound-shipment/fulfillment-outbound-shipment'
+export * from './sections/fulfillment-outbound-shipment/type'
+export * from './sections/fulfillment-outbound-shipment/codec'
 export * from './sections/merchant-fulfillment/merchant-fulfillment'
 export * from './sections/merchant-fulfillment/type'
 export * from './sections/merchant-fulfillment/codec'

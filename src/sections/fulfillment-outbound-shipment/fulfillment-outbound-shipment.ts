@@ -49,6 +49,7 @@ export class FulfillmentOutboundShipment {
       action: 'CreateFulfillmentReturn',
       parameters: {
         SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
+        'Items.member': parameters.Items,
       },
     })
 

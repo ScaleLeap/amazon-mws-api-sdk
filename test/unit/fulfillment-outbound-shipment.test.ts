@@ -1,5 +1,8 @@
-import { NextToken, ParsingError } from '../../src'
-import { CreateFulfillmentOrderParameters } from '../../src/sections/fulfillment-outbound-shipment/type'
+import { canonicalizeUpdateFulfillmentOrderParameters, NextToken, ParsingError } from '../../src'
+import {
+  canonicalizeGetFulfillmentPreviewParameters,
+  CreateFulfillmentOrderParameters,
+} from '../../src/sections/fulfillment-outbound-shipment/type'
 import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 function mockEnum() {
@@ -54,7 +57,54 @@ const mockCreateFulfillmentOrderItem = {
   Quantity: 1,
 }
 
+const mockGetFulfillmentPreviewItem = {
+  SellerSKU: '',
+  SellerFulfillmentOrderItemId: '',
+  Quantity: 1,
+}
+
 describe('fulfillmentOutboundShipment', () => {
+  describe('parameters', () => {
+    describe('canonicalizeGetFulfillmentPreviewParameters', () => {
+      it('should properly canonicalize GetFulfillmentPreviewParameters', () => {
+        expect.assertions(1)
+
+        const parameters = {
+          Address: mockAddress,
+          Items: [mockGetFulfillmentPreviewItem],
+        }
+
+        const output = canonicalizeGetFulfillmentPreviewParameters(parameters)
+
+        expect(output['Items.member']).toStrictEqual(parameters.Items)
+      })
+    })
+
+    describe('canonicalizeUpdateFulfillmentOrderParameters', () => {
+      it('should properly canonicalize UpdateFulfillmentOrderParameters', () => {
+        expect.assertions(2)
+
+        const mockItem = {
+          SellerFulfillmentOrderItemId: '',
+          Quantity: 1,
+        }
+
+        const parameters = {
+          SellerFulfillmentOrderId: '',
+          NotificationEmailList: [''],
+          Items: [mockItem],
+        }
+
+        const output = canonicalizeUpdateFulfillmentOrderParameters(parameters)
+
+        expect(output['Items.member']).toStrictEqual(parameters.Items)
+        expect(output['NotificationEmailList.member']).toStrictEqual(
+          parameters.NotificationEmailList,
+        )
+      })
+    })
+  })
+
   describe('createFulfillmentReturn', () => {
     const mockCreateReturnItem = {
       SellerReturnItemId: '',
@@ -319,11 +369,6 @@ describe('fulfillmentOutboundShipment', () => {
   })
 
   describe('getFulfillmentPreview', () => {
-    const mockGetFulfillmentPreviewItem = {
-      SellerSKU: '',
-      SellerFulfillmentOrderItemId: '',
-      Quantity: 1,
-    }
     const parameters = {
       Address: mockAddress,
       Items: [mockGetFulfillmentPreviewItem],
