@@ -163,6 +163,14 @@
     - [listInboundShipmentItemsByNextToken](#listinboundshipmentitemsbynexttoken)
     - [getServiceStatus](#getservicestatus-8)
   - [FulfillmentOutboundShipment](#fulfillmentoutboundshipment)
+    - [Types used in FulfillmentOutboundShipment](#types-used-in-fulfillmentoutboundshipment)
+      - [Address](#address-2)
+      - [GetFulfillmentPreviewItem](#getfulfillmentpreviewitem)
+      - [Currency](#currency)
+      - [CODSettings](#codsettings)
+      - [CreateFulfillmentOrderItem](#createfulfillmentorderitem)
+      - [DeliveryWindow](#deliverywindow)
+      - [CreateReturnItem](#createreturnitem)
     - [getFulfillmentPreview](#getfulfillmentpreview)
     - [createFulfillmentOrder](#createfulfillmentorder)
     - [updateFulfillmentOrder](#updatefulfillmentorder)
@@ -3350,16 +3358,105 @@ const [response, meta] = fis.getServiceStatus()
 
 ## FulfillmentOutboundShipment
 
-### getFulfillmentPreview
+### Types used in FulfillmentOutboundShipment
 
-| Name                         | Type                        | Example            | Required |
-| ---------------------------- | --------------------------- | ------------------ | -------- |
-| MarketplaceId                | string                      | `'A2EUQ1WTGCTBG2'` | No       |
-| Address                      | Address                     | `//@todo`          | Yes      |
-| Items                        | GetFulfillmentPreviewItem[] | `//@todo`          | Yes      |
-| ShippingSpeedCategories      | string                      | `'Standard'`       | No       |
-| IncludeCODFulfillmentPreview | boolean                     | `true`             | No       |
-| IncludeDeliveryWindows       | boolean                     | `true`             | No       |
+#### Address
+
+**Properties**
+
+| Name                | Type                   | Example                 | Required                                                                                                 |
+| ------------------- | ---------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------- |
+| Name                | string                 | `'Jane Doe'`            | Yes                                                                                                      |
+| Line1               | string                 | `'#123 Address Street'` | Yes                                                                                                      |
+| Line2               | string                 | `'Address Boulevard'`   | No                                                                                                       |
+| Line3               | string                 | `'Address Town'`        | No                                                                                                       |
+| DistrictOrCounty    | string                 | `'Address County'`      | No                                                                                                       |
+| City                | string                 | `'Gotham City'`         | Yes                                                                                                      |
+| StateOrProvinceCode | string                 | `'WI'`                  | No. Required in the Canada, US, and UK marketplaces. Also required for shipments originating from China. |
+| CountryCode         | string                 | `'US'`                  | Yes                                                                                                      |
+| PostalCode          | ShippingServiceOptions | `'99501'`               | Yes                                                                                                      |
+| PhoneNumber         | string                 | `'5555551234'`          | Yes                                                                                                      |
+
+
+#### GetFulfillmentPreviewItem
+
+**Properties**
+
+| Name                         | Type   | Example       | Required |
+| ---------------------------- | ------ | ------------- | -------- |
+| SellerSKU                    | string | `'MY-SKU-1'`  | Yes      |
+| SellerFulfillmentOrderItemId | string | `'FLFLMNTID'` | Yes      |
+| Quantity                     | number | `123`         | Yes      |
+
+#### Currency
+
+| Name         | Type   | Example  | Required |
+| ------------ | ------ | -------- | -------- |
+| CurrencyCode | string | `USD`    | Yes      |
+| Value        | string | `123.12` | Yes      |
+
+#### CODSettings
+
+**Properties**
+
+| Name              | Type     | Example                 | Required |
+| ----------------- | -------- | ----------------------- | -------- |
+| IsCODRequired     | boolean  | `true`                  | No       |
+| CODCharge         | Currency | [`Currency`](#currency) | No       |
+| CODChargeTax      | Currency | [`Currency`](#currency) | No       |
+| ShippingCharge    | Currency | [`Currency`](#currency) | No       |
+| ShippingChargeTax | Currency | [`Currency`](#currency) | No       |
+
+#### CreateFulfillmentOrderItem
+
+**Properties**
+
+| Name                         | Type     | Example                 | Required |
+| ---------------------------- | -------- | ----------------------- | -------- |
+| SellerSKU                    | string   | `MY-SKU-1`              | Yes      |
+| SellerFulfillmentOrderItemId | string   | `'FLFLMNTID'`           | Yes      |
+| Quantity                     | number   | `12`                    | Yes      |
+| GiftMessage                  | string   | `'My message'`          | No       |
+| DisplayableComment           | string   | `'My comment'`          | No       |
+| FulfillmentNetworkSKU        | string   | `'MY-SKU-2'`            | No       |
+| PerUnitDeclaredValue         | Currency | [`Currency`](#currency) | No       |
+| PerUnitPrice                 | Currency | [`Currency`](#currency) | No       |
+| PerUnitTax                   | Currency | [`Currency`](#currency) | No       |
+
+#### DeliveryWindow
+
+**Properties**
+
+| Name          | Type | Example      | Required |
+| ------------- | ---- | ------------ | -------- |
+| StartDateTime | Date | `new Date()` | Yes      |
+| EndDateTime   | Date | `new Date()` | Yes      |
+
+#### CreateReturnItem
+
+**Properties**
+| Name                         | Type   | Example         | Required |
+| ---------------------------- | ------ | --------------- | -------- |
+| SellerReturnItemId           | string | `RETURNID`      | Yes      |
+| SellerFulfillmentOrderItemId | string | `'FLFLMNTID'`   | Yes      |
+| AmazonShipmentId             | number | `ABCAMAZONID`   | Yes      |
+| ReturnReasonCode             | string | `'REASON-CODE'` | Yes      |
+| ReturnComment                | string | `'My comment'`  | No       |
+
+* The return reason code assigned to the return item by the seller. Get valid return reason codes by calling the [`listReturnReasonCodes`](#listreturnreasoncodes) operation.
+
+### getFulfillmentPreview
+**Parameters**
+| Name                         | Type                        | Example                                                     | Required |
+| ---------------------------- | --------------------------- | ----------------------------------------------------------- | -------- |
+| MarketplaceId                | string                      | `'A2EUQ1WTGCTBG2'`                                          | No       |
+| Address                      | Address                     | [`Address`](#address-2)                                     | Yes      |
+| Items                        | GetFulfillmentPreviewItem[] | [`[GetFulfillmentPreviewItem]`](#getfulfillmentpreviewitem) | Yes      |
+| ShippingSpeedCategories      | string                      | `'Standard'`                                                | No       |
+| IncludeCODFulfillmentPreview | boolean                     | `true`                                                      | No       |
+| IncludeDeliveryWindows       | boolean                     | `true`                                                      | No       |
+
+* [Possible values for ShippingSpeedCategories](http://docs.developer.amazonservices.com/en_CA/fba_outbound/FBAOutbound_GetFulfillmentPreview.html)
 
 **Example**
 
@@ -3400,22 +3497,25 @@ const [response, meta] = fos.getFulfillmentPreview(parameters)
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### createFulfillmentOrder
+**Parameters**
 
-| Name                     | Type                         | Example                 | Required                                                           |
-| ------------------------ | ---------------------------- | ----------------------- | ------------------------------------------------------------------ |
-| MarketplaceId            | string                       | `'A2EUQ1WTGCTBG2'`      | No                                                                 |
-| SellerFulfillmentOrderId | string                       | `'FLFLMNTID'`           | Yes                                                                |
-| FulfillmentAction        | string                       | `'Ship'`                | No                                                                 |
-| DisplayableOrderId       | string                       | `'ORDERID'`             | Yes                                                                |
-| DisplayableOrderDateTime | Date                         | `new Date()`            | Yes                                                                |
-| DisplayableOrderComment  | string                       | `Some Comment`          | Yes                                                                |
-| ShippingSpeedCategory    | string                       | `Standard`              | Yes                                                                |
-| DestinationAddress       | Address                      | `//@todo`               | Yes                                                                |
-| FulfillmentPolicy        | string                       | `FillAll`               | No                                                                 |
-| NotificationEmailList    | string[]                     | `['email@example.com']` | No                                                                 |
-| CODSettings              | CODSettings                  | `//@todo`               | No                                                                 |
-| Items                    | CreateFulfillmentOrderItem[] | `//@todo`               | Yes                                                                |
-| DeliveryWindow           | DeliveryWindow               | `//@todo`               | No. Required only if ShippingSpeedCategory = `'ScheduledDelivery'` |
+| Name                     | Type                         | Example                                                       | Required                                                           |
+| ------------------------ | ---------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| MarketplaceId            | string                       | `'A2EUQ1WTGCTBG2'`                                            | No                                                                 |
+| SellerFulfillmentOrderId | string                       | `'FLFLMNTID'`                                                 | Yes                                                                |
+| FulfillmentAction        | string                       | `'Ship'`                                                      | No                                                                 |
+| DisplayableOrderId       | string                       | `'ORDERID'`                                                   | Yes                                                                |
+| DisplayableOrderDateTime | Date                         | `new Date()`                                                  | Yes                                                                |
+| DisplayableOrderComment  | string                       | `Some Comment`                                                | Yes                                                                |
+| ShippingSpeedCategory    | string                       | `Standard`                                                    | Yes                                                                |
+| DestinationAddress       | Address                      | [`Address`](#address-2)                                       | Yes                                                                |
+| FulfillmentPolicy        | string                       | `FillAll`                                                     | No                                                                 |
+| NotificationEmailList    | string[]                     | `['email@example.com']`                                       | No                                                                 |
+| CODSettings              | CODSettings                  | [`CODSettings`](#codsettings)                                 | No                                                                 |
+| Items                    | CreateFulfillmentOrderItem[] | [`[CreateFulfillmentOrderItem]`](#createfulfillmentorderitem) | Yes                                                                |
+| DeliveryWindow           | DeliveryWindow               | [`DeliveryWindow`](#deliverywindow)                           | No. Required only if ShippingSpeedCategory = `'ScheduledDelivery'` |
+
+* [Possible values for FulfillmentAction, FulfillmentPolicy](http://docs.developer.amazonservices.com/en_CA/fba_outbound/FBAOutbound_CreateFulfillmentOrder.html)
 
 **Example**
 
@@ -3459,20 +3559,23 @@ const [response, meta] = fos.createFulfillmentOrder(parameters)
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### updateFulfillmentOrder
+**Parameters**
 
-| Name                     | Type                         | Example                 | Required |
-| ------------------------ | ---------------------------- | ----------------------- | -------- |
-| MarketplaceId            | string                       | `'A2EUQ1WTGCTBG2'`      | No       |
-| SellerFulfillmentOrderId | string                       | `'FLFLMNTID'`           | Yes      |
-| FulfillmentAction        | string                       | `'Ship'`                | No       |
-| DisplayableOrderId       | string                       | `'ORDERID'`             | No       |
-| DisplayableOrderDateTime | Date                         | `new Date()`            | No       |
-| DisplayableOrderComment  | string                       | `Some Comment`          | No       |
-| ShippingSpeedCategory    | string                       | `Standard`              | No       |
-| DestinationAddress       | Address                      | `//@todo`               | No       |
-| FulfillmentPolicy        | string                       | `FillAll`               | No       |
-| NotificationEmailList    | string[]                     | `['email@example.com']` | No       |
-| Items                    | CreateFulfillmentOrderItem[] | `//@todo`               | No       |
+| Name                     | Type                         | Example                                                       | Required |
+| ------------------------ | ---------------------------- | ------------------------------------------------------------- | -------- |
+| MarketplaceId            | string                       | `'A2EUQ1WTGCTBG2'`                                            | No       |
+| SellerFulfillmentOrderId | string                       | `'FLFLMNTID'`                                                 | Yes      |
+| FulfillmentAction        | string                       | `'Ship'`                                                      | No       |
+| DisplayableOrderId       | string                       | `'ORDERID'`                                                   | No       |
+| DisplayableOrderDateTime | Date                         | `new Date()`                                                  | No       |
+| DisplayableOrderComment  | string                       | `Some Comment`                                                | No       |
+| ShippingSpeedCategory    | string                       | `Standard`                                                    | No       |
+| DestinationAddress       | Address                      | [`Address`](#address-2)                                       | No       |
+| FulfillmentPolicy        | string                       | `FillAll`                                                     | No       |
+| NotificationEmailList    | string[]                     | `['email@example.com']`                                       | No       |
+| Items                    | CreateFulfillmentOrderItem[] | [`[CreateFulfillmentOrderItem]`](#createfulfillmentorderitem) | No       |
+
+* [Possible values for ShippingSpeedCategory, FulfillmentAction, FulfillmentPolicy](http://docs.developer.amazonservices.com/en_CA/fba_outbound/FBAOutbound_UpdateFulfillmentOrder.html)
 
 **Example**
 
@@ -3491,6 +3594,7 @@ const [response, meta] = fos.updateFulfillmentOrder(parameters)
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### listAllFulfillmentOrders
+**Parameters**
 
 | Name               | Type | Example      | Required |
 | ------------------ | ---- | ------------ | -------- |
@@ -3508,6 +3612,7 @@ const [response, meta] = fos.listAllFulfillmentOrders()
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### getFulfillmentOrder
+**Parameters**
 
 | Name                     | Type   | Example           | Required |
 | ------------------------ | ------ | ----------------- | -------- |
@@ -3527,6 +3632,7 @@ const [response, meta] = fos.getFulfillmentOrder(parameters)
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### listAllFulfillmentOrdersByNextToken
+**Parameters**
 
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
@@ -3546,6 +3652,7 @@ const [response, meta] = fos.listAllFulfillmentOrdersByNextToken(nextToken)
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### getPackageTrackingDetails
+**Parameters**
 
 | Name          | Type   | Example | Required |
 | ------------- | ------ | ------- | -------- |
@@ -3565,6 +3672,7 @@ const [response, meta] = fos.getPackageTrackingDetails(parameters)
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### cancelFulfillmentOrder
+**Parameters**
 
 | Name                     | Type   | Example     | Required |
 | ------------------------ | ------ | ----------- | -------- |
@@ -3584,6 +3692,7 @@ const [response, meta] = fos.cancelFulfillmentOrder(parameters)
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### listReturnReasonCodes
+**Parameters**
 
 | Name                     | Type   | Example            | Required                                                     |
 | ------------------------ | ------ | ------------------ | ------------------------------------------------------------ |
@@ -3609,11 +3718,12 @@ const [response, meta] = fos.listReturnReasonCodes(parameters)
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### createFulfillmentReturn
+**Parameters**
 
-| Name                     | Type               | Example     | Required |
-| ------------------------ | ------------------ | ----------- | -------- |
-| SellerFulfillmentOrderId | string             | `'ORDERID'` | Yes      |
-| Items                    | CreateReturnItem[] | `//@todo`   | Yes      |
+| Name                     | Type               | Example                                 | Required |
+| ------------------------ | ------------------ | --------------------------------------- | -------- |
+| SellerFulfillmentOrderId | string             | `'ORDERID'`                             | Yes      |
+| Items                    | CreateReturnItem[] | [`CreateReturnItem`](#createreturnitem) | Yes      |
 
 **Example**
 
