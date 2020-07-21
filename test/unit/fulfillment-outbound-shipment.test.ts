@@ -1,5 +1,6 @@
 import { canonicalizeUpdateFulfillmentOrderParameters, NextToken, ParsingError } from '../../src'
 import {
+  canonicalizeCreateFulfillmentOrderParameters,
   canonicalizeGetFulfillmentPreviewParameters,
   CreateFulfillmentOrderParameters,
 } from '../../src/sections/fulfillment-outbound-shipment/type'
@@ -63,8 +64,49 @@ const mockGetFulfillmentPreviewItem = {
   Quantity: 1,
 }
 
+const createFulfillmentOrderParameters: CreateFulfillmentOrderParameters = {
+  SellerFulfillmentOrderId: '',
+  DisplayableOrderId: '',
+  DisplayableOrderDateTime: new Date(),
+  DisplayableOrderComment: '',
+  ShippingSpeedCategory: 'Priority',
+  DestinationAddress: mockAddress,
+  Items: [mockCreateFulfillmentOrderItem],
+}
+
 describe('fulfillmentOutboundShipment', () => {
   describe('parameters', () => {
+    describe('canonicalizeCreateFulfillmentOrderParameters', () => {
+      it('should properly cannoicalize CreateFulfillmentOrderParameters', () => {
+        expect.assertions(3)
+
+        const datePast = new Date('2001/01/01')
+        const dateNow = new Date()
+
+        const withDate: CreateFulfillmentOrderParameters = {
+          SellerFulfillmentOrderId: '',
+          DisplayableOrderId: '',
+          DisplayableOrderDateTime: new Date(),
+          DisplayableOrderComment: '',
+          ShippingSpeedCategory: 'Priority',
+          DestinationAddress: mockAddress,
+          Items: [mockCreateFulfillmentOrderItem],
+          DeliveryWindow: {
+            StartDateTime: datePast,
+            EndDateTime: dateNow,
+          },
+        }
+
+        const withoutDate = createFulfillmentOrderParameters
+        const outputWDate = canonicalizeCreateFulfillmentOrderParameters(withDate)
+        const outputWODate = canonicalizeCreateFulfillmentOrderParameters(withoutDate)
+
+        expect(outputWDate.DeliveryWindow?.StartDateTime).toStrictEqual(datePast.toISOString())
+        expect(outputWDate.DeliveryWindow?.EndDateTime).toStrictEqual(dateNow.toISOString())
+        expect(outputWODate.DeliveryWindow).toBeUndefined()
+      })
+    })
+
     describe('canonicalizeGetFulfillmentPreviewParameters', () => {
       it('should properly canonicalize GetFulfillmentPreviewParameters', () => {
         expect.assertions(1)
@@ -335,16 +377,6 @@ describe('fulfillmentOutboundShipment', () => {
   })
 
   describe('createFulfillmentOrder', () => {
-    const parameters: CreateFulfillmentOrderParameters = {
-      SellerFulfillmentOrderId: '',
-      DisplayableOrderId: '',
-      DisplayableOrderDateTime: new Date(),
-      DisplayableOrderComment: '',
-      ShippingSpeedCategory: 'Priority',
-      DestinationAddress: mockAddress,
-      Items: [mockCreateFulfillmentOrderItem],
-    }
-
     it('returns the standard response elements if succesful', async () => {
       expect.assertions(1)
 
@@ -354,7 +386,7 @@ describe('fulfillmentOutboundShipment', () => {
 
       expect(
         await mockCreateFulfillmentOrder.fulfillmentOutboundShipment.createFulfillmentOrder(
-          parameters,
+          createFulfillmentOrderParameters,
         ),
       ).toMatchSnapshot()
     })
@@ -363,7 +395,9 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.createFulfillmentOrder(parameters),
+        mockMwsFail.fulfillmentOutboundShipment.createFulfillmentOrder(
+          createFulfillmentOrderParameters,
+        ),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
     })
   })
