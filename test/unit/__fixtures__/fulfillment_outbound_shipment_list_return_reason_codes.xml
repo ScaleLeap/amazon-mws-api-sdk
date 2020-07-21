@@ -1,0 +1,15 @@
+<ListReturnReasonCodesResponse xmlns="http://mws.amazonaws.com/FulfillmentOutboundShipment/2010-10-01/">
+  <ListReturnReasonCodesResult>
+    <ReasonCodeDetailsList>
+      <!-- changed the below from `ReasonCodeDetails` to `member` following c# mock examples naming scheme -->
+      <member>
+        <ReturnReasonCode>REASON-CODE</ReturnReasonCode>
+        <Description>This is a description of the reason code.</Description>
+        <TranslatedDescription>This is an optional translated description of the reason code.</TranslatedDescription>
+      </member>
+    </ReasonCodeDetailsList>
+  </ListReturnReasonCodesResult>
+  <ResponseMetadata>
+    <RequestId>5e5e5694-8e76-11df-929f-87c80302f8f6</RequestId>
+  </ResponseMetadata>
+</ListReturnReasonCodesResponse>
