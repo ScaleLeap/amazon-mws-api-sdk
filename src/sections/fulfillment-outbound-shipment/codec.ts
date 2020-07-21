@@ -403,3 +403,21 @@ export const GetPackageTrackingDetailsResponse = Codec.interface({
 export const CancelFulfillmentOrderResponse = Codec.interface({
   CancelFulfillmentOrderResponse: StandardResponse,
 })
+
+const ReasonCodeDetails = Codec.interface({
+  ReturnReasonCode: string,
+  Description: string,
+  TranslatedDescription: optional(string),
+})
+
+const ListReturnReasonCodes = Codec.interface({
+  ReasonCodeDetailsList: ensureArray('member', ReasonCodeDetails),
+})
+
+export type ListReturnReasonCodes = GetInterface<typeof ListReturnReasonCodes>
+
+export const ListReturnReasonCodesResponse = Codec.interface({
+  ListReturnReasonCodesResponse: Codec.interface({
+    ListReturnReasonCodesResult: ListReturnReasonCodes,
+  }),
+})

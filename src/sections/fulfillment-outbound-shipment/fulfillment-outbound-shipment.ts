@@ -14,6 +14,8 @@ import {
   ListAllFulfillmentOrders,
   ListAllFulfillmentOrdersByNextTokenResponse,
   ListAllFulfillmentOrdersResponse,
+  ListReturnReasonCodes,
+  ListReturnReasonCodesResponse,
   UpdateFulfillmentOrderResponse,
 } from './codec'
 import {
@@ -26,6 +28,7 @@ import {
   GetFulfillmentPreviewParameters,
   GetPackageTrackingDetailsParameters,
   ListAllFulfillmentOrdersParameters,
+  ListReturnReasonCodesParameters,
   UpdateFulfillmentOrderParameters,
 } from './type'
 
@@ -33,6 +36,26 @@ const FOS_API_VERSION = '2010-10-01'
 
 export class FulfillmentOutboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async listReturnReasonCodes(
+    parameters: ListReturnReasonCodesParameters,
+  ): Promise<[ListReturnReasonCodes, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentOutboundShipment,
+      version: FOS_API_VERSION,
+      action: 'UpdateFulfillmentOrder',
+      parameters: {
+        SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
+      },
+    })
+
+    return ListReturnReasonCodesResponse.decode(response).caseOf({
+      Right: (x) => [x.ListReturnReasonCodesResponse.ListReturnReasonCodesResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async cancelFulfillmentOrder(
     parameters: CancelFulfillmentOrderParameters,

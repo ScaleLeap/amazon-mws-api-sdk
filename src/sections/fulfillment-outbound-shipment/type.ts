@@ -1,3 +1,5 @@
+import { RequireOnlyOne } from '../types'
+
 interface FOSAddress {
   Name: string
   Line1: string
@@ -206,3 +208,13 @@ export interface GetPackageTrackingDetailsParameters {
 export interface CancelFulfillmentOrderParameters {
   SellerFulfillmentOrderId: string
 }
+
+export type ListReturnReasonCodesParameters = RequireOnlyOne<
+  {
+    MarketplaceId?: string
+    SellerFulfillmentOrderId?: string
+    SellerSKU: string
+    Language?: string
+  },
+  'MarketplaceId' | 'SellerFulfillmentOrderId'
+>
