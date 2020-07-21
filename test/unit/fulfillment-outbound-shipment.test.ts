@@ -55,6 +55,32 @@ const mockCreateFulfillmentOrderItem = {
 }
 
 describe('fulfillmentOutboundShipment', () => {
+  describe('getPackageTrackingDetails', () => {
+    const parameters = { PackageNumber: 0 }
+
+    it('returns package tracking details if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetPackageTrackingDetails = createMockHttpClient(
+        'fulfillment_outbound_shipment_get_package_tracking_details',
+      )
+
+      expect(
+        await mockGetPackageTrackingDetails.fulfillmentOutboundShipment.getPackageTrackingDetails(
+          parameters,
+        ),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response i snt valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockMwsFail.fulfillmentOutboundShipment.getPackageTrackingDetails(parameters),
+      ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+  })
+
   describe('listAllFulfillmentOrdersByNextToken', () => {
     const mockNextToken = new NextToken('ListAllFulfillmentOrders', '123')
 
