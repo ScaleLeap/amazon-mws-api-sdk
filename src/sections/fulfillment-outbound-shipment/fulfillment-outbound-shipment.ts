@@ -3,6 +3,7 @@ import { HttpClient, RequestMeta, Resource } from '../../http'
 import { NextToken } from '../../parsing'
 import { getServiceStatusByResource } from '../shared'
 import {
+  CancelFulfillmentOrderResponse,
   CreateFulfillmentOrderResponse,
   GetFulfillmentOrder,
   GetFulfillmentOrderResponse,
@@ -16,6 +17,7 @@ import {
   UpdateFulfillmentOrderResponse,
 } from './codec'
 import {
+  CancelFulfillmentOrderParameters,
   canonicalizeCreateFulfillmentOrderParameters,
   canonicalizeGetFulfillmentPreviewParameters,
   canonicalizeUpdateFulfillmentOrderParameters,
@@ -31,6 +33,26 @@ const FOS_API_VERSION = '2010-10-01'
 
 export class FulfillmentOutboundShipment {
   constructor(private httpClient: HttpClient) {}
+
+  async cancelFulfillmentOrder(
+    parameters: CancelFulfillmentOrderParameters,
+  ): Promise<['', RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.FulfillmentOutboundShipment,
+      version: FOS_API_VERSION,
+      action: 'UpdateFulfillmentOrder',
+      parameters: {
+        SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
+      },
+    })
+
+    return CancelFulfillmentOrderResponse.decode(response).caseOf({
+      Right: () => ['', meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async getPackageTrackingDetails(
     parameters: GetPackageTrackingDetailsParameters,

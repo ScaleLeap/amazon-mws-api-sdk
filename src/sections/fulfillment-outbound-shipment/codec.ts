@@ -399,3 +399,7 @@ export const GetPackageTrackingDetailsResponse = Codec.interface({
     GetPackageTrackingDetailsResult: GetPackageTrackingDetails,
   }),
 })
+
+export const CancelFulfillmentOrderResponse = Codec.interface({
+  CancelFulfillmentOrderResponse: StandardResponse,
+})
