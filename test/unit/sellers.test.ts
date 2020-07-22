@@ -1,6 +1,6 @@
 import { ParsingError } from '../../src'
 import { NextToken } from '../../src/parsing'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus } from '../utils'
+import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
 
 const mockMwsMarketplaceParticipations = createMockHttpClient(
   'sellers_list_marketplace_participations',
@@ -11,8 +11,6 @@ const mockMwsMarketplaceParticipationsNT = createMockHttpClient(
 )
 
 const mockNextToken = new NextToken('ListMarketplaceParticipations', '123')
-
-const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('sellers', () => {
   describe('listMarketplaceParticipations', () => {

@@ -70,13 +70,13 @@ const NotificationType = enumeration(NotificationTypeEnum)
 
 const RegisterDestinationResponse = Codec.interface({
   RegisterDestinationResponse: Codec.interface({
-    RegisterDestinationResult: exactly(''),
+    RegisterDestinationResult: string,
   }),
 })
 
 const DeregisterDestinationResponse = Codec.interface({
   DeregisterDestinationResponse: Codec.interface({
-    DeregisterDestinationResult: exactly(''),
+    DeregisterDestinationResult: string,
   }),
 })
 
@@ -312,7 +312,7 @@ export class Subscriptions {
 
   async deregisterDestination(
     parameters: DeregisterDestinationParameters,
-  ): Promise<['', RequestMeta]> {
+  ): Promise<[string, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Subscriptions,
       version: SUBSCRIPTIONS_API_VERSION,
@@ -334,7 +334,9 @@ export class Subscriptions {
     })
   }
 
-  async registerDestination(parameters: RegisterDestinationParameters): Promise<['', RequestMeta]> {
+  async registerDestination(
+    parameters: RegisterDestinationParameters,
+  ): Promise<[string, RequestMeta]> {
     const [response, meta] = await this.httpClient.request('POST', {
       resource: Resource.Subscriptions,
       version: SUBSCRIPTIONS_API_VERSION,

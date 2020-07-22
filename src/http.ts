@@ -2,6 +2,8 @@ import { AmazonMarketplace } from '@scaleleap/amazon-marketplaces'
 import axios from 'axios'
 import parser from 'fast-xml-parser'
 import { URLSearchParams } from 'url'
+import xml2js from 'xml2js'
+import { parseBooleans, parseNumbers } from 'xml2js/lib/processors'
 
 import {
   AccessDenied,
@@ -306,11 +308,18 @@ const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestR
       return Promise.reject(error.response.data)
     })
 
-const parseResponse = <T>(
+const parseResponse = async <T>(
   response: RequestResponse,
   parseString = false,
-): [T | string, RequestMeta] => {
-  const responseData = parseString ? response.data : parser.parse(response.data)
+): Promise<[T | string, RequestMeta]> => {
+  const responseData = parseString
+    ? response.data
+    : await xml2js.parseStringPromise(response.data, {
+        explicitArray: false,
+        valueProcessors: [parseNumbers, parseBooleans],
+        emptyTag: '',
+        trim: true,
+      })
   return [
     responseData,
     {
@@ -406,10 +415,10 @@ export class HttpClient {
        * http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_GetFeedSubmissionResult.html
        */
       if (info.action === 'GetReport' || info.action === 'GetFeedSubmissionResult') {
-        return parseResponse(response, true)
+        return await parseResponse(response, true)
       }
 
-      return parseResponse(response)
+      return await parseResponse(response)
     } catch (error) {
       if (parser.validate(error) !== true) {
         throw error

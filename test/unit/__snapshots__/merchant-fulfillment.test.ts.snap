@@ -322,7 +322,7 @@ Array [
             "SellerInputDefinition": Object {
               "Constraints": Array [
                 Object {
-                  "ValidationRegEx": "^[a-zA-Z0-9-._&amp; ]{3,25}$",
+                  "ValidationRegEx": "^[a-zA-Z0-9-._& ]{3,25}$",
                   "ValidationString": "Please enter item description using
                                         alphanumeric characters (max 25
                                         characters)",

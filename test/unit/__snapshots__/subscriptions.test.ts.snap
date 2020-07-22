@@ -28,7 +28,8 @@ Array [
 
 exports[`sellers deregisterDestination returns the standard response if deregistration is succesful 1`] = `
 Array [
-  "",
+  "
+    ",
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,
@@ -109,7 +110,8 @@ Array [
 
 exports[`sellers registerDestination returns the standard response if registration is succesful 1`] = `
 Array [
-  "",
+  "
+    ",
   Object {
     "quotaMax": 1000,
     "quotaRemaining": 999,

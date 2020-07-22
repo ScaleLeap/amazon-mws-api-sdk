@@ -36,6 +36,7 @@ export const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
 
-export const parsingError = 'Expected an object, but received a string with value ""'
+// export const parsingError = 'Expected an object, but received a string with value ""'
+export const parsingError = 'Expected an object, but received null'
 
 export const mockMwsServiceStatus = createMockHttpClient('get_service_status')

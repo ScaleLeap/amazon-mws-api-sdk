@@ -5,9 +5,18 @@ Array [
   Array [
     Object {
       "Product": Object {
+        "$": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
+        },
         "CompetitivePricing": Object {
           "CompetitivePrices": Object {
             "CompetitivePrice": Object {
+              "$": Object {
+                "belongsToRequester": "false",
+                "condition": "New",
+                "subcondition": "New",
+              },
               "CompetitivePriceId": 1,
               "Price": Object {
                 "LandedPrice": Object {
@@ -27,9 +36,24 @@ Array [
           },
           "NumberOfOfferListings": Object {
             "OfferListingCount": Array [
-              11,
-              1,
-              10,
+              Object {
+                "$": Object {
+                  "condition": "Any",
+                },
+                "_": 11,
+              },
+              Object {
+                "$": Object {
+                  "condition": "Used",
+                },
+                "_": 1,
+              },
+              Object {
+                "$": Object {
+                  "condition": "New",
+                },
+                "_": 10,
+              },
             ],
           },
         },
@@ -58,10 +82,19 @@ Array [
   Array [
     Object {
       "Product": Object {
+        "$": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
+        },
         "CompetitivePricing": Object {
           "CompetitivePrices": Object {
             "CompetitivePrice": Array [
               Object {
+                "$": Object {
+                  "belongsToRequester": "false",
+                  "condition": "New",
+                  "subcondition": "New",
+                },
                 "CompetitivePriceId": 1,
                 "Price": Object {
                   "LandedPrice": Object {
@@ -79,6 +112,11 @@ Array [
                 },
               },
               Object {
+                "$": Object {
+                  "belongsToRequester": "false",
+                  "condition": "Used",
+                  "subcondition": "Good",
+                },
                 "CompetitivePriceId": 2,
                 "Price": Object {
                   "LandedPrice": Object {
@@ -99,9 +137,24 @@ Array [
           },
           "NumberOfOfferListings": Object {
             "OfferListingCount": Array [
-              296,
-              145,
-              151,
+              Object {
+                "$": Object {
+                  "condition": "Any",
+                },
+                "_": 296,
+              },
+              Object {
+                "$": Object {
+                  "condition": "Used",
+                },
+                "_": 145,
+              },
+              Object {
+                "$": Object {
+                  "condition": "New",
+                },
+                "_": 151,
+              },
             ],
           },
           "TradeInValue": Object {
@@ -159,6 +212,10 @@ Array [
     Object {
       "AllOfferListingsConsidered": true,
       "Product": Object {
+        "$": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
+        },
         "Identifiers": Object {
           "MarketplaceASIN": Object {
             "ASIN": "B002KT3XQM",
@@ -168,7 +225,7 @@ Array [
         "LowestOfferListings": Object {
           "LowestOfferListing": Array [
             Object {
-              "MultipleOffersAtLowestPrice": "False",
+              "MultipleOffersAtLowestPrice": false,
               "NumberOfOfferListingsConsidered": 1,
               "Price": Object {
                 "LandedPrice": Object {
@@ -192,12 +249,12 @@ Array [
                 "ShippingTime": Object {
                   "Max": "0-2 days",
                 },
-                "ShipsDomestically": "True",
+                "ShipsDomestically": true,
               },
               "SellerFeedbackCount": 762,
             },
             Object {
-              "MultipleOffersAtLowestPrice": "False",
+              "MultipleOffersAtLowestPrice": false,
               "NumberOfOfferListingsConsidered": 1,
               "Price": Object {
                 "LandedPrice": Object {
@@ -221,12 +278,12 @@ Array [
                 "ShippingTime": Object {
                   "Max": "0-2 days",
                 },
-                "ShipsDomestically": "True",
+                "ShipsDomestically": true,
               },
               "SellerFeedbackCount": 181744,
             },
             Object {
-              "MultipleOffersAtLowestPrice": "False",
+              "MultipleOffersAtLowestPrice": false,
               "NumberOfOfferListingsConsidered": 1,
               "Price": Object {
                 "LandedPrice": Object {
@@ -250,7 +307,7 @@ Array [
                 "ShippingTime": Object {
                   "Max": "0-2 days",
                 },
-                "ShipsDomestically": "True",
+                "ShipsDomestically": true,
               },
               "SellerFeedbackCount": 13213,
             },
@@ -275,6 +332,10 @@ Array [
     Object {
       "AllOfferListingsConsidered": false,
       "Product": Object {
+        "$": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
+        },
         "Identifiers": Object {
           "MarketplaceASIN": Object {
             "ASIN": 1933890517,
@@ -289,7 +350,7 @@ Array [
         "LowestOfferListings": Object {
           "LowestOfferListing": Array [
             Object {
-              "MultipleOffersAtLowestPrice": "True",
+              "MultipleOffersAtLowestPrice": true,
               "NumberOfOfferListingsConsidered": 3,
               "Price": Object {
                 "LandedPrice": Object {
@@ -313,12 +374,12 @@ Array [
                 "ShippingTime": Object {
                   "Max": "0-2 days",
                 },
-                "ShipsDomestically": "True",
+                "ShipsDomestically": true,
               },
               "SellerFeedbackCount": 8900,
             },
             Object {
-              "MultipleOffersAtLowestPrice": "False",
+              "MultipleOffersAtLowestPrice": false,
               "NumberOfOfferListingsConsidered": 1,
               "Price": Object {
                 "LandedPrice": Object {
@@ -342,12 +403,12 @@ Array [
                 "ShippingTime": Object {
                   "Max": "0-2 days",
                 },
-                "ShipsDomestically": "True",
+                "ShipsDomestically": true,
               },
               "SellerFeedbackCount": 1569694,
             },
             Object {
-              "MultipleOffersAtLowestPrice": "False",
+              "MultipleOffersAtLowestPrice": false,
               "NumberOfOfferListingsConsidered": 3,
               "Price": Object {
                 "LandedPrice": Object {
@@ -371,7 +432,7 @@ Array [
                 "ShippingTime": Object {
                   "Max": "0-2 days",
                 },
-                "ShipsDomestically": "True",
+                "ShipsDomestically": true,
               },
               "SellerFeedbackCount": 7732,
             },
@@ -416,13 +477,24 @@ Array [
           "Amount": 0,
           "CurrencyCode": "USD",
         },
-        "ShippingTime": "",
+        "ShippingTime": Object {
+          "$": Object {
+            "availabilityType": "NOW",
+            "maximumHours": "0",
+            "minimumHours": "0",
+          },
+        },
         "SubCondition": "new",
       },
     ],
     "Summary": Object {
       "BuyBoxEligibleOffers": Object {
-        "OfferCount": 1,
+        "OfferCount": Object {
+          "$": Object {
+            "condition": "new",
+          },
+          "_": 1,
+        },
       },
       "BuyBoxPrices": Array [
         Object {
@@ -461,7 +533,12 @@ Array [
         },
       ],
       "NumberOfOffers": Object {
-        "OfferCount": 1,
+        "OfferCount": Object {
+          "$": Object {
+            "condition": "new",
+          },
+          "_": 1,
+        },
       },
       "SuggestedLowerPricePlusShipping": Object {
         "Amount": 32.99,
@@ -507,13 +584,24 @@ Array [
           "Amount": 0,
           "CurrencyCode": "USD",
         },
-        "ShippingTime": "",
+        "ShippingTime": Object {
+          "$": Object {
+            "availabilityType": "NOW",
+            "maximumHours": "0",
+            "minimumHours": "0",
+          },
+        },
         "SubCondition": "new",
       },
     ],
     "Summary": Object {
       "BuyBoxEligibleOffers": Object {
-        "OfferCount": 1,
+        "OfferCount": Object {
+          "$": Object {
+            "condition": "new",
+          },
+          "_": 1,
+        },
       },
       "BuyBoxPrices": Array [
         Object {
@@ -552,7 +640,12 @@ Array [
         },
       ],
       "NumberOfOffers": Object {
-        "OfferCount": 1,
+        "OfferCount": Object {
+          "$": Object {
+            "condition": "new",
+          },
+          "_": 1,
+        },
       },
       "SuggestedLowerPricePlusShipping": Object {
         "Amount": 32.99,
@@ -623,8 +716,15 @@ Array [
   Array [
     Object {
       "Product": Object {
+        "$": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
+        },
         "AttributeSets": Object {
           "ns2:ItemAttributes": Object {
+            "$": Object {
+              "xml:lang": "en-US",
+            },
             "ns2:Binding": "Apparel",
             "ns2:Brand": "Pearl iZUMi",
             "ns2:Department": "mens",
@@ -640,9 +740,24 @@ Array [
               "86 percent nylon, 14% spandex, 9-Inch inseam",
             ],
             "ns2:ItemDimensions": Object {
-              "ns2:Height": 2,
-              "ns2:Length": 9,
-              "ns2:Width": 9,
+              "ns2:Height": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 2,
+              },
+              "ns2:Length": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 9,
+              },
+              "ns2:Width": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 9,
+              },
             },
             "ns2:Label": "Pearl iZUMi",
             "ns2:ListPrice": Object {
@@ -652,10 +767,30 @@ Array [
             "ns2:Manufacturer": "Pearl iZUMi",
             "ns2:Model": 275,
             "ns2:PackageDimensions": Object {
-              "ns2:Height": 2.8,
-              "ns2:Length": 9.75,
-              "ns2:Weight": 0.4,
-              "ns2:Width": 8.4,
+              "ns2:Height": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 2.8,
+              },
+              "ns2:Length": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 9.75,
+              },
+              "ns2:Weight": Object {
+                "$": Object {
+                  "Units": "pounds",
+                },
+                "_": 0.4,
+              },
+              "ns2:Width": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 8.4,
+              },
             },
             "ns2:PackageQuantity": 1,
             "ns2:PartNumber": 275,
@@ -663,9 +798,19 @@ Array [
             "ns2:ProductTypeName": "SHORTS",
             "ns2:Publisher": "Pearl iZUMi",
             "ns2:SmallImage": Object {
-              "ns2:Height": 75,
+              "ns2:Height": Object {
+                "$": Object {
+                  "Units": "pixels",
+                },
+                "_": 75,
+              },
               "ns2:URL": "http://ecx.images-amazon.com/images/I/41ty3Sn%2BU8L._SL75_.jpg",
-              "ns2:Width": 58,
+              "ns2:Width": Object {
+                "$": Object {
+                  "Units": "pixels",
+                },
+                "_": 58,
+              },
             },
             "ns2:Studio": "Pearl iZUMi",
             "ns2:Title": "Pearl iZUMi Men's Quest Cycling Short",
@@ -775,6 +920,9 @@ Array [
         Object {
           "AttributeSets": Object {
             "ns2:ItemAttributes": Object {
+              "$": Object {
+                "xml:lang": "en-US",
+              },
               "ns2:Author": Array [
                 "Marmanis, Haralambos",
                 "Babenko, Dmitry",
@@ -783,10 +931,30 @@ Array [
               "ns2:Brand": "Marmanis, Haralambos/ Babenko, Dmitry",
               "ns2:Edition": 1,
               "ns2:ItemDimensions": Object {
-                "ns2:Height": 9.25,
-                "ns2:Length": 7.38,
-                "ns2:Weight": 1.38,
-                "ns2:Width": 0.73,
+                "ns2:Height": Object {
+                  "$": Object {
+                    "Units": "inches",
+                  },
+                  "_": 9.25,
+                },
+                "ns2:Length": Object {
+                  "$": Object {
+                    "Units": "inches",
+                  },
+                  "_": 7.38,
+                },
+                "ns2:Weight": Object {
+                  "$": Object {
+                    "Units": "pounds",
+                  },
+                  "_": 1.38,
+                },
+                "ns2:Width": Object {
+                  "$": Object {
+                    "Units": "inches",
+                  },
+                  "_": 0.73,
+                },
               },
               "ns2:Label": "Manning Publications",
               "ns2:Languages": Object {
@@ -813,10 +981,30 @@ Array [
               "ns2:NumberOfItems": 1,
               "ns2:NumberOfPages": 368,
               "ns2:PackageDimensions": Object {
-                "ns2:Height": 0.8,
-                "ns2:Length": 9.1,
-                "ns2:Weight": 1.35,
-                "ns2:Width": 7.3,
+                "ns2:Height": Object {
+                  "$": Object {
+                    "Units": "inches",
+                  },
+                  "_": 0.8,
+                },
+                "ns2:Length": Object {
+                  "$": Object {
+                    "Units": "inches",
+                  },
+                  "_": 9.1,
+                },
+                "ns2:Weight": Object {
+                  "$": Object {
+                    "Units": "pounds",
+                  },
+                  "_": 1.35,
+                },
+                "ns2:Width": Object {
+                  "$": Object {
+                    "Units": "inches",
+                  },
+                  "_": 7.3,
+                },
               },
               "ns2:PackageQuantity": 1,
               "ns2:PartNumber": 9781933988665,
@@ -825,9 +1013,19 @@ Array [
               "ns2:PublicationDate": "2009-07-08",
               "ns2:Publisher": "Manning Publications",
               "ns2:SmallImage": Object {
-                "ns2:Height": 75,
+                "ns2:Height": Object {
+                  "$": Object {
+                    "Units": "pixels",
+                  },
+                  "_": 75,
+                },
                 "ns2:URL": "http://ecx.images-amazon.com/images/I/51EEz05N2HL._SL75_.jpg",
-                "ns2:Width": 60,
+                "ns2:Width": Object {
+                  "$": Object {
+                    "Units": "pixels",
+                  },
+                  "_": 60,
+                },
               },
               "ns2:Studio": "Manning Publications",
               "ns2:Title": "Algorithms of the Intelligent Web",
@@ -968,6 +1166,10 @@ Array [
   Array [
     Object {
       "Product": Object {
+        "$": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
+        },
         "Identifiers": Object {
           "MarketplaceASIN": Object {
             "ASIN": 1933890517,
@@ -1019,6 +1221,10 @@ Array [
   Array [
     Object {
       "Product": Object {
+        "$": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
+        },
         "Identifiers": Object {
           "MarketplaceASIN": Object {
             "ASIN": 1933890517,
@@ -1087,10 +1293,10 @@ Array [
                 "ProductCategoryName": "Categories",
               },
               "ProductCategoryId": "2232464011",
-              "ProductCategoryName": "Bikes &#x26; Scooters",
+              "ProductCategoryName": "Bikes & Scooters",
             },
             "ProductCategoryId": "3403201",
-            "ProductCategoryName": "Bikes &#x26; Accessories",
+            "ProductCategoryName": "Bikes & Accessories",
           },
           "ProductCategoryId": "2371051011",
           "ProductCategoryName": "Clothing",
@@ -1127,10 +1333,10 @@ Array [
             "ProductCategoryName": "Subjects",
           },
           "ProductCategoryId": "3",
-          "ProductCategoryName": "Business &#x26; Investing",
+          "ProductCategoryName": "Business & Investing",
         },
         "ProductCategoryId": "2675",
-        "ProductCategoryName": "Management &#x26; Leadership",
+        "ProductCategoryName": "Management & Leadership",
       },
       "ProductCategoryId": "271578011",
       "ProductCategoryName": "Project Management",
@@ -1147,10 +1353,10 @@ Array [
             "ProductCategoryName": "Specialty Boutique",
           },
           "ProductCategoryId": "465600",
-          "ProductCategoryName": "New, Used &#x26; Rental Textbooks",
+          "ProductCategoryName": "New, Used & Rental Textbooks",
         },
         "ProductCategoryId": "468220",
-        "ProductCategoryName": "Business &#x26; Finance",
+        "ProductCategoryName": "Business & Finance",
       },
       "ProductCategoryId": "684248011",
       "ProductCategoryName": "Management",
@@ -1189,19 +1395,47 @@ Array [
       Object {
         "AttributeSets": Object {
           "ns2:ItemAttributes": Object {
+            "$": Object {
+              "xml:lang": "en-US",
+            },
             "ns2:Author": "Rowling, J.K.",
             "ns2:Binding": "Paperback",
             "ns2:Brand": "Scholastic Press",
-            "ns2:Creator": "GrandPrÃ©, Mary",
+            "ns2:Creator": Object {
+              "$": Object {
+                "Role": "Illustrator",
+              },
+              "_": "GrandPrÃ©, Mary",
+            },
             "ns2:Edition": "1st",
             "ns2:Feature": "Recommended Age: 9 years and up",
             "ns2:IsAutographed": false,
             "ns2:IsMemorabilia": false,
             "ns2:ItemDimensions": Object {
-              "ns2:Height": 0.8,
-              "ns2:Length": 7.5,
-              "ns2:Weight": 0.5,
-              "ns2:Width": 5.2,
+              "ns2:Height": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 0.8,
+              },
+              "ns2:Length": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 7.5,
+              },
+              "ns2:Weight": Object {
+                "$": Object {
+                  "Units": "pounds",
+                },
+                "_": 0.5,
+              },
+              "ns2:Width": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 5.2,
+              },
             },
             "ns2:Label": "Scholastic Paperbacks",
             "ns2:Languages": Object {
@@ -1228,10 +1462,30 @@ Array [
             "ns2:NumberOfItems": 1,
             "ns2:NumberOfPages": 320,
             "ns2:PackageDimensions": Object {
-              "ns2:Height": 1,
-              "ns2:Length": 7.5,
-              "ns2:Weight": 0.5,
-              "ns2:Width": 5.2,
+              "ns2:Height": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 1,
+              },
+              "ns2:Length": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 7.5,
+              },
+              "ns2:Weight": Object {
+                "$": Object {
+                  "Units": "pounds",
+                },
+                "_": 0.5,
+              },
+              "ns2:Width": Object {
+                "$": Object {
+                  "Units": "inches",
+                },
+                "_": 5.2,
+              },
             },
             "ns2:PackageQuantity": 1,
             "ns2:PartNumber": 9780590353427,
@@ -1241,9 +1495,19 @@ Array [
             "ns2:Publisher": "Scholastic Paperbacks",
             "ns2:ReleaseDate": "1999-09-08",
             "ns2:SmallImage": Object {
-              "ns2:Height": 75,
+              "ns2:Height": Object {
+                "$": Object {
+                  "Units": "pixels",
+                },
+                "_": 75,
+              },
               "ns2:URL": "http://ecx.images-amazon.com/images/I/51MU5VilKpL._SL75_.jpg",
-              "ns2:Width": 51,
+              "ns2:Width": Object {
+                "$": Object {
+                  "Units": "pixels",
+                },
+                "_": 51,
+              },
             },
             "ns2:Studio": "Scholastic Paperbacks",
             "ns2:Title": "Harry Potter and the Sorcerer's Stone (Book 1)",
