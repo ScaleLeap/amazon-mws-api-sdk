@@ -214,6 +214,7 @@ const OfferCountType = Codec.interface({
   OfferCount: Codec.interface({
     $: Codec.interface({
       condition: string,
+      fulfillmentChannel: string,
     }),
     _: number,
   }),

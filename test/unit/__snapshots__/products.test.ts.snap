@@ -492,6 +492,7 @@ Array [
         "OfferCount": Object {
           "$": Object {
             "condition": "new",
+            "fulfillmentChannel": "Amazon",
           },
           "_": 1,
         },
@@ -536,6 +537,7 @@ Array [
         "OfferCount": Object {
           "$": Object {
             "condition": "new",
+            "fulfillmentChannel": "Amazon",
           },
           "_": 1,
         },
@@ -599,6 +601,7 @@ Array [
         "OfferCount": Object {
           "$": Object {
             "condition": "new",
+            "fulfillmentChannel": "Amazon",
           },
           "_": 1,
         },
@@ -643,6 +646,7 @@ Array [
         "OfferCount": Object {
           "$": Object {
             "condition": "new",
+            "fulfillmentChannel": "Amazon",
           },
           "_": 1,
         },
