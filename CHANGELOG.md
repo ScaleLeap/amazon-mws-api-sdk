@@ -3,6 +3,25 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.5.1...v1.6.0) (2020-07-22)
+
+
+### Features
+
+* adjust getServiceStatus ([2527b05](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/2527b05635ca1f3dd44c54ae3c104fe32c7c0ddd))
+* init fulfillmentOutboundShipment ([3ca4f53](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/3ca4f53d6ab3f8e699c023558219fe6a504e4170))
+* init fulfillmentOutboundShipment ([e7325fa](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/e7325fa5e93ef30033359b72807cbd188b28919b))
+* made cancelFulfillmentOrder ([fec6424](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/fec6424118808e5b43865e2465b30065d1ab40bf))
+* made createFulfillmenReturn ([712b362](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/712b36206e9e3ce5aefb06d13c5ba1a0e7426f9a))
+* made createFulfillmentOrder ([49c0c02](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/49c0c02d92c57adfb23fe681f3a7ee2ef34f1e4f))
+* made GetFulfillmentPreview ([506074c](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/506074c98f887270cf891c3349d4f42dcbec9719))
+* made getPackageTrackingDetails ([79f2b36](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/79f2b36f09adf5a12f708c873d13b539344b44e2))
+* made listAllFulfillmentOrders NT ([752fbd5](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/752fbd5440ab12b37d4900f0492e2509d4251c71))
+* made listReturnReasonCodes ([56b552f](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/56b552f7a42ca772d6882bfbd1565357aabbcb08))
+* made updateFulfillmentOrder ([c37badc](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c37badc4882b591d88468c5a7fb98fb68d5a334d))
+* made: listAllFulfillmentOrders ([7af30fb](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/7af30fb545f31ae73b5885ba57a9b74ec8373ac6))
+* make getFulfillmentOrder ([a5a4656](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/a5a46567dc7024d871101c5142a7319768c302d3))
+
 ## [1.5.1](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.5.0...v1.5.1) (2020-07-21)
 
 
