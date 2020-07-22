@@ -1,4 +1,3 @@
-import { Parameters, ParameterTypes } from '../../http'
 import { DimensionsUnitEnum } from '../merchant-fulfillment/codec'
 import { RequireOnlyOne } from '../types'
 
@@ -208,7 +207,9 @@ export interface GetPrepInstructionsForASINParameters {
 export interface FIBAmount {
   CurrencyCode: string
   Value: string
+  [key: string]: string
 }
+
 interface PartneredEstimate {
   Amount?: FIBAmount
   ConfirmDeadline?: Date
@@ -234,6 +235,7 @@ export type FIBWeightUnit = keyof typeof WeightUnitEnum
 export interface FIBWeight {
   Unit: FIBWeightUnit
   Value: number
+  [key: string]: string | number
 }
 
 export enum PackageStatusEnum {
@@ -271,6 +273,7 @@ export interface Contact {
   Phone: string
   Email: string
   Fax: string
+  [key: string]: string
 }
 
 export interface Pallet {
@@ -312,12 +315,59 @@ export interface PutTransportContentParameters {
   >
 }
 
-/**
- *  Maybe define the exact return more deeply if needed?
- */
+export interface PartneredSmallParcelData {
+  'PackageList.member': PartneredSmallParcelPackageInput[]
+  CarrierName: string
+  [key: string]: string | PartneredSmallParcelPackageInput[]
+}
+
+export interface NonPartneredSmallParcelData {
+  CarrierName: string
+  'PackageList.member': NonPartneredSmallParcelPackageOutput[]
+  [key: string]: string | NonPartneredSmallParcelPackageOutput[]
+}
+
+export interface PartneredLtlData {
+  Contact: Contact
+  BoxCount: number
+  SellerFreightClass?: string
+  FreightReadyDate?: string
+  'PalletList.member'?: Pallet[]
+  TotalWeight?: FIBWeight
+  SellerDeclaredValue?: FIBAmount
+  [key: string]: string | undefined | number | Pallet[] | FIBWeight | FIBAmount | Contact
+}
+
+export interface NonPartneredLtlData {
+  CarrierName: string
+  ProNumber: string
+  [key: string]: string
+}
+
+export interface TransportDetails {
+  PartneredSmallParcelData?: PartneredSmallParcelData
+  NonPartneredSmallParcelData?: NonPartneredSmallParcelData
+  PartneredLtlData?: PartneredLtlData
+  NonPartneredLtlData?: NonPartneredLtlData
+  [key: string]:
+    | undefined
+    | PartneredSmallParcelData
+    | NonPartneredSmallParcelData
+    | PartneredLtlData
+    | NonPartneredLtlData
+}
+
+export interface CanonicalizedPutTransportContentParameters {
+  ShipmentId: string
+  IsPartnered: boolean
+  ShipmentType: string
+  TransportDetails: TransportDetails
+  [key: string]: string | boolean | TransportDetails
+}
+
 export const canonicalizePutTransportContentParameters = (
   parameters: PutTransportContentParameters,
-): Parameters => {
+): CanonicalizedPutTransportContentParameters => {
   const { TransportDetails } = parameters
   const {
     PartneredSmallParcelData,
@@ -325,7 +375,7 @@ export const canonicalizePutTransportContentParameters = (
     PartneredLtlData,
     NonPartneredLtlData,
   } = TransportDetails
-  const transportDetails: ParameterTypes = {
+  const transportDetails = {
     PartneredSmallParcelData: PartneredSmallParcelData
       ? {
           'PackageList.member': PartneredSmallParcelData?.PackageList,
@@ -355,7 +405,7 @@ export const canonicalizePutTransportContentParameters = (
           ProNumber: NonPartneredLtlData.ProNumber,
         }
       : undefined,
-  } as { [key: string]: undefined | Record<string, ParameterTypes> }
+  }
   return {
     ShipmentId: parameters.ShipmentId,
     IsPartnered: parameters.IsPartnered,

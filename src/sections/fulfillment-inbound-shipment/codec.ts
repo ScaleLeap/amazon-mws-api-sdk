@@ -377,7 +377,7 @@ export const NonPartneredLtlDataOutput = Codec.interface({
   ProNumber: ensureString,
 })
 
-export const TransportDetails = Codec.interface({
+const TransportDetails = Codec.interface({
   PartneredSmallParcelData: optional(PartneredSmallParcelDataOutput),
   NonPartneredSmallParcelData: optional(NonPartneredSmallParcelDataOutput),
   PartneredLtlData: optional(PartneredLtlDataOutput),

@@ -186,7 +186,7 @@ describe('fulfillmentInboundShipment', () => {
 
     describe('canonicalizePutTransportContentParameters', () => {
       it('properly canonicalizes PutTransportContentParameters', () => {
-        expect.assertions(1)
+        expect.assertions(2)
 
         const mockDate = new Date()
         const mock = {
@@ -203,10 +203,12 @@ describe('fulfillmentInboundShipment', () => {
           },
         }
         const canonicalized = canonicalizePutTransportContentParameters(mock)
+        const { PartneredLtlData } = canonicalized.TransportDetails
 
-        expect(
-          (canonicalized as any).TransportDetails.PartneredLtlData['PalletList.member'],
-        ).toStrictEqual(mock.TransportDetails.PartneredLtlData.PalletList)
+        expect(PartneredLtlData).toBeDefined()
+        expect(PartneredLtlData ? PartneredLtlData['PalletList.member'] : undefined).toStrictEqual(
+          mock.TransportDetails.PartneredLtlData.PalletList,
+        )
       })
     })
   })
