@@ -82,6 +82,7 @@ export enum Resource {
   Recommendations = 'Recommendations',
   MerchantFulfillment = 'MerchantFulfillment',
   FulfillmentInboundShipment = 'FulfillmentInboundShipment',
+  FulfillmentOutboundShipment = 'FulfillmentOutboundShipment',
 }
 
 export interface ResourceActions {
@@ -194,6 +195,18 @@ export interface ResourceActions {
     | 'GetLastUpdatedTimeForRecommendations'
     | 'ListRecommendations'
     | 'ListRecommendationsByNextToken'
+    | 'GetServiceStatus'
+  [Resource.FulfillmentOutboundShipment]:
+    | 'GetFulfillmentPreview'
+    | 'CreateFulfillmentOrder'
+    | 'UpdateFulfillmentOrder'
+    | 'ListAllFulfillmentOrders'
+    | 'GetFulfillmentOrder'
+    | 'ListAllFulfillmentOrdersByNextToken'
+    | 'GetPackageTrackingDetails'
+    | 'CancelFulfillmentOrder'
+    | 'ListReturnReasonCodes'
+    | 'CreateFulfillmentReturn'
     | 'GetServiceStatus'
 }
 

@@ -1,0 +1,177 @@
+<GetFulfillmentOrderResponse xmlns="http://mws.amazonaws.com/FulfillmentOutboundShipment/2010-10-01/">
+  <GetFulfillmentOrderResult>
+    <FulfillmentOrderItem>
+      <member>
+        <SellerSKU>SKU100</SellerSKU>
+        <GiftMessage>giftwrap_message</GiftMessage>
+        <SellerFulfillmentOrderItemId>merchant_order_item_id_2
+        </SellerFulfillmentOrderItemId>
+        <EstimatedShipDateTime>2016-09-03T07:07:53Z</EstimatedShipDateTime>
+        <DisplayableComment>Example comment</DisplayableComment>
+        <UnfulfillableQuantity>0</UnfulfillableQuantity>
+        <CancelledQuantity>1</CancelledQuantity>
+        <Quantity>5</Quantity>
+        <EstimatedArrivalDateTime>2016-09-05T08:07:53Z
+        </EstimatedArrivalDateTime>
+        <PerUnitPrice>
+          <CurrencyCode>JPY</CurrencyCode>
+          <Value>2500</Value>
+        </PerUnitPrice>
+        <PerUnitTax>
+          <CurrencyCode>JPY</CurrencyCode>
+          <Value>5000</Value>
+        </PerUnitTax>
+      </member>
+      <member>
+        <SellerSKU>SKU101</SellerSKU>
+        <GiftMessage>giftwrap_message</GiftMessage>
+        <SellerFulfillmentOrderItemId>merchant_order_item_id_1
+        </SellerFulfillmentOrderItemId>
+        <EstimatedShipDateTime>2016-09-03T07:07:53Z</EstimatedShipDateTime>
+        <DisplayableComment>Example comment</DisplayableComment>
+        <UnfulfillableQuantity>2</UnfulfillableQuantity>
+        <CancelledQuantity>1</CancelledQuantity>
+        <Quantity>5</Quantity>
+        <EstimatedArrivalDateTime>2016-09-05T08:07:53Z
+        </EstimatedArrivalDateTime>
+        <PerUnitPrice>
+          <CurrencyCode>JPY</CurrencyCode>
+          <Value>1000</Value>
+        </PerUnitPrice>
+        <PerUnitTax>
+          <CurrencyCode>JPY</CurrencyCode>
+          <Value>2000</Value>
+        </PerUnitTax>
+      </member>
+    </FulfillmentOrderItem>
+    <FulfillmentOrder>
+      <ShippingSpeedCategory>ScheduledDelivery</ShippingSpeedCategory>
+      <DeliveryWindow>
+        <StartDateTime>2016-09-05T03:00:00Z</StartDateTime>
+        <EndDateTime>2016-09-05T05:00:00Z</EndDateTime>
+      </DeliveryWindow>
+      <NotificationEmailList>
+        <member>o8c2EXAMPLsfr7o@marketplace.amazon.com</member>
+      </NotificationEmailList>
+      <StatusUpdatedDateTime>2016-09-05T23:48:48Z</StatusUpdatedDateTime>
+      <SellerFulfillmentOrderId>extern_id_1154539615776
+      </SellerFulfillmentOrderId>
+      <DestinationAddress>
+        <PostalCode>153-0002</PostalCode>
+        <Name>Amazon Taro</Name>
+        <CountryCode>JP</CountryCode>
+        <Line1>Meguro-ku Shimomeguro 12-34-56</Line1>
+        <StateOrProvinceCode>Tokyo</StateOrProvinceCode>
+        <Line2>XXX building 101</Line2>
+      </DestinationAddress>
+      <DisplayableOrderDateTime>2016-09-02T17:26:56Z </DisplayableOrderDateTime>
+      <FulfillmentPolicy>FillOrKill</FulfillmentPolicy>
+      <ReceivedDateTime>2016-09-02T17:26:56Z</ReceivedDateTime>
+      <DisplayableOrderId>test_displayable_id</DisplayableOrderId>
+      <DisplayableOrderComment>Sample comment</DisplayableOrderComment>
+      <CODSettings>
+        <IsCODRequired>true</IsCODRequired>
+        <CODCharge>
+          <Value>4000</Value>
+          <CurrencyCode>JPY</CurrencyCode>
+        </CODCharge>
+        <CODChargeTax>
+          <Value>300</Value>
+          <CurrencyCode>JPY</CurrencyCode>
+        </CODChargeTax>
+        <ShippingCharge>
+          <Value>1000</Value>
+          <CurrencyCode>JPY</CurrencyCode>
+        </ShippingCharge>
+        <ShippingChargeTax>
+          <Value>75</Value>
+          <CurrencyCode>JPY</CurrencyCode>
+        </ShippingChargeTax>
+      </CODSettings>
+      <FulfillmentOrderStatus>PROCESSING</FulfillmentOrderStatus>
+      <FulfillmentAction>Ship</FulfillmentAction>
+      <MarketplaceId>ATVPDKIKX0DER </MarketplaceId>
+    </FulfillmentOrder>
+    <FulfillmentShipment>
+      <member>
+        <FulfillmentShipmentStatus>PENDING</FulfillmentShipmentStatus>
+        <FulfillmentShipmentItem>
+          <member>
+            <SellerSKU>SKU100</SellerSKU>
+            <SellerFulfillmentOrderItemId>merchant_order_item_id_2
+            </SellerFulfillmentOrderItemId>
+            <Quantity>2</Quantity>
+            <PackageNumber>0</PackageNumber>
+          </member>
+        </FulfillmentShipmentItem>
+        <AmazonShipmentId>DnMDLWJWN</AmazonShipmentId>
+        <ShippingDateTime>2016-09-03T07:00:00Z</ShippingDateTime>
+        <FulfillmentCenterId>RNO1</FulfillmentCenterId>
+        <EstimatedArrivalDateTime>2016-09-04T07:00:00Z
+        </EstimatedArrivalDateTime>
+      </member>
+      <member>
+        <FulfillmentShipmentStatus>SHIPPED</FulfillmentShipmentStatus>
+        <FulfillmentShipmentItem>
+          <member>
+            <SellerSKU>SKU101</SellerSKU>
+            <SellerFulfillmentOrderItemId>merchant_order_item_id_1
+            </SellerFulfillmentOrderItemId>
+            <Quantity>1</Quantity>
+            <PackageNumber>1</PackageNumber>
+          </member>
+        </FulfillmentShipmentItem>
+        <AmazonShipmentId>DKMKLXJmN</AmazonShipmentId>
+        <ShippingDateTime>2016-09-03T07:00:00Z</ShippingDateTime>
+        <FulfillmentShipmentPackage>
+          <member>
+            <TrackingNumber>93ZZ00</TrackingNumber>
+            <CarrierCode>UPS</CarrierCode>
+            <PackageNumber>1</PackageNumber>
+          </member>
+        </FulfillmentShipmentPackage>
+        <FulfillmentCenterId>TST1</FulfillmentCenterId>
+        <EstimatedArrivalDateTime>2016-09-05T07:00:00Z
+        </EstimatedArrivalDateTime>
+      </member>
+    </FulfillmentShipment>
+    <ReturnItemList>
+      <!-- changed below from `ReturnItem` to `member`, because it's different in the c sharp example -->
+      <member>
+        <SellerReturnItemId>16a6a142EXAMPLE</SellerReturnItemId>
+        <SellerFulfillmentOrderItemId>order-item-1</SellerFulfillmentOrderItemId>
+        <AmazonShipmentId>DLHg36GDN</AmazonShipmentId >
+        <!-- changed below from `ReturnReasonCode` to `SellerReturnReasonCode`, because it's different in the c sharp example -->
+        <SellerReturnReasonCode>REASON-CODE</SellerReturnReasonCode>
+        <ReturnComment>Did not like color</ReturnComment>
+        <AmazonReturnReasonCode>OTHER-REASON-CODE</AmazonReturnReasonCode>
+        <Status>Processed</Status>
+        <StatusChangedDate>2016-09-02T02:40:36Z</StatusChangedDate>
+        <ReturnAuthorizationId>amzn-rma-id</ReturnAuthorizationId>
+        <ReturnReceivedCondition>Sellable</ReturnReceivedCondition>
+        <FulfillmentCenterId>FC123</FulfillmentCenterId>
+      </member>
+    </ReturnItemList>
+    <ReturnAuthorizationList>
+      <!-- changed below from `ReturnAuthorization` to `member`, because it's different in the c sharp example -->
+      <member>
+        <ReturnAuthorizationId>amzn-rma-id</ReturnAuthorizationId>
+        <FulfillmentCenterId>FC123</FulfillmentCenterId>
+        <ReturnToAddress>
+          <Name>Amazon FC</Name>
+          <Line1>123 Main Street</Line1>
+          <City>Anywhere</City>
+          <!-- changed below from `StateOrRegionCode` to `StateOrProvinceCode`, because it's different in the c sharp example -->
+          <StateOrProvinceCode>WA</StateOrProvinceCode>
+          <PostalCode>98122</PostalCode>
+          <CountryCode>US</CountryCode>
+        </ReturnToAddress>
+        <AmazonRmaId>test123</AmazonRmaId>
+        <RmaPageURL>https://sellercentral.amazon.com/URL</RmaPageURL>
+      </member>
+    </ReturnAuthorizationList>
+  </GetFulfillmentOrderResult>
+  <ResponseMetadata>
+    <RequestId>5e5e5694-8e76-11df-929f-87c80302f8f6</RequestId>
+  </ResponseMetadata>
+</GetFulfillmentOrderResponse>

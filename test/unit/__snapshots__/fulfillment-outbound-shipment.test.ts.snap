@@ -1,0 +1,885 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fulfillmentOutboundShipment cancelFulfillmentOrder returns the standard response if succesful 1`] = `
+Array [
+  "",
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment createFulfillmentOrder returns the standard response elements if succesful 1`] = `
+Array [
+  "",
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment createFulfillmentReturn returns the list of invalid and valid items for return if succesful 1`] = `
+Array [
+  Object {
+    "ReturnAuthorizationList": Array [
+      Object {
+        "AmazonRmaId": "test123",
+        "FulfillmentCenterId": "FC123",
+        "ReturnAuthorizationId": "amzn-rma-id",
+        "ReturnToAddress": Object {
+          "City": "Anywhere",
+          "CountryCode": "US",
+          "Line1": "123 Main Street",
+          "Name": "Amazon FC",
+          "PostalCode": "98122",
+          "StateOrProvinceCode": "WA",
+        },
+        "RmaPageURL": "https://sellercentral.amazon.com/URL",
+      },
+    ],
+    "ReturnItemList": Array [
+      Object {
+        "AmazonReturnReasonCode": "OTHER-REASON-CODE",
+        "AmazonShipmentId": "DLHg36GDN",
+        "FulfillmentCenterId": "FC123",
+        "ReturnAuthorizationId": "amzn-rma-id",
+        "ReturnComment": "Did not like color",
+        "ReturnReceivedCondition": "Sellable",
+        "SellerFulfillmentOrderItemId": "order-item-1",
+        "SellerReturnItemId": "16a6a142EXAMPLE",
+        "SellerReturnReasonCode": "REASON-CODE",
+        "Status": "Processed",
+        "StatusChangedDate": 2016-09-29T02:40:36.000Z,
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment getFulfillmentOrder returns a fulfillment order based on a SellerFulfillmentOrderId if succesful 1`] = `
+Array [
+  Object {
+    "FulfillmentOrder": Object {
+      "CODSettings": Object {
+        "CODCharge": Object {
+          "CurrencyCode": "JPY",
+          "Value": "4000",
+        },
+        "CODChargeTax": Object {
+          "CurrencyCode": "JPY",
+          "Value": "300",
+        },
+        "IsCODRequired": true,
+        "ShippingCharge": Object {
+          "CurrencyCode": "JPY",
+          "Value": "1000",
+        },
+        "ShippingChargeTax": Object {
+          "CurrencyCode": "JPY",
+          "Value": "75",
+        },
+      },
+      "DeliveryWindow": Object {
+        "EndDateTime": 2016-09-05T05:00:00.000Z,
+        "StartDateTime": 2016-09-05T03:00:00.000Z,
+      },
+      "DestinationAddress": Object {
+        "CountryCode": "JP",
+        "Line1": "Meguro-ku Shimomeguro 12-34-56",
+        "Line2": "XXX building 101",
+        "Name": "Amazon Taro",
+        "PostalCode": "153-0002",
+        "StateOrProvinceCode": "Tokyo",
+      },
+      "DisplayableOrderComment": "Sample comment",
+      "DisplayableOrderDateTime": 2016-09-02T17:26:56.000Z,
+      "DisplayableOrderId": "test_displayable_id",
+      "FulfillmentAction": "Ship",
+      "FulfillmentOrderStatus": "PROCESSING",
+      "FulfillmentPolicy": "FillOrKill",
+      "MarketplaceId": "ATVPDKIKX0DER",
+      "NotificationEmailList": Array [
+        "o8c2EXAMPLsfr7o@marketplace.amazon.com",
+      ],
+      "ReceivedDateTime": 2016-09-02T17:26:56.000Z,
+      "SellerFulfillmentOrderId": "extern_id_1154539615776",
+      "ShippingSpeedCategory": "ScheduledDelivery",
+      "StatusUpdatedDateTime": 2016-09-05T23:48:48.000Z,
+    },
+    "FulfillmentOrderItem": Array [
+      Object {
+        "CancelledQuantity": 1,
+        "DisplayableComment": "Example comment",
+        "EstimatedArrivalDateTime": 2016-09-05T08:07:53.000Z,
+        "EstimatedShipDateTime": 2016-09-03T07:07:53.000Z,
+        "GiftMessage": "giftwrap_message",
+        "PerUnitPrice": Object {
+          "CurrencyCode": "JPY",
+          "Value": "2500",
+        },
+        "PerUnitTax": Object {
+          "CurrencyCode": "JPY",
+          "Value": "5000",
+        },
+        "Quantity": 5,
+        "SellerFulfillmentOrderItemId": "merchant_order_item_id_2",
+        "SellerSKU": "SKU100",
+        "UnfulfillableQuantity": 0,
+      },
+      Object {
+        "CancelledQuantity": 1,
+        "DisplayableComment": "Example comment",
+        "EstimatedArrivalDateTime": 2016-09-05T08:07:53.000Z,
+        "EstimatedShipDateTime": 2016-09-03T07:07:53.000Z,
+        "GiftMessage": "giftwrap_message",
+        "PerUnitPrice": Object {
+          "CurrencyCode": "JPY",
+          "Value": "1000",
+        },
+        "PerUnitTax": Object {
+          "CurrencyCode": "JPY",
+          "Value": "2000",
+        },
+        "Quantity": 5,
+        "SellerFulfillmentOrderItemId": "merchant_order_item_id_1",
+        "SellerSKU": "SKU101",
+        "UnfulfillableQuantity": 2,
+      },
+    ],
+    "FulfillmentShipment": Array [
+      Object {
+        "AmazonShipmentId": "DnMDLWJWN",
+        "EstimatedArrivalDateTime": 2016-09-04T07:00:00.000Z,
+        "FulfillmentCenterId": "RNO1",
+        "FulfillmentShipmentItem": Array [
+          Object {
+            "PackageNumber": 0,
+            "Quantity": 2,
+            "SellerFulfillmentOrderItemId": "merchant_order_item_id_2",
+            "SellerSKU": "SKU100",
+          },
+        ],
+        "FulfillmentShipmentStatus": "PENDING",
+        "ShippingDateTime": 2016-09-03T07:00:00.000Z,
+      },
+      Object {
+        "AmazonShipmentId": "DKMKLXJmN",
+        "EstimatedArrivalDateTime": 2016-09-05T07:00:00.000Z,
+        "FulfillmentCenterId": "TST1",
+        "FulfillmentShipmentItem": Array [
+          Object {
+            "PackageNumber": 1,
+            "Quantity": 1,
+            "SellerFulfillmentOrderItemId": "merchant_order_item_id_1",
+            "SellerSKU": "SKU101",
+          },
+        ],
+        "FulfillmentShipmentPackage": Array [
+          Object {
+            "CarrierCode": "UPS",
+            "PackageNumber": 1,
+            "TrackingNumber": "93ZZ00",
+          },
+        ],
+        "FulfillmentShipmentStatus": "SHIPPED",
+        "ShippingDateTime": 2016-09-03T07:00:00.000Z,
+      },
+    ],
+    "ReturnAuthorizationList": Array [
+      Object {
+        "AmazonRmaId": "test123",
+        "FulfillmentCenterId": "FC123",
+        "ReturnAuthorizationId": "amzn-rma-id",
+        "ReturnToAddress": Object {
+          "City": "Anywhere",
+          "CountryCode": "US",
+          "Line1": "123 Main Street",
+          "Name": "Amazon FC",
+          "PostalCode": "98122",
+          "StateOrProvinceCode": "WA",
+        },
+        "RmaPageURL": "https://sellercentral.amazon.com/URL",
+      },
+    ],
+    "ReturnItemList": Array [
+      Object {
+        "AmazonReturnReasonCode": "OTHER-REASON-CODE",
+        "AmazonShipmentId": "DLHg36GDN",
+        "FulfillmentCenterId": "FC123",
+        "ReturnAuthorizationId": "amzn-rma-id",
+        "ReturnComment": "Did not like color",
+        "ReturnReceivedCondition": "Sellable",
+        "SellerFulfillmentOrderItemId": "order-item-1",
+        "SellerReturnItemId": "16a6a142EXAMPLE",
+        "SellerReturnReasonCode": "REASON-CODE",
+        "Status": "Processed",
+        "StatusChangedDate": 2016-09-02T02:40:36.000Z,
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment getFulfillmentOrder succesfully parses response structure, from c sharp 1`] = `
+Array [
+  Object {
+    "FulfillmentOrder": Object {
+      "CODSettings": Object {
+        "CODCharge": Object {
+          "CurrencyCode": "String",
+          "Value": "String",
+        },
+        "CODChargeTax": Object {
+          "CurrencyCode": "String",
+          "Value": "String",
+        },
+        "IsCODRequired": true,
+        "ShippingCharge": Object {
+          "CurrencyCode": "String",
+          "Value": "String",
+        },
+        "ShippingChargeTax": Object {
+          "CurrencyCode": "String",
+          "Value": "String",
+        },
+      },
+      "DeliveryWindow": Object {
+        "EndDateTime": 1969-07-21T02:56:03.000Z,
+        "StartDateTime": 1969-07-21T02:56:03.000Z,
+      },
+      "DestinationAddress": Object {
+        "City": "String",
+        "CountryCode": "String",
+        "DistrictOrCounty": "String",
+        "Line1": "String",
+        "Line2": "String",
+        "Line3": "String",
+        "Name": "String",
+        "PhoneNumber": "String",
+        "PostalCode": "String",
+        "StateOrProvinceCode": "String",
+      },
+      "DisplayableOrderComment": "String",
+      "DisplayableOrderDateTime": 1969-07-21T02:56:03.000Z,
+      "DisplayableOrderId": "String",
+      "FulfillmentAction": "String",
+      "FulfillmentOrderStatus": "String",
+      "FulfillmentPolicy": "String",
+      "MarketplaceId": "String",
+      "NotificationEmailList": Array [
+        "String",
+      ],
+      "ReceivedDateTime": 1969-07-21T02:56:03.000Z,
+      "SellerFulfillmentOrderId": "String",
+      "ShippingSpeedCategory": "String",
+      "StatusUpdatedDateTime": 1969-07-21T02:56:03.000Z,
+    },
+    "FulfillmentOrderItem": Array [
+      Object {
+        "CancelledQuantity": 1,
+        "DisplayableComment": "String",
+        "EstimatedArrivalDateTime": 1969-07-21T02:56:03.000Z,
+        "EstimatedShipDateTime": 1969-07-21T02:56:03.000Z,
+        "FulfillmentNetworkSKU": "String",
+        "GiftMessage": "String",
+        "PerUnitPrice": Object {
+          "CurrencyCode": "String",
+          "Value": "String",
+        },
+        "PerUnitTax": Object {
+          "CurrencyCode": "String",
+          "Value": "String",
+        },
+        "Quantity": 1,
+        "SellerFulfillmentOrderItemId": "String",
+        "SellerSKU": "String",
+        "UnfulfillableQuantity": 1,
+      },
+    ],
+    "FulfillmentShipment": Array [
+      Object {
+        "AmazonShipmentId": "String",
+        "EstimatedArrivalDateTime": 1969-07-21T02:56:03.000Z,
+        "FulfillmentCenterId": "String",
+        "FulfillmentShipmentItem": Array [
+          Object {
+            "PackageNumber": 1,
+            "Quantity": 1,
+            "SellerFulfillmentOrderItemId": "String",
+            "SellerSKU": "String",
+          },
+        ],
+        "FulfillmentShipmentPackage": Array [
+          Object {
+            "CarrierCode": "String",
+            "EstimatedArrivalDateTime": 1969-07-21T02:56:03.000Z,
+            "PackageNumber": 1,
+            "TrackingNumber": "String",
+          },
+        ],
+        "FulfillmentShipmentStatus": "String",
+        "ShippingDateTime": 1969-07-21T02:56:03.000Z,
+      },
+    ],
+    "ReturnAuthorizationList": Array [
+      Object {
+        "AmazonRmaId": "String",
+        "FulfillmentCenterId": "String",
+        "ReturnAuthorizationId": "String",
+        "ReturnToAddress": Object {
+          "City": "String",
+          "CountryCode": "String",
+          "DistrictOrCounty": "String",
+          "Line1": "String",
+          "Line2": "String",
+          "Line3": "String",
+          "Name": "String",
+          "PhoneNumber": "String",
+          "PostalCode": "String",
+          "StateOrProvinceCode": "String",
+        },
+        "RmaPageURL": "String",
+      },
+    ],
+    "ReturnItemList": Array [
+      Object {
+        "AmazonReturnReasonCode": "String",
+        "AmazonShipmentId": "String",
+        "FulfillmentCenterId": "String",
+        "ReturnAuthorizationId": "String",
+        "ReturnComment": "String",
+        "ReturnReceivedCondition": "String",
+        "SellerFulfillmentOrderItemId": "String",
+        "SellerReturnItemId": "String",
+        "SellerReturnReasonCode": "String",
+        "Status": "String",
+        "StatusChangedDate": 1969-07-21T02:56:03.000Z,
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment getFulfillmentPreview returns a list of fulfillment previews if succesful 1`] = `
+Array [
+  Object {
+    "FulfillmentPreviews": Array [
+      Object {
+        "EstimatedFees": Array [
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "225",
+            },
+            "Name": "FBAPerUnitFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "475",
+            },
+            "Name": "FBAPerOrderFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "660",
+            },
+            "Name": "FBATransportationFee",
+          },
+        ],
+        "EstimatedShippingWeight": Object {
+          "Unit": "kilograms",
+          "Value": "12",
+        },
+        "FulfillmentPreviewShipments": Array [
+          Object {
+            "EarliestArrivalDate": 2014-01-05T07:00:00.000Z,
+            "EarliestShipDate": 2014-01-04T00:30:00.000Z,
+            "FulfillmentPreviewItems": Array [
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "10",
+                },
+                "Quantity": 2,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-2",
+                "SellerSKU": "SampleSKU1",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "2",
+                },
+                "Quantity": 1,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-1",
+                "SellerSKU": "SampleSKU2",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+            ],
+            "LatestArrivalDate": 2014-01-06T06:59:59.000Z,
+            "LatestShipDate": 2014-01-04T00:30:00.000Z,
+          },
+        ],
+        "IsCODCapable": false,
+        "IsFulfillable": true,
+        "MarketplaceId": "ATVPDKIKX0DER",
+        "ShippingSpeedCategory": "Expedited",
+        "UnfulfillablePreviewItems": Array [],
+      },
+      Object {
+        "EstimatedFees": Array [
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "225",
+            },
+            "Name": "FBAPerUnitFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "475",
+            },
+            "Name": "FBAPerOrderFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "660",
+            },
+            "Name": "FBATransportationFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "315",
+            },
+            "Name": "FBAFulfillmentCODFee",
+          },
+        ],
+        "EstimatedShippingWeight": Object {
+          "Unit": "kilograms",
+          "Value": "12",
+        },
+        "FulfillmentPreviewShipments": Array [
+          Object {
+            "EarliestArrivalDate": 2014-01-05T07:00:00.000Z,
+            "EarliestShipDate": 2014-01-04T00:30:00.000Z,
+            "FulfillmentPreviewItems": Array [
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "10",
+                },
+                "Quantity": 2,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-2",
+                "SellerSKU": "SampleSKU1",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "2",
+                },
+                "Quantity": 1,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-1",
+                "SellerSKU": "SampleSKU2",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+            ],
+            "LatestArrivalDate": 2014-07-09T06:59:59.000Z,
+            "LatestShipDate": 2014-01-04T00:30:00.000Z,
+          },
+        ],
+        "IsCODCapable": true,
+        "IsFulfillable": true,
+        "ShippingSpeedCategory": "Standard",
+        "UnfulfillablePreviewItems": Array [],
+      },
+      Object {
+        "EstimatedFees": Array [
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "225",
+            },
+            "Name": "FBAPerUnitFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "475",
+            },
+            "Name": "FBAPerOrderFulfillmentFee",
+          },
+          Object {
+            "Amount": Object {
+              "CurrencyCode": "JPY",
+              "Value": "660",
+            },
+            "Name": "FBATransportationFee",
+          },
+        ],
+        "EstimatedShippingWeight": Object {
+          "Unit": "kilograms",
+          "Value": "12",
+        },
+        "FulfillmentPreviewShipments": Array [
+          Object {
+            "EarliestArrivalDate": 2014-01-05T07:00:00.000Z,
+            "EarliestShipDate": 2014-01-04T00:30:00.000Z,
+            "FulfillmentPreviewItems": Array [
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "10",
+                },
+                "Quantity": 2,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-2",
+                "SellerSKU": "SampleSKU1",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+              Object {
+                "EstimatedShippingWeight": Object {
+                  "Unit": "kilograms",
+                  "Value": "2",
+                },
+                "Quantity": 1,
+                "SellerFulfillmentOrderItemId": "mws-test-query-20100713023406723-1",
+                "SellerSKU": "SampleSKU2",
+                "ShippingWeightCalculationMethod": "Package",
+              },
+            ],
+            "LatestArrivalDate": 2014-01-06T06:59:59.000Z,
+            "LatestShipDate": 2014-01-04T00:30:00.000Z,
+          },
+        ],
+        "IsCODCapable": false,
+        "IsFulfillable": true,
+        "ScheduledDeliveryInfo": Object {
+          "DeliveryTimeZone": "Asia/Tokyo",
+          "DeliveryWindows": Array [
+            Object {
+              "EndDateTime": 2014-01-05T03:00:00.000Z,
+              "StartDateTime": 2014-01-04T23:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-05T05:00:00.000Z,
+              "StartDateTime": 2014-01-05T03:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-05T07:00:00.000Z,
+              "StartDateTime": 2014-01-05T05:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-05T09:00:00.000Z,
+              "StartDateTime": 2014-01-05T07:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-05T11:00:00.000Z,
+              "StartDateTime": 2014-01-05T09:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-05T12:00:00.000Z,
+              "StartDateTime": 2014-01-05T11:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T03:00:00.000Z,
+              "StartDateTime": 2014-01-05T23:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T05:00:00.000Z,
+              "StartDateTime": 2014-01-06T03:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T07:00:00.000Z,
+              "StartDateTime": 2014-01-06T05:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T09:00:00.000Z,
+              "StartDateTime": 2014-01-06T07:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T11:00:00.000Z,
+              "StartDateTime": 2014-01-06T09:00:00.000Z,
+            },
+            Object {
+              "EndDateTime": 2014-01-06T12:00:00.000Z,
+              "StartDateTime": 2014-01-06T11:00:00.000Z,
+            },
+          ],
+        },
+        "ShippingSpeedCategory": "ScheduledDelivery",
+        "UnfulfillablePreviewItems": Array [],
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment getPackageTrackingDetails returns package tracking details if succesful 1`] = `
+Array [
+  Object {
+    "AdditionalLocationInfo": "FRONT_DESK",
+    "CarrierCode": "UPS",
+    "CarrierPhoneNumber": "206-000-0000",
+    "CarrierURL": "http://www.ups.com/",
+    "CurrentStatus": "DELIVERED",
+    "EstimatedArrivalDate": 2012-03-09T10:00:00.000Z,
+    "PackageNumber": 42343,
+    "ShipDate": 2012-03-09T10:27:10.000Z,
+    "ShipToAddress": Object {
+      "City": "Seattle",
+      "Country": "US",
+      "State": "WA",
+    },
+    "SignedForBy": "John",
+    "TrackingEvents": Array [
+      Object {
+        "EventAddress": Object {
+          "City": "Reno",
+          "Country": "US",
+          "State": "NV",
+        },
+        "EventCode": "EVENT_202",
+        "EventDate": 2012-03-09T08:48:53.000Z,
+      },
+      Object {
+        "EventAddress": Object {
+          "City": "Seattle",
+          "Country": "US",
+          "State": "WA",
+        },
+        "EventCode": "EVENT_301",
+        "EventDate": 2012-03-10T10:27:10.000Z,
+      },
+    ],
+    "TrackingNumber": "3A18351E0390447173",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment getServiceStatus returns a parsed model when the status response is valid 1`] = `
+Array [
+  Object {
+    "Status": "GREEN",
+    "Timestamp": "2020-05-06T08:22:23.582Z",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment listAllFulfillmentOrders returns a list of fulfillment orders if succesful 1`] = `
+Array [
+  Object {
+    "FulfillmentOrders": Array [
+      Object {
+        "DestinationAddress": Object {
+          "City": "Seattle",
+          "CountryCode": "US",
+          "Line1": "123 Oak St.",
+          "Line2": "Apt. 321",
+          "Name": "Jane Adams",
+          "PhoneNumber": "321-098-7654",
+          "PostalCode": "98101",
+          "StateOrProvinceCode": "WA",
+        },
+        "DisplayableOrderComment": "Sample comment text.",
+        "DisplayableOrderDateTime": 2011-02-05T17:26:56.000Z,
+        "DisplayableOrderId": "test_displayable_id",
+        "FulfillmentOrderStatus": "PROCESSING",
+        "FulfillmentPolicy": "FillOrKill",
+        "NotificationEmailList": Array [
+          "o8c2EXAMPLsfr7o@marketplace.amazon.com",
+        ],
+        "ReceivedDateTime": 2011-02-06T17:26:56.000Z,
+        "SellerFulfillmentOrderId": "extern_id_1154539615776",
+        "ShippingSpeedCategory": "Standard",
+        "StatusUpdatedDateTime": 2011-01-28T23:48:48.000Z,
+      },
+      Object {
+        "DestinationAddress": Object {
+          "City": "Seattle",
+          "CountryCode": "US",
+          "Line1": "2345 5th Ave",
+          "Name": "George Jones",
+          "PhoneNumber": "123-123-4567",
+          "PostalCode": "98104",
+          "StateOrProvinceCode": "WA",
+        },
+        "DisplayableOrderComment": "Sample order comment.",
+        "DisplayableOrderDateTime": 2011-03-11T18:48:52.000Z,
+        "DisplayableOrderId": "test-order-test-1159210132812",
+        "FulfillmentOrderStatus": "PLANNING",
+        "FulfillmentPolicy": "FillAllAvailable",
+        "ReceivedDateTime": 2011-03-03T18:48:53.000Z,
+        "SellerFulfillmentOrderId": "external-order-ebaytime1154557376014",
+        "ShippingSpeedCategory": "Standard",
+        "StatusUpdatedDateTime": 2011-03-05T18:48:53.000Z,
+      },
+    ],
+    "NextToken": NextToken {
+      "action": "ListAllFulfillmentOrders",
+      "token": "H4sIAAAAAAAAAC2MwQqDMBBEfyXsPXU3ITUEEyjFQ6FWUNt7sbEI
+            alH7/3SVwjLLG3iTzeLjoe6n9xAv3ziWyysuIFoPCjGVqCWmDaZOWYckkRNB9B4MgZj
+            4MY0euuewRhBxswhZkaQbUk5pZ+iA1nK1m+u+ayXxlmnwyCXffzdkXTiXt/pe5FWWdB
+            tWeVE+Ttedkjn8AF4nvJquAAAA",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment listAllFulfillmentOrdersByNextToken returns a list of fulfillment orders if succesful 1`] = `
+Array [
+  Object {
+    "FulfillmentOrders": Array [
+      Object {
+        "DestinationAddress": Object {
+          "City": "Seattle",
+          "CountryCode": "US",
+          "Line1": "Amazon.com",
+          "Name": "Fred Jones",
+          "PhoneNumber": "123-456-7890",
+          "PostalCode": "98101",
+          "StateOrProvinceCode": "WA",
+        },
+        "DisplayableOrderComment": "Sample order comment",
+        "DisplayableOrderDateTime": 2011-01-08T08:00:00.000Z,
+        "DisplayableOrderId": "MinimalOrder",
+        "FulfillmentOrderStatus": "PROCESSING",
+        "FulfillmentPolicy": "FillAllAvailable",
+        "ReceivedDateTime": 2011-01-08T17:23:20.000Z,
+        "SellerFulfillmentOrderId": "SampleOrderId",
+        "ShippingSpeedCategory": "Standard",
+        "StatusUpdatedDateTime": 2011-01-02T07:49:35.000Z,
+      },
+      Object {
+        "DestinationAddress": Object {
+          "City": "Seattle",
+          "CountryCode": "US",
+          "Line1": "456 7th Ave",
+          "Name": "Mary Johnson",
+          "PhoneNumber": "098-765-4321",
+          "PostalCode": "98101",
+          "StateOrProvinceCode": "WA",
+        },
+        "DisplayableOrderComment": "Sample order comment.",
+        "DisplayableOrderDateTime": 2011-02-25T07:00:00.000Z,
+        "DisplayableOrderId": "SampleOrderID",
+        "FulfillmentOrderStatus": "PROCESSING",
+        "FulfillmentPolicy": "FillAllAvailable",
+        "ReceivedDateTime": 2011-02-25T18:47:49.000Z,
+        "SellerFulfillmentOrderId": "SampleOrderId",
+        "ShippingSpeedCategory": "Standard",
+        "StatusUpdatedDateTime": 2011-02-20T19:00:07.000Z,
+      },
+    ],
+    "NextToken": NextToken {
+      "action": "ListAllFulfillmentOrders",
+      "token": "H4sIAAAAAAAAAC2M0QqCQBBFf2WZ982ZXVeHxRUifMsEs96jVhIq0fX/ab
+        VguMw5cG8xidFBGJanXHxY5Dg//Px7ibI0N0YTMacg7g4UYha1VNyRschWGxkTEcTggJBAf
+        ByYiG8H/e0VPAi/1ggl5pJ0R8oqbQ3tkDmqrRq2YV6H0XSYRRnvP1wWfdlWdXP
+        dH4ukX+nQnM6Xumo3TKbyC+hpQInCAAAA",
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment listReturnReasonCodes returns a list of reason code details if succesful 1`] = `
+Array [
+  Object {
+    "ReasonCodeDetailsList": Array [
+      Object {
+        "Description": "This is a description of the reason code.",
+        "ReturnReasonCode": "REASON-CODE",
+        "TranslatedDescription": "This is an optional translated description of the reason code.",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`fulfillmentOutboundShipment updateFulfillmentOrder returns the standard response elements if succesful 1`] = `
+Array [
+  "",
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
