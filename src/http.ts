@@ -2,8 +2,7 @@ import { AmazonMarketplace } from '@scaleleap/amazon-marketplaces'
 import axios from 'axios'
 import parser from 'fast-xml-parser'
 import { URLSearchParams } from 'url'
-import xml2js from 'xml2js'
-import { parseBooleans, parseNumbers } from 'xml2js/lib/processors'
+import xml2json from 'xml2json'
 
 import {
   AccessDenied,
@@ -314,12 +313,7 @@ const parseResponse = async <T>(
 ): Promise<[T | string, RequestMeta]> => {
   const responseData = parseString
     ? response.data
-    : await xml2js.parseStringPromise(response.data, {
-        explicitArray: false,
-        valueProcessors: [parseNumbers, parseBooleans],
-        emptyTag: '',
-        trim: true,
-      })
+    : (xml2json.toJson(response.data, { object: true, coerce: true }) as T) // return type for this is exactly {}
   return [
     responseData,
     {
