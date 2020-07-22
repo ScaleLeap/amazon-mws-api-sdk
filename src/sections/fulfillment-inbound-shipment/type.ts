@@ -318,11 +318,13 @@ export interface PutTransportContentParameters {
 export interface PartneredSmallParcelData {
   'PackageList.member': PartneredSmallParcelPackageInput[]
   CarrierName: string
+  [key: string]: string | PartneredSmallParcelPackageInput[]
 }
 
 export interface NonPartneredSmallParcelData {
   CarrierName: string
   'PackageList.member': NonPartneredSmallParcelPackageOutput[]
+  [key: string]: string | NonPartneredSmallParcelPackageOutput[]
 }
 
 export interface PartneredLtlData {
@@ -333,11 +335,13 @@ export interface PartneredLtlData {
   'PalletList.member'?: Pallet[]
   TotalWeight?: FIBWeight
   SellerDeclaredValue?: FIBAmount
+  [key: string]: string | undefined | number | Pallet[] | FIBWeight | FIBAmount | Contact
 }
 
 export interface NonPartneredLtlData {
   CarrierName: string
   ProNumber: string
+  [key: string]: string
 }
 
 export interface TransportDetails {
@@ -345,6 +349,12 @@ export interface TransportDetails {
   NonPartneredSmallParcelData?: NonPartneredSmallParcelData
   PartneredLtlData?: PartneredLtlData
   NonPartneredLtlData?: NonPartneredLtlData
+  [key: string]:
+    | undefined
+    | PartneredSmallParcelData
+    | NonPartneredSmallParcelData
+    | PartneredLtlData
+    | NonPartneredLtlData
 }
 
 export interface CanonicalizedPutTransportContentParameters {
