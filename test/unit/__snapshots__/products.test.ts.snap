@@ -23,13 +23,33 @@ Array [
                   "CurrencyCode": "USD",
                 },
               },
+              "attr": Object {
+                "belongsToRequester": "false",
+                "condition": "New",
+                "subcondition": "New",
+              },
             },
           },
           "NumberOfOfferListings": Object {
             "OfferListingCount": Array [
-              11,
-              1,
-              10,
+              Object {
+                "#text": 11,
+                "attr": Object {
+                  "condition": "Any",
+                },
+              },
+              Object {
+                "#text": 1,
+                "attr": Object {
+                  "condition": "Used",
+                },
+              },
+              Object {
+                "#text": 10,
+                "attr": Object {
+                  "condition": "New",
+                },
+              },
             ],
           },
         },
@@ -40,6 +60,10 @@ Array [
           },
         },
         "SalesRankings": "",
+        "attr": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
+        },
       },
     },
   ],
@@ -77,6 +101,11 @@ Array [
                     "CurrencyCode": "USD",
                   },
                 },
+                "attr": Object {
+                  "belongsToRequester": "false",
+                  "condition": "New",
+                  "subcondition": "New",
+                },
               },
               Object {
                 "CompetitivePriceId": 2,
@@ -94,14 +123,34 @@ Array [
                     "CurrencyCode": "USD",
                   },
                 },
+                "attr": Object {
+                  "belongsToRequester": "false",
+                  "condition": "Used",
+                  "subcondition": "Good",
+                },
               },
             ],
           },
           "NumberOfOfferListings": Object {
             "OfferListingCount": Array [
-              296,
-              145,
-              151,
+              Object {
+                "#text": 296,
+                "attr": Object {
+                  "condition": "Any",
+                },
+              },
+              Object {
+                "#text": 145,
+                "attr": Object {
+                  "condition": "Used",
+                },
+              },
+              Object {
+                "#text": 151,
+                "attr": Object {
+                  "condition": "New",
+                },
+              },
             ],
           },
           "TradeInValue": Object {
@@ -139,6 +188,10 @@ Array [
               "Rank": 25,
             },
           ],
+        },
+        "attr": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
         },
       },
     },
@@ -255,6 +308,10 @@ Array [
               "SellerFeedbackCount": 13213,
             },
           ],
+        },
+        "attr": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
         },
       },
     },
@@ -376,6 +433,10 @@ Array [
               "SellerFeedbackCount": 7732,
             },
           ],
+        },
+        "attr": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
         },
       },
     },
@@ -625,6 +686,9 @@ Array [
       "Product": Object {
         "AttributeSets": Object {
           "ns2:ItemAttributes": Object {
+            "attr": Object {
+              "xml:lang": "en-US",
+            },
             "ns2:Binding": "Apparel",
             "ns2:Brand": "Pearl iZUMi",
             "ns2:Department": "mens",
@@ -640,9 +704,24 @@ Array [
               "86 percent nylon, 14% spandex, 9-Inch inseam",
             ],
             "ns2:ItemDimensions": Object {
-              "ns2:Height": 2,
-              "ns2:Length": 9,
-              "ns2:Width": 9,
+              "ns2:Height": Object {
+                "#text": 2,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
+              "ns2:Length": Object {
+                "#text": 9,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
+              "ns2:Width": Object {
+                "#text": 9,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
             },
             "ns2:Label": "Pearl iZUMi",
             "ns2:ListPrice": Object {
@@ -652,10 +731,30 @@ Array [
             "ns2:Manufacturer": "Pearl iZUMi",
             "ns2:Model": 275,
             "ns2:PackageDimensions": Object {
-              "ns2:Height": 2.8,
-              "ns2:Length": 9.75,
-              "ns2:Weight": 0.4,
-              "ns2:Width": 8.4,
+              "ns2:Height": Object {
+                "#text": 2.8,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
+              "ns2:Length": Object {
+                "#text": 9.75,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
+              "ns2:Weight": Object {
+                "#text": 0.4,
+                "attr": Object {
+                  "Units": "pounds",
+                },
+              },
+              "ns2:Width": Object {
+                "#text": 8.4,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
             },
             "ns2:PackageQuantity": 1,
             "ns2:PartNumber": 275,
@@ -663,9 +762,19 @@ Array [
             "ns2:ProductTypeName": "SHORTS",
             "ns2:Publisher": "Pearl iZUMi",
             "ns2:SmallImage": Object {
-              "ns2:Height": 75,
+              "ns2:Height": Object {
+                "#text": 75,
+                "attr": Object {
+                  "Units": "pixels",
+                },
+              },
               "ns2:URL": "http://ecx.images-amazon.com/images/I/41ty3Sn%2BU8L._SL75_.jpg",
-              "ns2:Width": 58,
+              "ns2:Width": Object {
+                "#text": 58,
+                "attr": Object {
+                  "Units": "pixels",
+                },
+              },
             },
             "ns2:Studio": "Pearl iZUMi",
             "ns2:Title": "Pearl iZUMi Men's Quest Cycling Short",
@@ -747,6 +856,10 @@ Array [
             },
           ],
         },
+        "attr": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
+        },
       },
     },
   ],
@@ -775,6 +888,9 @@ Array [
         Object {
           "AttributeSets": Object {
             "ns2:ItemAttributes": Object {
+              "attr": Object {
+                "xml:lang": "en-US",
+              },
               "ns2:Author": Array [
                 "Marmanis, Haralambos",
                 "Babenko, Dmitry",
@@ -783,10 +899,30 @@ Array [
               "ns2:Brand": "Marmanis, Haralambos/ Babenko, Dmitry",
               "ns2:Edition": 1,
               "ns2:ItemDimensions": Object {
-                "ns2:Height": 9.25,
-                "ns2:Length": 7.38,
-                "ns2:Weight": 1.38,
-                "ns2:Width": 0.73,
+                "ns2:Height": Object {
+                  "#text": 9.25,
+                  "attr": Object {
+                    "Units": "inches",
+                  },
+                },
+                "ns2:Length": Object {
+                  "#text": 7.38,
+                  "attr": Object {
+                    "Units": "inches",
+                  },
+                },
+                "ns2:Weight": Object {
+                  "#text": 1.38,
+                  "attr": Object {
+                    "Units": "pounds",
+                  },
+                },
+                "ns2:Width": Object {
+                  "#text": 0.73,
+                  "attr": Object {
+                    "Units": "inches",
+                  },
+                },
               },
               "ns2:Label": "Manning Publications",
               "ns2:Languages": Object {
@@ -813,10 +949,30 @@ Array [
               "ns2:NumberOfItems": 1,
               "ns2:NumberOfPages": 368,
               "ns2:PackageDimensions": Object {
-                "ns2:Height": 0.8,
-                "ns2:Length": 9.1,
-                "ns2:Weight": 1.35,
-                "ns2:Width": 7.3,
+                "ns2:Height": Object {
+                  "#text": 0.8,
+                  "attr": Object {
+                    "Units": "inches",
+                  },
+                },
+                "ns2:Length": Object {
+                  "#text": 9.1,
+                  "attr": Object {
+                    "Units": "inches",
+                  },
+                },
+                "ns2:Weight": Object {
+                  "#text": 1.35,
+                  "attr": Object {
+                    "Units": "pounds",
+                  },
+                },
+                "ns2:Width": Object {
+                  "#text": 7.3,
+                  "attr": Object {
+                    "Units": "inches",
+                  },
+                },
               },
               "ns2:PackageQuantity": 1,
               "ns2:PartNumber": 9781933988665,
@@ -825,9 +981,19 @@ Array [
               "ns2:PublicationDate": "2009-07-08",
               "ns2:Publisher": "Manning Publications",
               "ns2:SmallImage": Object {
-                "ns2:Height": 75,
+                "ns2:Height": Object {
+                  "#text": 75,
+                  "attr": Object {
+                    "Units": "pixels",
+                  },
+                },
                 "ns2:URL": "http://ecx.images-amazon.com/images/I/51EEz05N2HL._SL75_.jpg",
-                "ns2:Width": 60,
+                "ns2:Width": Object {
+                  "#text": 60,
+                  "attr": Object {
+                    "Units": "pixels",
+                  },
+                },
               },
               "ns2:Studio": "Manning Publications",
               "ns2:Title": "Algorithms of the Intelligent Web",
@@ -1001,6 +1167,10 @@ Array [
             "SellerSKU": "SKU2468",
           },
         },
+        "attr": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
+        },
       },
     },
   ],
@@ -1056,6 +1226,10 @@ Array [
             "SellerId": "A1IMEXAMPLEWRC",
             "SellerSKU": "SKU2468",
           },
+        },
+        "attr": Object {
+          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
+          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
         },
       },
     },
@@ -1189,19 +1363,47 @@ Array [
       Object {
         "AttributeSets": Object {
           "ns2:ItemAttributes": Object {
+            "attr": Object {
+              "xml:lang": "en-US",
+            },
             "ns2:Author": "Rowling, J.K.",
             "ns2:Binding": "Paperback",
             "ns2:Brand": "Scholastic Press",
-            "ns2:Creator": "GrandPrÃ©, Mary",
+            "ns2:Creator": Object {
+              "#text": "GrandPrÃ©, Mary",
+              "attr": Object {
+                "Role": "Illustrator",
+              },
+            },
             "ns2:Edition": "1st",
             "ns2:Feature": "Recommended Age: 9 years and up",
             "ns2:IsAutographed": false,
             "ns2:IsMemorabilia": false,
             "ns2:ItemDimensions": Object {
-              "ns2:Height": 0.8,
-              "ns2:Length": 7.5,
-              "ns2:Weight": 0.5,
-              "ns2:Width": 5.2,
+              "ns2:Height": Object {
+                "#text": 0.8,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
+              "ns2:Length": Object {
+                "#text": 7.5,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
+              "ns2:Weight": Object {
+                "#text": 0.5,
+                "attr": Object {
+                  "Units": "pounds",
+                },
+              },
+              "ns2:Width": Object {
+                "#text": 5.2,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
             },
             "ns2:Label": "Scholastic Paperbacks",
             "ns2:Languages": Object {
@@ -1228,10 +1430,30 @@ Array [
             "ns2:NumberOfItems": 1,
             "ns2:NumberOfPages": 320,
             "ns2:PackageDimensions": Object {
-              "ns2:Height": 1,
-              "ns2:Length": 7.5,
-              "ns2:Weight": 0.5,
-              "ns2:Width": 5.2,
+              "ns2:Height": Object {
+                "#text": 1,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
+              "ns2:Length": Object {
+                "#text": 7.5,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
+              "ns2:Weight": Object {
+                "#text": 0.5,
+                "attr": Object {
+                  "Units": "pounds",
+                },
+              },
+              "ns2:Width": Object {
+                "#text": 5.2,
+                "attr": Object {
+                  "Units": "inches",
+                },
+              },
             },
             "ns2:PackageQuantity": 1,
             "ns2:PartNumber": 9780590353427,
@@ -1241,9 +1463,19 @@ Array [
             "ns2:Publisher": "Scholastic Paperbacks",
             "ns2:ReleaseDate": "1999-09-08",
             "ns2:SmallImage": Object {
-              "ns2:Height": 75,
+              "ns2:Height": Object {
+                "#text": 75,
+                "attr": Object {
+                  "Units": "pixels",
+                },
+              },
               "ns2:URL": "http://ecx.images-amazon.com/images/I/51MU5VilKpL._SL75_.jpg",
-              "ns2:Width": 51,
+              "ns2:Width": Object {
+                "#text": 51,
+                "attr": Object {
+                  "Units": "pixels",
+                },
+              },
             },
             "ns2:Studio": "Scholastic Paperbacks",
             "ns2:Title": "Harry Potter and the Sorcerer's Stone (Book 1)",
