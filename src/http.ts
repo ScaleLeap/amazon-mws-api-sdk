@@ -316,6 +316,7 @@ const parseResponse = <T>(
         attributeNamePrefix: '',
         ignoreAttributes: false,
         attrNodeName: 'attr',
+        textNodeName: 'text',
       })
   return [
     responseData,

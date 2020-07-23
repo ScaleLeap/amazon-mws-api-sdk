@@ -211,7 +211,16 @@ export const GetLowestOfferListingsForASINResponse = Codec.interface({
  * http://docs.developer.amazonservices.com/en_CA/products/Products_Datatypes.html#OfferCount
  */
 const OfferCountType = Codec.interface({
-  OfferCount: number,
+  OfferCount: oneOf([
+    number,
+    Codec.interface({
+      text: number,
+      attr: Codec.interface({
+        condition: optional(string),
+        fulfillmentChannel: optional(string),
+      }),
+    }),
+  ]),
 })
 
 const LowestPrice = Codec.interface({

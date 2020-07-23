@@ -33,22 +33,22 @@ Array [
           "NumberOfOfferListings": Object {
             "OfferListingCount": Array [
               Object {
-                "#text": 11,
                 "attr": Object {
                   "condition": "Any",
                 },
+                "text": 11,
               },
               Object {
-                "#text": 1,
                 "attr": Object {
                   "condition": "Used",
                 },
+                "text": 1,
               },
               Object {
-                "#text": 10,
                 "attr": Object {
                   "condition": "New",
                 },
+                "text": 10,
               },
             ],
           },
@@ -134,22 +134,22 @@ Array [
           "NumberOfOfferListings": Object {
             "OfferListingCount": Array [
               Object {
-                "#text": 296,
                 "attr": Object {
                   "condition": "Any",
                 },
+                "text": 296,
               },
               Object {
-                "#text": 145,
                 "attr": Object {
                   "condition": "Used",
                 },
+                "text": 145,
               },
               Object {
-                "#text": 151,
                 "attr": Object {
                   "condition": "New",
                 },
+                "text": 151,
               },
             ],
           },
@@ -477,13 +477,25 @@ Array [
           "Amount": 0,
           "CurrencyCode": "USD",
         },
-        "ShippingTime": "",
+        "ShippingTime": Object {
+          "attr": Object {
+            "availabilityType": "NOW",
+            "maximumHours": "0",
+            "minimumHours": "0",
+          },
+        },
         "SubCondition": "new",
       },
     ],
     "Summary": Object {
       "BuyBoxEligibleOffers": Object {
-        "OfferCount": 1,
+        "OfferCount": Object {
+          "attr": Object {
+            "condition": "new",
+            "fulfillmentChannel": "Amazon",
+          },
+          "text": 1,
+        },
       },
       "BuyBoxPrices": Array [
         Object {
@@ -522,7 +534,13 @@ Array [
         },
       ],
       "NumberOfOffers": Object {
-        "OfferCount": 1,
+        "OfferCount": Object {
+          "attr": Object {
+            "condition": "new",
+            "fulfillmentChannel": "Amazon",
+          },
+          "text": 1,
+        },
       },
       "SuggestedLowerPricePlusShipping": Object {
         "Amount": 32.99,
@@ -568,13 +586,25 @@ Array [
           "Amount": 0,
           "CurrencyCode": "USD",
         },
-        "ShippingTime": "",
+        "ShippingTime": Object {
+          "attr": Object {
+            "availabilityType": "NOW",
+            "maximumHours": "0",
+            "minimumHours": "0",
+          },
+        },
         "SubCondition": "new",
       },
     ],
     "Summary": Object {
       "BuyBoxEligibleOffers": Object {
-        "OfferCount": 1,
+        "OfferCount": Object {
+          "attr": Object {
+            "condition": "new",
+            "fulfillmentChannel": "Amazon",
+          },
+          "text": 1,
+        },
       },
       "BuyBoxPrices": Array [
         Object {
@@ -613,7 +643,13 @@ Array [
         },
       ],
       "NumberOfOffers": Object {
-        "OfferCount": 1,
+        "OfferCount": Object {
+          "attr": Object {
+            "condition": "new",
+            "fulfillmentChannel": "Amazon",
+          },
+          "text": 1,
+        },
       },
       "SuggestedLowerPricePlusShipping": Object {
         "Amount": 32.99,
@@ -705,22 +741,22 @@ Array [
             ],
             "ns2:ItemDimensions": Object {
               "ns2:Height": Object {
-                "#text": 2,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 2,
               },
               "ns2:Length": Object {
-                "#text": 9,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 9,
               },
               "ns2:Width": Object {
-                "#text": 9,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 9,
               },
             },
             "ns2:Label": "Pearl iZUMi",
@@ -732,28 +768,28 @@ Array [
             "ns2:Model": 275,
             "ns2:PackageDimensions": Object {
               "ns2:Height": Object {
-                "#text": 2.8,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 2.8,
               },
               "ns2:Length": Object {
-                "#text": 9.75,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 9.75,
               },
               "ns2:Weight": Object {
-                "#text": 0.4,
                 "attr": Object {
                   "Units": "pounds",
                 },
+                "text": 0.4,
               },
               "ns2:Width": Object {
-                "#text": 8.4,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 8.4,
               },
             },
             "ns2:PackageQuantity": 1,
@@ -763,17 +799,17 @@ Array [
             "ns2:Publisher": "Pearl iZUMi",
             "ns2:SmallImage": Object {
               "ns2:Height": Object {
-                "#text": 75,
                 "attr": Object {
                   "Units": "pixels",
                 },
+                "text": 75,
               },
               "ns2:URL": "http://ecx.images-amazon.com/images/I/41ty3Sn%2BU8L._SL75_.jpg",
               "ns2:Width": Object {
-                "#text": 58,
                 "attr": Object {
                   "Units": "pixels",
                 },
+                "text": 58,
               },
             },
             "ns2:Studio": "Pearl iZUMi",
@@ -900,28 +936,28 @@ Array [
               "ns2:Edition": 1,
               "ns2:ItemDimensions": Object {
                 "ns2:Height": Object {
-                  "#text": 9.25,
                   "attr": Object {
                     "Units": "inches",
                   },
+                  "text": 9.25,
                 },
                 "ns2:Length": Object {
-                  "#text": 7.38,
                   "attr": Object {
                     "Units": "inches",
                   },
+                  "text": 7.38,
                 },
                 "ns2:Weight": Object {
-                  "#text": 1.38,
                   "attr": Object {
                     "Units": "pounds",
                   },
+                  "text": 1.38,
                 },
                 "ns2:Width": Object {
-                  "#text": 0.73,
                   "attr": Object {
                     "Units": "inches",
                   },
+                  "text": 0.73,
                 },
               },
               "ns2:Label": "Manning Publications",
@@ -950,28 +986,28 @@ Array [
               "ns2:NumberOfPages": 368,
               "ns2:PackageDimensions": Object {
                 "ns2:Height": Object {
-                  "#text": 0.8,
                   "attr": Object {
                     "Units": "inches",
                   },
+                  "text": 0.8,
                 },
                 "ns2:Length": Object {
-                  "#text": 9.1,
                   "attr": Object {
                     "Units": "inches",
                   },
+                  "text": 9.1,
                 },
                 "ns2:Weight": Object {
-                  "#text": 1.35,
                   "attr": Object {
                     "Units": "pounds",
                   },
+                  "text": 1.35,
                 },
                 "ns2:Width": Object {
-                  "#text": 7.3,
                   "attr": Object {
                     "Units": "inches",
                   },
+                  "text": 7.3,
                 },
               },
               "ns2:PackageQuantity": 1,
@@ -982,17 +1018,17 @@ Array [
               "ns2:Publisher": "Manning Publications",
               "ns2:SmallImage": Object {
                 "ns2:Height": Object {
-                  "#text": 75,
                   "attr": Object {
                     "Units": "pixels",
                   },
+                  "text": 75,
                 },
                 "ns2:URL": "http://ecx.images-amazon.com/images/I/51EEz05N2HL._SL75_.jpg",
                 "ns2:Width": Object {
-                  "#text": 60,
                   "attr": Object {
                     "Units": "pixels",
                   },
+                  "text": 60,
                 },
               },
               "ns2:Studio": "Manning Publications",
@@ -1370,10 +1406,10 @@ Array [
             "ns2:Binding": "Paperback",
             "ns2:Brand": "Scholastic Press",
             "ns2:Creator": Object {
-              "#text": "GrandPrÃ©, Mary",
               "attr": Object {
                 "Role": "Illustrator",
               },
+              "text": "GrandPrÃ©, Mary",
             },
             "ns2:Edition": "1st",
             "ns2:Feature": "Recommended Age: 9 years and up",
@@ -1381,28 +1417,28 @@ Array [
             "ns2:IsMemorabilia": false,
             "ns2:ItemDimensions": Object {
               "ns2:Height": Object {
-                "#text": 0.8,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 0.8,
               },
               "ns2:Length": Object {
-                "#text": 7.5,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 7.5,
               },
               "ns2:Weight": Object {
-                "#text": 0.5,
                 "attr": Object {
                   "Units": "pounds",
                 },
+                "text": 0.5,
               },
               "ns2:Width": Object {
-                "#text": 5.2,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 5.2,
               },
             },
             "ns2:Label": "Scholastic Paperbacks",
@@ -1431,28 +1467,28 @@ Array [
             "ns2:NumberOfPages": 320,
             "ns2:PackageDimensions": Object {
               "ns2:Height": Object {
-                "#text": 1,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 1,
               },
               "ns2:Length": Object {
-                "#text": 7.5,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 7.5,
               },
               "ns2:Weight": Object {
-                "#text": 0.5,
                 "attr": Object {
                   "Units": "pounds",
                 },
+                "text": 0.5,
               },
               "ns2:Width": Object {
-                "#text": 5.2,
                 "attr": Object {
                   "Units": "inches",
                 },
+                "text": 5.2,
               },
             },
             "ns2:PackageQuantity": 1,
@@ -1464,17 +1500,17 @@ Array [
             "ns2:ReleaseDate": "1999-09-08",
             "ns2:SmallImage": Object {
               "ns2:Height": Object {
-                "#text": 75,
                 "attr": Object {
                   "Units": "pixels",
                 },
+                "text": 75,
               },
               "ns2:URL": "http://ecx.images-amazon.com/images/I/51MU5VilKpL._SL75_.jpg",
               "ns2:Width": Object {
-                "#text": 51,
                 "attr": Object {
                   "Units": "pixels",
                 },
+                "text": 51,
               },
             },
             "ns2:Studio": "Scholastic Paperbacks",
