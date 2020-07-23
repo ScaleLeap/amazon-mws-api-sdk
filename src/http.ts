@@ -35,6 +35,7 @@ import {
   InvalidScheduleFrequency,
   InvalidUPCIdentifier,
   NonRetriableInternalError,
+  ParsingError,
   PickupSlotNotAvailable,
   QuotaExceeded,
   RegionNotSupported,
@@ -311,15 +312,26 @@ const parseResponse = <T>(
   response: RequestResponse,
   parseString = false,
 ): [T | string, RequestMeta] => {
-  const responseData = parseString
-    ? response.data
-    : parser.parse(response.data, {
-        attributeNamePrefix: '',
-        ignoreAttributes: false,
-        attrNodeName: 'attr',
-        textNodeName: 'text',
-        tagValueProcessor: (value) => XmlEntities.decode(value),
-      })
+  let responseData
+  if (parseString) {
+    responseData = response.data
+  } else {
+    try {
+      responseData = parser.parse(
+        response.data,
+        {
+          attributeNamePrefix: '',
+          ignoreAttributes: false,
+          attrNodeName: 'attr',
+          textNodeName: 'text',
+          tagValueProcessor: (value) => XmlEntities.decode(value),
+        },
+        true,
+      )
+    } catch (error) {
+      throw new ParsingError(error.message)
+    }
+  }
   return [
     responseData,
     {
