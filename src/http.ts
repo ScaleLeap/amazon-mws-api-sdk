@@ -310,12 +310,18 @@ const parseResponse = <T>(
   response: RequestResponse,
   parseString = false,
 ): [T | string, RequestMeta] => {
-  let responseData
-  if (parseString) {
-    responseData = response.data
-  } else {
-    responseData = parser.parse(response.data, {})
-  }
+  const responseData = parseString
+    ? response.data
+    : parser.parse(
+        response.data,
+        {
+          attributeNamePrefix: '',
+          ignoreAttributes: false,
+          attrNodeName: 'attr',
+          textNodeName: 'text',
+        },
+        true,
+      )
   return [
     responseData,
     {
