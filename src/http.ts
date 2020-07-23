@@ -1,6 +1,7 @@
 import { AmazonMarketplace } from '@scaleleap/amazon-marketplaces'
 import axios from 'axios'
 import parser from 'fast-xml-parser'
+import { XmlEntities } from 'html-entities'
 import { URLSearchParams } from 'url'
 
 import {
@@ -312,16 +313,13 @@ const parseResponse = <T>(
 ): [T | string, RequestMeta] => {
   const responseData = parseString
     ? response.data
-    : parser.parse(
-        response.data,
-        {
-          attributeNamePrefix: '',
-          ignoreAttributes: false,
-          attrNodeName: 'attr',
-          textNodeName: 'text',
-        },
-        true,
-      )
+    : parser.parse(response.data, {
+        attributeNamePrefix: '',
+        ignoreAttributes: false,
+        attrNodeName: 'attr',
+        textNodeName: 'text',
+        tagValueProcessor: (value) => XmlEntities.decode(value),
+      })
   return [
     responseData,
     {
