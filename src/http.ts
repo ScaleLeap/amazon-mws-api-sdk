@@ -34,7 +34,6 @@ import {
   InvalidScheduleFrequency,
   InvalidUPCIdentifier,
   NonRetriableInternalError,
-  ParsingError,
   PickupSlotNotAvailable,
   QuotaExceeded,
   RegionNotSupported,
@@ -315,11 +314,7 @@ const parseResponse = <T>(
   if (parseString) {
     responseData = response.data
   } else {
-    try {
-      responseData = parser.parse(response.data, {}, true)
-    } catch (error) {
-      throw new ParsingError(error.message)
-    }
+    responseData = parser.parse(response.data, {})
   }
   return [
     responseData,
