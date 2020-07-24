@@ -1,7 +1,7 @@
 <CancelReportRequestsResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
   <CancelReportRequestsResult>
     <Count>2</Count>
-      <!--1 or more repetitions:-->
+    <!--1 or more repetitions:-->
     <ReportRequestInfo>
       <ReportType>_GET_MERCHANT_LISTINGS_ALL_DATA_</ReportType>
       <ReportProcessingStatus>_DONE_</ReportProcessingStatus>
@@ -28,3 +28,4 @@
   <ResponseMetadata>
     <RequestId>9f748edb-0173-4661-850f-a2ab4f0bf328</RequestId>
   </ResponseMetadata>
+</CancelReportRequestsResponse>

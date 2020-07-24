@@ -1,11 +1,15 @@
-import { ParsingError } from '../../src'
 import {
   FeesEstimateRequest,
   GetMatchingProductIdType,
   ItemCondition,
   MoneyType,
 } from '../../src/sections/products/type'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 describe('products', () => {
   describe('getProductCategoriesForAsin', () => {
@@ -30,8 +34,8 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getProductCategoriesForAsin(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.products.getProductCategoriesForAsin(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -57,8 +61,8 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getProductCategoriesForSku(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.products.getProductCategoriesForSku(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -79,8 +83,8 @@ describe('products', () => {
     it('throws an error when the response is nt valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.products.getMyPriceForAsin(parameters)).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.products.getMyPriceForAsin(parameters)).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -102,8 +106,8 @@ describe('products', () => {
     it('throws an error when the response is nt valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.products.getMyPriceForSku(parameters)).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.products.getMyPriceForSku(parameters)).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -131,8 +135,8 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getLowestPricedOffersForAsin(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.products.getLowestPricedOffersForAsin(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -179,8 +183,8 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getLowestPricedOffersForSku(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.products.getLowestPricedOffersForSku(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -206,8 +210,8 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getLowestOfferListingsForAsin(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.products.getLowestOfferListingsForAsin(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -233,8 +237,8 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getLowestOfferListingsForSku(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.products.getLowestOfferListingsForSku(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -258,11 +262,11 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getCompetitivePricingForAsin({
+        mockParsingError.products.getCompetitivePricingForAsin({
           MarketplaceId: '',
           ASINList: [],
         }),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -286,11 +290,11 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getCompetitivePricingForSku({
+        mockParsingError.products.getCompetitivePricingForSku({
           MarketplaceId: '',
           SellerSKUList: [],
         }),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -317,8 +321,8 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getMatchingProductForId(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.products.getMatchingProductForId(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -340,8 +344,8 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getMatchingProduct({ MarketplaceId: '', ASINList: [] }),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.products.getMatchingProduct({ MarketplaceId: '', ASINList: [] }),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -363,8 +367,8 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.listMatchingProducts({ MarketplaceId: '', Query: '' }),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.products.listMatchingProducts({ MarketplaceId: '', Query: '' }),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -401,8 +405,8 @@ describe('products', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.products.getMyFeesEstimate({ FeesEstimateRequestList: [] }),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.products.getMyFeesEstimate({ FeesEstimateRequestList: [] }),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -416,8 +420,8 @@ describe('products', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.products.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.products.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })

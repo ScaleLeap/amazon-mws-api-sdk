@@ -1,6 +1,10 @@
-import { ParsingError } from '../../src'
 import { NextToken } from '../../src/parsing'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 describe('orders', () => {
   describe('listOrders', () => {
@@ -17,8 +21,8 @@ describe('orders', () => {
     it('throws a parsing error when the response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.orders.listOrders(parameters)).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.orders.listOrders(parameters)).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -40,8 +44,8 @@ describe('orders', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.orders.listOrdersByNextToken(mockNextTokenOrders),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.orders.listOrdersByNextToken(mockNextTokenOrders),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -57,8 +61,8 @@ describe('orders', () => {
     it('throws an error when the response is invalid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.orders.getOrder({ AmazonOrderId: [] })).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.orders.getOrder({ AmazonOrderId: [] })).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -78,8 +82,8 @@ describe('orders', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.orders.listOrderItems({ AmazonOrderId: '' }),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.orders.listOrderItems({ AmazonOrderId: '' }),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -100,8 +104,8 @@ describe('orders', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.orders.listOrderItemsByNextToken(mockNextTokenOrderItems),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.orders.listOrderItemsByNextToken(mockNextTokenOrderItems),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -115,8 +119,8 @@ describe('orders', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.orders.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.orders.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })

@@ -1,10 +1,15 @@
-import { canonicalizeUpdateFulfillmentOrderParameters, NextToken, ParsingError } from '../../src'
+import { canonicalizeUpdateFulfillmentOrderParameters, NextToken } from '../../src'
 import {
   canonicalizeCreateFulfillmentOrderParameters,
   canonicalizeGetFulfillmentPreviewParameters,
   CreateFulfillmentOrderParameters,
 } from '../../src/sections/fulfillment-outbound-shipment/type'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 function mockEnum() {
   /**
@@ -178,8 +183,8 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.createFulfillmentReturn(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentOutboundShipment.createFulfillmentReturn(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -207,8 +212,8 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.listReturnReasonCodes(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentOutboundShipment.listReturnReasonCodes(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -233,8 +238,8 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.cancelFulfillmentOrder(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentOutboundShipment.cancelFulfillmentOrder(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -259,8 +264,8 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.getPackageTrackingDetails(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentOutboundShipment.getPackageTrackingDetails(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -285,8 +290,10 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.listAllFulfillmentOrdersByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentOutboundShipment.listAllFulfillmentOrdersByNextToken(
+          mockNextToken,
+        ),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -321,8 +328,8 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentOutboundShipment.getFulfillmentOrder(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -343,8 +350,8 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.listAllFulfillmentOrders(),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentOutboundShipment.listAllFulfillmentOrders(),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -371,8 +378,8 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.updateFulfillmentOrder(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentOutboundShipment.updateFulfillmentOrder(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -395,10 +402,10 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.createFulfillmentOrder(
+        mockParsingError.fulfillmentOutboundShipment.createFulfillmentOrder(
           createFulfillmentOrderParameters,
         ),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -426,8 +433,8 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.getFulfillmentPreview(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentOutboundShipment.getFulfillmentPreview(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -444,8 +451,8 @@ describe('fulfillmentOutboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentOutboundShipment.getServiceStatus(),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentOutboundShipment.getServiceStatus(),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 })

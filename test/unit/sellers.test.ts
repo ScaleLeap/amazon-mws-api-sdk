@@ -1,6 +1,10 @@
-import { ParsingError } from '../../src'
 import { NextToken } from '../../src/parsing'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 const mockMwsMarketplaceParticipations = createMockHttpClient(
   'sellers_list_marketplace_participations',
@@ -11,8 +15,6 @@ const mockMwsMarketplaceParticipationsNT = createMockHttpClient(
 )
 
 const mockNextToken = new NextToken('ListMarketplaceParticipations', '123')
-
-const parsingError = 'Expected an object, but received a string with value ""'
 
 describe('sellers', () => {
   describe('listMarketplaceParticipations', () => {
@@ -27,8 +29,8 @@ describe('sellers', () => {
     it('throws a parsing error when the response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.sellers.listMarketplaceParticipations()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.sellers.listMarketplaceParticipations()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -48,8 +50,8 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.sellers.listMarketplaceParticipationsByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.sellers.listMarketplaceParticipationsByNextToken(mockNextToken),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -63,8 +65,8 @@ describe('sellers', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.sellers.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.sellers.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })

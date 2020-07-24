@@ -1,6 +1,6 @@
 import { ParsingError, SubmitFeedParameters } from '../../src'
 import { NextToken } from '../../src/parsing'
-import { createMockHttpClient, mockMwsFail, parsingError } from '../utils'
+import { createMockHttpClient, mockMwsFail, mockParsingError, parsingErrorRegex } from '../utils'
 
 describe('feeds', () => {
   describe('submitFeed', () => {
@@ -20,8 +20,8 @@ describe('feeds', () => {
     it('throws a parsing error when the response isnt valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.feeds.submitFeed(parameters)).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.feeds.submitFeed(parameters)).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -60,8 +60,8 @@ describe('feeds', () => {
     it("throws a parsing error when the response isn't valid", async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.feeds.cancelFeedSubmissions()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.feeds.cancelFeedSubmissions()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -78,8 +78,8 @@ describe('feeds', () => {
     it("throws a parsing error when the response isn't valid", async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.feeds.getFeedSubmissionList()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.feeds.getFeedSubmissionList()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -101,8 +101,8 @@ describe('feeds', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.feeds.getFeedSubmissionListByNextToken(nextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.feeds.getFeedSubmissionListByNextToken(nextToken),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -118,8 +118,8 @@ describe('feeds', () => {
     it('throws a parsing error when the response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.feeds.getFeedSubmissionCount()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.feeds.getFeedSubmissionCount()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
