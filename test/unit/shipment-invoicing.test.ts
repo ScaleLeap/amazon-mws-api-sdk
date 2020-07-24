@@ -1,5 +1,9 @@
-import { ParsingError } from '../../src'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 describe('shipmentInvoicing', () => {
   describe('getFbaOutboundShipmentInvoiceStatus', () => {
@@ -26,8 +30,8 @@ describe('shipmentInvoicing', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.shipmentInvoicing.getFbaOutboundShipmentInvoiceStatus(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.shipmentInvoicing.getFbaOutboundShipmentInvoiceStatus(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -56,8 +60,8 @@ describe('shipmentInvoicing', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.shipmentInvoicing.submitFbaOutboundShipmentInvoice(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.shipmentInvoicing.submitFbaOutboundShipmentInvoice(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -85,8 +89,8 @@ describe('shipmentInvoicing', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.shipmentInvoicing.getFbaOutboundShipmentDetail(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.shipmentInvoicing.getFbaOutboundShipmentDetail(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -100,8 +104,8 @@ describe('shipmentInvoicing', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.shipmentInvoicing.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.shipmentInvoicing.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })

@@ -1,6 +1,10 @@
-import { ParsingError } from '../../src'
 import { NextToken } from '../../src/parsing'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 function mockEnum() {
   /**
@@ -53,8 +57,8 @@ describe('finances', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.finances.listFinancialEventsByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.finances.listFinancialEventsByNextToken(mockNextToken),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -94,9 +98,9 @@ describe('finances', () => {
     it('throws a parsing error when the status response isnt valid', async () => {
       expect.assertions(1)
 
-      await expect(() =>
-        mockMwsFail.finances.listFinancialEvents(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      await expect(() => mockParsingError.finances.listFinancialEvents(parameters)).rejects.toThrow(
+        parsingErrorRegex,
+      )
     })
   })
 
@@ -121,8 +125,8 @@ describe('finances', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.finances.listFinancialEventGroupsByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.finances.listFinancialEventGroupsByNextToken(mockNextToken),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -147,8 +151,8 @@ describe('finances', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.finances.listFinancialEventGroups(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.finances.listFinancialEventGroups(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -161,8 +165,8 @@ describe('finances', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.finances.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.finances.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })

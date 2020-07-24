@@ -1,5 +1,10 @@
-import { NextToken, ParsingError } from '../../src'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import { NextToken } from '../../src'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 function mockEnum() {
   /**
@@ -56,8 +61,8 @@ describe('recommendations', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.recommendations.listRecommendationsByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.recommendations.listRecommendationsByNextToken(mockNextToken),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -80,8 +85,8 @@ describe('recommendations', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.recommendations.listRecommendations(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.recommendations.listRecommendations(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -108,8 +113,8 @@ describe('recommendations', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.recommendations.getLastUpdatedTimeForRecommendations(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.recommendations.getLastUpdatedTimeForRecommendations(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -123,8 +128,8 @@ describe('recommendations', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.recommendations.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.recommendations.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
