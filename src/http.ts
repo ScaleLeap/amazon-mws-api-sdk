@@ -1,6 +1,7 @@
 import { AmazonMarketplace } from '@scaleleap/amazon-marketplaces'
 import axios from 'axios'
 import parser from 'fast-xml-parser'
+import { XmlEntities } from 'html-entities'
 import { URLSearchParams } from 'url'
 
 import {
@@ -34,6 +35,7 @@ import {
   InvalidScheduleFrequency,
   InvalidUPCIdentifier,
   NonRetriableInternalError,
+  ParsingError,
   PickupSlotNotAvailable,
   QuotaExceeded,
   RegionNotSupported,
@@ -310,14 +312,26 @@ const parseResponse = <T>(
   response: RequestResponse,
   parseString = false,
 ): [T | string, RequestMeta] => {
-  const responseData = parseString
-    ? response.data
-    : parser.parse(response.data, {
-        attributeNamePrefix: '',
-        ignoreAttributes: false,
-        attrNodeName: 'attr',
-        textNodeName: 'text',
-      })
+  let responseData
+  if (parseString) {
+    responseData = response.data
+  } else {
+    try {
+      responseData = parser.parse(
+        response.data,
+        {
+          attributeNamePrefix: '',
+          ignoreAttributes: false,
+          attrNodeName: 'attr',
+          textNodeName: 'text',
+          tagValueProcessor: (value) => XmlEntities.decode(value),
+        },
+        true,
+      )
+    } catch (error) {
+      throw new ParsingError(error.message)
+    }
+  }
   return [
     responseData,
     {
