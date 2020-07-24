@@ -1,6 +1,12 @@
 import { ParsingError } from '../../src'
 import { NextToken } from '../../src/parsing'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsFail,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingError,
+} from '../utils'
 
 const mockMwsMarketplaceParticipations = createMockHttpClient(
   'sellers_list_marketplace_participations',
@@ -48,6 +54,16 @@ describe('sellers', () => {
       await expect(() =>
         mockMwsFail.sellers.listMarketplaceParticipationsByNextToken(mockNextToken),
       ).rejects.toStrictEqual(new ParsingError(parsingError))
+    })
+
+    it('throws a parsing error when the xml is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockParsingError.sellers.listMarketplaceParticipationsByNextToken(mockNextToken),
+      ).rejects.toThrow(
+        /Problem with property "(.*?)": it does not exist in received object {"xml":""}/,
+      )
     })
   })
 

@@ -36,6 +36,10 @@ export const mockMwsFail = new MWS(
   new HttpClient(httpConfig, () => Promise.resolve({ data: '', headers: {} })),
 )
 
+export const mockParsingError = new MWS(
+  new HttpClient(httpConfig, () => Promise.resolve({ data: '<xml></xml>', headers: {} })),
+)
+
 export const parsingError = 'Start tag expected.'
 // export const parsingError = 'Expected an object, but received a string with value ""'
 
