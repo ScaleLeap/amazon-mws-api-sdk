@@ -1,6 +1,7 @@
 export * from './error'
 export * from './http'
 export * from './mws'
+export * from './sections/easy-ship'
 export * from './sections/feeds'
 export * from './sections/finances/finances'
 export * from './sections/finances/codec'

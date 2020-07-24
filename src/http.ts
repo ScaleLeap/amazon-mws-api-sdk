@@ -83,6 +83,7 @@ export enum Resource {
   MerchantFulfillment = 'MerchantFulfillment',
   FulfillmentInboundShipment = 'FulfillmentInboundShipment',
   FulfillmentOutboundShipment = 'FulfillmentOutboundShipment',
+  EasyShip = 'EasyShip',
 }
 
 export interface ResourceActions {
@@ -207,6 +208,12 @@ export interface ResourceActions {
     | 'CancelFulfillmentOrder'
     | 'ListReturnReasonCodes'
     | 'CreateFulfillmentReturn'
+    | 'GetServiceStatus'
+  [Resource.EasyShip]:
+    | 'ListPickupSlots'
+    | 'CreateScheduledPackage'
+    | 'UpdateScheduledPackages'
+    | 'GetScheduledPackage'
     | 'GetServiceStatus'
 }
 
