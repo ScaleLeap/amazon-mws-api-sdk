@@ -5,7 +5,9 @@ import {
   InvalidAddress,
   InvalidParameterValue,
   InvalidUPCIdentifier,
+  MWS,
   MWSError,
+  ParsingError,
 } from '../../src'
 import { cleanParameters, Parameters, Resource } from '../../src/http'
 import {
@@ -15,7 +17,7 @@ import {
   SellerInputDataType,
   Weight,
 } from '../../src/sections/merchant-fulfillment/type'
-import { getFixture } from '../utils'
+import { getFixture, httpConfig, mockMwsFail } from '../utils'
 
 const httpClientThatThrows = (error: unknown) =>
   new HttpClient(
@@ -488,6 +490,34 @@ describe('httpClient', () => {
       const cleaned = cleanParameters(parametersWithUndefined)
 
       expect(cleaned['InboundShipmentItems.member.1.ReleaseDate']).toBeUndefined()
+    })
+  })
+
+  describe('parseResponse', () => {
+    it('throws a parse error when the XML a blank string', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockMwsFail.sellers.getServiceStatus()).rejects.toStrictEqual(
+        new ParsingError('Start tag expected.'),
+      )
+    })
+
+    it('throws a parse error when the XML is missing closing tags', async () => {
+      expect.assertions(1)
+
+      const mockFXPValidationFail = new MWS(
+        new HttpClient(httpConfig, () =>
+          Promise.resolve({
+            data: '<StartTagWithClosing><StartTagWithoutClosing></StartTagWithClosing>',
+            headers: {},
+          }),
+        ),
+      )
+      await expect(() => mockFXPValidationFail.sellers.getServiceStatus()).rejects.toStrictEqual(
+        new ParsingError(
+          "Closing tag 'StartTagWithoutClosing' is expected inplace of 'StartTagWithClosing'.",
+        ),
+      )
     })
   })
 })
