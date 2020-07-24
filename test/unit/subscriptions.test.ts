@@ -1,10 +1,14 @@
-import { ParsingError } from '../../src'
 import {
   AttributeKeyValueKeys,
   DeliveryChannel,
   NotificationType,
 } from '../../src/sections/subscriptions'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 describe('sellers', () => {
   const mockDestination = {
@@ -59,8 +63,8 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.updateSubscription(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.subscriptions.updateSubscription(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -81,8 +85,8 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.deleteSubscription(mockSubscriptionActionParameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.subscriptions.deleteSubscription(mockSubscriptionActionParameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -101,8 +105,8 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.getSubscription(mockSubscriptionActionParameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.subscriptions.getSubscription(mockSubscriptionActionParameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -123,8 +127,8 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.createSubscription(mockMarketplaceIdSubscriptionParameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.subscriptions.createSubscription(mockMarketplaceIdSubscriptionParameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -147,10 +151,10 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.sendTestNotificationToDestination(
+        mockParsingError.subscriptions.sendTestNotificationToDestination(
           mockMarketplaceIdDestinationParameters,
         ),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -175,8 +179,8 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.listRegisteredDestinations(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.subscriptions.listRegisteredDestinations(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -197,8 +201,10 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.deregisterDestination(mockMarketplaceIdDestinationParameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.subscriptions.deregisterDestination(
+          mockMarketplaceIdDestinationParameters,
+        ),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -219,8 +225,8 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.subscriptions.registerDestination(mockMarketplaceIdDestinationParameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.subscriptions.registerDestination(mockMarketplaceIdDestinationParameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -234,8 +240,8 @@ describe('sellers', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.sellers.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.sellers.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })

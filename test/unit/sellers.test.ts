@@ -1,11 +1,9 @@
-import { ParsingError } from '../../src'
 import { NextToken } from '../../src/parsing'
 import {
   createMockHttpClient,
-  mockMwsFail,
   mockMwsServiceStatus,
   mockParsingError,
-  parsingError,
+  parsingErrorRegex,
 } from '../utils'
 
 const mockMwsMarketplaceParticipations = createMockHttpClient(
@@ -31,8 +29,8 @@ describe('sellers', () => {
     it('throws a parsing error when the response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.sellers.listMarketplaceParticipations()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.sellers.listMarketplaceParticipations()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -52,18 +50,8 @@ describe('sellers', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.sellers.listMarketplaceParticipationsByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
-    })
-
-    it('throws a parsing error when the xml is not valid', async () => {
-      expect.assertions(1)
-
-      await expect(() =>
         mockParsingError.sellers.listMarketplaceParticipationsByNextToken(mockNextToken),
-      ).rejects.toThrow(
-        /Problem with property "(.*?)": it does not exist in received object {"xml":""}/,
-      )
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -77,8 +65,8 @@ describe('sellers', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.sellers.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.sellers.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })

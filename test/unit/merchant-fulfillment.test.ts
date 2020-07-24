@@ -1,10 +1,14 @@
-import { ParsingError } from '../../src'
 import {
   GetEligibleShippingServicesParameters,
   ShippingServiceOptions as ShippingServiceOptionsInterface,
   Weight as WeightInterface,
 } from '../../src/sections/merchant-fulfillment/type'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 const mockAddress = {
   Name: '',
@@ -93,8 +97,8 @@ describe('merchant-fulfillment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.merchantFulfillment.cancelShipment(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.merchantFulfillment.cancelShipment(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -113,8 +117,8 @@ describe('merchant-fulfillment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.merchantFulfillment.getShipment(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.merchantFulfillment.getShipment(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -157,8 +161,8 @@ describe('merchant-fulfillment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.merchantFulfillment.getAddtionalSellerInputs(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.merchantFulfillment.getAddtionalSellerInputs(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -182,8 +186,8 @@ describe('merchant-fulfillment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.merchantFulfillment.createShipment(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.merchantFulfillment.createShipment(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -238,8 +242,8 @@ describe('merchant-fulfillment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.merchantFulfillment.getEligibleShippingServices(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.merchantFulfillment.getEligibleShippingServices(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -253,8 +257,8 @@ describe('merchant-fulfillment', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.merchantFulfillment.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.merchantFulfillment.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })

@@ -1,6 +1,10 @@
-import { ParsingError } from '../../src'
 import { NextToken } from '../../src/parsing'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 describe('fulfillment-inventory', () => {
   describe('listInventorySupply', () => {
@@ -24,8 +28,8 @@ describe('fulfillment-inventory', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInventory.listInventorySupply(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInventory.listInventorySupply(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -50,10 +54,10 @@ describe('fulfillment-inventory', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInventory.listInventorySupplyByNextToken(
+        mockParsingError.fulfillmentInventory.listInventorySupplyByNextToken(
           mockNextTokenInventorySupply,
         ),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -67,8 +71,8 @@ describe('fulfillment-inventory', () => {
     it('throws a parsing error when the status response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.fulfillmentInventory.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.fulfillmentInventory.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })

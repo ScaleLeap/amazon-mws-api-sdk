@@ -1,7 +1,7 @@
 import { ParsingError } from '../../src'
 import { NextToken } from '../../src/parsing'
 import { ScheduleType } from '../../src/sections/reports'
-import { createMockHttpClient, mockMwsFail, parsingError } from '../utils'
+import { createMockHttpClient, mockMwsFail, mockParsingError, parsingErrorRegex } from '../utils'
 
 describe('reports', () => {
   describe('updateReportAcknowledgements', () => {
@@ -37,8 +37,8 @@ describe('reports', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.reports.updateReportAcknowledgements(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.reports.updateReportAcknowledgements(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -54,8 +54,8 @@ describe('reports', () => {
     it('throws a parsing error when the response i snt valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.reports.getReportScheduleCount()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.reports.getReportScheduleCount()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -72,8 +72,8 @@ describe('reports', () => {
     it('throws a parsing error when the response is nt valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.reports.getReportScheduleList()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.reports.getReportScheduleList()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -97,9 +97,9 @@ describe('reports', () => {
     it('throws a parsing error when the response is nt valid', async () => {
       expect.assertions(1)
 
-      await expect(() =>
-        mockMwsFail.reports.manageReportSchedule(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+      await expect(() => mockParsingError.reports.manageReportSchedule(parameters)).rejects.toThrow(
+        parsingErrorRegex,
+      )
     })
   })
 
@@ -140,8 +140,8 @@ describe('reports', () => {
     it('throws a parsing error when the response isn t valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.reports.getReportCount()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.reports.getReportCount()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -163,8 +163,8 @@ describe('reports', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.reports.getReportListByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.reports.getReportListByNextToken(mockNextToken),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -188,8 +188,8 @@ describe('reports', () => {
     it('throws a parsing error when the response isnt valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.reports.getReportList()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.reports.getReportList()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -216,8 +216,8 @@ describe('reports', () => {
     it('throws a parsing error when the response isnt valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.reports.cancelReportRequests()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.reports.cancelReportRequests()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -234,8 +234,8 @@ describe('reports', () => {
     it("throws a parsing error when the response isn't valid", async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.reports.getReportRequestCount()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.reports.getReportRequestCount()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -261,8 +261,8 @@ describe('reports', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.reports.getReportRequestListByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.reports.getReportRequestListByNextToken(mockNextToken),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -288,8 +288,8 @@ describe('reports', () => {
     it('throws a parsing error when the response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.reports.getReportRequestList()).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.reports.getReportRequestList()).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })
@@ -310,8 +310,8 @@ describe('reports', () => {
     it('throws a parsing error when the response is not valid', async () => {
       expect.assertions(1)
 
-      await expect(() => mockMwsFail.reports.requestReport(parameters)).rejects.toStrictEqual(
-        new ParsingError(parsingError),
+      await expect(() => mockParsingError.reports.requestReport(parameters)).rejects.toThrow(
+        parsingErrorRegex,
       )
     })
   })

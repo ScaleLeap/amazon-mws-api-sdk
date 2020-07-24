@@ -15,10 +15,14 @@ import {
   InboundShipmentPlanRequestItem,
   NextToken,
   PageType,
-  ParsingError,
   PartneredSmallParcelPackageInput,
 } from '../../src'
-import { createMockHttpClient, mockMwsFail, mockMwsServiceStatus, parsingError } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 function mockFunctions() {
   /**
@@ -234,8 +238,10 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.listInboundShipmentItemsByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.listInboundShipmentItemsByNextToken(
+          mockNextToken,
+        ),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -262,8 +268,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.listInboundShipmentItems(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.listInboundShipmentItems(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -288,8 +294,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.listInboundShipmentsByNextToken(mockNextToken),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.listInboundShipmentsByNextToken(mockNextToken),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -327,8 +333,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.listInboundShipments(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.listInboundShipments(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -353,8 +359,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getBillOfLading(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getBillOfLading(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -381,8 +387,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getPalletLabels(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getPalletLabels(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -411,8 +417,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getUniquePackageLabels(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getUniquePackageLabels(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -438,8 +444,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getPackageLabels(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getPackageLabels(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -464,8 +470,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.voidTransportRequest(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.voidTransportRequest(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -492,8 +498,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.confirmTransportRequest(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.confirmTransportRequest(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -530,8 +536,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getTransportContent(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getTransportContent(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -558,8 +564,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.estimateTransportRequest(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.estimateTransportRequest(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -607,8 +613,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.putTransportContent(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.putTransportContent(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -636,8 +642,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getPrepInstructionsForAsin(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getPrepInstructionsForAsin(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -665,8 +671,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getPrepInstructionsForSku(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getPrepInstructionsForSku(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -692,8 +698,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.confirmPreorder(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.confirmPreorder(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -716,8 +722,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getPreorderInfo(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getPreorderInfo(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -746,8 +752,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.updateInboundShipment(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.updateInboundShipment(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -776,8 +782,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.createInboundShipment(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.createInboundShipment(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -810,8 +816,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.createInboundShipmentPlan(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.createInboundShipmentPlan(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -839,8 +845,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getInboundGuidanceForAsin(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getInboundGuidanceForAsin(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -868,8 +874,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getInboundGuidanceForSku(parameters),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getInboundGuidanceForSku(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 
@@ -886,8 +892,8 @@ describe('fulfillmentInboundShipment', () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.fulfillmentInboundShipment.getServiceStatus(),
-      ).rejects.toStrictEqual(new ParsingError(parsingError))
+        mockParsingError.fulfillmentInboundShipment.getServiceStatus(),
+      ).rejects.toThrow(parsingErrorRegex)
     })
   })
 })

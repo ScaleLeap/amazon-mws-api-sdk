@@ -44,3 +44,5 @@ export const parsingError = 'Start tag expected.'
 // export const parsingError = 'Expected an object, but received a string with value ""'
 
 export const mockMwsServiceStatus = createMockHttpClient('get_service_status')
+
+export const parsingErrorRegex = /Problem with property "(.*?): it does not exist in received object {"xml":""}/
