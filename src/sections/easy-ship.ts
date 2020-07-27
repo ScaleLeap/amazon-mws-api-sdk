@@ -7,7 +7,7 @@ import { getServiceStatusByResource } from './shared'
 
 const EASY_SHIP_API_VERSION = '2018-09-01'
 
-interface ESDimensions {
+export interface ESDimensions {
   Length: number
   Width: number
   Height: number
@@ -16,13 +16,13 @@ interface ESDimensions {
   [key: string]: string | number | undefined
 }
 
-interface ESWeight {
+export interface ESWeight {
   Value: number
   Unit: string
   [key: string]: string | number
 }
 
-interface ListPickupSlotsParameters {
+export interface ListPickupSlotsParameters {
   MarketplaceId: string
   AmazonOrderId: string
   PackageDimensions: ESDimensions
@@ -35,12 +35,12 @@ const PickupSlot = Codec.interface({
   PickupTimeEnd: mwsDate,
 })
 
-const ListPickupSlots = Codec.interface({
+export const ListPickupSlots = Codec.interface({
   AmazonOrderId: string,
   PickupSlotList: ensureArray('PickupSlot', PickupSlot),
 })
 
-type ListPickupSlots = GetInterface<typeof ListPickupSlots>
+export type ListPickupSlots = GetInterface<typeof ListPickupSlots>
 
 const ListPickupSlotsResponse = Codec.interface({
   ListPickupSlotsResponse: Codec.interface({
@@ -48,26 +48,26 @@ const ListPickupSlotsResponse = Codec.interface({
   }),
 })
 
-interface Item {
+export interface ESItem {
   OrderItemId: string
   OrderItemSerialNumberList: string
 }
 
-interface PickupSlot {
+export interface PickupSlot {
   SlotId: string
   PickupTimeStart: Date
   PickupTimeEnd: Date
 }
 
-interface PackageRequestDetails {
+export interface PackageRequestDetails {
   PackageDimensions?: ESDimensions
   PackageWeight?: ESWeight
-  PackageItemList?: Item[]
+  PackageItemList?: ESItem[]
   PackagePickupSlot: PickupSlot
   PackageIdentifier?: string
 }
 
-interface CreateScheduledPackageParameters {
+export interface CreateScheduledPackageParameters {
   AmazonOrderId: string
   MarketplaceId: string
   PackageRequestDetails: PackageRequestDetails
@@ -112,11 +112,11 @@ const Package = Codec.interface({
   PackageStatus: optional(string),
 })
 
-const CreateScheduledPackage = Codec.interface({
+export const CreateScheduledPackage = Codec.interface({
   ScheduledPackage: Package,
 })
 
-type CreateScheduledPackage = GetInterface<typeof CreateScheduledPackage>
+export type CreateScheduledPackage = GetInterface<typeof CreateScheduledPackage>
 
 const CreateScheduledPackageResponse = Codec.interface({
   CreateScheduledPackageResponse: Codec.interface({
@@ -124,26 +124,26 @@ const CreateScheduledPackageResponse = Codec.interface({
   }),
 })
 
-interface ScheduledPackageId {
+export interface ScheduledPackageId {
   AmazonOrderId: string
   PackageId?: string
 }
 
-interface ScheduledPackageUpdateDetails {
+export interface ScheduledPackageUpdateDetails {
   ScheduledPackageId: ScheduledPackageId
   PackagePickupSlot: PickupSlot
 }
 
-interface UpdateScheduledPackagesParameters {
+export interface UpdateScheduledPackagesParameters {
   MarketplaceId: string
   ScheduledPackageUpdateDetailsList: ScheduledPackageUpdateDetails[]
 }
 
-const UpdateScheduledPackages = Codec.interface({
+export const UpdateScheduledPackages = Codec.interface({
   ScheduledPackageList: ensureArray('Package', Package),
 })
 
-type UpdateScheduledPackages = GetInterface<typeof UpdateScheduledPackages>
+export type UpdateScheduledPackages = GetInterface<typeof UpdateScheduledPackages>
 
 const UpdateScheduledPackagesResponse = Codec.interface({
   UpdateScheduledPackagesResponse: Codec.interface({
@@ -151,16 +151,16 @@ const UpdateScheduledPackagesResponse = Codec.interface({
   }),
 })
 
-interface GetScheduledPackageParameters {
+export interface GetScheduledPackageParameters {
   ScheduledPackageId: ScheduledPackageId
   MarketplaceId: string
 }
 
-const GetScheduledPackage = Codec.interface({
+export const GetScheduledPackage = Codec.interface({
   ScheduledPackage: Package,
 })
 
-type GetScheduledPackage = GetInterface<typeof GetScheduledPackage>
+export type GetScheduledPackage = GetInterface<typeof GetScheduledPackage>
 
 const GetScheduledPackageResponse = Codec.interface({
   GetScheduledPackageResponse: Codec.interface({
