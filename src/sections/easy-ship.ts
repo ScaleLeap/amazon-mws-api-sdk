@@ -1,4 +1,4 @@
-import { Codec, GetInterface, string } from 'purify-ts'
+import { Codec, GetInterface, string, optional, number, enumeration } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -48,8 +48,115 @@ const ListPickupSlotsResponse = Codec.interface({
   }),
 })
 
+interface Item {
+  OrderItemId: string
+  OrderItemSerialNumberList: string
+}
+
+interface PickupSlot {
+  SlotId: string
+  PickupTimeStart: Date
+  PickupTimeEnd: Date
+}
+
+interface PackageRequestDetails {
+  PackageDimensions?: ESDimensions
+  PackageWeight?: ESWeight
+  PackageItemList?: Item[]
+  PackagePickupSlot: PickupSlot
+  PackageIdentifier?: string
+}
+
+interface CreateScheduledPackageParameters {
+  AmazonOrderId: string
+  MarketplaceId: string
+  PackageRequestDetails: PackageRequestDetails
+}
+
+const ScheduledPackageId = Codec.interface({
+  AmazonOrderId: string,
+  PackageId: optional(string),
+})
+
+const ESDimensions = Codec.interface({
+  Length: number,
+  Width: number,
+  Height: number,
+  Unit: string,
+  Name: optional(string),
+})
+
+const ESWeight = Codec.interface({
+  Value: number,
+  Unit: string,
+})
+
+const Item = Codec.interface({
+  OrderItemId: string,
+  OrderItemSerialNumberList: ensureArray('member', string),
+})
+
+const InvoiceData = Codec.interface({
+  InvoiceNumber: string,
+  InvoiceDate: optional(mwsDate),
+})
+
+const Package = Codec.interface({
+  ScheduledPackageId,
+  PackageDimensions: ESDimensions,
+  PackageWeight: ESWeight,
+  PackageItemsList: optional(ensureArray('Item', Item)),
+  PackagePickupSlot: PickupSlot,
+  PackageIdentifier: optional(string),
+  Invoice: optional(InvoiceData),
+  PackageStatus: optional(string),
+})
+
+const CreateScheduledPackage = Codec.interface({
+  ScheduledPackage: Package,
+})
+
+type CreateScheduledPackage = GetInterface<typeof CreateScheduledPackage>
+
+const CreateScheduledPackageResponse = Codec.interface({
+  CreateScheduledPackageResponse: Codec.interface({
+    CreateScheduledPackageResult: CreateScheduledPackage,
+  }),
+})
+
 export class EasyShip {
   constructor(private httpClient: HttpClient) {}
+
+  async createScheduledPackage(
+    parameters: CreateScheduledPackageParameters,
+  ): Promise<[CreateScheduledPackage, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.EasyShip,
+      version: EASY_SHIP_API_VERSION,
+      action: 'CreateScheduledPackage',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        AmazonOrderId: parameters.AmazonOrderId,
+        PackageRequestDetails: {
+          PackageDimensions: parameters.PackageRequestDetails.PackageDimensions,
+          PackageWeight: parameters.PackageRequestDetails.PackageWeight,
+          PackagePickupSlot: {
+            SlotId: parameters.PackageRequestDetails.PackagePickupSlot.SlotId,
+            PickupTimeStart: parameters.PackageRequestDetails.PackagePickupSlot.PickupTimeStart.toISOString(),
+            PickupTimeEnd: parameters.PackageRequestDetails.PackagePickupSlot.PickupTimeEnd.toISOString(),
+          },
+        },
+        PackageIdentifier: parameters.PackageRequestDetails.PackageIdentifier,
+      },
+    })
+
+    return CreateScheduledPackageResponse.decode(response).caseOf({
+      Right: (x) => [x.CreateScheduledPackageResponse.CreateScheduledPackageResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async listPickupSlots(
     parameters: ListPickupSlotsParameters,
