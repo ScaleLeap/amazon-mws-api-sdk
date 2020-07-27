@@ -124,8 +124,66 @@ const CreateScheduledPackageResponse = Codec.interface({
   }),
 })
 
+interface ScheduledPackageId {
+  AmazonOrderId: string
+  PackageId?: string
+}
+
+interface ScheduledPackageUpdateDetails {
+  ScheduledPackageId: ScheduledPackageId
+  PackagePickupSlot: PickupSlot
+}
+
+interface UpdateScheduledPackagesParameters {
+  MarketplaceId: string
+  ScheduledPackageUpdateDetailsList: ScheduledPackageUpdateDetails[]
+}
+
+const UpdateScheduledPackages = Codec.interface({
+  ScheduledPackageList: ensureArray('Package', Package),
+})
+
+type UpdateScheduledPackages = GetInterface<typeof UpdateScheduledPackages>
+
+const UpdateScheduledPackagesResponse = Codec.interface({
+  UpdateScheduledPackagesResponse: Codec.interface({
+    UpdateScheduledPackagesResult: UpdateScheduledPackages,
+  }),
+})
 export class EasyShip {
   constructor(private httpClient: HttpClient) {}
+
+  async updateScheduledPackages(
+    parameters: UpdateScheduledPackagesParameters,
+  ): Promise<[UpdateScheduledPackages, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.EasyShip,
+      version: EASY_SHIP_API_VERSION,
+      action: 'UpdateScheduledPackages',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        'ScheduledPackageUpdateDetailsList.PackageUpdateDetails': parameters.ScheduledPackageUpdateDetailsList.map(
+          (packageUpdate) => {
+            return {
+              ScheduledPackageId: packageUpdate.ScheduledPackageId,
+              PackagePickupSlot: {
+                SlotId: packageUpdate.PackagePickupSlot.SlotId,
+                PickupTimeStart: packageUpdate.PackagePickupSlot.PickupTimeStart.toISOString(),
+                PickupTimeEnd: packageUpdate.PackagePickupSlot.PickupTimeEnd.toISOString(),
+              },
+            }
+          },
+        ),
+      },
+    })
+
+    return UpdateScheduledPackagesResponse.decode(response).caseOf({
+      Right: (x) => [x.UpdateScheduledPackagesResponse.UpdateScheduledPackagesResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async createScheduledPackage(
     parameters: CreateScheduledPackageParameters,

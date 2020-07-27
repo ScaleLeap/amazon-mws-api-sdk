@@ -61,7 +61,32 @@ const mockScheduledPackageId = {
 }
 
 describe('easyShip', () => {
-  describe('updateScheduledPackages', async () => {
+  describe('getScheduledPackage', () => {
+    const parameters = {
+      ScheduledPackageId: mockScheduledPackageId,
+      MarketplaceId: '',
+    }
+
+    it('returns info about the scheduled package if succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetScheduledPackage = createMockHttpClient('easy_ship_update_scheduled_packages')
+
+      expect(
+        await mockGetScheduledPackage.easyShip.getScheduledPackage(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it("throws a parsing error when the status response isn't valid", async () => {
+      expect.assertions(1)
+
+      await expect(() => mockParsingError.easyShip.getScheduledPackage(parameters)).rejects.toThrow(
+        parsingErrorRegex,
+      )
+    })
+  })
+
+  describe('updateScheduledPackages', () => {
     const mockScheduledPackageUpdateDetails = {
       ScheduledPackageId: mockScheduledPackageId,
       PackagePickupSlot: mockPickupSlot,
