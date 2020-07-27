@@ -1,4 +1,4 @@
-import { Codec, GetInterface, string, optional, number, enumeration } from 'purify-ts'
+import { Codec, GetInterface, number, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
