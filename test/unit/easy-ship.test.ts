@@ -1,4 +1,9 @@
-import { createMockHttpClient, mockMwsServiceStatus } from '../utils'
+import {
+  createMockHttpClient,
+  mockMwsServiceStatus,
+  mockParsingError,
+  parsingErrorRegex,
+} from '../utils'
 
 function mockEnum() {
   /**
@@ -82,6 +87,14 @@ describe('easyShip', () => {
         await mockCreateSchedulePackage.easyShip.createScheduledPackage(parameters),
       ).toMatchSnapshot()
     })
+
+    it('throws a parsing error when the status response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockParsingError.easyShip.createScheduledPackage(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
+    })
   })
 
   describe('listPickupSlots', () => {
@@ -99,6 +112,14 @@ describe('easyShip', () => {
 
       expect(await mockListPickupSlots.easyShip.listPickupSlots(parameters)).toMatchSnapshot()
     })
+
+    it('throws a parsing error when the status response isn t valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockParsingError.easyShip.listPickupSlots(parameters)).rejects.toThrow(
+        parsingErrorRegex,
+      )
+    })
   })
 
   describe('getServiceStatus', () => {
@@ -106,6 +127,14 @@ describe('easyShip', () => {
       expect.assertions(1)
 
       expect(await mockMwsServiceStatus.easyShip.getServiceStatus()).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response isn t valid', async () => {
+      expect.assertions(1)
+
+      await expect(() => mockParsingError.easyShip.getServiceStatus()).rejects.toThrow(
+        parsingErrorRegex,
+      )
     })
   })
 })
