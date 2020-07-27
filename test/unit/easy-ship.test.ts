@@ -50,13 +50,49 @@ const mockWeight = {
   Unit: 'g',
 }
 
+const mockPickupSlot = {
+  SlotId: '',
+  PickupTimeStart: new Date(),
+  PickupTimeEnd: new Date(),
+}
+
+const mockScheduledPackageId = {
+  AmazonOrderId: '',
+}
+
 describe('easyShip', () => {
-  describe('createScheduledPackage', () => {
-    const mockPickupSlot = {
-      SlotId: '',
-      PickupTimeStart: new Date(),
-      PickupTimeEnd: new Date(),
+  describe('updateScheduledPackages', async () => {
+    const mockScheduledPackageUpdateDetails = {
+      ScheduledPackageId: mockScheduledPackageId,
+      PackagePickupSlot: mockPickupSlot,
     }
+    const parameters = {
+      MarketplaceId: '',
+      ScheduledPackageUpdateDetailsList: [mockScheduledPackageUpdateDetails],
+    }
+
+    it('returns a list of packages if succesful', async () => {
+      expect.assertions(1)
+
+      const mockUpdateScheduledPackages = createMockHttpClient(
+        'easy_ship_update_scheduled_packages',
+      )
+
+      expect(
+        await mockUpdateScheduledPackages.easyShip.updateScheduledPackages(parameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws a parsing error when the status response is not valid', async () => {
+      expect.assertions(1)
+
+      await expect(() =>
+        mockParsingError.easyShip.updateScheduledPackages(parameters),
+      ).rejects.toThrow(parsingErrorRegex)
+    })
+  })
+
+  describe('createScheduledPackage', () => {
     const mockPackageRequestDetails = {
       PackagePickupSlot: mockPickupSlot,
     }
