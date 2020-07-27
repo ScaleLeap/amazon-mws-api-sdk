@@ -70,7 +70,7 @@ describe('easyShip', () => {
     it('returns info about the scheduled package if succesful', async () => {
       expect.assertions(1)
 
-      const mockGetScheduledPackage = createMockHttpClient('easy_ship_update_scheduled_packages')
+      const mockGetScheduledPackage = createMockHttpClient('easy_ship_get_scheduled_package')
 
       expect(
         await mockGetScheduledPackage.easyShip.getScheduledPackage(parameters),

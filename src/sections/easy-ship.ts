@@ -150,8 +150,50 @@ const UpdateScheduledPackagesResponse = Codec.interface({
     UpdateScheduledPackagesResult: UpdateScheduledPackages,
   }),
 })
+
+interface GetScheduledPackageParameters {
+  ScheduledPackageId: ScheduledPackageId
+  MarketplaceId: string
+}
+
+const GetScheduledPackage = Codec.interface({
+  ScheduledPackage: Package,
+})
+
+type GetScheduledPackage = GetInterface<typeof GetScheduledPackage>
+
+const GetScheduledPackageResponse = Codec.interface({
+  GetScheduledPackageResponse: Codec.interface({
+    GetScheduledPackageResult: GetScheduledPackage,
+  }),
+})
+
 export class EasyShip {
   constructor(private httpClient: HttpClient) {}
+
+  async getScheduledPackage(
+    parameters: GetScheduledPackageParameters,
+  ): Promise<[GetScheduledPackage, RequestMeta]> {
+    const [response, meta] = await this.httpClient.request('POST', {
+      resource: Resource.EasyShip,
+      version: EASY_SHIP_API_VERSION,
+      action: 'GetScheduledPackage',
+      parameters: {
+        MarketplaceId: parameters.MarketplaceId,
+        ScheduledPackageId: {
+          AmazonOrderId: parameters.ScheduledPackageId.AmazonOrderId,
+          PackageId: parameters.ScheduledPackageId.PackageId,
+        },
+      },
+    })
+
+    return GetScheduledPackageResponse.decode(response).caseOf({
+      Right: (x) => [x.GetScheduledPackageResponse.GetScheduledPackageResult, meta],
+      Left: (error) => {
+        throw new ParsingError(error)
+      },
+    })
+  }
 
   async updateScheduledPackages(
     parameters: UpdateScheduledPackagesParameters,
