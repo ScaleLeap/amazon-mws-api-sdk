@@ -182,6 +182,8 @@
     - [listReturnReasonCodes](#listreturnreasoncodes)
     - [createFulfillmentReturn](#createfulfillmentreturn)
     - [getServiceStatus](#getservicestatus-9)
+  - [FulfillmentOutboundShipment](#fulfillmentoutboundshipment-1)
+    - [getServiceStatus](#getservicestatus-10)
 
 # Basics
 
@@ -3767,3 +3769,28 @@ const [response, meta] = fos.getServiceStatus()
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- /////////////////////////////START EASYSHIP/////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+## FulfillmentOutboundShipment
+
+### getServiceStatus
+
+**Parameters**
+
+| None |
+| ---- |
+
+**Example**
+
+```typescript
+const easyShip = new EasyShip(httpClient)
+const [response, meta] = easyShip.getServiceStatus()
+```
+
+**Response**
+
+[See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
