@@ -186,11 +186,15 @@
     - [Types used in EasyShip](#types-used-in-easyship)
       - [Dimensions](#dimensions-1)
       - [Weight](#weight-2)
+      - [Item](#item-1)
+      - [PickupSlot](#pickupslot)
       - [PackageRequestDetails](#packagerequestdetails)
       - [ScheduledPackageUpdateDetails](#scheduledpackageupdatedetails)
+      - [ScheduledPackageId](#scheduledpackageid)
     - [listPickupSlots](#listpickupslots)
     - [createScheduledPackage](#createscheduledpackage)
     - [updateScheduledPackages](#updatescheduledpackages)
+    - [getScheduledPackage](#getscheduledpackage)
     - [getServiceStatus](#getservicestatus-10)
 
 # Basics
@@ -3788,13 +3792,77 @@ const [response, meta] = fos.getServiceStatus()
 ### Types used in EasyShip
 
 #### Dimensions
-@todo
+
+**Properties**
+
+| Name   | Type   | Example      | Required |
+| ------ | ------ | ------------ | -------- |
+| Length | number | `1`          | Yes      |
+| Width  | number | `1`          | Yes      |
+| Height | number | `1`          | Yes      |
+| Unit   | string | `cm`         | Yes      |
+| Name   | string | `Identifier` | No       |
+
+* Unlike other sections `EasyShip` documentation does not specify possible values for `Unit`
+
 #### Weight
-@todo
+
+**Properties**
+
+| Name  | Type   | Example | Required |
+| ----- | ------ | ------- | -------- |
+| Value | number | `10`    | Yes      |
+| Unit  | string | `'g'`   | Yes      |
+
+* Unlike other sections `EasyShip` documentation does not specify possible values for `Unit`
+
+#### Item
+**Properties**
+
+| Name                      | Type     | Example          | Required |
+| ------------------------- | -------- | ---------------- | -------- |
+| OrderItemId               | string   | `'AMZONORDERID'` | Yes      |
+| OrderItemSerialNumberList | string[] | `['1234']`       | Yes      |
+
+#### PickupSlot
+**Properties**
+
+| Name            | Type   | Example          | Required |
+| --------------- | ------ | ---------------- | -------- |
+| SlotId          | string | `'AMZONORDERID'` | Yes      |
+| PickupTimeStart | Date   | `new Date()`     | No       |
+| PickupTimeEnd   | Date   | `new Date()`     | No       |
+
+
 #### PackageRequestDetails
-@todo
+
+**Properties**
+
+| Name              | Type       | Example                       | Required |
+| ----------------- | ---------- | ----------------------------- | -------- |
+| PackageDimensions | Dimensions | [`Dimensions`](#dimensions-1) | No       |
+| PackageWeight     | Weight     | [`Weight`](#weight-2)         | No       |
+| PackageItemList   | Item[]     | [`[Item]`](#item-1)           | No       |
+| PackagePickupSlot | PickupSlot | [`PickupSlot`](#pickupslot)   | Yes      |
+| PackageIdentifier | strign     | `'PackageIdentifier'`         | No       |
+
 #### ScheduledPackageUpdateDetails
-@todo
+
+**Properties**
+
+| Name               | Type               | Example                                     | Required |
+| ------------------ | ------------------ | ------------------------------------------- | -------- |
+| ScheduledPackageId | ScheduledPackageId | [`ScheduledPackageId`](#scheduledpackageid) | No       |
+| PackagePickupSlot  | PickupSlot         | [`PickupSlot`](#pickupslot)                 | Yes      |
+
+#### ScheduledPackageId
+**Properties**
+
+| Name          | Type   | Example          | Required |
+| ------------- | ------ | ---------------- | -------- |
+| AmazonOrderId | string | `'AMZONORDERID'` | Yes      |
+| PackageId     | string | `'PKGID'`        | Yes      |
+
 
 ### listPickupSlots
 
@@ -3878,10 +3946,10 @@ const [response, meta] = easyShip.createScheduledPackage(parameters)
 
 **Parameters**
 
-| Name                              | Type                            | Example                                                           | Required |
-| --------------------------------- | ------------------------------- | ----------------------------------------------------------------- | -------- |
-| AmazonOrderId                     | string                          | `'AMZONORDERID'`                                                  | Yes      |
-| ScheduledPackageUpdateDetailsList | ScheduledPackageUpdateDetails[] | [`ScheduledPackageUpdateDetails`](#scheduledpackageupdatedetails) | Yes      |
+| Name                              | Type                            | Example                                                             | Required |
+| --------------------------------- | ------------------------------- | ------------------------------------------------------------------- | -------- |
+| AmazonOrderId                     | string                          | `'AMZONORDERID'`                                                    | Yes      |
+| ScheduledPackageUpdateDetailsList | ScheduledPackageUpdateDetails[] | [`[ScheduledPackageUpdateDetails]`](#scheduledpackageupdatedetails) | Yes      |
 
 **Example**
 
@@ -3908,6 +3976,36 @@ const parameters = {
 
 const easyShip = new EasyShip(httpClient)
 const [response, meta] = easyShip.updateScheduledPackages(parameters)
+```
+
+**Response**
+
+[See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
+
+### getScheduledPackage
+
+**Parameters**
+
+| Name               | Type               | Example                                     | Required |
+| ------------------ | ------------------ | ------------------------------------------- | -------- |
+| ScheduledPackageId | ScheduledPackageId | [`ScheduledPackageId`](#scheduledpackageid) | Yes      |
+| MarketplaceId      | string             | `'A2EUQ1WTGCTBG2'`                          | Yes      |
+
+**Example**
+
+```typescript
+
+const mockScheduledPackageId = {
+  AmazonOrderId: '',
+}
+
+const parameters = {
+  ScheduledPackageId: mockScheduledPackageId,
+  MarketplaceId: '',
+}
+
+const easyShip = new EasyShip(httpClient)
+const [response, meta] = easyShip.getScheduledPackage(parameters)
 ```
 
 **Response**
