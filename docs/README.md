@@ -182,7 +182,11 @@
     - [listReturnReasonCodes](#listreturnreasoncodes)
     - [createFulfillmentReturn](#createfulfillmentreturn)
     - [getServiceStatus](#getservicestatus-9)
-  - [FulfillmentOutboundShipment](#fulfillmentoutboundshipment-1)
+  - [EasyShip](#easyship)
+    - [Types used in EasyShip](#types-used-in-easyship)
+      - [Dimensions](#dimensions-1)
+      - [Weight](#weight-2)
+    - [listPickupSlots](#listpickupslots)
     - [getServiceStatus](#getservicestatus-10)
 
 # Basics
@@ -3775,7 +3779,56 @@ const [response, meta] = fos.getServiceStatus()
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-## FulfillmentOutboundShipment
+## EasyShip
+
+### Types used in EasyShip
+
+#### Dimensions
+@todo
+#### Weight
+@todo
+
+### listPickupSlots
+
+**Parameters**
+
+| Name              | Type       | Example                       | Required |
+| ----------------- | ---------- | ----------------------------- | -------- |
+| MarketplaceId     | string     | `'A2EUQ1WTGCTBG2'`            | Yes      |
+| AmazonOrderId     | string     | `'AMZONORDERID'`              | Yes      |
+| PackageDimensions | Dimensions | [`Dimensions`](#dimensions-1) | Yes      |
+| PackageWeight     | Weight     | [`Weight`](#weight-2)         | Yes      |
+
+**Example**
+
+```typescript
+const mockDimensions = {
+  Length: 1,
+  Width: 1,
+  Height: 1,
+  Unit: 'cm',
+}
+
+const mockWeight = {
+  Value: 1,
+  Unit: 'g',
+}
+
+const parameters = {
+  MarketplaceId: '',
+  AmazonOrderId: '',
+  PackageDimensions: mockDimensions,
+  PackageWeight: mockWeight,
+}
+
+const easyShip = new EasyShip(httpClient)
+const [response, meta] = easyShip.listPickupSlots(parameters)
+```
+
+**Response**
+
+[See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
+
 
 ### getServiceStatus
 
