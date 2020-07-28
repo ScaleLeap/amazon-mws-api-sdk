@@ -50,7 +50,7 @@ const ListPickupSlotsResponse = Codec.interface({
 
 export interface ESItem {
   OrderItemId: string
-  OrderItemSerialNumberList: string
+  OrderItemSerialNumberList: string[]
 }
 
 export interface PickupSlot {
@@ -240,13 +240,19 @@ export class EasyShip {
         PackageRequestDetails: {
           PackageDimensions: parameters.PackageRequestDetails.PackageDimensions,
           PackageWeight: parameters.PackageRequestDetails.PackageWeight,
+          PackageIdentifier: parameters.PackageRequestDetails.PackageIdentifier,
           PackagePickupSlot: {
             SlotId: parameters.PackageRequestDetails.PackagePickupSlot.SlotId,
             PickupTimeStart: parameters.PackageRequestDetails.PackagePickupSlot.PickupTimeStart.toISOString(),
             PickupTimeEnd: parameters.PackageRequestDetails.PackagePickupSlot.PickupTimeEnd.toISOString(),
           },
+          'PackageItemList.Item': parameters.PackageRequestDetails.PackageItemList
+            ? parameters.PackageRequestDetails.PackageItemList.map((item) => ({
+                OrderItemId: item.OrderItemId,
+                'OrderItemSerialNumberList.member': item.OrderItemSerialNumberList,
+              }))
+            : undefined,
         },
-        PackageIdentifier: parameters.PackageRequestDetails.PackageIdentifier,
       },
     })
 
