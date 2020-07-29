@@ -182,6 +182,20 @@
     - [listReturnReasonCodes](#listreturnreasoncodes)
     - [createFulfillmentReturn](#createfulfillmentreturn)
     - [getServiceStatus](#getservicestatus-9)
+  - [EasyShip](#easyship)
+    - [Types used in EasyShip](#types-used-in-easyship)
+      - [Dimensions](#dimensions-1)
+      - [Weight](#weight-2)
+      - [Item](#item-1)
+      - [PickupSlot](#pickupslot)
+      - [PackageRequestDetails](#packagerequestdetails)
+      - [ScheduledPackageUpdateDetails](#scheduledpackageupdatedetails)
+      - [ScheduledPackageId](#scheduledpackageid)
+    - [listPickupSlots](#listpickupslots)
+    - [createScheduledPackage](#createscheduledpackage)
+    - [updateScheduledPackages](#updatescheduledpackages)
+    - [getScheduledPackage](#getscheduledpackage)
+    - [getServiceStatus](#getservicestatus-10)
 
 # Basics
 
@@ -3767,3 +3781,251 @@ const [response, meta] = fos.getServiceStatus()
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- /////////////////////////////START EASYSHIP/////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+## EasyShip
+
+### Types used in EasyShip
+
+#### Dimensions
+
+**Properties**
+
+| Name   | Type   | Example      | Required |
+| ------ | ------ | ------------ | -------- |
+| Length | number | `1`          | Yes      |
+| Width  | number | `1`          | Yes      |
+| Height | number | `1`          | Yes      |
+| Unit   | string | `cm`         | Yes      |
+| Name   | string | `Identifier` | No       |
+
+* Unlike other sections `EasyShip` documentation does not specify possible values for `Unit`
+
+#### Weight
+
+**Properties**
+
+| Name  | Type   | Example | Required |
+| ----- | ------ | ------- | -------- |
+| Value | number | `10`    | Yes      |
+| Unit  | string | `'g'`   | Yes      |
+
+* Unlike other sections `EasyShip` documentation does not specify possible values for `Unit`
+
+#### Item
+**Properties**
+
+| Name                      | Type     | Example          | Required |
+| ------------------------- | -------- | ---------------- | -------- |
+| OrderItemId               | string   | `'AMZONORDERID'` | Yes      |
+| OrderItemSerialNumberList | string[] | `['1234']`       | Yes      |
+
+#### PickupSlot
+**Properties**
+
+| Name            | Type   | Example          | Required |
+| --------------- | ------ | ---------------- | -------- |
+| SlotId          | string | `'AMZONORDERID'` | Yes      |
+| PickupTimeStart | Date   | `new Date()`     | No       |
+| PickupTimeEnd   | Date   | `new Date()`     | No       |
+
+
+#### PackageRequestDetails
+
+**Properties**
+
+| Name              | Type       | Example                       | Required |
+| ----------------- | ---------- | ----------------------------- | -------- |
+| PackageDimensions | Dimensions | [`Dimensions`](#dimensions-1) | No       |
+| PackageWeight     | Weight     | [`Weight`](#weight-2)         | No       |
+| PackageItemList   | Item[]     | [`[Item]`](#item-1)           | No       |
+| PackagePickupSlot | PickupSlot | [`PickupSlot`](#pickupslot)   | Yes      |
+| PackageIdentifier | strign     | `'PackageIdentifier'`         | No       |
+
+#### ScheduledPackageUpdateDetails
+
+**Properties**
+
+| Name               | Type               | Example                                     | Required |
+| ------------------ | ------------------ | ------------------------------------------- | -------- |
+| ScheduledPackageId | ScheduledPackageId | [`ScheduledPackageId`](#scheduledpackageid) | No       |
+| PackagePickupSlot  | PickupSlot         | [`PickupSlot`](#pickupslot)                 | Yes      |
+
+#### ScheduledPackageId
+**Properties**
+
+| Name          | Type   | Example          | Required |
+| ------------- | ------ | ---------------- | -------- |
+| AmazonOrderId | string | `'AMZONORDERID'` | Yes      |
+| PackageId     | string | `'PKGID'`        | Yes      |
+
+
+### listPickupSlots
+
+**Parameters**
+
+| Name              | Type       | Example                       | Required |
+| ----------------- | ---------- | ----------------------------- | -------- |
+| MarketplaceId     | string     | `'A2EUQ1WTGCTBG2'`            | Yes      |
+| AmazonOrderId     | string     | `'AMZONORDERID'`              | Yes      |
+| PackageDimensions | Dimensions | [`Dimensions`](#dimensions-1) | Yes      |
+| PackageWeight     | Weight     | [`Weight`](#weight-2)         | Yes      |
+
+**Example**
+
+```typescript
+const mockDimensions = {
+  Length: 1,
+  Width: 1,
+  Height: 1,
+  Unit: 'cm',
+}
+
+const mockWeight = {
+  Value: 1,
+  Unit: 'g',
+}
+
+const parameters = {
+  MarketplaceId: '',
+  AmazonOrderId: '',
+  PackageDimensions: mockDimensions,
+  PackageWeight: mockWeight,
+}
+
+const easyShip = new EasyShip(httpClient)
+const [response, meta] = easyShip.listPickupSlots(parameters)
+```
+
+**Response**
+
+[See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
+
+
+### createScheduledPackage
+
+**Parameters**
+
+| Name                  | Type                  | Example                                           | Required |
+| --------------------- | --------------------- | ------------------------------------------------- | -------- |
+| AmazonOrderId         | string                | `'AMZONORDERID'`                                  | Yes      |
+| MarketplaceId         | string                | `'A2EUQ1WTGCTBG2'`                                | Yes      |
+| PackageRequestDetails | PackageRequestDetails | [`PackageRequestDetails`](#packagerequestdetails) | Yes      |
+
+**Example**
+
+```typescript
+const mockPickupSlot = {
+  SlotId: '',
+  PickupTimeStart: new Date(),
+  PickupTimeEnd: new Date(),
+}
+
+const mockPackageRequestDetails = {
+  PackagePickupSlot: mockPickupSlot,
+}
+const parameters = {
+  AmazonOrderId: '',
+  MarketplaceId: '',
+  PackageRequestDetails: mockPackageRequestDetails,
+}
+
+const easyShip = new EasyShip(httpClient)
+const [response, meta] = easyShip.createScheduledPackage(parameters)
+```
+
+**Response**
+
+[See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
+
+### updateScheduledPackages
+
+**Parameters**
+
+| Name                              | Type                            | Example                                                             | Required |
+| --------------------------------- | ------------------------------- | ------------------------------------------------------------------- | -------- |
+| AmazonOrderId                     | string                          | `'AMZONORDERID'`                                                    | Yes      |
+| ScheduledPackageUpdateDetailsList | ScheduledPackageUpdateDetails[] | [`[ScheduledPackageUpdateDetails]`](#scheduledpackageupdatedetails) | Yes      |
+
+**Example**
+
+```typescript
+
+const mockScheduledPackageId = {
+  AmazonOrderId: '',
+}
+
+const mockPickupSlot = {
+  SlotId: '',
+  PickupTimeStart: new Date(),
+  PickupTimeEnd: new Date(),
+}
+
+const mockScheduledPackageUpdateDetails = {
+  ScheduledPackageId: mockScheduledPackageId,
+  PackagePickupSlot: mockPickupSlot,
+}
+const parameters = {
+  MarketplaceId: '',
+  ScheduledPackageUpdateDetailsList: [mockScheduledPackageUpdateDetails],
+}
+
+const easyShip = new EasyShip(httpClient)
+const [response, meta] = easyShip.updateScheduledPackages(parameters)
+```
+
+**Response**
+
+[See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
+
+### getScheduledPackage
+
+**Parameters**
+
+| Name               | Type               | Example                                     | Required |
+| ------------------ | ------------------ | ------------------------------------------- | -------- |
+| ScheduledPackageId | ScheduledPackageId | [`ScheduledPackageId`](#scheduledpackageid) | Yes      |
+| MarketplaceId      | string             | `'A2EUQ1WTGCTBG2'`                          | Yes      |
+
+**Example**
+
+```typescript
+
+const mockScheduledPackageId = {
+  AmazonOrderId: '',
+}
+
+const parameters = {
+  ScheduledPackageId: mockScheduledPackageId,
+  MarketplaceId: '',
+}
+
+const easyShip = new EasyShip(httpClient)
+const [response, meta] = easyShip.getScheduledPackage(parameters)
+```
+
+**Response**
+
+[See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
+
+### getServiceStatus
+
+**Parameters**
+
+| None |
+| ---- |
+
+**Example**
+
+```typescript
+const easyShip = new EasyShip(httpClient)
+const [response, meta] = easyShip.getServiceStatus()
+```
+
+**Response**
+
+[See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)

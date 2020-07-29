@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`easyShip createScheduledPackage returns information about the scheduled package if structure is correct 1`] = `
+Array [
+  Object {
+    "ScheduledPackage": Object {
+      "Invoice": Object {
+        "InvoiceDate": 1969-07-21T02:56:03.000Z,
+        "InvoiceNumber": "String",
+      },
+      "PackageDimensions": Object {
+        "Height": 100,
+        "Length": 100,
+        "Name": "String",
+        "Unit": "String",
+        "Width": 100,
+      },
+      "PackageIdentifier": "String",
+      "PackagePickupSlot": Object {
+        "PickupTimeEnd": 1969-07-21T02:56:03.000Z,
+        "PickupTimeStart": 1969-07-21T02:56:03.000Z,
+        "SlotId": "String",
+      },
+      "PackageStatus": "String",
+      "PackageWeight": Object {
+        "Unit": "String",
+        "Value": 100,
+      },
+      "ScheduledPackageId": Object {
+        "AmazonOrderId": "String",
+        "PackageId": "String",
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`easyShip createScheduledPackage returns information about the scheduled package if succesful 1`] = `
+Array [
+  Object {
+    "ScheduledPackage": Object {
+      "PackageDimensions": Object {
+        "Height": 12,
+        "Length": 12,
+        "Unit": "cm",
+        "Width": 12,
+      },
+      "PackagePickupSlot": Object {
+        "PickupTimeEnd": 2018-02-19T10:30:00.500Z,
+        "PickupTimeStart": 2018-02-19T08:30:00.500Z,
+        "SlotId": "Xyt123bbdg=",
+      },
+      "PackageStatus": "ReadyForPickup",
+      "PackageWeight": Object {
+        "Unit": "g",
+        "Value": 23,
+      },
+      "ScheduledPackageId": Object {
+        "AmazonOrderId": "903-1713775-3598252",
+        "PackageId": "1ab0f06a-9149-87e0-aba9-7098117872d6",
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`easyShip getScheduledPackage returns info about the scheduled package if succesful 1`] = `
+Array [
+  Object {
+    "ScheduledPackage": Object {
+      "PackageDimensions": Object {
+        "Height": 12,
+        "Length": 12,
+        "Unit": "cm",
+        "Width": 12,
+      },
+      "PackagePickupSlot": Object {
+        "PickupTimeEnd": 2018-02-19T10:30:00.500Z,
+        "PickupTimeStart": 2018-02-19T08:30:00.500Z,
+        "SlotId": "Xyt123bbdg=",
+      },
+      "PackageStatus": "Scheduled",
+      "PackageWeight": Object {
+        "Unit": "g",
+        "Value": 23,
+      },
+      "ScheduledPackageId": Object {
+        "AmazonOrderId": "903-1713775-3598252",
+        "PackageId": "1ab0f06a-9149-87e0-aba9-7098117872d6",
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`easyShip getServiceStatus returns a parsed model when the status response is valid 1`] = `
+Array [
+  Object {
+    "Status": "GREEN",
+    "Timestamp": "2020-05-06T08:22:23.582Z",
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`easyShip listPickupSlots returns list of pickup slots if succesful 1`] = `
+Array [
+  Object {
+    "AmazonOrderId": "String",
+    "PickupSlotList": Array [
+      Object {
+        "PickupTimeEnd": 1969-07-21T02:56:03.000Z,
+        "PickupTimeStart": 1969-07-21T02:56:03.000Z,
+        "SlotId": "String",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`easyShip updateScheduledPackages returns a list of packages if succesful 1`] = `
+Array [
+  Object {
+    "ScheduledPackageList": Array [
+      Object {
+        "PackageDimensions": Object {
+          "Height": 12,
+          "Length": 12,
+          "Unit": "cm",
+          "Width": 12,
+        },
+        "PackagePickupSlot": Object {
+          "PickupTimeEnd": 2018-11-05T10:30:00.500Z,
+          "PickupTimeStart": 2018-11-05T08:30:00.500Z,
+          "SlotId": "Xyt123bbdg=",
+        },
+        "PackageStatus": "Scheduled",
+        "PackageWeight": Object {
+          "Unit": "g",
+          "Value": 23,
+        },
+        "ScheduledPackageId": Object {
+          "AmazonOrderId": "903-1713775-3598252",
+          "PackageId": "1ab0f06a-9149-87e0-aba9-7098117872d6",
+        },
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;

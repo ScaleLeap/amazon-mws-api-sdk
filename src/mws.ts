@@ -1,4 +1,5 @@
 import { HttpClient } from './http'
+import { EasyShip } from './sections/easy-ship'
 import { Feeds } from './sections/feeds'
 import { Finances } from './sections/finances/finances'
 import { FulfillmentInboundShipment } from './sections/fulfillment-inbound-shipment/fulfillment-inbound-shipment'
@@ -14,6 +15,8 @@ import { ShipmentInvoicing } from './sections/shipment-invoicing'
 import { Subscriptions } from './sections/subscriptions'
 
 export class MWS {
+  private _easyShip!: EasyShip
+
   private _feeds!: Feeds
 
   private _finances!: Finances
@@ -41,6 +44,14 @@ export class MWS {
   private _shipmentInvoicing!: ShipmentInvoicing
 
   constructor(private httpClient: HttpClient) {}
+
+  get easyShip() {
+    if (!this._easyShip) {
+      this._easyShip = new EasyShip(this.httpClient)
+    }
+
+    return this._easyShip
+  }
 
   get sellers() {
     if (!this._sellers) {
