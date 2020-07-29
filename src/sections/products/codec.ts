@@ -7,7 +7,6 @@ import {
   number,
   oneOf,
   optional,
-  record,
   string,
   unknown,
 } from 'purify-ts'
@@ -120,7 +119,75 @@ export const GetMyFeesEstimateResponse = Codec.interface({
   }),
 })
 
-const Product = record(string, unknown)
+// Amazon C# library has properties that are a type "any" they call an "abstract object"
+const AbstractObject = unknown
+
+const AttributeSetList = AbstractObject
+
+const ASINIdentifier = Codec.interface({
+  MarketplaceId: string,
+  ASIN: ensureString,
+})
+
+const SellerSKUIdentifier = Codec.interface({
+  MarketplaceId: string,
+  SellerId: ensureString,
+  SellerSKU: ensureString,
+})
+
+const IdentifierType = Codec.interface({
+  MarketplaceASIN: optional(ASINIdentifier),
+  SKUIdentifier: optional(SellerSKUIdentifier),
+})
+
+const RelationshipList = AbstractObject
+
+const PriceType = Codec.interface({
+  LandedPrice: optional(MoneyType),
+  ListingPrice: optional(MoneyType),
+  Shipping: optional(MoneyType),
+  Points: optional(PointsCodec),
+})
+
+const CompetitivePriceType = Codec.interface({
+  attr: Codec.interface({
+    condition: string,
+    subcondition: string,
+    belongsToRequester: optional(string), // @todo this is supposed to return a boolean
+  }),
+  CompetitivePriceId: ensureString,
+  Price: PriceType,
+})
+
+const CompetitivePriceList = ensureArray('CompetitivePrice', CompetitivePriceType)
+
+const OfferListingCountType = Codec.interface({
+  attr: Codec.interface({
+    condition: string,
+  }),
+  text: number,
+})
+
+const NumberOfOfferListingsList = ensureArray('OfferListingCount', OfferListingCountType)
+
+const CompetitivePricingType = Codec.interface({
+  CompetitivePrices: optional(CompetitivePriceList),
+  NumberOfOfferListings: optional(NumberOfOfferListingsList),
+  TradeInValue: optional(MoneyType),
+})
+const SalesRankList = unknown
+const LowestOfferListingList = unknown
+const Offers = unknown
+// @todo all unknowns
+const Product = Codec.interface({
+  Identifiers: optional(IdentifierType),
+  AttributeSets: optional(AttributeSetList),
+  Relationships: optional(RelationshipList),
+  CompetitivePricing: optional(CompetitivePricingType),
+  SalesRankings: optional(SalesRankList),
+  LowestOfferListings: optional(LowestOfferListingList),
+  Offers: optional(Offers),
+})
 
 const SingleProductInterface = Codec.interface({
   Product,

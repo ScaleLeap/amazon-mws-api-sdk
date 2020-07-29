@@ -6,9 +6,9 @@ Array [
     Object {
       "Product": Object {
         "CompetitivePricing": Object {
-          "CompetitivePrices": Object {
-            "CompetitivePrice": Object {
-              "CompetitivePriceId": 1,
+          "CompetitivePrices": Array [
+            Object {
+              "CompetitivePriceId": "1",
               "Price": Object {
                 "LandedPrice": Object {
                   "Amount": 34.27,
@@ -29,29 +29,27 @@ Array [
                 "subcondition": "New",
               },
             },
-          },
-          "NumberOfOfferListings": Object {
-            "OfferListingCount": Array [
-              Object {
-                "attr": Object {
-                  "condition": "Any",
-                },
-                "text": 11,
+          ],
+          "NumberOfOfferListings": Array [
+            Object {
+              "attr": Object {
+                "condition": "Any",
               },
-              Object {
-                "attr": Object {
-                  "condition": "Used",
-                },
-                "text": 1,
+              "text": 11,
+            },
+            Object {
+              "attr": Object {
+                "condition": "Used",
               },
-              Object {
-                "attr": Object {
-                  "condition": "New",
-                },
-                "text": 10,
+              "text": 1,
+            },
+            Object {
+              "attr": Object {
+                "condition": "New",
               },
-            ],
-          },
+              "text": 10,
+            },
+          ],
         },
         "Identifiers": Object {
           "MarketplaceASIN": Object {
@@ -60,10 +58,6 @@ Array [
           },
         },
         "SalesRankings": "",
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
       },
     },
   ],
@@ -83,76 +77,72 @@ Array [
     Object {
       "Product": Object {
         "CompetitivePricing": Object {
-          "CompetitivePrices": Object {
-            "CompetitivePrice": Array [
-              Object {
-                "CompetitivePriceId": 1,
-                "Price": Object {
-                  "LandedPrice": Object {
-                    "Amount": 40.03,
-                    "CurrencyCode": "USD",
-                  },
-                  "ListingPrice": Object {
-                    "Amount": 40.03,
-                    "CurrencyCode": "USD",
-                  },
-                  "Shipping": Object {
-                    "Amount": 0,
-                    "CurrencyCode": "USD",
-                  },
+          "CompetitivePrices": Array [
+            Object {
+              "CompetitivePriceId": "1",
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 40.03,
+                  "CurrencyCode": "USD",
                 },
-                "attr": Object {
-                  "belongsToRequester": "false",
-                  "condition": "New",
-                  "subcondition": "New",
+                "ListingPrice": Object {
+                  "Amount": 40.03,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 0,
+                  "CurrencyCode": "USD",
                 },
               },
-              Object {
-                "CompetitivePriceId": 2,
-                "Price": Object {
-                  "LandedPrice": Object {
-                    "Amount": 30.5,
-                    "CurrencyCode": "USD",
-                  },
-                  "ListingPrice": Object {
-                    "Amount": 30.5,
-                    "CurrencyCode": "USD",
-                  },
-                  "Shipping": Object {
-                    "Amount": 0,
-                    "CurrencyCode": "USD",
-                  },
+              "attr": Object {
+                "belongsToRequester": "false",
+                "condition": "New",
+                "subcondition": "New",
+              },
+            },
+            Object {
+              "CompetitivePriceId": "2",
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 30.5,
+                  "CurrencyCode": "USD",
                 },
-                "attr": Object {
-                  "belongsToRequester": "false",
-                  "condition": "Used",
-                  "subcondition": "Good",
+                "ListingPrice": Object {
+                  "Amount": 30.5,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 0,
+                  "CurrencyCode": "USD",
                 },
               },
-            ],
-          },
-          "NumberOfOfferListings": Object {
-            "OfferListingCount": Array [
-              Object {
-                "attr": Object {
-                  "condition": "Any",
-                },
-                "text": 296,
+              "attr": Object {
+                "belongsToRequester": "false",
+                "condition": "Used",
+                "subcondition": "Good",
               },
-              Object {
-                "attr": Object {
-                  "condition": "Used",
-                },
-                "text": 145,
+            },
+          ],
+          "NumberOfOfferListings": Array [
+            Object {
+              "attr": Object {
+                "condition": "Any",
               },
-              Object {
-                "attr": Object {
-                  "condition": "New",
-                },
-                "text": 151,
+              "text": 296,
+            },
+            Object {
+              "attr": Object {
+                "condition": "Used",
               },
-            ],
-          },
+              "text": 145,
+            },
+            Object {
+              "attr": Object {
+                "condition": "New",
+              },
+              "text": 151,
+            },
+          ],
           "TradeInValue": Object {
             "Amount": 17.05,
             "CurrencyCode": "USD",
@@ -160,7 +150,7 @@ Array [
         },
         "Identifiers": Object {
           "MarketplaceASIN": Object {
-            "ASIN": 1933890517,
+            "ASIN": "1933890517",
             "MarketplaceId": "ATVPDKIKX0DER",
           },
           "SKUIdentifier": Object {
@@ -188,10 +178,6 @@ Array [
               "Rank": 25,
             },
           ],
-        },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
         },
       },
     },
@@ -309,10 +295,6 @@ Array [
             },
           ],
         },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
       },
     },
   ],
@@ -334,7 +316,7 @@ Array [
       "Product": Object {
         "Identifiers": Object {
           "MarketplaceASIN": Object {
-            "ASIN": 1933890517,
+            "ASIN": "1933890517",
             "MarketplaceId": "ATVPDKIKX0DER",
           },
           "SKUIdentifier": Object {
@@ -433,10 +415,6 @@ Array [
               "SellerFeedbackCount": 7732,
             },
           ],
-        },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
         },
       },
     },
@@ -892,10 +870,6 @@ Array [
             },
           ],
         },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
       },
     },
   ],
@@ -1037,7 +1011,7 @@ Array [
           },
           "Identifiers": Object {
             "MarketplaceASIN": Object {
-              "ASIN": 1933988665,
+              "ASIN": "1933988665",
               "MarketplaceId": "ATVPDKIKX0DER",
             },
           },
@@ -1284,7 +1258,7 @@ Array [
       "Product": Object {
         "Identifiers": Object {
           "MarketplaceASIN": Object {
-            "ASIN": 1933890517,
+            "ASIN": "1933890517",
             "MarketplaceId": "ATVPDKIKX0DER",
           },
         },
@@ -1315,10 +1289,6 @@ Array [
             "SellerSKU": "SKU2468",
           },
         },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
       },
     },
   ],
@@ -1339,7 +1309,7 @@ Array [
       "Product": Object {
         "Identifiers": Object {
           "MarketplaceASIN": Object {
-            "ASIN": 1933890517,
+            "ASIN": "1933890517",
             "MarketplaceId": "ATVPDKIKX0DER",
           },
           "SKUIdentifier": Object {
@@ -1374,10 +1344,6 @@ Array [
             "SellerId": "A1IMEXAMPLEWRC",
             "SellerSKU": "SKU2468",
           },
-        },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
         },
       },
     },
