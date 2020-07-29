@@ -3,6 +3,14 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.6.0...v1.6.1) (2020-07-29)
+
+
+### Bug Fixes
+
+* fix a misnamed nested array in FeeDetail ([c34d739](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c34d7399384ee2a8a8c1d78bb7c8ccd2b8e74825))
+* remove build changes ([cd39642](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/cd39642fbddaaad6d8b08c0b3d606413decaf2d7))
+
 # [1.6.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.5.1...v1.6.0) (2020-07-22)
 
 
