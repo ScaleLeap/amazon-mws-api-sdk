@@ -3,6 +3,17 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.6.2...v1.7.0) (2020-07-29)
+
+
+### Features
+
+* create createScheduledPackage ([b144b8a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/b144b8a7d2186acaf2aa42197ed36e234421633d))
+* fixed missing parameters from creaetScheduledPackage ([0d06b79](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/0d06b79495ba3c116184e6d17f6860cad2c21fd6))
+* init easyShip with getServiceStatus ([c5a97f1](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c5a97f18bc5ac80b5712e6f49b76cfe195067d5d))
+* made easyShip ([5162b9c](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/5162b9c8ce033c9d4d8ff6b9ee70cc54548f1be5))
+* made getScheduledPackage ([e97ed56](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/e97ed5664e38470c7207cd61837a8003a8713e50))
+
 ## [1.6.2](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.6.1...v1.6.2) (2020-07-29)
 
 
