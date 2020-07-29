@@ -1119,6 +1119,41 @@ Array [
                 "Amount": 2.3,
                 "CurrencyCode": "USD",
               },
+              "IncludedFeeDetailList": Array [
+                Object {
+                  "FeeAmount": Object {
+                    "Amount": 1,
+                    "CurrencyCode": "USD",
+                  },
+                  "FeeType": "OrderHandlingFee",
+                  "FinalFee": Object {
+                    "Amount": 1,
+                    "CurrencyCode": "USD",
+                  },
+                },
+                Object {
+                  "FeeAmount": Object {
+                    "Amount": 0.3,
+                    "CurrencyCode": "USD",
+                  },
+                  "FeeType": "PickAndPackFee",
+                  "FinalFee": Object {
+                    "Amount": 0.3,
+                    "CurrencyCode": "USD",
+                  },
+                },
+                Object {
+                  "FeeAmount": Object {
+                    "Amount": 1,
+                    "CurrencyCode": "USD",
+                  },
+                  "FeeType": "WeightHandlingFee",
+                  "FinalFee": Object {
+                    "Amount": 1,
+                    "CurrencyCode": "USD",
+                  },
+                },
+              ],
             },
           ],
           "TimeOfFeesEstimation": 2015-07-19T23:15:11.859Z,
@@ -1152,6 +1187,83 @@ Array [
           "SellerInputIdentifier": "IDDDDDDDD",
         },
         "Status": "Success",
+      },
+    ],
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
+exports[`products getMyFeesEstimate returns a list fee estimates when the structure is valid 1`] = `
+Array [
+  Object {
+    "FeesEstimateResultList": Array [
+      Object {
+        "Error": Object {
+          "Code": "String",
+          "Message": "String",
+          "Type": "String",
+        },
+        "FeesEstimate": Object {
+          "FeeDetailList": Array [
+            Object {
+              "FeeAmount": Object {
+                "Amount": 100,
+                "CurrencyCode": "String",
+              },
+              "FeePromotion": Object {
+                "Amount": 100,
+                "CurrencyCode": "String",
+              },
+              "FeeType": "String",
+              "FinalFee": Object {
+                "Amount": 100,
+                "CurrencyCode": "String",
+              },
+              "IncludedFeeDetailList": Array [],
+              "TaxAmount": Object {
+                "Amount": 100,
+                "CurrencyCode": "String",
+              },
+            },
+          ],
+          "TimeOfFeesEstimation": 1969-07-21T02:56:03.000Z,
+          "TotalFeesEstimate": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+        },
+        "FeesEstimateIdentifier": Object {
+          "IdType": "String",
+          "IdValue": "String",
+          "IsAmazonFulfilled": true,
+          "MarketplaceId": "String",
+          "PriceToEstimateFees": Object {
+            "ListingPrice": Object {
+              "Amount": 100,
+              "CurrencyCode": "String",
+            },
+            "Points": Object {
+              "PointsMonetaryValue": Object {
+                "Amount": 100,
+                "CurrencyCode": "String",
+              },
+              "PointsNumber": 1,
+            },
+            "Shipping": Object {
+              "Amount": 100,
+              "CurrencyCode": "String",
+            },
+          },
+          "SellerInputIdentifier": "String",
+        },
+        "Status": "String",
       },
     ],
   },

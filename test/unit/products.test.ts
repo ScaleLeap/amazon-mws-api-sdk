@@ -11,6 +11,39 @@ import {
   parsingErrorRegex,
 } from '../utils'
 
+function mockEnum() {
+  /**
+   * Mock everything in purify-ts, restore it back to normal,
+   *  except for `enumeration` which will be stubbed to accept
+   * https://github.com/facebook/jest/issues/936#issuecomment-265074320
+   */
+  const original = jest.requireActual('purify-ts')
+
+  return {
+    ...original, // Pass down all the exported objects
+    enumeration: <T extends Record<string, string | number>>(enumeration: T) => {
+      const enumValues = Object.values(enumeration)
+
+      return original.Codec.custom({
+        decode: (input: string | number) => {
+          if (typeof input !== 'string' && typeof input !== 'number') {
+            return original.Left(`Expected enum, received ${input}`)
+          }
+
+          const enumIndex = enumValues.indexOf(input)
+
+          return enumIndex !== -1 || input === 'String'
+            ? original.Right((enumValues[enumIndex] as T[keyof T]) || 'String')
+            : original.Left(`Expected enum, received ${input}`)
+        },
+        encode: original.identity,
+        schema: () => ({ enum: enumValues }),
+      })
+    },
+  }
+}
+jest.mock('purify-ts', () => mockEnum())
+
 describe('products', () => {
   describe('getProductCategoriesForAsin', () => {
     const parameters = {
@@ -393,6 +426,20 @@ describe('products', () => {
       expect.assertions(1)
 
       const mockGetMyFeesEstimate = createMockHttpClient('products_get_my_fees_estimate')
+
+      expect(
+        await mockGetMyFeesEstimate.products.getMyFeesEstimate({
+          FeesEstimateRequestList: [sampleFee],
+        }),
+      ).toMatchSnapshot()
+    })
+
+    it('returns a list fee estimates when the structure is valid', async () => {
+      expect.assertions(1)
+
+      const mockGetMyFeesEstimate = createMockHttpClient(
+        'products_get_my_fees_estimate_from_c_sharp',
+      )
 
       expect(
         await mockGetMyFeesEstimate.products.getMyFeesEstimate({

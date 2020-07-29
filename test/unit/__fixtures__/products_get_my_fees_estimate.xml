@@ -20,9 +20,9 @@
             <Points>
               <PointsNumber>0</PointsNumber>
               <PointsMonetaryValue>
-                        <CurrencyCode>USD</CurrencyCode>
-                        <Amount>100</Amount>
-                        </PointsMonetaryValue>
+                <CurrencyCode>USD</CurrencyCode>
+                <Amount>100</Amount>
+              </PointsMonetaryValue>
             </Points>
           </PriceToEstimateFees>
           <SellerInputIdentifier>IDDDDDDDD</SellerInputIdentifier>
@@ -70,7 +70,7 @@
                 <CurrencyCode>USD</CurrencyCode>
                 <Amount>2.30</Amount>
               </FinalFee>
-              <IncludedFeeList>
+              <IncludedFeeDetailList>
                 <FeeDetail>
                   <FeeType>OrderHandlingFee</FeeType>
                   <FeeAmount>
@@ -104,7 +104,7 @@
                     <Amount>1.00</Amount>
                   </FinalFee>
                 </FeeDetail>
-              </IncludedFeeList>
+              </IncludedFeeDetailList>
             </FeeDetail>
           </FeeDetailList>
         </FeesEstimate>
