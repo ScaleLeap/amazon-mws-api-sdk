@@ -94,6 +94,8 @@ const main = async () => {
 ```
 ## [More examples in the `/examples` folder!](examples)
 
+## [Contributing](/CONTRIBUTING.md)
+
 ## Authors or Acknowledgments
 
 * Roman Filippov ([Scale Leap](https://www.scaleleap.com))
