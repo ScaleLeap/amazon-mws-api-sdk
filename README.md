@@ -10,7 +10,7 @@
 📦 @scaleleap/amazon-mws-api-sdk
 ===================================
 
-A fully typed TypeScript SDK library for Amazon MWS API
+A fully typed TypeScript and Node.js SDK library for Amazon MWS API
 
 ## Download & Installation
 
