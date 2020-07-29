@@ -1,6 +1,6 @@
 {
   "name": "@scaleleap/amazon-mws-api-sdk",
-  "description": "",
+  "description": "📦A fully typed TypeScript and Node.js SDK library for Amazon MWS API",
   "license": "MIT",
   "author": {
     "name": "Roman Filippov",
@@ -67,7 +67,20 @@
     "tsconfigs": "4.0.2",
     "typescript": "3.9.7"
   },
-  "keywords": [],
+  "keywords": [
+    "amazon marketplace web service",
+    "amazon mws",
+    "amazon mws api",
+    "amazon mws libraries",
+    "amazon mws sdk",
+    "fba",
+    "fbm",
+    "mws",
+    "mws api",
+    "mws sdk",
+    "nodejs",
+    "typescript"
+  ],
   "publishConfig": {
     "access": "public"
   }

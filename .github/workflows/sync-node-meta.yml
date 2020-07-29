@@ -1,0 +1,26 @@
+name: Sync package.json with repository info
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Sync repo with package.json
+        uses: jaid/action-sync-node-meta@v1.4.0
+        with:
+          direction: overwrite-github
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          syncHomepage: "false"
+          commitMessagePrefix: "chore:"
