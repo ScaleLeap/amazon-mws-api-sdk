@@ -91,7 +91,7 @@ const FeeDetail: Codec<FeeDetailInterface> = Codec.interface({
   FinalFee: MoneyType,
   IncludedFeeDetailList: optional(
     ensureArray(
-      'IncludedFeeDetail',
+      'FeeDetail',
       lazy(() => FeeDetail),
     ),
   ),
