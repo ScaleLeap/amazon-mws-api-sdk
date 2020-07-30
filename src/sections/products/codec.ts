@@ -175,10 +175,51 @@ const CompetitivePricingType = Codec.interface({
   NumberOfOfferListings: optional(NumberOfOfferListingsList),
   TradeInValue: optional(MoneyType),
 })
-const SalesRankList = unknown
-const LowestOfferListingList = unknown
-const Offers = unknown
-// @todo all unknowns
+
+const SalesRankType = Codec.interface({
+  ProductCategoryId: optional(ensureString),
+  Rank: optional(number),
+})
+
+const SalesRankList = ensureArray('SalesRank', SalesRankType)
+
+const ShippingTimeType = Codec.interface({
+  Max: string,
+})
+
+const QualifiersType = Codec.interface({
+  ItemCondition: optional(ensureString),
+  ItemSubcondition: optional(ensureString),
+  FulfillmentChannel: optional(ensureString),
+  ShipsDomestically: optional(ensureString),
+  ShippingTime: optional(ShippingTimeType),
+  SellerPositiveFeedbackRating: optional(ensureString),
+})
+
+const LowestOfferListingType = Codec.interface({
+  Qualifiers: optional(QualifiersType),
+  NumberOfOfferListingsConsidered: optional(number),
+  SellerFeedbackCount: optional(number),
+  Price: optional(PriceType),
+  MultipleOffersAtLowestPrice: optional(string),
+})
+
+const LowestOfferListingList = ensureArray('LowestOfferListing', LowestOfferListingType)
+
+const OfferType = Codec.interface({
+  BuyingPrice: optional(PriceType),
+  RegularPrice: optional(MoneyType),
+  FulfillmentChannel: optional(string),
+  ItemCondition: optional(string),
+  ItemSubCondition: optional(string),
+  SellerId: optional(string),
+  SellerSKU: optional(string),
+})
+
+const OffersList = ensureArray('Offer', OfferType)
+
+const Offers = OffersList
+
 const Product = Codec.interface({
   Identifiers: optional(IdentifierType),
   AttributeSets: optional(AttributeSetList),
