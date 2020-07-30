@@ -1622,3 +1622,152 @@ Array [
   },
 ]
 `;
+
+exports[`products product should properly decode complete product structure 1`] = `
+Object {
+  "AttributeSets": Object {
+    "Any": Object {
+      "any-xml": "",
+    },
+  },
+  "CompetitivePricing": Object {
+    "CompetitivePrices": Array [
+      Object {
+        "CompetitivePriceId": "String",
+        "Price": Object {
+          "LandedPrice": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+          "ListingPrice": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+          "Points": Object {
+            "PointsMonetaryValue": Object {
+              "Amount": 100,
+              "CurrencyCode": "String",
+            },
+            "PointsNumber": 1,
+          },
+          "Shipping": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+        },
+        "attr": Object {
+          "belongsToRequester": "true",
+          "condition": "String",
+          "subcondition": "String",
+        },
+      },
+    ],
+    "NumberOfOfferListings": Array [
+      Object {
+        "attr": Object {
+          "condition": "String",
+        },
+        "text": 1,
+      },
+    ],
+    "TradeInValue": Object {
+      "Amount": 100,
+      "CurrencyCode": "String",
+    },
+  },
+  "Identifiers": Object {
+    "MarketplaceASIN": Object {
+      "ASIN": "String",
+      "MarketplaceId": "String",
+    },
+    "SKUIdentifier": Object {
+      "MarketplaceId": "String",
+      "SellerId": "String",
+      "SellerSKU": "String",
+    },
+  },
+  "LowestOfferListings": Array [
+    Object {
+      "MultipleOffersAtLowestPrice": "String",
+      "NumberOfOfferListingsConsidered": 1,
+      "Price": Object {
+        "LandedPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "ListingPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "Points": Object {
+          "PointsMonetaryValue": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+          "PointsNumber": 1,
+        },
+        "Shipping": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+      },
+      "Qualifiers": Object {
+        "FulfillmentChannel": "String",
+        "ItemCondition": "String",
+        "ItemSubcondition": "String",
+        "SellerPositiveFeedbackRating": "String",
+        "ShippingTime": Object {
+          "Max": "String",
+        },
+        "ShipsDomestically": "String",
+      },
+      "SellerFeedbackCount": 1,
+    },
+  ],
+  "Offers": Array [
+    Object {
+      "BuyingPrice": Object {
+        "LandedPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "ListingPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "Points": Object {
+          "PointsMonetaryValue": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+          "PointsNumber": 1,
+        },
+        "Shipping": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+      },
+      "FulfillmentChannel": "String",
+      "ItemCondition": "String",
+      "ItemSubCondition": "String",
+      "RegularPrice": Object {
+        "Amount": 100,
+        "CurrencyCode": "String",
+      },
+      "SellerId": "String",
+      "SellerSKU": "String",
+    },
+  ],
+  "Relationships": Object {
+    "Any": Object {
+      "any-xml": "",
+    },
+  },
+  "SalesRankings": Array [
+    Object {
+      "ProductCategoryId": "String",
+      "Rank": 1,
+    },
+  ],
+}
+`;

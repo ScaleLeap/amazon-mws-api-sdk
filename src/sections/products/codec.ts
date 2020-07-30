@@ -220,7 +220,7 @@ const OffersList = ensureArray('Offer', OfferType)
 
 const Offers = OffersList
 
-const Product = Codec.interface({
+export const Product = Codec.interface({
   Identifiers: optional(IdentifierType),
   AttributeSets: optional(AttributeSetList),
   Relationships: optional(RelationshipList),

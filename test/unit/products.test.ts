@@ -1,3 +1,8 @@
+import { GetInterface } from 'purify-ts'
+
+import { ParsingError } from '../../src'
+import { parseResponse, RequestMeta } from '../../src/http'
+import { Product } from '../../src/sections/products/codec'
 import {
   FeesEstimateRequest,
   GetMatchingProductIdType,
@@ -6,6 +11,8 @@ import {
 } from '../../src/sections/products/type'
 import {
   createMockHttpClient,
+  getFixture,
+  headers,
   mockMwsServiceStatus,
   mockParsingError,
   parsingErrorRegex,
@@ -45,6 +52,27 @@ function mockEnum() {
 jest.mock('purify-ts', () => mockEnum())
 
 describe('products', () => {
+  describe('product', () => {
+    it('should properly decode complete product structure', async () => {
+      expect.assertions(1)
+
+      const fixture = getFixture('products_product')
+      const [response] = parseResponse({
+        data: fixture,
+        headers,
+      }) as [{ Product: GetInterface<typeof Product> }, RequestMeta]
+
+      expect(
+        Product.decode(response.Product).caseOf({
+          Right: (x) => x,
+          Left: (error) => {
+            throw new ParsingError(error)
+          },
+        }),
+      ).toMatchSnapshot()
+    })
+  })
+
   describe('getProductCategoriesForAsin', () => {
     const parameters = {
       MarketplaceId: '',

@@ -315,7 +315,7 @@ const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestR
       return Promise.reject(error.response.data)
     })
 
-const parseResponse = <T>(
+export const parseResponse = <T>(
   response: RequestResponse,
   parseString = false,
 ): [T | string, RequestMeta] => {
