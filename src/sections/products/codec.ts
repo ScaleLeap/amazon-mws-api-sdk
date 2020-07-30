@@ -153,7 +153,7 @@ const CompetitivePriceType = Codec.interface({
   attr: Codec.interface({
     condition: string,
     subcondition: string,
-    belongsToRequester: optional(string), // @todo this is supposed to return a boolean
+    belongsToRequester: optional(boolean),
   }),
   CompetitivePriceId: ensureString,
   Price: PriceType,

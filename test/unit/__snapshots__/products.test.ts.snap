@@ -24,7 +24,7 @@ Array [
                 },
               },
               "attr": Object {
-                "belongsToRequester": "false",
+                "belongsToRequester": false,
                 "condition": "New",
                 "subcondition": "New",
               },
@@ -95,7 +95,7 @@ Array [
                 },
               },
               "attr": Object {
-                "belongsToRequester": "false",
+                "belongsToRequester": false,
                 "condition": "New",
                 "subcondition": "New",
               },
@@ -117,7 +117,7 @@ Array [
                 },
               },
               "attr": Object {
-                "belongsToRequester": "false",
+                "belongsToRequester": false,
                 "condition": "Used",
                 "subcondition": "Good",
               },
@@ -452,8 +452,8 @@ Array [
         "ShippingTime": Object {
           "attr": Object {
             "availabilityType": "NOW",
-            "maximumHours": "0",
-            "minimumHours": "0",
+            "maximumHours": 0,
+            "minimumHours": 0,
           },
         },
         "SubCondition": "new",
@@ -561,8 +561,8 @@ Array [
         "ShippingTime": Object {
           "attr": Object {
             "availabilityType": "NOW",
-            "maximumHours": "0",
-            "minimumHours": "0",
+            "maximumHours": 0,
+            "minimumHours": 0,
           },
         },
         "SubCondition": "new",
@@ -1656,7 +1656,7 @@ Object {
           },
         },
         "attr": Object {
-          "belongsToRequester": "true",
+          "belongsToRequester": true,
           "condition": "String",
           "subcondition": "String",
         },

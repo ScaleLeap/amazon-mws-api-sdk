@@ -329,6 +329,7 @@ export const parseResponse = <T>(
         {
           attributeNamePrefix: '',
           ignoreAttributes: false,
+          parseAttributeValue: true,
           attrNodeName: 'attr',
           textNodeName: 'text',
           tagValueProcessor: (value) => XmlEntities.decode(value),
