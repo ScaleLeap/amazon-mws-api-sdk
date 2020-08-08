@@ -11,7 +11,7 @@ export const httpConfig = {
   sellerId: '',
 }
 
-const headers = {
+export const headers = {
   'x-mws-request-id': '0',
   'x-mws-timestamp': '2020-05-06T09:22:23.582Z',
   'x-mws-quota-max': '1000',
@@ -41,4 +41,4 @@ export const mockParsingError = new MWS(
 )
 export const mockMwsServiceStatus = createMockHttpClient('get_service_status')
 
-export const parsingErrorRegex = /Problem with property "(.*?): it does not exist in received object {"xml":""}/
+export const parsingErrorRegex = /Problem with property "(.*?)": it does not exist in received object {"xml":""}/

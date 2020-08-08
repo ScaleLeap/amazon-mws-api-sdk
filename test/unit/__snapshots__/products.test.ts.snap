@@ -6,9 +6,9 @@ Array [
     Object {
       "Product": Object {
         "CompetitivePricing": Object {
-          "CompetitivePrices": Object {
-            "CompetitivePrice": Object {
-              "CompetitivePriceId": 1,
+          "CompetitivePrices": Array [
+            Object {
+              "CompetitivePriceId": "1",
               "Price": Object {
                 "LandedPrice": Object {
                   "Amount": 34.27,
@@ -24,34 +24,32 @@ Array [
                 },
               },
               "attr": Object {
-                "belongsToRequester": "false",
+                "belongsToRequester": false,
                 "condition": "New",
                 "subcondition": "New",
               },
             },
-          },
-          "NumberOfOfferListings": Object {
-            "OfferListingCount": Array [
-              Object {
-                "attr": Object {
-                  "condition": "Any",
-                },
-                "text": 11,
+          ],
+          "NumberOfOfferListings": Array [
+            Object {
+              "attr": Object {
+                "condition": "Any",
               },
-              Object {
-                "attr": Object {
-                  "condition": "Used",
-                },
-                "text": 1,
+              "text": 11,
+            },
+            Object {
+              "attr": Object {
+                "condition": "Used",
               },
-              Object {
-                "attr": Object {
-                  "condition": "New",
-                },
-                "text": 10,
+              "text": 1,
+            },
+            Object {
+              "attr": Object {
+                "condition": "New",
               },
-            ],
-          },
+              "text": 10,
+            },
+          ],
         },
         "Identifiers": Object {
           "MarketplaceASIN": Object {
@@ -59,11 +57,7 @@ Array [
             "MarketplaceId": "ATVPDKIKX0DER",
           },
         },
-        "SalesRankings": "",
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
+        "SalesRankings": Array [],
       },
     },
   ],
@@ -83,76 +77,72 @@ Array [
     Object {
       "Product": Object {
         "CompetitivePricing": Object {
-          "CompetitivePrices": Object {
-            "CompetitivePrice": Array [
-              Object {
-                "CompetitivePriceId": 1,
-                "Price": Object {
-                  "LandedPrice": Object {
-                    "Amount": 40.03,
-                    "CurrencyCode": "USD",
-                  },
-                  "ListingPrice": Object {
-                    "Amount": 40.03,
-                    "CurrencyCode": "USD",
-                  },
-                  "Shipping": Object {
-                    "Amount": 0,
-                    "CurrencyCode": "USD",
-                  },
+          "CompetitivePrices": Array [
+            Object {
+              "CompetitivePriceId": "1",
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 40.03,
+                  "CurrencyCode": "USD",
                 },
-                "attr": Object {
-                  "belongsToRequester": "false",
-                  "condition": "New",
-                  "subcondition": "New",
+                "ListingPrice": Object {
+                  "Amount": 40.03,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 0,
+                  "CurrencyCode": "USD",
                 },
               },
-              Object {
-                "CompetitivePriceId": 2,
-                "Price": Object {
-                  "LandedPrice": Object {
-                    "Amount": 30.5,
-                    "CurrencyCode": "USD",
-                  },
-                  "ListingPrice": Object {
-                    "Amount": 30.5,
-                    "CurrencyCode": "USD",
-                  },
-                  "Shipping": Object {
-                    "Amount": 0,
-                    "CurrencyCode": "USD",
-                  },
+              "attr": Object {
+                "belongsToRequester": false,
+                "condition": "New",
+                "subcondition": "New",
+              },
+            },
+            Object {
+              "CompetitivePriceId": "2",
+              "Price": Object {
+                "LandedPrice": Object {
+                  "Amount": 30.5,
+                  "CurrencyCode": "USD",
                 },
-                "attr": Object {
-                  "belongsToRequester": "false",
-                  "condition": "Used",
-                  "subcondition": "Good",
+                "ListingPrice": Object {
+                  "Amount": 30.5,
+                  "CurrencyCode": "USD",
+                },
+                "Shipping": Object {
+                  "Amount": 0,
+                  "CurrencyCode": "USD",
                 },
               },
-            ],
-          },
-          "NumberOfOfferListings": Object {
-            "OfferListingCount": Array [
-              Object {
-                "attr": Object {
-                  "condition": "Any",
-                },
-                "text": 296,
+              "attr": Object {
+                "belongsToRequester": false,
+                "condition": "Used",
+                "subcondition": "Good",
               },
-              Object {
-                "attr": Object {
-                  "condition": "Used",
-                },
-                "text": 145,
+            },
+          ],
+          "NumberOfOfferListings": Array [
+            Object {
+              "attr": Object {
+                "condition": "Any",
               },
-              Object {
-                "attr": Object {
-                  "condition": "New",
-                },
-                "text": 151,
+              "text": 296,
+            },
+            Object {
+              "attr": Object {
+                "condition": "Used",
               },
-            ],
-          },
+              "text": 145,
+            },
+            Object {
+              "attr": Object {
+                "condition": "New",
+              },
+              "text": 151,
+            },
+          ],
           "TradeInValue": Object {
             "Amount": 17.05,
             "CurrencyCode": "USD",
@@ -160,7 +150,7 @@ Array [
         },
         "Identifiers": Object {
           "MarketplaceASIN": Object {
-            "ASIN": 1933890517,
+            "ASIN": "1933890517",
             "MarketplaceId": "ATVPDKIKX0DER",
           },
           "SKUIdentifier": Object {
@@ -169,30 +159,24 @@ Array [
             "SellerSKU": "SKU2468",
           },
         },
-        "SalesRankings": Object {
-          "SalesRank": Array [
-            Object {
-              "ProductCategoryId": "book_display_on_website",
-              "Rank": 900,
-            },
-            Object {
-              "ProductCategoryId": 271578011,
-              "Rank": 1,
-            },
-            Object {
-              "ProductCategoryId": 355562011,
-              "Rank": 8,
-            },
-            Object {
-              "ProductCategoryId": 173516,
-              "Rank": 25,
-            },
-          ],
-        },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
+        "SalesRankings": Array [
+          Object {
+            "ProductCategoryId": "book_display_on_website",
+            "Rank": 900,
+          },
+          Object {
+            "ProductCategoryId": "271578011",
+            "Rank": 1,
+          },
+          Object {
+            "ProductCategoryId": "355562011",
+            "Rank": 8,
+          },
+          Object {
+            "ProductCategoryId": "173516",
+            "Rank": 25,
+          },
+        ],
       },
     },
   ],
@@ -218,101 +202,95 @@ Array [
             "MarketplaceId": "ATVPDKIKX0DER",
           },
         },
-        "LowestOfferListings": Object {
-          "LowestOfferListing": Array [
-            Object {
-              "MultipleOffersAtLowestPrice": "False",
-              "NumberOfOfferListingsConsidered": 1,
-              "Price": Object {
-                "LandedPrice": Object {
-                  "Amount": 32.99,
-                  "CurrencyCode": "USD",
-                },
-                "ListingPrice": Object {
-                  "Amount": 28,
-                  "CurrencyCode": "USD",
-                },
-                "Shipping": Object {
-                  "Amount": 4.99,
-                  "CurrencyCode": "USD",
-                },
+        "LowestOfferListings": Array [
+          Object {
+            "MultipleOffersAtLowestPrice": "False",
+            "NumberOfOfferListingsConsidered": 1,
+            "Price": Object {
+              "LandedPrice": Object {
+                "Amount": 32.99,
+                "CurrencyCode": "USD",
               },
-              "Qualifiers": Object {
-                "FulfillmentChannel": "Merchant",
-                "ItemCondition": "Used",
-                "ItemSubcondition": "VeryGood",
-                "SellerPositiveFeedbackRating": "90-94%",
-                "ShippingTime": Object {
-                  "Max": "0-2 days",
-                },
-                "ShipsDomestically": "True",
+              "ListingPrice": Object {
+                "Amount": 28,
+                "CurrencyCode": "USD",
               },
-              "SellerFeedbackCount": 762,
+              "Shipping": Object {
+                "Amount": 4.99,
+                "CurrencyCode": "USD",
+              },
             },
-            Object {
-              "MultipleOffersAtLowestPrice": "False",
-              "NumberOfOfferListingsConsidered": 1,
-              "Price": Object {
-                "LandedPrice": Object {
-                  "Amount": 34.27,
-                  "CurrencyCode": "USD",
-                },
-                "ListingPrice": Object {
-                  "Amount": 34.27,
-                  "CurrencyCode": "USD",
-                },
-                "Shipping": Object {
-                  "Amount": 0,
-                  "CurrencyCode": "USD",
-                },
+            "Qualifiers": Object {
+              "FulfillmentChannel": "Merchant",
+              "ItemCondition": "Used",
+              "ItemSubcondition": "VeryGood",
+              "SellerPositiveFeedbackRating": "90-94%",
+              "ShippingTime": Object {
+                "Max": "0-2 days",
               },
-              "Qualifiers": Object {
-                "FulfillmentChannel": "Amazon",
-                "ItemCondition": "New",
-                "ItemSubcondition": "New",
-                "SellerPositiveFeedbackRating": "98-100%",
-                "ShippingTime": Object {
-                  "Max": "0-2 days",
-                },
-                "ShipsDomestically": "True",
-              },
-              "SellerFeedbackCount": 181744,
+              "ShipsDomestically": "True",
             },
-            Object {
-              "MultipleOffersAtLowestPrice": "False",
-              "NumberOfOfferListingsConsidered": 1,
-              "Price": Object {
-                "LandedPrice": Object {
-                  "Amount": 41.18,
-                  "CurrencyCode": "USD",
-                },
-                "ListingPrice": Object {
-                  "Amount": 41.18,
-                  "CurrencyCode": "USD",
-                },
-                "Shipping": Object {
-                  "Amount": 0,
-                  "CurrencyCode": "USD",
-                },
+            "SellerFeedbackCount": 762,
+          },
+          Object {
+            "MultipleOffersAtLowestPrice": "False",
+            "NumberOfOfferListingsConsidered": 1,
+            "Price": Object {
+              "LandedPrice": Object {
+                "Amount": 34.27,
+                "CurrencyCode": "USD",
               },
-              "Qualifiers": Object {
-                "FulfillmentChannel": "Amazon",
-                "ItemCondition": "New",
-                "ItemSubcondition": "New",
-                "SellerPositiveFeedbackRating": "95-97%",
-                "ShippingTime": Object {
-                  "Max": "0-2 days",
-                },
-                "ShipsDomestically": "True",
+              "ListingPrice": Object {
+                "Amount": 34.27,
+                "CurrencyCode": "USD",
               },
-              "SellerFeedbackCount": 13213,
+              "Shipping": Object {
+                "Amount": 0,
+                "CurrencyCode": "USD",
+              },
             },
-          ],
-        },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
+            "Qualifiers": Object {
+              "FulfillmentChannel": "Amazon",
+              "ItemCondition": "New",
+              "ItemSubcondition": "New",
+              "SellerPositiveFeedbackRating": "98-100%",
+              "ShippingTime": Object {
+                "Max": "0-2 days",
+              },
+              "ShipsDomestically": "True",
+            },
+            "SellerFeedbackCount": 181744,
+          },
+          Object {
+            "MultipleOffersAtLowestPrice": "False",
+            "NumberOfOfferListingsConsidered": 1,
+            "Price": Object {
+              "LandedPrice": Object {
+                "Amount": 41.18,
+                "CurrencyCode": "USD",
+              },
+              "ListingPrice": Object {
+                "Amount": 41.18,
+                "CurrencyCode": "USD",
+              },
+              "Shipping": Object {
+                "Amount": 0,
+                "CurrencyCode": "USD",
+              },
+            },
+            "Qualifiers": Object {
+              "FulfillmentChannel": "Amazon",
+              "ItemCondition": "New",
+              "ItemSubcondition": "New",
+              "SellerPositiveFeedbackRating": "95-97%",
+              "ShippingTime": Object {
+                "Max": "0-2 days",
+              },
+              "ShipsDomestically": "True",
+            },
+            "SellerFeedbackCount": 13213,
+          },
+        ],
       },
     },
   ],
@@ -334,7 +312,7 @@ Array [
       "Product": Object {
         "Identifiers": Object {
           "MarketplaceASIN": Object {
-            "ASIN": 1933890517,
+            "ASIN": "1933890517",
             "MarketplaceId": "ATVPDKIKX0DER",
           },
           "SKUIdentifier": Object {
@@ -343,101 +321,95 @@ Array [
             "SellerSKU": "SKU2468",
           },
         },
-        "LowestOfferListings": Object {
-          "LowestOfferListing": Array [
-            Object {
-              "MultipleOffersAtLowestPrice": "True",
-              "NumberOfOfferListingsConsidered": 3,
-              "Price": Object {
-                "LandedPrice": Object {
-                  "Amount": 28.68,
-                  "CurrencyCode": "USD",
-                },
-                "ListingPrice": Object {
-                  "Amount": 24.69,
-                  "CurrencyCode": "USD",
-                },
-                "Shipping": Object {
-                  "Amount": 3.99,
-                  "CurrencyCode": "USD",
-                },
+        "LowestOfferListings": Array [
+          Object {
+            "MultipleOffersAtLowestPrice": "True",
+            "NumberOfOfferListingsConsidered": 3,
+            "Price": Object {
+              "LandedPrice": Object {
+                "Amount": 28.68,
+                "CurrencyCode": "USD",
               },
-              "Qualifiers": Object {
-                "FulfillmentChannel": "Merchant",
-                "ItemCondition": "Used",
-                "ItemSubcondition": "Acceptable",
-                "SellerPositiveFeedbackRating": "95-97%",
-                "ShippingTime": Object {
-                  "Max": "0-2 days",
-                },
-                "ShipsDomestically": "True",
+              "ListingPrice": Object {
+                "Amount": 24.69,
+                "CurrencyCode": "USD",
               },
-              "SellerFeedbackCount": 8900,
+              "Shipping": Object {
+                "Amount": 3.99,
+                "CurrencyCode": "USD",
+              },
             },
-            Object {
-              "MultipleOffersAtLowestPrice": "False",
-              "NumberOfOfferListingsConsidered": 1,
-              "Price": Object {
-                "LandedPrice": Object {
-                  "Amount": 30.5,
-                  "CurrencyCode": "USD",
-                },
-                "ListingPrice": Object {
-                  "Amount": 30.5,
-                  "CurrencyCode": "USD",
-                },
-                "Shipping": Object {
-                  "Amount": 0,
-                  "CurrencyCode": "USD",
-                },
+            "Qualifiers": Object {
+              "FulfillmentChannel": "Merchant",
+              "ItemCondition": "Used",
+              "ItemSubcondition": "Acceptable",
+              "SellerPositiveFeedbackRating": "95-97%",
+              "ShippingTime": Object {
+                "Max": "0-2 days",
               },
-              "Qualifiers": Object {
-                "FulfillmentChannel": "Amazon",
-                "ItemCondition": "Used",
-                "ItemSubcondition": "Good",
-                "SellerPositiveFeedbackRating": "90-94%",
-                "ShippingTime": Object {
-                  "Max": "0-2 days",
-                },
-                "ShipsDomestically": "True",
-              },
-              "SellerFeedbackCount": 1569694,
+              "ShipsDomestically": "True",
             },
-            Object {
-              "MultipleOffersAtLowestPrice": "False",
-              "NumberOfOfferListingsConsidered": 3,
-              "Price": Object {
-                "LandedPrice": Object {
-                  "Amount": 30.99,
-                  "CurrencyCode": "USD",
-                },
-                "ListingPrice": Object {
-                  "Amount": 27,
-                  "CurrencyCode": "USD",
-                },
-                "Shipping": Object {
-                  "Amount": 3.99,
-                  "CurrencyCode": "USD",
-                },
+            "SellerFeedbackCount": 8900,
+          },
+          Object {
+            "MultipleOffersAtLowestPrice": "False",
+            "NumberOfOfferListingsConsidered": 1,
+            "Price": Object {
+              "LandedPrice": Object {
+                "Amount": 30.5,
+                "CurrencyCode": "USD",
               },
-              "Qualifiers": Object {
-                "FulfillmentChannel": "Merchant",
-                "ItemCondition": "Used",
-                "ItemSubcondition": "Good",
-                "SellerPositiveFeedbackRating": "95-97%",
-                "ShippingTime": Object {
-                  "Max": "0-2 days",
-                },
-                "ShipsDomestically": "True",
+              "ListingPrice": Object {
+                "Amount": 30.5,
+                "CurrencyCode": "USD",
               },
-              "SellerFeedbackCount": 7732,
+              "Shipping": Object {
+                "Amount": 0,
+                "CurrencyCode": "USD",
+              },
             },
-          ],
-        },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
+            "Qualifiers": Object {
+              "FulfillmentChannel": "Amazon",
+              "ItemCondition": "Used",
+              "ItemSubcondition": "Good",
+              "SellerPositiveFeedbackRating": "90-94%",
+              "ShippingTime": Object {
+                "Max": "0-2 days",
+              },
+              "ShipsDomestically": "True",
+            },
+            "SellerFeedbackCount": 1569694,
+          },
+          Object {
+            "MultipleOffersAtLowestPrice": "False",
+            "NumberOfOfferListingsConsidered": 3,
+            "Price": Object {
+              "LandedPrice": Object {
+                "Amount": 30.99,
+                "CurrencyCode": "USD",
+              },
+              "ListingPrice": Object {
+                "Amount": 27,
+                "CurrencyCode": "USD",
+              },
+              "Shipping": Object {
+                "Amount": 3.99,
+                "CurrencyCode": "USD",
+              },
+            },
+            "Qualifiers": Object {
+              "FulfillmentChannel": "Merchant",
+              "ItemCondition": "Used",
+              "ItemSubcondition": "Good",
+              "SellerPositiveFeedbackRating": "95-97%",
+              "ShippingTime": Object {
+                "Max": "0-2 days",
+              },
+              "ShipsDomestically": "True",
+            },
+            "SellerFeedbackCount": 7732,
+          },
+        ],
       },
     },
   ],
@@ -480,8 +452,8 @@ Array [
         "ShippingTime": Object {
           "attr": Object {
             "availabilityType": "NOW",
-            "maximumHours": "0",
-            "minimumHours": "0",
+            "maximumHours": 0,
+            "minimumHours": 0,
           },
         },
         "SubCondition": "new",
@@ -589,8 +561,8 @@ Array [
         "ShippingTime": Object {
           "attr": Object {
             "availabilityType": "NOW",
-            "maximumHours": "0",
-            "minimumHours": "0",
+            "maximumHours": 0,
+            "minimumHours": 0,
           },
         },
         "SubCondition": "new",
@@ -876,26 +848,20 @@ Array [
             },
           ],
         },
-        "SalesRankings": Object {
-          "SalesRank": Array [
-            Object {
-              "ProductCategoryId": "apparel_display_on_website",
-              "Rank": 159,
-            },
-            Object {
-              "ProductCategoryId": 2420095011,
-              "Rank": 1,
-            },
-            Object {
-              "ProductCategoryId": 2611189011,
-              "Rank": 4,
-            },
-          ],
-        },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
+        "SalesRankings": Array [
+          Object {
+            "ProductCategoryId": "apparel_display_on_website",
+            "Rank": 159,
+          },
+          Object {
+            "ProductCategoryId": "2420095011",
+            "Rank": 1,
+          },
+          Object {
+            "ProductCategoryId": "2611189011",
+            "Rank": 4,
+          },
+        ],
       },
     },
   ],
@@ -1037,31 +1003,29 @@ Array [
           },
           "Identifiers": Object {
             "MarketplaceASIN": Object {
-              "ASIN": 1933988665,
+              "ASIN": "1933988665",
               "MarketplaceId": "ATVPDKIKX0DER",
             },
           },
           "Relationships": "",
-          "SalesRankings": Object {
-            "SalesRank": Array [
-              Object {
-                "ProductCategoryId": "book_display_on_website",
-                "Rank": 689405,
-              },
-              Object {
-                "ProductCategoryId": 491298,
-                "Rank": 150,
-              },
-              Object {
-                "ProductCategoryId": 3870,
-                "Rank": 375,
-              },
-              Object {
-                "ProductCategoryId": 3887,
-                "Rank": 836,
-              },
-            ],
-          },
+          "SalesRankings": Array [
+            Object {
+              "ProductCategoryId": "book_display_on_website",
+              "Rank": 689405,
+            },
+            Object {
+              "ProductCategoryId": "491298",
+              "Rank": 150,
+            },
+            Object {
+              "ProductCategoryId": "3870",
+              "Rank": 375,
+            },
+            Object {
+              "ProductCategoryId": "3887",
+              "Rank": 836,
+            },
+          ],
         },
       ],
     },
@@ -1284,12 +1248,12 @@ Array [
       "Product": Object {
         "Identifiers": Object {
           "MarketplaceASIN": Object {
-            "ASIN": 1933890517,
+            "ASIN": "1933890517",
             "MarketplaceId": "ATVPDKIKX0DER",
           },
         },
-        "Offers": Object {
-          "Offer": Object {
+        "Offers": Array [
+          Object {
             "BuyingPrice": Object {
               "LandedPrice": Object {
                 "Amount": 303.99,
@@ -1314,11 +1278,7 @@ Array [
             "SellerId": "A1IMEXAMPLEWRC",
             "SellerSKU": "SKU2468",
           },
-        },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
+        ],
       },
     },
   ],
@@ -1339,7 +1299,7 @@ Array [
       "Product": Object {
         "Identifiers": Object {
           "MarketplaceASIN": Object {
-            "ASIN": 1933890517,
+            "ASIN": "1933890517",
             "MarketplaceId": "ATVPDKIKX0DER",
           },
           "SKUIdentifier": Object {
@@ -1348,8 +1308,8 @@ Array [
             "SellerSKU": "SKU2468",
           },
         },
-        "Offers": Object {
-          "Offer": Object {
+        "Offers": Array [
+          Object {
             "BuyingPrice": Object {
               "LandedPrice": Object {
                 "Amount": 303.99,
@@ -1374,11 +1334,7 @@ Array [
             "SellerId": "A1IMEXAMPLEWRC",
             "SellerSKU": "SKU2468",
           },
-        },
-        "attr": Object {
-          "xmlns": "http://mws.amazonservices.com/schema/Products/2011-10-01",
-          "xmlns:ns2": "http://mws.amazonservices.com/schema/Products/2011-10-01/default.xsd",
-        },
+        ],
       },
     },
   ],
@@ -1636,26 +1592,24 @@ Array [
           },
         },
         "Relationships": "",
-        "SalesRankings": Object {
-          "SalesRank": Array [
-            Object {
-              "ProductCategoryId": "book_display_on_website",
-              "Rank": 401,
-            },
-            Object {
-              "ProductCategoryId": 15356791,
-              "Rank": 5,
-            },
-            Object {
-              "ProductCategoryId": 3153,
-              "Rank": 8,
-            },
-            Object {
-              "ProductCategoryId": 17468,
-              "Rank": 16,
-            },
-          ],
-        },
+        "SalesRankings": Array [
+          Object {
+            "ProductCategoryId": "book_display_on_website",
+            "Rank": 401,
+          },
+          Object {
+            "ProductCategoryId": "15356791",
+            "Rank": 5,
+          },
+          Object {
+            "ProductCategoryId": "3153",
+            "Rank": 8,
+          },
+          Object {
+            "ProductCategoryId": "17468",
+            "Rank": 16,
+          },
+        ],
       },
     ],
   },
@@ -1667,4 +1621,153 @@ Array [
     "timestamp": 2020-05-06T09:22:23.582Z,
   },
 ]
+`;
+
+exports[`products product should properly decode complete product structure 1`] = `
+Object {
+  "AttributeSets": Object {
+    "Any": Object {
+      "any-xml": "",
+    },
+  },
+  "CompetitivePricing": Object {
+    "CompetitivePrices": Array [
+      Object {
+        "CompetitivePriceId": "String",
+        "Price": Object {
+          "LandedPrice": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+          "ListingPrice": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+          "Points": Object {
+            "PointsMonetaryValue": Object {
+              "Amount": 100,
+              "CurrencyCode": "String",
+            },
+            "PointsNumber": 1,
+          },
+          "Shipping": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+        },
+        "attr": Object {
+          "belongsToRequester": true,
+          "condition": "String",
+          "subcondition": "String",
+        },
+      },
+    ],
+    "NumberOfOfferListings": Array [
+      Object {
+        "attr": Object {
+          "condition": "String",
+        },
+        "text": 1,
+      },
+    ],
+    "TradeInValue": Object {
+      "Amount": 100,
+      "CurrencyCode": "String",
+    },
+  },
+  "Identifiers": Object {
+    "MarketplaceASIN": Object {
+      "ASIN": "String",
+      "MarketplaceId": "String",
+    },
+    "SKUIdentifier": Object {
+      "MarketplaceId": "String",
+      "SellerId": "String",
+      "SellerSKU": "String",
+    },
+  },
+  "LowestOfferListings": Array [
+    Object {
+      "MultipleOffersAtLowestPrice": "String",
+      "NumberOfOfferListingsConsidered": 1,
+      "Price": Object {
+        "LandedPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "ListingPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "Points": Object {
+          "PointsMonetaryValue": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+          "PointsNumber": 1,
+        },
+        "Shipping": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+      },
+      "Qualifiers": Object {
+        "FulfillmentChannel": "String",
+        "ItemCondition": "String",
+        "ItemSubcondition": "String",
+        "SellerPositiveFeedbackRating": "String",
+        "ShippingTime": Object {
+          "Max": "String",
+        },
+        "ShipsDomestically": "String",
+      },
+      "SellerFeedbackCount": 1,
+    },
+  ],
+  "Offers": Array [
+    Object {
+      "BuyingPrice": Object {
+        "LandedPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "ListingPrice": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+        "Points": Object {
+          "PointsMonetaryValue": Object {
+            "Amount": 100,
+            "CurrencyCode": "String",
+          },
+          "PointsNumber": 1,
+        },
+        "Shipping": Object {
+          "Amount": 100,
+          "CurrencyCode": "String",
+        },
+      },
+      "FulfillmentChannel": "String",
+      "ItemCondition": "String",
+      "ItemSubCondition": "String",
+      "RegularPrice": Object {
+        "Amount": 100,
+        "CurrencyCode": "String",
+      },
+      "SellerId": "String",
+      "SellerSKU": "String",
+    },
+  ],
+  "Relationships": Object {
+    "Any": Object {
+      "any-xml": "",
+    },
+  },
+  "SalesRankings": Array [
+    Object {
+      "ProductCategoryId": "String",
+      "Rank": 1,
+    },
+  ],
+}
 `;

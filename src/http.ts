@@ -315,7 +315,7 @@ const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestR
       return Promise.reject(error.response.data)
     })
 
-const parseResponse = <T>(
+export const parseResponse = <T>(
   response: RequestResponse,
   parseString = false,
 ): [T | string, RequestMeta] => {
@@ -329,6 +329,7 @@ const parseResponse = <T>(
         {
           attributeNamePrefix: '',
           ignoreAttributes: false,
+          parseAttributeValue: true,
           attrNodeName: 'attr',
           textNodeName: 'text',
           tagValueProcessor: (value) => XmlEntities.decode(value),

@@ -7,7 +7,6 @@ import {
   number,
   oneOf,
   optional,
-  record,
   string,
   unknown,
 } from 'purify-ts'
@@ -120,7 +119,116 @@ export const GetMyFeesEstimateResponse = Codec.interface({
   }),
 })
 
-const Product = record(string, unknown)
+// Amazon C# library has properties that are a type "any" they call an "abstract object"
+const AbstractObject = unknown
+
+const AttributeSetList = AbstractObject
+
+const ASINIdentifier = Codec.interface({
+  MarketplaceId: string,
+  ASIN: ensureString,
+})
+
+const SellerSKUIdentifier = Codec.interface({
+  MarketplaceId: string,
+  SellerId: ensureString,
+  SellerSKU: ensureString,
+})
+
+const IdentifierType = Codec.interface({
+  MarketplaceASIN: optional(ASINIdentifier),
+  SKUIdentifier: optional(SellerSKUIdentifier),
+})
+
+const RelationshipList = AbstractObject
+
+const PriceType = Codec.interface({
+  LandedPrice: optional(MoneyType),
+  ListingPrice: optional(MoneyType),
+  Shipping: optional(MoneyType),
+  Points: optional(PointsCodec),
+})
+
+const CompetitivePriceType = Codec.interface({
+  attr: Codec.interface({
+    condition: string,
+    subcondition: string,
+    belongsToRequester: optional(boolean),
+  }),
+  CompetitivePriceId: ensureString,
+  Price: PriceType,
+})
+
+const CompetitivePriceList = ensureArray('CompetitivePrice', CompetitivePriceType)
+
+const OfferListingCountType = Codec.interface({
+  attr: Codec.interface({
+    condition: string,
+  }),
+  text: number,
+})
+
+const NumberOfOfferListingsList = ensureArray('OfferListingCount', OfferListingCountType)
+
+const CompetitivePricingType = Codec.interface({
+  CompetitivePrices: optional(CompetitivePriceList),
+  NumberOfOfferListings: optional(NumberOfOfferListingsList),
+  TradeInValue: optional(MoneyType),
+})
+
+const SalesRankType = Codec.interface({
+  ProductCategoryId: optional(ensureString),
+  Rank: optional(number),
+})
+
+const SalesRankList = ensureArray('SalesRank', SalesRankType)
+
+const ShippingTimeType = Codec.interface({
+  Max: string,
+})
+
+const QualifiersType = Codec.interface({
+  ItemCondition: optional(ensureString),
+  ItemSubcondition: optional(ensureString),
+  FulfillmentChannel: optional(ensureString),
+  ShipsDomestically: optional(ensureString),
+  ShippingTime: optional(ShippingTimeType),
+  SellerPositiveFeedbackRating: optional(ensureString),
+})
+
+const LowestOfferListingType = Codec.interface({
+  Qualifiers: optional(QualifiersType),
+  NumberOfOfferListingsConsidered: optional(number),
+  SellerFeedbackCount: optional(number),
+  Price: optional(PriceType),
+  MultipleOffersAtLowestPrice: optional(string),
+})
+
+const LowestOfferListingList = ensureArray('LowestOfferListing', LowestOfferListingType)
+
+const OfferType = Codec.interface({
+  BuyingPrice: optional(PriceType),
+  RegularPrice: optional(MoneyType),
+  FulfillmentChannel: optional(string),
+  ItemCondition: optional(string),
+  ItemSubCondition: optional(string),
+  SellerId: optional(string),
+  SellerSKU: optional(string),
+})
+
+const OffersList = ensureArray('Offer', OfferType)
+
+const Offers = OffersList
+
+export const Product = Codec.interface({
+  Identifiers: optional(IdentifierType),
+  AttributeSets: optional(AttributeSetList),
+  Relationships: optional(RelationshipList),
+  CompetitivePricing: optional(CompetitivePricingType),
+  SalesRankings: optional(SalesRankList),
+  LowestOfferListings: optional(LowestOfferListingList),
+  Offers: optional(Offers),
+})
 
 const SingleProductInterface = Codec.interface({
   Product,
