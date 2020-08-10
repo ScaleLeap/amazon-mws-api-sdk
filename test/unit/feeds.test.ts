@@ -1,4 +1,4 @@
-import { InvalidParameterValue, ParsingError, SubmitFeedParameters } from '../../src'
+import { ParsingError, SubmitFeedParameters } from '../../src'
 import { NextToken } from '../../src/parsing'
 import { createMockHttpClient, mockMwsFail, mockParsingError, parsingErrorRegex } from '../utils'
 
@@ -29,17 +29,12 @@ describe('feeds', () => {
   describe('getFeedSubmissionResult', () => {
     const xmlParameters = {
       FeedSubmissionId: '',
-      format: 'xml',
+      format: 'xml' as 'xml',
     }
 
     const jsonParameters = {
       FeedSubmissionId: '',
-      format: 'json',
-    }
-
-    const incorrectParameters = {
-      FeedSubmissionId: '',
-      format: 'yml',
+      format: 'json' as 'json',
     }
 
     it('returns an XML file when succesful', async () => {
@@ -60,16 +55,6 @@ describe('feeds', () => {
       expect(
         await mockGetFeedSubmissionResult.feeds.getFeedSubmissionResult(jsonParameters),
       ).toMatchSnapshot()
-    })
-
-    it('throws invalid parameters error if format parameter is incorrect', async () => {
-      expect.assertions(1)
-
-      const mockGetFeedSubmissionResult = createMockHttpClient('feeds_get_feed_submission_result')
-
-      await expect(() =>
-        mockGetFeedSubmissionResult.feeds.getFeedSubmissionResult(incorrectParameters),
-      ).rejects.toStrictEqual(new InvalidParameterValue('"format" parameter is incorrect'))
     })
 
     it('throws a parsing error when the response isnt valid', async () => {
