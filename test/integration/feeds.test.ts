@@ -13,7 +13,7 @@ describe(`${Feeds.name}`, () => {
 
     const parameters = {
       FeedSubmissionId: '51793018437',
-      format: 'xml',
+      format: 'xml' as 'xml',
     }
 
     const [response] = await feeds.getFeedSubmissionResult(parameters)
@@ -28,7 +28,7 @@ describe(`${Feeds.name}`, () => {
 
       const parameters = {
         FeedSubmissionId: '51793018437',
-        format: 'json',
+        format: 'json' as 'json',
       }
 
       const [response] = await feeds.getFeedSubmissionResult(parameters)

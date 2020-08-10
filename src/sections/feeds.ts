@@ -227,7 +227,7 @@ export class Feeds {
 
   async getFeedSubmissionResult(
     parameters: GetFeedSubmissionResultParameters,
-  ): Promise<[FeedSubmission | Record<string, unknown>, RequestMeta] | void> {
+  ): Promise<[FeedSubmission | Record<string, unknown>, RequestMeta]> {
     const stringResponse = parameters.format === 'xml' || !parameters.format
 
     const [response, meta] = await this.httpClient.request(
