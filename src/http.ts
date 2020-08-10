@@ -362,6 +362,7 @@ export class HttpClient {
     method: HttpMethod,
     info: ResourceInfo<TResource>,
     body?: string,
+    stringResponse = false,
   ): Promise<[TRes | string, RequestMeta]> {
     const marketplaceUri = this.options.marketplace.webServiceUri
 
@@ -427,18 +428,7 @@ export class HttpClient {
         throw new InvalidUPCIdentifier(`${info.action} request failed`)
       }
 
-      /**
-       * GetReport and GetFeedSubmissionResult returns a string that should be treated as a file instead of XML data
-       * Get Report
-       * http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReport.html
-       * GetFeedSubmissionResult
-       * http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_GetFeedSubmissionResult.html
-       */
-      if (info.action === 'GetReport' || info.action === 'GetFeedSubmissionResult') {
-        return parseResponse(response, true)
-      }
-
-      return parseResponse(response)
+      return parseResponse(response, stringResponse)
     } catch (error) {
       if (parser.validate(error) !== true) {
         throw error

@@ -415,14 +415,19 @@ export class Reports {
   }
 
   async getReport(parameters: GetReportParameters): Promise<[Report, RequestMeta]> {
-    const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Reports,
-      version: REPORTS_API_VERSION,
-      action: 'GetReport',
-      parameters: {
-        ReportId: parameters.ReportId,
+    const [response, meta] = await this.httpClient.request(
+      'POST',
+      {
+        resource: Resource.Reports,
+        version: REPORTS_API_VERSION,
+        action: 'GetReport',
+        parameters: {
+          ReportId: parameters.ReportId,
+        },
       },
-    })
+      '',
+      true,
+    )
 
     return GetReportResponse.decode(response).caseOf({
       Right: (x) => [x, meta],

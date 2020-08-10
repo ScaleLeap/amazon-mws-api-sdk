@@ -10,10 +10,12 @@ import {
   number,
   oneOf,
   optional,
+  record,
   string,
+  unknown,
 } from 'purify-ts'
 
-import { ParsingError } from '../error'
+import { InvalidParameterValue, ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
 import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 
@@ -167,6 +169,7 @@ const GetFeedSubmissionResultResponse = Codec.custom<string>({
 
 export interface GetFeedSubmissionResultParameters {
   FeedSubmissionId: string
+  format?: string
 }
 
 export interface SubmitFeedParameters {
@@ -224,22 +227,42 @@ export class Feeds {
 
   async getFeedSubmissionResult(
     parameters: GetFeedSubmissionResultParameters,
-  ): Promise<[FeedSubmission, RequestMeta]> {
-    const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Feeds,
-      version: FEEDS_API_VERSION,
-      action: 'GetFeedSubmissionResult',
-      parameters: {
-        FeedSubmissionId: parameters.FeedSubmissionId,
-      },
-    })
+  ): Promise<[FeedSubmission | Record<string, unknown>, RequestMeta] | void> {
+    const stringResponse = parameters.format === 'xml'
 
-    return GetFeedSubmissionResultResponse.decode(response).caseOf({
-      Right: (x) => [x, meta],
-      Left: (error) => {
-        throw new ParsingError(error)
+    const [response, meta] = await this.httpClient.request(
+      'POST',
+      {
+        resource: Resource.Feeds,
+        version: FEEDS_API_VERSION,
+        action: 'GetFeedSubmissionResult',
+        parameters: {
+          FeedSubmissionId: parameters.FeedSubmissionId,
+        },
       },
-    })
+      '',
+      stringResponse,
+    )
+    if (stringResponse) {
+      return GetFeedSubmissionResultResponse.decode(response).caseOf({
+        Right: (x) => [x, meta],
+        Left: (error) => {
+          throw new ParsingError(error)
+        },
+      })
+    }
+    if (parameters.format === 'json') {
+      return record(string, unknown)
+        .decode(response)
+        .caseOf({
+          Right: (x) => [x, meta],
+          Left: (error) => {
+            throw new ParsingError(error)
+          },
+        })
+    }
+
+    throw new InvalidParameterValue('"format" parameter is incorrect')
   }
 
   async cancelFeedSubmissions(

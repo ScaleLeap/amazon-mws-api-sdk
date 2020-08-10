@@ -13,12 +13,29 @@ describe(`${Feeds.name}`, () => {
 
     const parameters = {
       FeedSubmissionId: '51793018437',
+      format: 'xml',
     }
 
     const [response] = await feeds.getFeedSubmissionResult(parameters)
 
     expect(typeof response).toBe('string')
   })
+
+  itci(
+    'should be able to get an XML string and parse it to JSON from get submission result',
+    async () => {
+      expect.assertions(1)
+
+      const parameters = {
+        FeedSubmissionId: '51793018437',
+        format: 'json',
+      }
+
+      const [response] = await feeds.getFeedSubmissionResult(parameters)
+
+      expect(typeof response).toBe('object')
+    },
+  )
 
   itci('should be able to list feed recently submitted', async () => {
     expect.assertions(1)

@@ -1,4 +1,4 @@
-import { ParsingError, SubmitFeedParameters } from '../../src'
+import { InvalidParameterValue, ParsingError, SubmitFeedParameters } from '../../src'
 import { NextToken } from '../../src/parsing'
 import { createMockHttpClient, mockMwsFail, mockParsingError, parsingErrorRegex } from '../utils'
 
@@ -27,7 +27,20 @@ describe('feeds', () => {
   })
 
   describe('getFeedSubmissionResult', () => {
-    const parameters = { FeedSubmissionId: '' }
+    const xmlParameters = {
+      FeedSubmissionId: '',
+      format: 'xml',
+    }
+
+    const jsonParameters = {
+      FeedSubmissionId: '',
+      format: 'json',
+    }
+
+    const incorrectParameters = {
+      FeedSubmissionId: '',
+      format: 'yml',
+    }
 
     it('returns an XML file when succesful', async () => {
       expect.assertions(1)
@@ -35,15 +48,35 @@ describe('feeds', () => {
       const mockGetFeedSubmissionResult = createMockHttpClient('feeds_get_feed_submission_result')
 
       expect(
-        await mockGetFeedSubmissionResult.feeds.getFeedSubmissionResult(parameters),
+        await mockGetFeedSubmissionResult.feeds.getFeedSubmissionResult(xmlParameters),
       ).toMatchSnapshot()
+    })
+
+    it('returns an XML file parsed to json when succesful', async () => {
+      expect.assertions(1)
+
+      const mockGetFeedSubmissionResult = createMockHttpClient('feeds_get_feed_submission_result')
+
+      expect(
+        await mockGetFeedSubmissionResult.feeds.getFeedSubmissionResult(jsonParameters),
+      ).toMatchSnapshot()
+    })
+
+    it('throws invalid parameters error if format parameter is incorrect', async () => {
+      expect.assertions(1)
+
+      const mockGetFeedSubmissionResult = createMockHttpClient('feeds_get_feed_submission_result')
+
+      await expect(() =>
+        mockGetFeedSubmissionResult.feeds.getFeedSubmissionResult(incorrectParameters),
+      ).rejects.toStrictEqual(new InvalidParameterValue('"format" parameter is incorrect'))
     })
 
     it('throws a parsing error when the response isnt valid', async () => {
       expect.assertions(1)
 
       await expect(() =>
-        mockMwsFail.feeds.getFeedSubmissionResult(parameters),
+        mockMwsFail.feeds.getFeedSubmissionResult(xmlParameters),
       ).rejects.toStrictEqual(new ParsingError('Expected feed to have length of more than 0'))
     })
   })
