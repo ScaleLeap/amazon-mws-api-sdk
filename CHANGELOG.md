@@ -3,6 +3,20 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.8.0...v1.9.0) (2020-08-11)
+
+
+### Bug Fixes
+
+* add parameters type to tests ([0011aab](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/0011aab70990e6d6f61893643dbcfd7dff2a954a))
+* fixes for integration tests and remove void from return ([044c161](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/044c161c191551312c653c27ff9662aa93d7d0b8))
+* specify valid formats, make xml default if invalid format ([3c703da](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/3c703da2501ed82d3d773fb4e6b1683529e5125f))
+
+
+### Features
+
+* add option for getFeedSubmissionResult to return json obj ([ff949e2](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ff949e256334f723508241f63858110ec38340ca))
+
 # [1.8.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.7.0...v1.8.0) (2020-08-08)
 
 
