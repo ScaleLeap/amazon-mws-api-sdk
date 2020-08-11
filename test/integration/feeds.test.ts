@@ -1,4 +1,4 @@
-import { Feeds } from '../../src'
+import { Feeds, GetFeedSubmissionResultParameters } from '../../src'
 import { Config } from './config'
 import { itci } from './it'
 
@@ -11,9 +11,9 @@ describe(`${Feeds.name}`, () => {
   itci('should be able to get XML string from get submission result', async () => {
     expect.assertions(1)
 
-    const parameters = {
+    const parameters: GetFeedSubmissionResultParameters = {
       FeedSubmissionId: '51793018437',
-      format: 'xml' as 'xml',
+      format: 'xml',
     }
 
     const [response] = await feeds.getFeedSubmissionResult(parameters)
@@ -26,9 +26,9 @@ describe(`${Feeds.name}`, () => {
     async () => {
       expect.assertions(1)
 
-      const parameters = {
+      const parameters: GetFeedSubmissionResultParameters = {
         FeedSubmissionId: '51793018437',
-        format: 'json' as 'json',
+        format: 'json',
       }
 
       const [response] = await feeds.getFeedSubmissionResult(parameters)

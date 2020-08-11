@@ -1,4 +1,4 @@
-import { ParsingError, SubmitFeedParameters } from '../../src'
+import { GetFeedSubmissionResultParameters, ParsingError, SubmitFeedParameters } from '../../src'
 import { NextToken } from '../../src/parsing'
 import { createMockHttpClient, mockMwsFail, mockParsingError, parsingErrorRegex } from '../utils'
 
@@ -27,14 +27,14 @@ describe('feeds', () => {
   })
 
   describe('getFeedSubmissionResult', () => {
-    const xmlParameters = {
+    const xmlParameters: GetFeedSubmissionResultParameters = {
       FeedSubmissionId: '',
-      format: 'xml' as 'xml',
+      format: 'xml',
     }
 
-    const jsonParameters = {
+    const jsonParameters: GetFeedSubmissionResultParameters = {
       FeedSubmissionId: '',
-      format: 'json' as 'json',
+      format: 'json',
     }
 
     it('returns an XML file when succesful', async () => {
