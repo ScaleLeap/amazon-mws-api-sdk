@@ -1,5 +1,5 @@
 import { Reports, ScheduleType } from '../../src'
-import { InvalidReportId } from '../../src/error'
+import { InvalidReportIdError } from '../../src/error'
 import { Config } from './config'
 import { itci } from './it'
 
@@ -61,7 +61,7 @@ describe('reports', () => {
 
     // expect(response).toBeDefined()
     await expect(() => reports.cancelReportRequests(parameters)).rejects.toThrow(
-      new InvalidReportId('CancelReportRequests request failed'),
+      new InvalidReportIdError('CancelReportRequests request failed'),
     )
   })
 
