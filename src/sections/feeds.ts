@@ -10,7 +10,9 @@ import {
   number,
   oneOf,
   optional,
+  record,
   string,
+  unknown,
 } from 'purify-ts'
 
 import { ParsingError } from '../error'
@@ -167,6 +169,7 @@ const GetFeedSubmissionResultResponse = Codec.custom<string>({
 
 export interface GetFeedSubmissionResultParameters {
   FeedSubmissionId: string
+  format?: 'xml' | 'json'
 }
 
 export interface SubmitFeedParameters {
@@ -224,15 +227,33 @@ export class Feeds {
 
   async getFeedSubmissionResult(
     parameters: GetFeedSubmissionResultParameters,
-  ): Promise<[FeedSubmission, RequestMeta]> {
-    const [response, meta] = await this.httpClient.request('POST', {
-      resource: Resource.Feeds,
-      version: FEEDS_API_VERSION,
-      action: 'GetFeedSubmissionResult',
-      parameters: {
-        FeedSubmissionId: parameters.FeedSubmissionId,
+  ): Promise<[FeedSubmission | Record<string, unknown>, RequestMeta]> {
+    const stringResponse = parameters.format === 'xml' || !parameters.format
+
+    const [response, meta] = await this.httpClient.request(
+      'POST',
+      {
+        resource: Resource.Feeds,
+        version: FEEDS_API_VERSION,
+        action: 'GetFeedSubmissionResult',
+        parameters: {
+          FeedSubmissionId: parameters.FeedSubmissionId,
+        },
       },
-    })
+      '',
+      stringResponse,
+    )
+
+    if (parameters.format === 'json') {
+      return record(string, unknown)
+        .decode(response)
+        .caseOf({
+          Right: (x) => [x, meta],
+          Left: (error) => {
+            throw new ParsingError(error)
+          },
+        })
+    }
 
     return GetFeedSubmissionResultResponse.decode(response).caseOf({
       Right: (x) => [x, meta],

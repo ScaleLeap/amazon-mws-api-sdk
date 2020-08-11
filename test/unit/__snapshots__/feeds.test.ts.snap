@@ -84,6 +84,37 @@ Array [
 ]
 `;
 
+exports[`feeds getFeedSubmissionResult returns an XML file parsed to json when succesful 1`] = `
+Array [
+  Object {
+    "AmazonEnvelope": Object {
+      "Header": Object {
+        "DocumentVersion": 1.02,
+        "MerchantIdentifier": "T_M_GOOD_83835495",
+      },
+      "Message": Object {
+        "MessageID": 1,
+        "ProcessingReport": Object {
+          "DocumentTransactionID": 4319742521,
+        },
+      },
+      "MessageType": "ProcessingReport",
+      "attr": Object {
+        "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+        "xsi:noNamespaceSchemaLocation": "amzn-envelope.xsd",
+      },
+    },
+  },
+  Object {
+    "quotaMax": 1000,
+    "quotaRemaining": 999,
+    "quotaResetOn": 2020-04-06T10:22:23.582Z,
+    "requestId": "0",
+    "timestamp": 2020-05-06T09:22:23.582Z,
+  },
+]
+`;
+
 exports[`feeds getFeedSubmissionResult returns an XML file when succesful 1`] = `
 Array [
   "<AmazonEnvelope xmlns:xsi=\\"http://www.w3.org/2001/XMLSchema-instance\\" xsi:noNamespaceSchemaLocation=\\"amzn-envelope.xsd\\">
