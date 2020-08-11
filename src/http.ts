@@ -1,7 +1,9 @@
 import { AmazonMarketplace } from '@scaleleap/amazon-marketplaces'
 import axios from 'axios'
 import parser from 'fast-xml-parser'
+import { readFileSync } from 'fs'
 import { XmlEntities } from 'html-entities'
+import { join } from 'path'
 import { URLSearchParams } from 'url'
 
 import {
@@ -50,6 +52,12 @@ import {
 } from './error'
 import { MWSApiError } from './error-codec'
 import { sign } from './sign'
+
+const packageJson = JSON.parse(
+  readFileSync(join(__dirname, '../package.json'), { encoding: 'utf8' }),
+)
+
+const { name, version } = packageJson
 
 export interface MWSOptions {
   marketplace: AmazonMarketplace
@@ -388,7 +396,7 @@ export class HttpClient {
     const parametersWithSignature = { ...parameters, Signature: signature }
 
     const headers = {
-      'user-agent': '@scaleleap/amazon-mws-api-sdk/1.0.0 (Language=JavaScript)',
+      'user-agent': `${name}/${version} (Language=Javascript)`,
     }
 
     let config: Request
