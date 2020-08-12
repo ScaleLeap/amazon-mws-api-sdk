@@ -1,11 +1,10 @@
 import { AmazonMarketplace } from '@scaleleap/amazon-marketplaces'
 import axios from 'axios'
 import parser from 'fast-xml-parser'
-import { readFileSync } from 'fs'
 import { XmlEntities } from 'html-entities'
-import { join } from 'path'
 import { URLSearchParams } from 'url'
 
+import { USER_AGENT } from './constants'
 import {
   AccessDenied,
   AccessToFeedProcessingResultDenied,
@@ -52,12 +51,6 @@ import {
 } from './error'
 import { MWSApiError } from './error-codec'
 import { sign } from './sign'
-
-const packageJson = JSON.parse(
-  readFileSync(join(__dirname, '../package.json'), { encoding: 'utf8' }),
-)
-
-const { name, version } = packageJson
 
 export interface MWSOptions {
   marketplace: AmazonMarketplace
@@ -363,7 +356,7 @@ export const parseResponse = <T>(
 export class HttpClient {
   constructor(
     private options: MWSOptions,
-    private fetch: <T>(meta: Request) => Promise<RequestResponse> = defaultFetch,
+    private fetch: (meta: Request) => Promise<RequestResponse> = defaultFetch,
   ) {}
 
   public async request<TResource extends Resource, TRes>(
@@ -396,7 +389,7 @@ export class HttpClient {
     const parametersWithSignature = { ...parameters, Signature: signature }
 
     const headers = {
-      'user-agent': `${name}/${version} (Language=Javascript)`,
+      'user-agent': `${USER_AGENT} (Language=Javascript)`,
     }
 
     let config: Request
