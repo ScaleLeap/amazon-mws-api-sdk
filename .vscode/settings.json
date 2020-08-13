@@ -20,7 +20,9 @@
     "node_modules": true,
     "package-lock.json": true,
     "release.config.js": true,
-    "renovate.json": true
+    "renovate.json": true,
+    "tsconfig.build.json": true,
+    "tsconfig.json": true,
   },
   "search.exclude": {
     "lib/**": true,
