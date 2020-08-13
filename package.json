@@ -37,7 +37,8 @@
     "start": "ts-node --transpile-only --pretty src",
     "test": "jest",
     "test:unit": "jest unit/",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "postversion": "ts-node --transpile-only --pretty utils/bump-version.ts"
   },
   "types": "lib/index.d.ts",
   "dependencies": {

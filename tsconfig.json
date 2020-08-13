@@ -1,6 +1,7 @@
 {
   "extends": "tsconfigs/nodejs-module",
   "include": [
+    "utils/**/*",
     "src/**/*.ts",
     "examples/**/*.ts",
     "test/**/*.ts"

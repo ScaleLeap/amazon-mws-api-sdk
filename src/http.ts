@@ -4,6 +4,7 @@ import parser from 'fast-xml-parser'
 import { XmlEntities } from 'html-entities'
 import { URLSearchParams } from 'url'
 
+import { USER_AGENT } from './constants'
 import {
   AccessDenied,
   AccessToFeedProcessingResultDenied,
@@ -355,7 +356,7 @@ export const parseResponse = <T>(
 export class HttpClient {
   constructor(
     private options: MWSOptions,
-    private fetch: <T>(meta: Request) => Promise<RequestResponse> = defaultFetch,
+    private fetch: (meta: Request) => Promise<RequestResponse> = defaultFetch,
   ) {}
 
   public async request<TResource extends Resource, TRes>(
@@ -388,7 +389,7 @@ export class HttpClient {
     const parametersWithSignature = { ...parameters, Signature: signature }
 
     const headers = {
-      'user-agent': '@scaleleap/amazon-mws-api-sdk/1.0.0 (Language=JavaScript)',
+      'user-agent': `${USER_AGENT} (Language=Javascript)`,
     }
 
     let config: Request
