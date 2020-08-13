@@ -1,4 +1,3 @@
-export * as Errors from './error'
 export * from './error'
 export * from './http'
 export * from './mws'
