@@ -5,6 +5,7 @@
     "target": "es2019"
   },
   "exclude": [
+    "utils/**/*",
     "src/**.test.ts",
     "examples/*",
     "test/**",
