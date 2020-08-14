@@ -2,9 +2,9 @@ import {
   amazonMarketplaces,
   HttpClient,
   HttpError,
-  InvalidAddress,
-  InvalidParameterValue,
-  InvalidUPCIdentifier,
+  InvalidAddressError,
+  InvalidParameterValueError,
+  InvalidUPCIdentifierError,
   MWS,
   MWSError,
   ParsingError,
@@ -47,7 +47,7 @@ describe('httpClient', () => {
     const httpClient = httpClientThatThrows(getFixture('error_response'))
 
     await expect(() => httpClient.request('POST', mockRequest)).rejects.toStrictEqual(
-      new InvalidParameterValue('GetServiceStatus request failed'),
+      new InvalidParameterValueError('GetServiceStatus request failed'),
     )
   })
 
@@ -56,7 +56,7 @@ describe('httpClient', () => {
 
     const httpClient = httpClientThatThrows(getFixture('error_response'))
 
-    let expectedError!: InvalidParameterValue
+    let expectedError!: InvalidParameterValueError
 
     try {
       await httpClient.request('POST', mockRequest)
@@ -66,7 +66,7 @@ describe('httpClient', () => {
 
     expect(expectedError instanceof MWSError).toStrictEqual(true)
     expect(expectedError instanceof HttpError).toStrictEqual(true)
-    expect(expectedError instanceof InvalidParameterValue).toStrictEqual(true)
+    expect(expectedError instanceof InvalidParameterValueError).toStrictEqual(true)
     expect(expectedError.code).toStrictEqual('InvalidParameterValue')
     expect(expectedError.type).toStrictEqual('Sender')
     expect(expectedError.requestId).toStrictEqual('e26147f9-30cc-4379-9fb5-bd4ad966c48b')
@@ -116,7 +116,7 @@ describe('httpClient', () => {
     } as const
 
     await expect(() => httpClient.request('POST', request)).rejects.toStrictEqual(
-      new InvalidUPCIdentifier('GetMatchingProductForId request failed'),
+      new InvalidUPCIdentifierError('GetMatchingProductForId request failed'),
     )
   })
 
@@ -133,7 +133,7 @@ describe('httpClient', () => {
       })
 
       await expect(() => httpClient.request('POST', mockRequest)).rejects.toStrictEqual(
-        new InvalidAddress('GetServiceStatus request failed'),
+        new InvalidAddressError('GetServiceStatus request failed'),
       )
     })
   })

@@ -19,52 +19,52 @@ export class HttpError extends MWSError {
 }
 
 // General errors
-export class InputStreamDisconnected extends HttpError {}
-export class InvalidParameterValue extends HttpError {}
-export class AccessDenied extends HttpError {}
-export class InvalidAccessKeyId extends HttpError {}
-export class SignatureDoesNotMatch extends HttpError {}
-export class InvalidAddress extends HttpError {}
-export class InternalError extends HttpError {}
-export class QuotaExceeded extends HttpError {}
-export class RequestThrottled extends HttpError {}
+export class InputStreamDisconnectedError extends HttpError {}
+export class InvalidParameterValueError extends HttpError {}
+export class AccessDeniedError extends HttpError {}
+export class InvalidAccessKeyIdError extends HttpError {}
+export class SignatureDoesNotMatchError extends HttpError {}
+export class InvalidAddressError extends HttpError {}
+export class InternalErrorError extends HttpError {}
+export class QuotaExceededError extends HttpError {}
+export class RequestThrottledError extends HttpError {}
 // Easy Ship errors
-export class ResourceNotFound extends HttpError {}
-export class ScheduledPackageAlreadyExists extends HttpError {}
-export class RegionNotSupported extends HttpError {}
-export class ScheduleWindowExpired extends HttpError {}
-export class InvalidOrderState extends HttpError {}
-export class PickupSlotNotAvailable extends HttpError {}
+export class ResourceNotFoundError extends HttpError {}
+export class ScheduledPackageAlreadyExistsError extends HttpError {}
+export class RegionNotSupportedError extends HttpError {}
+export class ScheduleWindowExpiredError extends HttpError {}
+export class InvalidOrderStateError extends HttpError {}
+export class PickupSlotNotAvailableError extends HttpError {}
 // Feeds errors
-export class AccessToFeedProcessingResultDenied extends HttpError {}
-export class ContentMD5Missing extends HttpError {}
-export class ContentMD5DoesNotMatch extends HttpError {}
-export class FeedCanceled extends HttpError {}
-export class FeedProcessingResultNoLongerAvailable extends HttpError {}
-export class FeedProcessingResultNotReady extends HttpError {}
-export class InputDataError extends HttpError {}
-export class InvalidFeedSubmissionId extends HttpError {}
-export class InvalidFeedType extends HttpError {}
-export class InvalidRequest extends HttpError {}
+export class AccessToFeedProcessingResultDeniedError extends HttpError {}
+export class ContentMD5MissingError extends HttpError {}
+export class ContentMD5DoesNotMatchError extends HttpError {}
+export class FeedCanceledError extends HttpError {}
+export class FeedProcessingResultNoLongerAvailableError extends HttpError {}
+export class FeedProcessingResultNotReadyError extends HttpError {}
+export class InputDataErrorError extends HttpError {}
+export class InvalidFeedSubmissionIdError extends HttpError {}
+export class InvalidFeedTypeError extends HttpError {}
+export class InvalidRequestError extends HttpError {}
 // Finances errors
-export class NonRetriableInternalError extends HttpError {}
-export class RetriableInternalError extends HttpError {}
+export class NonRetriableInternalErrorError extends HttpError {}
+export class RetriableInternalErrorError extends HttpError {}
 // Products errors
-export class InvalidUPCIdentifier extends HttpError {}
+export class InvalidUPCIdentifierError extends HttpError {}
 // Reports errors
-export class AccessToReportDenied extends HttpError {}
-export class InvalidReportId extends HttpError {}
-export class InvalidReportRequestId extends HttpError {}
-export class InvalidReportType extends HttpError {}
-export class InvalidScheduleFrequency extends HttpError {}
-export class ReportNoLongerAvailable extends HttpError {}
-export class ReportNotReady extends HttpError {}
+export class AccessToReportDeniedError extends HttpError {}
+export class InvalidReportIdError extends HttpError {}
+export class InvalidReportRequestIdError extends HttpError {}
+export class InvalidReportTypeError extends HttpError {}
+export class InvalidScheduleFrequencyError extends HttpError {}
+export class ReportNoLongerAvailableError extends HttpError {}
+export class ReportNotReadyError extends HttpError {}
 // Subscriptions errors
-export class DependencyFatalException extends HttpError {}
-export class DependencyRetriableException extends HttpError {}
-export class DependencyUnauthorizedException extends HttpError {}
-export class InternalErrorFatalException extends HttpError {}
-export class InvalidInputFatalException extends HttpError {}
+export class DependencyFatalExceptionError extends HttpError {}
+export class DependencyRetriableExceptionError extends HttpError {}
+export class DependencyUnauthorizedExceptionError extends HttpError {}
+export class InternalErrorFatalExceptionError extends HttpError {}
+export class InvalidInputFatalExceptionError extends HttpError {}
 
 export class ParsingError extends MWSError {}
 /* eslint-enable max-classes-per-file */
