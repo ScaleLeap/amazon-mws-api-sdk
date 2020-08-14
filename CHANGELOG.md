@@ -3,6 +3,14 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.2](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.1...v1.9.2) (2020-08-14)
+
+
+### Bug Fixes
+
+* remove volatile work around ([362937d](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/362937dd07ad137cf2524ff7d78b7ea887dfd127))
+* workaround to fix api-extractor issues ([42d3f6b](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/42d3f6b56013331f32f87cd7f8553318e017e5f1))
+
 ## [1.9.1](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.0...v1.9.1) (2020-08-13)
 
 
