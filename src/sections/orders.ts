@@ -97,7 +97,7 @@ const conditionSubtype: Codec<ConditionSubtype> = oneOf(
 )
 
 const Address = Codec.interface({
-  Name: string,
+  Name: optional(string),
   AddressLine1: optional(string),
   AddressLine2: optional(string),
   AddressLine3: optional(string),
