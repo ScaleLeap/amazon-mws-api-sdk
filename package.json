@@ -63,7 +63,7 @@
     "is-ci": "2.0.0",
     "jest": "26.2.2",
     "rimraf": "3.0.2",
-    "ts-jest": "26.1.4",
+    "ts-jest": "26.3.0",
     "ts-node": "9.0.0",
     "tsconfigs": "4.0.2",
     "typescript": "3.9.7"
