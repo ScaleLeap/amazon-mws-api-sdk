@@ -3,6 +3,20 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.4](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.3...v1.9.4) (2020-09-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @scaleleap/amazon-marketplaces to v6 ([ef94508](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ef94508bd355f2eb8432b332c47d627aa59c70d7))
+
+## [1.9.3](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.2...v1.9.3) (2020-08-24)
+
+
+### Bug Fixes
+
+* change Name on address to be optional ([a3d9f3d](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/a3d9f3db6fe5abbd53c1b9ac2ebacafe16c00444))
+
 ## [1.9.2](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.1...v1.9.2) (2020-08-14)
 
 
