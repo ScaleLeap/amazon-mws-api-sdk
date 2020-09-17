@@ -213,7 +213,7 @@ export const ListOrderItems = Codec.interface({
   OrderItems: ensureArray(
     'OrderItem',
     Codec.interface({
-      ASIN: string,
+      ASIN: oneOf([string, number]),
       OrderItemId: ensureString,
       SellerSKU: optional(string),
       BuyerCustomizedInfo: optional(
