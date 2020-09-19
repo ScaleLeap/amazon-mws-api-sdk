@@ -11,7 +11,13 @@ import {
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
+import {
+  ensureArray,
+  ensureString,
+  mwsDate,
+  NextToken,
+  nextToken as nextTokenCodec,
+} from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { FulfillmentChannelEnum } from './types'
 
@@ -63,7 +69,7 @@ export interface ListRecommendationsParameters {
 }
 
 const ProductIdentifier = Codec.interface({
-  Asin: string,
+  Asin: ensureString,
   Sku: string,
   Upc: string,
 })

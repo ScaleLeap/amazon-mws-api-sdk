@@ -2,7 +2,13 @@ import { Codec, exactly, GetInterface, number, oneOf, optional, string } from 'p
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
+import {
+  ensureArray,
+  ensureString,
+  mwsDate,
+  NextToken,
+  nextToken as nextTokenCodec,
+} from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { RequireOnlyOne } from './types'
 
@@ -58,7 +64,7 @@ const InventorySupplyDetail = Codec.interface({
 const InventorySupply = Codec.interface({
   SellerSKU: optional(string),
   FNSKU: string,
-  ASIN: optional(string),
+  ASIN: optional(ensureString),
   Condition: optional(oneOf(Object.values(InventoryCondition).map((x) => exactly(x)))),
   TotalSupplyQuantity: number,
   InStockSupplyQuantity: number,

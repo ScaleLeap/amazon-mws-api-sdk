@@ -25,7 +25,7 @@ export const InboundGuidance = enumeration(InboundGuidanceEnum)
 
 export const SKUInboundGuidance = Codec.interface({
   SellerSKU: string,
-  ASIN: string,
+  ASIN: ensureString,
   InboundGuidance,
   GuidanceReasonList: optional(ensureArray('GuidanceReason', GuidanceReason)),
 })
@@ -49,12 +49,12 @@ export const GetInboundGuidanceForSKUResponse = Codec.interface({
 })
 
 export const InvalidASIN = Codec.interface({
-  ASIN: string,
+  ASIN: ensureString,
   ErrorReason: string,
 })
 
 export const ASINInboundGuidance = Codec.interface({
-  ASIN: string,
+  ASIN: ensureString,
   InboundGuidance,
   GuidanceReasonList: optional(ensureArray('GuidanceReason', GuidanceReason)),
 })
@@ -205,7 +205,7 @@ export const AmazonPrepFeesDetails = Codec.interface({
 
 export const SKUPrepInstructions = Codec.interface({
   SellerSKU: string,
-  ASIN: string,
+  ASIN: ensureString,
   BarcodeInstruction,
   PrepGuidance,
   PrepInstructionList: ensureArray('PrepInstruction', PrepInstruction),
@@ -226,7 +226,7 @@ export const GetPrepInstructionsForSKUResponse = Codec.interface({
 })
 
 export const ASINPrepInstructions = Codec.interface({
-  ASIN: string,
+  ASIN: ensureString,
   BarcodeInstruction,
   PrepGuidance,
   PrepInstructionList: ensureArray('PrepInstruction', PrepInstruction),

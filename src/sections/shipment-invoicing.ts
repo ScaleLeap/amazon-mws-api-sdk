@@ -54,7 +54,7 @@ export const Money = Codec.interface({
 })
 
 const ShipmentItem = Codec.interface({
-  ASIN: string,
+  ASIN: ensureString,
   SellerSKU: optional(string),
   OrderItemId: ensureString,
   Title: optional(string),

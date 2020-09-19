@@ -183,7 +183,7 @@ export const AdditionalInputs = Codec.interface({
 })
 
 export const ItemLevelFields = Codec.interface({
-  Asin: string,
+  Asin: ensureString,
   AdditionalInputs: ensureArray('member', AdditionalInputs),
 })
 
