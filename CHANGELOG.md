@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.5](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.4...v1.9.5) (2020-09-19)
+
+
+### Bug Fixes
+
+* asin in codecs changed to account for pure number values ([e156906](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/e156906bc587d9d59797ec961303230afa0fce31))
+
 ## [1.9.4](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.3...v1.9.4) (2020-09-13)
 
 

@@ -19,7 +19,7 @@
     }
   ],
   "homepage": "https://github.com/ScaleLeap/amazon-mws-api-sdk/#readme",
-  "version": "1.9.4",
+  "version": "1.9.5",
   "main": "lib/index.js",
   "files": [
     "/lib"
