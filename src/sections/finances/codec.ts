@@ -287,7 +287,7 @@ const ServiceFeeEvent = Codec.interface({
   SellerSKU: optional(string),
   FnSKU: optional(string),
   FeeDesription: optional(string),
-  ASIN: optional(string),
+  ASIN: optional(ensureString),
 })
 
 const DebtRecoveryItem = Codec.interface({
@@ -352,7 +352,7 @@ const AdjustmentItem = Codec.interface({
   SellerSKU: optional(string),
   FnSKU: optional(string),
   ProductDescription: optional(string),
-  ASIN: optional(string),
+  ASIN: optional(ensureString),
 })
 
 const AdjustmentEvent = Codec.interface({
@@ -389,7 +389,7 @@ const SAFETReimbursementEvent = Codec.interface({
 const SellerReviewEnrollmentPaymentEvent = Codec.interface({
   PostedDate: optional(mwsDate),
   EnrollmentId: optional(ensureString),
-  ParentASIN: optional(string),
+  ParentASIN: optional(ensureString),
   FeeComponent: optional(FeeComponent),
   ChargeComponent: optional(ChargeComponent),
   TotalAmount: optional(CurrencyAmount),
@@ -404,7 +404,7 @@ const FBALiquidationEvent = Codec.interface({
 
 const ImagingServicesFeeEvent = Codec.interface({
   ImagingRequestBillingItemID: optional(ensureString),
-  ASIN: optional(string),
+  ASIN: optional(ensureString),
   PostedDate: optional(mwsDate),
   FeeList: optional(ensureArray('FeeComponent', FeeComponent)),
 })
@@ -445,7 +445,7 @@ const NetworkComminglingTransactionEvent = Codec.interface({
   NetCoTransactionID: optional(ensureString),
   SwapReason: optional(string),
   TransactionType: optional(NetworkComminglingTransactionType),
-  ASIN: optional(string),
+  ASIN: optional(ensureString),
   MarketplaceId: optional(string),
   TaxExclusiveAmount: optional(CurrencyAmount),
   TaxAmount: optional(CurrencyAmount),

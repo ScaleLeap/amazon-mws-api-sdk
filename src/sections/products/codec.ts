@@ -368,7 +368,7 @@ const SkuIdentifier = Codec.interface({
 })
 
 const AsinIdentifier = Codec.interface({
-  ASIN: string,
+  ASIN: ensureString,
   ...Identifier,
 })
 
