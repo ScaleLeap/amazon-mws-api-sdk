@@ -1,5 +1,3 @@
-![](https://raw.githubusercontent.com/ScaleLeap/amazon-mws-api-sdk/master/docs/assets/header.png)
-
 [![NPM](https://img.shields.io/npm/v/@scaleleap/amazon-mws-api-sdk)](https://npm.im/@scaleleap/amazon-mws-api-sdk)
 [![License](https://img.shields.io/npm/l/@scaleleap/amazon-mws-api-sdk)](./LICENSE)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ScaleLeap/amazon-mws-api-sdk/Release)](https://github.com/ScaleLeap/amazon-mws-api-sdk/actions)
