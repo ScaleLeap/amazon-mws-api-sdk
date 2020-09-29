@@ -1,6 +1,6 @@
 {
   "name": "@scaleleap/amazon-mws-api-sdk",
-  "description": "📦A fully typed TypeScript and Node.js SDK library for Amazon MWS API",
+  "description": "📦 A fully typed TypeScript and Node.js SDK library for Amazon MWS API",
   "license": "MIT",
   "author": {
     "name": "Roman Filippov",
