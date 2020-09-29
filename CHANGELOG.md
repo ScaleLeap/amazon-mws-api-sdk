@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.7](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.6...v1.9.7) (2020-09-29)
+
+
+### Bug Fixes
+
+* path to ts-node ([d7fc410](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d7fc410d622801b64c53fbd62fd12f6e9dc2af90))
+
 ## [1.9.6](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.5...v1.9.6) (2020-09-29)
 
 
