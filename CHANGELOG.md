@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.8](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.7...v1.9.8) (2020-09-29)
+
+
+### Bug Fixes
+
+* adds repository field ([ff20f0c](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ff20f0c2f06f17b8e4e853d45ac0ec0e8e8ae772))
+
 ## [1.9.7](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.6...v1.9.7) (2020-09-29)
 
 
