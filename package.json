@@ -59,7 +59,7 @@
     "@scaleleap/jest-polly": "1.5.4",
     "@scaleleap/utils": "1.8.18",
     "@types/is-ci": "2.0.0",
-    "@types/jest": "26.0.12",
+    "@types/jest": "26.0.14",
     "@types/node": "13.13.4",
     "ajv": "6.12.5",
     "danger": "10.4.1",
