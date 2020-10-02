@@ -57,7 +57,7 @@
     "@microsoft/api-extractor": "7.8.1",
     "@scaleleap/config": "2.0.4",
     "@scaleleap/jest-polly": "1.5.8",
-    "@scaleleap/utils": "1.8.18",
+    "@scaleleap/utils": "1.8.19",
     "@types/is-ci": "2.0.0",
     "@types/jest": "26.0.14",
     "@types/node": "13.13.4",
