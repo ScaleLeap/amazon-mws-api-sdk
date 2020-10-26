@@ -52,6 +52,7 @@ jobs:
         run: npm run build
 
       - name: Semantic Release
+        id: semantic_release
         if: success()
         env:
           GIT_AUTHOR_NAME: Scale Bot
@@ -63,7 +64,7 @@ jobs:
         run: npm run semantic-release
 
       - name: Publish as mws
-        if: success()
+        if: "!contains(steps.semantic_release.outputs.*, 'There are no relevant changes, so no new version is released')"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
