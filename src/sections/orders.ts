@@ -134,7 +134,7 @@ const Money = Codec.interface({
 
 export const Order = Codec.interface({
   AmazonOrderId: string,
-  SellerOrderId: optional(string),
+  SellerOrderId: optional(ensureString),
   PurchaseDate: mwsDate,
   LastUpdateDate: mwsDate,
   OrderStatus: orderStatus,

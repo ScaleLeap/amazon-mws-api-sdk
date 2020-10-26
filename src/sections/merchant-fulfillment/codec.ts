@@ -251,7 +251,7 @@ const Label = Codec.interface({
 export const Shipment = Codec.interface({
   ShipmentId: ensureString,
   AmazonOrderId: ensureString,
-  SellerOrderId: optional(string),
+  SellerOrderId: optional(ensureString),
   ItemList: ensureArray('Item', Item),
   ShipFromAddress: Address,
   ShipToAddress: Address,

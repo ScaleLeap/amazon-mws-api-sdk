@@ -158,7 +158,7 @@ const ShipmentItem = Codec.interface({
 
 const ShipmentEvent = Codec.interface({
   AmazonOrderId: optional(string),
-  SellerOrderId: optional(string),
+  SellerOrderId: optional(ensureString),
   MarketplaceName: optional(string),
   OrderChargeList: optional(ensureArray('ChargeComponent', ChargeComponent)),
   OrderChargeAdjustmentList: optional(ensureArray('ChargeComponent', ChargeComponent)),
@@ -178,7 +178,7 @@ const ChargebackEvent = ShipmentEvent
 const FulfillmentChannel = enumeration(FulfillmentChannelEnum)
 
 const PayWithAmazonEvent = Codec.interface({
-  SellerOrderId: optional(string),
+  SellerOrderId: optional(ensureString),
   TransactionPostedDate: optional(mwsDate),
   BusinessObjectType: optional(string),
   SalesChannel: optional(string),
