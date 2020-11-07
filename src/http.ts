@@ -485,7 +485,7 @@ export class HttpClient {
           InvalidInputFatalException: InvalidInputFatalExceptionError,
         }
 
-        const ErrorToThrow = errorMap[errorCode]
+        const ErrorToThrow = errorMap[errorCode as keyof typeof errorMap]
 
         throw enhanceError(new ErrorToThrow(`${info.action} request failed`), response)
       } else {

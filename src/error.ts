@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { GetInterface } from 'purify-ts/Codec'
+import { GetInterface } from 'purify-ts'
 import { ExtendableError } from 'ts-error'
 
 import { MWSApiError } from './error-codec'
