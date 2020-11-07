@@ -1,10 +1,9 @@
 import {
   boolean,
   Codec,
-  exactly,
+  enumeration,
   GetInterface,
   number,
-  oneOf,
   optional,
   string,
 } from 'purify-ts/Codec'
@@ -84,17 +83,11 @@ export enum ConditionSubtype {
   Other = 'Other',
 }
 
-const orderStatus: Codec<OrderStatusEnum> = oneOf(
-  Object.values(OrderStatusEnum).map((x) => exactly(x)),
-)
-const fulfillmentChannel: Codec<FulfillmentChannelEnum> = oneOf(
-  Object.values(FulfillmentChannelEnum).map((x) => exactly(x)),
-)
-const adddressType: Codec<AddressType> = oneOf(Object.values(AddressType).map((x) => exactly(x)))
-const condition: Codec<Condition> = oneOf(Object.values(Condition).map((x) => exactly(x)))
-const conditionSubtype: Codec<ConditionSubtype> = oneOf(
-  Object.values(ConditionSubtype).map((x) => exactly(x)),
-)
+const orderStatus = enumeration(OrderStatusEnum)
+const fulfillmentChannel = enumeration(FulfillmentChannelEnum)
+const adddressType = enumeration(AddressType)
+const condition = enumeration(Condition)
+const conditionSubtype = enumeration(ConditionSubtype)
 
 const Address = Codec.interface({
   Name: optional(string),

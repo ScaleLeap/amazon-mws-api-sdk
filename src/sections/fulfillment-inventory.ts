@@ -1,4 +1,4 @@
-import { Codec, exactly, GetInterface, number, oneOf, optional, string } from 'purify-ts'
+import { Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -50,13 +50,13 @@ export enum SupplyType {
 }
 
 const Timepoint = Codec.interface({
-  TimepointType: oneOf(Object.values(TimepointType).map((x) => exactly(x))),
+  TimepointType: enumeration(TimepointType),
   DateTime: optional(mwsDate),
 })
 
 const InventorySupplyDetail = Codec.interface({
   Quantity: number,
-  SupplyType: oneOf(Object.values(SupplyType).map((x) => exactly(x))),
+  SupplyType: enumeration(SupplyType),
   EarliestAvailableToPick: Timepoint,
   LatestAvailableToPick: Timepoint,
 })
@@ -65,7 +65,7 @@ const InventorySupply = Codec.interface({
   SellerSKU: optional(string),
   FNSKU: string,
   ASIN: optional(ensureString),
-  Condition: optional(oneOf(Object.values(InventoryCondition).map((x) => exactly(x)))),
+  Condition: optional(enumeration(InventoryCondition)),
   TotalSupplyQuantity: number,
   InStockSupplyQuantity: number,
   EarliestAvailability: optional(Timepoint),
