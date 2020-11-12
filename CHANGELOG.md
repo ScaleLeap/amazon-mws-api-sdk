@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.13](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.12...v1.9.13) (2020-11-12)
+
+
+### Bug Fixes
+
+* case sensitivity on ChargeType enum ([223050d](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/223050da2ebb2cd4b9a0b84d18a254d9d93828af)), closes [#243](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/243)
+
 ## [1.9.12](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.11...v1.9.12) (2020-11-07)
 
 
