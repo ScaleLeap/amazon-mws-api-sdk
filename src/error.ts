@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { GetInterface } from 'purify-ts'
+import { GetType } from 'purify-ts'
 import { ExtendableError } from 'ts-error'
 
 import { MWSApiError } from './error-codec'
@@ -69,7 +69,7 @@ export class InvalidInputFatalExceptionError extends HttpError {}
 export class ParsingError extends MWSError {}
 /* eslint-enable max-classes-per-file */
 
-type MWSApiError = GetInterface<typeof MWSApiError>
+type MWSApiError = GetType<typeof MWSApiError>
 
 export const enhanceError = (error: HttpError, response: MWSApiError): HttpError => {
   return Object.assign(error, {

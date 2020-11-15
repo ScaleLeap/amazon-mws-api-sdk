@@ -1,4 +1,4 @@
-import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
+import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
 import { DimensionsUnitEnum } from '../merchant-fulfillment/codec'
@@ -40,7 +40,7 @@ export const GetInboundGuidanceForSKU = Codec.interface({
   InvalidSKUList: optional(ensureArray('InvalidSKU', InvalidSKU)),
 })
 
-export type GetInboundGuidanceForSKU = GetInterface<typeof GetInboundGuidanceForSKU>
+export type GetInboundGuidanceForSKU = GetType<typeof GetInboundGuidanceForSKU>
 
 export const GetInboundGuidanceForSKUResponse = Codec.interface({
   GetInboundGuidanceForSKUResponse: Codec.interface({
@@ -64,7 +64,7 @@ export const GetInboundGuidanceForASIN = Codec.interface({
   InvalidASINList: ensureArray('InvalidASIN', InvalidASIN),
 })
 
-export type GetInboundGuidanceForASIN = GetInterface<typeof GetInboundGuidanceForASIN>
+export type GetInboundGuidanceForASIN = GetType<typeof GetInboundGuidanceForASIN>
 
 export const GetInboundGuidanceForASINResponse = Codec.interface({
   GetInboundGuidanceForASINResponse: Codec.interface({
@@ -76,7 +76,7 @@ export const CreateInboundShipment = Codec.interface({
   ShipmentId: string,
 })
 
-export type CreateInboundShipment = GetInterface<typeof CreateInboundShipment>
+export type CreateInboundShipment = GetType<typeof CreateInboundShipment>
 
 export const CreateInboundShipmentResponse = Codec.interface({
   CreateInboundShipmentResponse: Codec.interface({
@@ -90,7 +90,7 @@ export const UpdateInboundShipment = Codec.interface({
   ShipmentId: string,
 })
 
-export type UpdateInboundShipment = GetInterface<typeof UpdateInboundShipment>
+export type UpdateInboundShipment = GetType<typeof UpdateInboundShipment>
 
 export const UpdateInboundShipmentResponse = Codec.interface({
   UpdateInboundShipmentResponse: Codec.interface({
@@ -145,7 +145,7 @@ export const CreateInboundShipmentPlan = Codec.interface({
   InboundShipmentPlans: ensureArray('member', InboundShipmentPlan),
 })
 
-export type CreateInboundShipmentPlan = GetInterface<typeof CreateInboundShipmentPlan>
+export type CreateInboundShipmentPlan = GetType<typeof CreateInboundShipmentPlan>
 
 export const CreateInboundShipmentPlanResponse = Codec.interface({
   CreateInboundShipmentPlanResponse: Codec.interface({
@@ -160,7 +160,7 @@ export const GetPreorderInfo = Codec.interface({
   ShipmentConfirmedForPreorder: boolean,
 })
 
-export type GetPreorderInfo = GetInterface<typeof GetPreorderInfo>
+export type GetPreorderInfo = GetType<typeof GetPreorderInfo>
 
 export const GetPreorderInfoResponse = Codec.interface({
   GetPreorderInfoResponse: Codec.interface({
@@ -173,7 +173,7 @@ export const ConfirmPreorder = Codec.interface({
   ConfirmedFulfillableDate: string,
 })
 
-export type ConfirmPreorder = GetInterface<typeof ConfirmPreorder>
+export type ConfirmPreorder = GetType<typeof ConfirmPreorder>
 
 export const ConfirmPreorderResponse = Codec.interface({
   ConfirmPreorderResponse: Codec.interface({
@@ -217,7 +217,7 @@ export const GetPrepInstructionsForSKU = Codec.interface({
   InvalidSKUList: ensureArray('InvalidSKU', InvalidSKU),
 })
 
-export type GetPrepInstructionsForSKU = GetInterface<typeof GetPrepInstructionsForSKU>
+export type GetPrepInstructionsForSKU = GetType<typeof GetPrepInstructionsForSKU>
 
 export const GetPrepInstructionsForSKUResponse = Codec.interface({
   GetPrepInstructionsForSKUResponse: Codec.interface({
@@ -237,7 +237,7 @@ export const GetPrepInstructionsForASIN = Codec.interface({
   InvalidASINList: ensureArray('InvalidASIN', InvalidASIN),
 })
 
-export type GetPrepInstructionsForASIN = GetInterface<typeof GetPrepInstructionsForASIN>
+export type GetPrepInstructionsForASIN = GetType<typeof GetPrepInstructionsForASIN>
 
 export const GetPrepInstructionsForASINResponse = Codec.interface({
   GetPrepInstructionsForASINResponse: Codec.interface({
@@ -266,7 +266,7 @@ export const PutTransportContent = Codec.interface({
   }),
 })
 
-export type PutTransportContent = GetInterface<typeof PutTransportContent>
+export type PutTransportContent = GetType<typeof PutTransportContent>
 
 export const PutTransportContentResponse = Codec.interface({
   PutTransportContentResponse: Codec.interface({
@@ -280,7 +280,7 @@ export const EstimateTransportRequest = Codec.interface({
   }),
 })
 
-export type EstimateTransportRequest = GetInterface<typeof EstimateTransportRequest>
+export type EstimateTransportRequest = GetType<typeof EstimateTransportRequest>
 
 export const EstimateTransportRequestResponse = Codec.interface({
   EstimateTransportRequestResponse: Codec.interface({
@@ -398,7 +398,7 @@ export const GetTransportContent = Codec.interface({
   TransportContent,
 })
 
-export type GetTransportContent = GetInterface<typeof GetTransportContent>
+export type GetTransportContent = GetType<typeof GetTransportContent>
 
 export const GetTransportContentResponse = Codec.interface({
   GetTransportContentResponse: Codec.interface({
@@ -410,7 +410,7 @@ export const ConfirmTransportRequest = Codec.interface({
   TransportResult,
 })
 
-export type ConfirmTransportRequest = GetInterface<typeof ConfirmTransportRequest>
+export type ConfirmTransportRequest = GetType<typeof ConfirmTransportRequest>
 
 export const ConfirmTransportRequestResponse = Codec.interface({
   ConfirmTransportRequestResponse: Codec.interface({
@@ -422,7 +422,7 @@ export const VoidTransportRequest = Codec.interface({
   TransportResult,
 })
 
-export type VoidTransportRequest = GetInterface<typeof VoidTransportRequest>
+export type VoidTransportRequest = GetType<typeof VoidTransportRequest>
 
 export const VoidTransportRequestResponse = Codec.interface({
   VoidTransportRequestResponse: Codec.interface({
@@ -443,7 +443,7 @@ export const GetPackageLabels = Codec.interface({
   TransportDocument,
 })
 
-export type GetPackageLabels = GetInterface<typeof GetPackageLabels>
+export type GetPackageLabels = GetType<typeof GetPackageLabels>
 
 export const GetPackageLabelsResponse = Codec.interface({
   GetPackageLabelsResponse: Codec.interface({
@@ -459,7 +459,7 @@ export const GetUniquePackageLabels = Codec.interface({
   TransportDocument,
 })
 
-export type GetUniquePackageLabels = GetInterface<typeof GetUniquePackageLabels>
+export type GetUniquePackageLabels = GetType<typeof GetUniquePackageLabels>
 
 export const GetUniquePackageLabelsResponse = Codec.interface({
   GetUniquePackageLabelsResponse: Codec.interface({
@@ -471,7 +471,7 @@ export const GetPalletLabels = Codec.interface({
   TransportDocument,
 })
 
-export type GetPalletLabels = GetInterface<typeof GetPalletLabels>
+export type GetPalletLabels = GetType<typeof GetPalletLabels>
 
 export const GetPalletLabelsResponse = Codec.interface({
   GetPalletLabelsResponse: Codec.interface({
@@ -483,7 +483,7 @@ export const GetBillOfLading = Codec.interface({
   TransportDocument,
 })
 
-export type GetBillOfLading = GetInterface<typeof GetBillOfLading>
+export type GetBillOfLading = GetType<typeof GetBillOfLading>
 
 export const GetBillOfLadingResponse = Codec.interface({
   GetBillOfLadingResponse: Codec.interface({
@@ -532,7 +532,7 @@ export const ListInboundShipments = Codec.interface({
   ShipmentData: ensureArray('member', InboundShipmentInfo),
 })
 
-export type ListInboundShipments = GetInterface<typeof ListInboundShipments>
+export type ListInboundShipments = GetType<typeof ListInboundShipments>
 export const ListInboundShipmentsResponse = Codec.interface({
   ListInboundShipmentsResponse: Codec.interface({
     ListInboundShipmentsResult: ListInboundShipments,
@@ -544,7 +544,7 @@ export const ListInboundShipmentsByNextToken = Codec.interface({
   ShipmentData: ensureArray('member', InboundShipmentInfo),
 })
 
-export type ListInboundShipmentsByNextToken = GetInterface<typeof ListInboundShipments>
+export type ListInboundShipmentsByNextToken = GetType<typeof ListInboundShipments>
 export const ListInboundShipmentsByNextTokenResponse = Codec.interface({
   ListInboundShipmentsByNextTokenResponse: Codec.interface({
     ListInboundShipmentsByNextTokenResult: ListInboundShipmentsByNextToken,
@@ -567,7 +567,7 @@ export const ListInboundShipmentItems = Codec.interface({
   ItemData: ensureArray('member', InboundShipmentItem),
 })
 
-export type ListInboundShipmentItems = GetInterface<typeof ListInboundShipmentItems>
+export type ListInboundShipmentItems = GetType<typeof ListInboundShipmentItems>
 
 export const ListInboundShipmentItemsResponse = Codec.interface({
   ListInboundShipmentItemsResponse: Codec.interface({

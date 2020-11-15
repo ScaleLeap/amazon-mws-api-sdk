@@ -1,4 +1,4 @@
-import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
+import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
 import {
@@ -80,7 +80,7 @@ export const GetFulfillmentPreview = Codec.interface({
   FulfillmentPreviews: ensureArray('member', FulfillmentPreview),
 })
 
-export type GetFulfillmentPreview = GetInterface<typeof GetFulfillmentPreview>
+export type GetFulfillmentPreview = GetType<typeof GetFulfillmentPreview>
 
 export const GetFulfillmentPreviewResponse = Codec.interface({
   GetFulfillmentPreviewResponse: Codec.interface({
@@ -167,7 +167,7 @@ export const ListAllFulfillmentOrders = Codec.interface({
   FulfillmentOrders: ensureArray('member', FulfillmentOrder),
 })
 
-export type ListAllFulfillmentOrders = GetInterface<typeof ListAllFulfillmentOrders>
+export type ListAllFulfillmentOrders = GetType<typeof ListAllFulfillmentOrders>
 
 export const ListAllFulfillmentOrdersResponse = Codec.interface({
   ListAllFulfillmentOrdersResponse: Codec.interface({
@@ -264,7 +264,7 @@ export const GetFulfillmentOrder = Codec.interface({
   ReturnAuthorizationList: ensureArray('member', ReturnAuthorization),
 })
 
-export type GetFulfillmentOrder = GetInterface<typeof GetFulfillmentOrder>
+export type GetFulfillmentOrder = GetType<typeof GetFulfillmentOrder>
 
 export const GetFulfillmentOrderResponse = Codec.interface({
   GetFulfillmentOrderResponse: Codec.interface({
@@ -387,7 +387,7 @@ export const GetPackageTrackingDetails = Codec.interface({
   AdditionalLocationInfo: optional(AdditionalLocationInfo),
 })
 
-export type GetPackageTrackingDetails = GetInterface<typeof GetPackageTrackingDetails>
+export type GetPackageTrackingDetails = GetType<typeof GetPackageTrackingDetails>
 
 export const GetPackageTrackingDetailsResponse = Codec.interface({
   GetPackageTrackingDetailsResponse: Codec.interface({
@@ -409,7 +409,7 @@ export const ListReturnReasonCodes = Codec.interface({
   ReasonCodeDetailsList: ensureArray('member', ReasonCodeDetails),
 })
 
-export type ListReturnReasonCodes = GetInterface<typeof ListReturnReasonCodes>
+export type ListReturnReasonCodes = GetType<typeof ListReturnReasonCodes>
 
 export const ListReturnReasonCodesResponse = Codec.interface({
   ListReturnReasonCodesResponse: Codec.interface({
@@ -443,7 +443,7 @@ export const CreateFulfillmentReturn = Codec.interface({
   ReturnAuthorizationList: optional(ensureArray('member', ReturnAuthorization)),
 })
 
-export type CreateFulfillmentReturn = GetInterface<typeof CreateFulfillmentReturn>
+export type CreateFulfillmentReturn = GetType<typeof CreateFulfillmentReturn>
 
 export const CreateFulfillmentReturnResponse = Codec.interface({
   CreateFulfillmentReturnResponse: Codec.interface({

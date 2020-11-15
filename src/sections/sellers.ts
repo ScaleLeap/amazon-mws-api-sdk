@@ -1,4 +1,4 @@
-import { Codec, GetInterface, optional, string } from 'purify-ts'
+import { Codec, GetType, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -42,7 +42,7 @@ const MarketplaceParticipationsByNextTokenResponse = Codec.interface({
   }),
 })
 
-export type MarketplaceParticipations = GetInterface<typeof MarketplaceParticipations>
+export type MarketplaceParticipations = GetType<typeof MarketplaceParticipations>
 
 export class Sellers {
   constructor(private httpClient: HttpClient) {}

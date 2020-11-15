@@ -1,4 +1,4 @@
-import { boolean, Codec, enumeration, exactly, GetInterface, string } from 'purify-ts'
+import { boolean, Codec, enumeration, exactly, GetType, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -158,8 +158,8 @@ const UpdateSubscriptionResponse = Codec.interface({
   }),
 })
 
-export type ListRegisteredDestinations = GetInterface<typeof ListRegisteredDestinations>
-export type GetSubscription = GetInterface<typeof GetSubscription>
+export type ListRegisteredDestinations = GetType<typeof ListRegisteredDestinations>
+export type GetSubscription = GetType<typeof GetSubscription>
 export class Subscriptions {
   constructor(private httpClient: HttpClient) {}
 

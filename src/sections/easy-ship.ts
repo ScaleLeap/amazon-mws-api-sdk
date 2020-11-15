@@ -1,4 +1,4 @@
-import { Codec, GetInterface, number, optional, string } from 'purify-ts'
+import { Codec, GetType, number, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -40,7 +40,7 @@ export const ListPickupSlots = Codec.interface({
   PickupSlotList: ensureArray('PickupSlot', PickupSlot),
 })
 
-export type ListPickupSlots = GetInterface<typeof ListPickupSlots>
+export type ListPickupSlots = GetType<typeof ListPickupSlots>
 
 const ListPickupSlotsResponse = Codec.interface({
   ListPickupSlotsResponse: Codec.interface({
@@ -116,7 +116,7 @@ export const CreateScheduledPackage = Codec.interface({
   ScheduledPackage: Package,
 })
 
-export type CreateScheduledPackage = GetInterface<typeof CreateScheduledPackage>
+export type CreateScheduledPackage = GetType<typeof CreateScheduledPackage>
 
 const CreateScheduledPackageResponse = Codec.interface({
   CreateScheduledPackageResponse: Codec.interface({
@@ -143,7 +143,7 @@ export const UpdateScheduledPackages = Codec.interface({
   ScheduledPackageList: ensureArray('Package', Package),
 })
 
-export type UpdateScheduledPackages = GetInterface<typeof UpdateScheduledPackages>
+export type UpdateScheduledPackages = GetType<typeof UpdateScheduledPackages>
 
 const UpdateScheduledPackagesResponse = Codec.interface({
   UpdateScheduledPackagesResponse: Codec.interface({
@@ -160,7 +160,7 @@ export const GetScheduledPackage = Codec.interface({
   ScheduledPackage: Package,
 })
 
-export type GetScheduledPackage = GetInterface<typeof GetScheduledPackage>
+export type GetScheduledPackage = GetType<typeof GetScheduledPackage>
 
 const GetScheduledPackageResponse = Codec.interface({
   GetScheduledPackageResponse: Codec.interface({

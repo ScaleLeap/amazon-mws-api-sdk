@@ -1,4 +1,4 @@
-import { Codec, GetInterface, string } from 'purify-ts/Codec'
+import { Codec, GetType, string } from 'purify-ts/Codec'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -13,7 +13,7 @@ const ServiceStatusResponse = Codec.interface({
   }),
 })
 
-type ServiceStatusResponse = GetInterface<
+type ServiceStatusResponse = GetType<
   typeof ServiceStatusResponse
 >['GetServiceStatusResponse']['GetServiceStatusResult']
 

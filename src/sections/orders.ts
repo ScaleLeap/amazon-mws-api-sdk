@@ -1,12 +1,4 @@
-import {
-  boolean,
-  Codec,
-  enumeration,
-  GetInterface,
-  number,
-  optional,
-  string,
-} from 'purify-ts/Codec'
+import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts/Codec'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -274,9 +266,9 @@ const ListOrderItemsByNextTokenResponse = Codec.interface({
   }),
 })
 
-export type Order = GetInterface<typeof Order>
-export type ListOrders = GetInterface<typeof ListOrders>
-export type ListOrderItems = GetInterface<typeof ListOrderItems>
+export type Order = GetType<typeof Order>
+export type ListOrders = GetType<typeof ListOrders>
+export type ListOrderItems = GetType<typeof ListOrderItems>
 
 export interface GetOrderParameters {
   AmazonOrderId: string[]
