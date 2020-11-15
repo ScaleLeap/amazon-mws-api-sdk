@@ -1,14 +1,5 @@
 import crypto from 'crypto'
-import {
-  Codec,
-  enumeration,
-  exactly,
-  GetInterface,
-  number,
-  optional,
-  string,
-  unknown,
-} from 'purify-ts'
+import { Codec, enumeration, exactly, GetType, number, optional, string, unknown } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -101,7 +92,7 @@ export interface SubmitFBAOutboundShipmentInvoiceParameters {
 
 export const SubmitFBAOutboundShipmentInvoiceResult = optional(exactly(''))
 
-export type SubmitFBAOutboundShipmentInvoiceResult = GetInterface<
+export type SubmitFBAOutboundShipmentInvoiceResult = GetType<
   typeof SubmitFBAOutboundShipmentInvoiceResult
 >
 
@@ -114,7 +105,7 @@ export interface GetFBAOutboundShipmentInvoiceStatusParameters {
   MarketplaceId: string
   AmazonShipmentId: string
 }
-export type GetFBAOutboundShipmentDetail = GetInterface<typeof GetFBAOutboundShipmentDetail>
+export type GetFBAOutboundShipmentDetail = GetType<typeof GetFBAOutboundShipmentDetail>
 
 const Shipment = Codec.interface({
   AmazonShipmentId: string,
@@ -125,7 +116,7 @@ export const GetFBAOutboundShipmentInvoiceStatus = Codec.interface({
   Shipments: ensureArray('Shipment', Shipment),
 })
 
-export type GetFBAOutboundShipmentInvoiceStatus = GetInterface<
+export type GetFBAOutboundShipmentInvoiceStatus = GetType<
   typeof GetFBAOutboundShipmentInvoiceStatus
 >
 

@@ -2,7 +2,7 @@ import {
   boolean,
   Codec,
   enumeration,
-  GetInterface,
+  GetType,
   lazy,
   number,
   oneOf,
@@ -478,25 +478,19 @@ export const GetProductCategoriesForASINResponse = Codec.interface({
  *
  */
 
-export type GetMatchingProductForIdResponse = GetInterface<typeof GetMatchingProductForIdResponse>
-export type GetMyFeesEstimate = GetInterface<typeof GetMyFeesEstimate>
-export type ListMatchingProducts = GetInterface<typeof ListMatchingProducts>
-export type GetMatchingProductResult = GetInterface<typeof GetMatchingProductResult>
-export type GetCompetitivePricingForSKUResult = GetInterface<
-  typeof GetCompetitivePricingForSKUResult
->
-export type GetCompetitivePricingForASINResult = GetInterface<
-  typeof GetCompetitivePricingForASINResult
->
-export type GetLowestOfferListingsForSKUResult = GetInterface<
-  typeof GetLowestOfferListingsForSKUResult
->
-export type GetLowestOfferListingsForASINResult = GetInterface<
+export type GetMatchingProductForIdResponse = GetType<typeof GetMatchingProductForIdResponse>
+export type GetMyFeesEstimate = GetType<typeof GetMyFeesEstimate>
+export type ListMatchingProducts = GetType<typeof ListMatchingProducts>
+export type GetMatchingProductResult = GetType<typeof GetMatchingProductResult>
+export type GetCompetitivePricingForSKUResult = GetType<typeof GetCompetitivePricingForSKUResult>
+export type GetCompetitivePricingForASINResult = GetType<typeof GetCompetitivePricingForASINResult>
+export type GetLowestOfferListingsForSKUResult = GetType<typeof GetLowestOfferListingsForSKUResult>
+export type GetLowestOfferListingsForASINResult = GetType<
   typeof GetLowestOfferListingsForASINResult
 >
-export type GetLowestPricedOffersForSKU = GetInterface<typeof GetLowestPricedOffersForSKU>
-export type GetLowestPricedOffersForASIN = GetInterface<typeof GetLowestPricedOffersForASIN>
-export type GetMyPriceForSKUResult = GetInterface<typeof GetMyPriceForSKUResult>
-export type GetMyPriceForASINResult = GetInterface<typeof GetMyPriceForASINResult>
-export type GetProductCategoriesForSKU = GetInterface<typeof GetProductCategoriesForSKU>
-export type GetProductCategoriesForASIN = GetInterface<typeof GetProductCategoriesForASIN>
+export type GetLowestPricedOffersForSKU = GetType<typeof GetLowestPricedOffersForSKU>
+export type GetLowestPricedOffersForASIN = GetType<typeof GetLowestPricedOffersForASIN>
+export type GetMyPriceForSKUResult = GetType<typeof GetMyPriceForSKUResult>
+export type GetMyPriceForASINResult = GetType<typeof GetMyPriceForASINResult>
+export type GetProductCategoriesForSKU = GetType<typeof GetProductCategoriesForSKU>
+export type GetProductCategoriesForASIN = GetType<typeof GetProductCategoriesForASIN>

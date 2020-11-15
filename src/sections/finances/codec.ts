@@ -1,13 +1,4 @@
-import {
-  Codec,
-  enumeration,
-  GetInterface,
-  number,
-  oneOf,
-  optional,
-  string,
-  unknown,
-} from 'purify-ts'
+import { Codec, enumeration, GetType, number, oneOf, optional, string, unknown } from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
 import { CurrencyAmount } from '../codec'
@@ -39,7 +30,7 @@ export const ListFinancialEventGroups = Codec.interface({
   FinancialEventGroupList: ensureArray('FinancialEventGroup', FinancialEventGroup),
 })
 
-export type ListFinancialEventGroups = GetInterface<typeof ListFinancialEventGroups>
+export type ListFinancialEventGroups = GetType<typeof ListFinancialEventGroups>
 
 export const ListFinancialEventGroupsResponse = Codec.interface({
   ListFinancialEventGroupsResponse: Codec.interface({
@@ -518,7 +509,7 @@ export const ListFinancialEvents = Codec.interface({
   FinancialEvents,
 })
 
-export type ListFinancialEvents = GetInterface<typeof ListFinancialEvents>
+export type ListFinancialEvents = GetType<typeof ListFinancialEvents>
 
 export const ListFinancialEventsResponse = Codec.interface({
   ListFinancialEventsResponse: Codec.interface({

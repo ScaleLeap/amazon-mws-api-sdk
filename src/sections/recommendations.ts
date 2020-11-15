@@ -1,13 +1,4 @@
-import {
-  Codec,
-  enumeration,
-  exactly,
-  GetInterface,
-  number,
-  oneOf,
-  optional,
-  string,
-} from 'purify-ts'
+import { Codec, enumeration, exactly, GetType, number, oneOf, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -38,7 +29,7 @@ export const GetLastUpdatedTimeForRecommendations = oneOf([
   exactly(''),
 ])
 
-export type GetLastUpdatedTimeForRecommendations = GetInterface<
+export type GetLastUpdatedTimeForRecommendations = GetType<
   typeof GetLastUpdatedTimeForRecommendations
 >
 
@@ -187,7 +178,7 @@ export const ListRecommendations = Codec.interface({
   AdvertisingRecommendations: optional(ensureArray('member', AdvertisingRecommendation)),
 })
 
-export type ListRecommendations = GetInterface<typeof ListRecommendations>
+export type ListRecommendations = GetType<typeof ListRecommendations>
 
 const ListRecommendationsResponse = Codec.interface({
   ListRecommendationsResponse: Codec.interface({

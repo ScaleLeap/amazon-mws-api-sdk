@@ -5,7 +5,7 @@ import {
   Codec,
   enumeration,
   exactly,
-  GetInterface,
+  GetType,
   Left,
   number,
   oneOf,
@@ -55,7 +55,7 @@ export const GetFeedSubmissionList = Codec.interface({
   FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
 })
 
-export type GetFeedSubmissionList = GetInterface<typeof GetFeedSubmissionList>
+export type GetFeedSubmissionList = GetType<typeof GetFeedSubmissionList>
 
 const GetFeedSubmissionListResponse = Codec.interface({
   GetFeedSubmissionListResponse: Codec.interface({
@@ -124,7 +124,7 @@ export const GetFeedSubmissionCount = Codec.interface({
   Count: number,
 })
 
-export type GetFeedSubmissionCount = GetInterface<typeof GetFeedSubmissionCount>
+export type GetFeedSubmissionCount = GetType<typeof GetFeedSubmissionCount>
 
 const GetFeedSubmissionCountResponse = Codec.interface({
   GetFeedSubmissionCountResponse: Codec.interface({
@@ -144,7 +144,7 @@ export const CancelFeedSubmissions = Codec.interface({
   FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
 })
 
-export type CancelFeedSubmissions = GetInterface<typeof CancelFeedSubmissions>
+export type CancelFeedSubmissions = GetType<typeof CancelFeedSubmissions>
 
 const CancelFeedSubmissionsResponse = Codec.interface({
   CancelFeedSubmissionsResponse: Codec.interface({
@@ -154,7 +154,7 @@ const CancelFeedSubmissionsResponse = Codec.interface({
 
 export const FeedSubmission = string
 
-export type FeedSubmission = GetInterface<typeof FeedSubmission>
+export type FeedSubmission = GetType<typeof FeedSubmission>
 
 const GetFeedSubmissionResultResponse = Codec.custom<string>({
   decode: (feed) => {
@@ -185,7 +185,7 @@ export const SubmitFeed = Codec.interface({
   FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
 })
 
-export type SubmitFeed = GetInterface<typeof SubmitFeed>
+export type SubmitFeed = GetType<typeof SubmitFeed>
 
 const SubmitFeedResponse = Codec.interface({
   SubmitFeedResponse: Codec.interface({

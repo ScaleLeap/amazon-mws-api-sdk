@@ -1,4 +1,4 @@
-import { boolean, Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
+import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
 
 import { ensureArray, ensureString, mwsDate } from '../../parsing'
 import { PredefinedPackageDimensionsEnum } from './type'
@@ -65,7 +65,7 @@ export const GetEligibleShippingServices = Codec.interface({
   ),
 })
 
-export type GetEligibleShippingServices = GetInterface<typeof GetEligibleShippingServices>
+export type GetEligibleShippingServices = GetType<typeof GetEligibleShippingServices>
 
 export const GetEligibleShippingServicesResponse = Codec.interface({
   GetEligibleShippingServicesResponse: Codec.interface({
@@ -191,7 +191,7 @@ export const GetAdditionalSellerInputs = Codec.interface({
   ShipmentLevelFields: ensureArray('member', ShipmentLeveFields),
   ItemLevelFieldsList: ensureArray('member', ItemLevelFields),
 })
-export type GetAdditionalSellerInputs = GetInterface<typeof GetAdditionalSellerInputs>
+export type GetAdditionalSellerInputs = GetType<typeof GetAdditionalSellerInputs>
 
 export const GetAdditionalSellerInputsResponse = Codec.interface({
   GetAdditionalSellerInputsResponse: Codec.interface({
@@ -270,7 +270,7 @@ export const CreateShipment = Codec.interface({
   Shipment,
 })
 
-export type CreateShipment = GetInterface<typeof CreateShipment>
+export type CreateShipment = GetType<typeof CreateShipment>
 
 export const CreateShipmentResponse = Codec.interface({
   CreateShipmentResponse: Codec.interface({
@@ -282,7 +282,7 @@ export const GetShipment = Codec.interface({
   Shipment,
 })
 
-export type GetShipment = GetInterface<typeof GetShipment>
+export type GetShipment = GetType<typeof GetShipment>
 
 export const GetShipmentResponse = Codec.interface({
   GetShipmentResponse: Codec.interface({
@@ -294,7 +294,7 @@ export const CancelShipment = Codec.interface({
   Shipment,
 })
 
-export type CancelShipment = GetInterface<typeof CancelShipment>
+export type CancelShipment = GetType<typeof CancelShipment>
 
 export const CancelShipmentResponse = Codec.interface({
   CancelShipmentResponse: Codec.interface({

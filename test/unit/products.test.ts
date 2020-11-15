@@ -1,4 +1,4 @@
-import { GetInterface } from 'purify-ts'
+import { GetType } from 'purify-ts'
 
 import { ParsingError } from '../../src'
 import { parseResponse, RequestMeta } from '../../src/http'
@@ -60,7 +60,7 @@ describe('products', () => {
       const [response] = parseResponse({
         data: fixture,
         headers,
-      }) as [{ Product: GetInterface<typeof Product> }, RequestMeta]
+      }) as [{ Product: GetType<typeof Product> }, RequestMeta]
 
       expect(
         Product.decode(response.Product).caseOf({

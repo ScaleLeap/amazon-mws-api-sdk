@@ -1,4 +1,4 @@
-import { Codec, enumeration, GetInterface, number, optional, string } from 'purify-ts'
+import { Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
@@ -115,8 +115,8 @@ export type ListInventorySupplyRequestParameters = RequireOnlyOne<
   },
   'SellerSkus' | 'QueryStartDateTime'
 >
-export type InventorySupplyList = GetInterface<typeof InventorySupplyList>
-export type InventorySupplyListByNextToken = GetInterface<typeof InventorySupplyListByNextToken>
+export type InventorySupplyList = GetType<typeof InventorySupplyList>
+export type InventorySupplyListByNextToken = GetType<typeof InventorySupplyListByNextToken>
 export class FulfillmentInventory {
   constructor(private httpClient: HttpClient) {}
 
