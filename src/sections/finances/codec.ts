@@ -337,6 +337,7 @@ export enum AdjustmentTypeEnum {
   ReserveEvent = 'ReserveEvent',
   PostageBilling = 'PostageBilling',
   PostageBillingTransactionFee = 'PostageBilling_TransactionFee',
+  PostageBillingInsurance = 'PostageBilling_Insurance',
   PostageRefund = 'PostageRefund',
   LostOrDamagedReimbursement = 'LostOrDamagedReimbursement',
   CanceledButPickedUpReimbursement = 'CanceledButPickedUpReimbursement',
