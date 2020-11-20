@@ -344,6 +344,7 @@ export enum AdjustmentTypeEnum {
   LostOrDamagedReimbursement = 'LostOrDamagedReimbursement',
   CanceledButPickedUpReimbursement = 'CanceledButPickedUpReimbursement',
   ReimbursementClawback = 'ReimbursementClawback',
+  ReversalReimbursement = 'REVERSAL_REIMBURSEMENT',
   SellerRewards = 'SellerRewards',
 }
 
