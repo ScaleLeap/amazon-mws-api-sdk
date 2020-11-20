@@ -336,6 +336,7 @@ export enum AdjustmentTypeEnum {
   FBAInventoryReimbursement = 'FBAInventoryReimbursement',
   ReserveEvent = 'ReserveEvent',
   PostageBilling = 'PostageBilling',
+  PostageBillingTransactionFee = 'PostageBilling_TransactionFee',
   PostageRefund = 'PostageRefund',
   LostOrDamagedReimbursement = 'LostOrDamagedReimbursement',
   CanceledButPickedUpReimbursement = 'CanceledButPickedUpReimbursement',
