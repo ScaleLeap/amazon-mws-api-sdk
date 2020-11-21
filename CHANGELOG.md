@@ -3,6 +3,14 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.15](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.14...v1.9.15) (2020-11-21)
+
+
+### Bug Fixes
+
+* change GetInterface to GetType ([1c9c61a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/1c9c61a0c3184f8665990cccad13a0fc78b3f91e))
+* **deps:** update dependency purify-ts to v0.16.0 ([ae488b1](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ae488b1d08e83c1cc639dbfb00daa390eec0b9e0))
+
 ## [1.9.14](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.13...v1.9.14) (2020-11-21)
 
 
