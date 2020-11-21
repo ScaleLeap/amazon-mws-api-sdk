@@ -3,6 +3,17 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.14](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.13...v1.9.14) (2020-11-21)
+
+
+### Bug Fixes
+
+* add PostageBilling_DeliveryConfirmation adjustment type ([d078f0c](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d078f0c303b54ac4c9e5905d20687c980fdc18c7))
+* add PostageBilling_Insurance adjustment type ([5ae1989](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/5ae1989e8cc7f2e93a1b63693ef7fb0411de836a))
+* add PostageBilling_Postage adjustment type ([bdb8b06](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/bdb8b0612117aa0a92ac6bf6bb46ce32011392bd))
+* add PostageBilling_TransactionFee adjustment type ([ef6fcf7](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/ef6fcf72f2d512c9cc43b8a7121385cab9e77389))
+* add REVERSAL_REIMBURSEMENT adjustment type ([af112b7](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/af112b76e9ffffa387d9be42fe5bdba6224d8af5))
+
 ## [1.9.13](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.12...v1.9.13) (2020-11-12)
 
 
