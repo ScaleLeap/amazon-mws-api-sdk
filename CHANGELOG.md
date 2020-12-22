@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.22](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.21...v1.9.22) (2020-12-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v0.21.1 ([0d3c013](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/0d3c013a812a8590e24cf841e5d272c0d1b96772))
+
 ## [1.9.21](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.20...v1.9.21) (2020-12-21)
 
 
