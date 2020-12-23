@@ -3,6 +3,7 @@ import { boolean, Codec, enumeration, GetType, number, optional, string } from '
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
 import {
+  ASIN,
   ensureArray,
   ensureString,
   mwsDate,
@@ -199,7 +200,7 @@ export const ListOrderItems = Codec.interface({
   OrderItems: ensureArray(
     'OrderItem',
     Codec.interface({
-      ASIN: ensureString,
+      ASIN,
       OrderItemId: ensureString,
       SellerSKU: optional(SKU),
       BuyerCustomizedInfo: optional(

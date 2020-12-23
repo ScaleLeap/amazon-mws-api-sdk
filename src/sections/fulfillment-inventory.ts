@@ -2,14 +2,7 @@ import { Codec, enumeration, GetType, number, optional, string } from 'purify-ts
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import {
-  ensureArray,
-  ensureString,
-  mwsDate,
-  NextToken,
-  nextToken as nextTokenCodec,
-  SKU,
-} from '../parsing'
+import { ASIN, ensureArray, mwsDate, NextToken, nextToken as nextTokenCodec, SKU } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { RequireOnlyOne } from './types'
 
@@ -65,7 +58,7 @@ const InventorySupplyDetail = Codec.interface({
 const InventorySupply = Codec.interface({
   SellerSKU: optional(SKU),
   FNSKU: SKU,
-  ASIN: optional(ensureString),
+  ASIN: optional(ASIN),
   Condition: optional(enumeration(InventoryCondition)),
   TotalSupplyQuantity: number,
   InStockSupplyQuantity: number,

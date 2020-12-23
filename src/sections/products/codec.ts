@@ -12,7 +12,7 @@ import {
 } from 'purify-ts'
 
 import { Error } from '../../error-codec'
-import { ensureArray, ensureString, mwsDate, SKU } from '../../parsing'
+import { ASIN, ensureArray, ensureString, mwsDate, SKU } from '../../parsing'
 import {
   CurrencyCodeEnum,
   FeeDetail as FeeDetailInterface,
@@ -45,6 +45,7 @@ export enum StatusEnum {
 const Status = enumeration(StatusEnum)
 
 export enum IdTypeEnum {
+  // eslint-disable-next-line no-shadow, @typescript-eslint/no-shadow
   ASIN = 'ASIN',
   // eslint-disable-next-line no-shadow, @typescript-eslint/no-shadow
   SKU = 'SKU',
@@ -127,7 +128,7 @@ const AttributeSetList = AbstractObject
 
 const ASINIdentifier = Codec.interface({
   MarketplaceId: string,
-  ASIN: ensureString,
+  ASIN,
 })
 
 const SellerSKUIdentifier = Codec.interface({
@@ -369,7 +370,7 @@ const SkuIdentifier = Codec.interface({
 })
 
 const AsinIdentifier = Codec.interface({
-  ASIN: ensureString,
+  ASIN,
   ...Identifier,
 })
 

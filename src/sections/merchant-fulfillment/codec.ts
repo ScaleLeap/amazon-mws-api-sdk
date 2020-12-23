@@ -1,6 +1,6 @@
 import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
 
-import { ensureArray, ensureString, mwsDate } from '../../parsing'
+import { ASIN, ensureArray, ensureString, mwsDate } from '../../parsing'
 import { PredefinedPackageDimensionsEnum } from './type'
 
 export const TemporarilyUnavailableCarrier = Codec.interface({
@@ -183,7 +183,7 @@ export const AdditionalInputs = Codec.interface({
 })
 
 export const ItemLevelFields = Codec.interface({
-  Asin: ensureString,
+  Asin: ASIN,
   AdditionalInputs: ensureArray('member', AdditionalInputs),
 })
 
