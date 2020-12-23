@@ -1,6 +1,13 @@
 import { Codec, enumeration, GetType, number, oneOf, optional, string, unknown } from 'purify-ts'
 
-import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec, SKU } from '../../parsing'
+import {
+  ASIN,
+  ensureArray,
+  ensureString,
+  mwsDate,
+  nextToken as nextTokenCodec,
+  SKU,
+} from '../../parsing'
 import { CurrencyAmount } from '../codec'
 import { FulfillmentChannelEnum } from '../types'
 
@@ -278,7 +285,7 @@ const ServiceFeeEvent = Codec.interface({
   SellerSKU: optional(SKU),
   FnSKU: optional(SKU),
   FeeDesription: optional(string),
-  ASIN: optional(ensureString),
+  ASIN: optional(ASIN),
 })
 
 const DebtRecoveryItem = Codec.interface({
@@ -348,7 +355,7 @@ const AdjustmentItem = Codec.interface({
   SellerSKU: optional(SKU),
   FnSKU: optional(SKU),
   ProductDescription: optional(string),
-  ASIN: optional(ensureString),
+  ASIN: optional(ASIN),
 })
 
 const AdjustmentEvent = Codec.interface({
@@ -385,7 +392,7 @@ const SAFETReimbursementEvent = Codec.interface({
 const SellerReviewEnrollmentPaymentEvent = Codec.interface({
   PostedDate: optional(mwsDate),
   EnrollmentId: optional(ensureString),
-  ParentASIN: optional(ensureString),
+  ParentASIN: optional(ASIN),
   FeeComponent: optional(FeeComponent),
   ChargeComponent: optional(ChargeComponent),
   TotalAmount: optional(CurrencyAmount),
@@ -400,7 +407,7 @@ const FBALiquidationEvent = Codec.interface({
 
 const ImagingServicesFeeEvent = Codec.interface({
   ImagingRequestBillingItemID: optional(ensureString),
-  ASIN: optional(ensureString),
+  ASIN: optional(ASIN),
   PostedDate: optional(mwsDate),
   FeeList: optional(ensureArray('FeeComponent', FeeComponent)),
 })
@@ -441,7 +448,7 @@ const NetworkComminglingTransactionEvent = Codec.interface({
   NetCoTransactionID: optional(ensureString),
   SwapReason: optional(string),
   TransactionType: optional(NetworkComminglingTransactionType),
-  ASIN: optional(ensureString),
+  ASIN: optional(ASIN),
   MarketplaceId: optional(string),
   TaxExclusiveAmount: optional(CurrencyAmount),
   TaxAmount: optional(CurrencyAmount),

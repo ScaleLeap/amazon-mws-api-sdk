@@ -117,3 +117,9 @@ export const nextToken = <T extends string>(action: T) =>
  * XML parser will parse them to a number.
  */
 export const SKU = ensureString
+
+/**
+ * A shorthand for all ASINs, which are always strings, but when they consist of just numbers,
+ * XML parser will parse them to a number.
+ */
+export const ASIN = ensureString

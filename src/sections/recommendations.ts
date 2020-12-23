@@ -2,14 +2,7 @@ import { Codec, enumeration, exactly, GetType, number, oneOf, optional, string }
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import {
-  ensureArray,
-  ensureString,
-  mwsDate,
-  NextToken,
-  nextToken as nextTokenCodec,
-  SKU,
-} from '../parsing'
+import { ASIN, ensureArray, mwsDate, NextToken, nextToken as nextTokenCodec, SKU } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { FulfillmentChannelEnum } from './types'
 
@@ -61,7 +54,7 @@ export interface ListRecommendationsParameters {
 }
 
 const ProductIdentifier = Codec.interface({
-  Asin: ensureString,
+  Asin: ASIN,
   Sku: SKU,
   Upc: string,
 })

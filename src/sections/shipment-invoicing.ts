@@ -3,7 +3,7 @@ import { Codec, enumeration, exactly, GetType, number, optional, string, unknown
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray, ensureString, SKU } from '../parsing'
+import { ASIN, ensureArray, ensureString, SKU } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 
 const SHIPMENT_INVOICING_API_VERSION = '2018-09-01'
@@ -45,7 +45,7 @@ export const Money = Codec.interface({
 })
 
 const ShipmentItem = Codec.interface({
-  ASIN: ensureString,
+  ASIN,
   SellerSKU: optional(SKU),
   OrderItemId: ensureString,
   Title: optional(string),
