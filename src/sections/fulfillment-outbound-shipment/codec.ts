@@ -1,6 +1,6 @@
 import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
 
-import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
+import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec, SKU } from '../../parsing'
 import {
   FISFeeTypesEnum,
   FISWeightUnitEnum,
@@ -31,7 +31,7 @@ const FISFee = Codec.interface({
 })
 
 const FulfillmentPreviewItem = Codec.interface({
-  SellerSKU: string,
+  SellerSKU: SKU,
   SellerFulfillmentOrderItemId: ensureString,
   Quantity: number,
   EstimatedShippingWeight: optional(FISWeight),
@@ -47,7 +47,7 @@ const FulfillmentPreviewShipment = Codec.interface({
 })
 
 const UnfulfillablePreviewItem = Codec.interface({
-  SellerSKU: string,
+  SellerSKU: SKU,
   SellerFulfillmentOrderItemId: string,
   Quantity: number,
   ItemUnfulfillableReasons: ensureArray('member', string),
@@ -176,12 +176,12 @@ export const ListAllFulfillmentOrdersResponse = Codec.interface({
 })
 
 const FulfillmentOrderItem = Codec.interface({
-  SellerSKU: string,
+  SellerSKU: SKU,
   SellerFulfillmentOrderItemId: string,
   Quantity: number,
   GiftMessage: optional(string),
   DisplayableComment: optional(string),
-  FulfillmentNetworkSKU: optional(string),
+  FulfillmentNetworkSKU: optional(SKU),
   CancelledQuantity: number,
   UnfulfillableQuantity: number,
   EstimatedShipDateTime: optional(mwsDate),
