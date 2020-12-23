@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.25](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.24...v1.9.25) (2020-12-23)
+
+
+### Bug Fixes
+
+* adds WAREHOUSE_DAMAGE adjustment type ([677e367](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/677e3679e79ab197005ddd9922cbc8286cb82695))
+
 ## [1.9.24](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.23...v1.9.24) (2020-12-23)
 
 
