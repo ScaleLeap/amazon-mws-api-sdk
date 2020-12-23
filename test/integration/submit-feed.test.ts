@@ -1,6 +1,6 @@
 import { jestPollyConfigService } from '@scaleleap/jest-polly'
 import { readFileSync } from 'fs'
-import { join } from 'path'
+import path from 'path'
 
 import { Feeds, SubmitFeedParameters } from '../../src'
 import { Config } from './config'
@@ -25,7 +25,7 @@ describe(`submit-feed`, () => {
     expect.assertions(1)
 
     const parameters: SubmitFeedParameters = {
-      FeedContent: readFileSync(join(__dirname, `/submit_feed_sample_feed_content.xml`), {
+      FeedContent: readFileSync(path.join(__dirname, `/submit_feed_sample_feed_content.xml`), {
         encoding: 'utf8',
       }),
       FeedType: '_POST_PRODUCT_DATA_',

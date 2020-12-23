@@ -205,16 +205,14 @@ export class EasyShip {
       parameters: {
         MarketplaceId: parameters.MarketplaceId,
         'ScheduledPackageUpdateDetailsList.PackageUpdateDetails': parameters.ScheduledPackageUpdateDetailsList.map(
-          (packageUpdate) => {
-            return {
-              ScheduledPackageId: packageUpdate.ScheduledPackageId,
-              PackagePickupSlot: {
-                SlotId: packageUpdate.PackagePickupSlot.SlotId,
-                PickupTimeStart: packageUpdate.PackagePickupSlot.PickupTimeStart.toISOString(),
-                PickupTimeEnd: packageUpdate.PackagePickupSlot.PickupTimeEnd.toISOString(),
-              },
-            }
-          },
+          (packageUpdate) => ({
+            ScheduledPackageId: packageUpdate.ScheduledPackageId,
+            PackagePickupSlot: {
+              SlotId: packageUpdate.PackagePickupSlot.SlotId,
+              PickupTimeStart: packageUpdate.PackagePickupSlot.PickupTimeStart.toISOString(),
+              PickupTimeEnd: packageUpdate.PackagePickupSlot.PickupTimeEnd.toISOString(),
+            },
+          }),
         ),
       },
     })

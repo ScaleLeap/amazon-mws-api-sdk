@@ -96,14 +96,12 @@ const ListInventorySupplyByNextTokenResponse = Codec.interface({
   }),
 })
 
-const canonicalizeParameters = (parameters: ListInventorySupplyRequestParameters) => {
-  return {
-    'SellersSkus.member': parameters.SellerSkus,
-    QueryStartDateTime: parameters.QueryStartDateTime?.toISOString(),
-    ResponseGroup: parameters.ResponseGroup,
-    MarketplaceId: parameters.MarketplaceId,
-  }
-}
+const canonicalizeParameters = (parameters: ListInventorySupplyRequestParameters) => ({
+  'SellersSkus.member': parameters.SellerSkus,
+  QueryStartDateTime: parameters.QueryStartDateTime?.toISOString(),
+  ResponseGroup: parameters.ResponseGroup,
+  MarketplaceId: parameters.MarketplaceId,
+})
 
 export type ResponseGroup = 'Basic' | 'Detailed'
 

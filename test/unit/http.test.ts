@@ -284,13 +284,11 @@ describe('httpClient', () => {
         ],
       }
 
-      const items: Item[] = [...new Array(4)].map((_, index) => {
-        return {
-          ...item,
-          OrderItemId: `ITEM${index + 1}`,
-          ItemDescription: `This is item #${index + 1}`,
-        }
-      })
+      const items: Item[] = [...new Array(4)].map((_, index) => ({
+        ...item,
+        OrderItemId: `ITEM${index + 1}`,
+        ItemDescription: `This is item #${index + 1}`,
+      }))
 
       /**
        * This uses all possible values in the request parameter, even the optional parameters

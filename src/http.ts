@@ -64,6 +64,7 @@ export type HttpMethod = 'GET' | 'POST'
 export type ParameterTypes =
   | string
   | number
+  // eslint-disable-next-line @typescript-eslint/ban-types
   | (number | string | object)[]
   | boolean
   | { [key: string]: ParameterTypes }
@@ -270,6 +271,7 @@ export const cleanParameters = (
     .filter(([, parameter]) => parameter !== undefined)
 
     // Loop through each key
+    // eslint-disable-next-line unicorn/no-reduce
     .reduce((_, [key, parameter]) => {
       const trueKey = outerKey ? `${outerKey}.${key}` : key
       /**
@@ -285,6 +287,7 @@ export const cleanParameters = (
         /**
          * If parameter is type array reduce it to dotnotation
          */
+        // eslint-disable-next-line @typescript-eslint/ban-types
         parameter.forEach((parameterChild: object | string | number | boolean, index: number) => {
           if (
             typeof parameterChild === 'string' ||
@@ -312,9 +315,7 @@ const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestR
       data: response.data,
       headers: response.headers,
     }))
-    .catch((error) => {
-      return Promise.reject(error.response.data)
-    })
+    .catch((error) => Promise.reject(error.response.data))
 
 export const parseResponse = <T>(
   response: RequestResponse,
@@ -359,12 +360,12 @@ export class HttpClient {
     private fetch: (meta: Request) => Promise<RequestResponse> = defaultFetch,
   ) {}
 
-  public async request<TResource extends Resource, TRes>(
+  public async request<TResource extends Resource, TResponse>(
     method: HttpMethod,
     info: ResourceInfo<TResource>,
     body?: string,
     stringResponse = false,
-  ): Promise<[TRes | string, RequestMeta]> {
+  ): Promise<[TResponse | string, RequestMeta]> {
     const marketplaceUri = this.options.marketplace.webServiceUri
 
     const host = marketplaceUri.replace('https://', '')
