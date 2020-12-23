@@ -344,6 +344,7 @@ export enum AdjustmentTypeEnum {
   ReimbursementClawback = 'ReimbursementClawback',
   ReversalReimbursement = 'REVERSAL_REIMBURSEMENT',
   SellerRewards = 'SellerRewards',
+  WAREHOUSE_DAMAGE = 'WAREHOUSE_DAMAGE',
 }
 
 const AdjustmentType = enumeration(AdjustmentTypeEnum)
