@@ -8,6 +8,7 @@ import {
   mwsDate,
   NextToken,
   nextToken as nextTokenCodec,
+  SKU,
 } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { FulfillmentChannelEnum } from './types'
@@ -61,7 +62,7 @@ export interface ListRecommendationsParameters {
 
 const ProductIdentifier = Codec.interface({
   Asin: ensureString,
-  Sku: string,
+  Sku: SKU,
   Upc: string,
 })
 

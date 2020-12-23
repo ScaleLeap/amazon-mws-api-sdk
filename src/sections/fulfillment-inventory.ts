@@ -8,6 +8,7 @@ import {
   mwsDate,
   NextToken,
   nextToken as nextTokenCodec,
+  SKU,
 } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { RequireOnlyOne } from './types'
@@ -62,8 +63,8 @@ const InventorySupplyDetail = Codec.interface({
 })
 
 const InventorySupply = Codec.interface({
-  SellerSKU: optional(string),
-  FNSKU: string,
+  SellerSKU: optional(SKU),
+  FNSKU: SKU,
   ASIN: optional(ensureString),
   Condition: optional(enumeration(InventoryCondition)),
   TotalSupplyQuantity: number,
