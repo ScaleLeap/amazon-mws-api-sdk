@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.23](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.22...v1.9.23) (2020-12-23)
+
+
+### Bug Fixes
+
+* all SKUs are strings ([4f0b242](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/4f0b2428a3408f879491fffdc12029acd37616c6))
+
 ## [1.9.22](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.21...v1.9.22) (2020-12-22)
 
 

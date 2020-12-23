@@ -23,7 +23,7 @@
     "type": "git",
     "url": "git@github.com:ScaleLeap/amazon-mws-api-sdk.git"
   },
-  "version": "1.9.22",
+  "version": "1.9.23",
   "main": "lib/index.js",
   "files": [
     "/lib"
