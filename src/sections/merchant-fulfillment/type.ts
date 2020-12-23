@@ -27,8 +27,8 @@ export interface CanonicalizedSellerInputs {
 
 export const canonicalizeAdditionalSellerInputs = (
   inputList: AdditionalSellerInputs[] | undefined,
-): CanonicalizedSellerInputs[] | undefined => {
-  return inputList?.map((input) => {
+): CanonicalizedSellerInputs[] | undefined =>
+  inputList?.map((input) => {
     const { AdditionalInputFieldName, AdditionalSellerInput } = input
     const {
       ValueAsString,
@@ -57,7 +57,6 @@ export const canonicalizeAdditionalSellerInputs = (
       },
     }
   })
-}
 
 export interface CanonicalizedItem {
   OrderItemId: string
@@ -256,7 +255,7 @@ export interface AdditionalSellerInput {
   ValueAsWeight?: Weight
   ValueAsDimension?: PackageDimensions
   ValueAsCurrency?: CurrencyAmount
-  [key: string]: undefined | string | boolean | number | object
+  [key: string]: undefined | string | boolean | number | Date | Record<string, unknown>
 }
 export interface AdditionalSellerInputs {
   AdditionalInputFieldName: string

@@ -71,12 +71,11 @@ export class ParsingError extends MWSError {}
 
 type MWSApiError = GetType<typeof MWSApiError>
 
-export const enhanceError = (error: HttpError, response: MWSApiError): HttpError => {
-  return Object.assign(error, {
+export const enhanceError = (error: HttpError, response: MWSApiError): HttpError =>
+  Object.assign(error, {
     type: response.ErrorResponse.Error.Type,
     code: response.ErrorResponse.Error.Code,
     detail: response.ErrorResponse.Error.Detail,
     mwsMessage: response.ErrorResponse.Error.Message,
     requestId: response.ErrorResponse.RequestID || response.ErrorResponse.RequestId || '',
   } as HttpError)
-}

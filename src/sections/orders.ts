@@ -301,22 +301,20 @@ export interface ListOrderItemsParameters {
   AmazonOrderId: string
 }
 
-const canonicalizeParameters = (parameters: ListOrderParameters) => {
-  return {
-    CreatedAfter: parameters.CreatedAfter?.toISOString(),
-    CreatedBefore: parameters.CreatedBefore?.toISOString(),
-    LastUpdatedAfter: parameters.LastUpdatedAfter?.toISOString(),
-    LastUpdatedBefore: parameters.LastUpdatedBefore?.toISOString(),
-    'OrderStatus.Status': parameters.OrderStatus,
-    'MarketplaceId.Id': parameters.MarketplaceId,
-    'FulfillmentChannel.Channel': parameters.FulfillmentChannel,
-    'PaymentMethod.Method': parameters.PaymentMethod,
-    'EasyShipShipmentStatus.Status': parameters.EasyShipShipmentStatus,
-    BuyerEmail: parameters.BuyerEmail,
-    SellerOrderId: parameters.SellerOrderId,
-    MaxResultsPerPage: parameters.MaxResultsPerPage,
-  }
-}
+const canonicalizeParameters = (parameters: ListOrderParameters) => ({
+  CreatedAfter: parameters.CreatedAfter?.toISOString(),
+  CreatedBefore: parameters.CreatedBefore?.toISOString(),
+  LastUpdatedAfter: parameters.LastUpdatedAfter?.toISOString(),
+  LastUpdatedBefore: parameters.LastUpdatedBefore?.toISOString(),
+  'OrderStatus.Status': parameters.OrderStatus,
+  'MarketplaceId.Id': parameters.MarketplaceId,
+  'FulfillmentChannel.Channel': parameters.FulfillmentChannel,
+  'PaymentMethod.Method': parameters.PaymentMethod,
+  'EasyShipShipmentStatus.Status': parameters.EasyShipShipmentStatus,
+  BuyerEmail: parameters.BuyerEmail,
+  SellerOrderId: parameters.SellerOrderId,
+  MaxResultsPerPage: parameters.MaxResultsPerPage,
+})
 
 export class Orders {
   constructor(private httpClient: HttpClient) {}

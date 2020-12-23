@@ -3,16 +3,14 @@ import { RequireOnlyOne } from '../types'
 
 export const canonicalizeInboundShipmentPlanRequestItems = (
   requestItem: InboundShipmentPlanRequestItem,
-) => {
-  return {
-    SellerSKU: requestItem.SellerSKU,
-    ASIN: requestItem.ASIN,
-    Condition: requestItem.Condition,
-    Quantity: requestItem.Quantity,
-    QuantityInCase: requestItem.QuantityInCase,
-    'PrepDetailsList.PrepDetails': requestItem.PrepDetailsList,
-  }
-}
+) => ({
+  SellerSKU: requestItem.SellerSKU,
+  ASIN: requestItem.ASIN,
+  Condition: requestItem.Condition,
+  Quantity: requestItem.Quantity,
+  QuantityInCase: requestItem.QuantityInCase,
+  'PrepDetailsList.PrepDetails': requestItem.PrepDetailsList,
+})
 
 export const canonicalizeParametersCreateUpdateInboundShipmentPlan = (
   parameters: CreateInboundShipmentPlanParameters,
@@ -36,7 +34,6 @@ export const canonicalizeDate = (date: Date | undefined): string | undefined => 
     const releaseDate = new Date(date.getTime() + offset * 60 * 1000)
     return releaseDate.toISOString().split('T')[0]
   }
-  return undefined
 }
 
 export const canonicalizeInboundShipmentItem = (item: InboundShipmentItem) => {
@@ -210,12 +207,6 @@ export interface FIBAmount {
   [key: string]: string
 }
 
-interface PartneredEstimate {
-  Amount?: FIBAmount
-  ConfirmDeadline?: Date
-  VoidDeadline?: Date
-}
-
 export type FIBDimensionsUnit = keyof typeof DimensionsUnitEnum
 
 export interface FIBDimensions {
@@ -246,8 +237,6 @@ export enum PackageStatusEnum {
   'RECEIVING',
   'CLOSED',
 }
-
-type PackageStatus = keyof typeof PackageStatusEnum
 
 export interface PartneredSmallParcelPackageInput {
   Dimensions: FIBDimensions

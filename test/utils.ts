@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs'
-import { join } from 'path'
+import path from 'path'
 
 import { amazonMarketplaces, HttpClient, MWS } from '../src'
 
@@ -20,7 +20,7 @@ export const headers = {
 }
 
 export const getFixture = (filename: string): string =>
-  readFileSync(join(__dirname, `unit/__fixtures__/${filename}.xml`), { encoding: 'utf8' })
+  readFileSync(path.join(__dirname, `unit/__fixtures__/${filename}.xml`), { encoding: 'utf8' })
 
 export const createMockHttpClient = (fixture: string) =>
   new MWS(

@@ -40,16 +40,14 @@ export interface GetFulfillmentPreviewParameters {
 
 export const canonicalizeGetFulfillmentPreviewParameters = (
   parameters: GetFulfillmentPreviewParameters,
-) => {
-  return {
-    MarketplaceId: parameters.MarketplaceId,
-    Address: parameters.Address,
-    'Items.member': parameters.Items,
-    'ShippingSpeedCategories.member': parameters.ShippingSpeedCategories,
-    IncludeCODFulfillmentPreview: parameters.IncludeCODFulfillmentPreview,
-    IncludeDeliveryWindows: parameters.IncludeDeliveryWindows,
-  }
-}
+) => ({
+  MarketplaceId: parameters.MarketplaceId,
+  Address: parameters.Address,
+  'Items.member': parameters.Items,
+  'ShippingSpeedCategories.member': parameters.ShippingSpeedCategories,
+  IncludeCODFulfillmentPreview: parameters.IncludeCODFulfillmentPreview,
+  IncludeDeliveryWindows: parameters.IncludeDeliveryWindows,
+})
 
 export enum FISWeightUnitEnum {
   'kilograms',
@@ -128,28 +126,26 @@ export interface CreateFulfillmentOrderParameters {
 
 export const canonicalizeCreateFulfillmentOrderParameters = (
   parameters: CreateFulfillmentOrderParameters,
-) => {
-  return {
-    MarketplaceId: parameters.MarketplaceId,
-    SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
-    FulfillmentAction: parameters.FulfillmentAction,
-    DisplayableOrderId: parameters.DisplayableOrderId,
-    DisplayableOrderDateTime: parameters.DisplayableOrderDateTime?.toISOString(),
-    DisplayableOrderComment: parameters.DisplayableOrderComment,
-    ShippingSpeedCategory: parameters.ShippingSpeedCategory,
-    DestinationAddress: parameters.DestinationAddress,
-    FulfillmentPolicy: parameters.FulfillmentPolicy,
-    'NotificationEmailList.member': parameters.NotificationEmailList,
-    CODSettings: parameters.CODSettings,
-    'Items.member': parameters.Items,
-    DeliveryWindow: parameters.DeliveryWindow
-      ? {
-          StartDateTime: parameters.DeliveryWindow.StartDateTime?.toISOString(),
-          EndDateTime: parameters.DeliveryWindow.EndDateTime?.toISOString(),
-        }
-      : undefined,
-  }
-}
+) => ({
+  MarketplaceId: parameters.MarketplaceId,
+  SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
+  FulfillmentAction: parameters.FulfillmentAction,
+  DisplayableOrderId: parameters.DisplayableOrderId,
+  DisplayableOrderDateTime: parameters.DisplayableOrderDateTime?.toISOString(),
+  DisplayableOrderComment: parameters.DisplayableOrderComment,
+  ShippingSpeedCategory: parameters.ShippingSpeedCategory,
+  DestinationAddress: parameters.DestinationAddress,
+  FulfillmentPolicy: parameters.FulfillmentPolicy,
+  'NotificationEmailList.member': parameters.NotificationEmailList,
+  CODSettings: parameters.CODSettings,
+  'Items.member': parameters.Items,
+  DeliveryWindow: parameters.DeliveryWindow
+    ? {
+        StartDateTime: parameters.DeliveryWindow.StartDateTime?.toISOString(),
+        EndDateTime: parameters.DeliveryWindow.EndDateTime?.toISOString(),
+      }
+    : undefined,
+})
 
 export interface UpdateFulfillmentOrderItem {
   SellerFulfillmentOrderItemId: string
@@ -177,21 +173,19 @@ export interface UpdateFulfillmentOrderParameters {
 
 export const canonicalizeUpdateFulfillmentOrderParameters = (
   parameters: UpdateFulfillmentOrderParameters,
-) => {
-  return {
-    MarketplaceId: parameters.MarketplaceId,
-    SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
-    FulfillmentAction: parameters.FulfillmentAction,
-    DisplayableOrderId: parameters.DisplayableOrderId,
-    DisplayableOrderDateTime: parameters.DisplayableOrderDateTime?.toISOString(),
-    DisplayableOrderComment: parameters.DisplayableOrderComment,
-    ShippingSpeedCategory: parameters.ShippingSpeedCategory,
-    DestinationAddress: parameters.DestinationAddress,
-    FulfillmentPolicy: parameters.FulfillmentPolicy,
-    'NotificationEmailList.member': parameters.NotificationEmailList,
-    'Items.member': parameters.Items,
-  }
-}
+) => ({
+  MarketplaceId: parameters.MarketplaceId,
+  SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
+  FulfillmentAction: parameters.FulfillmentAction,
+  DisplayableOrderId: parameters.DisplayableOrderId,
+  DisplayableOrderDateTime: parameters.DisplayableOrderDateTime?.toISOString(),
+  DisplayableOrderComment: parameters.DisplayableOrderComment,
+  ShippingSpeedCategory: parameters.ShippingSpeedCategory,
+  DestinationAddress: parameters.DestinationAddress,
+  FulfillmentPolicy: parameters.FulfillmentPolicy,
+  'NotificationEmailList.member': parameters.NotificationEmailList,
+  'Items.member': parameters.Items,
+})
 
 export interface ListAllFulfillmentOrdersParameters {
   QueryStartDateTime?: Date
