@@ -46,6 +46,7 @@ const Status = enumeration(StatusEnum)
 
 export enum IdTypeEnum {
   ASIN = 'ASIN',
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   SKU = 'SKU',
 }
 
