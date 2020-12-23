@@ -111,3 +111,9 @@ export const nextToken = <T extends string>(action: T) =>
     encode: (x) => x,
     schema: () => ({ type: 'string' }),
   })
+
+/**
+ * A shorthand for all SKUs, which are always strings, but when they consist of just numbers,
+ * XML parser will parse them to a number.
+ */
+export const SKU = ensureString

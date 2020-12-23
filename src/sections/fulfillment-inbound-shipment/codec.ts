@@ -1,6 +1,6 @@
 import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
 
-import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
+import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec, SKU } from '../../parsing'
 import { DimensionsUnitEnum } from '../merchant-fulfillment/codec'
 import {
   CreateInboundShipmentParameters,
@@ -24,14 +24,14 @@ export const GuidanceReason = enumeration(GuidanceReasonEnum)
 export const InboundGuidance = enumeration(InboundGuidanceEnum)
 
 export const SKUInboundGuidance = Codec.interface({
-  SellerSKU: string,
+  SellerSKU: SKU,
   ASIN: ensureString,
   InboundGuidance,
   GuidanceReasonList: optional(ensureArray('GuidanceReason', GuidanceReason)),
 })
 
 export const InvalidSKU = Codec.interface({
-  SellerSKU: string,
+  SellerSKU: SKU,
   ErrorReason: string,
 })
 
@@ -115,8 +115,8 @@ const PrepDetails = Codec.interface({
 })
 
 export const InboundShipmentPlanItem = Codec.interface({
-  SellerSKU: string,
-  FulfillmentNetworkSKU: string,
+  SellerSKU: SKU,
+  FulfillmentNetworkSKU: SKU,
   Quantity: number,
   PrepDetailsList: optional(ensureArray('PrepDetails', PrepDetails)),
 })
@@ -204,7 +204,7 @@ export const AmazonPrepFeesDetails = Codec.interface({
 })
 
 export const SKUPrepInstructions = Codec.interface({
-  SellerSKU: string,
+  SellerSKU: SKU,
   ASIN: ensureString,
   BarcodeInstruction,
   PrepGuidance,
@@ -553,8 +553,8 @@ export const ListInboundShipmentsByNextTokenResponse = Codec.interface({
 
 const InboundShipmentItem = Codec.interface({
   ShipmentId: optional(ensureString),
-  SellerSKU: string,
-  FulfillmentNetworkSKU: optional(string),
+  SellerSKU: SKU,
+  FulfillmentNetworkSKU: optional(SKU),
   QuantityShipped: number,
   QuantityReceived: optional(number),
   QuantityInCase: optional(number),

@@ -8,6 +8,7 @@ import {
   mwsDate,
   NextToken,
   nextToken as nextTokenCodec,
+  SKU,
 } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { FulfillmentChannelEnum, RequireOnlyOne } from './types'
@@ -200,7 +201,7 @@ export const ListOrderItems = Codec.interface({
     Codec.interface({
       ASIN: ensureString,
       OrderItemId: ensureString,
-      SellerSKU: optional(string),
+      SellerSKU: optional(SKU),
       BuyerCustomizedInfo: optional(
         Codec.interface({
           CustomizedURL: string,

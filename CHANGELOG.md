@@ -3,6 +3,27 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.23](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.22...v1.9.23) (2020-12-23)
+
+
+### Bug Fixes
+
+* all SKUs are strings ([4f0b242](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/4f0b2428a3408f879491fffdc12029acd37616c6))
+
+## [1.9.22](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.21...v1.9.22) (2020-12-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v0.21.1 ([0d3c013](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/0d3c013a812a8590e24cf841e5d272c0d1b96772))
+
+## [1.9.21](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.20...v1.9.21) (2020-12-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency html-entities to v1.4.0 ([582e25c](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/582e25cb7960c7a6f40d3c8d5270a101e0b94f57))
+
 ## [1.9.20](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.19...v1.9.20) (2020-12-21)
 
 

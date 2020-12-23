@@ -116,3 +116,6 @@ lib/
 # Api Extractor
 dist/
 temp/
+
+# Local playground
+test/playground

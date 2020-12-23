@@ -1,6 +1,6 @@
 import { Codec, enumeration, GetType, number, oneOf, optional, string, unknown } from 'purify-ts'
 
-import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
+import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec, SKU } from '../../parsing'
 import { CurrencyAmount } from '../codec'
 import { FulfillmentChannelEnum } from '../types'
 
@@ -132,7 +132,7 @@ const Promotion = Codec.interface({
 })
 
 const ShipmentItem = Codec.interface({
-  SellerSKU: optional(string),
+  SellerSKU: optional(SKU),
   OrderItemId: optional(ensureString),
   OrderAdjustmentItemId: optional(ensureString),
   QuantityShipped: optional(number),
@@ -275,8 +275,8 @@ const ServiceFeeEvent = Codec.interface({
   AmazonOrderId: optional(string),
   FeeReason: optional(string),
   FeeList: optional(ensureArray('FeeComponent', FeeComponent)),
-  SellerSKU: optional(string),
-  FnSKU: optional(string),
+  SellerSKU: optional(SKU),
+  FnSKU: optional(SKU),
   FeeDesription: optional(string),
   ASIN: optional(ensureString),
 })
@@ -345,8 +345,8 @@ const AdjustmentItem = Codec.interface({
   Quantity: optional(ensureString), // Docs and mock responses list this as `string`
   PerUnitAmount: optional(CurrencyAmount),
   TotalAmount: optional(CurrencyAmount),
-  SellerSKU: optional(string),
-  FnSKU: optional(string),
+  SellerSKU: optional(SKU),
+  FnSKU: optional(SKU),
   ProductDescription: optional(string),
   ASIN: optional(ensureString),
 })
