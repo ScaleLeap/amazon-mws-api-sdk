@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.26](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.25...v1.9.26) (2020-12-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fast-xml-parser to v3.17.6 ([cd1cafa](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/cd1cafacc98996239d216a141dc025e7be34f091))
+
 ## [1.9.25](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.24...v1.9.25) (2020-12-23)
 
 
