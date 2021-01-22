@@ -1,7 +1,7 @@
 import { AmazonMarketplace } from '@scaleleap/amazon-marketplaces'
 import axios from 'axios'
 import parser from 'fast-xml-parser'
-import { XmlEntities } from 'html-entities'
+import { decode } from 'html-entities'
 import { URLSearchParams } from 'url'
 
 import { USER_AGENT } from './constants'
@@ -334,7 +334,7 @@ export const parseResponse = <T>(
           parseAttributeValue: true,
           attrNodeName: 'attr',
           textNodeName: 'text',
-          tagValueProcessor: (value) => XmlEntities.decode(value),
+          tagValueProcessor: (value) => decode(value),
         },
         true,
       )
