@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.28](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.27...v1.9.28) (2021-01-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency html-entities to v2 ([c18aa6b](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c18aa6b0bd1f7a859b0e04cafd9b84333b1f4fd6))
+
 ## [1.9.27](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.26...v1.9.27) (2021-01-08)
 
 
