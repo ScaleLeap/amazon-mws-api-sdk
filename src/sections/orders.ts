@@ -142,7 +142,7 @@ export const Order = Codec.interface({
     ),
   ),
   PaymentMethod: optional(string),
-  PaymentMethodDetails: ensureArray('PaymentMethodDetail', string),
+  PaymentMethodDetails: optional(ensureArray('PaymentMethodDetail', string)),
   IsReplacementOrder: optional(boolean),
   ReplacedOrderId: optional(string),
   MarketplaceId: optional(string),
