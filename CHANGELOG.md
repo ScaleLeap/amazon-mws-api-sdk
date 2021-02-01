@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.32](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.31...v1.9.32) (2021-02-01)
+
+
+### Bug Fixes
+
+* marks PaymentMethodDetails as optional ([eaeb00d](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/eaeb00d2dd87e66ccf9801b1a47d6cb15aec2600)), closes [#293](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/293)
+
 ## [1.9.31](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.30...v1.9.31) (2021-01-28)
 
 
