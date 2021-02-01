@@ -61,7 +61,7 @@
     "@types/is-ci": "2.0.0",
     "@types/jest": "26.0.20",
     "@types/node": "13.13.4",
-    "ajv": "7.0.3",
+    "ajv": "7.0.4",
     "danger": "10.6.1",
     "global-agent": "2.1.12",
     "is-ci": "2.0.0",
