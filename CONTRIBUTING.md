@@ -21,6 +21,7 @@ whether it's:
   * [Integration tests](#integration-tests)
   * [Testing against the API itself](#testing-against-the-api-itself)
   * [Testing locally without having to access the API](#testing-locally-without-having-to-access-the-api)
+  * [Debugging using a MITM proxy](#debugging-using-a-mitm-proxy)
 
 ## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
 
@@ -130,3 +131,22 @@ const [response] = await mockListMatchingProducts.products.listMatchingProducts(
     Query: '',
   })
 ```
+
+## Debugging using a MITM proxy
+
+Sometimes you'll need to inspect raw HTTP requests and responses to debug an issue.
+
+You can use a MITM proxy to inspect the results:
+
+ * [mitmproxy](https://mitmproxy.org/)
+ * [Charles.app](https://www.charlesproxy.com)
+
+You may use a [`global-agent` package](https://github.com/gajus/global-agent), which is already
+listed as a developer dependency.
+
+```sh
+export GLOBAL_AGENT_HTTP_PROXY=http://127.0.0.1:8080
+node -r 'global-agent/bootstrap' your-mws-script.js
+```
+
+This will then pass through all of the HTTP traffic through the MITM proxy and you can inspect it.
