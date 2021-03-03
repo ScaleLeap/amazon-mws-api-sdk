@@ -267,7 +267,7 @@ The most basic usage can be seen in [the get-service-status example file](../exa
 ## Response Object
 
 The actual request data varies between actions. Outside of some exceptions, all request data has been defined.
-Finding out the properties of the response object should be as easy as using your text editor's autocomplete suggestions 
+Finding out the properties of the response object should be as easy as using your text editor's autocomplete suggestions
 
 ---
 [go back to table of contents](#table-of-contents)
@@ -347,8 +347,8 @@ const usingMws = async () => {
 
   const [serviceStatus] = await mws.sellers.getServiceStatus()
   /**
-   * Also available 
-   * mws.orders, mws.feeds, mws.finances, mws.fulfillmentInventory, 
+   * Also available
+   * mws.orders, mws.feeds, mws.finances, mws.fulfillmentInventory,
    * mws.products, mws.reports, mws.subscriptions
    */
   if (serviceStatus.Status === 'GREEN') {
@@ -781,6 +781,7 @@ const [response, meta] = reports.getReport('12345')
 | ReportType   | string | `'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'` | Yes      |
 | Schedule     | string | `'_15_MINUTES_'`                       | Yes      |
 | ScheduleDate | Date   | `new Date()`                           | No       |
+
 * [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 * [Possible values for Schedule](http://docs.developer.amazonservices.com/en_CA/reports/Reports_Schedule.html)
 
@@ -2241,7 +2242,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
 
-### cancelShipment 
+### cancelShipment
 
 | Name       | Type   | Example     -  | Required |
 | ---------- | ------ | -------------- | -------- |
@@ -2385,7 +2386,7 @@ const [response, meta] = shipmentInvoicing.getServiceStatus()
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 
-## Recommendations 
+## Recommendations
 
 [Amazon MWS Recommendations API official documentation](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_Overview.html)
 
@@ -2493,7 +2494,7 @@ const [response, meta] = recommendations.getServiceStatus()
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-## FulfillmentInboundShipment 
+## FulfillmentInboundShipment
 
 [Amazon MWS FulfillmentInboundShipment API official documentation](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Overview.html)
 
