@@ -58,7 +58,7 @@
     "@scaleleap/config": "2.0.5",
     "@scaleleap/jest-polly": "1.5.24",
     "@scaleleap/utils": "1.8.56",
-    "@types/is-ci": "2.0.0",
+    "@types/is-ci": "3.0.0",
     "@types/jest": "26.0.20",
     "@types/node": "13.13.45",
     "ajv": "7.1.1",
