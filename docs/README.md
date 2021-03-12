@@ -198,7 +198,7 @@
     - [getScheduledPackage](#getscheduledpackage)
     - [getServiceStatus](#getservicestatus-10)
 
-# Basics
+## Basics
 
 `amazon-mws-api-sdk` is divided up into different sections representing the different sections of the Amazon MWS API.
 Under each section are methods that perform "actions" on the MWS API, the response is parsed and returned along with the the request metadata
@@ -206,7 +206,7 @@ Under each section are methods that perform "actions" on the MWS API, the respon
 ---
 [go back to table of contents](#table-of-contents)
 
-## Configuring `HttpClient` and using it with the different sections
+### Configuring `HttpClient` and using it with the different sections
 
 ```typescript
 /**
@@ -232,7 +232,8 @@ const sellers = new Sellers(http)
 // new Subscriptions(http), new Finances(http), new Feeds(http)
 ```
 
-**MWSOptions attributes**
+#### MWSOptions attributes
+
 | Name           | Type   | Example            | Description           | Required |
 | -------------- | ------ | ------------------ | --------------------- | -------- |
 | marketplace    | string | `'A2EUQ1WTGCTBG2'` | Amazon Marketplace ID | Yes      |
@@ -243,7 +244,7 @@ const sellers = new Sellers(http)
 
 ---
 
-## Basic usage example
+### Basic usage example
 
 ```typescript
 const orders = new Orders(httpClient)
@@ -265,7 +266,7 @@ The most basic usage can be seen in [the get-service-status example file](../exa
 ---
 [go back to table of contents](#table-of-contents)
 
-## Response Object
+### Response Object
 
 The actual request data varies between actions. Outside of some exceptions, all request data has been defined.
 Finding out the properties of the response object should be as easy as using your text editor's autocomplete suggestions
@@ -273,11 +274,11 @@ Finding out the properties of the response object should be as easy as using you
 ---
 [go back to table of contents](#table-of-contents)
 
-## Request Metadata
+### Request Metadata
 
 This is returned along with the API's response
 
-**Structure**
+#### Structure
 
 | Name           | Type   | Example                                  | Description                                |
 | -------------- | ------ | ---------------------------------------- | ------------------------------------------ |
@@ -292,13 +293,13 @@ This is returned along with the API's response
 ---
 [go back to table of contents](#table-of-contents)
 
-## Next tokens
+### Next tokens
 
 ["using-next-tokens" example file](../examples/using-next-tokens.ts)
 
 ["Using NextToken to request additional pages" from the Amazon documentation](http://docs.developer.amazonservices.com/en_CA/dev_guide/DG_NextToken.html)
 
-### Creating `NextToken`s
+#### Creating `NextToken`s
 
 ```typescript
   /**
@@ -313,7 +314,7 @@ This is returned along with the API's response
   ] = await sellers.listMarketplaceParticipationsByNextToken(nextToken)
 ```
 
-### Reusing next tokens from a previous response
+#### Reusing next tokens from a previous response
 
 ```typescript
   const [
@@ -332,11 +333,11 @@ This is returned along with the API's response
   }
 ```
 
-## MWS Class
+### MWS Class
 
 It is also possible to use the `MWS` access the sections and all their actions
 
-**Example**
+#### Example
 
 ```typescript
 // Using MWS client
@@ -360,7 +361,7 @@ const usingMws = async () => {
 }
 ```
 
-# Sections
+## Sections
 
 ---
 [go back to table of contents](#table-of-contents)
@@ -371,61 +372,63 @@ const usingMws = async () => {
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- ////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-## Sellers
+### Sellers
 
 [Amazon MWS Sellers API official documentation](http://docs.developer.amazonservices.com/en_CA/sellers/Sellers_Overview.html)
 
-### listMarketplaceParticipations
+#### listMarketplaceParticipations
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const sellers = new Sellers(httpClient)
 const [response, meta] = sellers.listMarketplaceParticipations()
 ```
 
-**Response**
+**Response:**
 
 [See sellers test snapshot](../test/unit/__snapshots__/sellers.test.ts.snap)
 
-### listMarketplaceParticipationsByNextToken
+#### listMarketplaceParticipationsByNextToken
 
-**Parameters**
+**Parameters:**
+
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const sellers = new Sellers(httpClient)
-const [response, meta] = sellers.listMarketplaceParticipationsByNextToken(new NextToken('ListMarketplaceParticipations', '123'))
+const [response, meta] = sellers
+  .listMarketplaceParticipationsByNextToken(new NextToken('ListMarketplaceParticipations', '123'))
 ```
 
-**Response**
+**Response:**
 
 [See sellers test snapshot](../test/unit/__snapshots__/sellers.test.ts.snap)
 
-### getServiceStatus
+#### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const sellers = new Sellers(httpClient)
 const [response, meta] = sellers.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See sellers test snapshot](../test/unit/__snapshots__/sellers.test.ts.snap)
 
@@ -444,7 +447,7 @@ const [response, meta] = sellers.getServiceStatus()
 
 ### listOrders
 
-**Parameters**
+**Parameters:**
 
 | Name               | Type     | Example                 | Required                                |
 | ------------------ | -------- | ----------------------- | --------------------------------------- |
@@ -461,107 +464,108 @@ const [response, meta] = sellers.getServiceStatus()
 | MaxResultsPerPage  | number   | `10`                    | No                                      |
 | EasyShipmentStatus | string[] | `['PendingPickUp']`     | No                                      |
 
-* [Possible values for FulfillmentChannel, PaymentMethod and EasyShipmentStatus](http://docs.developer.amazonservices.com/en_CA/orders-2013-09-01/Orders_ListOrders.html)
+- [Possible values for FulfillmentChannel, PaymentMethod and EasyShipmentStatus](http://docs.developer.amazonservices.com/en_CA/orders-2013-09-01/Orders_ListOrders.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const orders = new Orders(httpClient)
 const [response, meta] = orders.listOrders({ createdAfter: new Date() })
 ```
 
-**Response**
+**Response:**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
 ### listOrdersByNextToken
 
-**Parameters**
+**Parameters:**
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const orders = new Orders(httpClient)
 const [response, meta] = orders.listOrdersByNextToken(new NextToken('ListOrders', '123'))
 ```
 
-**Response**
+**Response:**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
 ### getOrder
 
-**Parameters**
+**Parameters:**
 | Name          | Type     | Example                   | Required |
 | ------------- | -------- | ------------------------- | -------- |
 | AmazonOrderId | string[] | `['902-3159896-1390916']` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const orders = new Orders(httpClient)
 const [response, meta] = orders.getOrder({ AmazonOrderId: ['902-3159896-1390916'] })
 ```
 
-**Response**
+**Response:**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
 ### listOrderItems
 
-**Parameters**
+**Parameters:**
 | Name          | Type   | Example                 | Required |
 | ------------- | ------ | ----------------------- | -------- |
 | AmazonOrderId | string | `'902-3159896-1390916'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const orders = new Orders(httpClient)
 const [response, meta] = orders.listOrderItems({ AmazonOrderId: '902-3159896-1390916' })
 ```
 
-**Response**
+**Response:**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
 ### listOrderItemsByNextToken
 
-**Parameters**
+**Parameters:**
 
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const orders = new Orders(httpClient)
-const [response, meta] = orders.listOrderItemsByNextToken(new NextToken('ListOrderItems', '123'))
+const [response, meta] = orders
+  .listOrderItemsByNextToken(new NextToken('ListOrderItems', '123'))
 ```
 
-**Response**
+**Response:**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
 ### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const orders = new Orders(httpClient)
 const [response, meta] = orders.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See orders test snapshot](../test/unit/__snapshots__/orders.test.ts.snap)
 
@@ -580,7 +584,7 @@ const [response, meta] = orders.getServiceStatus()
 
 ### requestReport
 
-**Parameters**
+**Parameters:**
 | Name              | Type     | Example                                | Required |
 | ----------------- | -------- | -------------------------------------- | -------- |
 | ReportType        | string   | `'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'` | Yes      |
@@ -589,22 +593,23 @@ const [response, meta] = orders.getServiceStatus()
 | ReportOptions     | string   | `'Report Option'`                      | No       |
 | MarketplaceIdList | string[] | `['A2EUQ1WTGCTBG2']`                   | No       |
 
-* [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+- [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
-const [response, meta] = reports.requestReport({ ReportType: '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_' })
+const [response, meta] = reports
+  .requestReport({ ReportType: '_GET_FLAT_FILE_OPEN_LISTINGS_DATA_' })
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### getReportRequestList
 
-**Parameters**
+**Parameters:**
 | Name                       | Type     | Example                                  | Required                                                                      |
 | -------------------------- | -------- | ---------------------------------------- | ----------------------------------------------------------------------------- |
 | ReportRequestIdList        | string[] | `['12345']`                              | No. If you pass in ReportRequestId values, other query conditions are ignored |
@@ -614,41 +619,42 @@ const [response, meta] = reports.requestReport({ ReportType: '_GET_FLAT_FILE_OPE
 | RequestedFromDate          | Date     | `new Date()`                             | No                                                                            |
 | RequestedToDate            | Date     | `new Date()`                             | No                                                                            |
 
-* [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestList.html)
-* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+- [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestList.html)
+- [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportRequestList()
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### getReportRequestListByNextToken
 
-**Parameters**
+**Parameters:**
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
-const [response, meta] = reports.getReportRequestListByNextToken(new NextToken('GetReportRequestList', '123'))
+const [response, meta] = reports
+  .getReportRequestListByNextToken(new NextToken('GetReportRequestList', '123'))
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### getReportRequestCount
 
-**Parameters**
+**Parameters:**
 | Name                       | Type     | Example                                  | Required |
 | -------------------------- | -------- | ---------------------------------------- | -------- |
 | ReportTypeList             | string[] | `['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_']` | No       |
@@ -656,23 +662,23 @@ const [response, meta] = reports.getReportRequestListByNextToken(new NextToken('
 | RequestedFromDate          | Date     | `new Date()`                             | No       |
 | RequestedToDate            | Date     | `new Date()`                             | No       |
 
-* [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestCount.html)
-* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+- [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestCount.html)
+- [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportRequestCount()
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### cancelReportRequests
 
-**Parameters**
+**Parameters:**
 
 | Name                       | Type     | Example                                  | Required |
 | -------------------------- | -------- | ---------------------------------------- | -------- |
@@ -682,23 +688,23 @@ const [response, meta] = reports.getReportRequestCount()
 | RequestedFromDate          | Date     | `new Date()`                             | No       |
 | RequestedToDate            | Date     | `new Date()`                             | No       |
 
-* [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestList.html)
-* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+- [Possible values for ReportProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_GetReportRequestList.html)
+- [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
 const [response, meta] = reports.cancelReportRequests()
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### getReportList
 
-**Parameters**
+**Parameters:**
 
 | Name                | Type     | Example                                  | Required |
 | ------------------- | -------- | ---------------------------------------- | -------- |
@@ -709,41 +715,42 @@ const [response, meta] = reports.cancelReportRequests()
 | AvailableFromDate   | Date     | `new Date()`                             | No       |
 | AvailableToDate     | Date     | `new Date()`                             | No       |
 
-* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+- [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportList()
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### getReportListByNextToken
 
-**Parameters**
+**Parameters:**
 
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
-const [response, meta] = reports.getReportListByNextToken(new NextToken('GetReportList', '123'))
+const [response, meta] = reports
+  .getReportListByNextToken(new NextToken('GetReportList', '123'))
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### getReportCount
 
-**Parameters**
+**Parameters:**
 
 | Name              | Type     | Example                                  | Required |
 | ----------------- | -------- | ---------------------------------------- | -------- |
@@ -752,34 +759,34 @@ const [response, meta] = reports.getReportListByNextToken(new NextToken('GetRepo
 | AvailableFromDate | Date     | `new Date()`                             | No       |
 | AvailableToDate   | Date     | `new Date()`                             | No       |
 
-* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+- [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportCount()
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### getReport
 
-**Parameters**
+**Parameters:**
 | Name     | Type   | Example | Required |
 | -------- | ------ | ------- | -------- |
 | ReportId | string | '12345' | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
 const [response, meta] = reports.getReport('12345')
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -788,17 +795,17 @@ const [response, meta] = reports.getReport('12345')
 
 ### manageReportSchedule
 
-**Parameters**
+**Parameters:**
 | Name         | Type   | Example                                | Required |
 | ------------ | ------ | -------------------------------------- | -------- |
 | ReportType   | string | `'_GET_FLAT_FILE_OPEN_LISTINGS_DATA_'` | Yes      |
 | Schedule     | string | `'_15_MINUTES_'`                       | Yes      |
 | ScheduleDate | Date   | `new Date()`                           | No       |
 
-* [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
-* [Possible values for Schedule](http://docs.developer.amazonservices.com/en_CA/reports/Reports_Schedule.html)
+- [Possible values for ReportType](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+- [Possible values for Schedule](http://docs.developer.amazonservices.com/en_CA/reports/Reports_Schedule.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
@@ -808,28 +815,28 @@ const [response, meta] = reports.manageReportSchedule({
 })
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### getReportScheduleList
 
-**Parameters**
+**Parameters:**
 
 | Name           | Type     | Example                                  | Required |
 | -------------- | -------- | ---------------------------------------- | -------- |
 | ReportTypeList | string[] | `['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_']` | No       |
 
-* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+- [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportScheduleList()
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -839,40 +846,41 @@ const [response, meta] = reports.getReportScheduleList()
 
 ### getReportScheduleCount
 
-**Parameters**
+**Parameters:**
 | Name           | Type     | Example                                  | Required |
 | -------------- | -------- | ---------------------------------------- | -------- |
 | ReportTypeList | string[] | `['_GET_FLAT_FILE_OPEN_LISTINGS_DATA_']` | No       |
 
-* [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
+- [Possible values for ReportTypeList](http://docs.developer.amazonservices.com/en_CA/reports/Reports_ReportType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
 const [response, meta] = reports.getReportScheduleCount()
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
 ### updateReportAcknowledgements
 
-**Parameters**
+**Parameters:**
 | Name         | Type     | Example     | Required |
 | ------------ | -------- | ----------- | -------- |
 | ReportIdList | string[] | `['12345']` | Yes      |
 | Acknowledged | boolean  | `true`      | No       |
 
-**Example**
+**Example:**
 
 ```typescript
 const reports = new Reports(httpClient)
-const [response, meta] = reports.updateReportAcknowledgements({ ReportIdList: ['12345'] })
+const [response, meta] = reports
+  .updateReportAcknowledgements({ ReportIdList: ['12345'] })
 ```
 
-**Response**
+**Response:**
 
 [See reports test snapshot](../test/unit/__snapshots__/reports.test.ts.snap)
 
@@ -893,45 +901,45 @@ const [response, meta] = reports.updateReportAcknowledgements({ ReportIdList: ['
 
 #### Subscription
 
-**Properties**
+**Properties:**
 | Name             | Type        | Example                       | Required |
 | ---------------- | ----------- | ----------------------------- | -------- |
 | NotificationType | string      | `'AnyOfferChanged'`           | Yes      |
 | Destination      | Destination | [`Destination`](#destination) | Yes      |
 | IsEnabled        | boolean     | `true`                        | Yes      |
 
-* [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
+- [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
 #### Destination
 
-**Properties**
+**Properties:**
 | Name            | Type              | Example                               | Required |
 | --------------- | ----------------- | ------------------------------------- | -------- |
 | DeliveryChannel | string            | `'SQS'`                               | Yes      |
 | AttributeList   | AttributeKeyValue | [AttribueKeyValue](#attribuekeyvalue) | Yes      |
 
-* [Possible values for DeliveryChannel](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Datatypes.html#Destination)
+- [Possible values for DeliveryChannel](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Datatypes.html#Destination)
 
 #### AttribueKeyValue
 
-**Properties**
+**Properties:**
 | Name  | Type   | Example                                                              | Required |
 | ----- | ------ | -------------------------------------------------------------------- | -------- |
 | Key   | string | 'sqsQueueUrl'                                                        | Yes      |
 | Value | string | 'https://sqs.us-east-1.amazonaws.com/51471EXAMPLE/mws_notifications' | Yes      |
 
-* [Possible values for Key](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Datatypes.html#AttributeKeyValue)
+- [Possible values for Key](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_Datatypes.html#AttributeKeyValue)
 
 ### registerDestination
 
-**Parameters**
+**Parameters:**
 
 | Name          | Type        | Example                       | Required |
 | ------------- | ----------- | ----------------------------- | -------- |
 | MarketplaceId | string      | `'A2EUQ1WTGCTBG2'`            | Yes      |
 | Destination   | Destination | [`Destination`](#destination) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const subscriptions = new Subscriptions(httpClient)
@@ -949,20 +957,20 @@ const [response, meta] = subscriptions.registerDestination({
     })
 ```
 
-**Response**
+**Response:**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### deregisterDestination
 
-**Parameters**
+**Parameters:**
 
 | Name          | Type        | Example                       | Required |
 | ------------- | ----------- | ----------------------------- | -------- |
 | MarketplaceId | string      | `'A2EUQ1WTGCTBG2'`            | Yes      |
 | Destination   | Destination | [`Destination`](#destination) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const subscriptions = new Subscriptions(httpClient)
@@ -980,18 +988,18 @@ const [response, meta] = subscriptions.deregisterDestination({
     })
 ```
 
-**Response**
+**Response:**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### listRegisteredDestinations
 
-**Parameters**
+**Parameters:**
 | Name          | Type   | Example            | Required |
 | ------------- | ------ | ------------------ | -------- |
 | MarketplaceId | string | `'A2EUQ1WTGCTBG2'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const subscriptions = new Subscriptions(httpClient)
@@ -1000,20 +1008,20 @@ const [response, meta] = subscriptions.listRegisteredDestinations({
     })
 ```
 
-**Response**
+**Response:**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### sendTestNotificationToDestination
 
-**Parameters**
+**Parameters:**
 
 | Name          | Type        | Example                       | Required |
 | ------------- | ----------- | ----------------------------- | -------- |
 | MarketplaceId | string      | `'A2EUQ1WTGCTBG2'`            | Yes      |
 | Destination   | Destination | [`Destination`](#destination) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const subscriptions = new Subscriptions(httpClient)
@@ -1031,19 +1039,19 @@ const [response, meta] = subscriptions.sendTestNotificationToDestination({
     })
 ```
 
-**Response**
+**Response:**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### createSubscription
 
-**Parameters**
+**Parameters:**
 | Name          | Type         | Example                         | Required |
 | ------------- | ------------ | ------------------------------- | -------- |
 | MarketplaceId | string       | `'A2EUQ1WTGCTBG2'`              | Yes      |
 | Subscription  | Subscription | [`Subscription`](#subscription) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const subscriptions = new Subscriptions(httpClient)
@@ -1065,13 +1073,13 @@ const [response, meta] = subscriptions.createSubscription({
     })
 ```
 
-**Response**
+**Response:**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### getSubscription
 
-**Parameters**
+**Parameters:**
 
 | Name             | Type        | Example                       | Required |
 | ---------------- | ----------- | ----------------------------- | -------- |
@@ -1079,9 +1087,9 @@ const [response, meta] = subscriptions.createSubscription({
 | NotificationType | string      | `'AnyOfferChanged'`           | Yes      |
 | Destination      | Destination | [`Destination`](#destination) | Yes      |
 
-* [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
+- [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const subscriptions = new Subscriptions(httpClient)
@@ -1100,13 +1108,13 @@ const [response, meta] = subscriptions.getSubscription({
     })
 ```
 
-**Response**
+**Response:**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### deleteSubscription
 
-**Parameters**
+**Parameters:**
 
 | Name             | Type        | Example                       | Required |
 | ---------------- | ----------- | ----------------------------- | -------- |
@@ -1114,9 +1122,9 @@ const [response, meta] = subscriptions.getSubscription({
 | NotificationType | string      | `'AnyOfferChanged'`           | Yes      |
 | Destination      | Destination | [`Destination`](#destination) | Yes      |
 
-* [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
+- [Possible values for NotificationType](http://docs.developer.amazonservices.com/en_CA/subscriptions/Subscriptions_NotificationType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const subscriptions = new Subscriptions(httpClient)
@@ -1135,18 +1143,18 @@ const [response, meta] = subscriptions.deleteSubscription({
     })
 ```
 
-**Response**
+**Response:**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### listSubscriptions
 
-**Parameters**
+**Parameters:**
 | Name          | Type   | Example            | Required |
 | ------------- | ------ | ------------------ | -------- |
 | MarketplaceId | string | `'A2EUQ1WTGCTBG2'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const subscriptions = new Subscriptions(httpClient)
@@ -1155,19 +1163,19 @@ const [response, meta] = subscriptions.listSubscriptions({
     })
 ```
 
-**Response**
+**Response:**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### updateSubscription
 
-**Parameters**
+**Parameters:**
 | Name          | Type         | Example                         | Required |
 | ------------- | ------------ | ------------------------------- | -------- |
 | MarketplaceId | string       | `'A2EUQ1WTGCTBG2'`              | Yes      |
 | Subscription  | Subscription | [`Subscription`](#subscription) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const subscriptions = new Subscriptions(httpClient)
@@ -1189,25 +1197,25 @@ const [response, meta] = subscriptions.updateSubscription({
     })
 ```
 
-**Response**
+**Response:**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
 ### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const subscriptions = new Subscriptions(httpClient)
 const [response, meta] = subscriptions.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See subscriptions test snapshot](../test/unit/__snapshots__/subscriptions.test.ts.snap)
 
@@ -1226,7 +1234,7 @@ const [response, meta] = subscriptions.getServiceStatus()
 
 ### listInventorySupply
 
-**Parameters**
+**Parameters:**
 | Name               | Type     | Example            | Required                                                                      |
 | ------------------ | -------- | ------------------ | ----------------------------------------------------------------------------- |
 | SellerSkus         | string[] | `['SAMPLESKU']`    | Yes, if QueryStartDateTime is not specified. Specifying both returns an error |
@@ -1234,9 +1242,9 @@ const [response, meta] = subscriptions.getServiceStatus()
 | ResponseGroup      | string   | `'Basic'`          | No                                                                            |
 | MarketplaceId      | string   | `'A2EUQ1WTGCTBG2'` | No                                                                            |
 
-* [Possible values for ResponseGroup](http://docs.developer.amazonservices.com/en_CA/fba_inventory/FBAInventory_ListInventorySupply.html)
+- [Possible values for ResponseGroup](http://docs.developer.amazonservices.com/en_CA/fba_inventory/FBAInventory_ListInventorySupply.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const fulfillmentInventory = new FulfillmentInventory(httpClient)
@@ -1245,43 +1253,44 @@ const [response, meta] = fulfillmentInventory.listInventorySupply({
 })
 ```
 
-**Response**
+**Response:**
 
 [See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
 
 ### listInventorySupplyByNextToken
 
-**Parameters**
+**Parameters:**
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const fulfillmentInventory = new FulfillmentInventory(httpClient)
-const [response, meta] = fulfillmentInventory.listInventorySupplyByNextToken(new NextToken('ListInventorySupply', '123'))
+const [response, meta] = fulfillmentInventory
+  .listInventorySupplyByNextToken(new NextToken('ListInventorySupply', '123'))
 ```
 
-**Response**
+**Response:**
 
 [See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
 
 ### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const fulfillmentInventory = new FulfillmentInventory(httpClient)
 const [response, meta] = fulfillmentInventory.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See fulfillment inventory test snapshot](../test/unit/__snapshots__/fulfillment-inventory.test.ts.snap)
 
@@ -1300,7 +1309,7 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 
 ### submitFeed
 
-**Parameters**
+**Parameters:**
 | Name              | Type     | Example                 | Required |
 | ----------------- | -------- | ----------------------- | -------- |
 | FeedContent       | string   | `'<XML></XML>'`         | Yes      |
@@ -1310,9 +1319,9 @@ const [response, meta] = fulfillmentInventory.getServiceStatus()
 | AmazonOrderId     | string   | `'902-3159896-1390916'` | No       |
 | DocumentId        | string   | `'DCMNTID'`             | No       |
 
-* `FeedContent` is the actual content of the feed itself, in XML or flat file format as a string.
+- `FeedContent` is the actual content of the feed itself, in XML or flat file format as a string.
 
-**Example**
+**Example:**
 
 ```typescript
 const feeds = new Feeds(httpClient)
@@ -1322,15 +1331,15 @@ const [response, meta] = feeds.submitFeed({
 })
 ```
 
-**Response**
+**Response:**
 
 [See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
-* [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
+- [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
 
 ### getFeedSubmissionList
 
-**Parameters**
+**Parameters:**
 
 | Name                     | Type     | Example                             | Required |
 | ------------------------ | -------- | ----------------------------------- | -------- |
@@ -1341,41 +1350,42 @@ const [response, meta] = feeds.submitFeed({
 | SubmittedFromDate        | Date     | `new Date()`                        | No       |
 | SubmittedToDate          | Date     | `new Date()`                        | No       |
 
-* [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
-* [Possible values for FeedProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedProcessingStatus.html)
+- [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
+- [Possible values for FeedProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedProcessingStatus.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const feeds = new Feeds(httpClient)
 const [response, meta] = feeds.getFeedSubmissionList()
 ```
 
-**Response**
+**Response:**
 
 [See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
 ### getFeedSubmissionListByNextToken
 
-**Parameters**
+**Parameters:**
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const feeds = new Feeds(httpClient)
-const [response, meta] = feeds.getFeedSubmissionListByNextToken(new NextToken('GetFeedSubmissionList', '123'))
+const [response, meta] = feeds
+  .getFeedSubmissionListByNextToken(new NextToken('GetFeedSubmissionList', '123'))
 ```
 
-**Response**
+**Response:**
 
 [See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
 ### getFeedSubmissionCount
 
-**Parameters**
+**Parameters:**
 
 | Name                     | Type     | Example                             | Required |
 | ------------------------ | -------- | ----------------------------------- | -------- |
@@ -1384,23 +1394,23 @@ const [response, meta] = feeds.getFeedSubmissionListByNextToken(new NextToken('G
 | SubmittedFromDate        | Date     | `new Date()`                        | No       |
 | SubmittedToDate          | Date     | `new Date()`                        | No       |
 
-* [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
-* [Possible values for FeedProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedProcessingStatus.html)
+- [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
+- [Possible values for FeedProcessingStatusList](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedProcessingStatus.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const feeds = new Feeds(httpClient)
 const [response, meta] = feeds.getFeedSubmissionCount()
 ```
 
-**Response**
+**Response:**
 
 [See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
 ### cancelFeedSubmissions
 
-**Parameters**
+**Parameters:**
 | Name                 | Type     | Example                   | Required |
 | -------------------- | -------- | ------------------------- | -------- |
 | FeedSubmissionIdList | string[] | `['FEEDID']`              | No       |
@@ -1408,28 +1418,28 @@ const [response, meta] = feeds.getFeedSubmissionCount()
 | SubmittedFromDate    | Date     | `new Date()`              | No       |
 | SubmittedToDate      | Date     | `new Date()`              | No       |
 
-* [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
+- [Possible values for FeedType](http://docs.developer.amazonservices.com/en_CA/feeds/Feeds_FeedType.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const feeds = new Feeds(httpClient)
 const [response, meta] = feeds.cancelFeedSubmissions()
 ```
 
-**Response**
+**Response:**
 
 [See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
 ### getFeedSubmissionResult
 
-**Parameters**
+**Parameters:**
 
 | Name             | Type   | Example    | Required |
 | ---------------- | ------ | ---------- | -------- |
 | FeedSubmissionId | string | `'FEEDID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const feeds = new Feeds(httpClient)
@@ -1438,10 +1448,10 @@ const [response, meta] = feeds.getFeedSubmissionResult({
 })
 ```
 
-**Response**
+**Response:**
 
-* Amazon MWS returns an XML file that contains the response to a successful request or subscription.
-* Response is type `string`
+- Amazon MWS returns an XML file that contains the response to a successful request or subscription.
+- Response is type `string`
 
 [See feeds test snapshot](../test/unit/__snapshots__/feeds.test.ts.snap)
 
@@ -1462,7 +1472,7 @@ const [response, meta] = feeds.getFeedSubmissionResult({
 
 #### FeesEstimateRequest
 
-**Properties**
+**Properties:**
 
 | Name                | Type                | Example                                       | Required |
 | ------------------- | ------------------- | --------------------------------------------- | -------- |
@@ -1475,7 +1485,7 @@ const [response, meta] = feeds.getFeedSubmissionResult({
 
 #### PriceToEstimateFees
 
-**Properties**
+**Properties:**
 | Name         | Type      | Example                   | Required |
 | ------------ | --------- | ------------------------- | -------- |
 | ListingPrice | MoneyType | [`MoneyType`](#moneytype) | Yes      |
@@ -1484,17 +1494,17 @@ const [response, meta] = feeds.getFeedSubmissionResult({
 
 #### MoneyType
 
-**Properties**
+**Properties:**
 | Name         | Type   | Example | Required |
 | ------------ | ------ | ------- | -------- |
 | Amount       | number | `1000`  | No       |
 | CurrencyCode | string | `'USD'` | No       |
 
-* [Possible values for CurrencyCode](http://docs.developer.amazonservices.com/en_CA/products/Products_Datatypes.html#MoneyType)
+- [Possible values for CurrencyCode](http://docs.developer.amazonservices.com/en_CA/products/Products_Datatypes.html#MoneyType)
 
 #### Points
 
-**Properties**
+**Properties:**
 | Name                | Type      | Example                   | Required |
 | ------------------- | --------- | ------------------------- | -------- |
 | PointsNumber        | number    | `1000`                    | Yes      |
@@ -1502,16 +1512,16 @@ const [response, meta] = feeds.getFeedSubmissionResult({
 
 ### listMatchingProducts
 
-**Parameters**
+**Parameters:**
 | Name           | Type   | Example              | Required |
 | -------------- | ------ | -------------------- | -------- |
 | MarketplaceId  | string | `'A2EUQ1WTGCTBG2'`   | Yes      |
 | Query          | string | `'harry potter dvd'` | Yes      |
 | QueryContextId | string | `'ArtsAndCrafts'`    | No       |
 
-* [Possible values for QueryContextId](http://docs.developer.amazonservices.com/en_CA/products/Products_QueryContextIDs.html)
+- [Possible values for QueryContextId](http://docs.developer.amazonservices.com/en_CA/products/Products_QueryContextIDs.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1521,19 +1531,19 @@ const [response, meta] = products.listMatchingProducts({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getMatchingProduct
 
-**Parameters**
+**Parameters:**
 | Name          | Type     | Example            | Required |
 | ------------- | -------- | ------------------ | -------- |
 | MarketplaceId | string   | `'A2EUQ1WTGCTBG2'` | Yes      |
 | ASINList      | string[] | `['MY-ASIN-1']`    | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1543,22 +1553,22 @@ const [response, meta] = products.getMatchingProduct({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getMatchingProductForId
 
-**Parameters**
+**Parameters:**
 | Name          | Type     | Example            | Required |
 | ------------- | -------- | ------------------ | -------- |
 | MarketplaceId | string   | `'A2EUQ1WTGCTBG2'` | Yes      |
 | IdType        | string   | `'ASIN'`           | Yes      |
 | IdList        | string[] | `['MY-ASIN-1']`    | No       |
 
-* [Possible values for IdType](http://docs.developer.amazonservices.com/en_CA/products/Products_GetMatchingProductForId.html)
+- [Possible values for IdType](http://docs.developer.amazonservices.com/en_CA/products/Products_GetMatchingProductForId.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1569,19 +1579,19 @@ const [response, meta] = products.getMatchingProductForId({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getCompetitivePricingForSku
 
-**Parameters**
+**Parameters:**
 | Name          | Type     | Example            | Required |
 | ------------- | -------- | ------------------ | -------- |
 | MarketplaceId | string   | `'A2EUQ1WTGCTBG2'` | Yes      |
 | SellerSKUList | string[] | `['MY-SKU-1']`     | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1591,19 +1601,19 @@ const [response, meta] = products.getCompetitivePricingForSku({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getCompetitivePricingForAsin
 
-**Parameters**
+**Parameters:**
 | Name          | Type     | Example            | Required |
 | ------------- | -------- | ------------------ | -------- |
 | MarketplaceId | string   | `'A2EUQ1WTGCTBG2'` | Yes      |
 | ASINList      | string[] | `['MY-ASIN-1']`    | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1613,22 +1623,22 @@ const [response, meta] = products.getCompetitivePricingForAsin({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getLowestOfferListingsForSku
 
-**Parameters**
+**Parameters:**
 | Name          | Type     | Example            | Required |
 | ------------- | -------- | ------------------ | -------- |
 | MarketplaceId | string   | `'A2EUQ1WTGCTBG2'` | Yes      |
 | SellerSKUList | string[] | `['MY-SKU-1']`     | Yes      |
 | ItemCondition | string   | `'New'`            | No       |
 
-* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
+- [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1639,22 +1649,22 @@ const [response, meta] = products.getLowestOfferListingsForSku({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getLowestOfferListingsForAsin
 
-**Parameters**
+**Parameters:**
 | Name          | Type     | Example            | Required |
 | ------------- | -------- | ------------------ | -------- |
 | MarketplaceId | string   | `'A2EUQ1WTGCTBG2'` | Yes      |
 | ASINList      | string[] | `['MY-ASIN-1']`    | Yes      |
 | ItemCondition | string   | `'New'`            | No       |
 
-* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForASIN.html)
+- [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForASIN.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1665,22 +1675,22 @@ const [response, meta] = products.getLowestOfferListingsForAsin({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getLowestPricedOffersForSku
 
-**Parameters**
+**Parameters:**
 | Name          | Type   | Example            | Required |
 | ------------- | ------ | ------------------ | -------- |
 | MarketplaceId | string | `'A2EUQ1WTGCTBG2'` | Yes      |
 | SellerSKU     | string | `'MY-SKU-1'`       | Yes      |
 | ItemCondition | string | `'New'`            | Yes      |
 
-* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
+- [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1691,22 +1701,22 @@ const [response, meta] = products.getLowestPricedOffersForSku({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getLowestPricedOffersForAsin
 
-**Parameters**
+**Parameters:**
 | Name          | Type   | Example            | Required |
 | ------------- | ------ | ------------------ | -------- |
 | MarketplaceId | string | `'A2EUQ1WTGCTBG2'` | Yes      |
 | ASIN          | string | `'MY-ASIN-1'`      | Yes      |
 | ItemCondition | string | `'New'`            | Yes      |
 
-* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
+- [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1717,18 +1727,18 @@ const [response, meta] = products.getLowestPricedOffersForAsin({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getMyFeesEstimate
 
-**Parameters**
+**Parameters:**
 | Name                    | Type                  | Example                                       | Required |
 | ----------------------- | --------------------- | --------------------------------------------- | -------- |
 | FeesEstimateRequestList | FeesEstimateRequest[] | [`FeesEstimateRequest`](#feesestimaterequest) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const moneyType: MoneyType = {
@@ -1753,22 +1763,22 @@ const [response, meta] = products.getMyFeesEstimate({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getMyPriceForSku
 
-**Parameters**
+**Parameters:**
 | Name          | Type     | Example            | Required |
 | ------------- | -------- | ------------------ | -------- |
 | MarketplaceId | string   | `'A2EUQ1WTGCTBG2'` | Yes      |
 | SellerSKUList | string[] | `['MY-SKU-1']`     | Yes      |
 | ItemCondition | string   | `'New'`            | No       |
 
-* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
+- [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1778,22 +1788,22 @@ const [response, meta] = products.getMyPriceForSku({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getMyPriceForAsin
 
-**Parameters**
+**Parameters:**
 | Name          | Type     | Example            | Required |
 | ------------- | -------- | ------------------ | -------- |
 | MarketplaceId | string   | `'A2EUQ1WTGCTBG2'` | Yes      |
 | ASINList      | string[] | `['MY-ASIN-1']`    | Yes      |
 | ItemCondition | string   | `'New'`            | No       |
 
-* [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
+- [Possible values for ItemCondition](http://docs.developer.amazonservices.com/en_CA/products/Products_GetLowestOfferListingsForSKU.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1803,19 +1813,19 @@ const [response, meta] = products.getMyPriceForAsin({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getProductCategoriesForSku
 
-**Parameters**
+**Parameters:**
 | Name          | Type   | Example            | Required |
 | ------------- | ------ | ------------------ | -------- |
 | MarketplaceId | string | `'A2EUQ1WTGCTBG2'` | Yes      |
 | SellerSKU     | string | `'MY-SKU-1'`       | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1825,19 +1835,19 @@ const [response, meta] = products.getProductCategoriesForSku({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getProductCategoriesForAsin
 
-**Parameters**
+**Parameters:**
 | Name          | Type   | Example            | Required |
 | ------------- | ------ | ------------------ | -------- |
 | MarketplaceId | string | `'A2EUQ1WTGCTBG2'` | Yes      |
 | ASIN          | string | `'MY-ASIN-1'`      | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
@@ -1847,25 +1857,25 @@ const [response, meta] = products.getProductCategoriesForAsin({
 })
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
 ### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const products = new Products(httpClient)
 const [response, meta] = products.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See products test snapshot](../test/unit/__snapshots__/products.test.ts.snap)
 
@@ -1884,14 +1894,14 @@ const [response, meta] = products.getServiceStatus()
 
 ### listFinancialEventGroups
 
-**Parameters**
+**Parameters:**
 | Name                             | Type   | Example      | Required |
 | -------------------------------- | ------ | ------------ | -------- |
 | MaxResultsPerPage                | number | `10`         | No       |
 | FinancialEventGroupsStartedAfter | Date   | `new Date()` | Yes      |
 | FinancialEventGroupStartedBefore | Date   | `new Date()` | No       |
 
-**Example**
+**Example:**
 
 ```typescript
 const finances = new Finances(httpClient)
@@ -1900,31 +1910,34 @@ const [response, meta] = finances.listFinancialEventGroups({
 })
 ```
 
-**Response**
+**Response:**
 
 [See finances test snapshot](../test/unit/__snapshots__/finances.test.ts.snap)
 
 ### listFinancialEventGroupsByNextToken
 
-**Parameters**
+**Parameters:**
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const finances = new Finances(httpClient)
-const [response, meta] = finances.listFinancialEventGroupsByNextToken(new NextToken('ListFinancialEventGroups', '123'))
+const [response, meta] = finances
+  .listFinancialEventGroupsByNextToken(
+    new NextToken('ListFinancialEventGroups', '123')
+  )
 ```
 
-**Response**
+**Response:**
 
 [See finances test snapshot](../test/unit/__snapshots__/finances.test.ts.snap)
 
 ### listFinancialEvents
 
-**Parameters**
+**Parameters:**
 | Name                  | Type   | Example                 | Required                                                                                                                                         |
 | --------------------- | ------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | MaxResultsPerPage     | number | `10`                    | No                                                                                                                                               |
@@ -1933,7 +1946,7 @@ const [response, meta] = finances.listFinancialEventGroupsByNextToken(new NextTo
 | PostedAfter           | Date   | `new Date()`            | Yes but you can only specify one of the following filter criteria: AmazonOrderId, FinancialEventGroupId, PostedAfter and optionally PostedBefore |
 | PostedBefore          | Date   | `new Date()`            | No                                                                                                                                               |
 
-**Example**
+**Example:**
 
 ```typescript
 const finances = new Finances(httpClient)
@@ -1942,25 +1955,26 @@ const [response, meta] = finances.listFinancialEvents({
 })
 ```
 
-**Response**
+**Response:**
 
 [See finances test snapshot](../test/unit/__snapshots__/finances.test.ts.snap)
 
 ### listFinancialEventsByNextToken
 
-**Parameters**
+**Parameters:**
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const finances = new Finances(httpClient)
-const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinancialEvents', '123'))
+const [response, meta] = finances
+  .listFinancialEvents(new NextToken('ListFinancialEvents', '123'))
 ```
 
-**Response**
+**Response:**
 
 [See finances test snapshot](../test/unit/__snapshots__/finances.test.ts.snap)
 
@@ -1976,7 +1990,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 
 #### ShipmentRequestDetails
 
-**Properties**
+**Properties:**
 
 | Name                   | Type                   | Example                                             | Required |
 | ---------------------- | ---------------------- | --------------------------------------------------- | -------- |
@@ -1993,7 +2007,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 
 #### Item
 
-**Properties**
+**Properties:**
 
 | Name                      | Type                     | Example                                             | Required |
 | ------------------------- | ------------------------ | --------------------------------------------------- | -------- |
@@ -2006,7 +2020,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 
 #### Address
 
-**Properties**
+**Properties:**
 
 | Name                | Type                   | Example                 | Required                                                                                                 |
 | ------------------- | ---------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------- |
@@ -2024,7 +2038,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 
 #### PackageDimensions
 
-**Properties**
+**Properties:**
 
 | Name                        | Type   | Example            | Required                                                                        |
 | --------------------------- | ------ | ------------------ | ------------------------------------------------------------------------------- |
@@ -2034,22 +2048,22 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | Unit                        | string | `'inches'`         | No. Unless a value for `PredefinedPackageDimensions` is not specified           |
 | PredefinedPackageDimensions | string | `'FedEx_Box_10kg'` | No. Unless values for `Length`, `Width`, `Height` and `Unit` were not specified |
 
-* Possible values for `Unit`: '`inches'` or `'centimeters'`
-* [Possible values for PredefinedPackageDimensions](http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_PrePackDimenEnum.html)
+- Possible values for `Unit`: '`inches'` or `'centimeters'`
+- [Possible values for PredefinedPackageDimensions](http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_PrePackDimenEnum.html)
 
 #### Weight
 
-**Parameters**
+**Parameters:**
 | Name  | Type   | Example    | Required |
 | ----- | ------ | ---------- | -------- |
 | Value | number | `10`       | Yes      |
 | Unit  | string | `'ounces'` | Yes      |
 
-* Possible values for `Unit`: `'ounces'` or `'grams'`
+- Possible values for `Unit`: `'ounces'` or `'grams'`
 
 #### ShippingServiceOptions
 
-**Parameters**
+**Parameters:**
 
 | Name               | Type           | Example                                    | Required |
 | ------------------ | -------------- | ------------------------------------------ | -------- |
@@ -2058,11 +2072,11 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | CarrierWillPickUp  | boolean        | `false`                                    | Yes      |
 | LabelFormat        | string         | `Label Format`                             | No       |
 
-* [Possible values for DeliveryExperience](http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_Datatypes.html#ShippingServiceOptions)
+- [Possible values for DeliveryExperience](http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_Datatypes.html#ShippingServiceOptions)
 
 #### LabelCustomization
 
-**Parameters**
+**Parameters:**
 
 | Name               | Type   | Example                | Required |
 | ------------------ | ------ | ---------------------- | -------- |
@@ -2071,7 +2085,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 
 #### AdditionalSellerInputs
 
-**Parameters**
+**Parameters:**
 
 | Name                  | Type                  | Example                                           | Required |
 | --------------------- | --------------------- | ------------------------------------------------- | -------- |
@@ -2080,7 +2094,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 
 #### AdditionalSellerInput
 
-**Parameters**
+**Parameters:**
 
 | Name             | Type              | Example                                    | Required |
 | ---------------- | ----------------- | ------------------------------------------ | -------- |
@@ -2094,11 +2108,11 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | ValueAsDimension | PackageDimensions | [`PackageDimensions`](#packagedimensions)`| No       |
 | ValueAsCurrency  | CurrencyAmount    | [`CurrencyAmount`](#currencyamount)        | No       |
 
-* Possible values for `DataType`:   `'String'`, `'Boolean'`, `'Integer'`, `'Timestamp'`, `'Address'`, `'Weight'`, `'Dimension'`, `'Currency'`,
+- Possible values for `DataType`:   `'String'`, `'Boolean'`, `'Integer'`, `'Timestamp'`, `'Address'`, `'Weight'`, `'Dimension'`, `'Currency'`,
 
 #### CurrencyAmount
 
-**Parameters**
+**Parameters:**
 | Name         | Type   | Example | Required |
 | ------------ | ------ | ------- | -------- |
 | CurrencyCode | string | `'USD'` | Yes      |
@@ -2106,28 +2120,28 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 
 #### LabelFormatOption
 
-**Parameters**
+**Parameters:**
 | Name                        | Type    | Example | Required |
 | --------------------------- | ------- | ------- | -------- |
 | IncludePackingSlipWithLabel | boolean | `true`  | Yes      |
 
 #### ShippingOfferingFilter
 
-**Parameters**
+**Parameters:**
 | Name                          | Type    | Example | Required |
 | ----------------------------- | ------- | ------- | -------- |
 | IncludeComplexShippingOptions | boolean | `true`  | No       |
 
 ### getEligibleShippingServices
 
-**Parameters**
+**Parameters:**
 
 | Name                   | Type                   | Example                                             | Required |
 | ---------------------- | ---------------------- | --------------------------------------------------- | -------- |
 | ShipmentRequestDetails | ShipmentRequestDetails | [`ShipmentRequestDetails`](#shipmentrequestdetails) | Yes      |
 | ShippingOfferingFilter | ShippingOfferingFilter | [`ShippingOfferingFilter`](#shippingofferingfilter) | No       |
 
-**Example**
+**Example:**
 
 ```typescript
     const Address = {
@@ -2174,13 +2188,13 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
     const [response, meta] = merchantFulfillment.getEligibleShippingServices(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
 
 ### getAddtionalSellerInputs
 
-**Parameters**
+**Parameters:**
 
 | Name              | Type    | Example               | Required |
 | ----------------- | ------- | --------------------- | -------- |
@@ -2188,7 +2202,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | ShippingServiceId | number  | `'SHIPPINGSERVICEID'` | Yes      |
 | ShipFromAddress   | Address | [`Address`](#address) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
     const Address = {
@@ -2211,13 +2225,13 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
     const [response, meta] = merchantFulfillment.getAdditionalSellerInputs(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
 
 ### createShipment
 
-**Parameters**
+**Parameters:**
 
 | Name                          | Type                     | Example                                               | Required |
 | ----------------------------- | ------------------------ | ----------------------------------------------------- | -------- |
@@ -2228,9 +2242,9 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | LabelFormatOption             | LabelFormatOption        | [`LabelFormatOption`](#labelformatoption)             | No       |
 | ShipmentLevelSellerInputsList | AdditionalSellerInputs[] | [`[AdditionalSellerInputs]`](#additionalsellerinputs) | No       |
 
-* [Possible values for HazmatType](http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_Datatypes.html#HazmatType)
+- [Possible values for HazmatType](http://docs.developer.amazonservices.com/en_CA/merch_fulfill/MerchFulfill_Datatypes.html#HazmatType)
 
-**Example**
+**Example:**
 
 ```typescript
     const Address = {
@@ -2278,7 +2292,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
     const [response, meta] = merchantFulfillment.createShipment(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
 
@@ -2288,7 +2302,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | ---------- | ------ | -------------- | -------- |
 | ShipmentId | string | `'SHIPMENTID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
     const parameters = { ShipmentId: 'SHIPMENTID' }
@@ -2297,7 +2311,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
     const [response, meta] = merchantFulfillment.getShipment(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
 
@@ -2307,7 +2321,7 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
 | ---------- | ------ | -------------- | -------- |
 | ShipmentId | string | `'SHIPMENTID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
     const parameters = { ShipmentId: 'SHIPMENTID' }
@@ -2316,25 +2330,25 @@ const [response, meta] = finances.listFinancialEvents(new NextToken('ListFinanci
     const [response, meta] = merchantFulfillment.cancelShipment(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
 
 ### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const merchantFulfillment = new MerchantFulfillment(httpClient)
 const [response, meta] = merchantFulfillment.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See merchant fulfillment test snapshot](../test/unit/__snapshots__/merchant-fulfillment.test.ts.snap)
 
@@ -2348,14 +2362,14 @@ const [response, meta] = merchantFulfillment.getServiceStatus()
 
 ### getFbaOutboundShipmentDetail
 
-**Parameters**
+**Parameters:**
 
 | Name             | Type   | Example            | Required |
 | ---------------- | ------ | ------------------ | -------- |
 | MarketplaceId    | string | `'A2EUQ1WTGCTBG2'` | Yes      |
 | AmazonShipmentId | string | `'SHIPMENTID'`     | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = {
@@ -2367,20 +2381,20 @@ const shipmentInvoicing = new ShipmentInvoicing(httpClient)
 const [response, meta] = shipmentInvoicing.getFbaOutboundShipmentDetail(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See shipment invoicing test snapshot](../test/unit/__snapshots__/shipment-invoicing.test.ts.snap)
 
 ### submitFBAOutboundShipmentInvoice
 
-**Parameters**
+**Parameters:**
 | Name             | Type   | Example            | Required |
 | ---------------- | ------ | ------------------ | -------- |
 | MarketplaceId    | string | `'A2EUQ1WTGCTBG2'` | Yes      |
 | AmazonShipmentId | string | `'SHIPMENTID'`     | Yes      |
 | InvoiceContent   | string | `'<XML></XML>'`    | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = {
@@ -2393,20 +2407,20 @@ const shipmentInvoicing = new ShipmentInvoicing(httpClient)
 const [response, meta] = shipmentInvoicing.submitFBAOutboundShipmentInvoice(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See shipment invoicing test snapshot](../test/unit/__snapshots__/shipment-invoicing.test.ts.snap)
 
 ### getFBAOutboundShipmentInvoiceStatus
 
-**Parameters**
+**Parameters:**
 
 | Name             | Type   | Example            | Required |
 | ---------------- | ------ | ------------------ | -------- |
 | MarketplaceId    | string | `'A2EUQ1WTGCTBG2'` | Yes      |
 | AmazonShipmentId | string | `'SHIPMENTID'`     | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = {
@@ -2422,19 +2436,19 @@ const [response, meta] = shipmentInvoicing.getFBAOutboundShipmentInvoiceStatus(p
 
 ### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const shipmentInvoicing = new ShipmentInvoicing(httpClient)
 const [response, meta] = shipmentInvoicing.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See shipment invoicing test snapshot](../test/unit/__snapshots__/shipment-invoicing.test.ts.snap)
 
@@ -2457,17 +2471,17 @@ const [response, meta] = shipmentInvoicing.getServiceStatus()
 | RecommendationCategory | string | `'Selection '`        | Yes      |
 | FilterOptions          | string | `'QualitySet=Defect'` | Yes      |
 
-* [Possible values for RecommendationCategory and FilterOptions](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
+- [Possible values for RecommendationCategory and FilterOptions](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
 
 ### getLastUpdatedTimeForRecommendations
 
-**Parameters**
+**Parameters:**
 
 | Name          | Type   | Example     -      | Required |
 | ------------- | ------ | ------------------ | -------- |
 | MarketplaceId | string | `'A2EUQ1WTGCTBG2'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = { MarketplaceId: 'A2EUQ1WTGCTBG2' }
@@ -2476,13 +2490,13 @@ const recommendations = new Recommendations(httpClient)
 const [response, meta] = recommendations.getLastUpdatedTimeForRecommendations(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
 
 ### listRecommendations
 
-**Parameters**
+**Parameters:**
 
 | Name                   | Type            | Example     -                       | Required                                                                        |
 | ---------------------- | --------------- | ----------------------------------- | ------------------------------------------------------------------------------- |
@@ -2490,9 +2504,9 @@ const [response, meta] = recommendations.getLastUpdatedTimeForRecommendations(pa
 | RecommendationCategory | string          | `'Inventory'`                       | No. To retrieve all recommendations, do not specify a value for this parameter. |
 | CategoryQueryList      | CategoryQuery[] | [`[CategoryQuery]`](#categoryquery) | No                                                                              |
 
-* [Possible values for RecommendationCategory](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
+- [Possible values for RecommendationCategory](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = { MarketplaceId: 'A2EUQ1WTGCTBG2' }
@@ -2501,46 +2515,47 @@ const recommendations = new Recommendations(httpClient)
 const [response, meta] = recommendations.listRecommendations(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
 
 ### listRecommendationsByNextToken
 
-**Parameters**
+**Parameters:**
 
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = { MarketplaceId: 'A2EUQ1WTGCTBG2' }
 
 const recommendations = new Recommendations(httpClient)
-const [response, meta] = recommendations.listRecommendationsByNextToken(new NextToken('ListRecommendations', '123'))
+const [response, meta] = recommendations
+  .listRecommendationsByNextToken(new NextToken('ListRecommendations', '123'))
 ```
 
-**Response**
+**Response:**
 
 [See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
 
 ### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const recommendations = new Recommendations(httpClient)
 const [response, meta] = recommendations.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See recommendations test snapshot](../test/unit/__snapshots__/recommendations.test.ts.snap)
 
@@ -2558,7 +2573,7 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### Address
 
-**Properties**
+**Properties:**
 
 | Name                | Type                   | Example                 | Required                                                                                                                                                                                                                          |
 | ------------------- | ---------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2573,7 +2588,7 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### InboundShipmentPlanRequestItem
 
-**Properties**
+**Properties:**
 
 | Name            | Type        | Example                       | Required |
 | --------------- | ----------- | ----------------------------- | -------- |
@@ -2586,19 +2601,19 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### PrepDetails
 
-**Properties**
+**Properties:**
 
 | Name            | Type   | Example         | Required |
 | --------------- | ------ | --------------- | -------- |
 | PrepInstruction | string | `'Polybagging'` | Yes      |
 | PrepOwner       | string | `'AMAZON'`      | No       |
 
-* [Possible values for PrepInstruction](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Datatypes.html#PrepInstruction)
-* [Possible values for PrepOwner](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Datatypes.html#PrepDetails)
+- [Possible values for PrepInstruction](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Datatypes.html#PrepInstruction)
+- [Possible values for PrepOwner](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Datatypes.html#PrepDetails)
 
 #### InboundShipmentHeader
 
-**Properties**
+**Properties:**
 
 | Name                           | Type    | Example                 | Required |
 | ------------------------------ | ------- | ----------------------- | -------- |
@@ -2610,11 +2625,11 @@ const [response, meta] = recommendations.getServiceStatus()
 | ShipmentStatus                 | string  | `'WORKING'`             | Yes      |
 | IntendedBoxContentsSource      | string  | `'NONE'`                | No       |
 
-* [Possible values for LabelPrepPreference, ShipmentStatus, IntendedBoxContentsSource](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Datatypes.html#InboundShipmentHeader)
+- [Possible values for LabelPrepPreference, ShipmentStatus, IntendedBoxContentsSource](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_Datatypes.html#InboundShipmentHeader)
 
 #### InboundShipmentItem
 
-**Properties**
+**Properties:**
 
 | Name                  | Type          | Example                       | Required |
 | --------------------- | ------------- | ----------------------------- | -------- |
@@ -2629,7 +2644,7 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### TransportDetailInput
 
-**Properties**
+**Properties:**
 
 | Name                        | Type                             | Example                                                                 | Required                                                                      |
 | --------------------------- | -------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
@@ -2640,7 +2655,7 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### Dimensions
 
-**Properties**
+**Properties:**
 
 | Name   | Type   | Example  | Required |
 | ------ | ------ | -------- | -------- |
@@ -2649,22 +2664,22 @@ const [response, meta] = recommendations.getServiceStatus()
 | Width: | number | `1`      | Yes      |
 | Height | number | `1`      | Yes      |
 
-* Possible values for `Unit`: `'inches'`, `'centimeters'`
+- Possible values for `Unit`: `'inches'`, `'centimeters'`
 
 #### Weight
 
-**Properties**
+**Properties:**
 
 | Name  | Type   | Example  | Required |
 | ----- | ------ | -------- | -------- |
 | Unit  | string | `pounds` | Yes      |
 | Value | number | `1`      | Yes      |
 
-* Possible values for `Unit`: `'pounds'`, `'kilograms'`
+- Possible values for `Unit`: `'pounds'`, `'kilograms'`
 
 #### PartneredSmallParcelPackageInput
 
-**Properties**
+**Properties:**
 
 | Name       | Type       | Example                     | Required |
 | ---------- | ---------- | --------------------------- | -------- |
@@ -2673,7 +2688,7 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### PartneredSmallParcelDataInput
 
-**Properties**
+**Properties:**
 | Name        | Type                               | Example                                                                   | Required |
 | ----------- | ---------------------------------- | ------------------------------------------------------------------------- | -------- |
 | CarrierName | string                             | `'UNITED_PARCEL_SERVICE_INC'`                                             | Yes      |
@@ -2681,14 +2696,14 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### NonPartneredSmallParcelPackageOutput
 
-**Properties**
+**Properties:**
 | Name       | Type   | Example   | Required |
 | ---------- | ------ | --------- | -------- |
 | TrackingId | string | `'12345'` | Yes      |
 
 #### NonPartneredSmallParcelDataInput
 
-**Properties**
+**Properties:**
 | Name        | Type                                   | Example                                                                           | Required |
 | ----------- | -------------------------------------- | --------------------------------------------------------------------------------- | -------- |
 | CarrierName | string                                 | `'UNITED_PARCEL_SERVICE_INC'`                                                     | Yes      |
@@ -2696,7 +2711,7 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### Contact
 
-**Properties**
+**Properties:**
 
 | Name  | Type   | Example               | Required |
 | ----- | ------ | --------------------- | -------- |
@@ -2707,7 +2722,7 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### Pallet
 
-**Properties**
+**Properties:**
 
 | Name      | Type       | Example                     | Required |
 | --------- | ---------- | --------------------------- | -------- |
@@ -2717,7 +2732,7 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### Amount
 
-**Properties**
+**Properties:**
 
 | Name         | Type   | Example | Required |
 | ------------ | ------ | ------- | -------- |
@@ -2726,7 +2741,7 @@ const [response, meta] = recommendations.getServiceStatus()
 
 #### PartneredLtlDataInput
 
-**Properties**
+**Properties:**
 
 | Name                | Type     | Example               | Required |
 | ------------------- | -------- | --------------------- | -------- |
@@ -2747,14 +2762,14 @@ const [response, meta] = recommendations.getServiceStatus()
 
 ### getInboundGuidanceForSku
 
-**Parameters**
+**Parameters:**
 
 | Name          | Type     | Example            | Required |
 | ------------- | -------- | ------------------ | -------- |
 | MarketplaceId | string   | `'A2EUQ1WTGCTBG2'` | Yes      |
 | SellerSKUList | string[] | `['MY-SKU-1']`     | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const fis = new fis(httpClient)
@@ -2764,20 +2779,20 @@ const [response, meta] = fis.getInboundGuidanceForSku({
 })
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### getInboundGuidanceForAsin
 
-**Parameters**
+**Parameters:**
 
 | Name          | Type     | Example            | Required |
 | ------------- | -------- | ------------------ | -------- |
 | MarketplaceId | string   | `'A2EUQ1WTGCTBG2'` | Yes      |
 | ASINList      | string[] | `['MY-ASIN-1']`    | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const fis = new fis(httpClient)
@@ -2787,13 +2802,13 @@ const [response, meta] = fis.getInboundGuidanceForAsin({
 })
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### createInboundShipmentPlan
 
-**Parameters**
+**Parameters:**
 
 | Name                            | Type                             | Example                                                               | Required                                                                                 |
 | ------------------------------- | -------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
@@ -2803,9 +2818,9 @@ const [response, meta] = fis.getInboundGuidanceForAsin({
 | LabelPrepPreference             | string                           | `AMAZON_LABEL_ONLY`                                                   | No                                                                                       |
 | InboundShipmentPlanRequestItems | InboundShipmentPlanRequestItem[] | [`[InboundShipmentPlanRequestItem]`](#inboundshipmentplanrequestitem) | Yes                                                                                      |
 
-* [Possible values for LabelPrepPreference](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
+- [Possible values for LabelPrepPreference](http://docs.developer.amazonservices.com/en_CA/recommendations/Recommendations_ListRecommendations.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const mockAddress = {
@@ -2832,13 +2847,13 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.createInboundShipmentPlan(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### createInboundShipment
 
-**Parameters**
+**Parameters:**
 
 | Name                  | Type                  | Example                                             | Required |
 | --------------------- | --------------------- | --------------------------------------------------- | -------- |
@@ -2846,7 +2861,7 @@ const [response, meta] = fis.createInboundShipmentPlan(parameters)
 | InboundShipmentHeader | InboundShipmentHeader | [`InboundShipmentHeader`](#inboundshipmentheader)   | Yes      |
 | InboundShipmentItems  | InboundShipmentItem[] | [`[InboundShipmentItem]`](#inboundshipmentplanitem) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const mockInboundShipmentItem = {
@@ -2882,13 +2897,13 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.createInboundShipment(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### updateInboundShipment
 
-**Parameters**
+**Parameters:**
 
 | Name                  | Type                  | Example                                           | Required |
 | --------------------- | --------------------- | ------------------------------------------------- | -------- |
@@ -2896,7 +2911,7 @@ const [response, meta] = fis.createInboundShipment(parameters)
 | InboundShipmentHeader | InboundShipmentHeader | [`InboundShipmentHeader`](#inboundshipmentheader) | Yes      |
 | InboundShipmentItems  | InboundShipmentItem[] | [`[InboundShipmentItem]`](#inboundshipmentitem)   | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const mockInboundShipmentItem = {
@@ -2932,19 +2947,19 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.updateInboundShipment(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### getPreorderInfo
 
-**Parameters**
+**Parameters:**
 
 | Name       | Type   | Example      | Required |
 | ---------- | ------ | ------------ | -------- |
 | ShipmentId | string | `'SHPMNTID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -2956,20 +2971,20 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.getPreorderInfo(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### confirmPreorder
 
-**Parameters**
+**Parameters:**
 
 | Name       | Type   | Example      | Required |
 | ---------- | ------ | ------------ | -------- |
 | ShipmentId | string | `'SHPMNTID'` | Yes      |
 | NeedByDate | Date   | `new Date()` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -2982,20 +2997,20 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.confirmPreorder(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### getPrepInstructionsForSku
 
-**Parameters**
+**Parameters:**
 
 | Name              | Type     | Example        | Required |
 | ----------------- | -------- | -------------- | -------- |
 | SellerSKUList     | string[] | `['MY-SKU-1']` | Yes      |
 | ShipToCountryCode | string   | `'US'`         | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3008,20 +3023,20 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.getPrepInstructionsForSku(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### getPrepInstructionsForAsin
 
-**Parameters**
+**Parameters:**
 
 | Name              | Type     | Example         | Required |
 | ----------------- | -------- | --------------- | -------- |
 | ASINList          | string[] | `['MY-ASIN-1']` | Yes      |
 | ShipToCountryCode | string   | `'US'`          | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3034,13 +3049,13 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.getPrepInstructionsForAsin(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### putTransportContent
 
-**Parameters**
+**Parameters:**
 
 | Name             | Type                 | Example                                         | Required |
 | ---------------- | -------------------- | ----------------------------------------------- | -------- |
@@ -3049,9 +3064,9 @@ const [response, meta] = fis.getPrepInstructionsForAsin(parameters)
 | ShipmentType     | string               | `'SP'`                                          | Yes      |
 | TransportDetails | TransportDetailInput | [`TransportDetailInput`](#transportdetailinput) | Yes      |
 
-* [Possible values for ShipmentType](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_PutTransportContent.html)
+- [Possible values for ShipmentType](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_PutTransportContent.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const mockPartneredSmallParcelPackageInput = {
@@ -3085,19 +3100,19 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.putTransportContent(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### estimateTransportRequest
 
-**Parameters**
+**Parameters:**
 
 | Name       | Type   | Example      | Required |
 | ---------- | ------ | ------------ | -------- |
 | ShipmentId | string | `'SHPMNTID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3109,19 +3124,19 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.estimateTransportRequest(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### getTransportContent
 
-**Parameters**
+**Parameters:**
 
 | Name       | Type   | Example      | Required |
 | ---------- | ------ | ------------ | -------- |
 | ShipmentId | string | `'SHPMNTID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3133,19 +3148,19 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.estimateTransportRequest(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### confirmTransportRequest
 
-**Parameters**
+**Parameters:**
 
 | Name       | Type   | Example      | Required |
 | ---------- | ------ | ------------ | -------- |
 | ShipmentId | string | `'SHPMNTID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3157,19 +3172,19 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.confirmTransportRequest(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### voidTransportRequest
 
-**Parameters**
+**Parameters:**
 
 | Name       | Type   | Example      | Required |
 | ---------- | ------ | ------------ | -------- |
 | ShipmentId | string | `'SHPMNTID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3181,13 +3196,13 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.voidTransportRequest(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### getPackageLabels
 
-**Parameters**
+**Parameters:**
 
 | Name             | Type   | Example                   | Required |
 | ---------------- | ------ | ------------------------- | -------- |
@@ -3195,9 +3210,9 @@ const [response, meta] = fis.voidTransportRequest(parameters)
 | PageType         | string | `'PackageLabel_Letter_2'` | Yes      |
 | NumberOfPackages | number | `1`                       | No       |
 
-* [Possible values for PageType](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_GetPackageLabels.html)
+- [Possible values for PageType](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_GetPackageLabels.html)
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3210,13 +3225,13 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.getPackageLabels(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### getUniquePackageLabels
 
-**Parameters**
+**Parameters:**
 
 | Name                 | Type     | Example                   | Required |
 | -------------------- | -------- | ------------------------- | -------- |
@@ -3224,9 +3239,9 @@ const [response, meta] = fis.getPackageLabels(parameters)
 | PageType             | string   | `'PackageLabel_Letter_2'` | Yes      |
 | PackageLabelsToPrint | string[] | `['CartonA', 'CartonB']`  | Yes      |
 
-* [Possible values for PageType](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_GetPackageLabels.html)
+- [Possible values for PageType](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_GetPackageLabels.html)
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3240,13 +3255,13 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.getUniquePackageLabels(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### getPalletLabels
 
-**Parameters**
+**Parameters:**
 
 | Name            | Type   | Example                   | Required |
 | --------------- | ------ | ------------------------- | -------- |
@@ -3254,9 +3269,9 @@ const [response, meta] = fis.getUniquePackageLabels(parameters)
 | PageType        | string | `'PackageLabel_Letter_2'` | Yes      |
 | NumberOfPallets | number | `10`                      | Yes      |
 
-* [Possible values for PageType](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_GetPackageLabels.html)
+- [Possible values for PageType](http://docs.developer.amazonservices.com/en_CA/fba_inbound/FBAInbound_GetPackageLabels.html)
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3270,19 +3285,19 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.getPalletLabels(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### getBillOfLading
 
-**Parameters**
+**Parameters:**
 
 | Name       | Type   | Example      | Required |
 | ---------- | ------ | ------------ | -------- |
 | ShipmentId | string | `'SHPMNTID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3294,13 +3309,13 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.voidTransportRequest(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### listInboundShipments
 
-**Parameters**
+**Parameters:**
 
 | Name               | Type     | Example         | Required                                                                                                                                                          |
 | ------------------ | -------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3309,7 +3324,7 @@ const [response, meta] = fis.voidTransportRequest(parameters)
 | LastUpdatedAfter   | Date     | `new Date()`    | No, If LastUpdatedBefore is specified, then LastUpdatedAfter must be specified.                                                                                   |
 | LastUpdatedBefore  | Date     | `new Date()`    | No, If LastUpdatedAfter is specified, then LastUpdatedBefore must be specified.                                                                                   |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = {
@@ -3321,19 +3336,19 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.listInboundShipments(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### listInboundShipmentsByNextToken
 
-**Parameters**
+**Parameters:**
 
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const nextToken = new NextToken('ListInboundShipments', '123')
@@ -3342,13 +3357,13 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.listInboundShipmentsByNextToken(nextToken)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### listInboundShipmentItems
 
-**Parameters**
+**Parameters:**
 
 | Name              | Type   | Example       | Required                                                                                                                                          |
 | ----------------- | ------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -3356,7 +3371,7 @@ const [response, meta] = fis.listInboundShipmentsByNextToken(nextToken)
 | LastUpdatedAfter  | Date   | `new Date()`  | Yes, if ShipmentId is not specified. If LastUpdatedBefore is specified, then LastUpdatedAfter must be specified.                                  |
 | LastUpdatedBefore | Date   | `new Date()`  | Yes, if ShipmentId is not specified. If LastUpdatedAfter is specified, then LastUpdatedBefore must be specified.                                  |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = {
@@ -3368,19 +3383,19 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.listInboundShipments(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### listInboundShipmentItemsByNextToken
 
-**Parameters**
+**Parameters:**
 
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const nextToken = new NextToken('ListInboundShipmentItems', '123')
@@ -3389,25 +3404,25 @@ const fis = new fis(httpClient)
 const [response, meta] = fis.listInboundShipmentItemsByNextToken(nextToken)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
 ### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const fis = new FulfillmentInboundShipment(httpClient)
 const [response, meta] = fis.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentInboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-inbound-shipment.test.ts.snap)
 
@@ -3423,7 +3438,7 @@ const [response, meta] = fis.getServiceStatus()
 
 #### Address
 
-**Properties**
+**Properties:**
 
 | Name                | Type                   | Example                 | Required                                                                                                 |
 | ------------------- | ---------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------- |
@@ -3440,7 +3455,7 @@ const [response, meta] = fis.getServiceStatus()
 
 #### GetFulfillmentPreviewItem
 
-**Properties**
+**Properties:**
 
 | Name                         | Type   | Example       | Required |
 | ---------------------------- | ------ | ------------- | -------- |
@@ -3457,7 +3472,7 @@ const [response, meta] = fis.getServiceStatus()
 
 #### CODSettings
 
-**Properties**
+**Properties:**
 
 | Name              | Type     | Example                 | Required |
 | ----------------- | -------- | ----------------------- | -------- |
@@ -3469,7 +3484,7 @@ const [response, meta] = fis.getServiceStatus()
 
 #### CreateFulfillmentOrderItem
 
-**Properties**
+**Properties:**
 
 | Name                         | Type     | Example                 | Required |
 | ---------------------------- | -------- | ----------------------- | -------- |
@@ -3485,7 +3500,7 @@ const [response, meta] = fis.getServiceStatus()
 
 #### DeliveryWindow
 
-**Properties**
+**Properties:**
 
 | Name          | Type | Example      | Required |
 | ------------- | ---- | ------------ | -------- |
@@ -3494,7 +3509,7 @@ const [response, meta] = fis.getServiceStatus()
 
 #### CreateReturnItem
 
-**Properties**
+**Properties:**
 | Name                         | Type   | Example         | Required |
 | ---------------------------- | ------ | --------------- | -------- |
 | SellerReturnItemId           | string | `RETURNID`      | Yes      |
@@ -3503,11 +3518,11 @@ const [response, meta] = fis.getServiceStatus()
 | ReturnReasonCode             | string | `'REASON-CODE'` | Yes      |
 | ReturnComment                | string | `'My comment'`  | No       |
 
-* The return reason code assigned to the return item by the seller. Get valid return reason codes by calling the [`listReturnReasonCodes`](#listreturnreasoncodes) operation.
+- The return reason code assigned to the return item by the seller. Get valid return reason codes by calling the [`listReturnReasonCodes`](#listreturnreasoncodes) operation.
 
 ### getFulfillmentPreview
 
-**Parameters**
+**Parameters:**
 | Name                         | Type                        | Example                                                     | Required |
 | ---------------------------- | --------------------------- | ----------------------------------------------------------- | -------- |
 | MarketplaceId                | string                      | `'A2EUQ1WTGCTBG2'`                                          | No       |
@@ -3517,9 +3532,9 @@ const [response, meta] = fis.getServiceStatus()
 | IncludeCODFulfillmentPreview | boolean                     | `true`                                                      | No       |
 | IncludeDeliveryWindows       | boolean                     | `true`                                                      | No       |
 
-* [Possible values for ShippingSpeedCategories](http://docs.developer.amazonservices.com/en_CA/fba_outbound/FBAOutbound_GetFulfillmentPreview.html)
+- [Possible values for ShippingSpeedCategories](http://docs.developer.amazonservices.com/en_CA/fba_outbound/FBAOutbound_GetFulfillmentPreview.html)
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3553,13 +3568,13 @@ const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.getFulfillmentPreview(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### createFulfillmentOrder
 
-**Parameters**
+**Parameters:**
 
 | Name                     | Type                         | Example                                                       | Required                                                           |
 | ------------------------ | ---------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -3577,9 +3592,9 @@ const [response, meta] = fos.getFulfillmentPreview(parameters)
 | Items                    | CreateFulfillmentOrderItem[] | [`[CreateFulfillmentOrderItem]`](#createfulfillmentorderitem) | Yes                                                                |
 | DeliveryWindow           | DeliveryWindow               | [`DeliveryWindow`](#deliverywindow)                           | No. Required only if ShippingSpeedCategory = `'ScheduledDelivery'` |
 
-* [Possible values for FulfillmentAction, FulfillmentPolicy](http://docs.developer.amazonservices.com/en_CA/fba_outbound/FBAOutbound_CreateFulfillmentOrder.html)
+- [Possible values for FulfillmentAction, FulfillmentPolicy](http://docs.developer.amazonservices.com/en_CA/fba_outbound/FBAOutbound_CreateFulfillmentOrder.html)
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -3616,13 +3631,13 @@ const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.createFulfillmentOrder(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### updateFulfillmentOrder
 
-**Parameters**
+**Parameters:**
 
 | Name                     | Type                         | Example                                                       | Required |
 | ------------------------ | ---------------------------- | ------------------------------------------------------------- | -------- |
@@ -3638,9 +3653,9 @@ const [response, meta] = fos.createFulfillmentOrder(parameters)
 | NotificationEmailList    | string[]                     | `['email@example.com']`                                       | No       |
 | Items                    | CreateFulfillmentOrderItem[] | [`[CreateFulfillmentOrderItem]`](#createfulfillmentorderitem) | No       |
 
-* [Possible values for ShippingSpeedCategory, FulfillmentAction, FulfillmentPolicy](http://docs.developer.amazonservices.com/en_CA/fba_outbound/FBAOutbound_UpdateFulfillmentOrder.html)
+- [Possible values for ShippingSpeedCategory, FulfillmentAction, FulfillmentPolicy](http://docs.developer.amazonservices.com/en_CA/fba_outbound/FBAOutbound_UpdateFulfillmentOrder.html)
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = {
@@ -3652,38 +3667,38 @@ const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.updateFulfillmentOrder(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### listAllFulfillmentOrders
 
-**Parameters**
+**Parameters:**
 
 | Name               | Type | Example      | Required |
 | ------------------ | ---- | ------------ | -------- |
 | QueryStartDateTime | Date | `new Date()` | No       |
 
-**Example**
+**Example:**
 
 ```typescript
 const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.listAllFulfillmentOrders()
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### getFulfillmentOrder
 
-**Parameters**
+**Parameters:**
 
 | Name                     | Type   | Example           | Required |
 | ------------------------ | ------ | ----------------- | -------- |
 | SellerFulfillmentOrderId | string | `'SELLERORDERID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = { SellerFulfillmentOrderId: '' }
@@ -3692,19 +3707,19 @@ const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.getFulfillmentOrder(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### listAllFulfillmentOrdersByNextToken
 
-**Parameters**
+**Parameters:**
 
 | Name      | Type      | Example                                                                                                      | Required |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------------ | -------- |
-| NextToken | NextToken | `new NextToken('action', 'nexttoken')`<br>[See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
+| NextToken | NextToken | `new NextToken('action', 'nexttoken')`. [See examples for sample usage](../examples/using-next-tokens.ts) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const nextToken = new NextToken('ListFinancialEvents', '123')
@@ -3713,19 +3728,19 @@ const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.listAllFulfillmentOrdersByNextToken(nextToken)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### getPackageTrackingDetails
 
-**Parameters**
+**Parameters:**
 
 | Name          | Type   | Example | Required |
 | ------------- | ------ | ------- | -------- |
 | PackageNumber | number | `1234`  | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = { PackageNumber: 1234 }
@@ -3734,19 +3749,19 @@ const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.getPackageTrackingDetails(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### cancelFulfillmentOrder
 
-**Parameters**
+**Parameters:**
 
 | Name                     | Type   | Example     | Required |
 | ------------------------ | ------ | ----------- | -------- |
 | SellerFulfillmentOrderId | string | `'ORDERID'` | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = { SellerFulfillmentOrderId: 'ORDERID' }
@@ -3755,13 +3770,13 @@ const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.cancelFulfillmentOrder(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### listReturnReasonCodes
 
-**Parameters**
+**Parameters:**
 
 | Name                     | Type   | Example            | Required                                                     |
 | ------------------------ | ------ | ------------------ | ------------------------------------------------------------ |
@@ -3770,7 +3785,7 @@ const [response, meta] = fos.cancelFulfillmentOrder(parameters)
 | SellerSKU                | string | `'SELLERSKU'`      | Yes                                                          |
 | Language                 | string | `'fr_CA'`          | No                                                           |
 
-**Example**
+**Example:**
 
 ```typescript
 const parameters = {
@@ -3782,20 +3797,20 @@ const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.listReturnReasonCodes(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### createFulfillmentReturn
 
-**Parameters**
+**Parameters:**
 
 | Name                     | Type               | Example                                 | Required |
 | ------------------------ | ------------------ | --------------------------------------- | -------- |
 | SellerFulfillmentOrderId | string             | `'ORDERID'`                             | Yes      |
 | Items                    | CreateReturnItem[] | [`CreateReturnItem`](#createreturnitem) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const mockCreateReturnItem = {
@@ -3815,25 +3830,25 @@ const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.createFulfillmentReturn(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
 ### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const fos = new FulfillmentOutboundShipment(httpClient)
 const [response, meta] = fos.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See FulfillmentOutboundShipment test snapshot](../test/unit/__snapshots__/fulfillment-outbound-shipment.test.ts.snap)
 
@@ -3849,7 +3864,7 @@ const [response, meta] = fos.getServiceStatus()
 
 #### Dimensions
 
-**Properties**
+**Properties:**
 
 | Name   | Type   | Example      | Required |
 | ------ | ------ | ------------ | -------- |
@@ -3859,22 +3874,22 @@ const [response, meta] = fos.getServiceStatus()
 | Unit   | string | `cm`         | Yes      |
 | Name   | string | `Identifier` | No       |
 
-* Unlike other sections `EasyShip` documentation does not specify possible values for `Unit`
+- Unlike other sections `EasyShip` documentation does not specify possible values for `Unit`
 
 #### Weight
 
-**Properties**
+**Properties:**
 
 | Name  | Type   | Example | Required |
 | ----- | ------ | ------- | -------- |
 | Value | number | `10`    | Yes      |
 | Unit  | string | `'g'`   | Yes      |
 
-* Unlike other sections `EasyShip` documentation does not specify possible values for `Unit`
+- Unlike other sections `EasyShip` documentation does not specify possible values for `Unit`
 
 #### Item
 
-**Properties**
+**Properties:**
 
 | Name                      | Type     | Example          | Required |
 | ------------------------- | -------- | ---------------- | -------- |
@@ -3883,7 +3898,7 @@ const [response, meta] = fos.getServiceStatus()
 
 #### PickupSlot
 
-**Properties**
+**Properties:**
 
 | Name            | Type   | Example          | Required |
 | --------------- | ------ | ---------------- | -------- |
@@ -3893,7 +3908,7 @@ const [response, meta] = fos.getServiceStatus()
 
 #### PackageRequestDetails
 
-**Properties**
+**Properties:**
 
 | Name              | Type       | Example                       | Required |
 | ----------------- | ---------- | ----------------------------- | -------- |
@@ -3905,7 +3920,7 @@ const [response, meta] = fos.getServiceStatus()
 
 #### ScheduledPackageUpdateDetails
 
-**Properties**
+**Properties:**
 
 | Name               | Type               | Example                                     | Required |
 | ------------------ | ------------------ | ------------------------------------------- | -------- |
@@ -3914,7 +3929,7 @@ const [response, meta] = fos.getServiceStatus()
 
 #### ScheduledPackageId
 
-**Properties**
+**Properties:**
 
 | Name          | Type   | Example          | Required |
 | ------------- | ------ | ---------------- | -------- |
@@ -3923,7 +3938,7 @@ const [response, meta] = fos.getServiceStatus()
 
 ### listPickupSlots
 
-**Parameters**
+**Parameters:**
 
 | Name              | Type       | Example                       | Required |
 | ----------------- | ---------- | ----------------------------- | -------- |
@@ -3932,7 +3947,7 @@ const [response, meta] = fos.getServiceStatus()
 | PackageDimensions | Dimensions | [`Dimensions`](#dimensions-1) | Yes      |
 | PackageWeight     | Weight     | [`Weight`](#weight-2)         | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const mockDimensions = {
@@ -3958,13 +3973,13 @@ const easyShip = new EasyShip(httpClient)
 const [response, meta] = easyShip.listPickupSlots(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
 
 ### createScheduledPackage
 
-**Parameters**
+**Parameters:**
 
 | Name                  | Type                  | Example                                           | Required |
 | --------------------- | --------------------- | ------------------------------------------------- | -------- |
@@ -3972,7 +3987,7 @@ const [response, meta] = easyShip.listPickupSlots(parameters)
 | MarketplaceId         | string                | `'A2EUQ1WTGCTBG2'`                                | Yes      |
 | PackageRequestDetails | PackageRequestDetails | [`PackageRequestDetails`](#packagerequestdetails) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 const mockPickupSlot = {
@@ -3994,20 +4009,20 @@ const easyShip = new EasyShip(httpClient)
 const [response, meta] = easyShip.createScheduledPackage(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
 
 ### updateScheduledPackages
 
-**Parameters**
+**Parameters:**
 
 | Name                              | Type                            | Example                                                             | Required |
 | --------------------------------- | ------------------------------- | ------------------------------------------------------------------- | -------- |
 | AmazonOrderId                     | string                          | `'AMZONORDERID'`                                                    | Yes      |
 | ScheduledPackageUpdateDetailsList | ScheduledPackageUpdateDetails[] | [`[ScheduledPackageUpdateDetails]`](#scheduledpackageupdatedetails) | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -4034,20 +4049,20 @@ const easyShip = new EasyShip(httpClient)
 const [response, meta] = easyShip.updateScheduledPackages(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
 
 ### getScheduledPackage
 
-**Parameters**
+**Parameters:**
 
 | Name               | Type               | Example                                     | Required |
 | ------------------ | ------------------ | ------------------------------------------- | -------- |
 | ScheduledPackageId | ScheduledPackageId | [`ScheduledPackageId`](#scheduledpackageid) | Yes      |
 | MarketplaceId      | string             | `'A2EUQ1WTGCTBG2'`                          | Yes      |
 
-**Example**
+**Example:**
 
 ```typescript
 
@@ -4064,24 +4079,24 @@ const easyShip = new EasyShip(httpClient)
 const [response, meta] = easyShip.getScheduledPackage(parameters)
 ```
 
-**Response**
+**Response:**
 
 [See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)
 
 ### getServiceStatus
 
-**Parameters**
+**Parameters:**
 
 | None |
 | ---- |
 
-**Example**
+**Example:**
 
 ```typescript
 const easyShip = new EasyShip(httpClient)
 const [response, meta] = easyShip.getServiceStatus()
 ```
 
-**Response**
+**Response:**
 
 [See EasyShip test snapshot](../test/unit/__snapshots__/easy-ship.test.ts.snap)

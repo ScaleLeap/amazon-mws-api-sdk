@@ -1,4 +1,11 @@
 {
   "$schema": "./node_modules/markdownlint/schema/markdownlint-config-schema.json",
-  "extends": "./node_modules/@scaleleap/utils/markdownlint/markdownlint.json"
+  "extends": "./node_modules/@scaleleap/utils/markdownlint/markdownlint.json",
+  "MD024": {
+    "siblings_only": true
+  },
+  "MD013": {
+    "line_length": 240,
+    "tables": false
+  }
 }
