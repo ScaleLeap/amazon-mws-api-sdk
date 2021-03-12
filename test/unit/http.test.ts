@@ -284,7 +284,7 @@ describe('httpClient', () => {
         ],
       }
 
-      const items: Item[] = [...new Array(4)].map((_, index) => ({
+      const items: Item[] = [...Array.from({ length: 4 })].map((_, index) => ({
         ...item,
         OrderItemId: `ITEM${index + 1}`,
         ItemDescription: `This is item #${index + 1}`,
