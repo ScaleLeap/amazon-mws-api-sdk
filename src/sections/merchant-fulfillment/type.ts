@@ -104,9 +104,10 @@ export const canonicalizeShipmentRequestDetails = (
     ShipDate,
     ShippingServiceOptions,
     LabelCustomization,
+    ItemList,
   } = shipmentRequestDetails
 
-  const itemsList = shipmentRequestDetails?.ItemList.map((item) => {
+  const itemsList = ItemList.map((item) => {
     const fixedInputsList = canonicalizeAdditionalSellerInputs(item.ItemLevelSellerInputsList)
 
     return {

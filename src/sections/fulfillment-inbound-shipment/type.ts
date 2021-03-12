@@ -357,7 +357,7 @@ export interface CanonicalizedPutTransportContentParameters {
 export const canonicalizePutTransportContentParameters = (
   parameters: PutTransportContentParameters,
 ): CanonicalizedPutTransportContentParameters => {
-  const { TransportDetails } = parameters
+  const { TransportDetails, ShipmentId, IsPartnered, ShipmentType } = parameters
   const {
     PartneredSmallParcelData,
     NonPartneredSmallParcelData,
@@ -396,9 +396,9 @@ export const canonicalizePutTransportContentParameters = (
       : undefined,
   }
   return {
-    ShipmentId: parameters.ShipmentId,
-    IsPartnered: parameters.IsPartnered,
-    ShipmentType: parameters.ShipmentType,
+    ShipmentId,
+    IsPartnered,
+    ShipmentType,
     TransportDetails: transportDetails,
   }
 }
