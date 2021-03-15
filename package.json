@@ -49,7 +49,7 @@
     "@scaleleap/amazon-marketplaces": "10.2.0",
     "axios": "0.21.1",
     "fast-xml-parser": "3.19.0",
-    "html-entities": "2.1.0",
+    "html-entities": "2.1.1",
     "purify-ts": "0.16.1",
     "ts-error": "1.0.6"
   },
