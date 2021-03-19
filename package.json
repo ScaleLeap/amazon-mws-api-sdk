@@ -46,7 +46,7 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@scaleleap/amazon-marketplaces": "10.2.0",
+    "@scaleleap/amazon-marketplaces": "10.3.0",
     "axios": "0.21.1",
     "fast-xml-parser": "3.19.0",
     "html-entities": "2.1.1",
