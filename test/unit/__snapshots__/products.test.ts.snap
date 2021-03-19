@@ -737,7 +737,7 @@ Array [
               "ns2:CurrencyCode": "USD",
             },
             "ns2:Manufacturer": "Pearl iZUMi",
-            "ns2:Model": 275,
+            "ns2:Model": "0275",
             "ns2:PackageDimensions": Object {
               "ns2:Height": Object {
                 "attr": Object {
@@ -765,7 +765,7 @@ Array [
               },
             },
             "ns2:PackageQuantity": 1,
-            "ns2:PartNumber": 275,
+            "ns2:PartNumber": "0275",
             "ns2:ProductGroup": "Apparel",
             "ns2:ProductTypeName": "SHORTS",
             "ns2:Publisher": "Pearl iZUMi",
