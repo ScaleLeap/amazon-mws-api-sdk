@@ -166,7 +166,7 @@ Array [
       Object {
         "Acknowledged": false,
         "AvailableDate": 2020-03-13T08:21:03.000Z,
-        "ReportId": "19571121666018336",
+        "ReportId": "19571121666018334",
         "ReportRequestId": "51776018334",
         "ReportType": "_GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_",
       },
@@ -321,7 +321,7 @@ Array [
       Object {
         "CompletedDate": 2020-03-13T08:21:03.000Z,
         "EndDate": 2020-03-13T07:52:49.000Z,
-        "GeneratedReportId": "19571121666018336",
+        "GeneratedReportId": "19571121666018334",
         "ReportProcessingStatus": "_DONE_",
         "ReportRequestId": "51776018334",
         "ReportType": "_GET_V2_SETTLEMENT_REPORT_DATA_FLAT_FILE_",

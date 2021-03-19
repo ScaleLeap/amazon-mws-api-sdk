@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`issue #327 should parse report response correctly 1`] = `
+Object {
+  "GetReportListResponse": Object {
+    "GetReportListResult": Object {
+      "HasNext": true,
+      "NextToken": "2YgYW55IPQhvu5hbCBwbGVhc3VyZS4=",
+      "ReportInfo": Array [
+        Object {
+          "Acknowledged": false,
+          "AvailableDate": "2021-03-17T09:43:46+00:00",
+          "ReportId": "28136451747018703",
+          "ReportRequestId": 505364018703,
+          "ReportType": "_RFQD_BULK_DOWNLOAD_",
+        },
+        Object {
+          "Acknowledged": false,
+          "AvailableDate": "2021-03-17T09:42:21+00:00",
+          "ReportId": "28146215237018703",
+          "ReportRequestId": 505360018703,
+          "ReportType": "_RFQD_BULK_DOWNLOAD_",
+        },
+        Object {
+          "Acknowledged": false,
+          "AvailableDate": "2021-03-17T08:27:14+00:00",
+          "ReportId": "28139198851018703",
+          "ReportRequestId": 505332018703,
+          "ReportType": "_RFQD_BULK_DOWNLOAD_",
+        },
+        Object {
+          "Acknowledged": false,
+          "AvailableDate": "2021-03-17T04:26:54+00:00",
+          "ReportId": "28141052303018703",
+          "ReportRequestId": 505237018703,
+          "ReportType": "_RFQD_BULK_DOWNLOAD_",
+        },
+        Object {
+          "Acknowledged": false,
+          "AvailableDate": "2021-03-16T14:12:45+00:00",
+          "ReportId": "28119289673018702",
+          "ReportRequestId": 504882018702,
+          "ReportType": "_RFQD_BULK_DOWNLOAD_",
+        },
+        Object {
+          "Acknowledged": false,
+          "AvailableDate": "2021-03-15T18:07:48+00:00",
+          "ReportId": "28085787288018701",
+          "ReportRequestId": 504400018701,
+          "ReportType": "_RFQD_BULK_DOWNLOAD_",
+        },
+        Object {
+          "Acknowledged": false,
+          "AvailableDate": "2021-03-08T18:03:33+00:00",
+          "ReportId": "27873864943018694",
+          "ReportRequestId": 500801018694,
+          "ReportType": "_RFQD_BULK_DOWNLOAD_",
+        },
+        Object {
+          "Acknowledged": false,
+          "AvailableDate": "2021-03-08T18:01:57+00:00",
+          "ReportId": "27875410347018694",
+          "ReportRequestId": 500800018694,
+          "ReportType": "_RFQD_BULK_DOWNLOAD_",
+        },
+        Object {
+          "Acknowledged": false,
+          "AvailableDate": "2021-03-08T17:54:27+00:00",
+          "ReportId": "27886303516018694",
+          "ReportRequestId": 500796018694,
+          "ReportType": "_RFQD_BULK_DOWNLOAD_",
+        },
+        Object {
+          "Acknowledged": false,
+          "AvailableDate": "2021-03-08T05:31:26+00:00",
+          "ReportId": "27864140748018694",
+          "ReportRequestId": 500483018694,
+          "ReportType": "_RFQD_BULK_DOWNLOAD_",
+        },
+      ],
+    },
+    "ResponseMetadata": Object {
+      "RequestId": "fbf677c1-dcee-4110-bc88-2ba3702e331b",
+    },
+    "attr": Object {
+      "xmlns": "http://mws.amazonservices.com/doc/2009-01-01/",
+    },
+  },
+}
+`;

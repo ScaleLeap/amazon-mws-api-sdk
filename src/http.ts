@@ -334,6 +334,7 @@ export const parseResponse = <T>(
           parseAttributeValue: true,
           attrNodeName: 'attr',
           textNodeName: 'text',
+          parseTrueNumberOnly: true,
           tagValueProcessor: (value) => decode(value),
         },
         true,
