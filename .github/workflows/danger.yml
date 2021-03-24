@@ -34,6 +34,6 @@ jobs:
         run: npm ci
 
       - name: Danger
-        uses: danger/danger-js@10.6.3
+        uses: danger/danger-js@10.6.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
