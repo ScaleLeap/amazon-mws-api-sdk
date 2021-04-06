@@ -52,6 +52,7 @@ jobs:
         run: npm run build
 
       - name: Semantic Release
+        id: semantic_release
         if: success()
         env:
           GIT_AUTHOR_NAME: Scale Bot
@@ -60,4 +61,21 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        run: npm run semantic-release
+        
+        # Cannot set Github Actions output with multiline strings. Therefore, we need to escape them before setting.
+        # Docs: https://trstringer.com/github-actions-multiline-strings/
+        run: |
+          release_log=$(npm run semantic-release)
+          echo "$release_log"
+          release_log="${release_log//'%'/'%25'}"
+          release_log="${release_log//$'\n'/'%0A'}"
+          release_log="${release_log//$'\r'/'%0D'}"
+          echo "::set-output name=log::$release_log"
+
+      - name: Publish as mws
+        # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif
+        if: ${{ !contains(steps.semantic_release.outputs.log, 'There are no relevant changes, so no new version is released') }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: node_modules/.bin/ts-node -T utils/rename-package.ts && npm publish
