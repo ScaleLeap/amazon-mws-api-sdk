@@ -1,3 +1,5 @@
+# Amazon MWS API for Node.js
+
 [![NPM](https://img.shields.io/npm/v/@scaleleap/amazon-mws-api-sdk)](https://npm.im/@scaleleap/amazon-mws-api-sdk)
 [![License](https://img.shields.io/npm/l/@scaleleap/amazon-mws-api-sdk)](./LICENSE)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ScaleLeap/amazon-mws-api-sdk/Release)](https://github.com/ScaleLeap/amazon-mws-api-sdk/actions)
@@ -6,19 +8,21 @@
 [![Semantic Release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 📦 @scaleleap/amazon-mws-api-sdk
-===================================
+
+---
 
 A fully typed TypeScript and Node.js SDK library for Amazon MWS API
 
 ## Download & Installation
 
 ```sh
-$ npm i -s @scaleleap/amazon-mws-api-sdk
+npm i -s @scaleleap/amazon-mws-api-sdk
 ```
 
 ## [Click here for the full **Documentation**](docs)
 
 ## Example
+
 ---
 
 ```typescript
@@ -90,6 +94,7 @@ const main = async () => {
 }
 
 ```
+
 ## [More examples in the `/examples` folder!](examples)
 
 ## [Contributing](/CONTRIBUTING.md)
