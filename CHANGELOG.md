@@ -3,6 +3,14 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.45](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.44...v1.9.45) (2021-04-07)
+
+
+### Bug Fixes
+
+* markdown lint in README.md ([0368630](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/03686307ccde0ba3843781052decdc8cddc7bc14))
+* release to mws package ([17df996](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/17df996e68b2f306a270fafdac6d266b5ac5916e))
+
 ## [1.9.44](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.43...v1.9.44) (2021-04-06)
 
 
