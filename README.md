@@ -6,6 +6,7 @@
 [![Codecov](https://img.shields.io/codecov/c/github/scaleleap/amazon-mws-api-sdk)](https://codecov.io/gh/ScaleLeap/amazon-mws-api-sdk)
 [![Snyk](https://img.shields.io/snyk/vulnerabilities/github/scaleleap/amazon-mws-api-sdk)](https://snyk.io/test/github/scaleleap/amazon-mws-api-sdk)
 [![Semantic Release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FScaleLeap%2Famazon-mws-api-sdk.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FScaleLeap%2Famazon-mws-api-sdk?ref=badge_shield)
 
 📦 @scaleleap/amazon-mws-api-sdk
 
@@ -108,3 +109,6 @@ const main = async () => {
 ## License
 
 This project is licensed under the MIT License.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FScaleLeap%2Famazon-mws-api-sdk.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FScaleLeap%2Famazon-mws-api-sdk?ref=badge_large)
