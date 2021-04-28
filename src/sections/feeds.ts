@@ -103,6 +103,7 @@ export type FeedType =
   | '_POST_FLAT_FILE_FBA_CREATE_REMOVAL_'
   | '_RFQ_UPLOAD_FEED_'
   | '_POST_EASYSHIP_DOCUMENTS_'
+  | '_UPLOAD_VAT_INVOICE_'
 
 export type FeedProcessingStatus =
   | '_AWAITING_ASYNCHRONOUS_REPLY_'
@@ -175,6 +176,7 @@ export interface GetFeedSubmissionResultParameters {
 export interface SubmitFeedParameters {
   FeedContent: string
   FeedType: FeedType
+  FeedOptions?: string
   MarketplaceIdList?: string[]
   PurgeAndReplace?: boolean
   AmazonOrderId?: string
@@ -207,6 +209,7 @@ export class Feeds {
         action: 'SubmitFeed',
         parameters: {
           FeedType: parameters.FeedType,
+          FeedOptions: parameters.FeedOptions,
           'MarketplaceIdList.Id': parameters.MarketplaceIdList,
           PurgeAndReplace: parameters.PurgeAndReplace,
           AmazonOrderId: parameters.AmazonOrderId,
