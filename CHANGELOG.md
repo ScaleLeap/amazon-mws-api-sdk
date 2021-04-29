@@ -3,6 +3,14 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.47](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.46...v1.9.47) (2021-04-29)
+
+
+### Bug Fixes
+
+* ensureString parser ([4483f22](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/4483f22e50d0681291c6fd86b139aba3c2a5dc1e))
+* **deps:** update dependency purify-ts to v0.16.2 ([e8fccd6](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/e8fccd6f22701ff3ae8c7ee375353772e8b0c338))
+
 ## [1.9.46](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.45...v1.9.46) (2021-04-29)
 
 
