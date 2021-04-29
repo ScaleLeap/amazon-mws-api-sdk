@@ -35,7 +35,7 @@ export const ensureArray = <T>(tag: string, codec: Codec<T>): Codec<T[]> => {
 export const ensureString = Codec.custom({
   decode: (x) =>
     string.decode(x).chainLeft((error) => (typeof x === 'number' ? Right(String(x)) : Left(error))),
-  encode: string.encode,
+  encode: (x: string) => string.encode(x),
   schema: () => ({ oneOf: [{ type: 'string' }, { type: 'number' }] }),
 })
 
