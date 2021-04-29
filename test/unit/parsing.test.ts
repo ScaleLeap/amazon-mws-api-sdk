@@ -1,5 +1,5 @@
 import Ajv from 'ajv'
-import { date, number, string } from 'purify-ts/Codec'
+import { date, number } from 'purify-ts/Codec'
 import { Right } from 'purify-ts/Either'
 
 import {
@@ -46,12 +46,6 @@ describe('ensureString', () => {
     expect.assertions(1)
 
     expect(ensureString.decode(5)).toStrictEqual(Right('5'))
-  })
-
-  it('has the same encode as the string codec', () => {
-    expect.assertions(1)
-
-    expect(ensureString.encode).toStrictEqual(string.encode)
   })
 
   it('generates a valid JSON schema for a string or number', () => {
