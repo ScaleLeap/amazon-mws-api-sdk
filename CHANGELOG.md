@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.48](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.47...v1.9.48) (2021-05-03)
+
+
+### Bug Fixes
+
+* parse phone as string ([fcc83cd](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/fcc83cd5ea4e661988980f89e77fe4978291eb99)), closes [#365](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/365)
+
 ## [1.9.47](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.46...v1.9.47) (2021-04-29)
 
 
