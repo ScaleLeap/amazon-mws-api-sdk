@@ -336,6 +336,8 @@ export const parseResponse = <T>(
           textNodeName: 'text',
           parseTrueNumberOnly: true,
           tagValueProcessor: (value) => decode(value),
+          // force to be parsed as string
+          stopNodes: ['Phone'],
         },
         true,
       )

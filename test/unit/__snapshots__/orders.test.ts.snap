@@ -200,6 +200,7 @@ Array [
           "City": "Seattle",
           "CountryCode": "US",
           "Name": "Buyer name",
+          "Phone": "3333333333",
           "PostalCode": "98103",
         },
       },
