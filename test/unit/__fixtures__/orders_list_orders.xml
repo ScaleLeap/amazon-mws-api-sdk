@@ -17,6 +17,7 @@
                   <PostalCode>98103</PostalCode>
                   <CountryCode>US</CountryCode>
                   <AddressType>Commercial</AddressType>
+                  <Phone>3333333333</Phone>
               </ShippingAddress>
               <OrderTotal>
                   <CurrencyCode>USD</CurrencyCode>
@@ -106,7 +107,7 @@
                   <AddressLine1>1-2-10 Akasaka</AddressLine1>
                   <City>Tokyo</City>
                   <PostalCode>107-0053</PostalCode>
-                  <CountryCode>JP</CountryCode>                  
+                  <CountryCode>JP</CountryCode>
               </ShippingAddress>
               <OrderTotal>
                   <CurrencyCode>JPY</CurrencyCode>
