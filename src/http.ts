@@ -338,6 +338,8 @@ export const parseResponse = <T>(
           tagValueProcessor: (value) => decode(value),
           // force to be parsed as string
           stopNodes: [
+            'BuyerName',
+            // ? ShippingAddress fields
             'Name',
             'AddressLine1',
             'AddressLine2',

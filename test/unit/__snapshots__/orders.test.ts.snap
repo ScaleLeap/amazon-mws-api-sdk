@@ -310,7 +310,7 @@ Array [
       Object {
         "AmazonOrderId": "058-1233752-8214740",
         "BuyerEmail": "5vlhEXAMPLEh9h5@marketplace.amazon.co.jp",
-        "BuyerName": "Jane Smith",
+        "BuyerName": "321321321",
         "FulfillmentChannel": "MFN",
         "IsBusinessOrder": false,
         "IsEstimatedShipDateSet": true,
