@@ -154,6 +154,69 @@
               <PromiseResponseDueDate>2017-08-31T23:58:44Z</PromiseResponseDueDate>
               <IsEstimatedShipDateSet>true</IsEstimatedShipDateSet>
           </Order>
+          <Order>
+              <AmazonOrderId>058-1233752-8214740</AmazonOrderId>
+              <PurchaseDate>2017-02-05T00%3A06%3A07.000Z</PurchaseDate>
+              <LastUpdateDate>2017-02-07T12%3A43%3A16.000Z</LastUpdateDate>
+              <OrderStatus>Unshipped</OrderStatus>
+              <FulfillmentChannel>MFN</FulfillmentChannel>
+              <ShipServiceLevel>Std JP Kanto8</ShipServiceLevel>
+              <ShippingAddress>
+                  <Name>Jane Smith</Name>
+                  <AddressLine1>22</AddressLine1>
+                  <AddressLine2>kebab st</AddressLine2>
+                  <AddressLine3>321321321</AddressLine3>
+                  <City>Tokyo</City>
+                  <PostalCode>00148</PostalCode>
+                  <Phone>05 55 555555</Phone>
+                  <CountryCode>IT</CountryCode>
+              </ShippingAddress>
+              <OrderTotal>
+                  <CurrencyCode>JPY</CurrencyCode>
+                  <Amount>1507.00</Amount>
+              </OrderTotal>
+              <NumberOfItemsShipped>0</NumberOfItemsShipped>
+              <NumberOfItemsUnshipped>1</NumberOfItemsUnshipped>
+              <PaymentExecutionDetail>
+                  <PaymentExecutionDetailItem>
+                      <Payment>
+                          <Amount>10.00</Amount>
+                          <CurrencyCode>JPY</CurrencyCode>
+                      </Payment>
+                      <PaymentMethod>PointsAccount</PaymentMethod>
+                  </PaymentExecutionDetailItem>
+                  <PaymentExecutionDetailItem>
+                      <Payment>
+                          <Amount>317.00</Amount>
+                          <CurrencyCode>JPY</CurrencyCode>
+                      </Payment>
+                      <PaymentMethod>GC</PaymentMethod>
+                  </PaymentExecutionDetailItem>
+                  <PaymentExecutionDetailItem>
+                      <Payment>
+                          <Amount>1180.00</Amount>
+                          <CurrencyCode>JPY</CurrencyCode>
+                      </Payment>
+                      <PaymentMethod>COD</PaymentMethod>
+                  </PaymentExecutionDetailItem>
+              </PaymentExecutionDetail>
+              <PaymentMethod>COD</PaymentMethod>
+              <PaymentMethodDetails>
+                  <PaymentMethodDetail>COD</PaymentMethodDetail>
+              </PaymentMethodDetails>
+              <MarketplaceId>A1VC38T7YXB528</MarketplaceId>
+              <BuyerEmail>5vlhEXAMPLEh9h5@marketplace.amazon.co.jp</BuyerEmail>
+              <BuyerName>Jane Smith</BuyerName>
+              <ShipmentServiceLevelCategory>Standard </ShipmentServiceLevelCategory>
+              <OrderType>SourcingOnDemandOrder</OrderType>
+              <IsBusinessOrder>false</IsBusinessOrder>
+              <IsPrime>false</IsPrime>
+              <IsPremiumOrder>false</IsPremiumOrder>
+              <IsGlobalExpressEnabled>false</IsGlobalExpressEnabled>
+              <PromiseResponseDueDate>2017-08-31T23:58:44Z</PromiseResponseDueDate>
+              <IsEstimatedShipDateSet>true</IsEstimatedShipDateSet>
+          </Order>
+          
       </Orders>
   </ListOrdersResult>
   <ResponseMetadata>
