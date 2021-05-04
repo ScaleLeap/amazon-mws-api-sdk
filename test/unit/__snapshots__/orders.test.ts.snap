@@ -307,6 +307,68 @@ Array [
           "PostalCode": "107-0053",
         },
       },
+      Object {
+        "AmazonOrderId": "058-1233752-8214740",
+        "BuyerEmail": "5vlhEXAMPLEh9h5@marketplace.amazon.co.jp",
+        "BuyerName": "Jane Smith",
+        "FulfillmentChannel": "MFN",
+        "IsBusinessOrder": false,
+        "IsEstimatedShipDateSet": true,
+        "IsGlobalExpressEnabled": false,
+        "IsPremiumOrder": false,
+        "IsPrime": false,
+        "LastUpdateDate": 2017-02-07T12:43:16.000Z,
+        "MarketplaceId": "A1VC38T7YXB528",
+        "NumberOfItemsShipped": 0,
+        "NumberOfItemsUnshipped": 1,
+        "OrderStatus": "Unshipped",
+        "OrderTotal": Object {
+          "Amount": 1507,
+          "CurrencyCode": "JPY",
+        },
+        "OrderType": "SourcingOnDemandOrder",
+        "PaymentExecutionDetail": Array [
+          Object {
+            "Payment": Object {
+              "Amount": 10,
+              "CurrencyCode": "JPY",
+            },
+            "PaymentMethod": "PointsAccount",
+          },
+          Object {
+            "Payment": Object {
+              "Amount": 317,
+              "CurrencyCode": "JPY",
+            },
+            "PaymentMethod": "GC",
+          },
+          Object {
+            "Payment": Object {
+              "Amount": 1180,
+              "CurrencyCode": "JPY",
+            },
+            "PaymentMethod": "COD",
+          },
+        ],
+        "PaymentMethod": "COD",
+        "PaymentMethodDetails": Array [
+          "COD",
+        ],
+        "PromiseResponseDueDate": 2017-08-31T23:58:44.000Z,
+        "PurchaseDate": 2017-02-05T00:06:07.000Z,
+        "ShipServiceLevel": "Std JP Kanto8",
+        "ShipmentServiceLevelCategory": "Standard",
+        "ShippingAddress": Object {
+          "AddressLine1": "22",
+          "AddressLine2": "kebab st",
+          "AddressLine3": "321321321",
+          "City": "Tokyo",
+          "CountryCode": "IT",
+          "Name": "Jane Smith",
+          "Phone": "05 55 555555",
+          "PostalCode": "00148",
+        },
+      },
     ],
   },
   Object {
