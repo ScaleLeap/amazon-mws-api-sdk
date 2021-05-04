@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.50](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.49...v1.9.50) (2021-05-04)
+
+
+### Bug Fixes
+
+* **orders:** `BuyerName` as string ([aafb154](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/aafb154ab46ae0615767075ebdb4041f2cf0d4ca))
+
 ## [1.9.49](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.48...v1.9.49) (2021-05-04)
 
 
