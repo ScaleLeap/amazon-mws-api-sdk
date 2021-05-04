@@ -20,7 +20,7 @@ import {
   ListInventorySupplyRequestParameters,
   RequestMeta,
   ResponseGroup,
-} from '@scaleleap/amazon-mws-api-sdk'
+} from '../..'
 
 /**
  * Configure the HttpClient
@@ -56,7 +56,7 @@ const main = async () => {
      * OPTIONAL
      */
 
-    // SellerSku: ['SKU123']
+    SellerSkus: ['SKU123'],
     // ResponseGroup: responseGroup
   }
 
