@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.49](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.48...v1.9.49) (2021-05-04)
+
+
+### Bug Fixes
+
+* **orders:** parse `ShippingAddress` as string ([#367](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/367)) ([7909ef4](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/7909ef4c416b4dbf2d4f27075d1f78b1bf4a32b7))
+
 ## [1.9.48](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.47...v1.9.48) (2021-05-03)
 
 
