@@ -337,7 +337,19 @@ export const parseResponse = <T>(
           parseTrueNumberOnly: true,
           tagValueProcessor: (value) => decode(value),
           // force to be parsed as string
-          stopNodes: ['Phone'],
+          stopNodes: [
+            'Name',
+            'AddressLine1',
+            'AddressLine2',
+            'AddressLine3',
+            'City',
+            'Municipality',
+            'StateOrRegion',
+            'PostalCode',
+            'CountryCode',
+            'Phone',
+            'AddressType',
+          ],
         },
         true,
       )
