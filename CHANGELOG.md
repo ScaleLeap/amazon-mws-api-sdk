@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.51](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.50...v1.9.51) (2021-05-05)
+
+
+### Bug Fixes
+
+* listInventorySupply to use GET method instead of POST ([d0176f9](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d0176f992a74041f91747120889deb3144ff7990)), closes [#368](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/368)
+
 ## [1.9.50](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.49...v1.9.50) (2021-05-04)
 
 
