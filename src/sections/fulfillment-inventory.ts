@@ -115,7 +115,7 @@ export class FulfillmentInventory {
   async listInventorySupply(
     parameters: ListInventorySupplyRequestParameters,
   ): Promise<[InventorySupplyList, RequestMeta]> {
-    const [response, meta] = await this.httpClient.request('POST', {
+    const [response, meta] = await this.httpClient.request('GET', {
       resource: Resource.FulfilmentInventory,
       version: FULFILLMENT_INVENTORY_API_VERSION,
       action: 'ListInventorySupply',
@@ -133,7 +133,7 @@ export class FulfillmentInventory {
   async listInventorySupplyByNextToken(
     nextToken: NextToken<'ListInventorySupply'>,
   ): Promise<[InventorySupplyListByNextToken, RequestMeta]> {
-    const [response, meta] = await this.httpClient.request('POST', {
+    const [response, meta] = await this.httpClient.request('GET', {
       resource: Resource.FulfilmentInventory,
       version: FULFILLMENT_INVENTORY_API_VERSION,
       action: 'ListInventorySupplyByNextToken',
