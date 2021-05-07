@@ -323,13 +323,16 @@ export const GetLowestOfferListingsForASINResponse = Codec.interface({
 const OfferCountType = Codec.interface({
   OfferCount: oneOf([
     number,
-    Codec.interface({
-      text: number,
-      attr: Codec.interface({
-        condition: optional(string),
-        fulfillmentChannel: optional(string),
+    ensureArray(
+      'OfferCount',
+      Codec.interface({
+        text: number,
+        attr: Codec.interface({
+          condition: optional(string),
+          fulfillmentChannel: optional(string),
+        }),
       }),
-    }),
+    ),
   ]),
 })
 
