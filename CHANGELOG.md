@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.52](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.51...v1.9.52) (2021-05-07)
+
+
+### Bug Fixes
+
+* **offer_count:** type obj to array ([7124f92](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/7124f92dcb335d0f5d0da7abd69fb3df5a71ef7b))
+
 ## [1.9.51](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.50...v1.9.51) (2021-05-05)
 
 
