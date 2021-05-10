@@ -339,6 +339,7 @@ export const parseResponse = <T>(
           // force to be parsed as string
           stopNodes: [
             'BuyerName',
+            'PurchaseOrderNumber',
             // ? ShippingAddress fields
             'Name',
             'AddressLine1',
