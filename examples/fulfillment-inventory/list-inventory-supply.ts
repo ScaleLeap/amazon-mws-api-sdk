@@ -1,7 +1,4 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable import/no-unresolved */
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable eslint-comments/disable-enable-pair, import/no-unresolved, no-console */
 
 /**
  * More usage examples at
@@ -17,10 +14,8 @@ import {
   FulfillmentInventory,
   HttpClient,
   InventorySupplyList,
-  ListInventorySupplyRequestParameters,
   RequestMeta,
-  ResponseGroup,
-} from '../..'
+} from '../../src'
 
 /**
  * Configure the HttpClient
@@ -38,32 +33,16 @@ const http = new HttpClient(mwsOptions)
 const fulfillmentInventory = new FulfillmentInventory(http)
 
 const main = async () => {
-  const responseGroup: ResponseGroup = 'Basic'
-  const date = new Date(Date.now() - 150 * 24 * 60 * 60 * 1000) // Date from 150 days ago
-
-  const parameters: ListInventorySupplyRequestParameters = {
-    /**
-     * REQUIRED
-     */
-
-    /**
-     * Either `MarketplaceId` or `QueryStartDateTime` not both
-     */
-    MarketplaceId: amazonMarketplaces.US.id,
-    // QueryStartDateTime: date,
-
-    /**
-     * OPTIONAL
-     */
-
-    SellerSkus: ['SKU123'],
-    // ResponseGroup: responseGroup
-  }
-
   const [listInventorySupply, requestMeta]: [
     InventorySupplyList,
     RequestMeta,
-  ] = await fulfillmentInventory.listInventorySupply(parameters)
+  ] = await fulfillmentInventory.listInventorySupply({
+    MarketplaceId: amazonMarketplaces.CA.id,
+    SellerSkus: ['SKU123', 'SKU456'],
+    ResponseGroup: 'Basic',
+  })
+
+  console.log(listInventorySupply, requestMeta)
 
   /**
    * Check out Amazon's official docs for other available endpoints
@@ -72,3 +51,5 @@ const main = async () => {
    * Under the folder API References
    */
 }
+
+main().catch((error) => console.error(error))
