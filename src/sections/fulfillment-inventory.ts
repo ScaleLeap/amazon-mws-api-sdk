@@ -57,7 +57,7 @@ const InventorySupplyDetail = Codec.interface({
 
 const InventorySupply = Codec.interface({
   SellerSKU: optional(SKU),
-  FNSKU: SKU,
+  FNSKU: optional(SKU),
   ASIN: optional(ASIN),
   Condition: optional(enumeration(InventoryCondition)),
   TotalSupplyQuantity: number,
