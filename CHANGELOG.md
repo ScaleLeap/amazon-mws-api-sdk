@@ -3,6 +3,14 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.55](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.54...v1.9.55) (2021-05-11)
+
+
+### Bug Fixes
+
+* the FNSKU prop is optional when SKU does not exist ([d093ff9](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/d093ff9b241927beae2f92944710a598a2c17785))
+* typo in the parameter transformation ([358cfb9](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/358cfb970b858f9d805e5e1232de9a63454d3286)), closes [#368](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/368)
+
 ## [1.9.54](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.53...v1.9.54) (2021-05-10)
 
 
