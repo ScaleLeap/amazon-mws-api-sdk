@@ -57,6 +57,7 @@ jobs:
           MWS_AUTH_TOKEN: ${{ secrets.MWS_AUTH_TOKEN }}
           SECRET_KEY: ${{ secrets.SECRET }}
           SELLER_ID: ${{ secrets.SELLER_ID }}
+          POLLY_MODE: passthrough
 
       - name: Build
         run: npm run build
