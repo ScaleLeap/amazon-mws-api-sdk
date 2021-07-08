@@ -63,7 +63,7 @@
     "@types/is-ci": "3.0.0",
     "@types/jest": "26.0.22",
     "@types/node": "13.13.48",
-    "ajv": "8.3.0",
+    "ajv": "8.6.1",
     "danger": "10.6.4",
     "global-agent": "2.2.0",
     "is-ci": "3.0.0",
