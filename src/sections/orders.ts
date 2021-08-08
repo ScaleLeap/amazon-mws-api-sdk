@@ -210,7 +210,7 @@ export const ListOrderItems = Codec.interface({
       ),
       Title: optional(string),
       QuantityOrdered: number,
-      QuantityShipper: optional(number),
+      QuantityShipped: optional(number),
       PointsGranted: optional(
         Codec.interface({
           PointsNumber: optional(number),
