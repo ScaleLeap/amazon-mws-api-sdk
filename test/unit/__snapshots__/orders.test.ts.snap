@@ -81,6 +81,7 @@ Array [
         },
         "OrderItemId": "68828574383266",
         "QuantityOrdered": 1,
+        "QuantityShipped": 1,
         "SellerSKU": "CBA_OTF_1",
         "ShippingPrice": Object {
           "Amount": 1.26,
@@ -128,6 +129,7 @@ Array [
         },
         "OrderItemId": "68828574383266",
         "QuantityOrdered": 1,
+        "QuantityShipped": 1,
         "SellerSKU": "CBA_OTF_1",
         "ShippingPrice": Object {
           "Amount": 1.26,
