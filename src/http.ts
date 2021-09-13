@@ -315,7 +315,15 @@ const defaultFetch = ({ url, method, headers, data }: Request): Promise<RequestR
       data: response.data,
       headers: response.headers,
     }))
-    .catch((error) => Promise.reject(error.response.data))
+    .catch((error) => {
+      if (error.response) {
+        return Promise.reject(error.response.data)
+      }
+      if (error.request) {
+        return Promise.reject(error.request)
+      }
+      return Promise.reject(error)
+    })
 
 export const parseResponse = <T>(
   response: RequestResponse,
