@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.56](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.55...v1.9.56) (2021-09-14)
+
+
+### Bug Fixes
+
+* add checks for offline scenarios [#417](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/417) ([#418](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/418)) ([b4a8cc9](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/b4a8cc9c084a1d640de7a71bb23981145dbda82c))
+
 ## [1.9.55](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.54...v1.9.55) (2021-05-11)
 
 
