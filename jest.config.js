@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('dotenv/config')
+
 const testPathIgnorePatterns = ['/node_modules/']
 
 // skips integration tests if the required env vars aren't set
