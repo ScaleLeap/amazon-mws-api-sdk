@@ -7,10 +7,8 @@ describe(`${FulfillmentInventory.name}`, () => {
   it('should be able to get list of inventory supply', async () => {
     expect.assertions(1)
 
-    const date = new Date(Date.now() - 150 * 24 * 60 * 60 * 1000) // Date from 150 days ago
-
     const parameters: ListInventorySupplyRequestParameters = {
-      QueryStartDateTime: date,
+      QueryStartDateTime: new Date('2021-03-11'),
     }
 
     const fulfillmentInventory = new FulfillmentInventory(httpClient)
