@@ -1,5 +1,14 @@
+import { jestPollyConfigService } from '@scaleleap/jest-polly'
+
 import { FulfillmentInventory, ListInventorySupplyRequestParameters } from '../../src'
 import { Config } from './config'
+
+jestPollyConfigService.config.matchRequestsBy = {
+  ...jestPollyConfigService.config.matchRequestsBy,
+  url: {
+    query: false,
+  },
+}
 
 const httpClient = new Config().createHttpClient()
 
@@ -8,7 +17,7 @@ describe(`${FulfillmentInventory.name}`, () => {
     expect.assertions(1)
 
     const parameters: ListInventorySupplyRequestParameters = {
-      QueryStartDateTime: new Date('2021-03-11'),
+      SellerSkus: ['x'],
     }
 
     const fulfillmentInventory = new FulfillmentInventory(httpClient)
