@@ -5,7 +5,6 @@ import { Config } from './config'
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe(`${Sellers.name}`, () => {
   it('should be able to query marketplace participation', async () => {
     expect.assertions(1)
@@ -29,4 +28,3 @@ describe(`${Sellers.name}`, () => {
     expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 })
-/* eslint-enable jest/no-standalone-expect */

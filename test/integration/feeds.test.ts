@@ -3,7 +3,6 @@ import { Config } from './config'
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe(`${Feeds.name}`, () => {
   const feeds = new Feeds(httpClient)
 
@@ -57,4 +56,3 @@ describe(`${Feeds.name}`, () => {
     expect(response).toBeDefined()
   })
 })
-/* eslint-enable jest/no-standalone-expect */

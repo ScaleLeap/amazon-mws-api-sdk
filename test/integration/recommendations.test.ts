@@ -3,7 +3,6 @@ import { Config } from './config'
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe(`${Recommendations.name}`, () => {
   it('should be able to query last updated time for recommendations', async () => {
     expect.assertions(1)
@@ -27,4 +26,3 @@ describe(`${Recommendations.name}`, () => {
     expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 })
-/* eslint-enable jest/no-standalone-expect */

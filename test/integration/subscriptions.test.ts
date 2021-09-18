@@ -18,7 +18,6 @@ const SQS_URL = 'https://sqs.us-east-1.amazonaws.com/304786922662/mws-sub-testw'
 const httpClient = new Config().createHttpClient()
 const subscriptions = new Subscriptions(httpClient)
 
-/* eslint-disable jest/no-standalone-expect */
 describe('subscriptions', () => {
   it('should be able to query service status', async () => {
     expect.assertions(1)
@@ -100,4 +99,3 @@ describe('subscriptions', () => {
     expect(deregisterDestinationResponse).toBe('')
   })
 })
-/* eslint-enable jest/no-standalone-expect */

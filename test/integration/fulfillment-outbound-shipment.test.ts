@@ -3,7 +3,6 @@ import { Config } from './config'
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe(`${FulfillmentOutboundShipment.name}`, () => {
   it('should be able to query service status', async () => {
     expect.assertions(1)
@@ -15,4 +14,3 @@ describe(`${FulfillmentOutboundShipment.name}`, () => {
     expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 })
-/* eslint-enable jest/no-standalone-expect */

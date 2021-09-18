@@ -3,7 +3,6 @@ import { Config } from './config'
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe(`${FulfillmentInventory.name}`, () => {
   it('should be able to get list of inventory supply', async () => {
     expect.assertions(1)
@@ -31,4 +30,3 @@ describe(`${FulfillmentInventory.name}`, () => {
     expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 })
-/* eslint-enable jest/no-standalone-expect */

@@ -5,7 +5,6 @@ import { Config } from './config'
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe(`products`, () => {
   const products = new Products(httpClient)
   const MarketplaceId = amazonMarketplaces.CA.id
@@ -89,4 +88,3 @@ describe(`products`, () => {
     expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 })
-/* eslint-enable jest/no-standalone-expect */

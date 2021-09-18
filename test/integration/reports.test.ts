@@ -4,7 +4,6 @@ import { Config } from './config'
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe('reports', () => {
   const reports = new Reports(httpClient)
 
@@ -136,4 +135,3 @@ describe('reports', () => {
     expect(response).toBeDefined()
   })
 })
-/* eslint-enable jest/no-standalone-expect */

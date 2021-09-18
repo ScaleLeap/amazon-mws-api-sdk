@@ -17,7 +17,6 @@ jestPollyConfigService.config = {
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe(`submit-feed`, () => {
   const feeds = new Feeds(httpClient)
 
@@ -36,4 +35,3 @@ describe(`submit-feed`, () => {
     expect(response).toBeDefined()
   })
 })
-/* eslint-enable jest/no-standalone-expect */

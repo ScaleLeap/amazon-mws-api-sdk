@@ -5,7 +5,6 @@ import { Config } from './config'
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe(`${Orders.name}`, () => {
   it('should be able to query list orders', async () => {
     expect.assertions(1)
@@ -32,4 +31,3 @@ describe(`${Orders.name}`, () => {
     expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 })
-/* eslint-enable jest/no-standalone-expect */

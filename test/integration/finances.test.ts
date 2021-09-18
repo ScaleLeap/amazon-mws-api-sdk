@@ -3,7 +3,6 @@ import { Config } from './config'
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe(`${Finances.name}`, () => {
   const finances = new Finances(httpClient)
   const validDate = new Date(Date.now() - 150 * 24 * 60 * 60 * 1000) // Date from 150 days ago
@@ -36,4 +35,3 @@ describe(`${Finances.name}`, () => {
     expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 })
-/* eslint-enable jest/no-standalone-expect */
