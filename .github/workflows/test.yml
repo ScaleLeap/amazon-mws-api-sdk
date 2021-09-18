@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: Test ${{ matrix.node }} and ${{ matrix.os }}
+    name: Node v${{ matrix.node }} on ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
 
