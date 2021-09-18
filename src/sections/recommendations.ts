@@ -1,8 +1,15 @@
-import { Codec, enumeration, exactly, GetType, number, oneOf, optional, string } from 'purify-ts'
+import { Codec, enumeration, exactly, GetType, oneOf, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ASIN, ensureArray, mwsDate, NextToken, nextToken as nextTokenCodec, SKU } from '../parsing'
+import {
+  ensureArray,
+  ensureFloat,
+  ensureInt,
+  mwsDate,
+  NextToken,
+  nextToken as nextTokenCodec,
+} from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { FulfillmentChannelEnum } from './types'
 
@@ -54,23 +61,23 @@ export interface ListRecommendationsParameters {
 }
 
 const ProductIdentifier = Codec.interface({
-  Asin: ASIN,
-  Sku: SKU,
+  Asin: string,
+  Sku: string,
   Upc: string,
 })
 
 const Price = Codec.interface({
   CurrencyCode: string,
-  Amount: number,
+  Amount: ensureFloat,
 })
 
 const DimensionMeasure = Codec.interface({
-  Value: number,
+  Value: ensureFloat,
   Unit: string,
 })
 
 const WeightMeasure = Codec.interface({
-  Value: number,
+  Value: ensureFloat,
   Unit: string,
 })
 
@@ -89,12 +96,12 @@ const FulfillmentRecommendation = Codec.interface({
   ItemName: optional(string),
   BrandName: optional(string),
   ProductCategory: optional(string),
-  SalesRank: optional(number),
+  SalesRank: optional(ensureInt),
   BuyBoxPrice: optional(Price),
-  NumberOfOffers: optional(number),
-  NumberOfOffersFulfilledByAmazon: optional(number),
-  AverageCustomerReview: optional(number),
-  NumberOfCustomerReviews: optional(number),
+  NumberOfOffers: optional(ensureInt),
+  NumberOfOffersFulfilledByAmazon: optional(ensureInt),
+  AverageCustomerReview: optional(ensureFloat),
+  NumberOfCustomerReviews: optional(ensureInt),
   ItemDimensions: optional(ItemDimensions),
 })
 
@@ -107,9 +114,9 @@ const InventoryRecommendation = Codec.interface({
   ItemIdentifier: ProductIdentifier,
   ItemName: optional(string),
   FulfillmentChannel: optional(FulfillmentChannel),
-  AvailableQuantity: optional(number),
-  DaysUntilStockRunsOut: optional(number),
-  DaysOutOfStockLast30Days: optional(number),
+  AvailableQuantity: optional(ensureInt),
+  DaysUntilStockRunsOut: optional(ensureInt),
+  DaysOutOfStockLast30Days: optional(ensureInt),
 })
 
 const PricingRecommendation = Codec.interface({
@@ -127,8 +134,8 @@ const PricingRecommendation = Codec.interface({
   MedianPricePlusShipping: optional(Price),
   LowestMerchantFulfilledOfferPrice: optional(Price),
   LowestAmazonFulfilledOfferPrice: optional(Price),
-  NumberOfMerchatFulfilledfOffers: optional(number),
-  NumberOfAmazonFulfilledOrders: optional(number),
+  NumberOfMerchatFulfilledfOffers: optional(ensureInt),
+  NumberOfAmazonFulfilledOrders: optional(ensureInt),
 })
 
 const GlobalSellingRecommendation = Codec.interface({
@@ -139,12 +146,12 @@ const GlobalSellingRecommendation = Codec.interface({
   ItemName: optional(string),
   BrandName: optional(string),
   ProductCategory: optional(string),
-  SalesRank: optional(number),
+  SalesRank: optional(ensureInt),
   BuyBoxPrice: optional(Price),
-  NumberOfOffers: optional(number),
-  NumberOfOffersFulfilledByAmazon: optional(number),
-  AverageCustomerReview: optional(number),
-  NumberOfCustomerReviews: optional(number),
+  NumberOfOffers: optional(ensureInt),
+  NumberOfOffersFulfilledByAmazon: optional(ensureInt),
+  AverageCustomerReview: optional(ensureFloat),
+  NumberOfCustomerReviews: optional(ensureInt),
   ItemDimensions: optional(ItemDimensions),
 })
 
@@ -156,11 +163,11 @@ const AdvertisingRecommendation = Codec.interface({
   ItemName: optional(string),
   BrandName: optional(string),
   ProductCategory: optional(string),
-  SalesRank: optional(number),
+  SalesRank: optional(ensureInt),
   YourPricePluShipping: optional(Price),
   LowestPricePlusShipping: optional(Price),
-  AvailableQuantity: optional(number),
-  SalesForTheLast30Days: optional(number),
+  AvailableQuantity: optional(ensureInt),
+  SalesForTheLast30Days: optional(ensureInt),
 })
 
 export const ListRecommendations = Codec.interface({

@@ -11,7 +11,7 @@ Array [
         "TaxClassifications": Object {
           "TaxClassification": Object {
             "Name": "CPF",
-            "Value": 99999999999,
+            "Value": "99999999999",
           },
         },
       },
@@ -24,7 +24,7 @@ Array [
         Object {
           "ASIN": "B078HVJB69",
           "GiftWrapPrice": Object {
-            "Amount": "0",
+            "Amount": "0.00",
             "CurrencyCode": "BRL",
           },
           "ItemPrice": Object {
@@ -33,7 +33,7 @@ Array [
           },
           "OrderItemId": "19441439621890",
           "PromotionDiscount": Object {
-            "Amount": "0",
+            "Amount": "0.00",
             "CurrencyCode": "BRL",
           },
           "QuantityOrdered": 2,
@@ -43,11 +43,11 @@ Array [
             "1234567687",
           ],
           "ShippingDiscount": Object {
-            "Amount": "0",
+            "Amount": "0.00",
             "CurrencyCode": "BRL",
           },
           "ShippingPrice": Object {
-            "Amount": "30",
+            "Amount": "30.00",
             "CurrencyCode": "BRL",
           },
           "Title": "iPhone X Apple Cinza Espacial, 64 GB e CÃ¢mera 12 MP",

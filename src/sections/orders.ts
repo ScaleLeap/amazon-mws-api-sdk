@@ -1,15 +1,15 @@
-import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts/Codec'
+import { Codec, enumeration, GetType, optional, string } from 'purify-ts/Codec'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
 import {
-  ASIN,
   ensureArray,
-  ensureString,
+  ensureBool,
+  ensureFloat,
+  ensureInt,
   mwsDate,
   NextToken,
   nextToken as nextTokenCodec,
-  SKU,
 } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { FulfillmentChannelEnum, RequireOnlyOne } from './types'
@@ -93,7 +93,7 @@ const Address = Codec.interface({
   Country: optional(string),
   District: optional(string),
   StateOrRegion: optional(string),
-  PostalCode: optional(ensureString),
+  PostalCode: optional(string),
   CountryCode: optional(string),
   Phone: optional(string),
   AddressType: optional(adddressType),
@@ -116,12 +116,12 @@ const BuyerTaxInfo = Codec.interface({
 
 const Money = Codec.interface({
   CurrencyCode: optional(string),
-  Amount: optional(number),
+  Amount: optional(ensureFloat),
 })
 
 export const Order = Codec.interface({
   AmazonOrderId: string,
-  SellerOrderId: optional(ensureString),
+  SellerOrderId: optional(string),
   PurchaseDate: mwsDate,
   LastUpdateDate: mwsDate,
   OrderStatus: orderStatus,
@@ -130,8 +130,8 @@ export const Order = Codec.interface({
   ShipServiceLevel: optional(string),
   ShippingAddress: optional(Address),
   OrderTotal: optional(Money),
-  NumberOfItemsShipped: optional(number),
-  NumberOfItemsUnshipped: optional(number),
+  NumberOfItemsShipped: optional(ensureInt),
+  NumberOfItemsUnshipped: optional(ensureInt),
   PaymentExecutionDetail: optional(
     ensureArray(
       'PaymentExecutionDetailItem',
@@ -143,7 +143,7 @@ export const Order = Codec.interface({
   ),
   PaymentMethod: optional(string),
   PaymentMethodDetails: optional(ensureArray('PaymentMethodDetail', string)),
-  IsReplacementOrder: optional(boolean),
+  IsReplacementOrder: optional(ensureBool),
   ReplacedOrderId: optional(string),
   MarketplaceId: optional(string),
   BuyerEmail: optional(string),
@@ -157,14 +157,14 @@ export const Order = Codec.interface({
   LatestShipDate: optional(mwsDate),
   EarliestDeliveryDate: optional(mwsDate),
   LatestDeliveryDate: optional(mwsDate),
-  IsBusinessOrder: optional(boolean),
-  IsSoldByAB: optional(boolean),
+  IsBusinessOrder: optional(ensureBool),
+  IsSoldByAB: optional(ensureBool),
   PurchaseOrderNumber: optional(string),
-  IsPrime: optional(boolean),
-  IsPremiumOrder: optional(boolean),
-  IsGlobalExpressEnabled: optional(boolean),
+  IsPrime: optional(ensureBool),
+  IsPremiumOrder: optional(ensureBool),
+  IsGlobalExpressEnabled: optional(ensureBool),
   PromiseResponseDueDate: optional(mwsDate),
-  IsEstimatedShipDateSet: optional(boolean),
+  IsEstimatedShipDateSet: optional(ensureBool),
 })
 
 export const ListOrders = Codec.interface({
@@ -200,26 +200,26 @@ export const ListOrderItems = Codec.interface({
   OrderItems: ensureArray(
     'OrderItem',
     Codec.interface({
-      ASIN,
-      OrderItemId: ensureString,
-      SellerSKU: optional(SKU),
+      ASIN: string,
+      OrderItemId: string,
+      SellerSKU: optional(string),
       BuyerCustomizedInfo: optional(
         Codec.interface({
           CustomizedURL: string,
         }),
       ),
       Title: optional(string),
-      QuantityOrdered: number,
-      QuantityShipped: optional(number),
+      QuantityOrdered: ensureInt,
+      QuantityShipped: optional(ensureInt),
       PointsGranted: optional(
         Codec.interface({
-          PointsNumber: optional(number),
+          PointsNumber: optional(ensureInt),
           PointsMonetaryValue: optional(Money),
         }),
       ),
       ProductInfo: optional(
         Codec.interface({
-          NumberOfItems: optional(number),
+          NumberOfItems: optional(ensureInt),
         }),
       ),
       ItemPrice: optional(Money),
@@ -241,7 +241,7 @@ export const ListOrderItems = Codec.interface({
       PromotionIds: optional(ensureArray('PromotionId', string)),
       CODFee: optional(Money),
       CODFeeDiscount: optional(Money),
-      IsGift: optional(boolean),
+      IsGift: optional(ensureBool),
       GiftMessageText: optional(string),
       GiftWrapLevel: optional(string),
       ConditionNote: optional(string),
@@ -250,8 +250,8 @@ export const ListOrderItems = Codec.interface({
       ScheduledDeliveryStartDate: optional(mwsDate),
       ScheduledDeliveryEndDate: optional(mwsDate),
       PriceDesignation: optional(string),
-      IsTransparency: optional(boolean),
-      SerialNumberRequired: optional(boolean),
+      IsTransparency: optional(ensureBool),
+      SerialNumberRequired: optional(ensureBool),
     }),
   ),
 })

@@ -1,13 +1,11 @@
 import crypto from 'crypto'
 import {
   array,
-  boolean,
   Codec,
   enumeration,
   exactly,
   GetType,
   Left,
-  number,
   oneOf,
   optional,
   record,
@@ -17,7 +15,7 @@ import {
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
+import { ensureBool, ensureInt, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 
 const FEEDS_API_VERSION = '2009-01-01'
 export interface GetFeedSubmissionListParameters {
@@ -41,7 +39,7 @@ export enum FeedProcessingStatusEnum {
 const FeedProcessingStatusCodec = enumeration(FeedProcessingStatusEnum)
 
 const FeedSubmissionInfo = Codec.interface({
-  FeedSubmissionId: ensureString,
+  FeedSubmissionId: string,
   FeedType: string,
   SubmittedDate: mwsDate,
   FeedProcessingStatus: FeedProcessingStatusCodec,
@@ -50,7 +48,7 @@ const FeedSubmissionInfo = Codec.interface({
 })
 
 export const GetFeedSubmissionList = Codec.interface({
-  HasToken: optional(boolean),
+  HasToken: optional(ensureBool),
   NextToken: optional(nextTokenCodec('GetFeedSubmissionList')),
   FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
 })
@@ -122,7 +120,7 @@ export interface GetFeedSubmissionCountParameters {
 }
 
 export const GetFeedSubmissionCount = Codec.interface({
-  Count: number,
+  Count: ensureInt,
 })
 
 export type GetFeedSubmissionCount = GetType<typeof GetFeedSubmissionCount>
@@ -141,7 +139,7 @@ export interface CancelFeedSubmissionsParameters {
 }
 
 export const CancelFeedSubmissions = Codec.interface({
-  Count: number,
+  Count: ensureInt,
   FeedSubmissionInfo: optional(oneOf([FeedSubmissionInfo, array(FeedSubmissionInfo), exactly('')])),
 })
 

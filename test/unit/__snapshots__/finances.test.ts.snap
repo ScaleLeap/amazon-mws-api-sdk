@@ -978,7 +978,7 @@ Array [
       "PerformanceBondRefundEventList": Array [
         Object {
           "Amount": Object {
-            "CurrencyAmount": 100,
+            "CurrencyAmount": "100",
             "CurrencyCode": "String",
           },
           "MarketplaceCountryCode": "String",

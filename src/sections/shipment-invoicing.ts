@@ -1,9 +1,9 @@
 import crypto from 'crypto'
-import { Codec, enumeration, exactly, GetType, number, optional, string, unknown } from 'purify-ts'
+import { Codec, enumeration, exactly, GetType, optional, string, unknown } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ASIN, ensureArray, ensureString, SKU } from '../parsing'
+import { ensureArray, ensureInt } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 
 const SHIPMENT_INVOICING_API_VERSION = '2018-09-01'
@@ -33,29 +33,29 @@ export const ShipmentInvoicingAddress = Codec.interface({
   County: optional(string),
   District: optional(string),
   StateOrRegion: optional(string),
-  PostalCode: optional(ensureString),
+  PostalCode: optional(string),
   CountryCode: optional(string),
-  Phone: optional(ensureString),
+  Phone: optional(string),
   AddressType: optional(AddressType),
 })
 
 export const Money = Codec.interface({
   CurrencyCode: optional(string),
-  Amount: optional(ensureString),
+  Amount: optional(string),
 })
 
 const ShipmentItem = Codec.interface({
-  ASIN,
-  SellerSKU: optional(SKU),
-  OrderItemId: ensureString,
+  ASIN: string,
+  SellerSKU: optional(string),
+  OrderItemId: string,
   Title: optional(string),
-  QuantityOrdered: number,
+  QuantityOrdered: ensureInt,
   ItemPrice: optional(Money),
   ShippingPrice: optional(Money),
   GiftWrapPrice: optional(Money),
   ShippingDiscount: optional(Money),
   PromotionDiscount: optional(Money),
-  SerialNumbers: optional(ensureArray('SerialNumber', ensureString)),
+  SerialNumbers: optional(ensureArray('SerialNumber', string)),
 })
 
 const ShipmentDetail = Codec.interface({

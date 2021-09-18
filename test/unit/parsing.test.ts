@@ -4,7 +4,9 @@ import { Right } from 'purify-ts/Either'
 
 import {
   ensureArray,
-  ensureString,
+  ensureBool,
+  ensureFloat,
+  ensureInt,
   mwsBoolean,
   mwsDate,
   NextToken,
@@ -41,19 +43,61 @@ describe('ensureArray', () => {
   })
 })
 
-describe('ensureString', () => {
-  it('decodes numbers as strings', () => {
+describe('ensureBool', () => {
+  it('decodes strings as booleans', () => {
+    expect.assertions(5)
+
+    expect(ensureBool.decode('true')).toStrictEqual(Right(true))
+    expect(ensureBool.decode('false')).toStrictEqual(Right(false))
+    expect(ensureBool.decode('')).not.toStrictEqual(Right(false))
+    expect(ensureBool.decode(1)).not.toStrictEqual(Right(true))
+    expect(ensureBool.decode(0)).not.toStrictEqual(Right(false))
+  })
+
+  it('generates a valid JSON schema for a string or boolean', () => {
+    expect.assertions(5)
+
+    const schema = ensureBool.schema()
+
+    expect(ajv.validate(schema, 'true')).toStrictEqual(true)
+    expect(ajv.validate(schema, 'false')).toStrictEqual(true)
+    expect(ajv.validate(schema, true)).toStrictEqual(true)
+    expect(ajv.validate(schema, false)).toStrictEqual(true)
+    expect(ajv.validate(schema, 5)).toStrictEqual(false)
+  })
+})
+
+describe('ensureFloat', () => {
+  it('decodes strings as floats', () => {
     expect.assertions(1)
 
-    expect(ensureString.decode(5)).toStrictEqual(Right('5'))
+    expect(ensureFloat.decode('5.1')).toStrictEqual(Right(5.1))
   })
 
   it('generates a valid JSON schema for a string or number', () => {
     expect.assertions(3)
 
-    const schema = ensureString.schema()
+    const schema = ensureFloat.schema()
 
-    expect(ajv.validate(schema, 'A')).toStrictEqual(true)
+    expect(ajv.validate(schema, '5.1')).toStrictEqual(true)
+    expect(ajv.validate(schema, 5.1)).toStrictEqual(true)
+    expect(ajv.validate(schema, false)).toStrictEqual(false)
+  })
+})
+
+describe('ensureInt', () => {
+  it('decodes strings as floats', () => {
+    expect.assertions(1)
+
+    expect(ensureInt.decode('5')).toStrictEqual(Right(5))
+  })
+
+  it('generates a valid JSON schema for a string or number', () => {
+    expect.assertions(3)
+
+    const schema = ensureInt.schema()
+
+    expect(ajv.validate(schema, '5')).toStrictEqual(true)
     expect(ajv.validate(schema, 5)).toStrictEqual(true)
     expect(ajv.validate(schema, false)).toStrictEqual(false)
   })

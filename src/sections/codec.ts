@@ -1,4 +1,6 @@
-import { Codec, number, optional, string } from 'purify-ts'
+import { Codec, optional, string } from 'purify-ts'
+
+import { ensureFloat } from '../parsing'
 
 /**
  * Shared codecs
@@ -7,5 +9,5 @@ import { Codec, number, optional, string } from 'purify-ts'
 // This is different from the CurrencyAmount used by merchant-fulfillment
 export const CurrencyAmount = Codec.interface({
   CurrencyCode: optional(string),
-  CurrencyAmount: optional(number),
+  CurrencyAmount: optional(ensureFloat),
 })

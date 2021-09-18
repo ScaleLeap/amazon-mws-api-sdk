@@ -89,13 +89,13 @@ Array [
   Object {
     "AmazonEnvelope": Object {
       "Header": Object {
-        "DocumentVersion": 1.02,
+        "DocumentVersion": "1.02",
         "MerchantIdentifier": "T_M_GOOD_83835495",
       },
       "Message": Object {
-        "MessageID": 1,
+        "MessageID": "1",
         "ProcessingReport": Object {
-          "DocumentTransactionID": 4319742521,
+          "DocumentTransactionID": "4319742521",
         },
       },
       "MessageType": "ProcessingReport",

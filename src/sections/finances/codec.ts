@@ -1,13 +1,6 @@
-import { Codec, enumeration, GetType, number, oneOf, optional, string, unknown } from 'purify-ts'
+import { Codec, enumeration, GetType, oneOf, optional, string, unknown } from 'purify-ts'
 
-import {
-  ASIN,
-  ensureArray,
-  ensureString,
-  mwsDate,
-  nextToken as nextTokenCodec,
-  SKU,
-} from '../../parsing'
+import { ensureArray, ensureInt, mwsDate, nextToken as nextTokenCodec } from '../../parsing'
 import { CurrencyAmount } from '../codec'
 import { FulfillmentChannelEnum } from '../types'
 
@@ -25,8 +18,8 @@ const FinancialEventGroup = Codec.interface({
   OriginalTotal: optional(CurrencyAmount),
   ConvertedTotal: optional(CurrencyAmount),
   FundTransferDate: optional(mwsDate),
-  TraceId: optional(ensureString),
-  AccountTail: optional(ensureString),
+  TraceId: optional(string),
+  AccountTail: optional(string),
   BeginningBalance: optional(CurrencyAmount),
   FinancialEventGroupStart: optional(mwsDate),
   FinancialEventGroupEnd: optional(mwsDate),
@@ -139,10 +132,10 @@ const Promotion = Codec.interface({
 })
 
 const ShipmentItem = Codec.interface({
-  SellerSKU: optional(SKU),
-  OrderItemId: optional(ensureString),
-  OrderAdjustmentItemId: optional(ensureString),
-  QuantityShipped: optional(number),
+  SellerSKU: optional(string),
+  OrderItemId: optional(string),
+  OrderAdjustmentItemId: optional(string),
+  QuantityShipped: optional(ensureInt),
   ItemChargeList: optional(ensureArray('ChargeComponent', ChargeComponent)),
   ItemTaxWithheldList: optional(ensureArray('TaxWithheldComponent', TaxWithheldComponent)),
   ItemChargeAdjustmentList: optional(ensureArray('ChargeComponent', ChargeComponent)),
@@ -156,7 +149,7 @@ const ShipmentItem = Codec.interface({
 
 const ShipmentEvent = Codec.interface({
   AmazonOrderId: optional(string),
-  SellerOrderId: optional(ensureString),
+  SellerOrderId: optional(string),
   MarketplaceName: optional(string),
   OrderChargeList: optional(ensureArray('ChargeComponent', ChargeComponent)),
   OrderChargeAdjustmentList: optional(ensureArray('ChargeComponent', ChargeComponent)),
@@ -176,7 +169,7 @@ const ChargebackEvent = ShipmentEvent
 const FulfillmentChannel = enumeration(FulfillmentChannelEnum)
 
 const PayWithAmazonEvent = Codec.interface({
-  SellerOrderId: optional(ensureString),
+  SellerOrderId: optional(string),
   TransactionPostedDate: optional(mwsDate),
   BusinessObjectType: optional(string),
   SalesChannel: optional(string),
@@ -197,7 +190,7 @@ const ProviderTransactionType = enumeration(ProviderTransactionTypeEnum)
 
 const SolutionProviderCreditEvent = Codec.interface({
   ProviderTransactionType: optional(ProviderTransactionType),
-  SellerOrderId: optional(ensureString),
+  SellerOrderId: optional(string),
   MarketplaceId: optional(string),
   MarketplaceCountryCode: optional(string),
   SellerId: optional(string),
@@ -238,9 +231,9 @@ export enum RentalEventTypeEnum {
 const RentalEventType = enumeration(RentalEventTypeEnum)
 
 const RentalTransactionEvent = Codec.interface({
-  AmazonOrderId: optional(ensureString),
+  AmazonOrderId: optional(string),
   RentalEventType: optional(RentalEventType),
-  ExtensionLength: optional(number),
+  ExtensionLength: optional(ensureInt),
   PostedDate: optional(mwsDate),
   RentalChargeList: optional(ensureArray('ChargeComponent', ChargeComponent)),
   RentalFeeList: optional(ensureArray('FeeComponent', FeeComponent)),
@@ -272,7 +265,7 @@ const transactionType = enumeration(transactionTypeEnum)
 const ProductAdsPaymentEvent = Codec.interface({
   postedDate: optional(mwsDate),
   transactionType: optional(transactionType),
-  invoiceId: optional(ensureString),
+  invoiceId: optional(string),
   baseValue: optional(CurrencyAmount),
   taxValue: optional(CurrencyAmount),
   transactionValue: optional(CurrencyAmount),
@@ -282,10 +275,10 @@ const ServiceFeeEvent = Codec.interface({
   AmazonOrderId: optional(string),
   FeeReason: optional(string),
   FeeList: optional(ensureArray('FeeComponent', FeeComponent)),
-  SellerSKU: optional(SKU),
-  FnSKU: optional(SKU),
+  SellerSKU: optional(string),
+  FnSKU: optional(string),
   FeeDesription: optional(string),
-  ASIN: optional(ASIN),
+  ASIN: optional(string),
 })
 
 const DebtRecoveryItem = Codec.interface({
@@ -297,7 +290,7 @@ const DebtRecoveryItem = Codec.interface({
 
 const ChargeInstrument = Codec.interface({
   Description: optional(string),
-  Tail: optional(ensureString),
+  Tail: optional(string),
   Amount: optional(CurrencyAmount),
 })
 
@@ -350,13 +343,13 @@ export enum AdjustmentTypeEnum {
 const AdjustmentType = enumeration(AdjustmentTypeEnum)
 
 const AdjustmentItem = Codec.interface({
-  Quantity: optional(ensureString), // Docs and mock responses list this as `string`
+  Quantity: optional(string), // Docs and mock responses list this as `string`
   PerUnitAmount: optional(CurrencyAmount),
   TotalAmount: optional(CurrencyAmount),
-  SellerSKU: optional(SKU),
-  FnSKU: optional(SKU),
+  SellerSKU: optional(string),
+  FnSKU: optional(string),
   ProductDescription: optional(string),
-  ASIN: optional(ASIN),
+  ASIN: optional(string),
 })
 
 const AdjustmentEvent = Codec.interface({
@@ -368,10 +361,10 @@ const AdjustmentEvent = Codec.interface({
 
 const CouponPaymentEvent = Codec.interface({
   PostedDate: optional(mwsDate),
-  CouponId: optional(ensureString),
+  CouponId: optional(string),
   SellerCouponDescription: optional(string),
-  ClipOrRedemptionCount: optional(number),
-  PaymentEventId: optional(ensureString),
+  ClipOrRedemptionCount: optional(ensureInt),
+  PaymentEventId: optional(string),
   FeeComponent: optional(FeeComponent),
   ChargeComponent: optional(ChargeComponent),
   TotalAmount: optional(CurrencyAmount),
@@ -383,7 +376,7 @@ const SAFETReimbursementItem = Codec.interface({
 
 const SAFETReimbursementEvent = Codec.interface({
   PostedDate: optional(mwsDate),
-  SAFETClaimId: optional(ensureString),
+  SAFETClaimId: optional(string),
   ReimbursedAmount: optional(CurrencyAmount),
   SAFETReimbursementItemList: optional(
     ensureArray('SAFETReimbursementItem', SAFETReimbursementItem),
@@ -392,8 +385,8 @@ const SAFETReimbursementEvent = Codec.interface({
 
 const SellerReviewEnrollmentPaymentEvent = Codec.interface({
   PostedDate: optional(mwsDate),
-  EnrollmentId: optional(ensureString),
-  ParentASIN: optional(ASIN),
+  EnrollmentId: optional(string),
+  ParentASIN: optional(string),
   FeeComponent: optional(FeeComponent),
   ChargeComponent: optional(ChargeComponent),
   TotalAmount: optional(CurrencyAmount),
@@ -401,14 +394,14 @@ const SellerReviewEnrollmentPaymentEvent = Codec.interface({
 
 const FBALiquidationEvent = Codec.interface({
   PostedDate: optional(mwsDate),
-  OriginalRemovalOrderId: optional(ensureString),
+  OriginalRemovalOrderId: optional(string),
   LiquidationProceedsAmount: optional(CurrencyAmount),
   LiquidationFeeAmount: optional(CurrencyAmount),
 })
 
 const ImagingServicesFeeEvent = Codec.interface({
-  ImagingRequestBillingItemID: optional(ensureString),
-  ASIN: optional(ASIN),
+  ImagingRequestBillingItemID: optional(string),
+  ASIN: optional(string),
   PostedDate: optional(mwsDate),
   FeeList: optional(ensureArray('FeeComponent', FeeComponent)),
 })
@@ -446,10 +439,10 @@ const NetworkComminglingTransactionType = enumeration(NetworkComminglingTransact
 
 const NetworkComminglingTransactionEvent = Codec.interface({
   PostedDate: optional(mwsDate),
-  NetCoTransactionID: optional(ensureString),
+  NetCoTransactionID: optional(string),
   SwapReason: optional(string),
   TransactionType: optional(NetworkComminglingTransactionType),
-  ASIN: optional(ASIN),
+  ASIN: optional(string),
   MarketplaceId: optional(string),
   TaxExclusiveAmount: optional(CurrencyAmount),
   TaxAmount: optional(CurrencyAmount),
@@ -457,7 +450,7 @@ const NetworkComminglingTransactionEvent = Codec.interface({
 
 const TDSReimbursementEvent = Codec.interface({
   PostedDate: optional(mwsDate),
-  TdsOrderId: optional(ensureString),
+  TdsOrderId: optional(string),
   ReimbursedAmount: optional(CurrencyAmount),
 })
 const FinancialEvents = Codec.interface({

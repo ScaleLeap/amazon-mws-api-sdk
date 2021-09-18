@@ -1,6 +1,12 @@
-import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
+import { Codec, enumeration, GetType, optional, string } from 'purify-ts'
 
-import { ensureArray, ensureString, mwsDate, nextToken as nextTokenCodec, SKU } from '../../parsing'
+import {
+  ensureArray,
+  ensureBool,
+  ensureInt,
+  mwsDate,
+  nextToken as nextTokenCodec,
+} from '../../parsing'
 import {
   FISFeeTypesEnum,
   FISWeightUnitEnum,
@@ -15,14 +21,14 @@ const FISWeightUnit = enumeration(FISWeightUnitEnum)
 
 const FISWeight = Codec.interface({
   Unit: FISWeightUnit,
-  Value: ensureString,
+  Value: string,
 })
 
 const FISFeeTypes = enumeration(FISFeeTypesEnum)
 
 const FISCurrency = Codec.interface({
   CurrencyCode: string,
-  Value: ensureString,
+  Value: string,
 })
 
 const FISFee = Codec.interface({
@@ -31,9 +37,9 @@ const FISFee = Codec.interface({
 })
 
 const FulfillmentPreviewItem = Codec.interface({
-  SellerSKU: SKU,
-  SellerFulfillmentOrderItemId: ensureString,
-  Quantity: number,
+  SellerSKU: string,
+  SellerFulfillmentOrderItemId: string,
+  Quantity: ensureInt,
   EstimatedShippingWeight: optional(FISWeight),
   ShippingWeightCalculationMethod: string,
 })
@@ -47,9 +53,9 @@ const FulfillmentPreviewShipment = Codec.interface({
 })
 
 const UnfulfillablePreviewItem = Codec.interface({
-  SellerSKU: SKU,
+  SellerSKU: string,
   SellerFulfillmentOrderItemId: string,
-  Quantity: number,
+  Quantity: ensureInt,
   ItemUnfulfillableReasons: ensureArray('member', string),
 })
 
@@ -65,8 +71,8 @@ const ScheduledDeliveryInfo = Codec.interface({
 
 const FulfillmentPreview = Codec.interface({
   ShippingSpeedCategory,
-  IsFulfillable: boolean,
-  IsCODCapable: boolean,
+  IsFulfillable: ensureBool,
+  IsCODCapable: ensureBool,
   MarketplaceId: optional(string),
   EstimatedShippingWeight: optional(FISWeight),
   EstimatedFees: optional(ensureArray('member', FISFee)),
@@ -115,7 +121,7 @@ const FOSAddress = Codec.interface({
   City: optional(string),
   StateOrProvinceCode: string,
   CountryCode: string,
-  PostalCode: optional(ensureString),
+  PostalCode: optional(string),
   PhoneNumber: optional(string),
 })
 
@@ -137,7 +143,7 @@ const FulfillmentAction = enumeration(FulfillmentActionEnum)
 const FulfillmentOrderStatus = enumeration(FulfillmentOrderStatusEnum)
 
 const CODSettings = Codec.interface({
-  IsCODRequired: optional(boolean),
+  IsCODRequired: optional(ensureBool),
   CODCharge: optional(FISCurrency),
   CODChargeTax: optional(FISCurrency),
   ShippingCharge: optional(FISCurrency),
@@ -147,7 +153,7 @@ const CODSettings = Codec.interface({
 const FulfillmentOrder = Codec.interface({
   SellerFulfillmentOrderId: string,
   MarketplaceId: optional(string),
-  DisplayableOrderId: ensureString,
+  DisplayableOrderId: string,
   DisplayableOrderDateTime: mwsDate,
   DisplayableOrderComment: string,
   ShippingSpeedCategory,
@@ -176,14 +182,14 @@ export const ListAllFulfillmentOrdersResponse = Codec.interface({
 })
 
 const FulfillmentOrderItem = Codec.interface({
-  SellerSKU: SKU,
+  SellerSKU: string,
   SellerFulfillmentOrderItemId: string,
-  Quantity: number,
+  Quantity: ensureInt,
   GiftMessage: optional(string),
   DisplayableComment: optional(string),
-  FulfillmentNetworkSKU: optional(SKU),
-  CancelledQuantity: number,
-  UnfulfillableQuantity: number,
+  FulfillmentNetworkSKU: optional(string),
+  CancelledQuantity: ensureInt,
+  UnfulfillableQuantity: ensureInt,
   EstimatedShipDateTime: optional(mwsDate),
   EstimatedArrivalDateTime: optional(mwsDate),
   PerUnitDecalredValue: optional(FISCurrency),
@@ -202,15 +208,15 @@ const FulfillmentShipmentStatus = enumeration(FulfillmentShipmentStatusEnum)
 
 const FulfillmentShipmentItem = Codec.interface({
   SellerSKU: optional(string),
-  SellerFulfillmentOrderItemId: ensureString,
-  Quantity: number,
-  PackageNumber: optional(number),
+  SellerFulfillmentOrderItemId: string,
+  Quantity: ensureInt,
+  PackageNumber: optional(ensureInt),
 })
 
 const FulfillmentShipmentPackage = Codec.interface({
-  PackageNumber: number,
-  CarrierCode: ensureString,
-  TrackingNumber: optional(ensureString),
+  PackageNumber: ensureInt,
+  CarrierCode: string,
+  TrackingNumber: optional(string),
   EstimatedArrivalDateTime: optional(mwsDate),
 })
 
@@ -235,24 +241,24 @@ export enum ReturnReceivedConditionEnum {
 const ReturnReceivedCondition = enumeration(ReturnReceivedConditionEnum)
 
 const ReturnItem = Codec.interface({
-  SellerReturnItemId: ensureString,
-  SellerFulfillmentOrderItemId: ensureString,
-  AmazonShipmentId: ensureString,
-  SellerReturnReasonCode: ensureString,
+  SellerReturnItemId: string,
+  SellerFulfillmentOrderItemId: string,
+  AmazonShipmentId: string,
+  SellerReturnReasonCode: string,
   ReturnComment: optional(string),
-  AmazonReturnReasonCode: optional(ensureString),
+  AmazonReturnReasonCode: optional(string),
   Status: string,
   StatusChangedDate: mwsDate,
-  ReturnAuthorizationId: optional(ensureString),
+  ReturnAuthorizationId: optional(string),
   ReturnReceivedCondition: optional(ReturnReceivedCondition),
   FulfillmentCenterId: optional(string),
 })
 
 const ReturnAuthorization = Codec.interface({
-  ReturnAuthorizationId: ensureString,
-  FulfillmentCenterId: ensureString,
+  ReturnAuthorizationId: string,
+  FulfillmentCenterId: string,
   ReturnToAddress: FOSAddress,
-  AmazonRmaId: ensureString,
+  AmazonRmaId: string,
   RmaPageURL: string,
 })
 
@@ -373,10 +379,10 @@ export enum AdditionalLocationInfoEnum {
 const AdditionalLocationInfo = enumeration(AdditionalLocationInfoEnum)
 
 export const GetPackageTrackingDetails = Codec.interface({
-  PackageNumber: number,
-  TrackingNumber: ensureString,
+  PackageNumber: ensureInt,
+  TrackingNumber: string,
   CarrierCode: string,
-  CarrierPhoneNumber: ensureString,
+  CarrierPhoneNumber: string,
   CarrierURL: string,
   ShipDate: mwsDate,
   ShipToAddress: TrackingAddress,

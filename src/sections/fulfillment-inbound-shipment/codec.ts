@@ -1,12 +1,12 @@
-import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
+import { Codec, enumeration, GetType, optional, string } from 'purify-ts'
 
 import {
-  ASIN,
   ensureArray,
-  ensureString,
+  ensureBool,
+  ensureFloat,
+  ensureInt,
   mwsDate,
   nextToken as nextTokenCodec,
-  SKU,
 } from '../../parsing'
 import { DimensionsUnitEnum } from '../merchant-fulfillment/codec'
 import {
@@ -31,14 +31,14 @@ export const GuidanceReason = enumeration(GuidanceReasonEnum)
 export const InboundGuidance = enumeration(InboundGuidanceEnum)
 
 export const SKUInboundGuidance = Codec.interface({
-  SellerSKU: SKU,
-  ASIN,
+  SellerSKU: string,
+  ASIN: string,
   InboundGuidance,
   GuidanceReasonList: optional(ensureArray('GuidanceReason', GuidanceReason)),
 })
 
 export const InvalidSKU = Codec.interface({
-  SellerSKU: SKU,
+  SellerSKU: string,
   ErrorReason: string,
 })
 
@@ -56,12 +56,12 @@ export const GetInboundGuidanceForSKUResponse = Codec.interface({
 })
 
 export const InvalidASIN = Codec.interface({
-  ASIN,
+  ASIN: string,
   ErrorReason: string,
 })
 
 export const ASINInboundGuidance = Codec.interface({
-  ASIN,
+  ASIN: string,
   InboundGuidance,
   GuidanceReasonList: optional(ensureArray('GuidanceReason', GuidanceReason)),
 })
@@ -113,7 +113,7 @@ export const FISAddress = Codec.interface({
   DistrictOrCounty: optional(string),
   StateOrProvinceCode: optional(string),
   CountryCode: string,
-  PostalCode: optional(ensureString),
+  PostalCode: optional(string),
 })
 
 const PrepDetails = Codec.interface({
@@ -122,19 +122,19 @@ const PrepDetails = Codec.interface({
 })
 
 export const InboundShipmentPlanItem = Codec.interface({
-  SellerSKU: SKU,
-  FulfillmentNetworkSKU: SKU,
-  Quantity: number,
+  SellerSKU: string,
+  FulfillmentNetworkSKU: string,
+  Quantity: ensureInt,
   PrepDetailsList: optional(ensureArray('PrepDetails', PrepDetails)),
 })
 
 export const Amount = Codec.interface({
   CurrencyCode: string,
-  Value: ensureString,
+  Value: string,
 })
 
 export const BoxContentsFeeDetails = Codec.interface({
-  TotalUnits: optional(number),
+  TotalUnits: optional(ensureInt),
   FeePerUnit: optional(Amount),
   TotalFee: optional(Amount),
 })
@@ -161,10 +161,10 @@ export const CreateInboundShipmentPlanResponse = Codec.interface({
 })
 
 export const GetPreorderInfo = Codec.interface({
-  ShipmentContainsPreorderableItems: boolean,
+  ShipmentContainsPreorderableItems: ensureBool,
   NeedByDate: string,
   ConfirmedFulfillableDate: string,
-  ShipmentConfirmedForPreorder: boolean,
+  ShipmentConfirmedForPreorder: ensureBool,
 })
 
 export type GetPreorderInfo = GetType<typeof GetPreorderInfo>
@@ -211,8 +211,8 @@ export const AmazonPrepFeesDetails = Codec.interface({
 })
 
 export const SKUPrepInstructions = Codec.interface({
-  SellerSKU: SKU,
-  ASIN,
+  SellerSKU: string,
+  ASIN: string,
   BarcodeInstruction,
   PrepGuidance,
   PrepInstructionList: ensureArray('PrepInstruction', PrepInstruction),
@@ -233,7 +233,7 @@ export const GetPrepInstructionsForSKUResponse = Codec.interface({
 })
 
 export const ASINPrepInstructions = Codec.interface({
-  ASIN,
+  ASIN: string,
   BarcodeInstruction,
   PrepGuidance,
   PrepInstructionList: ensureArray('PrepInstruction', PrepInstruction),
@@ -297,8 +297,8 @@ export const EstimateTransportRequestResponse = Codec.interface({
 
 export const TransportHeader = Codec.interface({
   SellerId: string,
-  ShipmentId: ensureString,
-  IsPartnered: boolean,
+  ShipmentId: string,
+  IsPartnered: ensureBool,
   ShipmentType: string,
 })
 
@@ -314,29 +314,29 @@ const DimensionsUnit = enumeration(DimensionsUnitEnum)
 
 const FIBDimensions = Codec.interface({
   Unit: DimensionsUnit,
-  Length: number,
-  Width: number,
-  Height: number,
+  Length: ensureFloat,
+  Width: ensureFloat,
+  Height: ensureFloat,
 })
 
 const WeightUnit = enumeration(WeightUnitEnum)
 
 const FIBWeight = Codec.interface({
   Unit: WeightUnit,
-  Value: number,
+  Value: ensureFloat,
 })
 
 export const PartneredSmallParcelPackageOutput = Codec.interface({
   Dimensions: FIBDimensions,
   Weight: FIBWeight,
-  TrackingId: ensureString,
+  TrackingId: string,
   PackageStatus,
   CarrierName: string,
 })
 
 const NonPartneredSmallParcelPackageOutput = Codec.interface({
   CarrierName: string,
-  TrackingId: ensureString,
+  TrackingId: string,
   PackageStatus,
 })
 
@@ -359,12 +359,12 @@ const Contact = Codec.interface({
 const Pallet = Codec.interface({
   Dimensions: FIBDimensions,
   Weight: optional(FIBWeight),
-  IsStacked: boolean,
+  IsStacked: ensureBool,
 })
 
 export const PartneredLtlDataOutput = Codec.interface({
   Contact,
-  BoxCount: number,
+  BoxCount: ensureInt,
   SellerFreightClass: optional(string),
   FreightReadyDate: string,
   PalletList: ensureArray('member', Pallet),
@@ -373,15 +373,15 @@ export const PartneredLtlDataOutput = Codec.interface({
   PreviewPickupDate: mwsDate,
   PreviewDeliveryDate: mwsDate,
   PreviewFreightClass: string,
-  AmazonReferenceId: ensureString,
-  IsBillOfLadingAvailable: boolean,
+  AmazonReferenceId: string,
+  IsBillOfLadingAvailable: ensureBool,
   PartneredEstimate: optional(PartneredEstimate),
   CarrierName: string,
 })
 
 export const NonPartneredLtlDataOutput = Codec.interface({
   CarrierName: string,
-  ProNumber: ensureString,
+  ProNumber: string,
 })
 
 const TransportDetails = Codec.interface({
@@ -522,13 +522,13 @@ export enum ShipmentStatusEnum {
 const ShipmentStatus = enumeration(ShipmentStatusEnum)
 
 export const InboundShipmentInfo = Codec.interface({
-  ShipmentId: optional(ensureString),
+  ShipmentId: optional(string),
   ShipmentName: optional(string),
   ShipFromAddress: FISAddress,
-  DestinationFulfillmentCenterId: optional(ensureString),
+  DestinationFulfillmentCenterId: optional(string),
   LabelPrepType: optional(LabelPrepType),
   ShipmentStatus: optional(ShipmentStatus),
-  AreCasesRequired: optional(boolean),
+  AreCasesRequired: optional(ensureBool),
   ConfirmedNeedByDate: optional(string),
   BoxContentsSource: optional(string),
   EstimatedBoxContentsFeeDetails: optional(BoxContentsFeeDetails),
@@ -559,12 +559,12 @@ export const ListInboundShipmentsByNextTokenResponse = Codec.interface({
 })
 
 const InboundShipmentItem = Codec.interface({
-  ShipmentId: optional(ensureString),
-  SellerSKU: SKU,
-  FulfillmentNetworkSKU: optional(SKU),
-  QuantityShipped: number,
-  QuantityReceived: optional(number),
-  QuantityInCase: optional(number),
+  ShipmentId: optional(string),
+  SellerSKU: string,
+  FulfillmentNetworkSKU: optional(string),
+  QuantityShipped: ensureInt,
+  QuantityReceived: optional(ensureInt),
+  QuantityInCase: optional(ensureInt),
   PrepDetailsList: optional(ensureArray('PrepDetails', PrepDetails)),
   ReleaseDate: optional(string),
 })

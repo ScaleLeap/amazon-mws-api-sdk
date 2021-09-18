@@ -1,8 +1,8 @@
-import { boolean, Codec, enumeration, exactly, GetType, string } from 'purify-ts'
+import { Codec, enumeration, exactly, GetType, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray } from '../parsing'
+import { ensureArray, ensureBool } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 
 const SUBSCRIPTIONS_API_VERSION = '2013-07-01'
@@ -133,7 +133,7 @@ const CreateSubscriptionResponse = Codec.interface({
 export const Subscription = Codec.interface({
   NotificationType,
   Destination,
-  IsEnabled: boolean,
+  IsEnabled: ensureBool,
 })
 
 export const GetSubscription = Codec.interface({
