@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.58](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.57...v1.9.58) (2021-09-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency purify-ts to v1 ([5f7eee6](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/5f7eee6afe4f587a9722521a407d483684594b36))
+
 ## [1.9.57](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.56...v1.9.57) (2021-09-18)
 
 
