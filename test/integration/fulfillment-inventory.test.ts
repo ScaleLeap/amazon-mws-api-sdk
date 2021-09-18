@@ -1,18 +1,23 @@
+import { jestPollyConfigService } from '@scaleleap/jest-polly'
+
 import { FulfillmentInventory, ListInventorySupplyRequestParameters } from '../../src'
 import { Config } from './config'
-import { itci } from './it'
+
+jestPollyConfigService.config.matchRequestsBy = {
+  ...jestPollyConfigService.config.matchRequestsBy,
+  url: {
+    query: false,
+  },
+}
 
 const httpClient = new Config().createHttpClient()
 
-/* eslint-disable jest/no-standalone-expect */
 describe(`${FulfillmentInventory.name}`, () => {
-  itci('should be able to get list of inventory supply', async () => {
+  it('should be able to get list of inventory supply', async () => {
     expect.assertions(1)
 
-    const date = new Date(Date.now() - 150 * 24 * 60 * 60 * 1000) // Date from 150 days ago
-
     const parameters: ListInventorySupplyRequestParameters = {
-      QueryStartDateTime: date,
+      SellerSkus: ['x'],
     }
 
     const fulfillmentInventory = new FulfillmentInventory(httpClient)
@@ -22,7 +27,7 @@ describe(`${FulfillmentInventory.name}`, () => {
     expect(marketplaceParticipations).toBeDefined()
   })
 
-  itci('should be able to query service status', async () => {
+  it('should be able to query service status', async () => {
     expect.assertions(1)
 
     const fulfillmentInventory = new FulfillmentInventory(httpClient)
@@ -32,4 +37,3 @@ describe(`${FulfillmentInventory.name}`, () => {
     expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 })
-/* eslint-enable jest/no-standalone-expect */

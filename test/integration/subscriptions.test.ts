@@ -2,7 +2,6 @@ import { amazonMarketplaces } from '@scaleleap/amazon-marketplaces'
 
 import { Subscriptions } from '../../src'
 import { Config } from './config'
-import { itci } from './it'
 
 /**
  * If this test Polly recordings need to be re-recorded:
@@ -19,9 +18,8 @@ const SQS_URL = 'https://sqs.us-east-1.amazonaws.com/304786922662/mws-sub-testw'
 const httpClient = new Config().createHttpClient()
 const subscriptions = new Subscriptions(httpClient)
 
-/* eslint-disable jest/no-standalone-expect */
 describe('subscriptions', () => {
-  itci('should be able to query service status', async () => {
+  it('should be able to query service status', async () => {
     expect.assertions(1)
 
     const [response] = await subscriptions.getServiceStatus()
@@ -29,7 +27,7 @@ describe('subscriptions', () => {
     expect(response.Status).toMatch(/GREEN|YELLOW|RED/)
   })
 
-  itci('should be able to create a subscription', async () => {
+  it('should be able to create a subscription', async () => {
     expect.assertions(2)
 
     // destination must be registered before it can be subscribed to
@@ -67,7 +65,7 @@ describe('subscriptions', () => {
     expect(createSubscriptionResponse).toBe('')
   })
 
-  itci('should be able to delete a subscription', async () => {
+  it('should be able to delete a subscription', async () => {
     expect.assertions(2)
 
     const [deleteSubscriptionResponse] = await subscriptions.deleteSubscription({
@@ -101,4 +99,3 @@ describe('subscriptions', () => {
     expect(deregisterDestinationResponse).toBe('')
   })
 })
-/* eslint-enable jest/no-standalone-expect */

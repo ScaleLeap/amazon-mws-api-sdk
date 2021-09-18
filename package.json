@@ -23,7 +23,7 @@
     "type": "git",
     "url": "git@github.com:ScaleLeap/amazon-mws-api-sdk.git"
   },
-  "version": "1.9.55",
+  "version": "1.9.59",
   "main": "lib/index.js",
   "files": [
     "/lib"
@@ -46,11 +46,11 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@scaleleap/amazon-marketplaces": "11.0.1",
-    "axios": "0.21.1",
+    "@scaleleap/amazon-marketplaces": "11.1.0",
+    "axios": "0.21.2",
     "fast-xml-parser": "3.19.0",
     "html-entities": "2.3.2",
-    "purify-ts": "0.16.3",
+    "purify-ts": "1.0.0",
     "ts-error": "1.0.6"
   },
   "devDependencies": {
@@ -65,7 +65,7 @@
     "@types/node": "13.13.48",
     "ajv": "8.3.0",
     "danger": "10.6.4",
-    "global-agent": "2.2.0",
+    "global-agent": "3.0.0",
     "is-ci": "3.0.0",
     "jest": "26.6.3",
     "rimraf": "3.0.2",

@@ -3,6 +3,34 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.59](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.58...v1.9.59) (2021-09-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @scaleleap/amazon-marketplaces to v11.1.0 ([21911ea](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/21911ea56d327f2beeb0f7d48d68331466a9724e))
+
+## [1.9.58](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.57...v1.9.58) (2021-09-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency purify-ts to v1 ([5f7eee6](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/5f7eee6afe4f587a9722521a407d483684594b36))
+
+## [1.9.57](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.56...v1.9.57) (2021-09-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v0.21.2 [security] ([#416](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/416)) ([1adc8e8](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/1adc8e8060a6135130df3b121ba21dfaf4da8cf8))
+
+## [1.9.56](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.55...v1.9.56) (2021-09-14)
+
+
+### Bug Fixes
+
+* add checks for offline scenarios [#417](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/417) ([#418](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/418)) ([b4a8cc9](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/b4a8cc9c084a1d640de7a71bb23981145dbda82c))
+
 ## [1.9.55](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.54...v1.9.55) (2021-05-11)
 
 
