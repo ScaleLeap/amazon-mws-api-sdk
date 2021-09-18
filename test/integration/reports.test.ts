@@ -1,14 +1,16 @@
 import { Reports, ScheduleType } from '../../src'
 import { InvalidReportIdError } from '../../src/error'
 import { Config } from './config'
-import { itci } from './it'
 
 const httpClient = new Config().createHttpClient()
 
 /* eslint-disable jest/no-standalone-expect */
 describe('reports', () => {
   const reports = new Reports(httpClient)
-  itci('after creating a schedule list it should return a count of more than one', async () => {
+
+  it('after creating a schedule list it should return a count of more than one', async () => {
+    expect.assertions(3)
+
     const parametersFirst = {
       ReportType: '_GET_FLAT_FILE_ACTIONABLE_ORDER_DATA_',
       Schedule: '_30_DAYS_' as ScheduleType,
@@ -28,13 +30,17 @@ describe('reports', () => {
     expect(typeof responseScheduleList.ReportSchedule).toBeDefined()
   })
 
-  itci('should succesfully query get report schedule list', async () => {
+  it('should succesfully query get report schedule list', async () => {
+    expect.assertions(1)
+
     const [response] = await reports.getReportScheduleList()
 
     expect(response).toBeDefined()
   })
 
-  itci('should return new request report', async () => {
+  it('should return new request report', async () => {
+    expect.assertions(1)
+
     const parameters = {
       ReportType: '_GET_MERCHANT_LISTINGS_ALL_DATA_',
     }
@@ -44,7 +50,9 @@ describe('reports', () => {
     expect(response.ReportRequestId).toBeDefined()
   })
 
-  itci('should succesfully return info on cancelled report requests', async () => {
+  it('should succesfully return info on cancelled report requests', async () => {
+    expect.assertions(1)
+
     const parameters = {
       ReportRequestIdList: ['51783018425', '51784018425'],
     }
@@ -54,7 +62,9 @@ describe('reports', () => {
     expect(response.Count).toBe(2)
   })
 
-  itci('should throw error on invalid report request ids', async () => {
+  it('should throw error on invalid report request ids', async () => {
+    expect.assertions(1)
+
     const parameters = {
       ReportRequestIdList: ['51783018499', '51784018499'],
     }
@@ -65,7 +75,9 @@ describe('reports', () => {
     )
   })
 
-  itci('should succesfully get a count of 2 with 2 valid ids', async () => {
+  it('should succesfully get a count of 2 with 2 valid ids', async () => {
+    expect.assertions(1)
+
     const parameters = {
       ReportIdList: ['21175694446018424', '21178489344018424'],
       Acknowledged: false,
@@ -75,7 +87,7 @@ describe('reports', () => {
     expect(response.Count).toBe(2)
   })
 
-  itci('should succesfully get report schedule count', async () => {
+  it('should succesfully get report schedule count', async () => {
     expect.assertions(1)
 
     const [response] = await reports.getReportScheduleCount()
@@ -83,15 +95,7 @@ describe('reports', () => {
     expect(typeof response.Count).toBe('number')
   })
 
-  itci('should succesfully get report schedule list', async () => {
-    expect.assertions(1)
-
-    const [response] = await reports.getReportScheduleList()
-
-    expect(response).toBeDefined()
-  })
-
-  itci('should be able to query get report count', async () => {
+  it('should be able to query get report count', async () => {
     expect.assertions(1)
 
     const [response] = await reports.getReportCount()
@@ -99,7 +103,7 @@ describe('reports', () => {
     expect(typeof response.Count).toBe('number')
   })
 
-  itci('should be able to query get report request count', async () => {
+  it('should be able to query get report request count', async () => {
     expect.assertions(1)
 
     const [response] = await reports.getReportRequestCount()
@@ -107,7 +111,7 @@ describe('reports', () => {
     expect(typeof response.Count).toBe('number')
   })
 
-  itci('should be able to query get report request list', async () => {
+  it('should be able to query get report request list', async () => {
     expect.assertions(1)
 
     const [response] = await reports.getReportRequestList()
@@ -115,7 +119,7 @@ describe('reports', () => {
     expect(response).toBeDefined()
   })
 
-  itci('should be able to get a report', async () => {
+  it('should be able to get a report', async () => {
     expect.assertions(2)
 
     const [response] = await reports.getReport({ ReportId: '20812705939018404' })
@@ -124,7 +128,7 @@ describe('reports', () => {
     expect(response).toContain('settlement-id')
   })
 
-  itci('should be able to query get report list', async () => {
+  it('should be able to query get report list', async () => {
     expect.assertions(1)
 
     const [response] = await reports.getReportList()

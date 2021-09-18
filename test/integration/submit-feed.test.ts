@@ -4,7 +4,6 @@ import path from 'path'
 
 import { Feeds, SubmitFeedParameters } from '../../src'
 import { Config } from './config'
-import { itci } from './it'
 
 /**
  * `submitFeed` modifies URL for each request which normally
@@ -21,7 +20,8 @@ const httpClient = new Config().createHttpClient()
 /* eslint-disable jest/no-standalone-expect */
 describe(`submit-feed`, () => {
   const feeds = new Feeds(httpClient)
-  itci('should be able to submit sample feed', async () => {
+
+  it('should be able to submit sample feed', async () => {
     expect.assertions(1)
 
     const parameters: SubmitFeedParameters = {

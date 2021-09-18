@@ -1,6 +1,5 @@
 import { Finances } from '../../src'
 import { Config } from './config'
-import { itci } from './it'
 
 const httpClient = new Config().createHttpClient()
 
@@ -8,7 +7,8 @@ const httpClient = new Config().createHttpClient()
 describe(`${Finances.name}`, () => {
   const finances = new Finances(httpClient)
   const validDate = new Date(Date.now() - 150 * 24 * 60 * 60 * 1000) // Date from 150 days ago
-  itci('list financial event groups should post succesfully with a basic request', async () => {
+
+  it('list financial event groups should post succesfully with a basic request', async () => {
     expect.assertions(1)
 
     const [response] = await finances.listFinancialEventGroups({
@@ -18,7 +18,7 @@ describe(`${Finances.name}`, () => {
     expect(response).toBeDefined()
   })
 
-  itci('list financial events should post succesfully with a basic request', async () => {
+  it('list financial events should post succesfully with a basic request', async () => {
     expect.assertions(1)
 
     const [response] = await finances.listFinancialEvents({
@@ -28,7 +28,7 @@ describe(`${Finances.name}`, () => {
     expect(response).toBeDefined()
   })
 
-  itci('should be able to query service status', async () => {
+  it('should be able to query service status', async () => {
     expect.assertions(1)
 
     const [response] = await finances.getServiceStatus()

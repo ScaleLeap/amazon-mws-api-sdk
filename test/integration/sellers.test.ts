@@ -2,13 +2,12 @@ import { amazonMarketplaces } from '@scaleleap/amazon-marketplaces'
 
 import { Sellers } from '../../src'
 import { Config } from './config'
-import { itci } from './it'
 
 const httpClient = new Config().createHttpClient()
 
 /* eslint-disable jest/no-standalone-expect */
 describe(`${Sellers.name}`, () => {
-  itci('should be able to query marketplace participation', async () => {
+  it('should be able to query marketplace participation', async () => {
     expect.assertions(1)
 
     const sellers = new Sellers(httpClient)
@@ -20,7 +19,7 @@ describe(`${Sellers.name}`, () => {
     )
   })
 
-  itci('should be able to query service status', async () => {
+  it('should be able to query service status', async () => {
     expect.assertions(1)
 
     const sellers = new Sellers(httpClient)

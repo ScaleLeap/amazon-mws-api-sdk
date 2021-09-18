@@ -1,12 +1,11 @@
 import { amazonMarketplaces, Recommendations } from '../../src'
 import { Config } from './config'
-import { itci } from './it'
 
 const httpClient = new Config().createHttpClient()
 
 /* eslint-disable jest/no-standalone-expect */
 describe(`${Recommendations.name}`, () => {
-  itci('should be able to query last updated time for recommendations', async () => {
+  it('should be able to query last updated time for recommendations', async () => {
     expect.assertions(1)
 
     const recommendations = new Recommendations(httpClient)
@@ -17,7 +16,8 @@ describe(`${Recommendations.name}`, () => {
 
     expect(response).toBeDefined()
   })
-  itci('should be able to query service status', async () => {
+
+  it('should be able to query service status', async () => {
     expect.assertions(1)
 
     const recommendations = new Recommendations(httpClient)
