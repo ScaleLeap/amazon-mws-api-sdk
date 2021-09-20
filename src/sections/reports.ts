@@ -1,12 +1,10 @@
 import {
   array,
-  boolean,
   Codec,
   enumeration,
   exactly,
   GetType,
   Left,
-  number,
   oneOf,
   optional,
   string,
@@ -14,7 +12,7 @@ import {
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureString, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
+import { ensureBool, ensureInt, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 
 const REPORTS_API_VERSION = '2009-01-01'
 /**
@@ -35,14 +33,14 @@ export interface RequestReportParameters {
 
 // Amazon does not explicitly define which elements of the response are required so everything is optional for now
 export const ReportRequestInfo = Codec.interface({
-  ReportRequestId: ensureString,
+  ReportRequestId: string,
   ReportType: optional(ReportType),
   StartDate: optional(mwsDate),
   EndDate: optional(mwsDate),
-  Scheduled: optional(boolean),
+  Scheduled: optional(ensureBool),
   SubmittedDate: optional(mwsDate),
   ReportProcessingStatus: optional(string),
-  GeneratedReportId: optional(ensureString),
+  GeneratedReportId: optional(string),
   StartedProcessingDate: optional(mwsDate),
   CompletedDate: optional(mwsDate),
 })
@@ -113,7 +111,7 @@ export interface GetReportRequestListParameters {
 
 export const GetReportRequestListResult = Codec.interface({
   NextToken: optional(nextTokenCodec('GetReportRequestList')),
-  HasNext: optional(boolean),
+  HasNext: optional(ensureBool),
   ReportRequestInfo: optional(oneOf([array(ReportRequestInfo), ReportRequestInfo, exactly('')])),
 })
 
@@ -139,7 +137,7 @@ export interface GetReportRequestCountParameters {
 }
 
 export const GetReportRequestCount = Codec.interface({
-  Count: number,
+  Count: ensureInt,
 })
 
 const GetReportRequestCountResponse = Codec.interface({
@@ -159,7 +157,7 @@ export interface CancelReportRequestsParameters {
 }
 
 export const CancelReportRequests = Codec.interface({
-  Count: number,
+  Count: ensureInt,
   ReportRequestInfo: optional(oneOf([array(ReportRequestInfo), ReportRequestInfo, exactly('')])),
 })
 
@@ -181,16 +179,16 @@ export interface GetReportListParameters {
 }
 
 const ReportInfo = Codec.interface({
-  ReportId: ensureString,
+  ReportId: string,
   ReportType,
-  ReportRequestId: optional(ensureString),
+  ReportRequestId: optional(string),
   AvailableDate: optional(mwsDate),
-  Acknowledged: optional(boolean),
+  Acknowledged: optional(ensureBool),
   AcknowledgedDate: optional(mwsDate),
 })
 
 export const GetReportListResult = Codec.interface({
-  HasNext: boolean,
+  HasNext: ensureBool,
   NextToken: optional(nextTokenCodec('GetReportList')),
   ReportInfo: optional(oneOf([array(ReportInfo), ReportInfo, exactly('')])),
 })
@@ -210,7 +208,7 @@ const GetReportListByNextTokenResponse = Codec.interface({
 export type GetReportListResult = GetType<typeof GetReportListResult>
 
 export const GetReportCount = Codec.interface({
-  Count: number,
+  Count: ensureInt,
 })
 
 const GetReportCountResponse = Codec.interface({
@@ -254,7 +252,7 @@ const ReportSchedule = Codec.interface({
 })
 
 export const ManageReportSchedule = Codec.interface({
-  Count: number,
+  Count: ensureInt,
   ReportSchedule: optional(oneOf([array(ReportSchedule), ReportSchedule, exactly('')])),
 })
 
@@ -272,7 +270,7 @@ export interface GetReportScheduleListParameters {
 
 export const GetReportScheduleList = Codec.interface({
   NextToken: optional(nextTokenCodec('GetReportScheduleList')),
-  HasNext: boolean,
+  HasNext: ensureBool,
   ReportSchedule: optional(oneOf([array(ReportSchedule), ReportSchedule, exactly('')])),
 })
 
@@ -289,7 +287,7 @@ export interface GetReportScheduleCountParameters {
 }
 
 export const GetReportScheduleCount = Codec.interface({
-  Count: number,
+  Count: ensureInt,
 })
 
 export type GetReportScheduleCount = GetType<typeof GetReportScheduleCount>
@@ -306,7 +304,7 @@ export interface UpdateReportAcknowledgementsParameters {
 }
 
 export const UpdateReportAcknowledgements = Codec.interface({
-  Count: optional(number),
+  Count: optional(ensureInt),
   ReportInfo: optional(oneOf([array(ReportInfo), ReportInfo, exactly('')])),
 })
 

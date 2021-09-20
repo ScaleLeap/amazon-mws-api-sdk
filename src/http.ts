@@ -339,28 +339,12 @@ export const parseResponse = <T>(
         {
           attributeNamePrefix: '',
           ignoreAttributes: false,
-          parseAttributeValue: true,
+          parseAttributeValue: false,
+          parseNodeValue: false,
           attrNodeName: 'attr',
           textNodeName: 'text',
           parseTrueNumberOnly: true,
           tagValueProcessor: (value) => decode(value),
-          // force to be parsed as string
-          stopNodes: [
-            'BuyerName',
-            'PurchaseOrderNumber',
-            // ? ShippingAddress fields
-            'Name',
-            'AddressLine1',
-            'AddressLine2',
-            'AddressLine3',
-            'City',
-            'Municipality',
-            'StateOrRegion',
-            'PostalCode',
-            'CountryCode',
-            'Phone',
-            'AddressType',
-          ],
         },
         true,
       )

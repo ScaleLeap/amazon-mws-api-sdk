@@ -1,11 +1,9 @@
 import {
   array,
-  boolean,
   Codec,
   enumeration,
   GetType,
   lazy,
-  number,
   oneOf,
   optional,
   string,
@@ -13,7 +11,7 @@ import {
 } from 'purify-ts'
 
 import { Error } from '../../error-codec'
-import { ASIN, ensureArray, ensureString, mwsDate, SKU } from '../../parsing'
+import { ensureArray, ensureBool, ensureFloat, ensureInt, mwsDate } from '../../parsing'
 import {
   CurrencyCodeEnum,
   FeeDetail as FeeDetailInterface,
@@ -55,12 +53,12 @@ export enum IdTypeEnum {
 const IdType = enumeration(IdTypeEnum)
 
 const MoneyType = Codec.interface({
-  Amount: optional(number),
+  Amount: optional(ensureFloat),
   CurrencyCode: optional(CurrencyCode),
 })
 
 export const PointsCodec = Codec.interface({
-  PointsNumber: number,
+  PointsNumber: ensureInt,
   PointsMonetaryValue: MoneyType,
 })
 
@@ -82,7 +80,7 @@ const FeesEstimateIdentifier = Codec.interface({
   IdValue: string,
   PriceToEstimateFees,
   SellerInputIdentifier: string,
-  IsAmazonFulfilled: boolean,
+  IsAmazonFulfilled: ensureBool,
 })
 
 const FeeDetail: Codec<FeeDetailInterface> = Codec.interface({
@@ -129,13 +127,13 @@ const AttributeSetList = AbstractObject
 
 const ASINIdentifier = Codec.interface({
   MarketplaceId: string,
-  ASIN,
+  ASIN: string,
 })
 
 const SellerSKUIdentifier = Codec.interface({
   MarketplaceId: string,
-  SellerId: ensureString,
-  SellerSKU: SKU,
+  SellerId: string,
+  SellerSKU: string,
 })
 
 const IdentifierType = Codec.interface({
@@ -156,9 +154,9 @@ const CompetitivePriceType = Codec.interface({
   attr: Codec.interface({
     condition: string,
     subcondition: string,
-    belongsToRequester: optional(boolean),
+    belongsToRequester: optional(ensureBool),
   }),
-  CompetitivePriceId: ensureString,
+  CompetitivePriceId: string,
   Price: PriceType,
 })
 
@@ -168,7 +166,7 @@ const OfferListingCountType = Codec.interface({
   attr: Codec.interface({
     condition: string,
   }),
-  text: number,
+  text: ensureInt,
 })
 
 const NumberOfOfferListingsList = ensureArray('OfferListingCount', OfferListingCountType)
@@ -180,8 +178,8 @@ const CompetitivePricingType = Codec.interface({
 })
 
 const SalesRankType = Codec.interface({
-  ProductCategoryId: optional(ensureString),
-  Rank: optional(number),
+  ProductCategoryId: optional(string),
+  Rank: optional(ensureInt),
 })
 
 const SalesRankList = ensureArray('SalesRank', SalesRankType)
@@ -191,18 +189,18 @@ const ShippingTimeType = Codec.interface({
 })
 
 const QualifiersType = Codec.interface({
-  ItemCondition: optional(ensureString),
-  ItemSubcondition: optional(ensureString),
-  FulfillmentChannel: optional(ensureString),
-  ShipsDomestically: optional(ensureString),
+  ItemCondition: optional(string),
+  ItemSubcondition: optional(string),
+  FulfillmentChannel: optional(string),
+  ShipsDomestically: optional(string),
   ShippingTime: optional(ShippingTimeType),
-  SellerPositiveFeedbackRating: optional(ensureString),
+  SellerPositiveFeedbackRating: optional(string),
 })
 
 const LowestOfferListingType = Codec.interface({
   Qualifiers: optional(QualifiersType),
-  NumberOfOfferListingsConsidered: optional(number),
-  SellerFeedbackCount: optional(number),
+  NumberOfOfferListingsConsidered: optional(ensureInt),
+  SellerFeedbackCount: optional(ensureInt),
   Price: optional(PriceType),
   MultipleOffersAtLowestPrice: optional(string),
 })
@@ -216,7 +214,7 @@ const OfferType = Codec.interface({
   ItemCondition: optional(string),
   ItemSubCondition: optional(string),
   SellerId: optional(string),
-  SellerSKU: optional(SKU),
+  SellerSKU: optional(string),
 })
 
 const OffersList = ensureArray('Offer', OfferType)
@@ -296,7 +294,7 @@ export const GetCompetitivePricingForASINResponse = Codec.interface({
 export const GetLowestOfferListingsForSKUResult = ensureArray(
   'GetLowestOfferListingsForSKUResult',
   Codec.interface({
-    AllOfferListingsConsidered: boolean,
+    AllOfferListingsConsidered: ensureBool,
     Product,
   }),
 )
@@ -308,7 +306,7 @@ export const GetLowestOfferListingsForSKUResponse = Codec.interface({
 export const GetLowestOfferListingsForASINResult = ensureArray(
   'GetLowestOfferListingsForASINResult',
   Codec.interface({
-    AllOfferListingsConsidered: boolean,
+    AllOfferListingsConsidered: ensureBool,
     Product,
   }),
 )
@@ -323,10 +321,10 @@ export const GetLowestOfferListingsForASINResponse = Codec.interface({
  */
 const OfferCountType = Codec.interface({
   OfferCount: oneOf([
-    number,
+    ensureInt,
     array(
       Codec.interface({
-        text: number,
+        text: ensureInt,
         attr: Codec.interface({
           condition: optional(string),
           fulfillmentChannel: optional(string),
@@ -334,7 +332,7 @@ const OfferCountType = Codec.interface({
       }),
     ),
     Codec.interface({
-      text: number,
+      text: ensureInt,
       attr: Codec.interface({
         condition: optional(string),
         fulfillmentChannel: optional(string),
@@ -358,7 +356,7 @@ const BuyBoxPrice = Codec.interface({
 })
 
 const Summary = Codec.interface({
-  TotalOfferCount: number,
+  TotalOfferCount: ensureInt,
   NumberOfOffers: optional(OfferCountType),
   LowestPrices: optional(ensureArray('LowestPrice', LowestPrice)),
   BuyBoxPrices: optional(ensureArray('BuyBoxPrice', BuyBoxPrice)),
@@ -375,18 +373,18 @@ const Identifier = {
 }
 
 const SkuIdentifier = Codec.interface({
-  SellerSKU: SKU,
+  SellerSKU: string,
   ...Identifier,
 })
 
 const AsinIdentifier = Codec.interface({
-  ASIN,
+  ASIN: string,
   ...Identifier,
 })
 
 const SellerFeedbackRating = Codec.interface({
-  SellerPositiveFeedbackRating: optional(number),
-  FeedbackCount: number,
+  SellerPositiveFeedbackRating: optional(ensureFloat),
+  FeedbackCount: ensureInt,
 })
 
 /**
@@ -407,9 +405,9 @@ const Offer = {
   Points: optional(PointsCodec),
   Shipping: MoneyType,
   ShipsFrom: optional(ShipsFrom),
-  IsFulfilledByAmazon: boolean,
-  IsBuyBoxWinner: optional(boolean),
-  IsFeaturedMerchant: optional(boolean),
+  IsFulfilledByAmazon: ensureBool,
+  IsBuyBoxWinner: optional(ensureBool),
+  IsFeaturedMerchant: optional(ensureBool),
 }
 
 export const GetLowestPricedOffersForSKU = Codec.interface({
@@ -418,7 +416,7 @@ export const GetLowestPricedOffersForSKU = Codec.interface({
   Offers: ensureArray(
     'Offer',
     Codec.interface({
-      MyOffer: optional(boolean),
+      MyOffer: optional(ensureBool),
       ...Offer,
     }),
   ),
@@ -463,7 +461,7 @@ export const GetMyPriceForASINResponse = Codec.interface({
 })
 
 const ProductCategory: Codec<ProductCategoryInterface> = Codec.interface({
-  ProductCategoryId: ensureString,
+  ProductCategoryId: string,
   ProductCategoryName: string,
   Parent: optional(lazy(() => ProductCategory)),
 })

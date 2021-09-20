@@ -1,5 +1,5 @@
 /** A collection of parsing codecs */
-import { array, Codec, date, record, string, unknown } from 'purify-ts/Codec'
+import { array, boolean, Codec, date, number, record, string, unknown } from 'purify-ts/Codec'
 import { Left, Right } from 'purify-ts/Either'
 
 export const ensureArray = <T>(tag: string, codec: Codec<T>): Codec<T[]> => {
@@ -31,11 +31,37 @@ export const ensureArray = <T>(tag: string, codec: Codec<T>): Codec<T[]> => {
   })
 }
 
-/** If a string is a valid number it will be parsed as such by our xml parser, even though it should still be a string */
-export const ensureString = Codec.custom({
+export const ensureBool = Codec.custom({
   decode: (x) =>
-    string.decode(x).chainLeft((error) => (typeof x === 'number' ? Right(String(x)) : Left(error))),
-  encode: (x: string) => string.encode(x),
+    boolean.decode(x).chainLeft((error) => {
+      switch (x) {
+        case 'true':
+          return Right(true)
+        case 'false':
+          return Right(false)
+        default:
+          return Left(error)
+      }
+    }),
+  encode: (x: boolean) => boolean.encode(x),
+  schema: () => ({ oneOf: [{ type: 'string' }, { type: 'boolean' }] }),
+})
+
+export const ensureFloat = Codec.custom({
+  decode: (x) =>
+    number
+      .decode(x)
+      .chainLeft((error) => (typeof x === 'string' ? Right(Number.parseFloat(x)) : Left(error))),
+  encode: (x: number) => number.encode(x),
+  schema: () => ({ oneOf: [{ type: 'string' }, { type: 'number' }] }),
+})
+
+export const ensureInt = Codec.custom({
+  decode: (x) =>
+    number
+      .decode(x)
+      .chainLeft((error) => (typeof x === 'string' ? Right(Number.parseInt(x, 10)) : Left(error))),
+  encode: (x: number) => number.encode(x),
   schema: () => ({ oneOf: [{ type: 'string' }, { type: 'number' }] }),
 })
 
@@ -111,15 +137,3 @@ export const nextToken = <T extends string>(action: T) =>
     encode: (x) => x,
     schema: () => ({ type: 'string' }),
   })
-
-/**
- * A shorthand for all SKUs, which are always strings, but when they consist of just numbers,
- * XML parser will parse them to a number.
- */
-export const SKU = ensureString
-
-/**
- * A shorthand for all ASINs, which are always strings, but when they consist of just numbers,
- * XML parser will parse them to a number.
- */
-export const ASIN = ensureString

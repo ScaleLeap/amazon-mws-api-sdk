@@ -1,8 +1,8 @@
-import { Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
+import { Codec, enumeration, GetType, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ASIN, ensureArray, mwsDate, NextToken, nextToken as nextTokenCodec, SKU } from '../parsing'
+import { ensureArray, ensureInt, mwsDate, NextToken, nextToken as nextTokenCodec } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 import { RequireOnlyOne } from './types'
 
@@ -49,19 +49,19 @@ const Timepoint = Codec.interface({
 })
 
 const InventorySupplyDetail = Codec.interface({
-  Quantity: number,
+  Quantity: ensureInt,
   SupplyType: enumeration(SupplyType),
   EarliestAvailableToPick: Timepoint,
   LatestAvailableToPick: Timepoint,
 })
 
 const InventorySupply = Codec.interface({
-  SellerSKU: optional(SKU),
-  FNSKU: optional(SKU),
-  ASIN: optional(ASIN),
+  SellerSKU: optional(string),
+  FNSKU: optional(string),
+  ASIN: optional(string),
   Condition: optional(enumeration(InventoryCondition)),
-  TotalSupplyQuantity: number,
-  InStockSupplyQuantity: number,
+  TotalSupplyQuantity: ensureInt,
+  InStockSupplyQuantity: ensureInt,
   EarliestAvailability: optional(Timepoint),
   SupplyDetail: optional(ensureArray('member', InventorySupplyDetail)),
 })

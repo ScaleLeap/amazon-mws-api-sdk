@@ -1,6 +1,6 @@
-import { boolean, Codec, enumeration, GetType, number, optional, string } from 'purify-ts'
+import { Codec, enumeration, GetType, optional, string } from 'purify-ts'
 
-import { ASIN, ensureArray, ensureString, mwsDate } from '../../parsing'
+import { ensureArray, ensureBool, ensureFloat, ensureInt, mwsDate } from '../../parsing'
 import { PredefinedPackageDimensionsEnum } from './type'
 
 export const TemporarilyUnavailableCarrier = Codec.interface({
@@ -9,12 +9,12 @@ export const TemporarilyUnavailableCarrier = Codec.interface({
 
 const CurrencyAmount = Codec.interface({
   CurrencyCode: string,
-  Amount: number,
+  Amount: ensureFloat,
 })
 
 export const RejectedShippingService = Codec.interface({
   CarrierName: string,
-  ShippingServiceId: ensureString,
+  ShippingServiceId: string,
   RejectionReasonCode: string,
   RejectionReasonMessage: string,
   ShippingServiceName: string,
@@ -34,22 +34,22 @@ const DeliveryExperience = enumeration(DeliveryExperienceEnum)
 const ShippingServiceOptions = Codec.interface({
   DeliveryExperience,
   DeclaredValue: optional(CurrencyAmount),
-  CarrierWillPickUp: boolean,
+  CarrierWillPickUp: ensureBool,
   LabelFormat: optional(string),
 })
 
 export const ShippingService = Codec.interface({
   ShippingServiceName: string,
   CarrierName: string,
-  ShippingServiceId: ensureString,
-  ShippingServiceOfferId: ensureString,
+  ShippingServiceId: string,
+  ShippingServiceOfferId: string,
   ShipDate: mwsDate,
   EarliestEstimatedDeliveryDate: optional(mwsDate),
   LatestEstimatedDeliveryDate: optional(mwsDate),
   Rate: CurrencyAmount,
   ShippingServiceOptions,
   AvailableLabelFormats: optional(ensureArray('LabelFormat', string)),
-  RequiresAdditionalSellerInputs: optional(boolean),
+  RequiresAdditionalSellerInputs: optional(ensureBool),
 })
 
 export const GetEligibleShippingServices = Codec.interface({
@@ -115,13 +115,13 @@ const Address = Codec.interface({
   Email: string,
   City: string,
   StateOrProvinceCode: optional(string),
-  PostalCode: ensureString,
+  PostalCode: string,
   CountryCode: string,
-  Phone: ensureString,
+  Phone: string,
 })
 
 const Weight = Codec.interface({
-  Value: number,
+  Value: ensureFloat,
   Unit: string,
 })
 
@@ -135,18 +135,18 @@ export enum DimensionsUnitEnum {
 export const DimensionsUnit = enumeration(DimensionsUnitEnum)
 
 const PackageDimensions = Codec.interface({
-  Length: optional(number),
-  Width: optional(number),
-  Height: optional(number),
+  Length: optional(ensureFloat),
+  Width: optional(ensureFloat),
+  Height: optional(ensureFloat),
   Unit: optional(DimensionsUnit),
   PredefinedPackageDimensions: optional(PredefinedPackageDimensions),
 })
 
 export const StoredValue = Codec.interface({
   DataType,
-  ValueAsString: optional(ensureString),
-  ValueAsBoolean: optional(boolean),
-  ValueAsInteger: optional(number),
+  ValueAsString: optional(string),
+  ValueAsBoolean: optional(ensureBool),
+  ValueAsInteger: optional(ensureInt),
   ValueAsTimeStamp: optional(mwsDate),
   ValueAsAddress: optional(Address),
   ValueAsWeight: optional(Weight),
@@ -155,7 +155,7 @@ export const StoredValue = Codec.interface({
 })
 
 export const SellerInputDefinition = Codec.interface({
-  IsRequired: boolean,
+  IsRequired: ensureBool,
   DataType,
   Constraints: ensureArray('member', Constraints),
   InputDisplayText: string,
@@ -183,7 +183,7 @@ export const AdditionalInputs = Codec.interface({
 })
 
 export const ItemLevelFields = Codec.interface({
-  Asin: ASIN,
+  Asin: string,
   AdditionalInputs: ensureArray('member', AdditionalInputs),
 })
 
@@ -209,8 +209,8 @@ export enum MerchantFulfillmentStatusEnum {
 const ItemLevelSellerInputsList = Codec.interface({
   DataType,
   ValueAsString: optional(string),
-  ValueAsBoolean: optional(boolean),
-  ValueAsInteger: optional(number),
+  ValueAsBoolean: optional(ensureBool),
+  ValueAsInteger: optional(ensureInt),
   ValueAsTimestamp: optional(mwsDate),
   ValueAsAddress: optional(Address),
   ValueAsWeight: optional(Weight),
@@ -220,8 +220,8 @@ const ItemLevelSellerInputsList = Codec.interface({
 
 const Status = enumeration(MerchantFulfillmentStatusEnum)
 const Item = Codec.interface({
-  OrderItemId: ensureString,
-  Quantity: number,
+  OrderItemId: string,
+  Quantity: ensureInt,
   ItemWeight: optional(Weight),
   ItemDescription: optional(string),
   transparencyCodeList: optional(ensureArray('member', string)),
@@ -229,8 +229,8 @@ const Item = Codec.interface({
 })
 
 const LabelDimensions = Codec.interface({
-  Length: number,
-  Width: number,
+  Length: ensureFloat,
+  Width: ensureFloat,
   Unit: DimensionsUnit,
 })
 
@@ -249,9 +249,9 @@ const Label = Codec.interface({
 })
 
 export const Shipment = Codec.interface({
-  ShipmentId: ensureString,
-  AmazonOrderId: ensureString,
-  SellerOrderId: optional(ensureString),
+  ShipmentId: string,
+  AmazonOrderId: string,
+  SellerOrderId: optional(string),
   ItemList: ensureArray('Item', Item),
   ShipFromAddress: Address,
   ShipToAddress: Address,
@@ -261,7 +261,7 @@ export const Shipment = Codec.interface({
   ShippingService,
   Label,
   Status,
-  TrackingId: optional(ensureString),
+  TrackingId: optional(string),
   CreatedDate: mwsDate,
   LastUpdatedDate: optional(mwsDate),
 })

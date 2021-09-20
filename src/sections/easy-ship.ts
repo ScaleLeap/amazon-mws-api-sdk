@@ -1,8 +1,8 @@
-import { Codec, GetType, number, optional, string } from 'purify-ts'
+import { Codec, GetType, optional, string } from 'purify-ts'
 
 import { ParsingError } from '../error'
 import { HttpClient, RequestMeta, Resource } from '../http'
-import { ensureArray, ensureString, mwsDate } from '../parsing'
+import { ensureArray, ensureFloat, mwsDate } from '../parsing'
 import { getServiceStatusByResource } from './shared'
 
 const EASY_SHIP_API_VERSION = '2018-09-01'
@@ -30,7 +30,7 @@ export interface ListPickupSlotsParameters {
 }
 
 const PickupSlot = Codec.interface({
-  SlotId: ensureString,
+  SlotId: string,
   PickupTimeStart: mwsDate,
   PickupTimeEnd: mwsDate,
 })
@@ -79,15 +79,15 @@ const ScheduledPackageId = Codec.interface({
 })
 
 const ESDimensions = Codec.interface({
-  Length: number,
-  Width: number,
-  Height: number,
+  Length: ensureFloat,
+  Width: ensureFloat,
+  Height: ensureFloat,
   Unit: string,
   Name: optional(string),
 })
 
 const ESWeight = Codec.interface({
-  Value: number,
+  Value: ensureFloat,
   Unit: string,
 })
 

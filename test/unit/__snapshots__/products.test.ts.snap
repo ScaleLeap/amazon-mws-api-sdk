@@ -452,8 +452,8 @@ Array [
         "ShippingTime": Object {
           "attr": Object {
             "availabilityType": "NOW",
-            "maximumHours": 0,
-            "minimumHours": 0,
+            "maximumHours": "0",
+            "minimumHours": "0",
           },
         },
         "SubCondition": "new",
@@ -561,8 +561,8 @@ Array [
         "ShippingTime": Object {
           "attr": Object {
             "availabilityType": "NOW",
-            "maximumHours": 0,
-            "minimumHours": 0,
+            "maximumHours": "0",
+            "minimumHours": "0",
           },
         },
         "SubCondition": "new",
@@ -716,24 +716,24 @@ Array [
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 2,
+                "text": "2.00",
               },
               "ns2:Length": Object {
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 9,
+                "text": "9.00",
               },
               "ns2:Width": Object {
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 9,
+                "text": "9.00",
               },
             },
             "ns2:Label": "Pearl iZUMi",
             "ns2:ListPrice": Object {
-              "ns2:Amount": 50,
+              "ns2:Amount": "50.00",
               "ns2:CurrencyCode": "USD",
             },
             "ns2:Manufacturer": "Pearl iZUMi",
@@ -743,28 +743,28 @@ Array [
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 2.8,
+                "text": "2.80",
               },
               "ns2:Length": Object {
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 9.75,
+                "text": "9.75",
               },
               "ns2:Weight": Object {
                 "attr": Object {
                   "Units": "pounds",
                 },
-                "text": 0.4,
+                "text": "0.40",
               },
               "ns2:Width": Object {
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 8.4,
+                "text": "8.40",
               },
             },
-            "ns2:PackageQuantity": 1,
+            "ns2:PackageQuantity": "1",
             "ns2:PartNumber": "0275",
             "ns2:ProductGroup": "Apparel",
             "ns2:ProductTypeName": "SHORTS",
@@ -774,14 +774,14 @@ Array [
                 "attr": Object {
                   "Units": "pixels",
                 },
-                "text": 75,
+                "text": "75",
               },
               "ns2:URL": "http://ecx.images-amazon.com/images/I/41ty3Sn%2BU8L._SL75_.jpg",
               "ns2:Width": Object {
                 "attr": Object {
                   "Units": "pixels",
                 },
-                "text": 58,
+                "text": "58",
               },
             },
             "ns2:Studio": "Pearl iZUMi",
@@ -899,31 +899,31 @@ Array [
               ],
               "ns2:Binding": "Paperback",
               "ns2:Brand": "Marmanis, Haralambos/ Babenko, Dmitry",
-              "ns2:Edition": 1,
+              "ns2:Edition": "1",
               "ns2:ItemDimensions": Object {
                 "ns2:Height": Object {
                   "attr": Object {
                     "Units": "inches",
                   },
-                  "text": 9.25,
+                  "text": "9.25",
                 },
                 "ns2:Length": Object {
                   "attr": Object {
                     "Units": "inches",
                   },
-                  "text": 7.38,
+                  "text": "7.38",
                 },
                 "ns2:Weight": Object {
                   "attr": Object {
                     "Units": "pounds",
                   },
-                  "text": 1.38,
+                  "text": "1.38",
                 },
                 "ns2:Width": Object {
                   "attr": Object {
                     "Units": "inches",
                   },
-                  "text": 0.73,
+                  "text": "0.73",
                 },
               },
               "ns2:Label": "Manning Publications",
@@ -944,40 +944,40 @@ Array [
                 ],
               },
               "ns2:ListPrice": Object {
-                "ns2:Amount": 44.99,
+                "ns2:Amount": "44.99",
                 "ns2:CurrencyCode": "USD",
               },
               "ns2:Manufacturer": "Manning Publications",
-              "ns2:NumberOfItems": 1,
-              "ns2:NumberOfPages": 368,
+              "ns2:NumberOfItems": "1",
+              "ns2:NumberOfPages": "368",
               "ns2:PackageDimensions": Object {
                 "ns2:Height": Object {
                   "attr": Object {
                     "Units": "inches",
                   },
-                  "text": 0.8,
+                  "text": "0.80",
                 },
                 "ns2:Length": Object {
                   "attr": Object {
                     "Units": "inches",
                   },
-                  "text": 9.1,
+                  "text": "9.10",
                 },
                 "ns2:Weight": Object {
                   "attr": Object {
                     "Units": "pounds",
                   },
-                  "text": 1.35,
+                  "text": "1.35",
                 },
                 "ns2:Width": Object {
                   "attr": Object {
                     "Units": "inches",
                   },
-                  "text": 7.3,
+                  "text": "7.30",
                 },
               },
-              "ns2:PackageQuantity": 1,
-              "ns2:PartNumber": 9781933988665,
+              "ns2:PackageQuantity": "1",
+              "ns2:PartNumber": "9781933988665",
               "ns2:ProductGroup": "Book",
               "ns2:ProductTypeName": "ABIS_BOOK",
               "ns2:PublicationDate": "2009-07-08",
@@ -987,14 +987,14 @@ Array [
                   "attr": Object {
                     "Units": "pixels",
                   },
-                  "text": 75,
+                  "text": "75",
                 },
                 "ns2:URL": "http://ecx.images-amazon.com/images/I/51EEz05N2HL._SL75_.jpg",
                 "ns2:Width": Object {
                   "attr": Object {
                     "Units": "pixels",
                   },
-                  "text": 60,
+                  "text": "60",
                 },
               },
               "ns2:Studio": "Manning Publications",
@@ -1481,32 +1481,32 @@ Array [
             },
             "ns2:Edition": "1st",
             "ns2:Feature": "Recommended Age: 9 years and up",
-            "ns2:IsAutographed": false,
-            "ns2:IsMemorabilia": false,
+            "ns2:IsAutographed": "false",
+            "ns2:IsMemorabilia": "false",
             "ns2:ItemDimensions": Object {
               "ns2:Height": Object {
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 0.8,
+                "text": "0.80",
               },
               "ns2:Length": Object {
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 7.5,
+                "text": "7.50",
               },
               "ns2:Weight": Object {
                 "attr": Object {
                   "Units": "pounds",
                 },
-                "text": 0.5,
+                "text": "0.50",
               },
               "ns2:Width": Object {
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 5.2,
+                "text": "5.20",
               },
             },
             "ns2:Label": "Scholastic Paperbacks",
@@ -1527,40 +1527,40 @@ Array [
               ],
             },
             "ns2:ListPrice": Object {
-              "ns2:Amount": 10.99,
+              "ns2:Amount": "10.99",
               "ns2:CurrencyCode": "USD",
             },
             "ns2:Manufacturer": "Scholastic Paperbacks",
-            "ns2:NumberOfItems": 1,
-            "ns2:NumberOfPages": 320,
+            "ns2:NumberOfItems": "1",
+            "ns2:NumberOfPages": "320",
             "ns2:PackageDimensions": Object {
               "ns2:Height": Object {
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 1,
+                "text": "1.00",
               },
               "ns2:Length": Object {
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 7.5,
+                "text": "7.50",
               },
               "ns2:Weight": Object {
                 "attr": Object {
                   "Units": "pounds",
                 },
-                "text": 0.5,
+                "text": "0.50",
               },
               "ns2:Width": Object {
                 "attr": Object {
                   "Units": "inches",
                 },
-                "text": 5.2,
+                "text": "5.20",
               },
             },
-            "ns2:PackageQuantity": 1,
-            "ns2:PartNumber": 9780590353427,
+            "ns2:PackageQuantity": "1",
+            "ns2:PartNumber": "9780590353427",
             "ns2:ProductGroup": "Book",
             "ns2:ProductTypeName": "ABIS_BOOK",
             "ns2:PublicationDate": "1999-10-01",
@@ -1571,14 +1571,14 @@ Array [
                 "attr": Object {
                   "Units": "pixels",
                 },
-                "text": 75,
+                "text": "75",
               },
               "ns2:URL": "http://ecx.images-amazon.com/images/I/51MU5VilKpL._SL75_.jpg",
               "ns2:Width": Object {
                 "attr": Object {
                   "Units": "pixels",
                 },
-                "text": 51,
+                "text": "51",
               },
             },
             "ns2:Studio": "Scholastic Paperbacks",

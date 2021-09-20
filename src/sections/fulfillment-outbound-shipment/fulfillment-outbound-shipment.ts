@@ -155,7 +155,6 @@ export class FulfillmentOutboundShipment {
         SellerFulfillmentOrderId: parameters.SellerFulfillmentOrderId,
       },
     })
-
     return GetFulfillmentOrderResponse.decode(response).caseOf({
       Right: (x) => [x.GetFulfillmentOrderResponse.GetFulfillmentOrderResult, meta],
       Left: (error) => {
