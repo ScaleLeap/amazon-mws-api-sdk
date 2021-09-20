@@ -3,6 +3,18 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.59...v2.0.0) (2021-09-20)
+
+
+### Bug Fixes
+
+* moves parsing to codec level ([#422](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/422)) ([c56b7ce](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/c56b7ce26482e5290caca7e77ce8ad27e9e81838)), closes [#421](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/421)
+
+
+### BREAKING CHANGES
+
+* Resolves values being parsed as booleans or numbers aggressively by `fast-xml-parser` by moving all parsing to the codec level through three new helpers (`ensureBool`, `ensureFloat`, and `ensureInt`) and disabling parsing at the attribute and node level of the XML parser. The breaking change affects a minor number of returned types. You can inspect the [list of updated snapshots](https://github.com/ScaleLeap/amazon-mws-api-sdk/pull/422/commits/5ffaa6cbdf33d6bc8c04717eb6ff55d5dd1111a8?file-filters%5B%5D=.snap) to see which ones have been affected.
+
 ## [1.9.59](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v1.9.58...v1.9.59) (2021-09-18)
 
 
