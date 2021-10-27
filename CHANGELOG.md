@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.5](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v2.0.4...v2.0.5) (2021-10-27)
+
+
+### Bug Fixes
+
+* adds types to `ChargeTypeEnum`, `TaxCollectionModelEnum`, `AdjustmentTypeEnum` ([#448](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/448)) ([8b3261a](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/8b3261ab3cf1275af6d76ad24e55570fb6dec98b)), closes [#447](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/447)
+
 ## [2.0.4](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v2.0.3...v2.0.4) (2021-10-19)
 
 
