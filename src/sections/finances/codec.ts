@@ -88,6 +88,8 @@ export enum ChargeTypeEnum {
   'TCS-SGST' = 'TCS-SGST',
   'TCS-IGST' = 'TCS-IGST',
   'TCS-UTGST' = 'TCS-UTGST',
+  'LowValueGoodsTax-Shipping' = 'LowValueGoodsTax-Shipping',
+  'LowValueGoodsTax-Principal' = 'LowValueGoodsTax-Principal',
 }
 
 const ChargeType = enumeration(ChargeTypeEnum)
@@ -116,6 +118,7 @@ const DirectPayment = Codec.interface({
 export enum TaxCollectionModelEnum {
   MarketplaceFacilitator = 'MarketplaceFacilitator',
   Standard = 'Standard',
+  LowValueGoods = 'LowValueGoods',
 }
 
 const TaxCollectionModel = enumeration(TaxCollectionModelEnum)
@@ -338,6 +341,12 @@ export enum AdjustmentTypeEnum {
   ReversalReimbursement = 'REVERSAL_REIMBURSEMENT',
   SellerRewards = 'SellerRewards',
   WAREHOUSE_DAMAGE = 'WAREHOUSE_DAMAGE',
+  FREE_REPLACEMENT_REFUND_ITEMS = 'FREE_REPLACEMENT_REFUND_ITEMS',
+  Other = 'Other',
+  COMPENSATED_CLAWBACK = 'COMPENSATED_CLAWBACK',
+  WAREHOUSE_LOST = 'WAREHOUSE_LOST',
+  LowValueGoods = 'LowValueGoods',
+  ItemTaxWithheldList = 'ItemTaxWithheldList',
 }
 
 const AdjustmentType = enumeration(AdjustmentTypeEnum)
