@@ -3,6 +3,13 @@
           All notable changes to this project will be documented in this file.
           See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.6](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v2.0.5...v2.0.6) (2021-10-28)
+
+
+### Bug Fixes
+
+* adds finances data types ([#449](https://github.com/ScaleLeap/amazon-mws-api-sdk/issues/449)) ([2425277](https://github.com/ScaleLeap/amazon-mws-api-sdk/commit/24252778edeb3aed1cc8c882b84974b26f15cf42))
+
 ## [2.0.5](https://github.com/ScaleLeap/amazon-mws-api-sdk/compare/v2.0.4...v2.0.5) (2021-10-27)
 
 
