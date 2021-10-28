@@ -90,7 +90,7 @@ export enum ChargeTypeEnum {
   'TCS-UTGST' = 'TCS-UTGST',
   'LowValueGoodsTax-Shipping' = 'LowValueGoodsTax-Shipping',
   'LowValueGoodsTax-Principal' = 'LowValueGoodsTax-Principal',
-  'MarketplaceFacilitatorTax-RestockingFee' = 'MarketplaceFacilitatorTax-RestockingFee'
+  'MarketplaceFacilitatorTax-RestockingFee' = 'MarketplaceFacilitatorTax-RestockingFee',
 }
 
 const ChargeType = enumeration(ChargeTypeEnum)
@@ -349,7 +349,7 @@ export enum AdjustmentTypeEnum {
   LowValueGoods = 'LowValueGoods',
   ItemTaxWithheldList = 'ItemTaxWithheldList',
   ReserveDebit = 'ReserveDebit',
-  ReserveCredit = 'ReserveCredit'
+  ReserveCredit = 'ReserveCredit',
 }
 
 const AdjustmentType = enumeration(AdjustmentTypeEnum)
