@@ -511,10 +511,8 @@ describe('httpClient', () => {
           }),
         ),
       )
-      await expect(() => mockFXPValidationFail.sellers.getServiceStatus()).rejects.toStrictEqual(
-        new ParsingError(
-          "Closing tag 'StartTagWithoutClosing' is expected inplace of 'StartTagWithClosing'.",
-        ),
+      await expect(() => mockFXPValidationFail.sellers.getServiceStatus()).rejects.toThrow(
+        ParsingError,
       )
     })
   })
