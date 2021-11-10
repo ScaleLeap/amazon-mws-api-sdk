@@ -54,25 +54,25 @@ describe('httpClient', () => {
   it('should throw a HttpError that can be handled', async () => {
     expect.assertions(7)
 
-    const httpClient = httpClientThatThrows(getFixture('error_response'))
-
-    let expectedError!: InvalidParameterValueError
-
-    try {
-      await httpClient.request('POST', mockRequest)
-    } catch (error) {
-      expectedError = error
+    const getError = async () => {
+      const httpClient = httpClientThatThrows(getFixture('error_response'))
+      try {
+        await httpClient.request('POST', mockRequest)
+        throw new Error('NoErrorThrownError')
+      } catch (error: unknown) {
+        return error as InvalidParameterValueError
+      }
     }
 
-    expect(expectedError instanceof MWSError).toStrictEqual(true)
-    expect(expectedError instanceof HttpError).toStrictEqual(true)
-    expect(expectedError instanceof InvalidParameterValueError).toStrictEqual(true)
-    expect(expectedError.code).toStrictEqual('InvalidParameterValue')
-    expect(expectedError.type).toStrictEqual('Sender')
-    expect(expectedError.requestId).toStrictEqual('e26147f9-30cc-4379-9fb5-bd4ad966c48b')
-    expect(expectedError.mwsMessage).toStrictEqual(
-      'CreatedAfter or LastUpdatedAfter must be specified',
-    )
+    const error = await getError()
+
+    expect(error instanceof MWSError).toStrictEqual(true)
+    expect(error instanceof HttpError).toStrictEqual(true)
+    expect(error instanceof InvalidParameterValueError).toStrictEqual(true)
+    expect(error.code).toStrictEqual('InvalidParameterValue')
+    expect(error.type).toStrictEqual('Sender')
+    expect(error.requestId).toStrictEqual('e26147f9-30cc-4379-9fb5-bd4ad966c48b')
+    expect(error.mwsMessage).toStrictEqual('CreatedAfter or LastUpdatedAfter must be specified')
   })
 
   it('should propagate non-API errors', async () => {
