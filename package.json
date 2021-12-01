@@ -61,7 +61,7 @@
     "@scaleleap/utils": "1.9.27",
     "@semantic-release/exec": "6.0.2",
     "@types/is-ci": "3.0.0",
-    "@types/jest": "27.0.2",
+    "@types/jest": "27.0.3",
     "@types/node": "16.11.7",
     "ajv": "8.8.2",
     "danger": "10.7.1",
