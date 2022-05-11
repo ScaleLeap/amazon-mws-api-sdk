@@ -58,7 +58,7 @@
     "@scaleleap/config": "2.0.8",
     "@scaleleap/jest-polly": "1.5.59",
     "@scaleleap/semantic-release-config": "1.1.35",
-    "@scaleleap/utils": "1.9.27",
+    "@scaleleap/utils": "1.9.29",
     "@semantic-release/exec": "6.0.3",
     "@types/is-ci": "3.0.0",
     "@types/jest": "27.0.3",
