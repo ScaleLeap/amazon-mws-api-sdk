@@ -48,7 +48,7 @@
   "dependencies": {
     "@scaleleap/amazon-marketplaces": "13.0.0",
     "axios": "0.27.2",
-    "fast-xml-parser": "3.21.1",
+    "fast-xml-parser": "4.1.2",
     "html-entities": "2.4.0",
     "purify-ts": "1.1.0",
     "ts-error": "1.0.6"
