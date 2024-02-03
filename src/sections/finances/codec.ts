@@ -350,6 +350,11 @@ export enum AdjustmentTypeEnum {
   ItemTaxWithheldList = 'ItemTaxWithheldList',
   ReserveDebit = 'ReserveDebit',
   ReserveCredit = 'ReserveCredit',
+  ReturnPostageBilling_Postage = "ReturnPostageBilling_Postage",
+	ReturnPostageBilling_Tracking = "ReturnPostageBilling_Tracking",
+	ReturnPostageBilling_FuelSurcharge = "ReturnPostageBilling_FuelSurcharge",
+	ReturnPostageBilling_OversizeSurcharge = "ReturnPostageBilling_OversizeSurcharge",
+	ReturnPostageBilling_TransactionFee = "ReturnPostageBilling_TransactionFee",
 }
 
 const AdjustmentType = enumeration(AdjustmentTypeEnum)
